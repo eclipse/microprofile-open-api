@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+openapi<?xml version="1.0" encoding="UTF-8"?>
 <!--
     Licensed under the Apache License, Version 2.0 (the
     "License"); you may not use this file except in compliance
@@ -18,13 +18,13 @@
 
     <parent>
         <!-- This is just for now and will not work if the API has a separate release cycle than the rest. -->
-        <groupId>org.eclipse.microprofile.metrics</groupId>
-        <artifactId>microprofile-metrics-parent</artifactId>
+        <groupId>org.eclipse.microprofile.openapi</groupId>
+        <artifactId>microprofile-openapi-parent</artifactId>
         <version>1.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>microprofile-metrics-api</artifactId>
-    <name>MicroProfile Metrics API</name>
+    <artifactId>microprofile-openapi-api</artifactId>
+    <name>MicroProfile OpenAPI API</name>
 
 
     <dependencies>
@@ -83,8 +83,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
-                    <Bundle-SymbolicName>org.eclipse.microprofile.metrics</Bundle-SymbolicName>
-                    <Bundle-Name>MicroProfile metrics bundle</Bundle-Name>
+                    <Bundle-SymbolicName>org.eclipse.microprofile.openapi</Bundle-SymbolicName>
+                    <Bundle-Name>MicroProfile openapi bundle</Bundle-Name>
                     <archive>
                         <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
                     </archive>
