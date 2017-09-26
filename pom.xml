@@ -82,9 +82,11 @@
 
     <modules>
         <module>api</module>
+<!--
         <module>spec</module>
         <module>tck/rest</module>
         <module>tck/api</module>
+-->
     </modules>
 
     <dependencyManagement>
