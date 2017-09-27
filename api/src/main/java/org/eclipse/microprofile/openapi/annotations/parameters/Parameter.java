@@ -1,4 +1,5 @@
 /**
+ * Copyright (c) 2017 Contributors to the Eclipse Foundation
  * Copyright 2017 SmartBear Software
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.eclipse.microprofile.openapi.annotations;
+package org.eclipse.microprofile.openapi.annotations.parameters;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;

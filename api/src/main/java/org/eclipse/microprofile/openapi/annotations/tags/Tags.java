@@ -1,4 +1,5 @@
 /**
+ * Copyright (c) 2017 Contributors to the Eclipse Foundation
  * Copyright 2017 SmartBear Software
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,6 +23,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * This object encapsulates a set of tags
+ */
 @Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited

@@ -47,10 +47,10 @@
 
     <developers>
         <developer>
-            <name>Heiko Rupp</name>
-            <url>https://github.com/pilhuhn</url>
-            <organization>Red Hat</organization>
-            <organizationUrl>https://www.jboss.org</organizationUrl>
+            <name>Arthur De Magalhaes</name>
+            <url>https://github.com/arthurdm</url>
+            <organization>IBM</organization>
+            <organizationUrl>https://www.ibm.com</organizationUrl>
         </developer>
     </developers>
 
