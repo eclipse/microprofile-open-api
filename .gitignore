@@ -1,1 +1,9 @@
 .DS_Store
+.apt_generated/
+.settings/
+.checkstyle
+.classpath
+.project
+.factorypath
+bin/
+target/
