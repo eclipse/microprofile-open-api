@@ -18,7 +18,7 @@
 
     <groupId>org.eclipse.microprofile.openapi</groupId>
     <artifactId>microprofile-openapi-parent</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>MicroProfile OpenAPI</name>
     <description>Eclipse MicroProfile OpenAPI Feature - Parent POM</description>
@@ -47,10 +47,10 @@
 
     <developers>
         <developer>
-            <name>Heiko Rupp</name>
-            <url>https://github.com/pilhuhn</url>
-            <organization>Red Hat</organization>
-            <organizationUrl>https://www.jboss.org</organizationUrl>
+            <name>Arthur De Magalhaes</name>
+            <url>https://github.com/arthurdm</url>
+            <organization>IBM</organization>
+            <organizationUrl>https://www.ibm.com</organizationUrl>
         </developer>
     </developers>
 

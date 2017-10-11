@@ -1,4 +1,5 @@
 /**
+ * Copyright (c) 2017 Contributors to the Eclipse Foundation
  * Copyright 2017 SmartBear Software
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,6 +24,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
+import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.ApiResponse;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
