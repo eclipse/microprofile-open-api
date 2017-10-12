@@ -171,7 +171,7 @@ public interface MediaType extends Constructible {
 	 * @return Map&lt;String, Object&gt; extensions
 	 */
 
-	java.util.Map<String, Object> getExtensions();
+	Map<String, Object> getExtensions();
 
 	/**
 	 * Adds an object item to extensions map for
@@ -193,6 +193,6 @@ public interface MediaType extends Constructible {
 	 * @param extensions
 	 */
 
-	void setExtensions(java.util.Map<String, Object> extensions);
+	void setExtensions(Map<String, Object> extensions);
 
 }
