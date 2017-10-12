@@ -17,6 +17,8 @@
 
 package org.eclipse.microprofile.openapi.models.examples;
 
+import java.util.Map;
+
 import org.eclipse.microprofile.openapi.models.Constructible;
 
 /**
@@ -148,7 +150,7 @@ public interface Example extends Constructible {
 	 *
 	 * @return Map&lt;String, Object&gt; extensions
 	 **/
-	java.util.Map<String, Object> getExtensions();
+	Map<String, Object> getExtensions();
 
 	/**
 	 * Adds the given Object to this Example's map of extensions, with the given key as its key.
@@ -163,6 +165,6 @@ public interface Example extends Constructible {
 	 *
 	 * @return Map&lt;String, Object&gt; extensions
 	 **/
-	void setExtensions(java.util.Map<String, Object> extensions);
+	void setExtensions(Map<String, Object> extensions);
 
 }
