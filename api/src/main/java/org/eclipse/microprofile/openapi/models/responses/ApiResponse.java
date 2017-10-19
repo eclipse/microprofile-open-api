@@ -20,6 +20,7 @@ package org.eclipse.microprofile.openapi.models.responses;
 import java.util.Map;
 
 import org.eclipse.microprofile.openapi.models.Constructible;
+import org.eclipse.microprofile.openapi.models.Extensible;
 import org.eclipse.microprofile.openapi.models.headers.Header;
 import org.eclipse.microprofile.openapi.models.links.Link;
 import org.eclipse.microprofile.openapi.models.media.Content;
@@ -29,7 +30,7 @@ import org.eclipse.microprofile.openapi.models.media.Content;
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#responseObject"
  */
-public interface ApiResponse extends Constructible {
+public interface ApiResponse extends Constructible, Extensible {
 
 	/**
 	 * returns the description property from a ApiResponse instance.
@@ -180,35 +181,5 @@ public interface ApiResponse extends Constructible {
 	 */
 
 	ApiResponse $ref(String $ref);
-
-	/**
-	 * Returns extensions property of a ApiResponse instance.
-	 *
-	 * @return Map&lt;String, Object&gt; extensions
-	 */
-
-	Map<String, Object> getExtensions();
-
-	/**
-	 * Adds an object item to extensions map at
-	 * the specified key.
-	 * <p>
-	 * If extensions is null, creates a new HashMap
-	 * and adds item to it
-	 *
-	 * @param name - map key
-	 * @param value - map value
-	 */
-
-	void addExtension(String name, Object value);
-
-	/**
-	 * Sets extensions property of a ApiResponse instance
-	 * to the parameter.
-	 *
-	 * @param extensions
-	 */
-
-	void setExtensions(Map<String, Object> extensions);
 
 }

@@ -20,13 +20,14 @@ package org.eclipse.microprofile.openapi.models.security;
 import java.util.Map;
 
 import org.eclipse.microprofile.openapi.models.Constructible;
+import org.eclipse.microprofile.openapi.models.Extensible;
 
 /**
  * Scopes
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#scopedObject"
  */
-public interface Scopes extends Constructible, Map<String, String> {
+public interface Scopes extends Constructible, Extensible, Map<String, String> {
 
 	/**
 	 * Adds name and item parameters to a Scopes instance
@@ -38,33 +39,5 @@ public interface Scopes extends Constructible, Map<String, String> {
 	 */
 
 	Scopes addString(String name, String item);
-
-	/**
-	 * Returns extensions property of an Scopes instance.
-	 *
-	 * @return Map&lt;String, Object&gt; extensions
-	 */
-
-	Map<String, Object> getExtensions();
-
-	/**
-	 * Adds an object item to extensions map of an Scopes instance
-	 * at the specified key.
-	 * If extensions is null, then creates a new HashMap and adds the item.
-	 *
-	 * @param name
-	 * @param value
-	 */
-
-	void addExtension(String name, Object value);
-
-	/**
-	 * Sets extensions property of an Scopes instance
-	 * to the parameter.
-	 *
-	 * @param extensions
-	 */
-
-	void setExtensions(Map<String, Object> extensions);
 
 }

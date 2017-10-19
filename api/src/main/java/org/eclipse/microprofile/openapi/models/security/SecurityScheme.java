@@ -17,16 +17,15 @@
 
 package org.eclipse.microprofile.openapi.models.security;
 
-import java.util.Map;
-
 import org.eclipse.microprofile.openapi.models.Constructible;
+import org.eclipse.microprofile.openapi.models.Extensible;
 
 /**
  * SecurityScheme
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#securitySchemeObject"
  */
-public interface SecurityScheme extends Constructible {
+public interface SecurityScheme extends Constructible, Extensible {
 
 	/**
 	 * Gets or Sets type
@@ -284,34 +283,6 @@ public interface SecurityScheme extends Constructible {
 	 */
 
 	SecurityScheme openIdConnectUrl(String openIdConnectUrl);
-
-	/**
-	 * Returns extensions property of a SecurityScheme instance.
-	 *
-	 * @return Map&lt;String, Object&gt; extensions
-	 */
-
-	Map<String, Object> getExtensions();
-
-	/**
-	 * Adds an object item to extensions map of a SecurityScheme instance
-	 * at the specified key.
-	 * If extensions is null, then creates a new HashMap and adds the item.
-	 *
-	 * @param name
-	 * @param value
-	 */
-
-	void addExtension(String name, Object value);
-
-	/**
-	 * Sets extensions property of a SecurityScheme instance
-	 * to the parameter.
-	 *
-	 * @param extensions
-	 */
-
-	void setExtensions(Map<String, Object> extensions);
 
 	/**
 	 * returns the $ref property from an SecurityScheme instance.

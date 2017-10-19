@@ -18,7 +18,6 @@
 package org.eclipse.microprofile.openapi.models;
 
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.microprofile.openapi.models.info.Info;
 import org.eclipse.microprofile.openapi.models.media.Schema;
@@ -32,7 +31,7 @@ import org.eclipse.microprofile.openapi.models.tags.Tag;
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md"
  */
-public interface OpenAPI extends Constructible {
+public interface OpenAPI extends Constructible, Extensible {
 
 	/**
 	   * returns the openapi property from a OpenAPI instance.
@@ -278,28 +277,5 @@ public interface OpenAPI extends Constructible {
 	   * @return OpenAPI
 	   */
 	OpenAPI schemaRequirement(String name, SecurityScheme securityScheme);
-
-	/**
-	   * returns the extensions property from a OpenAPI instance.
-	   *
-	   * @return Map&lt;String, Object&gt; extensions
-	   **/
-	Map<String, Object> getExtensions();
-
-	/**
-	   * Adds the given Object to this OpenAPI's map of extensions, with the given key as its key.
-	   *
-	   * @param String key
-	   * @param Object value
-	   * @return OpenAPI
-	   */
-	void addExtension(String name, Object value);
-
-	/**
-	   * sets this OpenAPI's extensions property to the given map of extensions.
-	   *
-	   * @param Map&lt;String, Object&gt;extensions
-	   */
-	void setExtensions(Map<String, Object> extensions);
 
 }

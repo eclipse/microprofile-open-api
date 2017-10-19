@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.microprofile.openapi.models.Constructible;
+import org.eclipse.microprofile.openapi.models.Extensible;
 import org.eclipse.microprofile.openapi.models.ExternalDocumentation;
 
 /**
@@ -29,7 +30,7 @@ import org.eclipse.microprofile.openapi.models.ExternalDocumentation;
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#schemaObject"
  */
-public interface Schema<T> extends Constructible {
+public interface Schema<T> extends Constructible, Extensible {
 
 	/**
 	 * returns the name property from a from a Schema instance. Ignored in serialization.
@@ -947,31 +948,5 @@ public interface Schema<T> extends Constructible {
 	 */
 
 	Schema xml(XML xml);
-
-	/**
-	 * Returns extensions property of a Schema instance.
-	 *
-	 * @return Map&lt;String, Object&gt; extensions
-	 */
-
-	Map<String, Object> getExtensions();
-
-	/**
-	 * Adds an object item to extensions map at
-	 * the specified key.
-	 *
-	 * @param name - map key
-	 * @param value - map value
-	 */
-
-	void addExtension(String name, Object value);
-
-	/**
-	 * Sets extensions property of a Schema instance
-	 *
-	 * @param extensions
-	 */
-
-	void setExtensions(Map<String, Object> extensions);
 
 }

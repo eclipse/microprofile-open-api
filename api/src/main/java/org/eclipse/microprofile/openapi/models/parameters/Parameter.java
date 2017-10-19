@@ -19,6 +19,7 @@ package org.eclipse.microprofile.openapi.models.parameters;
 
 import java.util.Map;
 
+import org.eclipse.microprofile.openapi.models.Extensible;
 import org.eclipse.microprofile.openapi.models.examples.Example;
 import org.eclipse.microprofile.openapi.models.media.Content;
 import org.eclipse.microprofile.openapi.models.media.Schema;
@@ -28,7 +29,7 @@ import org.eclipse.microprofile.openapi.models.media.Schema;
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#parameterObject"
  */
-public interface Parameter {
+public interface Parameter extends Extensible {
 
 	/**
 	 * Gets or Sets style
@@ -437,34 +438,5 @@ public interface Parameter {
 	 */
 
 	Parameter $ref(String $ref);
-
-	/**
-	 * Returns extensions property of a Parameter instance.
-	 *
-	 * @return Map&lt;String, Object&gt; extensions
-	 */
-
-	Map<String, Object> getExtensions();
-
-	/**
-	 * Adds an object item to extensions map at
-	 * the specified key.
-	 * <p>
-	 * If extensions is null, creates a new HashMap
-	 * and adds item to it
-	 *
-	 * @param String name - map key
-	 * @param Object value - map value
-	 */
-
-	void addExtension(String name, Object value);
-
-	/**
-	 * Sets extensions property of a Parameter instance
-	 *
-	 * @param Map&lt;String, Object&gt; extensions
-	 */
-
-	void setExtensions(Map<String, Object> extensions);
 
 }

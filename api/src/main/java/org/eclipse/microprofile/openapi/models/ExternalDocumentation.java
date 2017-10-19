@@ -17,14 +17,12 @@
 
 package org.eclipse.microprofile.openapi.models;
 
-import java.util.Map;
-
 /**
  * ExternalDocumentation
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#externalDocumentationObject"
  */
-public interface ExternalDocumentation extends Constructible {
+public interface ExternalDocumentation extends Constructible, Extensible {
 
 	/**
 	   * returns the description property from a ExternalDocumentation instance.
@@ -73,28 +71,5 @@ public interface ExternalDocumentation extends Constructible {
 	   * @return ExternalDocumentation
 	   */
 	ExternalDocumentation url(String url);
-
-	/**
-	   * returns the extensions property from a ExternalDocumentation instance.
-	   *
-	   * @return Map&lt;String, Object&gt;extensions
-	   **/
-	Map<String, Object> getExtensions();
-
-	/**
-	   * Adds the given extension to this ExternalDocumentation's map of extensions, with the given key as its key.
-	   *
-	   * @param String key
-	   * @param Object value
-	   * @return Components
-	   */
-	void addExtension(String name, Object value);
-
-	/**
-	   * sets this ExternalDocumentation's extensions property to the given extensions.
-	   *
-	   * @param Map&lt;String, Object&gt;extensions
-	   */
-	void setExtensions(Map<String, Object> extensions);
 
 }
