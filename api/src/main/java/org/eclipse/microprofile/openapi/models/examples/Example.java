@@ -17,14 +17,13 @@
 
 package org.eclipse.microprofile.openapi.models.examples;
 
-import java.util.Map;
-
 import org.eclipse.microprofile.openapi.models.Constructible;
+import org.eclipse.microprofile.openapi.models.Extensible;
 
 /**
  * Example
  */
-public interface Example extends Constructible {
+public interface Example extends Constructible, Extensible {
 
 	/**
 	 * returns the summary property from a Example instance.
@@ -144,27 +143,5 @@ public interface Example extends Constructible {
 	 * @return Example
 	 */
 	Example $ref(String $ref);
-
-	/**
-	 * returns the extensions property from a Example instance.
-	 *
-	 * @return Map&lt;String, Object&gt; extensions
-	 **/
-	Map<String, Object> getExtensions();
-
-	/**
-	 * Adds the given Object to this Example's map of extensions, with the given key as its key.
-	 *
-	 * @param String key
-	 * @param Object value
-	 */
-	void addExtension(String name, Object value);
-
-	/**
-	 * sets the extensions property for a Example instance.
-	 *
-	 * @return Map&lt;String, Object&gt; extensions
-	 **/
-	void setExtensions(Map<String, Object> extensions);
 
 }

@@ -32,7 +32,7 @@ import org.eclipse.microprofile.openapi.models.servers.Server;
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#operationObject"
  */
-public interface Operation extends Constructible {
+public interface Operation extends Constructible, Extensible {
 
 	/**
 	   * returns the tags property from a Operation instance.
@@ -356,28 +356,5 @@ public interface Operation extends Constructible {
 	   * @return Operation
 	   */
 	Operation addServersItem(Server serversItem);
-
-	/**
-	   * returns the extensions property from a Operation instance.
-	   *
-	   * @return Map&lt;String, Object&gt; extensions
-	   **/
-	Map<String, Object> getExtensions();
-
-	/**
-	   * Adds the given Object to this Operation's map of extensions, with the given key as its key.
-	   *
-	   * @param String key
-	   * @param Object value
-	   * @return Operation
-	   */
-	void addExtension(String name, Object value);
-
-	/**
-	   * sets this Operation's extensions property to the given map of extensions.
-	   *
-	   * @param Map&lt;String, Object&gt;extensions
-	   */
-	void setExtensions(Map<String, Object> extensions);
 
 }

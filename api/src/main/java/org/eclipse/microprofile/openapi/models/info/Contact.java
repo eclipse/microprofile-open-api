@@ -17,16 +17,15 @@
 
 package org.eclipse.microprofile.openapi.models.info;
 
-import java.util.Map;
-
 import org.eclipse.microprofile.openapi.models.Constructible;
+import org.eclipse.microprofile.openapi.models.Extensible;
 
 /**
  * Contact
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#contactObject"
  */
-public interface Contact extends Constructible {
+public interface Contact extends Constructible, Extensible {
 
 	/**
 	   * returns the name property from a Contact instance.
@@ -99,27 +98,5 @@ public interface Contact extends Constructible {
 	   * @return Contact
 	   */
 	Contact email(String email);
-
-	/**
-	   * returns the extensions property from a Contact instance.
-	   *
-	   * @return Map&lt;String, Object&gt; extensions
-	   */
-	Map<String, Object> getExtensions();
-
-	/**
-	   * Adds the given Object to this Contact's map of extensions, with the given key as its key.
-	   *
-	   * @param String key
-	   * @param Object value
-	   */
-	void addExtension(String name, Object value);
-
-	/**
-	    * sets the extensions property for a Contact instance.
-	    *
-	    * @return Map&lt;String, Object&gt; extensions
-	    */
-	void setExtensions(Map<String, Object> extensions);
 
 }

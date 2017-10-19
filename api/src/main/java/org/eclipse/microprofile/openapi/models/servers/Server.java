@@ -17,16 +17,15 @@
 
 package org.eclipse.microprofile.openapi.models.servers;
 
-import java.util.Map;
-
 import org.eclipse.microprofile.openapi.models.Constructible;
+import org.eclipse.microprofile.openapi.models.Extensible;
 
 /**
  * Server
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#serverObject"
  */
-public interface Server extends Constructible  {
+public interface Server extends Constructible, Extensible {
 
 	/**
 	 * returns the url property from a Server instance.
@@ -108,33 +107,5 @@ public interface Server extends Constructible  {
 	 */
 
 	Server variables(ServerVariables variables);
-
-	/**
-	 * Returns extensions property of a Server instance.
-	 *
-	 * @return Map&lt;String, Object&gt; extensions
-	 */
-
-	Map<String, Object> getExtensions();
-
-	/**
-	 * Adds an object item to extensions map of a Server instance
-	 * at the specified key.
-	 * If extensions is null, then creates a new HashMap and adds the item.
-	 *
-	 * @param name
-	 * @param value
-	 */
-
-	void addExtension(String name, Object value);
-
-	/**
-	 * Sets extensions property of a Server instance
-	 * to the parameter.
-	 *
-	 * @param extensions
-	 */
-
-	void setExtensions(Map<String, Object> extensions);
 
 }

@@ -17,9 +17,8 @@
 
 package org.eclipse.microprofile.openapi.models.tags;
 
-import java.util.Map;
-
 import org.eclipse.microprofile.openapi.models.Constructible;
+import org.eclipse.microprofile.openapi.models.Extensible;
 import org.eclipse.microprofile.openapi.models.ExternalDocumentation;
 
 /**
@@ -27,7 +26,7 @@ import org.eclipse.microprofile.openapi.models.ExternalDocumentation;
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#tagObject"
  */
-public interface Tag extends Constructible {
+public interface Tag extends Constructible, Extensible {
 
 	/**
 	 * returns the name property from a Tag instance.
@@ -109,33 +108,5 @@ public interface Tag extends Constructible {
 	 */
 
 	Tag externalDocs(ExternalDocumentation externalDocs);
-
-	/**
-	 * Returns extensions property of a Tag instance.
-	 *
-	 * @return Map&lt;String, Object&gt; extensions
-	 */
-
-	Map<String, Object> getExtensions();
-
-	/**
-	 * Adds an object item to extensions map of a Tag instance
-	 * at the specified key.
-	 * If extensions is null, then creates a new HashMap and adds the item.
-	 *
-	 * @param name
-	 * @param value
-	 */
-
-	void addExtension(String name, Object value);
-
-	/**
-	 * Sets extensions property of a Tag instance
-	 * to the parameter.
-	 *
-	 * @param extensions
-	 */
-
-	void setExtensions(Map<String, Object> extensions);
 
 }

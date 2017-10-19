@@ -17,16 +17,15 @@
 
 package org.eclipse.microprofile.openapi.models.links;
 
-import java.util.Map;
-
 import org.eclipse.microprofile.openapi.models.Constructible;
+import org.eclipse.microprofile.openapi.models.Extensible;
 
 /**
  * LinkParameter
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#linkOParametersbject"
  */
-public interface LinkParameter extends Constructible {
+public interface LinkParameter extends Constructible, Extensible {
 
 	/**
 	   * returns the value property from a LinkParameter instance.
@@ -50,27 +49,5 @@ public interface LinkParameter extends Constructible {
 	   * @return LinkParameter
 	   */
 	LinkParameter value(String value);
-
-	/**
-	   * returns the extensions property from a LinkParameter instance.
-	   *
-	   * @return Map&lt;String, Object&gt; extensions
-	   */
-	Map<String, Object> getExtensions();
-
-	/**
-	   * Adds the given Object to this LinkParameter's map of extensions, with the given key as its key.
-	   *
-	   * @param String key
-	   * @param Object value
-	   */
-	void addExtension(String name, Object value);
-
-	/**
-	   * sets the extensions property for a LinkParameter instance.
-	   *
-	   * @return Map&lt;String, Object&gt; extensions
-	   */
-	void setExtensions(Map<String, Object> extensions);
 
 }

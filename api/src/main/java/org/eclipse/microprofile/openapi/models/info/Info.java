@@ -17,15 +17,14 @@
 
 package org.eclipse.microprofile.openapi.models.info;
 
-import java.util.Map;
-
 import org.eclipse.microprofile.openapi.models.Constructible;
+import org.eclipse.microprofile.openapi.models.Extensible;
 
 /**
 *
 * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#infoObject"
 */
-public interface Info extends Constructible {
+public interface Info extends Constructible, Extensible {
 
 	/**
 	   * returns the title property from a Info instance.
@@ -170,27 +169,5 @@ public interface Info extends Constructible {
 	   * @return Info
 	   */
 	Info version(String version);
-
-	/**
-	   * returns the extensions property from a Info instance.
-	   *
-	   * @return Map&lt;String, Object&gt; extensions
-	   */
-	Map<String, Object> getExtensions();
-
-	/**
-	   * Adds the given Object to this Info's map of extensions, with the given key as its key.
-	   *
-	   * @param String key
-	   * @param Object value
-	   */
-	void addExtension(String name, Object value);
-
-	/**
-	    * sets the extensions property for a Info instance.
-	    *
-	    * @return Map&lt;String, Object&gt; extensions
-	    */
-	void setExtensions(Map<String, Object> extensions);
 
 }

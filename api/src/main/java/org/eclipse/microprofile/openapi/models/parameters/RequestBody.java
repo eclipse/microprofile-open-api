@@ -17,9 +17,8 @@
 
 package org.eclipse.microprofile.openapi.models.parameters;
 
-import java.util.Map;
-
 import org.eclipse.microprofile.openapi.models.Constructible;
+import org.eclipse.microprofile.openapi.models.Extensible;
 import org.eclipse.microprofile.openapi.models.media.Content;
 
 /**
@@ -27,7 +26,7 @@ import org.eclipse.microprofile.openapi.models.media.Content;
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#requestBodyObject"
  */
-public interface RequestBody extends Constructible {
+public interface RequestBody extends Constructible, Extensible {
 
 	/**
 	 * returns the description property from a RequestBody instance.
@@ -109,33 +108,6 @@ public interface RequestBody extends Constructible {
 	 */
 
 	RequestBody required(Boolean required);
-
-	/**
-	 * Returns extensions property of a RequestBody instance.
-	 *
-	 * @return Map&lt;String, Object&gt; extensions
-	 */
-
-	Map<String, Object> getExtensions();
-
-	/**
-	 * Adds an object item to extensions map at
-	 * the specified key.
-	 *
-	 * @param name - map key
-	 * @param value - map value
-	 */
-
-	void addExtension(String name, Object value);
-
-	/**
-	 * Sets extensions property of a RequestBody instance
-	 * to the parameter.
-	 *
-	 * @param extensions
-	 */
-
-	void setExtensions(Map<String, Object> extensions);
 
 	/**
 	 * returns the $ref property from a RequestBody instance.

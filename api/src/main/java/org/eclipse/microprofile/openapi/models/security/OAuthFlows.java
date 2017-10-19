@@ -17,16 +17,15 @@
 
 package org.eclipse.microprofile.openapi.models.security;
 
-import java.util.Map;
-
 import org.eclipse.microprofile.openapi.models.Constructible;
+import org.eclipse.microprofile.openapi.models.Extensible;
 
 /**
  * OAuthFlows
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#oauthFlowsObject"
  */
-public interface OAuthFlows extends Constructible {
+public interface OAuthFlows extends Constructible, Extensible {
 
 	/**
 	 * returns the implicit property from a OAuthFlows instance.
@@ -135,33 +134,5 @@ public interface OAuthFlows extends Constructible {
 	 */
 
 	OAuthFlows authorizationCode(OAuthFlow authorizationCode);
-
-	/**
-	 * Returns extensions property of an OAuthFlows instance.
-	 *
-	 * @return Map&lt;String, Object&gt; extensions
-	 */
-
-	Map<String, Object> getExtensions();
-
-	/**
-	 * Adds an object item to extensions map of an OAuthFlows instance
-	 * at the specified key.
-	 * If extensions is null, then creates a new HashMap and adds the item.
-	 *
-	 * @param name
-	 * @param value
-	 */
-
-	void addExtension(String name, Object value);
-
-	/**
-	 * Sets extensions property of an OAuthFlows instance
-	 * to the parameter.
-	 *
-	 * @param extensions
-	 */
-
-	void setExtensions(Map<String, Object> extensions);
 
 }

@@ -20,6 +20,7 @@ package org.eclipse.microprofile.openapi.models.media;
 import java.util.Map;
 
 import org.eclipse.microprofile.openapi.models.Constructible;
+import org.eclipse.microprofile.openapi.models.Extensible;
 import org.eclipse.microprofile.openapi.models.examples.Example;
 
 /**
@@ -27,7 +28,7 @@ import org.eclipse.microprofile.openapi.models.examples.Example;
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#mediaTypeObject"
  */
-public interface MediaType extends Constructible {
+public interface MediaType extends Constructible, Extensible {
 
 	/**
 	 * returns the schema property from a MediaType instance.
@@ -164,35 +165,5 @@ public interface MediaType extends Constructible {
 	 */
 
 	MediaType addEncoding(String key, Encoding encodingItem);
-
-	/**
-	 * Returns extensions property of a MediaType instance.
-	 *
-	 * @return Map&lt;String, Object&gt; extensions
-	 */
-
-	Map<String, Object> getExtensions();
-
-	/**
-	 * Adds an object item to extensions map for
-	 * the specified name key.
-	 * <p>
-	 * If the extensions property is null, creates a new HashMap
-	 * and adds the item to it.
-	 *
-	 * @param name - map key
-	 * @param value - map value
-	 */
-
-	void addExtension(String name, Object value);
-
-	/**
-	 * Sets extensions property of a MediaType instance
-	 * to the parameter.
-	 *
-	 * @param extensions
-	 */
-
-	void setExtensions(Map<String, Object> extensions);
 
 }

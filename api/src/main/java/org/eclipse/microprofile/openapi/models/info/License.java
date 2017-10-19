@@ -17,11 +17,15 @@
 
 package org.eclipse.microprofile.openapi.models.info;
 
-import java.util.Map;
-
 import org.eclipse.microprofile.openapi.models.Constructible;
+import org.eclipse.microprofile.openapi.models.Extensible;
 
-public interface License extends Constructible {
+/**
+ * License
+ *
+ * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#licenseObject"
+ */
+public interface License extends Constructible, Extensible {
 
 	/**
 	   * returns the name property from a License instance.
@@ -70,27 +74,5 @@ public interface License extends Constructible {
 	   * @return License
 	   */
 	License url(String url);
-
-	/**
-	   * returns the extensions property from a License instance.
-	   *
-	   * @return Map&lt;String, Object&gt; extensions
-	   */
-	Map<String, Object> getExtensions();
-
-	/**
-	   * Adds the given Object to this License's map of extensions, with the given key as its key.
-	   *
-	   * @param String key
-	   * @param Object value
-	   */
-	void addExtension(String name, Object value);
-
-	/**
-	   * sets the extensions property for a License instance.
-	   *
-	   * @return Map&lt;String, Object&gt; extensions
-	   */
-	void setExtensions(Map<String, Object> extensions);
 
 }
