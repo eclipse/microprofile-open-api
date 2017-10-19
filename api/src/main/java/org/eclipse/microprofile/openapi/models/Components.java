@@ -34,7 +34,7 @@ import org.eclipse.microprofile.openapi.models.security.SecurityScheme;
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#componentsObject"
  */
-public interface Components extends Constructible {
+public interface Components extends Constructible, Extensible {
 
 	/**
 	 * returns the schemas property from a Components instance.
@@ -329,28 +329,5 @@ public interface Components extends Constructible {
 	 * @return Components
 	 */
 	Components addCallbacks(String key, Callback callbacksItem);
-
-	/**
-	 * returns the extensions property from a Components instance.
-	 *
-	 * @return Map&lt;String, Object&gt; extensions
-	 **/
-	Map<String, Object> getExtensions();
-
-	/**
-	 * Adds the given Object to this Components' map of extensions, with the given key as its key.
-	 *
-	 * @param String key
-	 * @param Object value
-	 * @return Components
-	 */
-	void addExtension(String name, Object value);
-
-	/**
-	 * sets this Components' extensions property to the given map of extensions.
-	 *
-	 * @param Map&lt;String, Object&gt;extensions
-	 */
-	void setExtensions(Map<String, Object> extensions);
 
 }

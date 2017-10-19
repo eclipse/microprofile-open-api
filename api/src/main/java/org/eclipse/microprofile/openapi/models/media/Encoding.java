@@ -20,6 +20,7 @@ package org.eclipse.microprofile.openapi.models.media;
 import java.util.Map;
 
 import org.eclipse.microprofile.openapi.models.Constructible;
+import org.eclipse.microprofile.openapi.models.Extensible;
 import org.eclipse.microprofile.openapi.models.headers.Header;
 
 /**
@@ -27,7 +28,7 @@ import org.eclipse.microprofile.openapi.models.headers.Header;
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#encodingObject"
  */
-public interface Encoding extends Constructible {
+public interface Encoding extends Constructible, Extensible {
 
 	enum StyleEnum {
 	    FORM("form"),
@@ -161,27 +162,5 @@ public interface Encoding extends Constructible {
 	 * @param Boolean allowReserved
 	 */
 	void setAllowReserved(Boolean allowReserved);
-
-	/**
-	 * returns the extensions property from a Encoding instance.
-	 *
-	 * @return Map&lt;String, Object&gt; extensions
-	 **/
-	Map<String, Object> getExtensions();
-
-	/**
-	 * Adds the given extension value to this Encoding's map of extensions, with the given name as its key.
-	 *
-	 * @param String name
-	 * @param Object value
-	 */
-	void addExtension(String name, Object value);
-
-	/**
-	 * sets this Encoding's extensions property to the given extensions.
-	 *
-	 * @param Map&lt;String, Object&gt; extensions
-	 */
-	void setExtensions(Map<String, Object> extensions);
 
 }

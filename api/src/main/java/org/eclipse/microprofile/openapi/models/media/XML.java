@@ -17,16 +17,15 @@
 
 package org.eclipse.microprofile.openapi.models.media;
 
-import java.util.Map;
-
 import org.eclipse.microprofile.openapi.models.Constructible;
+import org.eclipse.microprofile.openapi.models.Extensible;
 
 /**
  * XML
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#xmlObject"
  */
-public interface XML extends Constructible {
+public interface XML extends Constructible, Extensible {
 
 	/**
 	 * returns the name property from a XML instance.
@@ -162,32 +161,5 @@ public interface XML extends Constructible {
 	 */
 
 	XML wrapped(Boolean wrapped);
-
-	/**
-	 * Returns the extensions property of an XML instance.
-	 *
-	 * @return Map&lt;String, Object&gt; extensions
-	 */
-
-	Map<String, Object> getExtensions();
-
-	/**
-	 * Adds an item to the extensions property of an XML instance.
-	 * If extensions is null, creates a HashMap and adds item to it.
-	 *
-	 * @param name - map key
-	 * @param value - map value
-	 */
-
-	void addExtension(String name, Object value);
-
-	/**
-	 * Sets the extensions property of an XML instance
-	 * to the parameter.
-	 *
-	 * @return Map&lt;String, Object&gt; extensions
-	 */
-
-	void setExtensions(Map<String, Object> extensions);
 
 }

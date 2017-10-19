@@ -20,11 +20,12 @@ package org.eclipse.microprofile.openapi.models.headers;
 import java.util.Map;
 
 import org.eclipse.microprofile.openapi.models.Constructible;
+import org.eclipse.microprofile.openapi.models.Extensible;
 import org.eclipse.microprofile.openapi.models.examples.Example;
 import org.eclipse.microprofile.openapi.models.media.Content;
 import org.eclipse.microprofile.openapi.models.media.Schema;
 
-public interface Header extends Constructible {
+public interface Header extends Constructible, Extensible {
 	
     /**
      * Gets or Sets style
@@ -296,28 +297,6 @@ public interface Header extends Constructible {
 	 * @return Header
 	 */
 	Header content(Content content);
-
-	/**
-	 * returns the extensions property from a Header instance.
-	 *
-	 * @return Map&lt;String, Object&gt; extensions
-	 */
-	Map<String, Object> getExtensions();
-
-	/**
-	 * Adds the given Object to this Header's map of extensions, with the given key as its key.
-	 *
-	 * @param String key
-	 * @param Object value
-	 */
-	void addExtension(String name, Object value);
-
-	/**
-	 * sets the extensions property for a Header instance.
-	 *
-	 * @return Map&lt;String, Object&gt; extensions
-	 */
-	void setExtensions(Map<String, Object> extensions);
 
 	/**
 	 * returns the $ref property from a Header instance.
