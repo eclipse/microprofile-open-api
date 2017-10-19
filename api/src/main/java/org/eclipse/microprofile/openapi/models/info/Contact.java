@@ -21,81 +21,81 @@ import org.eclipse.microprofile.openapi.models.Constructible;
 import org.eclipse.microprofile.openapi.models.Extensible;
 
 /**
- * Contact
+ * This interface represents the Contact information for the exposed API.
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#contactObject"
  */
 public interface Contact extends Constructible, Extensible {
 
 	/**
-	   * returns the name property from a Contact instance.
+	   * Returns the identifying name of this Contact instance.
 	   *
-	   * @return String name
+	   * @return the name of the contact person/organization
 	   **/
-
 	String getName();
 
 	/**
-	   * sets this Contact's name property to the given name.
+	   * Sets the identifying name of this Contact instance.
 	   *
-	   * @param String name
+	   * @param name the name of the contact person/organization
 	   */
 	void setName(String name);
 
 	/**
-	   * sets this Contact's name property to the given name and
-	   * returns this instance of Contact
+	   * Sets this Contact instance's identifying name to the given name and
+	   * returns this instance of Contact.
 	   *
-	   * @param String name
-	   * @return Contact
+	   * @param name the name of the contact person/organization
+	   * @return this instance of Contact
 	   */
 	Contact name(String name);
 
 	/**
-	   * returns the url property from a Contact instance.
+	   * Returns the URL pointing to the contact information for this Contact instance.
 	   *
-	   * @return String url
+	   * @return the URL pointing to the contact information
 	   **/
 
 	String getUrl();
 
 	/**
-	   * sets this Contact's url property to the given url.
-	   *
-	   * @param String url
+       * Sets this Contact instance's URL pointing to the contact information.
+       * The URL must be in the format of a URL.
+       *
+	   * @param url the URL pointing to the contact information
 	   */
 	void setUrl(String url);
 
 	/**
-	   * sets this Contact's url property to the given url and
-	   * returns this instance of Contact
+	   * Sets this Contact instance's URL pointing to the contact information and
+	   * returns this instance of Contact. The URL must be in the format of a URL.
 	   *
-	   * @param String url
+	   * @param url the url pointing to the contact information
 	   * @return Contact
 	   */
 	Contact url(String url);
 
 	/**
-	   * returns the email property from a Contact instance.
+	   * Returns the contact email of this Contact instance.
 	   *
-	   * @return String email
+	   * @return the email of the contact person/organization
 	   **/
 
 	String getEmail();
 
 	/**
-	   * sets this Contact's email property to the given email.
+	   * Sets the contact email of this instance of Contact.
 	   *
-	   * @param String email
+	   * @param email the email of the contact person/organization
 	   */
 	void setEmail(String email);
 
 	/**
-	   * sets this Contact's email property to the given email and
+	   * Sets this Contact instance's contact email to the given email and
 	   * returns this instance of Contact
 	   *
-	   * @param String email
-	   * @return Contact
+	   * @param email the email of the contact person/organization
+	   * @return this instance of Contact
 	   */
 	Contact email(String email);
 
