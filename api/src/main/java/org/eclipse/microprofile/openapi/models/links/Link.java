@@ -20,6 +20,7 @@ package org.eclipse.microprofile.openapi.models.links;
 import java.util.Map;
 
 import org.eclipse.microprofile.openapi.models.Constructible;
+import org.eclipse.microprofile.openapi.models.Extensible;
 import org.eclipse.microprofile.openapi.models.headers.Header;
 import org.eclipse.microprofile.openapi.models.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.models.servers.Server;
@@ -29,7 +30,7 @@ import org.eclipse.microprofile.openapi.models.servers.Server;
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#linkObject"
  */
-public interface Link extends Constructible {
+public interface Link extends Constructible, Extensible {
 
 	/**
 	 * returns the server property from a Link instance.
@@ -229,27 +230,5 @@ public interface Link extends Constructible {
 	 * @return Link
 	 */
 	Link $ref(String $ref);
-
-	/**
-	 * returns the extensions property from a Link instance.
-	 *
-	 * @return Map&lt;String, Object&gt; extensions
-	 */
-	Map<String, Object> getExtensions();
-
-	/**
-	 * Adds the given Object to this Link's map of extensions, with the given name as its key.
-	 *
-	 * @param String key
-	 * @param Object value
-	 */
-	void addExtension(String name, Object value);
-
-	/**
-	 * sets the extensions property for a Link instance.
-	 *
-	 * @return Map&lt;String, Object&gt; extensions
-	 */
-	void setExtensions(Map<String, Object> extensions);
 
 }

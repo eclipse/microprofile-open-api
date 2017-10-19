@@ -28,7 +28,7 @@ import org.eclipse.microprofile.openapi.models.servers.Server;
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#pathItemObject"
  */
-public interface PathItem extends Constructible {
+public interface PathItem extends Constructible, Extensible {
 
 	/**
 	 * All of the possible types of methods for this path
@@ -362,28 +362,6 @@ public interface PathItem extends Constructible {
 	 * @return PathItem
 	*/
 	PathItem addParametersItem(Parameter parametersItem);
-
-	/**
-	 * returns the extensions property from a PathItem instance.
-	 *
-	 * @return Map&lt;String, Object&gt; extensions
-	 **/
-	Map<String, Object> getExtensions();
-
-	/**
-	 * Adds the given extension to this PathItem's list of extension, with the given key as its key.
-	 *
-	 * @param String key
-	 * @param Object value
-	*/
-	void addExtension(String name, Object value);
-
-	/**
-	 * sets this PathItem's patch extensions to the given extensions
-	 *
-	 * @param Map&lt;String, Object&gt; extensions
-	 **/
-	void setExtensions(Map<String, Object> extensions);
 
 	/**
 	 * returns the ref property from a PathItem instance.

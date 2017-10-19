@@ -20,6 +20,7 @@ package org.eclipse.microprofile.openapi.models.callbacks;
 import java.util.Map;
 
 import org.eclipse.microprofile.openapi.models.Constructible;
+import org.eclipse.microprofile.openapi.models.Extensible;
 import org.eclipse.microprofile.openapi.models.PathItem;
 
 /**
@@ -27,7 +28,7 @@ import org.eclipse.microprofile.openapi.models.PathItem;
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#callbackObject"
  */
-public interface Callback extends Constructible, Map<String, PathItem> {
+public interface Callback extends Constructible, Extensible, Map<String, PathItem> {
 
 	/**
 	   * Adds the given PathItem to this Callbacks's list of PathItems, with the given key as its key.
@@ -36,28 +37,5 @@ public interface Callback extends Constructible, Map<String, PathItem> {
 	   * @param PathItem item
 	   */
 	Callback addPathItem(String name, PathItem item);
-
-	/**
-	   * returns the extensions property from a Callback instance.
-	   *
-	   * @return Map&lt;String, Object&gt; extensions
-	   **/
-	Map<String, Object> getExtensions();
-
-	/**
-	   * Adds the given Object to this Callback's map of extensions, with the given key as its key.
-	   *
-	   * @param String key
-	   * @param Object value
-	   * @return Components
-	   */
-	void addExtension(String name, Object value);
-
-	/**
-	   * sets this Components' extensions property to the given map of extensions.
-	   *
-	   * @param Map&lt;String, Object&gt;extensions
-	   */
-	void setExtensions(Map<String, Object> extensions);
 
 }

@@ -20,19 +20,31 @@ package org.eclipse.microprofile.openapi.models;
 import java.util.Map;
 
 /**
- * Paths
- *
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#pathsObject"
+ * Base interface for OpenAPI model objects that can contain extensions.
  */
-public interface Paths extends Constructible, Extensible, Map<String, PathItem> {
+public interface Extensible {
+	
+	/**
+	 * Returns the extensions property from an Extensible instance.
+	 *
+	 * @return Map&lt;String, Object&gt; extensions
+	 **/
+	Map<String, Object> getExtensions();
 
 	/**
-	   * Adds the given path item to this Paths and return this instance of Paths
-	   * 
-	   * @param String name
-	   * @param PathItem item
-	   * @return Paths
-	   */
-	Paths addPathItem(String name, PathItem item);
+	 * Adds the given Object to this Extensible's map of extensions, with the given name as its key.
+	 *
+	 * @param String name
+	 * @param Object value
+	 * @return Components
+	 */
+	void addExtension(String name, Object value);
+
+	/**
+	 * Sets this Extensible's extensions property to the given map of extensions.
+	 *
+	 * @param Map&lt;String, Object&gt;extensions
+	 */
+	void setExtensions(Map<String, Object> extensions);
 
 }

@@ -20,13 +20,14 @@ package org.eclipse.microprofile.openapi.models.servers;
 import java.util.Map;
 
 import org.eclipse.microprofile.openapi.models.Constructible;
+import org.eclipse.microprofile.openapi.models.Extensible;
 
 /**
  * ServerVariables
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#serverVariablesObject"
  */
-public interface ServerVariables extends Constructible, Map<String, ServerVariable> {
+public interface ServerVariables extends Constructible, Extensible, Map<String, ServerVariable> {
 
 	/**
 	 * Adds a key-value item to a ServerVariables instance from
@@ -38,11 +39,5 @@ public interface ServerVariables extends Constructible, Map<String, ServerVariab
 	 */
 
 	ServerVariables addServerVariable(String name, ServerVariable item);
-
-	Map<String, Object> getExtensions();
-
-	void addExtension(String name, Object value);
-
-	void setExtensions(Map<String, Object> extensions);
 
 }
