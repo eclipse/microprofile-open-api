@@ -19,57 +19,77 @@ package org.eclipse.microprofile.openapi.models;
 
 /**
  * ExternalDocumentation
- *
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#externalDocumentationObject"
+ * <p>
+ * Allows referencing an external resource for extended documentation.
+ * <p>
+ * Fixed Fields
+ * <table border=1>
+ * <tr>
+ * <td>Field Name</td>
+ * <td>Type</td>
+ * <td>Description</td>
+ * </tr>
+ * <tr>
+ * <td>description</td>
+ * <td>String</td>
+ * <td>A short description of the target documentation. CommonMark syntax MAY be
+ * used for rich text representation.</td>
+ * </tr>
+ * <tr>
+ * <td>url</td>
+ * <td>String</td>
+ * <td>REQUIRED. The URL for the target documentation. Value MUST be in the format of a URL.</td>
+ * </tr>
+ * </table>
+ * 
+ * @see <a href=
+ *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#externalDocumentationObject">OpenAPI
+ *      Specification External Documentation Object</a>
  */
 public interface ExternalDocumentation extends Constructible, Extensible {
 
 	/**
-	   * returns the description property from a ExternalDocumentation instance.
-	   *
-	   * @return String description
-	   **/
-
+	  * Returns the description property from an ExternalDocumentation instance.
+	  *
+	  * @return a short description of the target documentation
+	  **/
 	String getDescription();
 
 	/**
-	   * sets this ExternalDocumentation's description property to the given description.
-	   *
-	   * @param String description
-	   */
+	  * Sets this ExternalDocumentation's description property to the given string.
+	  *
+	  * @param description a short description of the target documentation
+	  */
 	void setDescription(String description);
 
 	/**
-	   * sets this ExternalDocumentation's description property to the given description and
-	   * returns this instance of ExternalDocumentation.
-	   *
-	   * @param String description
-	   * @return ExternalDocumentation
-	   */
+	  * Sets this ExternalDocumentation's description property to the given string.
+	  *
+	  * @param description a short description of the target documentation
+	  * @return the current ExternalDocumentation instance
+	  */
 	ExternalDocumentation description(String description);
 
 	/**
-	   * returns the url property from a ExternalDocumentation instance.
-	   *
-	   * @return String url
-	   **/
-
+	  * Returns the url property from an ExternalDocumentation instance.
+	  *
+	  * @return the URL for the target documentation
+	  **/
 	String getUrl();
 
 	/**
-	   * sets this ExternalDocumentation's url property to the given url.
-	   *
-	   * @param String url
-	   */
+	  * Sets this ExternalDocumentation's url property to the given string.
+	  *
+	  * @param url the URL for the target documentation
+	  */
 	void setUrl(String url);
 
 	/**
-	   * sets this ExternalDocumentation's url property to the given url and
-	   * returns this instance of ExternalDocumentation.
-	   *
-	   * @param String url
-	   * @return ExternalDocumentation
-	   */
+	  * Sets this ExternalDocumentation's url property to the given string.
+	  *
+	  * @param url the URL for the target documentation
+	  * @return the current ExternalDocumentation instance
+	  */
 	ExternalDocumentation url(String url);
 
 }

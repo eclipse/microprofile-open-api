@@ -31,302 +31,380 @@ import org.eclipse.microprofile.openapi.models.security.SecurityScheme;
 
 /**
  * Components
- *
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#componentsObject"
+ * <p>
+ * Holds a set of reusable objects for different aspects of the OAS. All objects
+ * defined within the components object will have no effect on the API unless
+ * they are explicitly referenced from properties outside the components object.
+ * <p>
+ * Fixed Fields
+ * <table border=1>
+ * <tr>
+ * <td>Field Name</td>
+ * <td>Type</td>
+ * <td>Description</td>
+ * </tr>
+ * <tr>
+ * <td>schemas</td>
+ * <td>Map[string, {@link media.Schema Schema} Object | Reference Object]</td>
+ * <td>An object to hold reusable Schema Objects.</td>
+ * </tr>
+ * <tr>
+ * <td>responses</td>
+ * <td>Map[string, {@link responses.ApiResponse Response} Object | Reference
+ * Object]</td>
+ * <td>An object to hold reusable Response Objects.</td>
+ * </tr>
+ * <tr>
+ * <td>parameters</td>
+ * <td>Map[string, {@link parameters.Parameter Parameter} Object | Reference
+ * Object]</td>
+ * <td>An object to hold reusable Parameter Objects.</td>
+ * </tr>
+ * <tr>
+ * <td>examples</td>
+ * <td>Map[string, {@link examples.Example Example} Object | Reference
+ * Object]</td>
+ * <td>An object to hold reusable Example Objects.</td>
+ * </tr>
+ * <tr>
+ * <td>requestBodies</td>
+ * <td>Map[string, {@link parameters.RequestBody Request Body} Object |
+ * Reference Object]</td>
+ * <td>An object to hold reusable Request Body Objects.</td>
+ * </tr>
+ * <tr>
+ * <td>headers</td>
+ * <td>Map[string, {@link headers.Header Header} Object | Reference Object]</td>
+ * <td>An object to hold reusable Header Objects.</td>
+ * </tr>
+ * <tr>
+ * <td>securitySchemes</td>
+ * <td>Map[string, {@link security.SecurityScheme Security Scheme} Object |
+ * Reference Object]</td>
+ * <td>An object to hold reusable Security Scheme Objects.</td>
+ * </tr>
+ * <tr>
+ * <td>links</td>
+ * <td>Map[string, {@link links.Link Link} Object | Reference Object]</td>
+ * <td>An object to hold reusable Link Objects.</td>
+ * </tr>
+ * <tr>
+ * <td>callbacks</td>
+ * <td>Map[string, {@link callbacks.Callback Callback} Object | Reference
+ * Object]</td>
+ * <td>An object to hold reusable Callback Objects.</td>
+ * </tr>
+ * </table>
+ * <p>
+ * All the fixed fields declared above are objects that MUST use keys that match
+ * the regular expression: ^[a-zA-Z0-9\.\-_]+$.
+ * <p>
+ * Field Name Examples:
+ * <ul>
+ * <li>User</li> <li>User_1</li> <li>User_Name</li> <li>user-name</li> <li>my.org.User</li>
+ * </ul>
+ * @see <a href=
+ *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#componentsObject">
+ *      OpenAPI Specification Components Object</a>
  */
 public interface Components extends Constructible, Extensible {
 
 	/**
-	 * returns the schemas property from a Components instance.
+	 * Returns the schemas property from a Components instance.
 	 *
-	 * @return Map&lt;String, Schema&gt; schemas
+	 * @return a Map containing the keys and the reusable schemas for this OpenAPI document
 	 **/
 	Map<String, Schema> getSchemas();
 
 	/**
-	 * sets this Components' schemas property to the given schema.
+	 * Sets this Components' schemas property to the given Map containing keys
+	 * and reusable schema objects.
 	 * 
-	 * @param Map&lt;String, Schema&gt;schemas
+	 * @param schemas a Map containing keys and reusable schema objects
 	 */
 	void setSchemas(Map<String, Schema> schemas);
 
 	/**
-	 * sets this Components' schemas property to the given schema and returns this Components.
+	 * Sets this Components' schemas property to the given Map containing keys
+	 * and reusable schemas.
 	 * 
-	 * @param Map&lt;String, Schema&gt;schemas
-	 * @return Components
+	 * @param schemas a Map containing keys and reusable schemas
+	 * @return the current Components object
 	 */
 	Components schemas(Map<String, Schema> schemas);
 
 	/**
-	 * Adds the given schema to this Components list of schemas, with the given key as its key.
+	 * Adds the given schema to this Components' list of schemas with the given string as its key.
 	 *
-	 * @param String key
-	 * @param Schema schemasItem
-	 * @return Components
+	 * @param key a key conforming to the format required for this object
+	 * @param schemasItem a reusable schema object
+	 * @return the current Components object
 	 */
 	Components addSchemas(String key, Schema schemasItem);
 
 	/**
-	 * returns the responses property from a Components instance.
+	 * Returns the responses property from a Components instance.
 	 *
-	 * @return Map&lt;String, ApiResponse&gt; responses
+	 * @return a Map containing the keys and the reusable responses from API operations for this OpenAPI document
 	 **/
-
 	Map<String, ApiResponse> getResponses();
 
 	/**
-	 * sets this Components' responses property to the given map of ApiResponses.
+	 * Sets this Components' responses property to the given Map containing keys
+	 * and reusable response objects.
 	 *
-	 * @param Map&lt;String, ApiResponse&gt;respones
+	 * @param responses a Map containing keys and reusable response objects
 	 */
 	void setResponses(Map<String, ApiResponse> responses);
 
 	/**
-	 * sets this Components' responses property to the given map of ApiResponses and
-	 * return this instance of Components.
+	 * Sets this Components' responses property to the given Map containing keys
+	 * and reusable response objects.
 	 *
-	 * @param Map&lt;String, ApiResponse&gt;responses
+	 * @param responses a Map containing keys and reusable response objects
+	 * @return the current Components object
 	 */
 	Components responses(Map<String, ApiResponse> responses);
 
 	/**
-	 * Adds the given response to this Components' map of responses, with the given key as its key.
+	 * Adds the given response to this Components' map of responses with the given string as its key.
 	 *
-	 * @param String key
-	 * @param ApiResponse responsesItem
-	 * @return Components instance
+	 * @param key a key conforming to the format required for this object
+	 * @param responsesItem a reusable response object
+	 * @return the current Components object
 	 */
 	Components addResponses(String key, ApiResponse responsesItem);
 
 	/**
-	 * returns the parameters property from a Components instance.
+	 * Returns the parameters property from a Components instance.
 	 *
-	 * @return Map&lt;String, Parameter&gt; parameters
+	 * @return a Map containing the keys and the reusable parameters of API operations for this OpenAPI document
 	 **/
 
 	Map<String, Parameter> getParameters();
 
 	/**
-	 * sets this Components' parameters property to the given map of Parameters.
+	 * Sets this Components' parameters property to the given Map containing keys
+	 * and reusable parameter objects.
 	 *
-	 * @param Map&lt;String, Parameter&gt;parameters
+	 * @param parameters a Map containing keys and reusable parameter objects
 	 */
 	void setParameters(Map<String, Parameter> parameters);
 
 	/**
-	 * sets this Components' parameters property to the given map of Parameters and
-	 * returns this instance of Components.
+	 * Sets this Components' parameters property to the given Map containing keys
+	 * and reusable parameter objects.
 	 *
-	 * @param Map&lt;String, Parameter&gt;parameters
-	 * @return Components
+	 * @param parameters a Map containing keys and reusable parameter objects
+	 * @return the current Components object
 	 */
 	Components parameters(Map<String, Parameter> parameters);
 
 	/**
-	 * Adds the given parameters to this Components' map of parameters, with the given key as its key.
+	 * Adds the given parameter to this Components' map of parameters with the given string as its key.
 	 *
-	 * @param String key
-	 * @param Parameter parametersItem
-	 * @return Components
+	 * @param key a key conforming to the format required for this object
+	 * @param parametersItem a reusable parameter object
+	 * @return the current Components object
 	 */
 	Components addParameters(String key, Parameter parametersItem);
 
 	/**
-	 * returns the examples property from a Components instance.
+	 * Returns the examples property from a Components instance.
 	 *
-	 * @return Map&lt;String, Example&gt; examples
+	 * @return a Map containing the keys and the reusable examples for this OpenAPI document
 	 **/
 
 	Map<String, Example> getExamples();
 
 	/**
-	 * sets this Components' examples property to the given map of Examples.
+	 * Sets this Components' examples property to the given Map containing keys
+	 * and reusable example objects.
 	 *
-	 * @param Map&lt;String, Example&gt;examples
+	 * @param examples a Map containing keys and reusable example objects
 	 */
 	void setExamples(Map<String, Example> examples);
 
 	/**
-	 * sets this Components' examples property to the given map of Examples and
-	 * returns this instance of Components.
+	 * Sets this Components' examples property to the given Map containing keys
+	 * and reusable example objects.
 	 *
-	 * @param Map&lt;String, Example&gt;examples
-	 * @return Components
+	 * @param examples a Map containing keys and reusable example objects
+	 * @return the current Components object
 	 */
 	Components examples(Map<String, Example> examples);
 
 	/**
-	 * Adds the given Example to this Components' map of Examples, with the given key as its key.
+	 * Adds the given example to this Components' map of examples with the given string as its key.
 	 *
-	 * @param String key
-	 * @param Example examplesItem
-	 * @return Components
+	 * @param key a key conforming to the format required for this object
+	 * @param examplesItem a reusable example object
+	 * @return the current Components object
 	 */
 	Components addExamples(String key, Example examplesItem);
 
 	/**
-	 * returns the requestBodies property from a Components instance.
+	 * Returns the requestBodies property from a Components instance.
 	 *
-	 * @return Map&lt;String, RequestBody&gt; requestBodies
+	 * @return a Map containing the keys and the reusable request bodies for this OpenAPI document
 	 **/
-
 	Map<String, RequestBody> getRequestBodies();
 
 	/**
-	 * sets this Components' requestBodies property to the given map of RequestBodies.
+	 * Sets this Components' requestBodies property to the given Map containing keys
+	 * and reusable request body objects.
 	 *
-	 * @param Map&lt;String, RequestBody&gt;requestBodies
-	 */
+	 * @param requestBodies a Map containing the keys and reusable request body objects
+	 **/
 	void setRequestBodies(Map<String, RequestBody> requestBodies);
 
 	/**
-	 * sets this Components' requestBodies property to the given map of RequestBodies and
-	 * returns this instance of Components.
+	 * Sets this Components' requestBodies property to the given Map containing keys
+	 * and reusable request body objects.
 	 *
-	 * @param Map&lt;String, RequestBody&gt;requestBodies
-	 * @return Components
+	 * @param requestBodies a Map containing the keys and reusable request body objects
+	 * @return the current Components object
 	 */
 	Components requestBodies(Map<String, RequestBody> requestBodies);
 
 	/**
-	 * Adds the given RequestBody to this Components' map of RequestBodies, with the given key as its key.
+	 * Adds the given request body to this Components' map of request bodies with the given string as its key.
 	 *
-	 * @param String key
-	 * @param RequestBody requestBodiesItem
-	 * @return Components
+	 * @param key a key conforming to the format required for this object
+	 * @param requestBodiesItem a reusable request body object
+	 * @return the current Components object
 	 */
 	Components addRequestBodies(String key, RequestBody requestBodiesItem);
 
 	/**
-	 * returns the headers property from a Components instance.
+	 * Returns the headers property from a Components instance.
 	 *
-	 * @return Map&lt;String, Header&gt; headers
+	 * @return a Map containing the keys and the reusable headers for this OpenAPI document
 	 **/
-
 	Map<String, Header> getHeaders();
 
 	/**
-	 * sets this Components' headers property to the given map of Headers.
+	 * Sets this Components' headers property to the given Map containing keys
+	 * and reusable header objects.
 	 *
-	 * @param Map&lt;String, Header&gt;headers
+	 * @param headers a Map containing the keys and reusable header objects
 	 */
 	void setHeaders(Map<String, Header> headers);
 
 	/**
-	 * sets this Components' headers property to the given map of Headers and
-	 * returns this instance of Components.
+	 * Sets this Components' headers property to the given Map containing keys
+	 * and reusable header objects.
 	 *
-	 * @param Map&lt;String, Header&gt;headers
-	 * @return Components
+	 * @param headers a Map containing the keys and reusable header objects
+	 * @return the current Components object
 	 */
 	Components headers(Map<String, Header> headers);
 
 	/**
-	 * Adds the given Header to this Components' map of Headers, with the given key as its key.
+	 * Adds the given header to this Components' map of headers with the given string as its key.
 	 *
-	 * @param String key
-	 * @param Header headersItem
-	 * @return Components
+	 * @param key a key conforming to the format required for this object
+	 * @param headersItem a reusable header object
+	 * @return the current Components object
 	 */
 	Components addHeaders(String key, Header headersItem);
 
 	/**
-	 * returns the securitySchemes property from a Components instance.
+	 * Returns the securitySchemes property from a Components instance.
 	 *
-	 * @return Map&lt;String, SecurityScheme&gt; securitySchemes
+	 * @return a Map containing the keys and the reusable security schemes for this OpenAPI document
 	 **/
-
 	Map<String, SecurityScheme> getSecuritySchemes();
 
 	/**
-	 * sets this Components' securitySchemes property to the given map of SecuritySchemes.
+	 * Sets this Components' securitySchemes property to the given Map containing keys
+	 * and reusable security scheme objects.
 	 *
-	 * @param Map&lt;String, SecurityScheme&gt;securitySchemes
+	 * @param securitySchemes a Map containing the keys and reusable security scheme objects
 	 */
 	void setSecuritySchemes(Map<String, SecurityScheme> securitySchemes);
 
 	/**
-	 * sets this Components' securitySchemes property to the given map of SecuritySchemes and
-	 * returns this instance of Components.
+	 * Sets this Components' securitySchemes property to the given Map containing keys
+	 * and reusable security scheme objects.
 	 *
-	 * @param Map&lt;String, SecurityScheme&gt;securitySchemes
-	 * @return Components
+	 * @param securitySchemes a Map containing the keys and reusable security scheme objects
+	 * @return the current Components object
 	 */
 	Components securitySchemes(Map<String, SecurityScheme> securitySchemes);
 
 	/**
-	 * Adds the given SecurityScheme to this Components' map of SecuritySchemes, with the given key as its key.
+	 * Adds the given security scheme to this Components' map of security schemes with the given string as its key.
 	 *
-	 * @param String key
-	 * @param SecurityScheme securitySchemesItem
-	 * @return Components
+	 * @param key a key conforming to the format required for this object
+	 * @param securitySchemesItem a reusable security scheme object
+	 * @return the current Components object
 	 */
 	Components addSecuritySchemes(String key, SecurityScheme securitySchemesItem);
 
 	/**
-	 * returns the links property from a Components instance.
+	 * Returns the links property from a Components instance.
 	 *
-	 * @return Map&lt;String, Link&gt; links
+	 * @return a Map containing the keys and the reusable links for this OpenAPI document
 	 **/
-
 	Map<String, Link> getLinks();
 
 	/**
-	 * sets this Components' links property to the given map of Links.
+	 * Sets this Components' links property to the given Map containing keys
+	 * and reusable link objects.
 	 *
-	 * @param Map&lt;String, Link&gt;links
+	 * @param links a Map containing the keys and reusable link objects
 	 */
 	void setLinks(Map<String, Link> links);
 
 	/**
-	 * sets this Components' links property to the given map of Links and
-	 * returns this instance of Components.
+	 * Sets this Components' links property to the given Map containing keys
+	 * and reusable link objects.
 	 *
-	 * @param Map&lt;String, Link&gt;links
-	 * @return Components
+	 * @param links a Map containing the keys and reusable link objects
+	 * @return the current Components object
 	 */
 	Components links(Map<String, Link> links);
 
 	/**
-	 * Adds the given Link to this Components' map of Links, with the given key as its key.
+	 * Adds the given link to this Components' map of links with the given string as its key.
 	 *
-	 * @param String key
-	 * @param Link linksItem
-	 * @return Components
+	 * @param key a key conforming to the format required for this object
+	 * @param linksItem a reusable link object
+	 * @return the current Components object
 	 */
 	Components addLinks(String key, Link linksItem);
 
 	/**
-	 * returns the callbacks property from a Components instance.
+	 * Returns the callbacks property from a Components instance.
 	 *
-	 * @return Map&lt;String, Callback&gt; callbacks
+	 * @return a Map containing the keys and the reusable callbacks for this OpenAPI document
 	 **/
-
 	Map<String, Callback> getCallbacks();
 
 	/**
-	 * sets this Components' callbacks property to the given map of Callbacks.
+	 * Sets this Components' callbacks property to the given Map containing keys
+	 * and reusable callback objects.
 	 *
-	 * @param Map&lt;String, Callback&gt;callbacks
+	 * @param callbacks a Map containing the keys and reusable callback objects
 	 */
 	void setCallbacks(Map<String, Callback> callbacks);
 
 	/**
-	 * sets this Components' callbacks property to the given map of Callbacks and
-	 * returns this instance of Components.
+	 * Sets this Components' callbacks property to the given Map containing keys
+	 * and reusable callback objects.
 	 *
-	 * @param Map&lt;String, Callback&gt;callbacks
-	 * @return Components
+	 * @param callbacks a Map containing the keys and reusable callback objects
+	 * @return the current Components object
 	 */
 	Components callbacks(Map<String, Callback> callbacks);
 
 	/**
-	 * Adds the given Callback to this Components' map of Callbacks, with the given key as its key.
+	 * Adds the given callback to this Components' map of callbacks with the given string as its key.
 	 *
-	 * @param String key
-	 * @param Callback callbacksItem
-	 * @return Components
+	 * @param key a key conforming to the format required for this object
+	 * @param callbacksItem a reusable callback object
+	 * @return the current Components object
 	 */
 	Components addCallbacks(String key, Callback callbacksItem);
 

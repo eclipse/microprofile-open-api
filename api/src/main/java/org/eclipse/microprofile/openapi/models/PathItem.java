@@ -25,8 +25,111 @@ import org.eclipse.microprofile.openapi.models.servers.Server;
 
 /**
  * PathItem
- *
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#pathItemObject"
+ * <p>
+ * Describes the operations available on a single path. A Path Item MAY be
+ * empty, due to ACL constraints. The path itself is still exposed to the
+ * documentation viewer but they will not know which operations and parameters
+ * are available.
+ * <p>
+ * Fixed Fields
+ * <table border=1>
+ * <tr>
+ * <td>Field Name</td>
+ * <td>Type</td>
+ * <td>Description</td>
+ * </tr>
+ * <tr>
+ * <td>$ref</td>
+ * <td>string</td>
+ * <td>Allows for an external definition of this path item. The referenced
+ * structure MUST be in the format of a Path Item Object. If there are conflicts
+ * between the referenced definition and this Path Item's definition, the
+ * behavior is undefined.</td>
+ * </tr>
+ * <tr>
+ * <td>summary</td>
+ * <td>string</td>
+ * <td>An optional, string summary, intended to apply to all operations in this
+ * path.</td>
+ * </tr>
+ * <tr>
+ * <td>description</td>
+ * <td>string</td>
+ * <td>An optional, string description, intended to apply to all operations in
+ * this path. CommonMark syntax MAY be used for rich text representation.</td>
+ * </tr>
+ * <tr>
+ * <td>get</td>
+ * <td>{@link org.eclipse.microprofile.openapi.models.Operation Operation}
+ * Object</td>
+ * <td>A definition of a GET operation on this path.</td>
+ * </tr>
+ * <tr>
+ * <td>put</td>
+ * <td>{@link org.eclipse.microprofile.openapi.models.Operation Operation}
+ * Object</td>
+ * <td>A definition of a PUT operation on this path.</td>
+ * </tr>
+ * <tr>
+ * <td>post</td>
+ * <td>{@link org.eclipse.microprofile.openapi.models.Operation Operation}
+ * Object</td>
+ * <td>A definition of a POST operation on this path.</td>
+ * </tr>
+ * <tr>
+ * <td>delete</td>
+ * <td>{@link org.eclipse.microprofile.openapi.models.Operation Operation}
+ * Object</td>
+ * <td>A definition of a DELETE operation on this path.</td>
+ * </tr>
+ * <tr>
+ * <td>options</td>
+ * <td>{@link org.eclipse.microprofile.openapi.models.Operation Operation}
+ * Object</td>
+ * <td>A definition of a OPTIONS operation on this path.</td>
+ * </tr>
+ * <tr>
+ * <td>head</td>
+ * <td>{@link org.eclipse.microprofile.openapi.models.Operation Operation}
+ * Object</td>
+ * <td>A definition of a HEAD operation on this path.</td>
+ * </tr>
+ * <tr>
+ * <td>patch</td>
+ * <td>{@link org.eclipse.microprofile.openapi.models.Operation Operation}
+ * Object</td>
+ * <td>A definition of a PATCH operation on this path.</td>
+ * </tr>
+ * <tr>
+ * <td>trace</td>
+ * <td>{@link org.eclipse.microprofile.openapi.models.Operation Operation}
+ * Object</td>
+ * <td>A definition of a TRACE operation on this path.</td>
+ * </tr>
+ * <tr>
+ * <td>servers</td>
+ * <td>[{@link org.eclipse.microprofile.openapi.models.servers.Server Server}
+ * Object]</td>
+ * <td>An alternative server array to service all operations in this path.</td>
+ * </tr>
+ * <tr>
+ * <td>parameters</td>
+ * <td>[{@link org.eclipse.microprofile.openapi.models.parameters.Parameter
+ * Parameter} Object |
+ * {@link org.eclipse.microprofile.openapi.models.parameters.Parameter
+ * Reference} Object]</td>
+ * <td>A list of parameters that are applicable for all the operations described
+ * under this path. These parameters can be overridden at the operation level,
+ * but cannot be removed there. The list MUST NOT include duplicated parameters.
+ * A unique parameter is defined by a combination of a name and location. The
+ * list can use the Reference Object to link to parameters that are defined at
+ * the OpenAPI Object's components/parameters.</td>
+ * </tr>
+ * </table>
+ * 
+ * @see <a href=
+ *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#pathItemObject">OpenAPI
+ *      Specification Path Item Object</a>
  */
 public interface PathItem extends Constructible, Extensible {
 

@@ -23,90 +23,76 @@ import org.eclipse.microprofile.openapi.models.ExternalDocumentation;
 
 /**
  * Tag
- *
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#tagObject"
+ * <p>
+ * An object to store metadata to be available in the OpenAPI document.
+ * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#tagObject">OpenAPI Specification Tag Object</a>
  */
 public interface Tag extends Constructible, Extensible {
 
 	/**
-	 * returns the name property from a Tag instance.
+	 * Returns the name property from a Tag instance.
 	 *
-	 * @return String name
+	 * @return the name property from this tag
 	 **/
-
 	String getName();
 
 	/**
-	 * Sets the name property of a Tag instance to the
-	 * parameter.
+	 * Sets the name property of a Tag instance to the given string.
 	 * 
-	 * @param name
+	 * @param name the name property for this tag
 	 */
-
 	void setName(String name);
 
 	/**
-	 * Sets the name property of a Tag instance to the
-	 * parameter and returns the instance.
+	 * Sets the name property of a Tag instance to the given string.
 	 * 
-	 * @param name
-	 * @return Tag instance with the set name property
+	 * @param name the name property for this tag
+	 * @return the current Tag instance
 	 */
-
 	Tag name(String name);
 
 	/**
-	 * returns the description property from a Tag instance.
+	 * Returns the description property from a Tag instance.
 	 *
-	 * @return String description
+	 * @return the description property from this tag
 	 **/
-
 	String getDescription();
 
 	/**
-	 * Sets the description property of a Tag instance to the
-	 * parameter.
+	 * Sets the description property of a Tag instance to the given string.
 	 * 
-	 * @param description
+	 * @param description the description property for this tag
 	 */
-
 	void setDescription(String description);
 
 	/**
-	 * Sets the description property of a Tag instance to the
-	 * parameter and returns the instance.
+	 * Sets the description property of a Tag instance to the given string.
 	 * 
-	 * @param description
-	 * @return Tag instance with the set description property
+	 * @param description the description property for this tag
+	 * @return the current Tag instance
 	 */
-
 	Tag description(String description);
 
 	/**
-	 * returns the externalDocs property from a Tag instance.
+	 * Returns the externalDocs property from a Tag instance.
 	 *
-	 * @return ExternalDocumentation externalDocs
+	 * @return additional external documentation from this tag
 	 **/
-
 	ExternalDocumentation getExternalDocs();
 
 	/**
-	 * Sets the externalDocs property of a Tag instance to the
-	 * parameter.
+	 * Sets the externalDocs property of a Tag instance to the given object.
 	 * 
-	 * @param externalDocs
+	 * @param externalDocs additional external documentation for this tag
 	 */
-
 	void setExternalDocs(ExternalDocumentation externalDocs);
 
 	/**
-	 * Sets the externalDocs property of a Tag instance to the
-	 * parameter and returns the instance.
+	 * Sets the externalDocs property of a Tag instance to the given object.
 	 * 
-	 * @param externalDocs
-	 * @return Tag instance with the set externalDocs property
+	 * @param externalDocs additional external documentation for this tag
+	 * @return the current Tag instance
 	 */
-
 	Tag externalDocs(ExternalDocumentation externalDocs);
 
 }
