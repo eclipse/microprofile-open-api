@@ -21,152 +21,155 @@ import org.eclipse.microprofile.openapi.models.Constructible;
 import org.eclipse.microprofile.openapi.models.Extensible;
 
 /**
-*
-* @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#infoObject"
-*/
+ * This interface represents all the metadata about the API. The metadata may be used by clients if needed,
+ * and may be presented in editing or documentation tools.
+ *
+ * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#infoObject"
+ */
 public interface Info extends Constructible, Extensible {
 
 	/**
-	   * returns the title property from a Info instance.
+	   * Returns the title for the application for this instance of Info
 	   *
-	   * @return String title
+	   * @return the title of the application
 	   **/
 
 	String getTitle();
 
 	/**
-	   * sets this Info's title property to the given title.
+	   * Sets this Info instance's title for the application to the given title.
 	   *
-	   * @param String title
+	   * @param title the title of the application
 	   */
 	void setTitle(String title);
 
 	/**
-	   * sets this Info's title property to the given title and
+	   * Sets this Info instance's title for the application to the given title and
 	   * returns this instance of Info
 	   *
-	   * @param String title
-	   * @return Info
+	   * @param title the title of the application
+	   * @return this Info instance
 	   */
 	Info title(String title);
 
 	/**
-	   * returns the description property from a Info instance.
+	   * Returns a short description for the application for this Info instance.
 	   *
-	   * @return String description
+	   * @return a short description of the application
 	   **/
 
 	String getDescription();
 
 	/**
-	   * sets this Info's description property to the given description.
+	   * Sets this Info instance's description for the application to the given description.
 	   *
-	   * @param String description
+	   * @param description a short description for the application
 	   */
 	void setDescription(String description);
 
 	/**
-	   * sets this Info's description property to the given description and
-	   * returns this instance of Info
+	   * Sets this Info instance's description for the application to the given description and
+	   * returns this instance of Info.
 	   *
-	   * @param String description
-	   * @return Info
+	   * @param description
+	   * @return this Info instance
 	   */
 	Info description(String description);
 
 	/**
-	   * returns the termsOfService property from a Info instance.
+	   * Returns the URL to the Terms of Service for the API for this instance of Info.
 	   *
-	   * @return String termsOfService
+	   * @return a URL to the Terms of Service for the API
 	   **/
 
 	String getTermsOfService();
 
 	/**
-	   * sets this Info's termsOfService property to the given termsOfService.
+	   * Sets this Info instance's URL to the Terms of Service for the API to the given String.
+	   * The URL must be in the format of a URL.
 	   *
-	   * @param String termsOfService
+	   * @param termsOfService the URL to the Terms of Service for the API
 	   */
 	void setTermsOfService(String termsOfService);
 
 	/**
-	   * sets this Info's termsOfService property to the given termsOfService and
-	   * returns this instance of Info
+	   * Sets this Info instance's URL to the Terms of Service for the API to the given String and
+	   * returns this instance of Info. The URL must be in the format of a URL.
 	   *
-	   * @param String termsOfService
-	   * @return Info
+	   * @param termsOfService the URL to the Terms of Service for the API
+	   * @return this Info instance
 	   */
 	Info termsOfService(String termsOfService);
 
 	/**
-	   * returns the contact property from a Info instance.
+	   * Returns the contact information for the exposed API from this Info instance.
 	   *
-	   * @return Contact contact
+	   * @return the contact information for the exposed API
 	   **/
 
 	Contact getContact();
 
 	/**
-	   * sets this Info's contact property to the given contact.
+	   * Sets this Info instance's contact information for the exposed API.
 	   *
-	   * @param Contact contact
+	   * @param contact the contact information for the exposed API
 	   */
 	void setContact(Contact contact);
 
 	/**
-	   * sets this Info's contact property to the given contact and
-	   * returns this instance of Info
+	   * Sets this Info instance's contact information for the exposed API and
+	   * returns this instance of Info.
 	   *
-	   * @param Contact contact
-	   * @return Info
+	   * @param contact the contact information for the exposed API
+	   * @return this Info instance
 	   */
 	Info contact(Contact contact);
 
 	/**
-	   * returns the license property from a Info instance.
+	   * Returns the license information for the exposed API from this Info instance.
 	   *
-	   * @return License license
+	   * @return the license information for the exposed API
 	   **/
 
 	License getLicense();
 
 	/**
-	   * sets this Info's license property to the given license.
+	   * Sets this Info's license information for the exposed API.
 	   *
-	   * @param License license
+	   * @param license the license information for the exposed API
 	   */
 	void setLicense(License license);
 
 	/**
-	   * sets this Info's license property to the given license and
-	   * returns this instance of Info
+	   * Sets this Info's license information for the exposed API and
+	   * returns this instance of Info.
 	   *
-	   * @param License license
-	   * @return Info
+	   * @param license the license information for the exposed API
+	   * @return this Info instance
 	   */
 	Info license(License license);
 
 	/**
-	   * returns the version property from a Info instance.
+	   * Returns the version of the OpenAPI document for this Info instance.
 	   *
-	   * @return String version
+	   * @return the version of the OpenAPI document
 	   **/
 
 	String getVersion();
 
 	/**
-	   * sets this Info's version property to the given version.
+	   * Sets the version of the OpenAPI document for this instance of Info to the given version.
 	   *
-	   * @param String version
+	   * @param version the version of the OpenAPI document
 	   */
 	void setVersion(String version);
 
 	/**
-	   * sets this Info's version property to the given version and
+	   * Sets the version of the OpenAPI document for this instance of Info to the given version and
 	   * returns this instance of Info
 	   *
-	   * @param String version
-	   * @return Info
+	   * @param version the version of the OpenAPI document
+	   * @return this Info instance
 	   */
 	Info version(String version);
 
