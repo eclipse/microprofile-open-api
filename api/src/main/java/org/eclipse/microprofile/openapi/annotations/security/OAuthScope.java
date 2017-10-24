@@ -24,6 +24,7 @@ import java.lang.annotation.Target;
 
 /**
  * Represents an OAuth scope.
+ * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#oauthFlowsObject" 
  **/
 @Target({  })
 @Retention(RetentionPolicy.RUNTIME)
