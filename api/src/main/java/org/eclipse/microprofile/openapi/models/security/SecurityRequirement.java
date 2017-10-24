@@ -33,11 +33,11 @@ public interface SecurityRequirement extends Constructible, Map<String, List<Str
 	 * Adds a List item to a SecurityRequirement instance
 	 * based on the name and item parameters provided as key-value pair.
 	 * <p>
-	 * Takes value as a String.
+	 * Takes value as a String object.
 	 * 
 	 * @param name
 	 * @param item
-	 * @return Updated SecurityRequirements instance
+	 * @return Updated SecurityRequirement instance
 	 */
 
 	SecurityRequirement addList(String name, String item);
@@ -47,11 +47,11 @@ public interface SecurityRequirement extends Constructible, Map<String, List<Str
 	 * based on the name and item parameters provided as key-value pair
 	 * to the map.
 	 * <p>
-	 * Takes value as a List of strings.
+	 * Takes value as a List of String objects.
 	 * 
 	 * @param name
 	 * @param item
-	 * @return Updated SecurityRequirements instance
+	 * @return Updated SecurityRequirement instance
 	 */
 
 	SecurityRequirement addList(String name, List<String> item);
@@ -61,7 +61,7 @@ public interface SecurityRequirement extends Constructible, Map<String, List<Str
 	 * based on the name parameter provided as key to the map.
 	 * 
 	 * @param name
-	 * @return Updated SecurityRequirements instance
+	 * @return Updated SecurityRequirement instance
 	 */
 
 	SecurityRequirement addList(String name);
