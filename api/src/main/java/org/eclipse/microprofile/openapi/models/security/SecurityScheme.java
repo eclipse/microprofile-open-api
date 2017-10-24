@@ -28,10 +28,7 @@ import org.eclipse.microprofile.openapi.models.Extensible;
 public interface SecurityScheme extends Constructible, Extensible {
 
 	/**
-	 * Type is a REQUIRED property that specifies the type of SecurityScheme instance.
-	 * <p>
-	 * This method is used in getType and setType to get or set the type of SecurityScheme object 
-	 * to one of the valid values. 
+	 * Gets or Sets type
 	 */
 	public enum Type {
 	    APIKEY("apiKey"),
@@ -52,10 +49,7 @@ public interface SecurityScheme extends Constructible, Extensible {
 	}
 
 	/**
-	 * In is a REQUIRED property that specifies the location of the API key.
-	 * <p>
-	 * This method is used in getIn and setIn to get or set the in of SecurityScheme object 
-	 * to one of the enum constants listed.
+	 * Gets or Sets in
 	 */
 	public enum In {
 	    COOKIE("cookie"),
@@ -75,32 +69,26 @@ public interface SecurityScheme extends Constructible, Extensible {
 	}
 
 	/**
-	 * Type is a REQUIRED property that specifies the type of SecurityScheme instance.
-	 * <p>
-	 * This method returns the type property from SecurityScheme instance.
-	 * <p>
+	 * returns the type property from a SecurityScheme instance.
+	 *
 	 * @return Type type
 	 **/
 
 	SecurityScheme.Type getType();
 
 	/**
-	 * Type is a REQUIRED property that specifies the type of SecurityScheme instance.
-	 * <p>
-	 * This method sets the type property of SecurityScheme instance
-	 * to the given Type argument.
-	 * <p>
+	 * Sets the type property of a SecurityScheme instance
+	 * to the parameter
+	 *
 	 * @param type
 	 */
 
 	void setType(SecurityScheme.Type type);
 
 	/**
-	 * Type is a REQUIRED property that specifies the type of SecurityScheme instance.
-	 * <p>
-	 * This method sets the type property of SecurityScheme instance
-	 * to the given Type argument and returns the modified instance.
-	 * <p>
+	 * Sets the type property of a SecurityScheme instance
+	 * to the parameter and returns the instance.
+	 *
 	 * @param type
 	 * @return SecurityScheme instance with the set type property
 	 */
@@ -108,31 +96,26 @@ public interface SecurityScheme extends Constructible, Extensible {
 	SecurityScheme type(SecurityScheme.Type type);
 
 	/**
-	 * A short description for security schema.
-	 * <p>
-	 * This method returns the description property from SecurityScheme instance.
-	 * <p>
+	 * returns the description property from a SecurityScheme instance.
+	 *
 	 * @return String description
 	 **/
 
 	String getDescription();
 
 	/**
-	 * A short description for security schema.
-	 * <p>
-	 * This method sets the description property of SecurityScheme instance.
-	 * <p>
+	 * Sets the description property of a SecurityScheme instance
+	 * to the parameter.
+	 *
 	 * @param description
 	 */
 
 	void setDescription(String description);
 
 	/**
-	 * A short description for security schema.
-	 * <p>
-	 * This method sets the description property of SecurityScheme instance
-	 * and returns the modified instance.
-	 * <p>
+	 * Sets the description property of a SecurityScheme instance
+	 * to the parameter and returns the instance.
+	 *
 	 * @param description
 	 * @return SecurityScheme instance with the set description property
 	 */
@@ -140,32 +123,26 @@ public interface SecurityScheme extends Constructible, Extensible {
 	SecurityScheme description(String description);
 
 	/**
-	 * Name is a REQUIRED property - this is the name of the header, query or cookie parameter to be used.
-	 * <p>
-	 * This method returns the name property from SecurityScheme instance.
-	 * <p>
+	 * returns the name property from a SecurityScheme instance.
+	 *
 	 * @return String name
 	 **/
 
 	String getName();
 
 	/**
-	 * Name is a REQUIRED property - this is the name of the header, query or cookie parameter to be used.
-	 * <p>
-	 * This method sets the name property of SecurityScheme instance
+	 * Sets the name property of a SecurityScheme instance
 	 * to the parameter.
-	 * <p>
+	 *
 	 * @param name
 	 */
 
 	void setName(String name);
 
 	/**
-	 * Name is a REQUIRED property - this is the name of the header, query or cookie parameter to be used.
-	 * <p>
-	 * This method sets the name property of SecurityScheme instance
-	 * to the given String argument and returns the modified instance.
-	 * <p>
+	 * Sets the name property of a SecurityScheme instance
+	 * to the parameter and returns the instance.
+	 *
 	 * @param name
 	 * @return SecurityScheme instance with the set name property
 	 */
@@ -173,35 +150,26 @@ public interface SecurityScheme extends Constructible, Extensible {
 	SecurityScheme name(String name);
 
 	/**
-	 * In is a REQUIRED property that indicates the location of the API key. 
-	 * Valid values are "query", "header", "cookie".
-	 * <p> 
-	 * This method returns the in property from SecurityScheme instance.
-	 * <p>
+	 * returns the in property from a SecurityScheme instance.
+	 *
 	 * @return In in
 	 **/
 
 	SecurityScheme.In getIn();
 
 	/**
-	 * In is a REQUIRED property that indicates the location of the API key. 
-	 * Valid values are "query", "header", "cookie".
-	 * <p>
-	 * The method sets the in property of SecurityScheme instance
-	 * to the given In argument.
-	 * <p>
+	 * Sets the in property of a SecurityScheme instance
+	 * to the parameter.
+	 *
 	 * @param in
 	 */
 
 	void setIn(SecurityScheme.In in);
 
 	/**
-	 * In is a REQUIRED property that indicates the location of the API key. 
-	 * Valid values are "query", "header", "cookie".
-	 * <p>
-	 * This method sets the in property of SecurityScheme instance
-	 * to the given In argument and returns the modified instance.
-	 * <p>
+	 * Sets the in property of a SecurityScheme instance
+	 * to the parameter and returns the instance.
+	 *
 	 * @param in
 	 * @return SecurityScheme instance with the set in property
 	 */
@@ -209,35 +177,26 @@ public interface SecurityScheme extends Constructible, Extensible {
 	SecurityScheme in(SecurityScheme.In in);
 
 	/**
-	 * Schema is a REQUIRED property that is the name of the HTTP Authorization scheme
-	 * to be used in the Authorization header as defined in RFC7235.
-	 * <p>
-	 * This method returns the scheme property from SecurityScheme instance.
-	 * <p>
+	 * returns the scheme property from a SecurityScheme instance.
+	 *
 	 * @return String scheme
 	 **/
 
 	String getScheme();
 
 	/**
-	 * Schema is a REQUIRED property that is the name of the HTTP Authorization scheme
-	 * to be used in the Authorization header as defined in RFC7235.
-	 * <p>
-	 * This method sets the scheme property of SecurityScheme instance
-	 * to the given String argument.
-	 * <p>
+	 * Sets the scheme property of a SecurityScheme instance
+	 * to the parameter.
+	 *
 	 * @param scheme
 	 */
 
 	void setScheme(String scheme);
 
 	/**
-	 * Schema is a REQUIRED property that is the name of the HTTP Authorization scheme
-	 * to be used in the Authorization header as defined in RFC7235.
-	 * <p>
-	 * This method sets the scheme property of SecurityScheme instance
-	 * to the given String argument and returns the modified instance.
-	 * <p>
+	 * Sets the scheme property of a SecurityScheme instance
+	 * to the parameter and returns the instance.
+	 *
 	 * @param scheme
 	 * @return SecurityScheme instance with the set scheme property
 	 */
@@ -245,35 +204,26 @@ public interface SecurityScheme extends Constructible, Extensible {
 	SecurityScheme scheme(String scheme);
 
 	/**
-	 * bearerFormat is intended as a hint to the client to identify how the bearer token is formatted. 
-	 * Bearer tokens are usually generated by an authorization server, so this information is primarily for documentation purposes.
-	 * <p>
-	 * This method returns the bearerFormat property from SecurityScheme instance.
-	 * <p>
+	 * returns the bearerFormat property from a SecurityScheme instance.
+	 *
 	 * @return String bearerFormat
 	 **/
 
 	String getBearerFormat();
 
 	/**
-	 * bearerFormat is intended as a hint to the client to identify how the bearer token is formatted. 
-	 * Bearer tokens are usually generated by an authorization server, so this information is primarily for documentation purposes.
-	 * <p>
-	 * This method sets the bearerFormat property of SecurityScheme instance
-	 * to the given String argument.
-	 * <p>
+	 * Sets the bearerFormat property of a SecurityScheme instance
+	 * to the parameter.
+	 *
 	 * @param bearerFormat
 	 */
 
 	void setBearerFormat(String bearerFormat);
 
 	/**
-	 * bearerFormat is intended as a hint to the client to identify how the bearer token is formatted. 
-	 * Bearer tokens are usually generated by an authorization server, so this information is primarily for documentation purposes.
-	 * <p>
-	 * This method sets the bearerFormat property of SecurityScheme instance to the given String argument
-	 * and returns the modified instance.
-	 * <p>
+	 * Sets the bearerFormat property of a SecurityScheme instance
+	 * to the parameter and returns the instance.
+	 *
 	 * @param bearerFormat
 	 * @return SecurityScheme instance with the set bearerFormat property
 	 */
@@ -281,11 +231,7 @@ public interface SecurityScheme extends Constructible, Extensible {
 	SecurityScheme bearerFormat(String bearerFormat);
 
 	/**
-	 * Flows is a REQUIRED property.
-	 * <p>
-	 * Flows is an object containing configuration information for the flow types supported.
-	 * <p>
-	 * This method returns the flows property from SecurityScheme instance.
+	 * returns the flows property from a SecurityScheme instance.
 	 *
 	 * @return OAuthFlows flows
 	 **/
@@ -293,25 +239,18 @@ public interface SecurityScheme extends Constructible, Extensible {
 	OAuthFlows getFlows();
 
 	/**
-	 * Flows is a REQUIRED property.
-	 * <p>
-	 * Flows is an object containing configuration information for the flow types supported.
-	 * <p>
-	 * This method sets the flows property of SecurityScheme instance
-	 * to the given OAuthFlows argument.
+	 * Sets the flows property of a SecurityScheme instance
+	 * to the parameter.
+	 *
 	 * @param flows
 	 */
 
 	void setFlows(OAuthFlows flows);
 
 	/**
-	 * Flows is a REQUIRED property.
-	 * <p>
-	 * Flows is an object containing configuration information for the flow types supported.
-	 * <p>
-	 * This method sets the flows property of SecurityScheme instance
-	 * to the given OAuthFlows argument and returns the modified instance.
-	 * <p>
+	 * Sets the flows property of a SecurityScheme instance
+	 * to the parameter and returns the instance.
+	 *
 	 * @param flows
 	 * @return SecurityScheme instance with the set flows property
 	 */
@@ -319,12 +258,7 @@ public interface SecurityScheme extends Constructible, Extensible {
 	SecurityScheme flows(OAuthFlows flows);
 
 	/**
-	 * openIdConnectUrl is a REQUIRED property.
-	 * <p>
-	 * This property allows to discover OAuth2 configuration values. 
-	 * openIdConnectUrl MUST be in a form of a URL.
-	 * <p>
-	 * This method returns the openIdConnectUrl property from SecurityScheme instance.
+	 * returns the openIdConnectUrl property from a SecurityScheme instance.
 	 *
 	 * @return String openIdConnectUrl
 	 **/
@@ -332,13 +266,8 @@ public interface SecurityScheme extends Constructible, Extensible {
 	String getOpenIdConnectUrl();
 
 	/**
-	 * openIdConnectUrl is a REQUIRED property.
-	 * <p>
-	 * This property allows to discover OAuth2 configuration values. 
-	 * openIdConnectUrl MUST be in a form of a URL.
-	 * <p>
-	 * This method sets the openIdConnectUrl property of a SecurityScheme instance
-	 * to the given String argument.
+	 * Sets the openIdConnectUrl property of a SecurityScheme instance
+	 * to the parameter.
 	 *
 	 * @param openIdConnectUrl
 	 */
@@ -346,14 +275,9 @@ public interface SecurityScheme extends Constructible, Extensible {
 	void setOpenIdConnectUrl(String openIdConnectUrl);
 
 	/**
-	 * penIdConnectUrl is a REQUIRED property.
-	 * <p>
-	 * This property allows to discover OAuth2 configuration values. 
-	 * openIdConnectUrl MUST be in a form of a URL.
-	 * <p>
-	 * This method sets the openIdConnectUrl property of SecurityScheme instance
-	 * to the given String argument and returns the modified instance.
-	 * <p>
+	 * Sets the openIdConnectUrl property of a SecurityScheme instance
+	 * to the parameter and returns the instance.
+	 *
 	 * @param openIdConnectUrl
 	 * @return SecurityScheme instance with the set openIdConnectUrl property
 	 */
@@ -361,35 +285,29 @@ public interface SecurityScheme extends Constructible, Extensible {
 	SecurityScheme openIdConnectUrl(String openIdConnectUrl);
 
 	/**
-	 * ref property is the reference of the model's location.
-	 * <p>
-	 * This method returns the ref property from SecurityScheme instance.
-	 * <p>
-	 * @return String ref
+	 * returns the $ref property from an SecurityScheme instance.
+	 *
+	 * @return String $ref
 	 **/
-	String getRef();
+	String get$ref();
 
 	/**
-	 * ref property is the reference of the model's location.
-	 * <p>
-	 * This method sets the ref property of SecurityScheme instance
-	 * to the given String argument.
+	 * Sets the $ref property of a SecurityScheme instance
+	 * to the parameter.
 	 *
-	 * @param ref
+	 * @param $ref
 	 */
 
-	void setRef(String ref);
+	void set$ref(String $ref);
 
 	/**
-	 * ref property is the reference of the model's location.
-	 * <p>
-	 * This method sets the ref property of SecurityScheme instance
-	 * to the given String argument and returns the modified instance.
+	 * Sets the $ref property of a SecurityScheme instance
+	 * to the parameter and returns the instance.
 	 *
-	 * @param ref
-	 * @return SecurityScheme instance with the set ref property
+	 * @param $ref
+	 * @return SecurityScheme instance with the set $ref property
 	 */
 
-	SecurityScheme ref(String ref);
+	SecurityScheme $ref(String $ref);
 
 }
