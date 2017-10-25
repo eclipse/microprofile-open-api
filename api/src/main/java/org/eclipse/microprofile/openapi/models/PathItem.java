@@ -26,99 +26,89 @@ import org.eclipse.microprofile.openapi.models.servers.Server;
 /**
  * PathItem
  * <p>
- * Describes the operations available on a single path. A Path Item MAY be
- * empty, due to ACL constraints. The path itself is still exposed to the
- * documentation viewer but they will not know which operations and parameters
+ * Describes the operations available on a single path. A Path Item MAY be empty
+ * due to ACL constraints. In that case the path itself is still exposed to the
+ * documentation viewer but you will not know which operations and parameters
  * are available.
  * <p>
  * Fixed Fields
- * <table border=1>
+ * <table border=1 cellpadding="8" style="border-collapse: collapse">
  * <tr>
- * <td>Field Name</td>
- * <td>Type</td>
- * <td>Description</td>
+ * <th>Field Name</th>
+ * <th>Type</th>
+ * <th>Description</th>
  * </tr>
  * <tr>
- * <td>$ref</td>
+ * <td>reference</td>
  * <td>string</td>
  * <td>Allows for an external definition of this path item. The referenced
- * structure MUST be in the format of a Path Item Object. If there are conflicts
- * between the referenced definition and this Path Item's definition, the
- * behavior is undefined.</td>
+ * structure MUST be in the format of a Path Item Object. This field represents
+ * the $ref field in the OAS file. If there are conflicts between the referenced
+ * definition and this Path Item's definition, the behavior is undefined.</td>
  * </tr>
  * <tr>
  * <td>summary</td>
  * <td>string</td>
- * <td>An optional, string summary, intended to apply to all operations in this
- * path.</td>
+ * <td>A short summary of what the path item represents and which is intended to
+ * apply to all operations in this path.</td>
  * </tr>
  * <tr>
  * <td>description</td>
  * <td>string</td>
- * <td>An optional, string description, intended to apply to all operations in
- * this path. CommonMark syntax MAY be used for rich text representation.</td>
+ * <td>A detailed description of what the path item represents and which is
+ * intended to apply to all operations in this path. CommonMark syntax MAY be
+ * used for rich text representation.</td>
  * </tr>
  * <tr>
  * <td>get</td>
- * <td>{@link org.eclipse.microprofile.openapi.models.Operation Operation}
- * Object</td>
+ * <td>{@link Operation Operation Object}</td>
  * <td>A definition of a GET operation on this path.</td>
  * </tr>
  * <tr>
  * <td>put</td>
- * <td>{@link org.eclipse.microprofile.openapi.models.Operation Operation}
- * Object</td>
+ * <td>{@link Operation Operation Object}</td>
  * <td>A definition of a PUT operation on this path.</td>
  * </tr>
  * <tr>
  * <td>post</td>
- * <td>{@link org.eclipse.microprofile.openapi.models.Operation Operation}
- * Object</td>
+ * <td>{@link Operation Operation Object}</td>
  * <td>A definition of a POST operation on this path.</td>
  * </tr>
  * <tr>
  * <td>delete</td>
- * <td>{@link org.eclipse.microprofile.openapi.models.Operation Operation}
- * Object</td>
+ * <td>{@link Operation Operation Object}</td>
  * <td>A definition of a DELETE operation on this path.</td>
  * </tr>
  * <tr>
  * <td>options</td>
- * <td>{@link org.eclipse.microprofile.openapi.models.Operation Operation}
- * Object</td>
+ * <td>{@link Operation Operation Object}</td>
  * <td>A definition of a OPTIONS operation on this path.</td>
  * </tr>
  * <tr>
  * <td>head</td>
- * <td>{@link org.eclipse.microprofile.openapi.models.Operation Operation}
- * Object</td>
+ * <td>{@link Operation Operation Object}</td>
  * <td>A definition of a HEAD operation on this path.</td>
  * </tr>
  * <tr>
  * <td>patch</td>
- * <td>{@link org.eclipse.microprofile.openapi.models.Operation Operation}
- * Object</td>
+ * <td>{@link Operation Operation Object}</td>
  * <td>A definition of a PATCH operation on this path.</td>
  * </tr>
  * <tr>
  * <td>trace</td>
- * <td>{@link org.eclipse.microprofile.openapi.models.Operation Operation}
- * Object</td>
+ * <td>{@link Operation Operation Object}</td>
  * <td>A definition of a TRACE operation on this path.</td>
  * </tr>
  * <tr>
  * <td>servers</td>
- * <td>[{@link org.eclipse.microprofile.openapi.models.servers.Server Server}
- * Object]</td>
+ * <td>[{@link Server Server Object}]</td>
  * <td>An alternative server array to service all operations in this path.</td>
  * </tr>
  * <tr>
  * <td>parameters</td>
- * <td>[{@link org.eclipse.microprofile.openapi.models.parameters.Parameter
- * Parameter} Object |
- * {@link org.eclipse.microprofile.openapi.models.parameters.Parameter
- * Reference} Object]</td>
- * <td>A list of parameters that are applicable for all the operations described
+ * <td>[{@link Parameter Parameter Object } | {@link Parameter Reference Object
+ * }]</td>
+ * <td>A list of parameters that are applicable to all the operations described
  * under this path. These parameters can be overridden at the operation level,
  * but cannot be removed there. The list MUST NOT include duplicated parameters.
  * A unique parameter is defined by a combination of a name and location. The
@@ -128,14 +118,14 @@ import org.eclipse.microprofile.openapi.models.servers.Server;
  * </table>
  * 
  * @see <a href=
- *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#pathItemObject">OpenAPI
- *      Specification Path Item Object</a>
+ *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#pathItemObject">
+ *      OpenAPI Specification Path Item Object</a>
  */
 public interface PathItem extends Constructible, Extensible {
 
 	/**
-	 * All of the possible types of methods for this path
-	 */
+	 * All of the possible types of HTTP operations for this path
+	 **/
 	enum HttpMethod {
 	    POST,
 	    GET,
@@ -148,345 +138,319 @@ public interface PathItem extends Constructible, Extensible {
 	}
 
 	/**
-	 * returns the summary property from a PathItem instance.
+	 * Returns the summary property from a PathItem instance.
 	 *
-	 * @return String summary
+	 * @return a short summary of what the path item represents
 	 **/
-
 	String getSummary();
 
 	/**
-	 * sets this PathItem's summary property to the given summary.
+	 * Sets this PathItem's summary property to the given string.
 	 *
-	 * @param String summary
-	 */
+	 * @param summary  short summary of what the path item represents
+	 **/
 	void setSummary(String summary);
 
 	/**
-	* sets this PathItem's summary property to the given summary and
-	* returns this instance of PathItem
-	*
-	* @param String summary
-	* @return PathItem
-	*/
+	 * Sets this PathItem's summary property to the given string.
+	 *
+	 * @param summary  short summary of what the path item represents
+	 * @return the current PathItem instance
+	 **/
 	PathItem summary(String summary);
 
 	/**
-	 * returns the description property from a PathItem instance.
+	 * Returns the description property from a PathItem instance.
 	 *
-	 * @return String description
+	 * @return a detailed description of what the path item represents
 	 **/
-
 	String getDescription();
 
 	/**
-	 * sets this PathItem's description property to the given description.
+	 * Sets this PathItem's description property to the given string.
 	 *
-	 * @param String description
-	 */
+	 * @param description  detailed description of what the path item represents
+	 **/
 	void setDescription(String description);
 
 	/**
-	* sets this PathItem's description property to the given description and
-	* returns this instance of PathItem
-	*
-	* @param String description
-	* @return PathItem
-	*/
+	 * Sets this PathItem's description property to the given string.
+	 *
+	 * @param description  detailed description of what the path item represents
+	 * @return the current PathItem instance
+	 **/
 	PathItem description(String description);
 
 	/**
-	 * returns the get property from a PathItem instance.
+	 * Returns the get property from a PathItem instance.
 	 *
-	 * @return Operation get
+	 * @return definition of a GET operation on this path
 	 **/
-	Operation getGet();
+	Operation getGetOperation();
 
 	/**
-	 * sets this PathItem's get property to the given get.
+	 * Sets this PathItem's get property to the given operation.
 	 *
-	 * @param Operation get
-	 */
-	void setGet(Operation get);
+	 * @param get  definition of a GET operation
+	 **/
+	void setGetOperation(Operation get);
 
 	/**
-	* sets this PathItem's get property to the given get and
-	* returns this instance of PathItem
-	*
-	* @param Operation get
-	* @return PathItem
-	*/
+	 * Sets this PathItem's get property to the given operation.
+	 *
+	 * @param get  definition of a GET operation
+	 * @return the current PathItem instance
+	 **/
 	PathItem get(Operation get);
 
 	/**
-	 * returns the put property from a PathItem instance.
+	 * Returns the put property from a PathItem instance.
 	 *
-	 * @return Operation put
+	 * @return definition of a PUT operation on this path
 	 **/
-
-	Operation getPut();
+	Operation getPutOperation();
 
 	/**
-	 * sets this PathItem's put property to the given put.
+	 * Sets this PathItem's put property to the given operation.
 	 *
-	 * @param Operation put
-	 */
-	void setPut(Operation put);
+	 * @param put  definition of a PUT operation
+	 **/
+	void setPutOperation(Operation put);
 
 	/**
-	* sets this PathItem's put property to the given put and
-	* returns this instance of PathItem
-	*
-	* @param Operation put
-	* @return PathItem
-	*/
+	 * Sets this PathItem's put property to the given operation.
+	 *
+	 * @param put  definition of a PUT operation
+	 * @return the current PathItem instance
+	 **/
 	PathItem put(Operation put);
 
 	/**
-	 * returns the post property from a PathItem instance.
+	 * Returns the post property from a PathItem instance.
 	 *
-	 * @return Operation post
+	 * @return definition of a POST operation on this path
 	 **/
-
-	Operation getPost();
+	Operation getPostOperation();
 
 	/**
-	 * sets this PathItem's post property to the given post.
+	 * Sets this PathItem's post property to the given operation.
 	 *
-	 * @param Operation post
-	 */
-	void setPost(Operation post);
+	 * @param post  definition of a PUT operation
+	 **/
+	void setPostOperation(Operation post);
 
 	/**
-	* sets this PathItem's post property to the given post and
-	* returns this instance of PathItem
-	*
-	* @param Operation post
-	* @return PathItem
-	*/
+	 * Sets this PathItem's post property to the given operation.
+	 *
+	 * @param post  definition of a PUT operation
+	 * @return the current PathItem instance
+	 **/
 	PathItem post(Operation post);
 
 	/**
-	 * returns the delete property from a PathItem instance.
+	 * Returns the delete property from a PathItem instance.
 	 *
-	 * @return Operation delete
+	 * @return definition of a DELETE operation on this path
 	 **/
-
-	Operation getDelete();
+	Operation getDeleteOperation();
 
 	/**
-	 * sets this PathItem's delete property to the given delete.
+	 * Sets this PathItem's delete property to the given operation.
 	 *
-	 * @param Operation delete
-	 */
-	void setDelete(Operation delete);
+	 * @param delete  definition of a DELETE operation
+	 **/
+	void setDeleteOperation(Operation delete);
 
 	/**
-	* sets this PathItem's delete property to the given delete and
-	* returns this instance of PathItem
-	*
-	* @param Operation delete
-	* @return PathItem
-	*/
+	 * Sets this PathItem's delete property to the given operation.
+	 *
+	 * @param delete  definition of a DELETE operation
+	 * @return the current PathItem instance
+	 **/
 	PathItem delete(Operation delete);
 
 	/**
-	 * returns the options property from a PathItem instance.
+	 * Returns the options property from a PathItem instance.
 	 *
-	 * @return Operation options
+	 * @return definition of an OPTIONS operation on this path
 	 **/
-
-	Operation getOptions();
+	Operation getOptionsOperation();
 
 	/**
-	 * sets this PathItem's options property to the given options.
+	 * Sets this PathItem's options property to the given operation.
 	 *
-	 * @param Operation options
-	 */
-	void setOptions(Operation options);
+	 * @param options  definition of an OPTIONS operation
+	 **/
+	void setOptionsOperation(Operation options);
 
 	/**
-	* sets this PathItem's options property to the given options and
-	* returns this instance of PathItem
-	*
-	* @param Operation options
-	* @return PathItem
-	*/
+	 * Sets this PathItem's options property to the given operation.
+	 *
+	 * @param options  definition of an OPTIONS operation
+	 * @return the current PathItem instance
+	 **/
 	PathItem options(Operation options);
 
 	/**
-	 * returns the head property from a PathItem instance.
+	 * Returns the head property from a PathItem instance.
 	 *
-	 * @return Operation head
+	 * @return definition of a HEAD operation on this path
 	 **/
-
-	Operation getHead();
+	Operation getHeadOperation();
 
 	/**
-	 * sets this PathItem's head property to the given head.
+	 * Sets this PathItem's head property to the given operation.
 	 *
-	 * @param Operation head
-	 */
-	void setHead(Operation head);
+	 * @param head  definition of a HEAD operation
+	 **/
+	void setHeadOperation(Operation head);
 
 	/**
-	* sets this PathItem's head property to the given head and
-	* returns this instance of PathItem
-	*
-	* @param Operation head
-	* @return PathItem
-	*/
+	 * Sets this PathItem's head property to the given operation.
+	 *
+	 * @param head  definition of a HEAD operation
+	 * @return the current PathItem instance
+	 **/
 	PathItem head(Operation head);
 
 	/**
-	 * returns the patch property from a PathItem instance.
+	 * Returns the patch property from a PathItem instance.
 	 *
-	 * @return Operation patch
+	 * @return definition of a PATCH operation on this path
 	 **/
-
-	Operation getPatch();
+	Operation getPatchOperation();
 
 	/**
-	 * sets this PathItem's patch property to the given patch.
+	 * Sets this PathItem's patch property to the given operation.
 	 *
-	 * @param Operation patch
-	 */
-	void setPatch(Operation patch);
+	 * @param patch  definition of a PATCH operation
+	 **/
+	void setPatchOperation(Operation patch);
 
 	/**
-	* sets this PathItem's patch property to the given patch and
-	* returns this instance of PathItem
-	*
-	* @param Operation patch
-	* @return PathItem
-	*/
+	 * Sets this PathItem's patch property to the given operation.
+	 *
+	 * @param patch  definition of a PATCH operation
+	 * @return the current PathItem instance
+	 **/
 	PathItem patch(Operation patch);
 
 	/**
-	 * returns the trace property from a PathItem instance.
+	 * Returns the trace property from a PathItem instance.
 	 *
-	 * @return Operation trace
+	 * @return definition of a TRACE operation on this path
 	 **/
-
-	Operation getTrace();
+	Operation getTraceOperation();
 
 	/**
-	 * sets this PathItem's trace property to the given trace.
+	 * Sets this PathItem's trace property to the given operation.
 	 *
-	 * @param Operation trace
-	 */
-	void setTrace(Operation trace);
+	 * @param trace  definition of a TRACE operation
+	 **/
+	void setTraceOperation(Operation trace);
 
 	/**
-	* sets this PathItem's trace property to the given trace and
-	* returns this instance of PathItem
-	*
-	* @param Operation trace
-	* @return PathItem
-	*/
+	 * Sets this PathItem's trace property to the given operation.
+	 *
+	 * @param trace  definition of a TRACE operation
+	 * @return the current PathItem instance
+	 **/
 	PathItem trace(Operation trace);
 
 	/**
-	 * Returns a list of all the operation for this path.
+	 * Returns a list of all the operations for this path item.
 	 * 
-	 * @return List&lt;Operation&gt; allOperations
-	 */
+	 * @return a list of all the operations for this path item
+	 **/
 	List<Operation> readOperations();
 
 	/**
-	 * Returns a map with all the operations for this path, where the HttpMethods are keys.
+	 * Returns a map with all the operations for this path where the keys are HttpMethods.
 	 * 
-	 * @return Map&lt;HttpMethod, Operation&gt; result
-	 */
+	 * @return a map with all the operations for this path where the keys are HttpMethods
+	 **/
 	Map<PathItem.HttpMethod, Operation> readOperationsMap();
 
 	/**
-	 * returns the servers property from a PathItem instance.
+	 * Returns the servers property from a PathItem instance.
 	 *
-	 * @return List&lt;Server&gt; servers
+	 * @return a list of all the servers defined in this path item
 	 **/
-
 	List<Server> getServers();
 
 	/**
-	 * sets this PathItem's servers property to the given servers.
+	 * Sets this PathItem's servers property to the given list.
 	 *
-	 * @param List&lt;Server&gt; servers
-	 */
+	 * @param servers  a list of the servers to service operations in this path item
+	 **/
 	void setServers(List<Server> servers);
 
 	/**
-	* sets this PathItem's patch servers to the given servers and
-	* returns this instance of PathItem
-	*
-	* @param List&lt;Server&gt; servers
-	* @return PathItem
-	*/
+	 * Sets this PathItem's servers property to the given list.
+	 *
+	 * @param servers  a list of the servers to service operations in this path item
+	 * @return the current PathItem instance
+	 **/
 	PathItem servers(List<Server> servers);
 
 	/**
-	 * Adds the given serversItem to this PathItem's list of serversItem, with the given key as its key.
+	 * Adds the given server to this PathItem's list of servers.
 	 *
-	 * @param String key
-	 * @param Server serversItem
-	 * @return PathItem
-	*/
+	 * @param serversItem a server to service operations in this path item
+	 * @return the current PathItem instance
+	 **/
 	PathItem addServersItem(Server serversItem);
 
 	/**
-	 * returns the parameters property from a PathItem instance.
+	 * Returns the parameters property from this PathItem instance.
 	 *
-	 * @return List&lt;Parameter&gt; parameters
+	 * @return a list of parameters that are applicable to all the operations described under this path
 	 **/
-
 	List<Parameter> getParameters();
 
 	/**
-	 * sets this PathItem's parameters property to the given parameters.
+	 * Sets this PathItem's parameters property to the given list.
 	 *
-	 * @param List&lt;Parameter&gt; servers
-	 */
+	 * @param parameters  a list of parameters that are applicable to all the operations described under this path
+	 **/
 	void setParameters(List<Parameter> parameters);
 
 	/**
-	 * sets this PathItem's patch parameters to the given parameters and
-	 * returns this instance of PathItem
+	 * Sets this PathItem's parameters property to the given list.
 	 *
-	 * @param List&lt;Parameter&gt; servers
-	 * @return PathItem
-	 */
+	 * @param parameters  a list of parameters that are applicable to all the operations described under this path
+	 * @return the current PathItem instance
+	 **/
 	PathItem parameters(List<Parameter> parameters);
 
 	/**
-	 * Adds the given parametersItem to this PathItem's list of parametersItem, with the given key as its key.
+	 * Adds the given parameter to this PathItem's list of parameters.
 	 *
-	 * @param String key
-	 * @param Parameter parametersItem
-	 * @return PathItem
-	*/
+	 * @param parametersItem  a parameter that is applicable to all the operations described under this path
+	 * @return the current PathItem instance
+	 **/
 	PathItem addParametersItem(Parameter parametersItem);
 
 	/**
-	 * returns the ref property from a PathItem instance.
+	 * Returns the reference property from this PathItem instance.
 	 *
-	 * @return String ref
+	 * @return a reference to a path object in the components in this OpenAPI document
 	 **/
-	String get$ref();
+	String getReference();
 
 	/**
-	 * sets this PathItem's $ref property to the given $ref.
+	 * Sets this PathItem's reference property to the given string.
 	 *
-	 * @param String $ref
-	 */
-	void set$ref(String $ref);
+	 * @param reference  a reference to a path object in the components in this OpenAPI document
+	 **/
+	void setReference(String reference);
 
 	/**
-	 * sets this PathItem's $ref parameters to the given $ref and
-	 * returns this instance of PathItem
+	 * Sets this PathItem's reference property to the given string.
 	 *
-	 * @param List&lt;String&gt; $ref
-	 * @return PathItem
-	 */
-	PathItem $ref(String $ref);
+	 * @param reference  a reference to a path object in the components in this OpenAPI document
+	 * @return the current PathItem instance
+	 **/
+	PathItem reference(String reference);
 
 }
