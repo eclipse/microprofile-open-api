@@ -22,3 +22,5 @@
 This specification aims at providing a unified Java API for the OpenAPI v3
 specification (https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md),
 that all application developers can use to expose their API documentation.
+
+The specification is composed of annotations, models, and configuration interfaces.
