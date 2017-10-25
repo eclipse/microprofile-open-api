@@ -15,28 +15,35 @@
  * limitations under the License.
  */
 
-package org.eclipse.microprofile.openapi.annotations.security;
-
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+package org.eclipse.microprofile.openapi.models.media;
 
 /**
- * Represents an OAuth scope.
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#oauthFlowsObject" 
- **/
-@Target({  })
-@Retention(RetentionPolicy.RUNTIME)
-@Inherited
-public @interface OAuthScope {
-	/**
-	 * Name of the scope.
-	 */
-    String name() default "";
+ * ArraySchema
+ */
+public interface ArraySchema extends Schema {
 
-    /**
-     * Short description of the scope.
-     */
-    String description() default "";
+	/**
+	   * returns the items property from a ArraySchema instance.
+	   *
+	   * @return Schema items
+	   **/
+
+	Schema getItems();
+
+	/**
+	   * sets this ArraySchema's items property to the given items.
+	   *
+	   * @param SchemaImpl items
+	   */
+	void setItems(Schema items);
+
+	/**
+	   * sets this ArraySchema's items property to the given items and
+	   * returns this instance of ArraySchema
+	   *
+	   * @param SchemaImpl items
+	   * @return ArraySchema
+	   */
+	ArraySchema items(Schema items);
+
 }

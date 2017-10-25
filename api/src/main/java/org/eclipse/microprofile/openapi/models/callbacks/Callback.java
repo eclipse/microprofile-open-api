@@ -15,28 +15,27 @@
  * limitations under the License.
  */
 
-package org.eclipse.microprofile.openapi.annotations.security;
+package org.eclipse.microprofile.openapi.models.callbacks;
 
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.util.Map;
+
+import org.eclipse.microprofile.openapi.models.Constructible;
+import org.eclipse.microprofile.openapi.models.Extensible;
+import org.eclipse.microprofile.openapi.models.PathItem;
 
 /**
- * Represents an OAuth scope.
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#oauthFlowsObject" 
- **/
-@Target({  })
-@Retention(RetentionPolicy.RUNTIME)
-@Inherited
-public @interface OAuthScope {
-	/**
-	 * Name of the scope.
-	 */
-    String name() default "";
+ * Callback
+ *
+ * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#callbackObject"
+ */
+public interface Callback extends Constructible, Extensible, Map<String, PathItem> {
 
-    /**
-     * Short description of the scope.
-     */
-    String description() default "";
+	/**
+	   * Adds the given PathItem to this Callbacks's list of PathItems, with the given key as its key.
+	   *
+	   * @param String name
+	   * @param PathItem item
+	   */
+	Callback addPathItem(String name, PathItem item);
+
 }

@@ -15,28 +15,30 @@
  * limitations under the License.
  */
 
-package org.eclipse.microprofile.openapi.annotations.security;
+package org.eclipse.microprofile.openapi.models.security;
 
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.util.Map;
+
+import org.eclipse.microprofile.openapi.models.Constructible;
+import org.eclipse.microprofile.openapi.models.Extensible;
 
 /**
- * Represents an OAuth scope.
+ * Scopes is a property of OAuth Flow Object.
+ * <p>
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#oauthFlowsObject" 
  **/
-@Target({  })
-@Retention(RetentionPolicy.RUNTIME)
-@Inherited
-public @interface OAuthScope {
-	/**
-	 * Name of the scope.
-	 */
-    String name() default "";
 
-    /**
-     * Short description of the scope.
-     */
-    String description() default "";
+public interface Scopes extends Constructible, Extensible, Map<String, String> {
+
+	/**
+	 * Adds name of an existing scope object and item parameters to a Scopes instance
+	 * as a key-value pair in a map.
+	 *
+	 * @param name
+	 * @param item
+	 * @return Scopes instance with the added key-value pair
+	 */
+
+	Scopes addString(String name, String item);
+
 }

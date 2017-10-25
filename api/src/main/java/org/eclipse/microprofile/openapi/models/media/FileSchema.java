@@ -15,28 +15,31 @@
  * limitations under the License.
  */
 
-package org.eclipse.microprofile.openapi.annotations.security;
-
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+package org.eclipse.microprofile.openapi.models.media;
 
 /**
- * Represents an OAuth scope.
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#oauthFlowsObject" 
- **/
-@Target({  })
-@Retention(RetentionPolicy.RUNTIME)
-@Inherited
-public @interface OAuthScope {
-	/**
-	 * Name of the scope.
-	 */
-    String name() default "";
+ * FileSchema
+ */
+public interface FileSchema extends Schema<String> {
 
-    /**
-     * Short description of the scope.
-     */
-    String description() default "";
+	/**
+	 * Sets the type property of a FileSchema instance
+	 * to the parameter and returns the instance.
+	 *
+	 * @param type
+	 * @return FileSchema instance with the set type property.
+	 */
+
+	FileSchema type(String type);
+
+	/**
+	 * Sets the format property of a FileSchema instance
+	 * to the parameter and returns the instance.
+	 *
+	 * @param format
+	 * @return FileSchema instance with the set format property.
+	 */
+
+	FileSchema format(String format);
+
 }

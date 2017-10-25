@@ -15,28 +15,24 @@
  * limitations under the License.
  */
 
-package org.eclipse.microprofile.openapi.annotations.security;
+package org.eclipse.microprofile.openapi.models;
 
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.util.Map;
 
 /**
- * Represents an OAuth scope.
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#oauthFlowsObject" 
- **/
-@Target({  })
-@Retention(RetentionPolicy.RUNTIME)
-@Inherited
-public @interface OAuthScope {
-	/**
-	 * Name of the scope.
-	 */
-    String name() default "";
+ * Paths
+ *
+ * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#pathsObject"
+ */
+public interface Paths extends Constructible, Extensible, Map<String, PathItem> {
 
-    /**
-     * Short description of the scope.
-     */
-    String description() default "";
+	/**
+	   * Adds the given path item to this Paths and return this instance of Paths
+	   * 
+	   * @param String name
+	   * @param PathItem item
+	   * @return Paths
+	   */
+	Paths addPathItem(String name, PathItem item);
+
 }

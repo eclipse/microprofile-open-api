@@ -15,28 +15,13 @@
  * limitations under the License.
  */
 
-package org.eclipse.microprofile.openapi.annotations.security;
+package org.eclipse.microprofile.openapi.models.parameters;
 
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import org.eclipse.microprofile.openapi.models.Constructible;
 
 /**
- * Represents an OAuth scope.
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#oauthFlowsObject" 
- **/
-@Target({  })
-@Retention(RetentionPolicy.RUNTIME)
-@Inherited
-public @interface OAuthScope {
-	/**
-	 * Name of the scope.
-	 */
-    String name() default "";
+ * PathParameter
+ */
+public interface PathParameter extends Constructible, Parameter {
 
-    /**
-     * Short description of the scope.
-     */
-    String description() default "";
 }
