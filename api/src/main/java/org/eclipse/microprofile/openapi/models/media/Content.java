@@ -23,17 +23,21 @@ import org.eclipse.microprofile.openapi.models.Constructible;
 
 /**
  * Content
- *
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#contentObject"
+ * <p>
+ * A map to assist describing the media types for an operation's parameter or response.
+ * 
  */
 public interface Content extends Constructible, Map<String, MediaType> {
 
 	/**
-	 * Adds the MediaType for this Content, where name is the name of the MediaType and item is the MediaType itself
+	 * Adds the MediaType for this Content, where the key is the name of the
+	 * MediaType and the value is the object that describes the content passed into 
+	 * or returned from an operation.
 	 *
-	 * @param String name
-	 * @param MediaType item
-	 * @return Content
+	 * @param name  the name of a media type e.g. application/json.
+	 * @param item  an object that describes the content passed into or returned
+	 *            from an operation.
+	 * @return the current Content instance
 	 */
 	Content addMediaType(String name, MediaType item);
 

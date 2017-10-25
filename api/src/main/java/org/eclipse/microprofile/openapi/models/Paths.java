@@ -27,16 +27,15 @@ import java.util.Map;
  * the full URL. The Paths MAY be empty, due to ACL constraints.
  * <p>
  * Patterned Fields
- * <table border=1>
+ * <table border=1 cellpadding="8" style="border-collapse: collapse">
  * <tr>
- * <td>Field Pattern</td>
- * <td>Type</td>
- * <td>Description</td>
+ * <th>Field Pattern</th>
+ * <th>Type</th>
+ * <th>Description</th>
  * </tr>
  * <tr>
  * <td>/{path}</td>
- * <td>{@link org.eclipse.microprofile.openapi.models.PathItem "Path Item
- * Object"}</td>
+ * <td>{@link PathItem Path Item Object}</td>
  * <td>A relative path to an individual endpoint. The field name MUST begin with
  * a slash. The path is appended (no relative URL resolution) to the expanded
  * URL from the Server Object's url field in order to construct the full URL.
@@ -49,8 +48,8 @@ import java.util.Map;
  * </table>
  * 
  * @see <a
- *      href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#pathsObject">OpenAPI
- *      Specification Paths Object</a>
+ *      href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#pathsObject">
+ *      OpenAPI Specification Paths Object</a>
  */
 public interface Paths extends Constructible, Extensible, Map<String, PathItem> {
 

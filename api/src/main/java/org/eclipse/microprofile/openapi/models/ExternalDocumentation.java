@@ -23,11 +23,11 @@ package org.eclipse.microprofile.openapi.models;
  * Allows referencing an external resource for extended documentation.
  * <p>
  * Fixed Fields
- * <table border=1>
+ * <table border=1 cellpadding="8" style="border-collapse: collapse">
  * <tr>
- * <td>Field Name</td>
- * <td>Type</td>
- * <td>Description</td>
+ * <th>Field Name</th>
+ * <th>Type</th>
+ * <th>Description</th>
  * </tr>
  * <tr>
  * <td>description</td>
@@ -43,7 +43,7 @@ package org.eclipse.microprofile.openapi.models;
  * </table>
  * 
  * @see <a href=
- *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#externalDocumentationObject">OpenAPI
+ *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#externalDocumentationObject">OpenAPI
  *      Specification External Documentation Object</a>
  */
 public interface ExternalDocumentation extends Constructible, Extensible {

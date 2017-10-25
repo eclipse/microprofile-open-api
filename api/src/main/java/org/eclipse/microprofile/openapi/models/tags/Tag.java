@@ -24,8 +24,35 @@ import org.eclipse.microprofile.openapi.models.ExternalDocumentation;
 /**
  * Tag
  * <p>
- * An object to store metadata to be available in the OpenAPI document.
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#tagObject">OpenAPI Specification Tag Object</a>
+ * An object to store metadata to be available in the OpenAPI document. 
+ * <p>
+ * Fixed Fields
+ * <table border=1 cellpadding="8" style="border-collapse: collapse">
+ * <tr>
+ * <th>Field Name</th>
+ * <th>Type</th>
+ * <th>Description</th>
+ * </tr>
+ * <td>name</td>
+ * <td>string</td>
+ * <td>REQUIRED. The name of the tag.</td>
+ * </tr>
+ * <tr>
+ * <td>description</td>
+ * <td>string</td>
+ * <td>A short description for the tag. CommonMark syntax MAY be used for rich
+ * text representation.</td>
+ * </tr>
+ * <tr>
+ * <td>externalDocs</td>
+ * <td>{@link ExternalDocumentation External Documentation Object}</td>
+ * <td>Additional external documentation for this tag.</td>
+ * </tr>
+ * </table>
+ * 
+ * @see <a href=
+ *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#tagObject">OpenAPI
+ *      Specification Tag Object</a>
  */
 public interface Tag extends Constructible, Extensible {
 

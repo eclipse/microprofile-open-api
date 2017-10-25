@@ -31,15 +31,15 @@ import org.eclipse.microprofile.openapi.models.tags.Tag;
  * <p>
  * This is the root document object of the OpenAPI document. It contains the
  * following required and optional fields.
- * <table border=1>
+ * <table border=1 cellpadding="8" style="border-collapse: collapse">
  * <tr>
- * <td>Field Name</td>
- * <td>Type</td>
- * <td>Description</td>
+ * <th>Field Name</th>
+ * <th>Type</th>
+ * <th>Description</th>
  * </tr>
  * <tr>
  * <td>openapi</td>
- * <td>String</td>
+ * <td>string</td>
  * <td>REQUIRED. This string MUST be the semantic version number of the OpenAPI
  * Specification version that the OpenAPI document uses. The openapi field
  * SHOULD be used by tooling specifications and clients to interpret the OpenAPI
@@ -47,31 +47,30 @@ import org.eclipse.microprofile.openapi.models.tags.Tag;
  * </tr>
  * <tr>
  * <td>info</td>
- * <td>{@link org.eclipse.microprofile.openapi.models.info.Info Info}</td>
+ * <td>{@link Info Info Object}</td>
  * <td>REQUIRED. Provides metadata about the API. The metadata MAY be used by
  * tooling as required.</td>
  * </tr>
  * <tr>
  * <td>servers</td>
- * <td>{@link org.eclipse.microprofile.openapi.models.servers.Server Server}</td>
+ * <td>[{@link Server Server Object}]</td>
  * <td>An array of Server Objects, which provide connectivity information to a
  * target server. If the servers property is not provided, or is an empty array,
  * the default value would be a Server Object with a url value of /.</td>
  * </tr>
  * <tr>
  * <td>paths</td>
- * <td>{@link org.eclipse.microprofile.openapi.models.Paths Paths} Object</td>
+ * <td>{@link Paths Paths Object}</td>
  * <td>REQUIRED. The available paths and operations for the API.</td>
  * </tr>
  * <tr>
  * <td>components</td>
- * <td>{@link org.eclipse.microprofile.openapi.models.Components Components}</td>
+ * <td>{@link Components Components Object}</td>
  * <td>An element to hold various schemas for the specification.</td>
  * </tr>
  * <tr>
  * <td>security</td>
- * <td>{@link
- * org.eclipse.microprofile.openapi.models.security.SecurityRequirement SecurityRequirement}</td>
+ * <td>[{@link SecurityRequirement SecurityRequirement Object}]</td>
  * <td>A declaration of which security mechanisms can be used across the API.
  * The list of values includes alternative security requirement objects that can
  * be used. Only one of the security requirement objects need to be satisfied to
@@ -79,7 +78,7 @@ import org.eclipse.microprofile.openapi.models.tags.Tag;
  * </tr>
  * <tr>
  * <td>tags</td>
- * <td>{@link org.eclipse.microprofile.openapi.models.tags.Tag Tag}</td>
+ * <td>[{@link Tag Tag Object}]</td>
  * <td>A list of tags used by the specification with additional metadata. The
  * order of the tags can be used to reflect on their order by the parsing tools.
  * Not all tags that are used by the Operation Object must be declared. The tags
@@ -88,12 +87,12 @@ import org.eclipse.microprofile.openapi.models.tags.Tag;
  * </tr>
  * <tr>
  * <td>externalDocs</td>
- * <td>{@link org.eclipse.microprofile.openapi.models.ExternalDocumentation ExternalDocumentation}</td>
+ * <td>{@link ExternalDocumentation External Documentation Object}</td>
  * <td>Additional external documentation.</td>
  * </tr>
  * </table>
  * 
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md">OpenAPI Specification</a>
+ * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#openapi-object">OpenAPI Specification OpenAPI Object</a>
  */
 public interface OpenAPI extends Constructible, Extensible {
 
@@ -102,7 +101,6 @@ public interface OpenAPI extends Constructible, Extensible {
 	  *
 	  * @return the semantic version number of the OpenAPI Specification version that the OpenAPI document uses
 	  **/
-
 	String getOpenapi();
 
 	/**
@@ -125,7 +123,6 @@ public interface OpenAPI extends Constructible, Extensible {
 	  *
 	  * @return metadata about the API
 	  **/
-
 	Info getInfo();
 
 	/**
@@ -170,7 +167,6 @@ public interface OpenAPI extends Constructible, Extensible {
 	  *
 	  * @return Server objects which provide connectivity information to target servers
 	  **/
-
 	List<Server> getServers();
 
 	/**
@@ -201,7 +197,6 @@ public interface OpenAPI extends Constructible, Extensible {
 	  *
 	  * @return which security mechanisms can be used across the API
 	  **/
-
 	List<SecurityRequirement> getSecurity();
 
 	/**

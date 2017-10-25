@@ -29,332 +29,407 @@ import org.eclipse.microprofile.openapi.models.servers.Server;
 
 /**
  * Operation
- *
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#operationObject"
+ * <p>
+ * Describes a single API operation on a path.
+ * <p>
+ * Fixed Fields
+ * <table border=1 cellpadding="8" style="border-collapse: collapse">
+ * <tr>
+ * <th>Field Name</th>
+ * <th>Type</th>
+ * <th>Description</th>
+ * </tr>
+ * <tr>
+ * <td>tags</td>
+ * <td>[string]</td>
+ * <td>A list of tags for API documentation control. Tags can be used for
+ * logical grouping of operations by resources or any other qualifier.</td>
+ * </tr>
+ * <tr>
+ * <td>summary</td>
+ * <td>string</td>
+ * <td>A short summary of what the operation does.</td>
+ * </tr>
+ * <tr>
+ * <td>description</td>
+ * <td>string</td>
+ * <td>A verbose explanation of the operation behavior. CommonMark syntax MAY be
+ * used for rich text representation.</td>
+ * </tr>
+ * <tr>
+ * <td>externalDocs</td>
+ * <td>{@link ExternalDocumentation External Documentation Object }</td>
+ * <td>Additional external documentation for this operation.</td>
+ * </tr>
+ * <tr>
+ * <td>operationId</td>
+ * <td>string</td>
+ * <td>Unique string used to identify the operation. The id MUST be unique among
+ * all operations described in the API. Tools and libraries MAY use the
+ * operationId to uniquely identify an operation, therefore, it is RECOMMENDED
+ * to follow common programming naming conventions.</td>
+ * </tr>
+ * <tr>
+ * <td>parameters</td>
+ * <td>[{@link Parameter Parameter Object } | {@link Parameter Reference Object}]</td>
+ * <td>A list of parameters that are applicable for this operation. If a
+ * parameter is already defined at the Path Item, the new definition will
+ * override it but can never remove it. The list MUST NOT include duplicated
+ * parameters. A unique parameter is defined by a combination of a name and
+ * location. The list can use the Reference Object to link to parameters that
+ * are defined at the OpenAPI Object's components/parameters.</td>
+ * </tr>
+ * <tr>
+ * <td>requestBody</td>
+ * <td>{@link RequestBody Request Body Object } | {@link RequestBody Reference
+ * Object}</td>
+ * <td>The request body applicable for this operation. The requestBody is only
+ * supported in HTTP methods where the HTTP 1.1 specification RFC7231 has
+ * explicitly defined semantics for request bodies. In other cases where the
+ * HTTP spec is vague, requestBody SHALL be ignored by consumers.</td>
+ * </tr>
+ * <tr>
+ * <td>responses</td>
+ * <td>{@link ApiResponses Responses Object }</td>
+ * <td>REQUIRED. The list of possible responses as they are returned from
+ * executing this operation.</td>
+ * </tr>
+ * <tr>
+ * <td>callbacks</td>
+ * <td>Map[string, {@link Callback Callback Object } | {@link Callback Reference
+ * Object}]</td>
+ * <td>A map of possible out-of band callbacks related to the parent operation.
+ * The key is a unique identifier for the Callback Object. Each value in the map
+ * is a Callback Object that describes a request that may be initiated by the
+ * API provider and the expected responses. The key value used to identify the
+ * callback object is an expression, evaluated at runtime, that identifies a URL
+ * to use for the callback operation.</td>
+ * </tr>
+ * <tr>
+ * <td>deprecated</td>
+ * <td>boolean</td>
+ * <td>Declares this operation to be deprecated. Consumers SHOULD refrain from
+ * usage of the declared operation. Default value is false.</td>
+ * </tr>
+ * <tr>
+ * <td>security</td>
+ * <td>[{@link SecurityRequirement Security Requirement Object }]</td>
+ * <td>A declaration of which security mechanisms can be used for this
+ * operation. The list of values includes alternative security requirement
+ * objects that can be used. Only one of the security requirement objects need
+ * to be satisfied to authorize a request. This definition overrides any
+ * declared top-level security. To remove a top-level security declaration, an
+ * empty array can be used.</td>
+ * </tr>
+ * <tr>
+ * <td>servers</td>
+ * <td>[{@link Server Server Object }]</td>
+ * <td>An alternative server array to service this operation. If an alternative
+ * server object is specified at the Path Item Object or Root level, it will be
+ * overridden by this value.</td>
+ * </tr>
+ * </table>
+ * 
+ * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#operationObject">OpenAPI Specification Operation Object</a>
  */
 public interface Operation extends Constructible, Extensible {
 
 	/**
-	   * returns the tags property from a Operation instance.
-	   *
-	   * @return List&lt;String&gt; tags
-	   **/
-
+	 * Returns the tags property from an Operation instance.
+	 *
+	 * @return a list of the operation's tags
+	 **/
 	List<String> getTags();
 
 	/**
-	   * sets this Operation's tags property to the given Tags.
-	   *
-	   * @param List&lt;String&gt;tags
-	   */
+	 * Sets this Operation's tags property to the given tags.
+	 *
+	 * @param tags a list of tags for API documentation control 
+	 **/
 	void setTags(List<String> tags);
 
 	/**
-	   * sets this Operation's tags property to the given tags and
-	   * returns this instance of Operation
-	   *
-	   * @param List&lt;String&gt;tags
-	   * @return Operation
-	   */
+	 * Sets this Operation's tags property to the given tags.
+	 *
+	 * @param tags a list of tags for API documentation control 
+	 * @return the current Operation object
+	 **/
 	Operation tags(List<String> tags);
 
 	/**
-	   * Adds the given tagsItem to this Operation's list of tags, with the given key as its key.
-	   *
-	   * @param String key
-	   * @param String tagsItem
-	   * @return Operation
-	   */
+	 * Adds the given tag to this Operation's list of tags.
+	 *
+	 * @param tagsItem a tag for API documentation control
+	 * @return the current Operation object
+	 **/
 	Operation addTagsItem(String tagsItem);
 
 	/**
-	   * returns the summary property from a Operation instance.
-	   *
-	   * @return String summary
-	   **/
-
+	 * Returns the summary property from an Operation instance.
+	 *
+	 * @return a short summary of what the operation does
+	 **/
 	String getSummary();
 
 	/**
-	   * sets this Operation's summary property to the given summary.
-	   *
-	   * @param String summary
-	   */
+	 * Sets this Operation's summary property to the given string.
+	 *
+	 * @param summary a short summary of what the operation does
+	 **/
 	void setSummary(String summary);
 
 	/**
-	   * sets this Operation's summary property to the given summary and
-	   * returns this instance of Operation
-	   *
-	   * @param String summary
-	   * @return Operation
-	   */
+	 * Sets this Operation's summary property to the given string.
+	 *
+	 * @param summary a short summary of what the operation does
+	 * @return the current Operation object
+	 **/
 	Operation summary(String summary);
 
 	/**
-	   * returns the description property from a Operation instance.
-	   *
-	   * @return String description
-	   **/
+	 * Returns the description property from an Operation instance.
+	 *
+	 * @return a verbose explanation of the operation behavior
+	 **/
 	String getDescription();
 
 	/**
-	   * sets this Operation's description property to the given description.
-	   *
-	   * @param String description
-	   */
+	 * Sets this Operation's description property to the given string.
+	 *
+	 * @param description a verbose explanation of the operation behavior
+	 **/
 	void setDescription(String description);
 
 	/**
-	   * sets this Operation's description property to the given description and
-	   * returns this instance of Operation
-	   *
-	   * @param String description
-	   * @return Operation
-	   */
+	 * Sets this Operation's description property to the given string.
+	 *
+	 * @param description a verbose explanation of the operation behavior
+	 * @return the current Operation object
+	 **/
 	Operation description(String description);
 
 	/**
-	   * returns the externalDocs property from a Operation instance.
-	   *
-	   * @return ExternalDocumentation externalDocs
-	   **/
-
+	 * Returns the externalDocs property from an Operation instance.
+	 *
+	 * @return additional external documentation for this operation
+	 **/
 	ExternalDocumentation getExternalDocs();
 
 	/**
-	   * sets this Operation's externalDocs property to the given externalDocs.
-	   *
-	   * @param ExternalDocumentation externalDocs
-	   */
+	 * Sets this Operation's externalDocs property to the given object.
+	 *
+	 * @param externalDocs additional external documentation for this operation
+	 **/
 	void setExternalDocs(ExternalDocumentation externalDocs);
 
 	/**
-	   * sets this Operation's externalDocs property to the given externalDocs and
-	   * returns this instance of Operation
-	   *
-	   * @param ExternalDocumentation externalDocs
-	   * @return Operation
-	   */
+	 * Sets this Operation's externalDocs property to the given object.
+	 *
+	 * @param externalDocs additional external documentation for this operation
+	 * @return the current Operation object
+	 **/
 	Operation externalDocs(ExternalDocumentation externalDocs);
 
 	/**
-	   * returns the operationId property from a Operation instance.
-	   *
-	   * @return String operationId
-	   **/
-
+	 * Returns the operationId property from an Operation instance.
+	 *
+	 * @return unique string used to identify the operation
+	 **/
 	String getOperationId();
 
 	/**
-	   * sets this Operation's operationId property to the given operationId.
-	   *
-	   * @param String operationId
-	   */
+	 * Sets this Operation's operationId property to the given string.
+	 *
+	 * @param operationId unique string used to identify the operation
+	 **/
 	void setOperationId(String operationId);
 
 	/**
-	   * sets this Operation's operationId property to the given operationId and
-	   * returns this instance of Operation
-	   *
-	   * @param String operationId
-	   * @return Operation
-	   */
+	 * Sets this Operation's operationId property to the given string.
+	 *
+	 * @param operationId unique string used to identify the operation
+	 * @return the current Operation object
+	 **/
 	Operation operationId(String operationId);
 
 	/**
-	   * returns the parameters property from a Operation instance.
-	   *
-	   * @return List&lt;Parameter&gt; parameters
-	   **/
-
+	 * Returns the parameters property from an Operation instance.
+	 *
+	 * @return a list of parameters that are applicable for this operation
+	 **/
 	List<Parameter> getParameters();
 
 	/**
-	   * sets this Operation's parameters property to the given parameters.
-	   *
-	   * @param List&lt;Parameter&gt;parameters
-	   */
+	 * Sets this Operation's parameters property to the given parameter list.
+	 *
+	 * @param parameters a list of parameters that are applicable for this operation
+	 **/
 	void setParameters(List<Parameter> parameters);
 
 	/**
-	   * sets this Operation's parameters property to the given parameters and
-	   * returns this instance of Operation
-	   *
-	   * @param List&lt;Parameter&gt;parameters
-	   * @return Operation
-	   */
+	 * Sets this Operation's parameters property to the given parameter list.
+	 *
+	 * @param parameters a list of parameters that are applicable for this operation
+	 * @return the current Operation object
+	 **/
 	Operation parameters(List<Parameter> parameters);
 
 	/**
-	   * Adds the given parametersItem to this Operation's list of parameters, with the given key as its key.
-	   *
-	   * @param String key
-	   * @param Parameter parametersItem
-	   * @return Operation
-	   */
+	 * Adds the given parameter item to this Operation's list of parameters.
+	 *
+	 * @param parametersItem a parameter that is applicable for this operation
+	 * @return the current Operation object
+	 **/
 	Operation addParametersItem(Parameter parametersItem);
 
 	/**
-	   * returns the requestBody property from a Operation instance.
-	   *
-	   * @return RequestBody requestBody
-	   **/
-
+	 * Returns the requestBody property from an Operation instance.
+	 *
+	 * @return the request body applicable for this operation
+	 **/
 	RequestBody getRequestBody();
 
 	/**
-	   * sets this Operation's requestBody property to the given requestBody.
-	   *
-	   * @param RequestBody requestBody
-	   */
+	 * Sets this Operation's requestBody property to the given object.
+	 *
+	 * @param requestBody the request body applicable for this operation
+	 **/
 	void setRequestBody(RequestBody requestBody);
 
 	/**
-	   * sets this Operation's requestBody property to the given requestBody and
-	   * returns this instance of Operation
-	   *
-	   * @param RequestBody requestBody
-	   * @return Operation
-	   */
+	 * Sets this Operation's requestBody property to the given object.
+	 *
+	 * @param requestBody the request body applicable for this operation
+	 * @return the current Operation object
+	 **/
 	Operation requestBody(RequestBody requestBody);
 
 	/**
-	   * returns the responses property from a Operation instance.
-	   *
-	   * @return ApiResponses responses
-	   **/
-
+	 * Returns the responses property from an Operation instance.
+	 *
+	 * @return collection of possible responses from executing this operation
+	 **/
 	ApiResponses getResponses();
 
 	/**
-	   * sets this Operation's responses property to the given responses.
-	   *
-	   * @param ApiResponses responses
-	   */
+	 * Sets this Operation's responses property to the given responses.
+	 *
+	 * @param responses collection of possible responses from executing this operation
+	 **/
 	void setResponses(ApiResponses responses);
 
 	/**
-	   * sets this Operation's responses property to the given responses and
-	   * returns this instance of Operation
-	   *
-	   * @param ApiResponses responses
-	   * @return Operation
-	   */
+	 * Sets this Operation's responses property to the given responses.
+	 *
+	 * @param responses collection of possible responses from executing this operation
+	 * @return the current Operation object
+	 **/
 	Operation responses(ApiResponses responses);
 
 	/**
-	   * returns the callbacks property from a Operation instance.
-	   *
-	   * @return Callbacks callbacks
-	   **/
-
+	 * Returns the callbacks property from an Operation instance.
+	 *
+	 * @return map of possible out-of-band callbacks related to the operation
+	 **/
 	Map<String, Callback> getCallbacks();
 
 	/**
-	   * sets this Operation's callbacks property to the given callbacks.
-	   *
-	   * @param Map&lt;String, Callback&gt; callbacks
-	   */
+	 * Sets this Operation's callbacks property to the given map.
+	 *
+	 * @param callbacks map of possible out-of-band callbacks related to the operation.
+	 * The key value must be the correct format for this field.
+	 **/
 	void setCallbacks(Map<String, Callback> callbacks);
 
 	/**
-	   * sets this Operation's callbacks property to the given callbacks and
-	   * returns this instance of Operation
-	   *
-	   * @param Map&lt;String, Callback&gt; callbacks
-	   * @return Operation
-	   */
+	 * Sets this Operation's callbacks property to the given map.
+	 *
+	 * @param callbacks map of possible out-of-band callbacks related to the operation.
+	 * The key value must be the correct format for this field.
+	 * @return the current Operation object
+	 **/
 	Operation callbacks(Map<String, Callback> callbacks);
 
 	/**
-	   * returns the deprecated property from a Operation instance.
-	   *
-	   * @return Boolean deprecated
-	   **/
-
+	 * Returns the deprecated property from an Operation instance.
+	 *
+	 * @return declaration whether this operation is deprecated
+	 **/
 	Boolean getDeprecated();
 
 	/**
-	   * sets this Operation's deprecated property to the given deprecated.
-	   *
-	   * @param Boolean deprecated
-	   */
+	 * Sets this Operation's deprecated property to the given value.
+	 *
+	 * @param deprecated declaration whether this operation is deprecated
+	 **/
 	void setDeprecated(Boolean deprecated);
 
 	/**
-	   * sets this Operation's deprecated property to the given deprecated and
-	   * returns this instance of Operation
-	   *
-	   * @param Boolean deprecated
-	   * @return Operation
-	   */
+	 * Sets this Operation's deprecated property to the given value.
+	 *
+	 * @param deprecated declaration whether this operation is deprecated
+	 * @return the current Operation object
+	 **/
 	Operation deprecated(Boolean deprecated);
 
 	/**
-	   * returns the security property from a Operation instance.
-	   *
-	   * @return List&lt;SecurityRequirement&gt; security
-	   **/
-
+	 * Returns the security property from an Operation instance.
+	 *
+	 * @return a list of which security mechanisms can be used for this operation
+	 **/
 	List<SecurityRequirement> getSecurity();
 
 	/**
-	   * sets this Operation's security property to the given security.
-	   *
-	   * @param List&lt;SecurityRequirement&gt; security
-	   */
+	 * Sets this Operation's security property to the given list.
+	 *
+	 * @param security list of which security mechanisms can be used for this operation
+	 **/
 	void setSecurity(List<SecurityRequirement> security);
 
 	/**
-	   * sets this Operation's security property to the given security and
-	   * returns this instance of Operation
-	   *
-	   * @param List&lt;SecurityRequirement&gt;security
-	   * @return Operation
-	   */
+	 * Sets this Operation's security property to the given list.
+	 *
+	 * @param security list of which security mechanisms can be used for this operation
+	 * @return the current Operation object
+	 **/
 	Operation security(List<SecurityRequirement> security);
 
 	/**
-	   * Adds the given securityItem to this Operation's list of securityItems, with the given key as its key.
-	   *
-	   * @param String key
-	   * @param SecurityRequirement securityItem
-	   * @return Operation
-	   */
+	 * Adds the given security requirement item to this Operation's list of security mechanisms.
+	 *
+	 * @param securityItem security mechanism which can be used for this operation
+	 * @return the current Operation object
+	 **/
 	Operation addSecurityItem(SecurityRequirement securityItem);
 
 	/**
-	   * returns the servers property from a Operation instance.
-	   *
-	   * @return List&lt;Server&gt; servers
-	   **/
-
+	 * Returns the servers property from an Operation instance.
+	 *
+	 * @return a list of servers to service this operation
+	 **/
 	List<Server> getServers();
 
 	/**
-	   * sets this Operation's servers property to the given servers.
-	   *
-	   * @param List&lt;Server&gt; servers
-	   */
+	 * Sets this Operation's servers property to the given list.
+	 *
+	 * @param servers list of servers to service this operation
+	 **/
 	void setServers(List<Server> servers);
 
 	/**
-	   * sets this Operation's servers property to the given servers and
-	   * returns this instance of Operation
-	   *
-	   * @param List&lt;Server&gt;servers
-	   * @return Operation
-	   */
+	 * Sets this Operation's servers property to the given list.
+	 *
+	 * @param servers list of servers to service this operation
+	 * @return the current Operation object
+	 **/
 	Operation servers(List<Server> servers);
 
 	/**
-	   * Adds the given serversItem to this Operation's list of serversItem, with the given key as its key.
-	   *
-	   * @param String key
-	   * @param Server serversItem
-	   * @return Operation
-	   */
+	 * Adds the given server to this Operation's list of servers.
+	 *
+	 * @param serversItem server which can service this operation
+	 * @return the current Operation object
+	 **/
 	Operation addServersItem(Server serversItem);
 
 }

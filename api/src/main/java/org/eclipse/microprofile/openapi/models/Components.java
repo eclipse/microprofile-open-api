@@ -37,74 +37,78 @@ import org.eclipse.microprofile.openapi.models.security.SecurityScheme;
  * they are explicitly referenced from properties outside the components object.
  * <p>
  * Fixed Fields
- * <table border=1>
+ * <table border=1 cellpadding="8" style="border-collapse: collapse">
  * <tr>
- * <td>Field Name</td>
- * <td>Type</td>
- * <td>Description</td>
+ * <th>Field Name</th>
+ * <th>Type</th>
+ * <th>Description</th>
  * </tr>
  * <tr>
  * <td>schemas</td>
- * <td>Map[string, {@link media.Schema Schema} Object | Reference Object]</td>
+ * <td>Map[string, {@link Schema Schema Object } | {@link Schema Reference Object}]</td>
  * <td>An object to hold reusable Schema Objects.</td>
  * </tr>
  * <tr>
  * <td>responses</td>
- * <td>Map[string, {@link responses.ApiResponse Response} Object | Reference
- * Object]</td>
+ * <td>Map[string, {@link ApiResponse Response Object } | {@link ApiResponse Reference
+ * Object}]</td>
  * <td>An object to hold reusable Response Objects.</td>
  * </tr>
  * <tr>
  * <td>parameters</td>
- * <td>Map[string, {@link parameters.Parameter Parameter} Object | Reference
- * Object]</td>
+ * <td>Map[string, {@link Parameter Parameter Object } | {@link Parameter Reference
+ * Object}]</td>
  * <td>An object to hold reusable Parameter Objects.</td>
  * </tr>
  * <tr>
  * <td>examples</td>
- * <td>Map[string, {@link examples.Example Example} Object | Reference
- * Object]</td>
+ * <td>Map[string, {@link Example Example Object } | {@link Example Reference
+ * Object}]</td>
  * <td>An object to hold reusable Example Objects.</td>
  * </tr>
  * <tr>
  * <td>requestBodies</td>
- * <td>Map[string, {@link parameters.RequestBody Request Body} Object |
- * Reference Object]</td>
+ * <td>Map[string, {@link RequestBody Request Body Object } |
+ * {@link RequestBody Reference Object}]</td>
  * <td>An object to hold reusable Request Body Objects.</td>
  * </tr>
  * <tr>
  * <td>headers</td>
- * <td>Map[string, {@link headers.Header Header} Object | Reference Object]</td>
+ * <td>Map[string, {@link Header Header Object } | {@link Header Reference Object}]</td>
  * <td>An object to hold reusable Header Objects.</td>
  * </tr>
  * <tr>
  * <td>securitySchemes</td>
- * <td>Map[string, {@link security.SecurityScheme Security Scheme} Object |
- * Reference Object]</td>
+ * <td>Map[string, {@link SecurityScheme Security Scheme Object } |
+ * {@link SecurityScheme Reference Object}]</td>
  * <td>An object to hold reusable Security Scheme Objects.</td>
  * </tr>
  * <tr>
  * <td>links</td>
- * <td>Map[string, {@link links.Link Link} Object | Reference Object]</td>
+ * <td>Map[string, {@link Link Link Object } | {@link Link Reference Object}]</td>
  * <td>An object to hold reusable Link Objects.</td>
  * </tr>
  * <tr>
  * <td>callbacks</td>
- * <td>Map[string, {@link callbacks.Callback Callback} Object | Reference
- * Object]</td>
+ * <td>Map[string, {@link Callback Callback Object } | {@link Callback Reference
+ * Object}]</td>
  * <td>An object to hold reusable Callback Objects.</td>
  * </tr>
  * </table>
  * <p>
  * All the fixed fields declared above are objects that MUST use keys that match
- * the regular expression: ^[a-zA-Z0-9\.\-_]+$.
+ * the regular expression: <code>^[a-zA-Z0-9\.\-_]+$</code>.
  * <p>
  * Field Name Examples:
  * <ul>
- * <li>User</li> <li>User_1</li> <li>User_Name</li> <li>user-name</li> <li>my.org.User</li>
+ * <li>User</li> 
+ * <li>User_1</li> 
+ * <li>User_Name</li> 
+ * <li>user-name</li> 
+ * <li>my.org.User</li>
  * </ul>
  * @see <a href=
- *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#componentsObject">
+ *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#componentsObject">
  *      OpenAPI Specification Components Object</a>
  */
 public interface Components extends Constructible, Extensible {
