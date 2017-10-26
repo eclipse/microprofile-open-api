@@ -32,7 +32,6 @@ public interface License extends Constructible, Extensible {
 	   *
 	   * @return the license name used for the API
 	   **/
-
 	String getName();
 
 	/**
