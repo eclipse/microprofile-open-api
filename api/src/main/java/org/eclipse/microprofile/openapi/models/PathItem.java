@@ -186,14 +186,14 @@ public interface PathItem extends Constructible, Extensible {
 	 *
 	 * @return definition of a GET operation on this path
 	 **/
-	Operation getGetOperation();
+	Operation getGET();
 
 	/**
 	 * Sets this PathItem's get property to the given operation.
 	 *
 	 * @param get  definition of a GET operation
 	 **/
-	void setGetOperation(Operation get);
+	void setGET(Operation get);
 
 	/**
 	 * Sets this PathItem's get property to the given operation.
@@ -201,21 +201,21 @@ public interface PathItem extends Constructible, Extensible {
 	 * @param get  definition of a GET operation
 	 * @return the current PathItem instance
 	 **/
-	PathItem get(Operation get);
+	PathItem GET(Operation get);
 
 	/**
 	 * Returns the put property from a PathItem instance.
 	 *
 	 * @return definition of a PUT operation on this path
 	 **/
-	Operation getPutOperation();
+	Operation getPUT();
 
 	/**
 	 * Sets this PathItem's put property to the given operation.
 	 *
 	 * @param put  definition of a PUT operation
 	 **/
-	void setPutOperation(Operation put);
+	void setPUT(Operation put);
 
 	/**
 	 * Sets this PathItem's put property to the given operation.
@@ -223,21 +223,21 @@ public interface PathItem extends Constructible, Extensible {
 	 * @param put  definition of a PUT operation
 	 * @return the current PathItem instance
 	 **/
-	PathItem put(Operation put);
+	PathItem PUT(Operation put);
 
 	/**
 	 * Returns the post property from a PathItem instance.
 	 *
 	 * @return definition of a POST operation on this path
 	 **/
-	Operation getPostOperation();
+	Operation getPOST();
 
 	/**
 	 * Sets this PathItem's post property to the given operation.
 	 *
 	 * @param post  definition of a PUT operation
 	 **/
-	void setPostOperation(Operation post);
+	void setPOST(Operation post);
 
 	/**
 	 * Sets this PathItem's post property to the given operation.
@@ -245,21 +245,21 @@ public interface PathItem extends Constructible, Extensible {
 	 * @param post  definition of a PUT operation
 	 * @return the current PathItem instance
 	 **/
-	PathItem post(Operation post);
+	PathItem POST(Operation post);
 
 	/**
 	 * Returns the delete property from a PathItem instance.
 	 *
 	 * @return definition of a DELETE operation on this path
 	 **/
-	Operation getDeleteOperation();
+	Operation getDELETE();
 
 	/**
 	 * Sets this PathItem's delete property to the given operation.
 	 *
 	 * @param delete  definition of a DELETE operation
 	 **/
-	void setDeleteOperation(Operation delete);
+	void setDELETE(Operation delete);
 
 	/**
 	 * Sets this PathItem's delete property to the given operation.
@@ -267,21 +267,21 @@ public interface PathItem extends Constructible, Extensible {
 	 * @param delete  definition of a DELETE operation
 	 * @return the current PathItem instance
 	 **/
-	PathItem delete(Operation delete);
+	PathItem DELETE(Operation delete);
 
 	/**
 	 * Returns the options property from a PathItem instance.
 	 *
 	 * @return definition of an OPTIONS operation on this path
 	 **/
-	Operation getOptionsOperation();
+	Operation getOPTIONS();
 
 	/**
 	 * Sets this PathItem's options property to the given operation.
 	 *
 	 * @param options  definition of an OPTIONS operation
 	 **/
-	void setOptionsOperation(Operation options);
+	void setOPTIONS(Operation options);
 
 	/**
 	 * Sets this PathItem's options property to the given operation.
@@ -289,21 +289,21 @@ public interface PathItem extends Constructible, Extensible {
 	 * @param options  definition of an OPTIONS operation
 	 * @return the current PathItem instance
 	 **/
-	PathItem options(Operation options);
+	PathItem OPTIONS(Operation options);
 
 	/**
 	 * Returns the head property from a PathItem instance.
 	 *
 	 * @return definition of a HEAD operation on this path
 	 **/
-	Operation getHeadOperation();
+	Operation getHEAD();
 
 	/**
 	 * Sets this PathItem's head property to the given operation.
 	 *
 	 * @param head  definition of a HEAD operation
 	 **/
-	void setHeadOperation(Operation head);
+	void setHEAD(Operation head);
 
 	/**
 	 * Sets this PathItem's head property to the given operation.
@@ -311,21 +311,21 @@ public interface PathItem extends Constructible, Extensible {
 	 * @param head  definition of a HEAD operation
 	 * @return the current PathItem instance
 	 **/
-	PathItem head(Operation head);
+	PathItem HEAD(Operation head);
 
 	/**
 	 * Returns the patch property from a PathItem instance.
 	 *
 	 * @return definition of a PATCH operation on this path
 	 **/
-	Operation getPatchOperation();
+	Operation getPATCH();
 
 	/**
 	 * Sets this PathItem's patch property to the given operation.
 	 *
 	 * @param patch  definition of a PATCH operation
 	 **/
-	void setPatchOperation(Operation patch);
+	void setPATCH(Operation patch);
 
 	/**
 	 * Sets this PathItem's patch property to the given operation.
@@ -333,21 +333,21 @@ public interface PathItem extends Constructible, Extensible {
 	 * @param patch  definition of a PATCH operation
 	 * @return the current PathItem instance
 	 **/
-	PathItem patch(Operation patch);
+	PathItem PATCH(Operation patch);
 
 	/**
 	 * Returns the trace property from a PathItem instance.
 	 *
 	 * @return definition of a TRACE operation on this path
 	 **/
-	Operation getTraceOperation();
+	Operation getTRACE();
 
 	/**
 	 * Sets this PathItem's trace property to the given operation.
 	 *
 	 * @param trace  definition of a TRACE operation
 	 **/
-	void setTraceOperation(Operation trace);
+	void setTRACE(Operation trace);
 
 	/**
 	 * Sets this PathItem's trace property to the given operation.
@@ -355,7 +355,7 @@ public interface PathItem extends Constructible, Extensible {
 	 * @param trace  definition of a TRACE operation
 	 * @return the current PathItem instance
 	 **/
-	PathItem trace(Operation trace);
+	PathItem TRACE(Operation trace);
 
 	/**
 	 * Returns a list of all the operations for this path item.
