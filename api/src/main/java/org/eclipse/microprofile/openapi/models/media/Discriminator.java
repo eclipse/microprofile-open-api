@@ -21,60 +21,92 @@ import java.util.Map;
 
 import org.eclipse.microprofile.openapi.models.Constructible;
 
+/**
+ * Discriminator
+ * <p>
+ * When request bodies or response payloads may be one of a number of different
+ * schemas, a discriminator object can be used to aid in serialization,
+ * deserialization, and validation. The discriminator is a specific object in a
+ * schema which is used to inform the consumer of the specification of an
+ * alternative schema based on the value associated with it.
+ * <p>
+ * When using the discriminator, inline schemas will not be considered.
+ * <p>
+ * Fixed Fields
+ * <table border=1 cellpadding="8" style="border-collapse: collapse">
+ * <tr>
+ * <th>Field Name</th>
+ * <th>Type</th>
+ * <th>Description</th>
+ * </tr>
+ * <tr>
+ * <td>propertyName</td>
+ * <td>string</td>
+ * <td>REQUIRED. The name of the property in the payload that will hold the
+ * discriminator value.</td>
+ * </tr>
+ * <tr>
+ * <td>mapping</td>
+ * <td>Map[string, string]</td>
+ * <td>An object to hold mappings between payload values and schema names or
+ * references.</td>
+ * </tr>
+ * </table>
+ * 
+ * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#discriminator-object">OpenAPI Specification Discriminator Object</a>
+ */
 public interface Discriminator extends Constructible {
 
 	/**
-	 * sets this Discriminator's propertyName property to the given propertyName and
-	 * returns this instance of Discriminator
+	 * Sets this Discriminator's propertyName property to the given string.
 	 *
-	 * @param String propertyName
-	 * @return Discriminator
+	 * @param propertyName the name of the property in the payload that will hold the discriminator value
+	 * @return the current Discriminator instance
 	 */
 	Discriminator propertyName(String propertyName);
 
 	/**
-	 * returns the propertyName property from a Discriminator instance.
+	 * Returns the propertyName property from a Discriminator instance.
 	 *
-	 * @return String propertyName
+	 * @return the name of the property in the payload that will hold the discriminator value
 	 **/
 	String getPropertyName();
 
 	/**
-	 * sets this Discriminator's propertyName property to the given propertyName.
+	 * Sets this Discriminator's propertyName property to the given propertyName.
 	 *
-	 * @param String propertyName
+	 * @param propertyName  the name of the property in the payload that will hold the discriminator value
 	 */
 	void setPropertyName(String propertyName);
 
 	/**
-	 * maps the given name to the given value and store it in this Discriminator's mapping property.
+	 * Maps the given name to the given value and stores it in this Discriminator's mapping property.
 	 * 
-	 * @param String name
-	 * @param String value
-	 * @return Discriminator
+	 * @param name  a key which will be compared to information from a request body or response payload.
+	 * @param value  a schema name or reference
+	 * @return the current Discriminator instance
 	 */
 	Discriminator mapping(String name, String value);
 
 	/**
-	 * sets this Discriminator's mapping property to the given mapping and
-	 * returns this instance of Discriminator
+	 * Sets this Discriminator's mapping property to the given map object. 
 	 *
-	 * @param Map&lt;String, String&gt; mapping
-	 * @return Discriminator
+	 * @param mapping  a map containing keys and schema names or references
+	 * @return the current Discriminator instance
 	 */
 	Discriminator mapping(Map<String, String> mapping);
 
 	/**
-	 * returns the mapping property from a Discriminator instance.
+	 * Returns the mapping property from a Discriminator instance.
 	 *
-	 * @return Map&lt;String, String&gt; mapping
+	 * @return a map containing keys and schema names or references
 	 **/
 	Map<String, String> getMapping();
 
 	/**
-	 * sets this Discriminator's mapping property to the given mapping.
+	 * Sets this Discriminator's mapping property to the given map object.
 	 *
-	 * @param Map&lt;String, String&gt; mapping
+	 * @param mapping  a map containing keys and schema names or references
 	 */
 	void setMapping(Map<String, String> mapping);
 
