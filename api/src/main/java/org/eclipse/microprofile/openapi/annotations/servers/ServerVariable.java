@@ -30,22 +30,24 @@ import java.lang.annotation.Target;
 @Inherited
 public @interface ServerVariable {
   /**
-   * Required.  The name of this variable.
+   * The name of this server variable. This is a REQUIRED property.
    **/
   String name();
 
   /**
-   * An array of allowable values for this variable.  This field map to the enum property in the OAS schema.
+   * An array of enum values for this variable.  This field maps to the enum property in the OAS schema
+   * and to enumeration field of ServerVariable model.
    **/
-  String[] allowableValues() default "";
+  String[] enumeration() default "";
 
   /**
-   * Required.  The default value of this variable.
+   * The default value of this server variable. This is a REQUIRED property.
    **/
   String defaultValue();
 
   /**
-   * An optional description for the server variable.
+   * An optional description for the server variable. 
+   * CommonMark syntax can be used for rich text representation.
    **/
   String description() default "";
 
