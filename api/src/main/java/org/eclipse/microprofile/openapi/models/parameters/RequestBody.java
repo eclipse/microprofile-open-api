@@ -22,59 +22,60 @@ import org.eclipse.microprofile.openapi.models.Extensible;
 import org.eclipse.microprofile.openapi.models.media.Content;
 
 /**
- * RequestBody
+ * This interface represents the request body of an operation in which body parameters can be specified.
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#requestBodyObject"
  */
 public interface RequestBody extends Constructible, Extensible {
 
 	/**
-	 * returns the description property from a RequestBody instance.
+	 * Returns the description of this instance of RequestBody.
 	 *
-	 * @return String description
+	 * @return a brief description of the RequestBody
 	 **/
 
 	String getDescription();
 
 	/**
-	 * Sets the description property of a RequestBody instance
+	 * Sets the description of this instance of RequestBody.
 	 * to the parameter.
 	 *
-	 * @param description
+	 * @param description the brief description of the RequestBody
 	 */
 
 	void setDescription(String description);
 
 	/**
-	 * Sets the description property of a RequestBody instance
-	 * to the parameter and returns the instance.
+	 * Sets the description of this RequestBody and return this instance
+	 * of RequestBody
 	 *
-	 * @param description
-	 * @return RequestBody instance with the modified description property
+	 * @param description the brief description of the RequestBody
+	 * @return this RequestBody instance
 	 */
 
 	RequestBody description(String description);
 
 	/**
-	 * returns the content property from a RequestBody instance.
+	 * Returns the content of this instance of RequestBody, where the keys in content are media type names
+	 * and the values describe it.
 	 *
-	 * @return Content content
+	 * @return the content of this RequestBody
 	 **/
 
 	Content getContent();
 
 	/**
-	 * Sets the content property of a RequestBody instance
-	 * to the parameter.
+	 * Sets the content of this instance of RequestBody, where the keys in content are media type names
+	 * and the values describe it.
 	 *
-	 * @param content
+	 * @param content the content that describes the RequestBody
 	 */
 
 	void setContent(Content content);
 
 	/**
-	 * Sets the content property of a RequestBody instance
-	 * to the parameter and returns the instance.
+	 * Sets the content of this instance of RequestBody, where the keys in content are media type names
+	 * and the values describe it.
 	 *
 	 * @param content
 	 * @return RequestBody instance with the modified content property
@@ -83,57 +84,54 @@ public interface RequestBody extends Constructible, Extensible {
 	RequestBody content(Content content);
 
 	/**
-	 * returns the required property from a RequestBody instance.
+	 * Returns whether this instance of RequestBody is required for the operation.
 	 *
-	 * @return Boolean required
+	 * @return true iff the RequestBody is required, false otherwise
 	 **/
 
 	Boolean getRequired();
 
 	/**
-	 * Sets the required property of a RequestBody instance
-	 * to the parameter.
+	 * Sets whether this instance of RequestBody is required or not.
 	 *
-	 * @param required
+	 * @param required true iff the RequestBody is required, false otherwise
 	 */
 
 	void setRequired(Boolean required);
 
 	/**
-	 * Sets the required property of a RequestBody instance
-	 * to the parameter and returns the instance.
+	 * Sets whether this instance of RequestBody is required or not and returns this instance of RequestBody
 	 *
-	 * @param required
-	 * @return RequestBody instance with the modified required property
+	 * @param required true iff the RequestBody is required, false otherwise
+	 * @return this RequestBody instance
 	 */
 
 	RequestBody required(Boolean required);
 
 	/**
-	 * returns the $ref property from a RequestBody instance.
+	 * Returns the reference to this RequestBody instance that is defined.
 	 *
-	 * @return String $ref
+	 * @return the reference to the response
 	 **/
 
-	String get$ref();
+	String getRef();
 
 	/**
-	 * Sets $ref property of a RequestBody instance
-	 * to the parameter.
+	 * Sets the reference to this RequestBody instance that is defined.
 	 *
-	 * @param $ref
+	 * @param ref the reference to the response
 	 */
 
-	void set$ref(String $ref);
+	void setRef(String ref);
 
 	/**
-	 * Sets $ref property of a RequestBody instance
-	 * to the parameter and return the instance.
+	 * Sets the reference to this RequestBody instance that is defined
+	 * and returns this instance of RequestBody.
 	 *
-	 * @param $ref
-	 * @return RequestBody instance with the set $ref property.
+	 * @param ref the reference to the response
+	 * @return this RequestBody instance
 	 */
 
-	RequestBody $ref(String $ref);
+	RequestBody ref(String ref);
 
 }

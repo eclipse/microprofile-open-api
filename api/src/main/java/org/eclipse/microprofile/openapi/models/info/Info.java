@@ -71,7 +71,7 @@ public interface Info extends Constructible, Extensible {
 	   * Sets this Info instance's description for the application to the given description and
 	   * returns this instance of Info.
 	   *
-	   * @param description
+	   * @param description a short description for the application
 	   * @return this Info instance
 	   */
 	Info description(String description);
