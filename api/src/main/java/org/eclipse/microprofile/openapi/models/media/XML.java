@@ -21,145 +21,186 @@ import org.eclipse.microprofile.openapi.models.Constructible;
 import org.eclipse.microprofile.openapi.models.Extensible;
 
 /**
- * XML
- *
+ * A metadata object that allows for more fine-tuned XML model definitions.
+ * When using arrays, XML element names are not inferred (for singular/plural forms) and 
+ * the name property SHOULD be used to add that information.
+ * <p>
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#xmlObject"
  */
 public interface XML extends Constructible, Extensible {
 
-	/**
-	 * returns the name property from a XML instance.
-	 *
+	/** 
+	 * This method returns the name property from XML instance.
+	 * <p>
+	 * The name property replaces the name of the element/attribute 
+	 * used for the described schema property.
+	 * <p>
 	 * @return String name
+	 * @see https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#xml-object
 	 **/
-
 	String getName();
 
 	/**
-	 * Sets the name property of an XML instance
-	 * to the parameter.
-	 *
+	 * This method sets the name property of XML instance
+	 * to the given String argument.
+	 * <p>
+	 * The name property replaces the name of the element/attribute 
+	 * used for the described schema property.
+	 * <p>
 	 * @param name
+	 * @see https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#xml-object
 	 */
-
 	void setName(String name);
 
 	/**
-	 * Sets the name property of an XML instance
-	 * to the parameter and returns the instance.
-	 *
+	 * This method sets the name property of XML instance
+	 * to the given String argument and returns the modified instance.
+	 * <p>
+	 * The name property replaces the name of the element/attribute 
+	 * used for the described schema property.
+	 * <p>
 	 * @param name
 	 * @return XML instance with the set name property
+	 * @see https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#xml-object
 	 */
-
 	XML name(String name);
 
 	/**
-	 * returns the namespace property from a XML instance.
-	 *
+	 * This method returns the namespace property of XML instance.
+	 * <p>
+	 * The namespace property is the URI of the namespace definition.
+	 * Value MUST be in the form of an absolute URI.
+	 * <p>
 	 * @return String namespace
 	 **/
-
 	String getNamespace();
 
 	/**
-	 * Sets the namespace property of an XML instance
-	 * to the parameter.
-	 *
+	 * This method sets the namespace property of XML instance
+	 * to the given String argument.
+	 * <p>
+	 * The namespace property is the URI of the namespace definition.
+	 * Value MUST be in the form of an absolute URI.
+	 * <p>
 	 * @param namespace
 	 */
-
 	void setNamespace(String namespace);
 
 	/**
-	 * Sets the namespace property of an XML instance
-	 * to the parameter and returns the instance.
-	 *
+	 * This method sets the namespace property of XML instance
+	 * to the given String argument and returns the modified instance.
+	 * <p>
+	 * The namespace property is the URI of the namespace definition.
+	 * Value MUST be in the form of an absolute URI.
+	 * <p>
 	 * @param namespace
 	 * @return XML instance with the set namespace property
 	 */
-
 	XML namespace(String namespace);
 
 	/**
-	 * returns the prefix property from a XML instance.
-	 *
+	 * This method returns the prefix property of XML instance.
+	 * <p>
+	 * This property is a String prefix to be used for the name.
+	 * <p>
 	 * @return String prefix
 	 **/
-
 	String getPrefix();
 
 	/**
-	 * Sets the prefix property of an XML instance
-	 * to the parameter.
-	 *
+	 * This method sets the prefix property of XML instance
+	 * to the given String argument.
+	 * <p>
+	 * This property is a String prefix to be used for the name.
+	 * <p>
 	 * @param prefix
 	 */
-
 	void setPrefix(String prefix);
 
 	/**
-	 * Sets the prefix property of an XML instance
-	 * to the parameter and returns the instance.
-	 *
+	 * This method sets the prefix property of XML instance
+	 * to the given String argument and returns the modified instance.
+	 * <p>
+	 * This property is a String prefix to be used for the name.
+	 * <p>
 	 * @param prefix
 	 * @return XML instance with the set prefix property
 	 */
-
 	XML prefix(String prefix);
 
 	/**
-	 * returns the attribute property from a XML instance.
-	 *
+	 * This method returns the attribute property of XML instance.
+	 * <p>
+	 * Attribute property declares whether the property definition translates to an attribute 
+	 * instead of an element. 
+	 * Default value is FALSE.
+	 * <p>
 	 * @return Boolean attribute
 	 **/
-
 	Boolean getAttribute();
 
 	/**
-	 * Sets the attribute property of an XML instance
-	 * to the parameter.
-	 *
+	 * This method sets the attribute property of XML instance
+	 * to the given Boolean argument.
+	 * <p>
+	 * Attribute property declares whether the property definition translates to an attribute 
+	 * instead of an element. 
+	 * Default value is FALSE.
+	 * <p>
 	 * @param attribute
 	 */
-
 	void setAttribute(Boolean attribute);
 
 	/**
-	 * Sets the attribute property of an XML instance
-	 * to the parameter and returns the instance.
-	 *
+	 * This method sets the attribute property of XML instance
+	 * to the given Boolean argument and returns the modified instance.
+	 * <p>
+	 * Attribute property declares whether the property definition translates to an attribute 
+	 * instead of an element. 
+	 * Default value is FALSE.
+	 * <p>
 	 * @param attribute
 	 * @return XML instance with the set attribute property
 	 */
-
 	XML attribute(Boolean attribute);
 
 	/**
-	 * returns the wrapped property from a XML instance.
-	 *
+	 * This method returns the wrapped property of XML instance.
+	 * <p>
+	 * Wrapped property MAY be used only for an array definition. 
+	 * Signifies whether the array is wrapped. The definition takes effect only when defined
+	 * alongside type being array.
+	 * Default value is FALSE.
+	 * <p>
 	 * @return Boolean wrapped
 	 **/
-
 	Boolean getWrapped();
 
 	/**
-	 * Sets the wrapped property of an XML instance
-	 * to the parameter.
-	 *
+	 * This method sets the wrapped property of XML instance
+	 * to the given Boolean argument.
+	 * <p>
+	 * Wrapped property MAY be used only for an array definition. 
+	 * Signifies whether the array is wrapped. The definition takes effect only when defined
+	 * alongside type being array.
+	 * Default value is FALSE.
+	 * <p>
 	 * @param wrapped
 	 */
-
 	void setWrapped(Boolean wrapped);
 
 	/**
-	 * Sets the wrapped property of an XML instance
-	 * to the parameter and returns the instance.
-	 *
+	 * This method sets the wrapped property of XML instance
+	 * to the given Boolean argument and returns the modified instance.
+	 * <p>
+	 * Wrapped property MAY be used only for an array definition. 
+	 * Signifies whether the array is wrapped. The definition takes effect only when defined
+	 * alongside type being array.
+	 * Default value is FALSE.
+	 * <p>
 	 * @param wrapped
 	 * @return XML instance with the set wrapped property
 	 */
-
 	XML wrapped(Boolean wrapped);
 
 }
