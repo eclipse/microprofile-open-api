@@ -210,10 +210,11 @@ public @interface Schema {
   String type() default "";
 
   /**
-   * Provides a list of allowable values.  This field map to the enum property in the OAS schema.
+   * Provides a list of enum values.  This field maps to the enum property in the OAS schema
+   * and the enumeration property in the corresponding model.
    * @return a list of allowed schema values
    */
-  String[] allowableValues() default {};
+  String[] enumeration() default {};
 
   /**
    * Provides a default value.

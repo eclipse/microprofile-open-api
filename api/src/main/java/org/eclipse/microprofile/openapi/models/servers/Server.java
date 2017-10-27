@@ -21,33 +21,52 @@ import org.eclipse.microprofile.openapi.models.Constructible;
 import org.eclipse.microprofile.openapi.models.Extensible;
 
 /**
- * Server
+ * An object representing a server.
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#serverObject"
  */
 public interface Server extends Constructible, Extensible {
 
 	/**
-	 * returns the url property from a Server instance.
-	 *
+	 * This method returns the url property of Server instance, which is a URL to the target host.
+	 * <p> 
+	 * This URL supports Server Variables and MAY be relative, 
+	 * to indicate that the host location is relative to the location where the OpenAPI definition is being served. 
+	 * Variable substitutions will be made when a variable is named enclosed in curly brackets.
+	 * <p>
+	 * This is a REQUIRED property.
+	 * <p>
 	 * @return String url
 	 **/
 
 	String getUrl();
 
 	/**
-	 * Sets the url property of a Server instance
-	 * to the parameter.
-	 * 
+	 * This method sets the url property of Server instance
+	 * to the given url argument, representing a URL to the target host.
+	 * <p>
+	 * This URL supports Server Variables and MAY be relative, 
+	 * to indicate that the host location is relative to the location where the OpenAPI definition is being served. 
+	 * Variable substitutions will be made when a variable is named enclosed in curly brackets.
+	 * <p>
+	 * This is a REQUIRED property.
+	 * <p>
 	 * @param url
 	 */
 
 	void setUrl(String url);
 
 	/**
-	 * Sets the url property of a Server instance
-	 * to the parameter and returns the instance.
-	 * 
+	 * his method sets the url property of Server instance
+	 * to the given url argument, representing a URL to the target host,
+	 * and returns the modified instance.
+	 * <p>
+	 * This URL supports Server Variables and MAY be relative, 
+	 * to indicate that the host location is relative to the location where the OpenAPI definition is being served. 
+	 * Variable substitutions will be made when a variable is named enclosed in curly brackets.
+	 * <p>
+	 * This is a REQUIRED property.
+	 * <p>
 	 * @param url
 	 * @return Server instance with the set url property.
 	 */
@@ -55,26 +74,33 @@ public interface Server extends Constructible, Extensible {
 	Server url(String url);
 
 	/**
-	 * returns the description property from a Server instance.
-	 *
+	 * This method returns the description property of Server instance.
+	 * The decsription property is an optional string describing the host designated by the URL.
+	 * <p>
 	 * @return String description
 	 **/
 
 	String getDescription();
 
 	/**
-	 * Sets the description property of a Server instance
-	 * to the parameter.
-	 * 
+	 * This method sets the description property of a Server instance
+	 * to the given description parameter.
+	 * <p>
+	 * Description of a server is an optional string describing the host designated by the URL. 
+	 * CommonMark syntax can be used for rich text representation.
+	 * <p>
 	 * @param description
 	 */
 
 	void setDescription(String description);
 
 	/**
-	 * Sets the description property of a Server instance
-	 * to the parameter and returns the instance.
-	 * 
+	 * This method sets the description property of a Server instance
+	 * to the given description parameter and returns the modified instance.
+	 * <p>
+	 * Description of a server is an optional string describing the host designated by the URL. 
+	 * CommonMark syntax can be used for rich text representation.
+	 * <p>
 	 * @param description
 	 * @return Server instance with the set description property.
 	 */
@@ -82,26 +108,35 @@ public interface Server extends Constructible, Extensible {
 	Server description(String description);
 
 	/**
-	 * returns the variables property from a Server instance.
-	 *
+	 * This method returns the variables property of Server instance.
+	 * <p>
+	 * Variables are represented as a map between variable name and its value.
+	 * The value is used for substitution in the server's URL template.
+	 * <p>
 	 * @return ServerVariables variables
 	 **/
 
 	ServerVariables getVariables();
 
 	/**
-	 * Sets the variables property of a Server instance
-	 * to the parameter.
-	 * 
+	 * This method sets the variables property of Server instance
+	 * to the given variables argument.
+	 * <p>
+	 * Variables property is a map between variable name and its value.
+	 * The value is used for substitution in the server's URL template.
+	 * <p>
 	 * @param variables
 	 */
 
 	void setVariables(ServerVariables variables);
 
 	/**
-	 * Sets the variables property of a Server instance
-	 * to the parameter and returns the instance.
-	 * 
+	 * This method sets the variables property of Server instance
+	 * to the given variables argument and returns the modified instance.
+	 * <p>
+	 * Variables property is a map between variable name and its value.
+	 * The value is used for substitution in the server's URL template.
+	 * <p>
 	 * @param variables
 	 * @return Server instance with the set variables property.
 	 */

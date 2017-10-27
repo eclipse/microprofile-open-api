@@ -23,99 +23,124 @@ import org.eclipse.microprofile.openapi.models.Constructible;
 import org.eclipse.microprofile.openapi.models.Extensible;
 
 /**
- * ServerVariable
+ * An object representing a Server Variable for server URL template substitution.
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#serverVariableObject"
  */
 public interface ServerVariable extends Constructible, Extensible {
 
 	/**
-	 * returns the _enum property from a ServerVariable instance.
-	 *
-	 * @return List&lt;String&gt; _enum
+	 * This  method returns the enumeration property of ServerVariable instance.
+	 * <p>
+	 * This property represents an enumeration of string values to be used 
+	 * if the substitution options are from a limited set
+	 * <p>
+	 * @return List&lt;String&gt; enumeration
 	 **/
 
-	List<String> getEnum();
+	List<String> getEnumeration();
 
 	/**
-	 * Sets the _enum property of a ServerVariable instance
-	 * to parameter.
-	 * 
-	 * @param _enum
+	 * This method sets the enumeration property of ServerVariable instance
+	 * to the given enumeration argument.
+	 * <p>
+	 * This property represents an enumeration of string values to be used 
+	 * if the substitution options are from a limited set
+	 * <p>
+	 * @param enumeration
 	 */
 
-	void setEnum(List<String> _enum);
+	void setEnumeration(List<String> enumeration);
 
 	/**
-	 * Sets the _enum property of a ServerVariable instance
-	 * to parameter and returns the instance.
-	 * 
-	 * @param _enum
-	 * @return ServerVariable instance with the set _enum property
+	 * This method sets the enumeration property of ServerVariable instance
+	 * to the given enumeration argument and returns the modified instance.
+	 * <p>
+	 * This property represents an enum of string values to be used 
+	 * if the substitution options are from a limited set.
+	 * <p>
+	 * @param enumeration
+	 * @return ServerVariable instance with the set enumeration property
 	 */
 
-	ServerVariable _enum(List<String> _enum);
+	ServerVariable enumeration(List<String> enumeration);
 
 	/**
-	 * Adds a string item to _enum list of a ServerVariable instance
+	 * This method adds a string item to enumeration list of a ServerVariable instance
 	 * and returns the instance.
 	 * <p>
-	 * If the _enum list is null, creates a new ArrayList and adds the item.
-	 * 
-	 * @param _enumItem
+	 * If the enumeration list is null, this method should create a new ArrayList and add the item.
+	 * <p>
+	 * @param enumerationItem
 	 * @return ServerVariable instance with the added enum item.
 	 */
 
-	ServerVariable addEnumItem(String _enumItem);
+	ServerVariable addEnumerationItem(String enumerationItem);
 
 	/**
-	 * returns the _default property from a ServerVariable instance.
-	 *
-	 * @return String _default
+	 * The default value to use for substitution, and to send, if an alternate value is not supplied.
+	 * This value MUST be provided by the consumer and is REQUIRED.
+	 * <p>
+	 * This method returns the defaultValue property from ServerVariable instance.
+	 * <p>
+	 * @return String defaultValue
 	 **/
 
-	String getDefault();
+	String getDefaultValue();
 
 	/**
-	 * Sets the _default property of a ServerVariable instance
-	 * to parameter.
-	 * 
-	 * @param _default
+	 * The default value to use for substitution, and to send, if an alternate value is not supplied.
+	 * This value MUST be provided by the consumer and is REQUIRED.
+	 * <p>
+	 * This method sets the defaultValue property of ServerVariable instance
+	 * to the given defaultValue argument.
+	 * <p>
+	 * @param defaultValue
 	 */
 
-	void setDefault(String _default);
+	void setDefaultValue(String defaultValue);
 
 	/**
-	 * Sets the _default property of a ServerVariable instance
-	 * to parameter and returns the instance.
-	 * 
-	 * @param _default
-	 * @return ServerVariable instance with the set _default property
+	 * The default value to use for substitution, and to send, if an alternate value is not supplied.
+	 * This value MUST be provided by the consumer and is REQUIRED.
+	 * <p>
+	 * This method sets the defaultValue property of ServerVariable instance
+	 * to the given defaultValue argument and returns the modified instance.
+	 * <p>
+	 * @param defaultValue
+	 * @return ServerVariable instance with the set defaultValue property
 	 */
 
-	ServerVariable _default(String _default);
+	ServerVariable defaultValue(String defaultValue);
 
 	/**
-	 * returns the description property from a ServerVariable instance.
-	 *
+	 * This method returns the description property of ServerVariable instance.
+	 * Description property is optional for server variable.
+	 * <p>
 	 * @return String description
 	 **/
 
 	String getDescription();
 
 	/**
-	 * Sets the description property of a ServerVariable instance
-	 * to parameter.
-	 * 
+	 * This method sets the description property of ServerVariable instance
+	 * to the given description argument.
+	 * <p>
+	 * Description property is optional for server variable.
+	 * CommonMark syntax can be used for rich text representation.
+	 * <p>
 	 * @param description
 	 */
 
 	void setDescription(String description);
 
 	/**
-	 * Sets the description property of a ServerVariable instance
-	 * to parameter and returns the instance.
-	 * 
+	 * This method sets the description property of ServerVariable instance
+	 * to the given description argument and returns the modeified instance.
+	 * <p>
+	 * Description property is optional for server variable.
+	 * CommonMark syntax can be used for rich text representation.
+	 * <p>
 	 * @param description
 	 * @return ServerVariable instance with the set description property
 	 */
