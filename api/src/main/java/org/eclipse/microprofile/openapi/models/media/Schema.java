@@ -26,709 +26,652 @@ import org.eclipse.microprofile.openapi.models.Extensible;
 import org.eclipse.microprofile.openapi.models.ExternalDocumentation;
 
 /**
- * Schema
- *
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#schemaObject"
+ * The Schema Object allows the definition of input and output data types. These
+ * types can be objects, but also primitives and arrays. This object is an
+ * extended subset of the
+ * <a href="https://tools.ietf.org/html/draft-wright-json-schema-00">JSON Schema
+ * Specification Wright Draft 00</a>.
+ * <p>
+ * For more information about the properties, see
+ * <a href="http://json-schema.org/">JSON Schema Core</a> and <a href=
+ * "https://tools.ietf.org/html/draft-wright-json-schema-validation-00">JSON
+ * Schema Validation</a>. Unless stated otherwise, the property definitions
+ * follow the JSON Schema.
+ * <p>
+ * Any time a Schema Object can be used, a Reference Object can be used in its
+ * place. This allows referencing an existing definition instead of defining the
+ * same schema again.
+ * 
+ * @see <a href=
+ *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#schemaObject">OpenAPI
+ *      Specification Schema Object</a>
  */
 public interface Schema<T> extends Constructible, Extensible {
 
 	/**
-	 * returns the name property from a from a Schema instance. Ignored in serialization.
+	 * Returns the discriminator property from this schema instance.
 	 *
-	 * @return String name
+	 * @return the discriminator that is used to differentiate between the
+	 *         schemas which may satisfy the payload description
 	 **/
-	String getName();
-
-	/**
-	 * Sets the name property of a Schema instance
-	 * to the parameter.
-	 *
-	 * @param name
-	 */
-
-	void setName(String name);
-
-	/**
-	 * Sets the name property of a Schema instance
-	 * to the parameter and returns the instance.
-	 *
-	 * @param name
-	 * @return Schema instance with the modified name property
-	 */
-
-	Schema name(String name);
-
-	/**
-	 * returns the discriminator property from a Schema instance.
-	 *
-	 * @return Discriminator discriminator
-	 **/
-
 	Discriminator getDiscriminator();
 
 	/**
-	 * Sets discriminator property of a Schema instance
-	 * to the parameter.
+	 * Sets the discriminator property of this schema instance to the given object.
 	 *
 	 * @param discriminator
+	 *            the object that is used to differentiate between the schemas
+	 *            which may satisfy the payload description
 	 */
-
 	void setDiscriminator(Discriminator discriminator);
 
 	/**
-	 * Sets discriminator property of a Schema instance
-	 * to the parameter and returns the instance.
+	 * Sets the discriminator property of this schema instance to the given object.
 	 *
 	 * @param discriminator
-	 * @return Schema instance with the modified discriminator.
+	 *            the object that is used to differentiate between the schemas
+	 *            which may satisfy the payload description
+	 * @return the current Schema instance
 	 */
-
 	Schema discriminator(Discriminator discriminator);
 
 	/**
-	 * returns the title property from a Schema instance.
+	 * Returns the title property from this schema instance.
 	 *
-	 * @return String title
+	 * @return the title assigned to this schema
 	 **/
-
 	String getTitle();
 
 	/**
-	 * Sets the title property of a Schema instance
-	 * to the parameter.
+	 * Sets the title property of this schema instance
+	 * to the given string.
 	 *
-	 * @param title
+	 * @param title  a title to assign to this schema
 	 */
-
 	void setTitle(String title);
 
 	/**
-	 * Sets the title property of a Schema instance
-	 * to the parameter and returns the modified instance.
+	 * Sets the title property of this schema instance
+	 * to the given string.
 	 *
-	 * @param title
-	 * @return Schema instance with the modified title.
+	 * @param title  a title to assign to this schema
+	 * @return the current Schema instance
 	 */
-
 	Schema title(String title);
 
 	/**
-	 * returns the _default property from a StringSchema instance.
+	 * Returns the default value property from this schema instance.
 	 *
-	 * @return String _default
+	 * @return the default value object
 	 **/
-
-	T getDefault();
+	T getDefaultValue();
 
 	/**
-	 * Set _default property of a Schema instance
-	 * to the parameter.
+	 * Set the default value property of this schema instance
+	 * to the value given.
 	 *
-	 * @param _default
+	 * @param defaultValue a value to use as the default
 	 */
-
-	void setDefault(Object _default);
+	void setDefaultValue(Object defaultValue);
 
 	/**
-	 * Returns _enum property for a Schema instance.
+	 * Set the default value property of this schema instance
+	 * to the value given.
 	 *
-	 * @return List&lt;T&gt; _enum
+	 * @param defaultValue a value to use as the default
+	 * @return the current Schema instance
 	 */
-
-	List<T> getEnum();
+	Schema defaultValue(Object defaultValue);
 
 	/**
-	 * Sets _enum property of a Schema instance
-	 * to the parameter.
+	 * Returns the enumerated list of values allowed for objects defined by this
+	 * schema.
 	 *
-	 * @param _enum
+	 * @return the list of values allowed for objects defined by this schema
 	 */
-
-	void setEnum(List<T> _enum);
+	List<T> getEnumeration();
 
 	/**
-	 * Adds a generic type T item to _enum of a Schema instance.
+	 * Sets the enumerated list of values allowed for objects defined by this schema.
 	 *
-	 * @param _enumItem
+	 * @param enumeration a list of values allowed
 	 */
-
-	void addEnumItemObject(T _enumItem);
+	void setEnumeration(List<T> enumeration);
 
 	/**
-	 * returns the multipleOf property from a Schema instance.
+	 * Adds an item of the appropriate type to the enumerated list of values
+	 * allowed.
+	 *
+	 * @param enumerationItem  an object to add to the enumerated values
+	 */
+	void addEnumerationItemObject(T enumerationItem);
+
+	/**
+	 * Returns the multipleOf property from this schema instance.
 	 * <p>
 	 * minimum: 0
 	 *
-	 * @return BigDecimal multipleOf
+	 * @return the positive number that restricts the value of the object
 	 **/
-
 	BigDecimal getMultipleOf();
 
 	/**
-	 * Sets multipleOf property of a Schema instance
-	 * to the parameter.
+	 * Sets the multipleOf property of this schema instance to the value given.
 	 *
 	 * @param multipleOf
+	 *            a positive number that restricts the value of objects
+	 *            described by this schema
 	 */
-
 	void setMultipleOf(BigDecimal multipleOf);
 
 	/**
-	 * Sets multipleOf property of a Schema instance
-	 * to the parameter and returns the instance.
+	 * Sets the multipleOf property of this schema instance to the value given.
 	 *
 	 * @param multipleOf
-	 * @return Schema instance with the modified multipleOf property
+	 *            a positive number that restricts the value of objects
+	 *            described by this schema
+	 * @return the current Schema instance
 	 */
-
 	Schema multipleOf(BigDecimal multipleOf);
 
 	/**
-	 * returns the maximum property from a Schema instance.
+	 * Returns the maximum property from this schema instance.
 	 *
-	 * @return BigDecimal maximum
+	 * @return the maximum value of a numeric object
 	 **/
-
 	BigDecimal getMaximum();
 
 	/**
-	 * Sets maximum property of a Schema instance
-	 * to the parameter.
+	 * Sets the maximum property of this schema instance to the value given.
 	 *
-	 * @param maximum
+	 * @param maximum  specifies the maximum numeric value of objects defined by this schema
 	 */
-
 	void setMaximum(BigDecimal maximum);
 
 	/**
-	 * Sets maximum property of a Schema instance to the parameter
-	 * and returns the instance.
+	 * Sets the maximum property of this schema instance to the value given.
 	 *
-	 * @param maximum
-	 * @return Schema instance with the modified maximum property
+	 * @param maximum  specifies the maximum numeric value of objects defined by this schema
+	 * @return the current Schema instance
 	 */
-
 	Schema maximum(BigDecimal maximum);
 
 	/**
-	 * returns the exclusiveMaximum property from a Schema instance.
+	 * Returns the exclusiveMaximum property from this schema instance.
 	 *
-	 * @return Boolean exclusiveMaximum
+	 * @return whether the numeric value of objects must be less than the maximum property
 	 **/
-
 	Boolean getExclusiveMaximum();
 
 	/**
-	 * Sets exclusiveMaximum property of a Schema instance
-	 * to the parameter.
+	 * Sets the exclusiveMaximum property of this schema instance to the value
+	 * given.
 	 *
 	 * @param exclusiveMaximum
+	 *            when true the numeric value of objects defined by this schema
+	 *            must be less than indicated by the maximum property
 	 */
-
 	void setExclusiveMaximum(Boolean exclusiveMaximum);
 
 	/**
-	 * Sets exclusiveMaximum property of a Schema instance to the parameter
-	 * and returns the instance.
+	 * Sets the exclusiveMaximum property of this schema instance to the value
+	 * given.
 	 *
 	 * @param exclusiveMaximum
-	 * @return Schema instance with modified exclusiveMaximum property.
+	 *            when true the numeric value of objects defined by this schema
+	 *            must be less than indicated by the maximum property
+	 * @return the current Schema instance
 	 */
-
 	Schema exclusiveMaximum(Boolean exclusiveMaximum);
 
 	/**
-	 * returns the minimum property from a Schema instance.
+	 * Returns the minimum property from this schema instance.
 	 *
-	 * @return BigDecimal minimum
+	 * @return the minimum value of a numeric object
 	 **/
-
 	BigDecimal getMinimum();
 
 	/**
-	 * Sets minimum property of a Schema instance
-	 * to the parameter.
+	 * Sets the minimum property of this schema instance to the value given.
 	 *
-	 * @param minimum
+	 * @param minimum  specifies the minimum numeric value of objects defined by this schema
 	 */
-
 	void setMinimum(BigDecimal minimum);
 
 	/**
-	 * Sets minimum property of a Schema instance
-	 * to the parameter and returns the instance
+	 * Sets the minimum property of this schema instance to the value given.
 	 *
-	 * @param minimum
-	 * @return Schema instance with the modified minimum property.
+	 * @param minimum  specifies the minimum numeric value of objects defined by this schema
+	 * @return the current Schema instance
 	 */
-
 	Schema minimum(BigDecimal minimum);
 
 	/**
-	 * returns the exclusiveMinimum property from a Schema instance.
+	 * Returns the exclusiveMinimum property from this schema instance.
 	 *
-	 * @return Boolean exclusiveMinimum
+	 * @return whether the numeric value of objects must be greater than the minimum property
 	 **/
-
 	Boolean getExclusiveMinimum();
 
 	/**
-	 * Sets exclusiveMinimum property of a Schema instance
-	 * to the parameter.
+	 * Sets the exclusiveMinimum property of this schema instance to the value
+	 * given.
 	 *
 	 * @param exclusiveMinimum
+	 *            when true the numeric value of objects defined by this schema
+	 *            must be greater than indicated by the minimum property
 	 */
-
 	void setExclusiveMinimum(Boolean exclusiveMinimum);
 
 	/**
-	 * Sets exclusiveMinimum property of a Schema instance
-	 * to the parameter and returns the instance.
+	 * Sets the exclusiveMinimum property of this schema instance to the value
+	 * given.
 	 *
 	 * @param exclusiveMinimum
-	 * @return Schema instance with the modified exclusiveMinimum property.
+	 *            when true the numeric value of objects defined by this schema
+	 *            must be greater than indicated by the minimum property
+	 * @return the current Schema instance
 	 */
-
 	Schema exclusiveMinimum(Boolean exclusiveMinimum);
 
 	/**
-	 * returns the maxLength property from a Schema instance.
+	 * Returns the maxLength property from this schema instance.
 	 * <p>
 	 * minimum: 0
 	 *
-	 * @return Integer maxLength
+	 * @return the maximum length of objects e.g. strings
 	 **/
-
 	Integer getMaxLength();
 
 	/**
-	 * Sets maxLength property of a Schema instance
-	 * to the parameter.
+	 * Sets the maxLength property of this schema instance to the value given.
 	 *
-	 * @param maxLength
+	 * @param maxLength  the maximum length of objects defined by this schema
 	 */
-
 	void setMaxLength(Integer maxLength);
 
 	/**
-	 * Sets maxLength property of a Schema instance
-	 * to the parameter and returns the instance
+	 * Sets the maxLength property of this schema instance to the value given.
 	 *
-	 * @param maxLength
-	 * @return Schema instance with the modified maxLength property.
+	 * @param maxLength  the maximum length of objects defined by this schema
+	 * @return the current Schema instance
 	 */
-
 	Schema maxLength(Integer maxLength);
 
 	/**
-	 * returns the minLength property from a Schema instance.
+	 * Returns the minLength property from this schema instance.
 	 * <p>
 	 * minimum: 0
 	 *
-	 * @return Integer minLength
+	 * @return the minimum length of objects e.g. strings
 	 **/
-
 	Integer getMinLength();
 
 	/**
-	 * Sets minLength property of a Schema instance
-	 * to the parameter.
+	 * Sets the minLength property of this schema instance to the value given.
 	 *
-	 * @param minLength
+	 * @param minLength  the minimum length of objects defined by this schema
 	 */
-
 	void setMinLength(Integer minLength);
 
 	/**
-	 * Sets minLength property of a Schema instance
-	 * to the parameter and returns the instance
+	 * Sets the minLength property of this schema instance to the value given.
 	 *
-	 * @param minLength
-	 * @return Schema instance with the modified minLength property.
+	 * @param minLength  the minimum length of objects defined by this schema
+	 * @return the current Schema instance
 	 */
-
 	Schema minLength(Integer minLength);
 
 	/**
-	 * returns the pattern property from a Schema instance.
+	 * Returns the pattern property from this schema instance.
 	 *
-	 * @return String pattern
+	 * @return the regular expression which restricts the value of an object e.g. a string
 	 **/
-
 	String getPattern();
 
 	/**
-	 * Sets pattern property of a Schema instance
-	 * to the parameter.
+	 * Sets the pattern property of this schema instance to the string given.
 	 *
-	 * @param pattern
+	 * @param pattern  the regular expression which restricts objects defined by this schema
 	 */
-
 	void setPattern(String pattern);
 
 	/**
-	 * Sets pattern property of a Schema instance
-	 * to the parameter and returns the instance
+	 * Sets the pattern property of this schema instance to the string given.
 	 *
-	 * @param pattern
-	 * @return Schema instance with the modified pattern property.
+	 * @param pattern  the regular expression which restricts objects defined by this schema
+	 * @return the current Schema instance
 	 */
-
 	Schema pattern(String pattern);
 
 	/**
-	 * returns the maxItems property from a Schema instance.
+	 * Returns the maxItems property from this schema instance.
 	 * <p>
 	 * minimum: 0
 	 *
-	 * @return Integer maxItems
+	 * @return the maximum number of elements in the object e.g. array elements
 	 **/
-
 	Integer getMaxItems();
 
 	/**
-	 * Sets maxItems property of a Schema instance
-	 * to the parameter.
+	 * Sets the maxItems property of this schema instance to the value given.
 	 *
 	 * @param maxItems
+	 *            the maximum number of elements in objects defined by this
+	 *            schema e.g. array elements
 	 */
-
 	void setMaxItems(Integer maxItems);
 
 	/**
-	 * Sets maxItems property of a Schema instance
-	 * to the parameter and returns the instance.
+	 * Sets the maxItems property of this schema instance to the value given.
 	 *
 	 * @param maxItems
-	 * @return Schema instance with the modified maxItems property.
+	 *            the maximum number of elements in objects defined by this
+	 *            schema e.g. array elements
+	 * @return the current Schema instance
 	 */
-
 	Schema maxItems(Integer maxItems);
 
 	/**
-	 * returns the minItems property from a Schema instance.
+	 * Returns the minItems property from this schema instance.
 	 * <p>
 	 * minimum: 0
 	 *
-	 * @return Integer minItems
+	 * @return the minimum number of elements in the object e.g. array elements
 	 **/
-
 	Integer getMinItems();
 
 	/**
-	 * Sets minItems property of Schema instance
-	 * to the parameter.
+	 * Sets the minItems property of this schema instance to the value given.
 	 *
 	 * @param minItems
+	 *            the minimum number of elements in objects defined by this
+	 *            schema e.g. array elements
 	 */
-
 	void setMinItems(Integer minItems);
 
 	/**
-	 * Sets minItems property of a Schema instance
-	 * to the parameter and returns the instance.
+	 * Sets the minItems property of this schema instance to the value given.
 	 *
 	 * @param minItems
-	 * @return Schema instance with the modified minItems property.
+	 *            the minimum number of elements in objects defined by this
+	 *            schema e.g. array elements
+	 * @return the current Schema instance
 	 */
-
 	Schema minItems(Integer minItems);
 
 	/**
-	 * returns the uniqueItems property from a Schema instance.
+	 * Returns the uniqueItems property from this schema instance.
 	 *
-	 * @return Boolean uniqueItems
+	 * @return whether to ensure items are unique
 	 **/
-
 	Boolean getUniqueItems();
 
 	/**
-	 * Sets uniqueItems property of a Schema instance
-	 * to the parameter.
+	 * Sets the uniqueItems property of this schema instance to the value given.
 	 *
 	 * @param uniqueItems
+	 *            ensure the items (e.g. array elements) are unique in objects
+	 *            defined by this schema
 	 */
-
 	void setUniqueItems(Boolean uniqueItems);
 
 	/**
-	 * Sets uniqueItems property of a Schema instance
-	 * to the parameter and returns the instance.
+	 * Sets the uniqueItems property of this schema instance to the value given.
 	 *
 	 * @param uniqueItems
-	 * @return Schema instance with the modified uniqueItems property.
+	 *            ensure the items (e.g. array elements) are unique in objects
+	 *            defined by this schema
+	 * @return the current Schema instance
 	 */
-
 	Schema uniqueItems(Boolean uniqueItems);
 
 	/**
-	 * returns the maxProperties property from a Schema instance.
+	 * Returns the maxProperties property from this schema instance.
 	 * <p>
 	 * minimum: 0
 	 *
-	 * @return Integer maxProperties
+	 * @return the maximum number of properties allowed in the object
 	 **/
-
 	Integer getMaxProperties();
 
 	/**
-	 * Sets maxProperties property of a Schema instance
-	 * to the parameter.
+	 * Sets the maxProperties property of this schema instance to the value given.
 	 *
-	 * @param maxProperties
+	 * @param maxProperties  limit the number of properties in objects
+	 *            defined by this schema
 	 */
-
 	void setMaxProperties(Integer maxProperties);
 
 	/**
-	 * Sets maxProperties property of a Schema instance
-	 * to the parameter and returns the instance.
+	 * Sets the maxProperties property of this schema instance to the value given.
 	 *
-	 * @param maxProperties
-	 * @return Schema instance with the modified maxProperty property.
+	 * @param maxProperties  limit the number of properties in objects
+	 *            defined by this schema
+	 * @return the current Schema instance
 	 */
-
 	Schema maxProperties(Integer maxProperties);
 
 	/**
-	 * returns the minProperties property from a Schema instance.
+	 * Returns the minProperties property from this schema instance.
 	 * <p>
 	 * minimum: 0
 	 *
-	 * @return Integer minProperties
+	 * @return the minimum number of properties allowed in the object
 	 **/
-
 	Integer getMinProperties();
 
 	/**
-	 * Sets minProperties property of a Schema instance
-	 * to the parameter.
+	 * Sets the minProperties property of this schema instance to the value given.
 	 *
-	 * @param minProperties
+	 * @param minProperties  limit the number of properties in objects
+	 *            defined by this schema
 	 */
-
 	void setMinProperties(Integer minProperties);
 
 	/**
-	 * Sets minProperties property of a Schema instance
-	 * to the parameter and returns the instance.
+	 * Sets the minProperties property of this schema instance to the value given.
 	 *
-	 * @param minProperties
-	 * @return Schema instance with the modified minProperty property.
+	 * @param minProperties  limit the number of properties in objects
+	 *            defined by this schema
+	 * @return the current Schema instance
 	 */
-
 	Schema minProperties(Integer minProperties);
 
 	/**
-	 * returns the required property from a Schema instance.
+	 * Returns the required property from this schema instance.
 	 *
-	 * @return List&lt;String&gt; required
+	 * @return the list of fields required in objects defined by this schema
 	 **/
-
 	List<String> getRequired();
 
 	/**
-	 * Sets required property of a Schema instance if
-	 * it is null or does not contain the List items
-	 * passed in as method arguments.
+	 * Sets the list of fields required in objects defined by this schema.
 	 *
-	 * @param required
+	 * @param required  the list of fields required in objects defined by this schema
 	 */
-
 	void setRequired(List<String> required);
 
 	/**
-	 * Sets required List property of a Schema instance
-	 * to the parameter and returns the instance.
+	 * Sets the list of fields required in objects defined by this schema.
 	 *
-	 * @param required
-	 * @return Schema instance with the set required property.
+	 * @param required  the list of fields required in objects defined by this schema
+	 * @return the current Schema instance
 	 */
-
 	Schema required(List<String> required);
 
 	/**
-	 * Adds an item to required List of a Schema instance.
-	 * Creates new ArrayList if instance's required property is null.
+	 * Adds the name of an item to the list of fields required in objects
+	 * defined by this schema.
 	 *
 	 * @param requiredItem
-	 * @return Schema instance with added required item.
+	 *            the name of an item required in objects defined by this schema
+	 *            instance
+	 * @return the current Schema instance
 	 */
-
 	Schema addRequiredItem(String requiredItem);
 
 	/**
-	 * returns the type property from a Schema instance.
+	 * Returns the type property from this schema.
 	 *
-	 * @return String type
+	 * @return the name of the type used in this schema
 	 **/
-
 	String getType();
 
 	/**
-	 * Sets the type property of a Schema instance
-	 * to the parameter.
+	 * Sets the type used by this schema to the string given.
 	 *
-	 * @param type
+	 * @param type  the name of the type used by this schema
 	 */
-
 	void setType(String type);
 
 	/**
-	 * Sets the type property of a Schema instance
-	 * to the parameter and returns the instance.
+	 * Sets the type used by this schema to the string given.
 	 *
-	 * @param type
-	 * @return Schema instance with the modified type property.
+	 * @param type  the name of the type used by this schema
+	 * @return the current Schema instance
 	 */
-
 	Schema type(String type);
 
 	/**
-	 * returns the not property from a Schema instance.
+	 * Returns a schema which describes properties not allowed in objects defined by the current schema. 
 	 *
-	 * @return Schema not
+	 * @return the not property's schema
 	 **/
-
 	Schema getNot();
 
 	/**
-	 * Sets the not property of a Schema instance
-	 * to the parameter.
+	 * Sets the not property to a schema which describes properties not allowed
+	 * in objects defined by the current schema.
 	 *
-	 * @param not
+	 * @param not  the schema which describes properties not allowed
 	 */
-
 	void setNot(Schema not);
 
 	/**
-	 * Sets the not property of a Schema instance
-	 * to the parameter and
-	 * returns the instance.
+	 * Sets the not property to a schema which describes properties not allowed
+	 * in objects defined by the current schema.
 	 *
-	 * @param not
-	 * @return Schema with the modified not property.
+	 * @param not  the schema which describes properties not allowed
+	 * @return the current Schema instance
 	 */
-
 	Schema not(Schema not);
 
 	/**
-	 * returns the properties property from a Schema instance.
+	 * Returns the properties defined in this schema.
 	 *
-	 * @return Map&lt;String, Schema&gt; properties
+	 * @return a map which associates property names with the schemas that
+	 *         describe their contents
 	 **/
-
 	Map<String, Schema> getProperties();
 
 	/**
-	 * Sets properties property of a Schema instance
-	 * to the parameter.
+	 * Sets the properties of this schema instance to the map provided.
 	 *
 	 * @param properties
+	 *            a map which associates property names with the schemas that
+	 *            describe their contents
 	 */
-
 	void setProperties(Map<String, Schema> properties);
 
 	/**
-	 * Sets properties property of a Schema instance
-	 * to the parameter and returns the modified instance.
+	 * Sets the properties of this schema instance to the map provided.
 	 *
 	 * @param properties
-	 * @return Schema instance with the set properties property.
+	 *            a map which associates property names with the schemas that
+	 *            describe their contents
+	 * @return the current Schema instance
 	 */
-
 	Schema properties(Map<String, Schema> properties);
 
 	/**
-	 * Adds a Schema property item at specified key to properties
-	 * property of a Schema instance and returns the instance.
+	 * Adds a schema property of the provided name using the given schema.
 	 *
 	 * @param key
+	 *            the name of a new schema property
 	 * @param propertiesItem
-	 * @return Schema instance with added property item.
+	 *            the schema which describes the properties of the named
+	 *            property
+	 * @return the current Schema instance
 	 */
-
 	Schema addProperties(String key, Schema propertiesItem);
 
 	/**
-	 * returns the additionalProperties property from a Schema instance.
+	 * Returns the schema which defines new properties added to objects defined
+	 * by the current schema.
 	 *
-	 * @return Schema additionalProperties
+	 * @return this schema's additionalProperties property
 	 **/
-
 	Schema getAdditionalProperties();
 
 	/**
-	 * Sets additionalProperties property of a Schema instance
-	 * to the parameter.
+	 * Sets the schema which defines new properties added to objects defined by
+	 * the current schema.
 	 *
 	 * @param additionalProperties
+	 *            a schema which defines additional properties
 	 */
-
 	void setAdditionalProperties(Schema additionalProperties);
 
 	/**
-	 * Sets additionalProperties property of a Schema instance
-	 * to the parameter and returns the instance.
+	 * Sets the schema which defines new properties added to objects defined by
+	 * the current schema.
 	 *
 	 * @param additionalProperties
-	 * @return Schema instance with the set additionalProperties property
+	 *            a schema which defines additional properties
+	 * @return the current Schema instance
 	 */
-
 	Schema additionalProperties(Schema additionalProperties);
 
 	/**
-	 * returns the description property from a Schema instance.
+	 * Returns a description of the purpose of this schema.
 	 *
-	 * @return String description
+	 * @return a string containing a description
 	 **/
-
 	String getDescription();
 
 	/**
-	 * Sets description property of a Schema instance
-	 * to the parameter.
+	 * Sets the description property of this schema 
+	 * to the given string.
 	 *
-	 * @param description
+	 * @param description  a string containing a description of the purpose of this schema
 	 */
-
 	void setDescription(String description);
 
 	/**
-	 * Sets description property of a Schema instance
-	 * to the parameter and returns the instance.
+	 * Sets the description property of this schema 
+	 * to the given string.
 	 *
-	 * @param description
-	 * @return Schema instance with the set description property
+	 * @param description  a string containing a description of the purpose of this schema
+	 * @return the current Schema instance
 	 */
-
 	Schema description(String description);
 
 	/**
-	 * returns the format property from a Schema instance.
+	 * Returns the format property from this schema instance. This property clarifies the 
+	 * data type specified in the type property. 
 	 *
-	 * @return String format
+	 * @return a string describing the format of the data in this schema
 	 **/
-
 	String getFormat();
 
 	/**
-	 * Sets format property of a Schema instance
-	 * to the parameter.
+	 * Sets the format property of this schema instance to the given string. The value may
+	 * be one of the formats described in the OAS or a user defined format.
 	 *
 	 * @param format
+	 *            the string specifying the data format
 	 */
-
 	void setFormat(String format);
 
 	/**
-	 * Sets format property of a Schema instance
-	 * to the parameter and returns the instance.
+	 * Sets the format property of this schema instance to the given string. The value may
+	 * be one of the formats described in the OAS or a user defined format.
 	 *
 	 * @param format
-	 * @return Schema instance with the set format property.
+	 *            the string specifying the data format
+	 * @return the current Schema instance
 	 */
-
 	Schema format(String format);
 
 	/**
@@ -758,195 +701,172 @@ public interface Schema<T> extends Constructible, Extensible {
 	Schema $ref(String $ref);
 
 	/**
-	 * returns the nullable property from a Schema instance.
+	 * Returns the nullable property from this schema instance which indicates whether null is a 
+	 * valid value.
 	 *
-	 * @return Boolean nullable
+	 * @return the nullable property
 	 **/
-
 	Boolean getNullable();
 
 	/**
-	 * Sets nullable property of a Schema instance
-	 * to the parameter.
+	 * Sets the nullable property of this schema instance. Specify true if this 
+	 * schema will allow null values. 
 	 *
-	 * @param nullable
+	 * @param nullable  a boolean value indicating this schema allows a null value.
 	 */
-
 	void setNullable(Boolean nullable);
 
 	/**
-	 * Sets nullable property of a Schema instance
-	 * to the parameter and return the instance.
+	 * Sets the nullable property of this schema instance. Specify true if this 
+	 * schema will allow null values. 
 	 *
-	 * @param nullable
-	 * @return Schema instance with the set nullable property.
+	 * @param nullable  a boolean value indicating this schema allows a null value.
+	 * @return the current Schema instance
 	 */
-
 	Schema nullable(Boolean nullable);
 
 	/**
-	 * returns the readOnly property from a Schema instance.
+	 * Returns the readOnly property from this schema instance.
 	 *
-	 * @return Boolean readOnly
+	 * @return indication that the schema is only valid in a response message
 	 **/
-
 	Boolean getReadOnly();
 
 	/**
-	 * Sets readOnly property of a Schema instance
-	 * to the parameter.
+	 * Sets the readOnly property of this schema. Only valid when the schema is
+	 * the property in an object.
 	 *
-	 * @param readOnly
+	 * @param readOnly  true indicates the schema should not be sent as part of a request message
 	 */
-
 	void setReadOnly(Boolean readOnly);
 
 	/**
-	 * Sets readOnly property of a Schema instance
-	 * to the parameter and return the instance.
+	 * Sets the readOnly property of this schema. Only valid when the schema is
+	 * the property in an object.
 	 *
-	 * @param readOnly
-	 * @return Schema instance with the set readOnly property.
+	 * @param readOnly  true indicates the schema should not be sent as part of a request message
+	 * @return the current Schema instance
 	 */
-
 	Schema readOnly(Boolean readOnly);
 
 	/**
-	 * returns the writeOnly property from a Schema instance.
+	 * Returns the writeOnly property from this schema instance.
 	 *
-	 * @return Boolean writeOnly
+	 * @return indication that the schema is only valid in a request message
 	 **/
-
 	Boolean getWriteOnly();
 
 	/**
-	 * Sets writeOnly property of a Schema instance
-	 * to the parameter.
+	 * Sets the writeOnly property of this schema. Only valid when the schema is
+	 * the property in an object.
 	 *
-	 * @param writeOnly
+	 * @param writeOnly  true indicates the schema should not be sent as part of a response message
 	 */
-
 	void setWriteOnly(Boolean writeOnly);
 
 	/**
-	 * Sets writeOnly property of a Schema instance
-	 * to the parameter and return the instance.
+	 * Sets the writeOnly property of this schema. Only valid when the schema is
+	 * the property in an object.
 	 *
-	 * @param writeOnly
-	 * @return Schema instance with the set writeOnly property.
+	 * @param writeOnly  true indicates the schema should not be sent as part of a response message
+	 * @return the current Schema instance
 	 */
-
 	Schema writeOnly(Boolean writeOnly);
 
 	/**
-	 * returns the example property from a Schema instance.
+	 * Returns the example property from this schema instance.
 	 *
-	 * @return String example
+	 * @return an object which is an example of an instance of this schema
 	 **/
-
 	Object getExample();
 
 	/**
-	 * Sets example property of a Schema instance
-	 * to the parameter.
+	 * Sets the example property of this schema instance. To represent examples
+	 * that cannot be naturally represented in JSON or YAML, a string value can
+	 * be used to contain the example with escaping where necessary.
 	 *
-	 * @param example
+	 * @param example  an object which is an instance of this schema
 	 */
-
 	void setExample(Object example);
 
 	/**
-	 * Sets example property of a Schema instance
-	 * to the parameter and return the instance.
+	 * Sets the example property of this schema instance. To represent examples
+	 * that cannot be naturally represented in JSON or YAML, a string value can
+	 * be used to contain the example with escaping where necessary.
 	 *
-	 * @param example
-	 * @return Schema instance with the set example property.
+	 * @param example  an object which is an instance of this schema
+	 * @return the current Schema instance
 	 */
-
 	Schema example(Object example);
 
 	/**
-	 * returns the externalDocs property from a Schema instance.
+	 * Returns the externalDocs property from this schema instance.
 	 *
-	 * @return ExternalDocumentation externalDocs
+	 * @return additional external documentation for this schema
 	 **/
-
 	ExternalDocumentation getExternalDocs();
 
 	/**
-	 * Sets externalDocs property of a Schema instance
-	 * to the parameter.
+	 * Sets the externalDocs property of this schema to the indicated value.
 	 *
-	 * @param externalDocs
+	 * @param externalDocs  an additional external documentation object
 	 */
-
 	void setExternalDocs(ExternalDocumentation externalDocs);
 
 	/**
-	 * Sets externalDocs property of a Schema instance
-	 * to the parameter and
-	 * return the instance.
+	 * Sets the externalDocs property of this schema to the indicated value.
 	 *
-	 * @param externalDocs
-	 * @return Schema instance with the set externalDocs property
+	 * @param externalDocs  an additional external documentation object
+	 * @return the current Schema instance
 	 */
-
 	Schema externalDocs(ExternalDocumentation externalDocs);
 
 	/**
-	 * returns the deprecated property from a Schema instance.
+	 * Returns the deprecated property from this schema instance.
 	 *
-	 * @return Boolean deprecated
+	 * @return indication that the schema is deprecated and should be transitioned out of usage
 	 **/
-
 	Boolean getDeprecated();
 
 	/**
-	 * Sets deprecated property of a Schema instance
-	 * to the parameter.
+	 * Sets the deprecated property of this schema. This 
+	 * specifies that the schema is deprecated and should be transitioned out of usage
 	 *
-	 * @param deprecated
+	 * @param deprecated  true to indicate this schema is deprecated
 	 */
-
 	void setDeprecated(Boolean deprecated);
 
 	/**
-	 * Sets deprecated property of a Schema instance
-	 * to the parameter and
-	 * return the instance.
+	 * Sets the deprecated property of this schema. This 
+	 * specifies that the schema is deprecated and should be transitioned out of usage
 	 *
-	 * @param deprecated
-	 * @return Schema instance with the set deprecated property
+	 * @param deprecated  true to indicate this schema is deprecated
+	 * @return the current Schema instance
 	 */
-
 	Schema deprecated(Boolean deprecated);
 
 	/**
-	 * returns the xml property from a Schema instance.
+	 * Returns the xml property from this schema instance.
 	 *
-	 * @return XML xml
+	 * @return a metadata object that allows for more fine-tuned XML model definitions
 	 **/
-
 	XML getXml();
-
+	
 	/**
-	 * Sets xml property of a Schema instance
-	 * to the parameter.
+	 * Sets the xml property of this schema instance. It may only be set on properties schemas
+	 * and adds additional metadata to describe the XML representation of this property.
 	 *
-	 * @param xml
+	 * @param xml  a metadata object to describe the XML representation of this property
 	 */
-
 	void setXml(XML xml);
 
 	/**
-	 * Sets xml property of a Schema instance
-	 * to the parameter and
-	 * return the instance.
+	 * Sets the xml property of this schema instance. It may only be set on properties schemas
+	 * and adds additional metadata to describe the XML representation of this property.
 	 *
-	 * @param xml
-	 * @return Schema instance with the set xml property
+	 * @param xml  a metadata object to describe the XML representation of this property
+	 * @return the current Schema instance
 	 */
-
 	Schema xml(XML xml);
 
 }

@@ -20,49 +20,53 @@ package org.eclipse.microprofile.openapi.models.media;
 import java.util.List;
 
 /**
- * BinarySchema
+ * The schema used for an object that holds binary data.
  */
 public interface BinarySchema extends Schema<byte[]> {
 
 	/**
-	   * sets this BinarySchema's type property to the given type and
-	   * returns this instance of BinarySchema
-	   *
-	   * @param String type
-	   * @return BinarySchema
-	   */
+	 * Change this BinarySchema's type property from the default value to the
+	 * given string. 
+	 *
+	 * @param type  the name of a valid type
+	 * @return the current BinarySchema instance
+	 */
 	BinarySchema type(String type);
 
 	/**
-	   * sets this BinarySchema's format property to the given format and
-	   * returns this instance of BinarySchema
-	   *
-	   * @param String format
-	   * @return BinarySchema
-	   */
+	 * Change this BinarySchema's format property from the default value to the
+	 * given format. The value may be one of the formats described in the OAS or
+	 * a user defined format.
+	 *
+	 * @param format
+	 *            the string specifying the data format
+	 * @return the current BinarySchema instance
+	 */
 	BinarySchema format(String format);
 
 	/**
-	   * sets the _default property of this BinarySchema to the given _default value.
-	   * 
-	   * @param byte[] _default
-	   * @return BinarySchema
-	   */
-	BinarySchema _default(byte[] _default);
+	 * Sets the default property of this BinarySchema to the given default value.
+	 * 
+	 * @param defaultValue  a value to use as the default
+	 * @return the current BinarySchema instance
+	 */
+	BinarySchema defaultValue(byte[] defaultValue);
 
 	/**
-	   * sets the _enum property of this BinarySchema to the given _enum value.
-	   * 
-	   * @param List&lt;byte[]&gt; _enum
-	   * @return BinarySchema
-	   */
-	BinarySchema _enum(List<byte[]> _enum);
+	 * Sets the enumerated list of values allowed for objects defined by this schema.
+	 *
+	 * @param enumeration a list of values allowed
+	 * @return the current BinarySchema instance
+	 */
+	BinarySchema enumeration(List<byte[]> enumeration);
 
 	/**
-	   * Adds the given _enumItem to this BinarySchema's List of _enumItems.
-	   *
-	   * @param byte[] _enumItem
-	   */
-	BinarySchema addEnumItem(byte[] _enumItem);
+	 * Adds an item of the appropriate type to the enumerated list of values
+	 * allowed.
+	 *
+	 * @param enumerationItem  an object to add to the enumerated values
+	 * @return the current BinarySchema instance
+	 */
+	BinarySchema addEnumerationItem(byte[] enumerationItem);
 
 }
