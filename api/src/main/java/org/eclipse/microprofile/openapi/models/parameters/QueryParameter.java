@@ -21,6 +21,8 @@ import org.eclipse.microprofile.openapi.models.Constructible;
 
 /**
  * QueryParameter
+ * <p>
+ * A query parameter is a {@link Parameter Parameter} where the "in" property has the value "query."
  */
 public interface QueryParameter extends Constructible, Parameter {
 

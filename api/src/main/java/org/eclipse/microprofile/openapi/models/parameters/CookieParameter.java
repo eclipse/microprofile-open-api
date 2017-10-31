@@ -21,6 +21,8 @@ import org.eclipse.microprofile.openapi.models.Constructible;
 
 /**
  * CookieParameter
+ * <p>
+ * A cookie parameter is a {@link Parameter Parameter} where the "in" property has the value "cookie."
  */
 public interface CookieParameter extends Constructible, Parameter {
 

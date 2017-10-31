@@ -25,145 +25,131 @@ import org.eclipse.microprofile.openapi.models.examples.Example;
 
 /**
  * MediaType
- *
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#mediaTypeObject"
+ * <p>
+ * Each Media Type Object provides a schema and examples for the media type
+ * identified by its key.
+ * <p>
+ * 
+ * @see <a
+ *      href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#mediaTypeObject">OpenAPI
+ *      Specification Media Type Object</a>
  */
 public interface MediaType extends Constructible, Extensible {
 
 	/**
-	 * returns the schema property from a MediaType instance.
+	 * Returns the schema property from a MediaType instance.
 	 *
-	 * @return Schema schema
+	 * @return the schema defining the type used for the request body
 	 **/
-
 	Schema getSchema();
 
 	/**
-	 * Sets schema field of a MediaType instance to the
-	 * parameter.
+	 * Sets the schema field of a MediaType instance to the
+	 * given schema object.
 	 *
-	 * @param schema
+	 * @param schema  the schema defining the type used for the request body
 	 */
-
 	void setSchema(Schema schema);
 
 	/**
-	 * Sets schema property of a MediaType instance to the
-	 * parameter and returns the instance.
+	 * Sets the schema field of a MediaType instance to the given schema object.
 	 *
-	 * @param schema
-	 * @return MediaType instance with the set schema property
+	 * @param schema  the schema defining the type used for the request body
+	 * @return the current MediaType instance
 	 */
-
 	MediaType schema(Schema schema);
 
 	/**
-	 * returns the examples map of String to Example from a MediaType instance.
+	 * Returns the collection of examples from a MediaType instance.
 	 *
-	 * @return Map&lt;String, Example&gt; examples
+	 * @return examples of the media type
 	 **/
-
 	Map<String, Example> getExamples();
 
 	/**
-	 * Sets examples field of a MediaType instance to the
-	 * parameter.
+	 * Sets the examples field of a MediaType instance to the given map object.
+	 * Each example object should match the media type and specified schema if present.
+	 * The example object is mutually exclusive of the examples object.
 	 *
-	 * @param examples
+	 * @param examples  examples of the media type
 	 */
-
 	void setExamples(Map<String, Example> examples);
 
 	/**
-	 * Sets examples field of a MediaType instance to the
-	 * parameter and returns the instance.
+	 * Sets the examples field of a MediaType instance to the given map object.
+	 * Each example object should match the media type and specified schema if present.
+	 * The example object is mutually exclusive of the examples object.
 	 *
-	 * @param examples
-	 * @return MediaType instance with the set examples property
+	 * @param examples  examples of the media type
+	 * @return the current MediaType instance
 	 */
-
 	MediaType examples(Map<String, Example> examples);
 
 	/**
-	 * Adds an example item to examples map of a MediaType instance
-	 * and returns the instance.
-	 * <p>
-	 * If the examples property is null, creates a new HashMap
-	 * and adds the item to it.
+	 * Adds an example item to the examples map of a MediaType instance.
+	 * The example object should match the media type and specified schema if present.
 	 *
-	 * @param key
-	 * @param examplesItem
-	 * @return MediaType instance with the set example item
+	 * @param key  any unique name to identify the example object
+	 * @param examplesItem  an example of a media type
+	 * @return the current MediaType instance
 	 */
-
 	MediaType addExamples(String key, Example examplesItem);
 
 	/**
-	 * returns the example property from a MediaType instance.
+	 * Returns the example property from a MediaType instance.
 	 *
-	 * @return String example
+	 * @return an example of the media type
 	 **/
-
-	String getExample();
+	Object getExample();
 
 	/**
-	 * Sets example property of a MediaType instance to the
-	 * parameter.
+	 * Sets the example property of a MediaType instance to the given value.
+	 * The example object should be in the correct format as specified by the media type.
+	 * The example object is mutually exclusive of the examples object.
 	 *
-	 * @param example
+	 * @param example  an example of the media type
 	 */
-
-	void setExample(String example);
+	void setExample(Object example);
 
 	/**
-	 * Sets example property of a MediaType instance to the
-	 * parameter and returns the instance.
+	 * Sets the example property of a MediaType instance to the given value.
+	 * The example object should be in the correct format as specified by the media type.
+	 * The example object is mutually exclusive of the examples object.
 	 *
-	 * @param example
-	 * @return MediaType instance with the set example property
+	 * @param example  an example of the media type
+	 * @return the current MediaType instance
 	 */
-
-	MediaType example(String example);
+	MediaType example(Object example);
 
 	/**
-	 * returns the encoding property from a MediaType instance.
+	 * Returns the encoding property from a MediaType instance.
 	 *
-	 * @return Encoding encoding
+	 * @return a map between a property name and its encoding information
 	 **/
-
 	Map<String, Encoding> getEncoding();
 
 	/**
-	 * Sets encoding property of a MediaType instance to the
-	 * parameter.
+	 * Sets encoding property of a MediaType instance to the given map object.
 	 *
-	 * @param encoding
+	 * @param encoding  a map between property names and their encoding information
 	 */
-
 	void setEncoding(Map<String, Encoding> encoding);
 
 	/**
-	 * Sets encoding property of a MediaType instance to the
-	 * parameter and returns the instance.
+	 * Sets encoding property of a MediaType instance to the given map object.
 	 *
-	 * @param encoding
-	 * @return MediaType instance with the set encoding property
+	 * @param encoding  a map between property names and their encoding information
+	 * @return the current MediaType instance
 	 */
-
 	MediaType encoding(Map<String, Encoding> encoding);
 
 	/**
-	 * Adds an Encoding item to encoding map of a MediaType instance
-	 * and returns the instance.
-	 * <p>
-	 * If the encoding property is null, creates a new HashMap
-	 * and adds the item to it.
+	 * Adds an Encoding item to the encoding property of a MediaType instance.
 	 *
-	 * @param String key
-	 * @param Encoding encodingItem
-	 * @return MediaType instance with the added encoding item
+	 * @param key a property name in the schema
+	 * @param encodingItem  an encoding definition to apply to the schema property.
+	 * @return the current MediaType instance
 	 */
-
 	MediaType addEncoding(String key, Encoding encodingItem);
 
 }

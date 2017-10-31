@@ -28,254 +28,242 @@ import org.eclipse.microprofile.openapi.models.tags.Tag;
 
 /**
  * OpenAPI
- *
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md"
+ * <p>
+ * This is the root document object of the OpenAPI document. It contains
+ * required and optional fields.
+ * 
+ * @see <a href=
+ *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#openapi-object">OpenAPI
+ *      Specification OpenAPI Object</a>
  */
 public interface OpenAPI extends Constructible, Extensible {
 
 	/**
-	   * returns the openapi property from a OpenAPI instance.
-	   *
-	   * @return String openapi
-	   **/
-
+	  * Returns the openapi property from an OpenAPI instance.
+	  *
+	  * @return the semantic version number of the OpenAPI Specification version that the OpenAPI document uses
+	  **/
 	String getOpenapi();
 
 	/**
-	   * sets this OpenAPI's openapi property to the given openapi.
-	   *
-	   * @param String openapi
-	   */
+	  * Sets this OpenAPI instance's openapi property to the given string.
+	  *
+	  * @param openapi the semantic version number of the OpenAPI Specification version that the OpenAPI document uses
+	  */
 	void setOpenapi(String openapi);
 
 	/**
-	   * sets this OpenAPI's openapi property to the given openapi and
-	   * returns this instance of OpenAPI
-	   *
-	   * @param String openapi
-	   * @return OpenAPI
-	   */
+	  * Sets this OpenAPI instance's openapi property to the given string.
+	  *
+	  * @param openapi the semantic version number of the OpenAPI Specification version that the OpenAPI document uses
+	  * @return the current OpenAPI object
+	  */
 	OpenAPI openapi(String openapi);
 
 	/**
-	   * returns the info property from a OpenAPI instance.
-	   *
-	   * @return Info info
-	   **/
-
+	  * Returns the info property from an OpenAPI instance.
+	  *
+	  * @return metadata about the API
+	  **/
 	Info getInfo();
 
 	/**
-	   * sets this OpenAPI's info property to the given info.
-	   *
-	   * @param Info info
-	   */
+	  * Sets this OpenAPI instance's info property to the given object.
+	  *
+	  * @param info metadata about the API
+	  */
 	void setInfo(Info info);
 
 	/**
-	   * sets this OpenAPI's info property to the given info and
-	   * returns this instance of OpenAPI
-	   *
-	   * @param Info info
-	   * @return OpenAPI
-	   */
+	  * Sets this OpenAPI instance's info property to the given object.
+	  *
+	  * @param info metadata about the API
+	  * @return the current OpenAPI object
+	  */
 	OpenAPI info(Info info);
 
 	/**
-	   * returns the externalDocs property from a OpenAPI instance.
-	   *
-	   * @return ExternalDocumentation externalDocs
-	   **/
+	  * Returns the externalDocs property from an OpenAPI instance.
+	  *
+	  * @return additional external documentation
+	  **/
 	ExternalDocumentation getExternalDocs();
 
 	/**
-	   * sets this OpenAPI's externalDocs property to the given externalDocs.
-	   *
-	   * @param ExternalDocumentation externalDocs
-	   */
+	  * Sets this OpenAPI instance's externalDocs property to the given object.
+	  *
+	  * @param externalDocs additional external documentation.
+	  */
 	void setExternalDocs(ExternalDocumentation externalDocs);
 
 	/**
-	   * sets this OpenAPI's externalDocs property to the given externalDocs and
-	   * returns this instance of OpenAPI
-	   *
-	   * @param ExternalDocumentation externalDocs
-	   * @return OpenAPI
-	   */
+	  * Sets this OpenAPI instance's externalDocs property to the given object.
+	  *
+	  * @param externalDocs additional external documentation
+	  * @return the current OpenAPI object
+	  */
 	OpenAPI externalDocs(ExternalDocumentation externalDocs);
 
 	/**
-	   * returns the Servers defined in the API
-	   *
-	   * @return List&lt;Server&gt; servers
-	   **/
-
+	  * Returns the Servers defined in the API
+	  *
+	  * @return Server objects which provide connectivity information to target servers
+	  **/
 	List<Server> getServers();
 
 	/**
-	   * sets this OpenAPI's servers property to the given servers.
-	   *
-	   * @param List&lt;Server&gt;servers
-	   */
+	  * Sets this OpenAPI instance's servers property to the given servers.
+	  *
+	  * @param servers Server objects which provide connectivity information to target servers
+	  */
 	void setServers(List<Server> servers);
 
 	/**
-	   * sets this OpenAPI's servers property to the given servers and
-	   * returns this instance of OpenAPI
-	   *
-	   * @param List&lt;Server&gt;servers
-	   * @return OpenAPI
-	   */
+	  * Sets this OpenAPI instance's servers property to the given servers.
+	  *
+	  * @param servers Server objects which provide connectivity information to target servers
+	  * @return the current OpenAPI object
+	  */
 	OpenAPI servers(List<Server> servers);
 
 	/**
-	   * Adds the given serversItem to this OpenAPI's list of servers, with the given key as its key.
-	   *
-	   * @param String key
-	   * @param Server serversItem
-	   * @return OpenAPI
-	   */
+	  * Adds the given server to this OpenAPI instance's list of servers.
+	  *
+	  * @param serversItem Server object which provides connectivity information to a target server
+	  * @return the current OpenAPI object
+	  */
 	OpenAPI addServersItem(Server serversItem);
 
 	/**
-	   * returns the security property from a OpenAPI instance.
-	   *
-	   * @return List&lt;SecurityRequirement&gt; security
-	   **/
-
+	  * Returns the security property from an OpenAPI instance.
+	  *
+	  * @return which security mechanisms can be used across the API
+	  **/
 	List<SecurityRequirement> getSecurity();
 
 	/**
-	   * sets this OpenAPI's security property to the given security.
-	   *
-	   * @param List&lt;SecurityRequirement&gt;security
-	   */
+	  * Sets this OpenAPI instance's security property to the given list.
+	  *
+	  * @param security which security mechanisms can be used across the API
+	  */
 	void setSecurity(List<SecurityRequirement> security);
 
 	/**
-	   * sets this OpenAPI's security property to the given security and
-	   * returns this instance of OpenAPI
-	   *
-	   * @param List&lt;SecurityRequirement&gt;servers
-	   * @return OpenAPI
-	   */
+	  * Sets this OpenAPI instance's security property to the given list.
+	  *
+	  * @param security which security mechanisms can be used across the API
+	  * @return the current OpenAPI object
+	  */
 	OpenAPI security(List<SecurityRequirement> security);
 
 	/**
-	   * Adds the given securityItem to this OpenAPI's list of securitItems, with the given key as its key.
-	   *
-	   * @param String key
-	   * @param SecurityRequirement securityItem
-	   * @return OpenAPI
-	   */
+	  * Adds the given security requirement to this OpenAPI instance's list of security requirements.
+	  *
+	  * @param securityItem security mechanism which can be used across the API
+	  * @return the current OpenAPI object
+	  */
 	OpenAPI addSecurityItem(SecurityRequirement securityItem);
 
 	/**
-	   * returns the tags property from a OpenAPI instance.
-	   *
-	   * @return List&lt;Tag&gt; tags
-	   **/
+	  * Returns the tags property from an OpenAPI instance.
+	  *
+	  * @return tags used by the specification
+	  **/
 
 	List<Tag> getTags();
 
 	/**
-	   * sets this OpenAPI's tags property to the given Tags.
-	   *
-	   * @param List&lt;Tag&gt;tags
-	   */
+	  * Sets this OpenAPI instance's tags property to the given Tags.
+	  *
+	  * @param tags tags used by the specification with additional metadata
+	  */
 	void setTags(List<Tag> tags);
 
 	/**
-	   * sets this OpenAPI's tags property to the given tags and
-	   * returns this instance of OpenAPI
-	   *
-	   * @param List&lt;Tag&gt;tags
-	   * @return OpenAPI
-	   */
+	  * Sets this OpenAPI instance's tags property to the given tags.
+	  *
+	  * @param tags tags used by the specification with additional metadata
+	  * @return the current OpenAPI object
+	  */
 	OpenAPI tags(List<Tag> tags);
 
 	/**
-	   * Adds the given tagsItem to this OpenAPI's list of tags, with the given key as its key.
-	   *
-	   * @param String key
-	   * @param Tag tagsItem
-	   * @return OpenAPI
-	   */
+	  * Adds the given tag to this OpenAPI instance's list of tags.
+	  *
+	  * @param tagsItem a tag used by the specification with additional metadata
+	  * @return the current OpenAPI object
+	  */
 	OpenAPI addTagsItem(Tag tagsItem);
 
 	/**
-	   * returns the paths property from a OpenAPI instance.
-	   *
-	   * @return Paths paths
-	   **/
-
+	  * Returns the paths property from an OpenAPI instance.
+	  *
+	  * @return the available paths and operations for the API
+	  **/
 	Paths getPaths();
 
 	/**
-	   * sets this OpenAPI's paths property to the given paths.
-	   *
-	   * @param List&lt;Paths&gt;paths
-	   */
+	  * Sets this OpenAPI instance's paths property to the given paths.
+	  *
+	  * @param paths the available paths and operations for the API
+	  */
 	void setPaths(Paths paths);
 
 	/**
-	   * sets this OpenAPI's paths property to the given paths and
-	   * returns this instance of OpenAPI
-	   *
-	   * @param List&lt;Paths&gt;paths
-	   * @return OpenAPI
-	   */
+	  * Sets this OpenAPI instance's paths property to the given paths.
+	  *
+	  * @param paths the available paths and operations for the API
+	  * @return the current OpenAPI object
+	  */
 	OpenAPI paths(Paths paths);
 
 	/**
-	   * returns the components property from a OpenAPI instance.
-	   *
-	   * @return Components components
-	   **/
-
-	Components getComponents();
-
-	/**
-	   * sets this OpenAPI's components property to the given components.
-	   *
-	   * @param List&lt;Components&gt;components
-	   */
-	void setComponents(Components components);
-
-	/**
-	   * sets this OpenAPI's components property to the given components and
-	   * returns this instance of OpenAPI
-	   *
-	   * @param List&lt;Components&gt;components
-	   * @return OpenAPI
-	   */
-	OpenAPI components(Components components);
-
-	/**
-	   * Adds the given path item to this OpenAPI's list of paths
-	   * 
-	   * @param String name
-	   * @param PathItem path
-	   * @return OpenAPI
-	   */
+	  * Adds the given path item to this OpenAPI instance's list of paths
+	  * 
+	  * @param name a path name in the format valid for a Paths object
+	  * @param path the path item added to the list of paths
+	  * @return the current OpenAPI object
+	  */
 	OpenAPI path(String name, PathItem path);
 
 	/**
-	   * Adds the given schema to this OpenAPI's components property.
-	   * 
-	   * @param String name
-	   * @param Schema schema
-	   * @return OpenAPI
-	   */
+	  * Returns the components property from an OpenAPI instance.
+	  *
+	  * @return schemas used in the specification
+	  **/
+	Components getComponents();
+
+	/**
+	  * Sets this OpenAPI instance's components property to the given components.
+	  *
+	  * @param components  a set of reusable objects used in the API specification
+	  */
+	void setComponents(Components components);
+
+	/**
+	  * Sets this OpenAPI instance's components property to the given components.
+	  *
+	  * @param components  a set of reusable objects used in the API specification
+	  * @return the current OpenAPI object
+	  */
+	OpenAPI components(Components components);
+
+	/**
+	  * Adds the given schema to this OpenAPI instance's components property.
+	  * 
+	  * @param name the canonical name of the given schema
+	  * @param schema a schema to add to the components property
+	  * @return the current OpenAPI object
+	  */
 	OpenAPI schema(String name, Schema schema);
 
 	/**
-	   * Adds the given securityScheme to this OpenAPI's securitySchemes
-	   * 
-	   * @param String name
-	   * @param SecurityScheme securityScheme
-	   * @return OpenAPI
-	   */
-	OpenAPI schemaRequirement(String name, SecurityScheme securityScheme);
-
+	  * Adds the given security scheme to this OpenAPI instance's components property.
+	  * This convenience method is similar to Components.addSecuritySchemes. 
+	  * 
+	  * @param name the canonical name of the given security scheme
+	  * @param securityScheme a security scheme to add to the components property
+	  * @return the current OpenAPI object
+	  */
+	OpenAPI securityScheme(String name, SecurityScheme securityScheme);
 }

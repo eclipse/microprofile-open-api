@@ -21,6 +21,8 @@ import org.eclipse.microprofile.openapi.models.Constructible;
 
 /**
  * HeaderParameter
+ * <p>
+ * A header parameter is a {@link Parameter Parameter} where the "in" property has the value "header."
  */
 public interface HeaderParameter extends Constructible, Parameter {
 
