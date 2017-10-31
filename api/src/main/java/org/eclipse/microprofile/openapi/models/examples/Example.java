@@ -25,49 +25,6 @@ import org.eclipse.microprofile.openapi.models.Extensible;
  * <p>
  * An object containing sample data for the related object.
  * <p>
- * Fixed Fields
- * <table border=1 cellpadding="8" style="border-collapse: collapse">
- * <tr>
- * <th>Field Name</th>
- * <th>Type</th>
- * <th>Description</th>
- * </tr>
- * <tr>
- * <td>reference</td>
- * <td>string</td>
- * <td>Allows for an external definition of this example. The referenced
- * structure MUST be in the format of an Example Object. This field represents
- * the $ref field in the OAS file. If there are conflicts between the referenced
- * definition and this Example's definition, the behavior is undefined.</td>
- * </tr>
- * <tr>
- * <td>summary</td>
- * <td>string</td>
- * <td>Short description for the example.</td>
- * </tr>
- * <tr>
- * <td>description</td>
- * <td>string</td>
- * <td>Long description for the example. CommonMark syntax MAY be used for rich
- * text representation.</td>
- * </tr>
- * <tr>
- * <td>value</td>
- * <td>Any</td>
- * <td>Embedded literal example. The value field and externalValue field are
- * mutually exclusive. To represent examples of media types that cannot
- * naturally be represented in JSON or YAML, use a string value to contain the
- * example, escaping where necessary.</td>
- * </tr>
- * <tr>
- * <td>externalValue</td>
- * <td>string</td>
- * <td>A URL that points to the literal example. This provides the capability to
- * reference examples that cannot easily be included in JSON or YAML documents.
- * The value field and externalValue field are mutually exclusive.</td>
- * </tr>
- * </table>
- * <p>
  * In all cases, the example value is expected to be compatible with the type
  * schema of its associated value. Tooling implementations MAY choose to
  * validate compatibility automatically, and reject the example value(s) if
@@ -132,6 +89,7 @@ public interface Example extends Constructible, Extensible {
 
 	/**
 	 * Sets this Example's value property to the given value.
+	 * The value field and externalValue field are mutually exclusive.
 	 *
 	 * @param value a literal example object
 	 */
@@ -139,6 +97,7 @@ public interface Example extends Constructible, Extensible {
 
 	/**
 	 * Sets this Example's value property to the given value.
+	 * The value field and externalValue field are mutually exclusive.
 	 *
 	 * @param value a literal example object
 	 * @return the current Example object
@@ -154,6 +113,7 @@ public interface Example extends Constructible, Extensible {
 
 	/**
 	 * Sets this Example's externalValue property to the given string.
+	 * The value field and externalValue field are mutually exclusive.
 	 *
 	 * @param externalValue URL that points to the literal example
 	 */
@@ -161,6 +121,7 @@ public interface Example extends Constructible, Extensible {
 
 	/**
 	 * Sets this Example's externalValue property to the given string.
+	 * The value field and externalValue field are mutually exclusive.
 	 *
 	 * @param externalValue URL that points to the literal example
 	 * @return the current Example object

@@ -32,81 +32,23 @@ import org.eclipse.microprofile.openapi.models.security.SecurityScheme;
 /**
  * Components
  * <p>
- * Holds a set of reusable objects for different aspects of the OAS. All objects
- * defined within the components object will have no effect on the API unless
- * they are explicitly referenced from properties outside the components object.
+ * Holds a set of reusable objects for different aspects of the API
+ * specification. All objects defined within this object will have no effect on
+ * the API unless they are explicitly referenced from properties outside the
+ * components object.
  * <p>
- * Fixed Fields
- * <table border=1 cellpadding="8" style="border-collapse: collapse">
- * <tr>
- * <th>Field Name</th>
- * <th>Type</th>
- * <th>Description</th>
- * </tr>
- * <tr>
- * <td>schemas</td>
- * <td>Map[string, {@link Schema Schema Object } | {@link Schema Reference Object}]</td>
- * <td>An object to hold reusable Schema Objects.</td>
- * </tr>
- * <tr>
- * <td>responses</td>
- * <td>Map[string, {@link ApiResponse Response Object } | {@link ApiResponse Reference
- * Object}]</td>
- * <td>An object to hold reusable Response Objects.</td>
- * </tr>
- * <tr>
- * <td>parameters</td>
- * <td>Map[string, {@link Parameter Parameter Object } | {@link Parameter Reference
- * Object}]</td>
- * <td>An object to hold reusable Parameter Objects.</td>
- * </tr>
- * <tr>
- * <td>examples</td>
- * <td>Map[string, {@link Example Example Object } | {@link Example Reference
- * Object}]</td>
- * <td>An object to hold reusable Example Objects.</td>
- * </tr>
- * <tr>
- * <td>requestBodies</td>
- * <td>Map[string, {@link RequestBody Request Body Object } |
- * {@link RequestBody Reference Object}]</td>
- * <td>An object to hold reusable Request Body Objects.</td>
- * </tr>
- * <tr>
- * <td>headers</td>
- * <td>Map[string, {@link Header Header Object } | {@link Header Reference Object}]</td>
- * <td>An object to hold reusable Header Objects.</td>
- * </tr>
- * <tr>
- * <td>securitySchemes</td>
- * <td>Map[string, {@link SecurityScheme Security Scheme Object } |
- * {@link SecurityScheme Reference Object}]</td>
- * <td>An object to hold reusable Security Scheme Objects.</td>
- * </tr>
- * <tr>
- * <td>links</td>
- * <td>Map[string, {@link Link Link Object } | {@link Link Reference Object}]</td>
- * <td>An object to hold reusable Link Objects.</td>
- * </tr>
- * <tr>
- * <td>callbacks</td>
- * <td>Map[string, {@link Callback Callback Object } | {@link Callback Reference
- * Object}]</td>
- * <td>An object to hold reusable Callback Objects.</td>
- * </tr>
- * </table>
+ * All the fields are indexed by keys that must match the regular expression:
+ * <code>^[a-zA-Z0-9\.\-_]+$</code>.
  * <p>
- * All the fixed fields declared above are objects that MUST use keys that match
- * the regular expression: <code>^[a-zA-Z0-9\.\-_]+$</code>.
- * <p>
- * Field Name Examples:
+ * Key Examples:
  * <ul>
- * <li>User</li> 
- * <li>User_1</li> 
- * <li>User_Name</li> 
- * <li>user-name</li> 
+ * <li>User</li>
+ * <li>User_1</li>
+ * <li>User_Name</li>
+ * <li>user-name</li>
  * <li>my.org.User</li>
  * </ul>
+ * 
  * @see <a href=
  *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#componentsObject">
  *      OpenAPI Specification Components Object</a>
@@ -149,7 +91,8 @@ public interface Components extends Constructible, Extensible {
 	/**
 	 * Returns the responses property from a Components instance.
 	 *
-	 * @return a Map containing the keys and the reusable responses from API operations for this OpenAPI document
+	 * @return a Map containing the keys and the reusable responses from API
+	 *         operations for this OpenAPI document
 	 **/
 	Map<String, ApiResponse> getResponses();
 
@@ -182,9 +125,9 @@ public interface Components extends Constructible, Extensible {
 	/**
 	 * Returns the parameters property from a Components instance.
 	 *
-	 * @return a Map containing the keys and the reusable parameters of API operations for this OpenAPI document
+	 * @return a Map containing the keys and the reusable parameters of API
+	 *         operations for this OpenAPI document
 	 **/
-
 	Map<String, Parameter> getParameters();
 
 	/**
@@ -218,7 +161,6 @@ public interface Components extends Constructible, Extensible {
 	 *
 	 * @return a Map containing the keys and the reusable examples for this OpenAPI document
 	 **/
-
 	Map<String, Example> getExamples();
 
 	/**
@@ -272,10 +214,13 @@ public interface Components extends Constructible, Extensible {
 	Components requestBodies(Map<String, RequestBody> requestBodies);
 
 	/**
-	 * Adds the given request body to this Components' map of request bodies with the given string as its key.
+	 * Adds the given request body to this Components' map of request bodies
+	 * with the given string as its key.
 	 *
-	 * @param key a key conforming to the format required for this object
-	 * @param requestBodiesItem a reusable request body object
+	 * @param key
+	 *            a key conforming to the format required for this object
+	 * @param requestBodiesItem
+	 *            a reusable request body object
 	 * @return the current Components object
 	 */
 	Components addRequestBodies(String key, RequestBody requestBodiesItem);

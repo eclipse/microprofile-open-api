@@ -30,28 +30,6 @@ import org.eclipse.microprofile.openapi.models.Constructible;
  * schema which is used to inform the consumer of the specification of an
  * alternative schema based on the value associated with it.
  * <p>
- * When using the discriminator, inline schemas will not be considered.
- * <p>
- * Fixed Fields
- * <table border=1 cellpadding="8" style="border-collapse: collapse">
- * <tr>
- * <th>Field Name</th>
- * <th>Type</th>
- * <th>Description</th>
- * </tr>
- * <tr>
- * <td>propertyName</td>
- * <td>string</td>
- * <td>REQUIRED. The name of the property in the payload that will hold the
- * discriminator value.</td>
- * </tr>
- * <tr>
- * <td>mapping</td>
- * <td>Map[string, string]</td>
- * <td>An object to hold mappings between payload values and schema names or
- * references.</td>
- * </tr>
- * </table>
  * 
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#discriminator-object">OpenAPI Specification Discriminator Object</a>
  */

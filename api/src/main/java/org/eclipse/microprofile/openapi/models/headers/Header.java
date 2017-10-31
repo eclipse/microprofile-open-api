@@ -28,143 +28,12 @@ import org.eclipse.microprofile.openapi.models.media.Schema;
 /**
  * Header
  * <p>
- * Describes a single operation header parameter.
+ * Describes a single header parameter for an operation.
  * <p>
- * Fixed Fields
- * <table border=1 cellpadding="8" style="border-collapse: collapse">
- * <tr>
- * <th>Field Name</th>
- * <th>Type</th>
- * <th>Description</th>
- * </tr>
- * <tr>
- * <td>reference</td>
- * <td>string</td>
- * <td>Allows for an external definition of this header. The referenced
- * structure MUST be in the format of a Header Object. This field represents the
- * $ref field in the OAS file. If there are conflicts between the referenced
- * definition and this Header's definition, the behavior is undefined.</td>
- * </tr>
- * <tr>
- * <td>description</td>
- * <td>string</td>
- * <td>A brief description of the parameter. This could contain examples of use.
- * CommonMark syntax MAY be used for rich text representation.</td>
- * </tr>
- * <tr>
- * <td>required</td>
- * <td>boolean</td>
- * <td>Determines whether this parameter is mandatory. The property MAY be
- * included and its default value is false.</td>
- * </tr>
- * <tr>
- * <td>deprecated</td>
- * <td>boolean</td>
- * <td>Specifies that a parameter is deprecated and SHOULD be transitioned out
- * of usage.</td>
- * </tr>
- * <tr>
- * <td>allowEmptyValue</td>
- * <td>boolean</td>
- * <td>Sets the ability to pass empty-valued parameters. This is valid only for
- * query parameters and allows sending a parameter with an empty value. Default
- * value is false. If style is used, and if behavior is n/a (cannot be
- * serialized), the value of allowEmptyValue SHALL be ignored.</td>
- * </tr>
- * </table>
- * The rules for serialization of the header parameter are specified in one of
- * two ways. For simpler scenarios, a schema and style can describe the
- * structure and syntax of the header parameter.
- * <table border=1 cellpadding="8" style="border-collapse: collapse">
- * <tr>
- * <th>Field Name</th>
- * <th>Type</th>
- * <th>Description</th>
- * </tr>
- * <tr>
- * <td>style</td>
- * <td>string</td>
- * <td>Describes how the parameter value will be serialized depending on the
- * type of the parameter value. Default value for header is simple.</td>
- * </tr>
- * <tr>
- * <td>explode</td>
- * <td>boolean</td>
- * <td>When this is true, parameter values of type array or object generate
- * separate parameters for each value of the array or key-value pair of the map.
- * For other types of parameters this property has no effect. When style is
- * form, the default value is true. For all other styles, the default value is
- * false.</td>
- * </tr>
- * <tr>
- * <td>allowReserved</td>
- * <td>boolean</td>
- * <td>Determines whether the parameter value SHOULD allow reserved characters,
- * as defined by RFC3986 <code>:/?#[]@!$&'()*+,;=</code> to be included without
- * percent-encoding. This property only applies to parameters with an in value
- * of query. The default value is false.</td>
- * </tr>
- * <tr>
- * <td>schema</td>
- * <td>{@link Schema Schema Object} | {@link Schema Reference Object}</td>
- * <td>The schema defining the type used for the parameter.</td>
- * </tr>
- * <tr>
- * <td>example</td>
- * <td>Any</td>
- * <td>Example of the media type. The example SHOULD match the specified schema
- * and encoding properties if present. The example object is mutually exclusive
- * of the examples object. Furthermore, if referencing a schema which contains
- * an example, the example value SHALL override the example provided by the
- * schema. To represent examples of media types that cannot naturally be
- * represented in JSON or YAML, a string value can contain the example with
- * escaping where necessary.</td>
- * </tr>
- * <tr>
- * <td>examples</td>
- * <td>Map[ string, {@link Example Example Object} | {@link Example Reference Object}]</td>
- * <td>Examples of the media type. Each example SHOULD contain a value in the
- * correct format as specified in the parameter encoding. The examples object is
- * mutually exclusive of the example object. Furthermore, if referencing a
- * schema which contains an example, the examples value SHALL override the
- * example provided by the schema.</td>
- * </tr>
- * </table>
- * For more complex scenarios, the content property can define the media type
- * and schema of the parameter. A parameter MUST contain either a schema
- * property, or a content property, but not both. When example or examples are
- * provided in conjunction with the schema object, the example MUST follow the
- * prescribed serialization strategy for the parameter.
- * <table border=1 cellpadding="8" style="border-collapse: collapse">
- * <tr>
- * <th>Field Name</th>
- * <th>Type</th>
- * <th>Description</th>
- * </tr>
- * <tr>
- * <td>content</td>
- * <td>Map[string, {@link MediaType Media Type Object} ]</td>
- * <td>A map containing the representations for the parameter. The key is the
- * media type and the value describes it. The map MUST only contain one
- * entry.</td>
- * </tr>
- * </table>
- * Style Values
- * <p>
- * For headers only one way of serializing the parameters, simple.
- * <table border=1 cellpadding="8">
- * <tr>
- * <th>Style</th>
- * <th>Type</th>
- * <th>Comments</th>
- * </tr>
- * <tr>
- * <td>simple</td>
- * <td>array</td>
- * <td>Simple style parameters defined by RFC6570. This option replaces
- * collectionFormat with a csv value from OpenAPI 2.0.</td>
- * </tr>
- * </table>
+ * 
+ * @see <a href=
+ *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#header-object">OpenAPI
+ *      Specification Header Object</a>
  */
 public interface Header extends Constructible, Extensible {
 	
@@ -233,21 +102,21 @@ public interface Header extends Constructible, Extensible {
 	/**
 	 * Returns the deprecated property from a Header instance.
 	 *
-	 * @return  whether a parameter is deprecated
+	 * @return  whether the header parameter is deprecated
 	 **/
 	Boolean getDeprecated();
 
 	/**
 	 * Sets this Header's deprecated property to the given value.
 	 *
-	 * @param deprecated  whether a parameter is deprecated
+	 * @param deprecated  whether the header parameter is deprecated
 	 */
 	void setDeprecated(Boolean deprecated);
 
 	/**
 	 * Sets this Header's deprecated property to the given value.
 	 *
-	 * @param deprecated  whether a parameter is deprecated
+	 * @param deprecated  whether the header parameter is deprecated
 	 * @return the current Header instance
 	 */
 	Header deprecated(Boolean deprecated);
@@ -262,14 +131,14 @@ public interface Header extends Constructible, Extensible {
 	/**
 	 * Sets this Header's allowEmptyValue property to the given value.
 	 *
-	 * @param allowEmptyValue  the ability to pass empty-valued parameters
+	 * @param allowEmptyValue  specify the ability to pass empty-valued parameters
 	 */
 	void setAllowEmptyValue(Boolean allowEmptyValue);
 
 	/**
 	 * Sets this Header's allowEmptyValue property to the given value.
 	 *
-	 * @param allowEmptyValue  the ability to pass empty-valued parameters
+	 * @param allowEmptyValue  specify the ability to pass empty-valued parameters
 	 * @return the current Header instance
 	 */
 	Header allowEmptyValue(Boolean allowEmptyValue);
@@ -299,21 +168,26 @@ public interface Header extends Constructible, Extensible {
 	/**
 	 * Returns the explode property from a Header instance.
 	 *
-	 * @return whether parameter values of type "array" or "object" generate separate parameters for each value
+	 * @return whether parameter values of type "array" or "object" generate
+	 *         separate parameters for each value
 	 **/
 	Boolean getExplode();
 
 	/**
 	 * Sets this Header's explode property to the given value.
 	 *
-	 * @param explode  whether parameter values of type "array" or "object" generate separate parameters for each value
+	 * @param explode
+	 *            whether parameter values of type "array" or "object" generate
+	 *            separate parameters for each value
 	 */
 	void setExplode(Boolean explode);
 
 	/**
 	 * Sets this Header's explode property to the given value.
 	 *
-	 * @param explode  whether parameter values of type "array" or "object" generate separate parameters for each value
+	 * @param explode
+	 *            whether parameter values of type "array" or "object" generate
+	 *            separate parameters for each value
 	 * @return the current Header instance
 	 */
 	Header explode(Boolean explode);
@@ -321,21 +195,21 @@ public interface Header extends Constructible, Extensible {
 	/**
 	 * Returns the schema property from a Header instance.
 	 *
-	 * @return schema defining the type used for the parameter
+	 * @return schema defining the type used for the header parameter
 	 **/
 	Schema getSchema();
 
 	/**
 	 * Sets this Header's schema property to the given object.
 	 *
-	 * @param schema  schema defining the type used for the parameter
+	 * @param schema  schema defining the type used for the header parameter
 	 */
 	void setSchema(Schema schema);
 
 	/**
 	 * Sets this Header's schema property to the given object.
 	 *
-	 * @param schema  schema defining the type used for the parameter
+	 * @param schema  schema defining the type used for the header parameter
 	 * @return the current Header instance
 	 */
 	Header schema(Schema schema);
@@ -349,6 +223,8 @@ public interface Header extends Constructible, Extensible {
 
 	/**
 	 * Sets the examples property of this Header instance to the given map.
+	 * Each example should contain a value in the correct format as specified in the parameter encoding.
+	 * The examples object is mutually exclusive of the example object.
 	 *
 	 * @param examples  examples of the media type
 	 */
@@ -356,6 +232,8 @@ public interface Header extends Constructible, Extensible {
 
 	/**
 	 * Sets the examples property of this Header instance to the given map.
+	 * Each example should contain a value in the correct format as specified in the parameter encoding.
+	 * The examples object is mutually exclusive of the example object.
 	 *
 	 * @param examples  examples of the media type
 	 * @return the current Header instance 
@@ -363,7 +241,8 @@ public interface Header extends Constructible, Extensible {
 	Header examples(Map<String, Example> examples);
 
 	/**
-	 * Adds an example of the media type using the specified key.
+	 * Adds an example of the media type using the specified key to this Header instance.
+	 * The example should contain a value in the correct format as specified in the parameter encoding.
 	 *
 	 * @param key string to represent the example
 	 * @param examplesItem  example of the media type
@@ -380,6 +259,8 @@ public interface Header extends Constructible, Extensible {
 
 	/**
 	 * Sets this Header's example property to the given object.
+	 * The example should match the specified schema and encoding properties if present.
+	 * The examples object is mutually exclusive of the example object.
 	 *
 	 * @param example  example of the media type
 	 */
@@ -387,6 +268,8 @@ public interface Header extends Constructible, Extensible {
 
 	/**
 	 * Sets this Header's example property to the given object.
+	 * The example should match the specified schema and encoding properties if present.
+	 * The examples object is mutually exclusive of the example object.
 	 *
 	 * @param example  example of the media type
 	 * @return the current Header instance

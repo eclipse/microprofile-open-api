@@ -22,25 +22,6 @@ package org.eclipse.microprofile.openapi.models;
  * <p>
  * Allows referencing an external resource for extended documentation.
  * <p>
- * Fixed Fields
- * <table border=1 cellpadding="8" style="border-collapse: collapse">
- * <tr>
- * <th>Field Name</th>
- * <th>Type</th>
- * <th>Description</th>
- * </tr>
- * <tr>
- * <td>description</td>
- * <td>String</td>
- * <td>A short description of the target documentation. CommonMark syntax MAY be
- * used for rich text representation.</td>
- * </tr>
- * <tr>
- * <td>url</td>
- * <td>String</td>
- * <td>REQUIRED. The URL for the target documentation. Value MUST be in the format of a URL.</td>
- * </tr>
- * </table>
  * 
  * @see <a href=
  *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#externalDocumentationObject">OpenAPI

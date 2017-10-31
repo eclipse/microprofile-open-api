@@ -29,45 +29,6 @@ import org.eclipse.microprofile.openapi.models.examples.Example;
  * Each Media Type Object provides a schema and examples for the media type
  * identified by its key.
  * <p>
- * Fixed Fields
- * <table border=1 cellpadding="8" style="border-collapse: collapse">
- * <tr>
- * <th>Field Name</th>
- * <th>Type</th>
- * <th>Description</th>
- * </tr>
- * <tr>
- * <td>schema</td>
- * <td>{@link Schema Schema Object} | {@link Schema Reference Object}</td>
- * <td>The schema defining the type used for the request body.</td>
- * </tr>
- * <tr>
- * <td>example</td>
- * <td>Any</td>
- * <td>Example of the media type. The example object SHOULD be in the correct
- * format as specified by the media type. The example object is mutually
- * exclusive of the examples object. Furthermore, if referencing a schema which
- * contains an example, the example value SHALL override the example provided by
- * the schema.</td>
- * </tr>
- * <tr>
- * <td>examples</td>
- * <td>Map[ string, {@link Example Example Object} | {@link Example Reference Object}]</td>
- * <td>Examples of the media type. Each example object SHOULD match the media
- * type and specified schema if present. The examples object is mutually
- * exclusive of the example object. Furthermore, if referencing a schema which
- * contains an example, the examples value SHALL override the example provided
- * by the schema.</td>
- * </tr>
- * <tr>
- * <td>encoding</td>
- * <td>Map[string, {@link Encoding Encoding Object}]</td>
- * <td>A map between a property name and its encoding information. The key,
- * being the property name, MUST exist in the schema as a property. The encoding
- * object SHALL only apply to requestBody objects when the media type is
- * multipart or application/x-www-form-urlencoded.</td>
- * </tr>
- * </table>
  * 
  * @see <a
  *      href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#mediaTypeObject">OpenAPI
@@ -107,6 +68,8 @@ public interface MediaType extends Constructible, Extensible {
 
 	/**
 	 * Sets the examples field of a MediaType instance to the given map object.
+	 * Each example object should match the media type and specified schema if present.
+	 * The example object is mutually exclusive of the examples object.
 	 *
 	 * @param examples  examples of the media type
 	 */
@@ -114,6 +77,8 @@ public interface MediaType extends Constructible, Extensible {
 
 	/**
 	 * Sets the examples field of a MediaType instance to the given map object.
+	 * Each example object should match the media type and specified schema if present.
+	 * The example object is mutually exclusive of the examples object.
 	 *
 	 * @param examples  examples of the media type
 	 * @return the current MediaType instance
@@ -122,6 +87,7 @@ public interface MediaType extends Constructible, Extensible {
 
 	/**
 	 * Adds an example item to the examples map of a MediaType instance.
+	 * The example object should match the media type and specified schema if present.
 	 *
 	 * @param key  any unique name to identify the example object
 	 * @param examplesItem  an example of a media type
@@ -138,6 +104,8 @@ public interface MediaType extends Constructible, Extensible {
 
 	/**
 	 * Sets the example property of a MediaType instance to the given value.
+	 * The example object should be in the correct format as specified by the media type.
+	 * The example object is mutually exclusive of the examples object.
 	 *
 	 * @param example  an example of the media type
 	 */
@@ -145,6 +113,8 @@ public interface MediaType extends Constructible, Extensible {
 
 	/**
 	 * Sets the example property of a MediaType instance to the given value.
+	 * The example object should be in the correct format as specified by the media type.
+	 * The example object is mutually exclusive of the examples object.
 	 *
 	 * @param example  an example of the media type
 	 * @return the current MediaType instance

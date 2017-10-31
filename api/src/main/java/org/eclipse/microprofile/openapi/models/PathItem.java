@@ -26,96 +26,13 @@ import org.eclipse.microprofile.openapi.models.servers.Server;
 /**
  * PathItem
  * <p>
- * Describes the operations available on a single path. A Path Item MAY be empty
- * due to ACL constraints. In that case the path itself is still exposed to the
+ * Describes the operations available on a single path. A Path Item MAY be
+ * empty, due to <a href=
+ * "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-filtering">security
+ * constraints</a>. In that case the path itself is still exposed to the
  * documentation viewer but you will not know which operations and parameters
  * are available.
  * <p>
- * Fixed Fields
- * <table border=1 cellpadding="8" style="border-collapse: collapse">
- * <tr>
- * <th>Field Name</th>
- * <th>Type</th>
- * <th>Description</th>
- * </tr>
- * <tr>
- * <td>reference</td>
- * <td>string</td>
- * <td>Allows for an external definition of this path item. The referenced
- * structure MUST be in the format of a Path Item Object. This field represents
- * the $ref field in the OAS file. If there are conflicts between the referenced
- * definition and this Path Item's definition, the behavior is undefined.</td>
- * </tr>
- * <tr>
- * <td>summary</td>
- * <td>string</td>
- * <td>A short summary of what the path item represents and which is intended to
- * apply to all operations in this path.</td>
- * </tr>
- * <tr>
- * <td>description</td>
- * <td>string</td>
- * <td>A detailed description of what the path item represents and which is
- * intended to apply to all operations in this path. CommonMark syntax MAY be
- * used for rich text representation.</td>
- * </tr>
- * <tr>
- * <td>get</td>
- * <td>{@link Operation Operation Object}</td>
- * <td>A definition of a GET operation on this path.</td>
- * </tr>
- * <tr>
- * <td>put</td>
- * <td>{@link Operation Operation Object}</td>
- * <td>A definition of a PUT operation on this path.</td>
- * </tr>
- * <tr>
- * <td>post</td>
- * <td>{@link Operation Operation Object}</td>
- * <td>A definition of a POST operation on this path.</td>
- * </tr>
- * <tr>
- * <td>delete</td>
- * <td>{@link Operation Operation Object}</td>
- * <td>A definition of a DELETE operation on this path.</td>
- * </tr>
- * <tr>
- * <td>options</td>
- * <td>{@link Operation Operation Object}</td>
- * <td>A definition of a OPTIONS operation on this path.</td>
- * </tr>
- * <tr>
- * <td>head</td>
- * <td>{@link Operation Operation Object}</td>
- * <td>A definition of a HEAD operation on this path.</td>
- * </tr>
- * <tr>
- * <td>patch</td>
- * <td>{@link Operation Operation Object}</td>
- * <td>A definition of a PATCH operation on this path.</td>
- * </tr>
- * <tr>
- * <td>trace</td>
- * <td>{@link Operation Operation Object}</td>
- * <td>A definition of a TRACE operation on this path.</td>
- * </tr>
- * <tr>
- * <td>servers</td>
- * <td>[{@link Server Server Object}]</td>
- * <td>An alternative server array to service all operations in this path.</td>
- * </tr>
- * <tr>
- * <td>parameters</td>
- * <td>[{@link Parameter Parameter Object } | {@link Parameter Reference Object
- * }]</td>
- * <td>A list of parameters that are applicable to all the operations described
- * under this path. These parameters can be overridden at the operation level,
- * but cannot be removed there. The list MUST NOT include duplicated parameters.
- * A unique parameter is defined by a combination of a name and location. The
- * list can use the Reference Object to link to parameters that are defined at
- * the OpenAPI Object's components/parameters.</td>
- * </tr>
- * </table>
  * 
  * @see <a href=
  *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#pathItemObject">
