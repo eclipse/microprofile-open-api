@@ -19,6 +19,7 @@ package org.eclipse.microprofile.openapi.models.parameters;
 
 import org.eclipse.microprofile.openapi.models.Constructible;
 import org.eclipse.microprofile.openapi.models.Extensible;
+import org.eclipse.microprofile.openapi.models.Reference;
 import org.eclipse.microprofile.openapi.models.media.Content;
 
 /**
@@ -26,7 +27,7 @@ import org.eclipse.microprofile.openapi.models.media.Content;
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#requestBodyObject"
  */
-public interface RequestBody extends Constructible, Extensible {
+public interface RequestBody extends Constructible, Extensible, Reference<RequestBody> {
 
 	/**
 	 * Returns the description of this instance of RequestBody.
@@ -107,31 +108,5 @@ public interface RequestBody extends Constructible, Extensible {
 	 */
 
 	RequestBody required(Boolean required);
-
-	/**
-	 * Returns the reference to this RequestBody instance that is defined.
-	 *
-	 * @return the reference to the response
-	 **/
-
-	String getRef();
-
-	/**
-	 * Sets the reference to this RequestBody instance that is defined.
-	 *
-	 * @param ref the reference to the response
-	 */
-
-	void setRef(String ref);
-
-	/**
-	 * Sets the reference to this RequestBody instance that is defined
-	 * and returns this instance of RequestBody.
-	 *
-	 * @param ref the reference to the response
-	 * @return this RequestBody instance
-	 */
-
-	RequestBody ref(String ref);
 
 }

@@ -20,6 +20,7 @@ package org.eclipse.microprofile.openapi.models.parameters;
 import java.util.Map;
 
 import org.eclipse.microprofile.openapi.models.Extensible;
+import org.eclipse.microprofile.openapi.models.Reference;
 import org.eclipse.microprofile.openapi.models.examples.Example;
 import org.eclipse.microprofile.openapi.models.media.Content;
 import org.eclipse.microprofile.openapi.models.media.Schema;
@@ -55,7 +56,7 @@ import org.eclipse.microprofile.openapi.models.media.Schema;
  *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject">OpenAPI
  *      Specification Parameter Object</a>
  */
-public interface Parameter extends Extensible {
+public interface Parameter extends Extensible, Reference<Parameter> {
 
 	/**
 	 * The values allowed for the style field.
@@ -395,29 +396,5 @@ public interface Parameter extends Extensible {
 	 * @return the current Parameter instance
 	 */
 	Parameter content(Content content);
-
-	/**
-	 * Returns the reference property from a Parameter instance.
-	 *
-	 * @return  a reference to a parameter object in an OpenAPI document
-	 **/
-	String getReference();
-
-	/**
-	 * Sets reference property of a Parameter instance to the given string.
-	 *
-	 * @param reference  a reference to a header object in an OpenAPI document
-	 *            especially in the components in this OpenAPI document
-	 */
-	void setReference(String reference);
-
-	/**
-	 * Sets reference property of a Parameter instance to the given string.
-	 *
-	 * @param reference  a reference to a header object in an OpenAPI document
-	 *            especially in the components in this OpenAPI document
-	 * @return the current Parameter instance
-	 */
-	Parameter reference(String reference);
 
 }

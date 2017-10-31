@@ -19,13 +19,14 @@ package org.eclipse.microprofile.openapi.models.security;
 
 import org.eclipse.microprofile.openapi.models.Constructible;
 import org.eclipse.microprofile.openapi.models.Extensible;
+import org.eclipse.microprofile.openapi.models.Reference;
 
 /**
  * SecurityScheme
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#securitySchemeObject"
  */
-public interface SecurityScheme extends Constructible, Extensible {
+public interface SecurityScheme extends Constructible, Extensible, Reference<SecurityScheme> {
 
 	/**
 	 * Type is a REQUIRED property that specifies the type of SecurityScheme instance.
@@ -359,37 +360,5 @@ public interface SecurityScheme extends Constructible, Extensible {
 	 */
 
 	SecurityScheme openIdConnectUrl(String openIdConnectUrl);
-
-	/**
-	 * ref property is the reference of the model's location.
-	 * <p>
-	 * This method returns the ref property from SecurityScheme instance.
-	 * <p>
-	 * @return String ref
-	 **/
-	String getRef();
-
-	/**
-	 * ref property is the reference of the model's location.
-	 * <p>
-	 * This method sets the ref property of SecurityScheme instance
-	 * to the given String argument.
-	 *
-	 * @param ref
-	 */
-
-	void setRef(String ref);
-
-	/**
-	 * ref property is the reference of the model's location.
-	 * <p>
-	 * This method sets the ref property of SecurityScheme instance
-	 * to the given String argument and returns the modified instance.
-	 *
-	 * @param ref
-	 * @return SecurityScheme instance with the set ref property
-	 */
-
-	SecurityScheme ref(String ref);
 
 }

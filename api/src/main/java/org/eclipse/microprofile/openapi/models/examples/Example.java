@@ -19,6 +19,7 @@ package org.eclipse.microprofile.openapi.models.examples;
 
 import org.eclipse.microprofile.openapi.models.Constructible;
 import org.eclipse.microprofile.openapi.models.Extensible;
+import org.eclipse.microprofile.openapi.models.Reference;
 
 /**
  * Example
@@ -34,7 +35,7 @@ import org.eclipse.microprofile.openapi.models.Extensible;
  *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#exampleObject">OpenAPI
  *      Specification Example Object</a>
  */
-public interface Example extends Constructible, Extensible {
+public interface Example extends Constructible, Extensible, Reference<Example> {
 
 	/**
 	 * Returns the summary property from an Example instance.
@@ -127,27 +128,5 @@ public interface Example extends Constructible, Extensible {
 	 * @return the current Example object
 	 */
 	Example externalValue(String externalValue);
-
-	/**
-	 * Returns the reference property from an Example instance.
-	 *
-	 * @return a reference to an example object in the components in this OpenAPI document
-	 */
-	String getReference();
-
-	/**
-	 * Sets this Example's reference property to the given string.
-	 *
-	 * @param reference  a reference to an example object in the components in this OpenAPI document
-	 */
-	void setReference(String reference);
-
-	/**
-	 * Sets this Example's reference property to the given string.
-	 *
-	 * @param reference  a reference to an example object in the components in this OpenAPI document
-	 * @return the current Example object
-	 */
-	Example reference(String reference);
 
 }
