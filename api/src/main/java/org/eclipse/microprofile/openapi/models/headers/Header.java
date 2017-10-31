@@ -21,6 +21,7 @@ import java.util.Map;
 
 import org.eclipse.microprofile.openapi.models.Constructible;
 import org.eclipse.microprofile.openapi.models.Extensible;
+import org.eclipse.microprofile.openapi.models.Reference;
 import org.eclipse.microprofile.openapi.models.examples.Example;
 import org.eclipse.microprofile.openapi.models.media.Content;
 import org.eclipse.microprofile.openapi.models.media.Schema;
@@ -35,7 +36,7 @@ import org.eclipse.microprofile.openapi.models.media.Schema;
  *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#header-object">OpenAPI
  *      Specification Header Object</a>
  */
-public interface Header extends Constructible, Extensible {
+public interface Header extends Constructible, Extensible, Reference<Header> {
 	
     /**
      * Controls the style of serialization. Only one style is supported for headers.
@@ -297,30 +298,5 @@ public interface Header extends Constructible, Extensible {
 	 * @return the current Header instance
 	 */
 	Header content(Content content);
-
-	/**
-	 * Returns the reference property from a Header instance.
-	 *
-	 * @return a reference to a header object in an OpenAPI document especially
-	 *         in the components in this OpenAPI document
-	 */
-	String getReference();
-
-	/**
-	 * Sets this Header's reference property to the given string.
-	 *
-	 * @param reference  a reference to a header object in an OpenAPI document
-	 *            especially in the components in this OpenAPI document
-	 */
-	void setReference(String reference);
-
-	/**
-	 * Sets this Header's reference property to the given string.
-	 *
-	 * @param reference  a reference to a header object in an OpenAPI document
-	 *            especially in the components in this OpenAPI document
-	 * @return the current Header instance
-	 */
-	Header reference(String reference);
 
 }

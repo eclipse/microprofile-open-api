@@ -38,7 +38,7 @@ import org.eclipse.microprofile.openapi.models.servers.Server;
  *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#pathItemObject">
  *      OpenAPI Specification Path Item Object</a>
  */
-public interface PathItem extends Constructible, Extensible {
+public interface PathItem extends Constructible, Extensible, Reference<PathItem> {
 
 	/**
 	 * All of the possible types of HTTP operations for this path
@@ -347,27 +347,5 @@ public interface PathItem extends Constructible, Extensible {
 	 * @return the current PathItem instance
 	 **/
 	PathItem addParametersItem(Parameter parametersItem);
-
-	/**
-	 * Returns the reference property from this PathItem instance.
-	 *
-	 * @return a reference to a path object in the components in this OpenAPI document
-	 **/
-	String getReference();
-
-	/**
-	 * Sets this PathItem's reference property to the given string.
-	 *
-	 * @param reference  a reference to a path object in the components in this OpenAPI document
-	 **/
-	void setReference(String reference);
-
-	/**
-	 * Sets this PathItem's reference property to the given string.
-	 *
-	 * @param reference  a reference to a path object in the components in this OpenAPI document
-	 * @return the current PathItem instance
-	 **/
-	PathItem reference(String reference);
 
 }

@@ -21,6 +21,7 @@ import java.util.Map;
 
 import org.eclipse.microprofile.openapi.models.Constructible;
 import org.eclipse.microprofile.openapi.models.Extensible;
+import org.eclipse.microprofile.openapi.models.Reference;
 import org.eclipse.microprofile.openapi.models.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.models.servers.Server;
 
@@ -46,7 +47,7 @@ import org.eclipse.microprofile.openapi.models.servers.Server;
  *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#linkObject">
  *      OpenAPI Specification Link Object</a>
  */
-public interface Link extends Constructible, Extensible {
+public interface Link extends Constructible, Extensible, Reference<Link> {
 
 	/**
 	 * Returns the server property from a Link instance.
@@ -198,27 +199,5 @@ public interface Link extends Constructible, Extensible {
 	 * @return the current Link instance
 	 */
 	Link description(String description);
-
-	/**
-	 * Returns the reference property from a Link instance.
-	 *
-	 * @return a reference to one of the components in this OpenAPI document
-	 **/
-	String getReference();
-
-	/**
-	 * Sets this Link's reference property to the given string.
-	 *
-	 * @param reference  a reference to a link object in the components in this OpenAPI document
-	 **/
-	void setReference(String reference);
-
-	/**
-	 * Sets this Link's reference property to the given string.
-	 *
-	 * @param reference  a reference to a link object in the components in this OpenAPI document
-	 * @return the current Link instance
-	 */
-	Link reference(String reference);
 
 }
