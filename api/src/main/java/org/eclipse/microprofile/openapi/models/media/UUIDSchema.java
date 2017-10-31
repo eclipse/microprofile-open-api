@@ -21,81 +21,62 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * UUIDSchema
+ * The schema used for an object that holds a UUID.
  */
 public interface UUIDSchema extends Schema<UUID> {
 
 	/**
-	 * Sets the type property of a UUIDSchema instance
-	 * to the parameter and returns the instance.
+	 * Change this UUIDSchema's type property from the default value to the
+	 * given string. 
 	 *
-	 * @param type
-	 * @return UUIDSchema instance with modified type property.
+	 * @param type  the name of a valid type
+	 * @return the current UUIDSchema instance
 	 */
-
 	UUIDSchema type(String type);
 
 	/**
-	 * Sets format property of a UUIDSchema instance
-	 * to the parameter and returns the instance.
+	 * Change this UUIDSchema's format property from the default value to the
+	 * given format. The value may be one of the formats described in the OAS or
+	 * a user defined format.
 	 *
 	 * @param format
-	 * @return UUIDSchema instance with the modified format
+	 *            the string specifying the data format
+	 * @return the current UUIDSchema instance
 	 */
-
 	UUIDSchema format(String format);
 
 	/**
-	 * Sets inherited _default property of a UUIDSchema instance
-	 * to the parameter and returns the instance.
-	 * _default is inherited from super class Schema
-	 *
-	 * <p>
-	 * Sets _default from UUID argument
-	 *
-	 * @param _default
-	 * @return UUIDSchema instance with the modified _default property
-	 * @see SchemaImpl
+	 * Sets the default property of this UUIDSchema to the given default value.
+	 * 
+	 * @param defaultValue  a value to use as the default
+	 * @return the current UUIDSchema instance
 	 */
-
-	UUIDSchema _default(UUID _default);
+	UUIDSchema defaultValue(UUID defaultValue);
 
 	/**
-	 * Sets inherited _default property of a UUIDSchema instance
-	 * to the parameter and returns the instance.
-	 * _default is inherited from super class Schema
-	 *
-	 * <p>
-	 * Sets _default from String argument
-	 *
-	 * @param _default
-	 * @return UUIDSchema instance with the modified _default property
-	 * @see SchemaImpl
+	 * Sets the default property of this UUIDSchema by converting the given string
+	 * to a valid default value.
+	 * 
+	 * @param defaultValue  a value to use as the default
+	 * @return the current UUIDSchema instance
 	 */
-
-	UUIDSchema _default(String _default);
+	UUIDSchema defaultValue(String defaultValue);
 
 	/**
-	 * Sets inherited _enum property of a UUIDSchema instance
-	 * to the parameter.
-	 * _enum is inherited from super class Schema.
+	 * Sets the enumerated list of values allowed for objects defined by this schema.
 	 *
-	 * @param _enum
-	 * @return UUIDSchema instance with modified _enum.
-	 * @see SchemaImpl
+	 * @param enumeration a list of values allowed
+	 * @return the current UUIDSchema instance
 	 */
-
-	UUIDSchema _enum(List<UUID> _enum);
+	UUIDSchema enumeration(List<UUID> enumeration);
 
 	/**
-	 * Adds an item to _enum of a UUIDSchema instance
-	 * to the parameter and returns the instance.
-	 * If _enum is null, creates a new ArrayList and adds item.
+	 * Adds an item of the appropriate type to the enumerated list of values
+	 * allowed.
 	 *
-	 * @param _enumItem
-	 * @return UUIDSchema instance with the added _enum item.
+	 * @param enumerationItem  an object to add to the enumerated values
+	 * @return the current UUIDSchema instance
 	 */
-
-	UUIDSchema addEnumItem(UUID _enumItem);
+	UUIDSchema addEnumerationItem(UUID enumerationItem);
 
 }

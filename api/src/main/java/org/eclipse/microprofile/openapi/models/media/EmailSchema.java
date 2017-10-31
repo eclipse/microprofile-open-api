@@ -20,49 +20,52 @@ package org.eclipse.microprofile.openapi.models.media;
 import java.util.List;
 
 /**
- * EmailSchema
+ * The schema used for an object that holds email data
  */
 public interface EmailSchema extends Schema<String> {
-
 	/**
-	   * sets this EmailSchema's type property to the given type and
-	   * returns this instance of EmailSchema
-	   *
-	   * @param String type
-	   * @return EmailSchema
-	   */
+	 * Change this EmailSchema's type property from the default value to the
+	 * given string. 
+	 *
+	 * @param type  the name of a valid type
+	 * @return the current EmailSchema instance
+	 */
 	EmailSchema type(String type);
 
 	/**
-	   * sets this EmailSchema's format property to the given format and
-	   * returns this instance of EmailSchema
-	   *
-	   * @param String format
-	   * @return EmailSchema
-	   */
+	 * Change this EmailSchema's format property from the default value to the
+	 * given format. The value may be one of the formats described in the OAS or
+	 * a user defined format.
+	 *
+	 * @param format
+	 *            the string specifying the data format
+	 * @return the current EmailSchema instance
+	 */
 	EmailSchema format(String format);
 
 	/**
-	   * sets the _default property of this EmailSchema to the given _default value.
-	   * 
-	   * @param byte[] _default
-	   * @return EmailSchema
-	   */
-	EmailSchema _default(String _default);
+	 * Sets the default property of this EmailSchema to the given default value.
+	 * 
+	 * @param defaultValue  a value to use as the default
+	 * @return the current EmailSchema instance
+	 */
+	EmailSchema defaultValue(String defaultValue);
 
 	/**
-	   * sets the _enum property of this EmailSchema to the given _enum value.
-	   * 
-	   * @param List&lt;byte[]&gt; _enum
-	   * @return EmailSchema
-	   */
-	EmailSchema _enum(List<String> _enum);
+	 * Sets the enumerated list of values allowed for objects defined by this schema.
+	 *
+	 * @param enumeration a list of values allowed
+	 * @return the current EmailSchema instance
+	 */
+	EmailSchema enumeration(List<String> enumeration);
 
 	/**
-	   * Adds the given _enumItem to this EmailSchema's List of _enumItems.
-	   *
-	   * @param byte[] _enumItem
-	   */
-	EmailSchema addEnumItem(String _enumItem);
+	 * Adds an item of the appropriate type to the enumerated list of values
+	 * allowed.
+	 *
+	 * @param enumerationItem  an object to add to the enumerated values
+	 * @return the current EmailSchema instance
+	 */
+	EmailSchema addEnumerationItem(String enumerationItem);
 
 }

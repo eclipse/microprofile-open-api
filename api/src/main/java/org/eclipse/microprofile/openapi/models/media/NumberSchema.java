@@ -21,53 +21,42 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
- * NumberSchema
+ * The schema used for an object that holds numeric data.
  */
 public interface NumberSchema extends Schema<BigDecimal> {
 
 	/**
-	 * Sets the type property of a NumberSchema instance
-	 * to the parameter.
+	 * Change this NumberSchema's type property from the default value to the
+	 * given string. 
 	 *
-	 * @param type
-	 * @return NumberSchema instance with the modified type property
+	 * @param type  the name of a valid type
+	 * @return the current NumberSchema instance
 	 */
-
 	NumberSchema type(String type);
 
 	/**
-	 * Sets the _default property of a NumberSchema instance
-	 * to the parameter and returns the instance.
-	 * _default property is inherited from super class Schema
-	 * Method setDefault inherited from Schema super class.
-	 *
-	 * @param _default
-	 * @return The instance of NumberSchema with the modified _default
-	 * @see SchemaImpl.setDefault
+	 * Sets the default property of this NumberSchema to the given default value.
+	 * 
+	 * @param defaultValue  a value to use as the default
+	 * @return the current NumberSchema instance
 	 */
-
-	NumberSchema _default(BigDecimal _default);
+	NumberSchema defaultValue(BigDecimal defaultValue);
 
 	/**
-	 * Sets inherited _enum property of a NumberSchema instance
-	 * to the parameter.
-	 * _enum is inherited from Schema.
+	 * Sets the enumerated list of values allowed for objects defined by this schema.
 	 *
-	 * @param _enum A list of BigDecimal values
-	 * @return A NumberSchema instance with the set _enum
-	 * @see SchemaImpl
+	 * @param enumeration a list of values allowed
+	 * @return the current NumberSchema instance
 	 */
-
-	NumberSchema _enum(List<BigDecimal> _enum);
+	NumberSchema enumeration(List<BigDecimal> enumeration);
 
 	/**
-	 * Adds an item to _enum List.
-	 * If _enum is null, will create a new ArrayList and add the item.
+	 * Adds an item of the appropriate type to the enumerated list of values
+	 * allowed.
 	 *
-	 * @param BigDecimal _enumItem
-	 * @return NumberSchema instance with the modified _enum item
+	 * @param enumerationItem  an object to add to the enumerated values
+	 * @return the current NumberSchema instance
 	 */
-
-	NumberSchema addEnumItem(BigDecimal _enumItem);
+	NumberSchema addEnumerationItem(BigDecimal enumerationItem);
 
 }

@@ -20,65 +20,53 @@ package org.eclipse.microprofile.openapi.models.media;
 import java.util.List;
 
 /**
- * IntegerSchema
+ * The schema used for an object that holds integer data.
  */
 public interface IntegerSchema extends Schema<Integer> {
 
 	/**
-	 * Sets the type property for an IntegerSchema instance to the
-	 * parameter and returns the instance.
-	 * Type for IntegerSchema instance is "integer"
+	 * Change this IntegerSchema's type property from the default value to the
+	 * given string. 
 	 *
-	 * @param type
-	 * @return IntegerSchema instance with the set type
-	 **/
-
+	 * @param type  the name of a valid type
+	 * @return the current IntegerSchema instance
+	 */
 	IntegerSchema type(String type);
 
 	/**
-	 * Sets the format property for an IntegerSchema instance to the
-	 * parameter and returns the instance.
-	 * The format property for IntegerSchema can be: "int32" or "int64"
+	 * Change this IntegerSchema's format property from the default value to the
+	 * given format. The value may be one of the formats described in the OAS or
+	 * a user defined format.
 	 *
 	 * @param format
-	 * @return IntegerSchema instance with the set format
-	 **/
-
+	 *            the string specifying the data format
+	 * @return the current IntegerSchema instance
+	 */
 	IntegerSchema format(String format);
 
 	/**
-	 * Sets the _default property of an IntegerSchema instance to the
-	 * parameter and returns the instance.
-	 * _default property is inherited from super class Schema
-	 * Method setDefault inherited from Schema super class.
-	 *
-	 * @param _default
-	 * @return IntegerSchema instance with the set _default
-	 * @see SchemaImpl.setDefault
+	 * Sets the default property of this IntegerSchema to the given default value.
+	 * 
+	 * @param defaultValue  a value to use as the default
+	 * @return the current IntegerSchema instance
 	 */
-
-	IntegerSchema _default(Integer _default);
+	IntegerSchema defaultValue(Integer defaultValue);
 
 	/**
-	 * Sets inherited _enum property of an IntegerSchema instance to the
-	 * parameter.
-	 * _enum is inherited from Schema.
+	 * Sets the enumerated list of values allowed for objects defined by this schema.
 	 *
-	 * @param _enum
-	 * @return IntegerSchema instance with the set _enum
-	 * @see SchemaImpl
+	 * @param enumeration a list of values allowed
+	 * @return the current IntegerSchema instance
 	 */
-
-	IntegerSchema _enum(List<Integer> _enum);
+	IntegerSchema enumeration(List<Integer> enumeration);
 
 	/**
-	 * Adds an item to _enum List.
-	 * If _enum is null, will create a new ArrayList and add the item.
+	 * Adds an item of the appropriate type to the enumerated list of values
+	 * allowed.
 	 *
-	 * @param _enumItem
-	 * @return IntegerSchema instance with modified _enum
+	 * @param enumerationItem  an object to add to the enumerated values
+	 * @return the current IntegerSchema instance
 	 */
-
-	IntegerSchema addEnumItem(Integer _enumItem);
+	IntegerSchema addEnumerationItem(Integer enumerationItem);
 
 }

@@ -18,18 +18,17 @@
 package org.eclipse.microprofile.openapi.models.media;
 
 /**
- * MapSchema
+ * The schema used for an object that holds map data.
  */
 public interface MapSchema extends Schema {
 
 	/**
-	 * Sets type property of MapSchema instance to the
-	 * parameter and returns the instance.
+	 * Change this MapSchema's type property from the default value to the
+	 * given string. 
 	 *
-	 * @param type
-	 * @return MapSchema instance with the modified type property
+	 * @param type  the name of a valid type
+	 * @return the current MapSchema instance
 	 */
-
 	MapSchema type(String type);
 
 }

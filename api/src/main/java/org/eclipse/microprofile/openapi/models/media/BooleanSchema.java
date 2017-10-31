@@ -20,40 +20,42 @@ package org.eclipse.microprofile.openapi.models.media;
 import java.util.List;
 
 /**
- * BooleanSchema
+ * The schema used for an object that holds boolean data.
  */
 public interface BooleanSchema extends Schema<Boolean> {
 
 	/**
-	   * sets this BooleanSchema's type property to the given type and
-	   * returns this instance of BooleanSchema
-	   *
-	   * @param String type
-	   * @return BooleanSchema
-	   */
+	 * Change this BooleanSchema's type property from the default value to the
+	 * given string. 
+	 *
+	 * @param type  the name of a valid type
+	 * @return the current BooleanSchema instance
+	 */
 	BooleanSchema type(String type);
 
 	/**
-	   * sets the _default property of this BooleanSchema to the given _default value.
-	   * 
-	   * @param byte[] _default
-	   * @return BooleanSchema
-	   */
-	BooleanSchema _default(Boolean _default);
+	 * Sets the default property of this BooleanSchema to the given default value.
+	 * 
+	 * @param defaultValue  a value to use as the default
+	 * @return the current BooleanSchema instance
+	 */
+	BooleanSchema defaultValue(Boolean defaultValue);
 
 	/**
-	   * sets the _enum property of this BooleanSchema to the given _enum value.
-	   * 
-	   * @param List&lt;byte[]&gt; _enum
-	   * @return BooleanSchema
-	   */
-	BooleanSchema _enum(List<Boolean> _enum);
+	 * Sets the enumerated list of values allowed for objects defined by this schema.
+	 *
+	 * @param enumeration a list of values allowed
+	 * @return the current BooleanSchema instance
+	 */
+	BooleanSchema enumeration(List<Boolean> enumeration);
 
 	/**
-	   * Adds the given _enumItem to this BooleanSchema's List of _enumItems.
-	   *
-	   * @param byte[] _enumItem
-	   */
-	BooleanSchema addEnumItem(Boolean _enumItem);
+	 * Adds an item of the appropriate type to the enumerated list of values
+	 * allowed.
+	 *
+	 * @param enumerationItem  an object to add to the enumerated values
+	 * @return the current BooleanSchema instance
+	 */
+	BooleanSchema addEnumerationItem(Boolean enumerationItem);
 
 }
