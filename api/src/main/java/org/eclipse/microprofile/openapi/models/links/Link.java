@@ -21,214 +21,183 @@ import java.util.Map;
 
 import org.eclipse.microprofile.openapi.models.Constructible;
 import org.eclipse.microprofile.openapi.models.Extensible;
-import org.eclipse.microprofile.openapi.models.headers.Header;
+import org.eclipse.microprofile.openapi.models.Reference;
 import org.eclipse.microprofile.openapi.models.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.models.servers.Server;
 
 /**
  * Link
- *
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#linkObject"
+ * <p>
+ * The Link object represents a possible design-time link for a response. The
+ * presence of a link does not guarantee the caller's ability to successfully
+ * invoke it, rather it provides a known relationship and traversal mechanism
+ * between responses and other operations.
+ * <p>
+ * For computing links, and providing instructions to execute them, a runtime
+ * expression is used for accessing values in an operation and using them as
+ * parameters while invoking the linked operation.
+ * <p>
+ * A linked operation MUST be identified using either an operationRef or
+ * operationId. In the case of an operationId, it MUST be unique and resolved in
+ * the scope of the OAS document. Because of the potential for name clashes, the
+ * operationRef syntax is preferred for specifications with external references.
+ * <p>
+ * 
+ * @see <a href=
+ *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#linkObject">
+ *      OpenAPI Specification Link Object</a>
  */
-public interface Link extends Constructible, Extensible {
+public interface Link extends Constructible, Extensible, Reference<Link> {
 
 	/**
-	 * returns the server property from a Link instance.
+	 * Returns the server property from a Link instance.
 	 *
-	 * @return Server server
+	 * @return a server object to be used by the target operation
 	 **/
-
 	Server getServer();
 
 	/**
-	 * sets this Link's server property to the given server.
+	 * Sets this Link's server property to the given object.
 	 *
-	 * @param Server server
+	 * @param server  a server object to be used by the target operation
 	 */
 	void setServer(Server server);
 
 	/**
-	 * sets this Link's server property to the given server and
-	 * returns this instance of Link
+	 * Sets this Link's server property to the given object.
 	 *
-	 * @param Server server
-	 * @return Link
+	 * @param server  a server object to be used by the target operation
+	 * @return the current Link instance
 	 */
 	Link server(Server server);
 
 	/**
-	 * returns the operationRef property from a Link instance.
+	 * Returns the operationRef property from a Link instance.
 	 *
-	 * @return String operationRef
+	 * @return a relative or absolute reference to an OAS operation
 	 **/
-
 	String getOperationRef();
 
 	/**
-	 * sets this Link's operationRef property to the given operationRef.
+	 * Sets this Link's operationRef property to the given string.
+	 * This field is mutually exclusive of the operationId field.
 	 *
-	 * @param String operationRef
+	 * @param operationRef  a relative or absolute reference to an OAS operation
 	 */
 	void setOperationRef(String operationRef);
 
 	/**
-	 * sets this Link's operationRef property to the given operationRef and
-	 * returns this instance of Link
+	 * Sets this Link's operationRef property to the given string.
+	 * This field is mutually exclusive of the operationId field.
 	 *
-	 * @param String operationRef
-	 * @return Link
+	 * @param operationRef  a relative or absolute reference to an OAS operation
+	 * @return the current Link instance
 	 */
 	Link operationRef(String operationRef);
 
 	/**
-	 * returns the requestBody property from a Link instance.
+	 * Returns the requestBody property from a Link instance.
 	 *
-	 * @return RequestBody requestBody
+	 * @return a literal value or runtime expression to use as a request body
+	 *         when calling the target operation
 	 **/
-
 	RequestBody getRequestBody();
 
 	/**
-	 * sets this Link's requestBody property to the given requestBody.
+	 * Sets this Link's requestBody property to the given object.
 	 *
-	 * @param RequestBody requestBody
+	 * @param requestBody
+	 *            a literal value or runtime expression to use as a request body
+	 *            when calling the target operation
 	 */
 	void setRequestBody(RequestBody requestBody);
 
 	/**
-	 * sets this Link's requestBody property to the given requestBody and
-	 * returns this instance of Link
+	 * Sets this Link's requestBody property to the given object.
 	 *
-	 * @param RequestBody requestBody
-	 * @return Link
+	 * @param requestBody
+	 *            a literal value or runtime expression to use as a request body
+	 *            when calling the target operation
+	 * @return the current Link instance
 	 */
 	Link requestBody(RequestBody requestBody);
 
 	/**
-	 * returns this Link's requestBody property for this instance of Link.
+	 * Returns the operationId property for this instance of Link.
 	 *
-	 * @param String operationId
+	 * @return  the name of an existing, resolvable OAS operation
 	 */
 	String getOperationId();
 
 	/**
-	 * sets this Link's operationId property to the given operationId.
+	 * Sets this Link's operationId property to the given string.
+	 * This field is mutually exclusive of the operationRef field.
 	 *
-	 * @param String operationId
+	 * @param operationId  the name of an existing, resolvable OAS operation
 	 */
 	void setOperationId(String operationId);
 
 	/**
-	 * sets this Link's operationId property to the given operationId and
-	 * returns this instance of Link
+	 * Sets this Link's operationId property to the given string.
+	 * This field is mutually exclusive of the operationRef field.
 	 *
-	 * @param String operationId
-	 * @return Link
+	 * @param operationId  the name of an existing, resolvable OAS operation
+	 * @return the current Link instance
 	 */
 	Link operationId(String operationId);
 
 	/**
-	 * returns the parameters property from a Link instance.
+	 * Returns the parameters property from this instance of Link.
+	 * The key is the parameter name and the value is a constant or a 
+	 * runtime expression to be passed to the linked operation.
 	 *
-	 * @return LinkParameters parameters
+	 * @return a map representing parameters to pass to this link's operation
 	 **/
 	Map<String, String> getParameters();
 
 	/**
-	 * sets this Link's parameters property to the given parameters.
+	 * Sets this Link's parameters property to the given map.
 	 *
-	 * @param LinkParameters parameters
+	 * @param parameters
+	 *            a map representing parameters to pass to this link's operation
+	 *            as specified with operationId or identified via operationRef
 	 */
 	void setParameters(Map<String, String> parameters);
 
 	/**
-	 * sets this Link's parameter property to the given parameter and
-	 * returns this instance of Link
+	 * Add a new parameter to the parameters property of this instance of Link.
 	 *
-	 * @param String name
-	 * @param String parameter
-	 * @return Link
+	 * @param name
+	 *            The name of the parameter. Can be qualified using the
+	 *            parameter location [{in}.]{name} for operations that use the
+	 *            same parameter name in different locations (e.g. path.id).
+	 * @param parameter
+	 *            a constant or an expression to be evaluated at runtime and
+	 *            passed to the linked operation
+	 * @return the current Link instance
 	 */
 	Link parameters(String name, String parameter);
 
 	/**
-	 * returns the headers property from a Link instance.
+	 * Returns the description property from a Link instance.
 	 *
-	 * @return Headers headers
+	 * @return a description of the link
 	 **/
-
-	Map<String, Header> getHeaders();
-
-	/**
-	 * sets this Link's headers property to the given headers.
-	 *
-	 * @param Map&lt;String, Header&gt; headers
-	 */
-	void setHeaders(Map<String, Header> headers);
-
-	/**
-	 * sets this Link's headers property to the given headers and
-	 * returns this instance of Link
-	 *
-	 * @param Map&lt;String, Header&gt; headers
-	 * @return Link
-	 */
-	Link headers(Map<String, Header> headers);
-
-	/**
-	 * Adds the given Header to this Link's map of headers, with the given name as its key.
-	 *
-	 * @param String name
-	 * @param Header header
-	 * @return Link
-	 */
-	Link addHeaderObject(String name, Header header);
-
-	/**
-	 * returns the description property from a Link instance.
-	 *
-	 * @return String description
-	 **/
-
 	String getDescription();
 
 	/**
-	 * returns the description property from a Link instance.
+	 * Sets this Link's description property to the given string.
 	 *
-	 * @return String description
+	 * @param description  a description of the link
 	 **/
 	void setDescription(String description);
 
 	/**
-	 * sets this Link's description property to the given description and
-	 * returns this instance of Link
+	 * Sets this Link's description property to the given string.
 	 *
-	 * @param String description
-	 * @return Link
+	 * @param description  a description of the link
+	 * @return the current Link instance
 	 */
 	Link description(String description);
-
-	/**
-	 * returns the $ref property from a Link instance.
-	 *
-	 * @return String $ref
-	 **/
-	String get$ref();
-
-	/**
-	 * sets the $ref property for a Link instance.
-	 *
-	 * @param String $ref
-	 **/
-	void set$ref(String $ref);
-
-	/**
-	 * sets this Link's $ref property to the given description and
-	 * returns this instance of Link
-	 *
-	 * @param String $ref
-	 * @return Link
-	 */
-	Link $ref(String $ref);
 
 }

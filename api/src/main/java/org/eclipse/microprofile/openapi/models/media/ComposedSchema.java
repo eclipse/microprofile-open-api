@@ -20,104 +20,100 @@ package org.eclipse.microprofile.openapi.models.media;
 import java.util.List;
 
 /**
- * ComposedSchema
+ * Create a schema composed of other schemas. An object with this schema can
+ * take a value conforming to one (or more) of the schemas used to build this
+ * one.
  */
 public interface ComposedSchema extends Schema {
 
 	/**
-	   * returns the allOf property from a ComposedSchema instance.
-	   *
-	   * @return List&lt;Schema&gt; allOf
-	   **/
-
+	 * Returns the schemas used by the allOf property in a ComposedSchema instance.
+	 *
+	 * @return the list of schemas used by the allOf property
+	 **/
 	List<Schema> getAllOf();
 
 	/**
-	   * sets the allOf property of this instance of ComposedSchema
-	   * 
-	   * @param List&lt;Schema&gt; allOf
-	   */
+	 * Sets the schemas used by the allOf property of this schema.
+	 * 
+	 * @param allOf  the list of schemas used by the allOf property
+	 */
 	void setAllOf(List<Schema> allOf);
 
 	/**
-	   * sets the allOf property of this instance of ComposedSchema 
-	   * and returns this ComposedSchema
-	   * 
-	   * @param List&lt;Schema&gt; allOf
-	   * @return ComposedSchema
-	   */
+	 * Sets the schemas used by the allOf property of this schema.
+	 * 
+	 * @param allOf  the list of schemas used by the allOf property
+	 * @return the current ComposedSchema instance
+	 */
 	ComposedSchema allOf(List<Schema> allOf);
 
 	/**
-	    * adds the given allOfItem Schema to this ComposedSchema's list of allOfItems
-	    * 
-	    * @param Schema allOfItem
-	    * @return ComposedSchema
-	    */
+	 * Adds the given schema to this ComposedSchema's list of schemas used by the allOf property.
+	 * 
+	 * @param allOfItem  a schema to use with the allOf property
+	 * @return the current ComposedSchema instance
+	 */
 	ComposedSchema addAllOfItem(Schema allOfItem);
 
 	/**
-	   * returns the anyOf property from a ComposedSchema instance.
-	   *
-	   * @return List&lt;Schema&gt; anyOf
-	   **/
-
+	 * Returns the schemas used by the anyOf property in a ComposedSchema instance.
+	 *
+	 * @return the list of schemas used by the anyOf property
+	 **/
 	List<Schema> getAnyOf();
 
 	/**
-	   * sets the anyOf property of this instance of ComposedSchema
-	   * 
-	   * @param List&lt;Schema&gt; anyOf
-	   */
+	 * Sets the schemas used by the anyOf property of this schema.
+	 * 
+	 * @param anyOf  the list of schemas used by the anyOf property
+	 */
 	void setAnyOf(List<Schema> anyOf);
 
 	/**
-	   * sets the anyOf property of this instance of ComposedSchema 
-	   * and returns this ComposedSchema
-	   * 
-	   * @param List&lt;Schema&gt; anyOf
-	   * @return ComposedSchema
-	   */
+	 * Sets the schemas used by the anyOf property of this schema.
+	 * 
+	 * @param anyOf  the list of schemas used by the anyOf property
+	 * @return the current ComposedSchema instance
+	 */
 	ComposedSchema anyOf(List<Schema> anyOf);
 
 	/**
-	    * adds the given anyOfItem Schema to this ComposedSchema's list of anyOfItems
-	    * 
-	    * @param Schema anyOfItem
-	    * @return ComposedSchema
-	    */
+	 * Adds the given schema to this ComposedSchema's list of schemas used by the anyOf property.
+	 * 
+	 * @param anyOfItem  a schema to use with the anyOf property
+	 * @return the current ComposedSchema instance
+	 */
 	ComposedSchema addAnyOfItem(Schema anyOfItem);
 
 	/**
-	   * returns the oneOf property from a ComposedSchema instance.
-	   *
-	   * @return List&lt;Schema&gt; oneOf
-	   **/
-
+	 * Returns the schemas used by the oneOf property in a ComposedSchema instance.
+	 *
+	 * @return the list of schemas used by the oneOf property
+	 **/
 	List<Schema> getOneOf();
 
 	/**
-	   * sets the oneOf property of this instance of ComposedSchema
-	   * 
-	   * @param List&lt;Schema&gt; oneOf
-	   */
+	 * Sets the schemas used by the oneOf property of this schema.
+	 * 
+	 * @param oneOf  the list of schemas used by the oneOf property
+	 */
 	void setOneOf(List<Schema> oneOf);
 
 	/**
-	   * sets the oneOf property of this instance of ComposedSchema 
-	   * and returns this ComposedSchema
-	   * 
-	   * @param List&lt;Schema&gt; oneOf
-	   * @return ComposedSchema
-	   */
+	 * Sets the schemas used by the oneOf property of this schema.
+	 * 
+	 * @param oneOf  the list of schemas used by the oneOf property
+	 * @return the current ComposedSchema instance
+	 */
 	ComposedSchema oneOf(List<Schema> oneOf);
 
 	/**
-	    * adds the given oneOfItem Schema to this ComposedSchema's list of oneOfItems
-	    * 
-	    * @param Schema oneOfItem
-	    * @return ComposedSchema
-	    */
+	 * Adds the given schema to this ComposedSchema's list of schemas used by the oneOf property.
+	 * 
+	 * @param oneOfItem  a schema to use with the oneOf property
+	 * @return the current ComposedSchema instance
+	 */
 	ComposedSchema addOneOfItem(Schema oneOfItem);
 
 }

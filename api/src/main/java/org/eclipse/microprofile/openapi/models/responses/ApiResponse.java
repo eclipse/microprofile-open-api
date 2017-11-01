@@ -21,6 +21,7 @@ import java.util.Map;
 
 import org.eclipse.microprofile.openapi.models.Constructible;
 import org.eclipse.microprofile.openapi.models.Extensible;
+import org.eclipse.microprofile.openapi.models.Reference;
 import org.eclipse.microprofile.openapi.models.headers.Header;
 import org.eclipse.microprofile.openapi.models.links.Link;
 import org.eclipse.microprofile.openapi.models.media.Content;
@@ -31,7 +32,7 @@ import org.eclipse.microprofile.openapi.models.media.Content;
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#responseObject"
  */
-public interface ApiResponse extends Constructible, Extensible {
+public interface ApiResponse extends Constructible, Extensible, Reference<ApiResponse> {
 
 	/**
 	 * Returns a short description of this instance of ApiResponse.
@@ -152,30 +153,5 @@ public interface ApiResponse extends Constructible, Extensible {
 	 */
 
 	ApiResponse link(String name, Link link);
-
-	/**
-	 * Returns the reference to this ApiResponse instance that is defined.
-	 *
-	 * @return the reference to the response
-	 **/
-	String getRef();
-
-	/**
-	 * Sets the reference to this ApiResponse instance that is defined.
-	 *
-	 * @param ref the reference to the response
-	 */
-
-	void setRef(String ref);
-
-	/**
-	 * Sets the reference to this ApiResponse instance that is defined and
-	 * returns this instance of ApiResponse.
-	 *
-	 * @param ref the reference to the response
-	 * @return this ApiResponse instance
-	 */
-
-	ApiResponse ref(String ref);
 
 }

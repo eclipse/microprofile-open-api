@@ -20,49 +20,53 @@ package org.eclipse.microprofile.openapi.models.media;
 import java.util.List;
 
 /**
- * ByteArraySchema
+ * The schema used for an object that holds an array of byte data.
  */
 public interface ByteArraySchema extends Schema<byte[]> {
 
 	/**
-	   * sets this ByteArraySchema's type property to the given type and
-	   * returns this instance of ByteArraySchema
-	   *
-	   * @param String type
-	   * @return ByteArraySchema
-	   */
+	 * Change this ByteArraySchema's type property from the default value to the
+	 * given string. 
+	 *
+	 * @param type  the name of a valid type
+	 * @return the current ByteArraySchema instance
+	 */
 	ByteArraySchema type(String type);
 
 	/**
-	   * sets this ByteArraySchema's format property to the given format and
-	   * returns this instance of ByteArraySchema
-	   *
-	   * @param String format
-	   * @return ByteArraySchema
-	   */
+	 * Change this ByteArraySchema's format property from the default value to the
+	 * given format. The value may be one of the formats described in the OAS or
+	 * a user defined format.
+	 *
+	 * @param format
+	 *            the string specifying the data format
+	 * @return the current ByteArraySchema instance
+	 */
 	ByteArraySchema format(String format);
 
 	/**
-	   * sets the _default property of this ByteArraySchema to the given _default value.
-	   * 
-	   * @param byte[] _default
-	   * @return ByteArraySchema
-	   */
-	ByteArraySchema _default(byte[] _default);
+	 * Sets the default property of this ByteArraySchema to the given default value.
+	 * 
+	 * @param defaultValue  a value to use as the default
+	 * @return the current ByteArraySchema instance
+	 */
+	ByteArraySchema defaultValue(byte[] defaultValue);
 
 	/**
-	   * sets the _enum property of this ByteArraySchema to the given _enum value.
-	   * 
-	   * @param List&lt;byte[]&gt; _enum
-	   * @return ByteArraySchema
-	   */
-	ByteArraySchema _enum(List<byte[]> _enum);
+	 * Sets the enumerated list of values allowed for objects defined by this schema.
+	 *
+	 * @param enumeration a list of values allowed
+	 * @return the current ByteArraySchema instance
+	 */
+	ByteArraySchema enumeration(List<byte[]> enumeration);
 
 	/**
-	   * Adds the given _enumItem to this ByteArraySchema's List of _enumItems.
-	   *
-	   * @param byte[] _enumItem
-	   */
-	ByteArraySchema addEnumItem(byte[] _enumItem);
+	 * Adds an item of the appropriate type to the enumerated list of values
+	 * allowed.
+	 *
+	 * @param enumerationItem  an object to add to the enumerated values
+	 * @return the current ByteArraySchema instance
+	 */
+	ByteArraySchema addEnumerationItem(byte[] enumerationItem);
 
 }

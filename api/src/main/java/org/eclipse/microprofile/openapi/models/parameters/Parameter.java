@@ -20,19 +20,46 @@ package org.eclipse.microprofile.openapi.models.parameters;
 import java.util.Map;
 
 import org.eclipse.microprofile.openapi.models.Extensible;
+import org.eclipse.microprofile.openapi.models.Reference;
 import org.eclipse.microprofile.openapi.models.examples.Example;
 import org.eclipse.microprofile.openapi.models.media.Content;
 import org.eclipse.microprofile.openapi.models.media.Schema;
 
 /**
  * Parameter
- *
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#parameterObject"
+ * <p>
+ * Describes a single operation parameter.
+ * <p>
+ * A unique parameter is defined by a combination of a name and location.
+ * There are four possible parameter locations specified by the in field:
+ * <ul>
+ * <li>path - Used together with Path Templating, where the parameter value is
+ * actually part of the operation's URL. This does not include the host or base
+ * path of the API. For example, in /items/{itemId}, the path parameter is
+ * itemId.</li>
+ * <li>query - Parameters that are appended to the URL. For example, in
+ * /items?id=###, the query parameter is id.</li>
+ * <li>header - Custom headers that are expected as part of the request. Note
+ * that RFC7230 states header names are case insensitive.</li>
+ * <li>cookie - Used to pass a specific cookie value to the API.</li>
+ * </ul>
+ * <p>
+ * The rules for serialization of the parameter are specified in one of two
+ * ways. For simpler scenarios, a schema and style can describe the structure
+ * and syntax of the parameter.
+ * <p>
+ * For more complex scenarios, the content property can define the media type
+ * and schema of the parameter. A parameter must contain either a schema
+ * property, or a content property, but not both.
+ * 
+ * @see <a href=
+ *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject">OpenAPI
+ *      Specification Parameter Object</a>
  */
-public interface Parameter extends Extensible {
+public interface Parameter extends Extensible, Reference<Parameter> {
 
 	/**
-	 * Gets or Sets style
+	 * The values allowed for the style field.
 	 */
 	enum StyleEnum {
 	    MATRIX("matrix"),
@@ -56,387 +83,318 @@ public interface Parameter extends Extensible {
 	}
 
 	/**
-	 * returns the name property from a Parameter instance.
+	 * Returns the name property from a Parameter instance.
 	 *
-	 * @return String name
+	 * @return the name of the parameter
 	 **/
-
 	String getName();
 
 	/**
-	 * Sets the name property of a Parameter instance
-	 * to the parameter.
+	 * Sets the name property of a Parameter instance to the given string.
 	 *
-	 * @param name
+	 * @param name  the name of the parameter
 	 */
-
 	void setName(String name);
 
 	/**
-	 * Sets the name property of a Parameter instance
-	 * to the parameter and returns the instance.
+	 * Sets the name property of a Parameter instance to the given string.
 	 *
-	 * @param name
-	 * @return Parameter instance with the modified name property
+	 * @param name  the name of the parameter
+	 * @return the current Parameter instance
 	 */
-
 	Parameter name(String name);
 
 	/**
-	 * returns the in property from a Parameter instance.
+	 * Returns the in property from a Parameter instance.
 	 *
-	 * @return String in
+	 * @return the location of the parameter
 	 **/
-
 	String getIn();
 
 	/**
-	 * Sets the in property of a Parameter instance
-	 * to the parameter.
-	 * If in property is set to path then also sets
-	 * required property to true.
+	 * Sets the in property of a Parameter instance to the given string. If the
+	 * in property is set to "path" then also sets the required property to
+	 * true.
 	 *
-	 * @param in
+	 * @param in  the location of the parameter
 	 */
-
 	void setIn(String in);
 
 	/**
-	 * Sets the in property of a Parameter instance
-	 * to the parameter and returns the instance.
+	 * Sets the in property of a Parameter instance to the given string. If the
+	 * in property is set to "path" then also sets the required property to
+	 * true.
 	 *
-	 * @param in
-	 * @return Parameter instance with the modified in property
+	 * @param in  the location of the parameter
+	 * @return the current Parameter instance
 	 */
-
 	Parameter in(String in);
 
 	/**
-	 * returns the description property from a Parameter instance.
+	 * Returns the description property from a Parameter instance.
 	 *
-	 * @return String description
+	 * @return a brief description of the parameter
 	 **/
-
 	String getDescription();
 
 	/**
 	 * Sets the description property of a Parameter instance
-	 * to the parameter.
+	 * to the given string.
 	 *
-	 * @param description
+	 * @param description  a brief description of the parameter
 	 */
-
 	void setDescription(String description);
 
 	/**
 	 * Sets the description property of a Parameter instance
-	 * to the parameter and returns the instance.
+	 * to the given string.
 	 *
-	 * @param description
-	 * @return Parameter instance with the modified description property
+	 * @param description  a brief description of the parameter
+	 * @return the current Parameter instance
 	 */
-
 	Parameter description(String description);
 
 	/**
-	 * returns the required property from a Parameter instance.
+	 * Returns the required property from a Parameter instance.
 	 *
-	 * @return Boolean required
+	 * @return indicates whether this parameter is mandatory
 	 **/
-
 	Boolean getRequired();
 
 	/**
-	 * Sets the required property of a Parameter instance
-	 * to the parameter.
+	 * Sets the required property of a Parameter instance to the given value.
 	 *
-	 * @param required
+	 * @param required  indicates whether this parameter is mandatory
 	 */
-
 	void setRequired(Boolean required);
 
 	/**
-	 * Sets the required property of a Parameter instance
-	 * to the parameter and returns the instance.
+	 * Sets the required property of a Parameter instance to the given value.
 	 *
-	 * @param required
-	 * @return Parameter instance with the modified required property
+	 * @param required  indicates whether this parameter is mandatory
+	 * @return the current Parameter instance
 	 */
-
 	Parameter required(Boolean required);
 
 	/**
-	 * returns the deprecated property from a Parameter instance.
+	 * Returns the deprecated property from a Parameter instance.
 	 *
-	 * @return Boolean deprecated
+	 * @return specifies that a parameter is deprecated
 	 **/
-
 	Boolean getDeprecated();
 
 	/**
-	 * Sets the deprecated property of a Parameter instance
-	 * to the parameter.
+	 * Sets the deprecated property of a Parameter instance to the given value.
 	 *
-	 * @param deprecated
+	 * @param deprecated  specifies that a parameter is deprecated
 	 */
-
 	void setDeprecated(Boolean deprecated);
 
 	/**
-	 * Sets the deprecated property of a Parameter instance
-	 * to the parameter and returns the instance.
+	 * Sets the deprecated property of a Parameter instance to the given value.
 	 *
-	 * @param deprecated
-	 * @return Parameter instance with the modified deprecated property
+	 * @param deprecated  specifies that a parameter is deprecated
+	 * @return the current Parameter instance
 	 */
-
 	Parameter deprecated(Boolean deprecated);
 
 	/**
-	 * returns the allowEmptyValue property from a Parameter instance.
+	 * Returns the allowEmptyValue property from a Parameter instance.
 	 *
-	 * @return Boolean allowEmptyValue
+	 * @return specifies the ability to pass empty-valued parameters
 	 **/
-
 	Boolean getAllowEmptyValue();
 
 	/**
-	 * Sets the allowEmptyValue property of a Parameter instance
-	 * to the parameter.
+	 * Sets the allowEmptyValue property of a Parameter instance to the given value.
 	 *
-	 * @param allowEmptyValue
+	 * @param allowEmptyValue  specify the ability to pass empty-valued parameters
 	 */
-
 	void setAllowEmptyValue(Boolean allowEmptyValue);
 
 	/**
-	 * Sets the allowEmptyValue property of a Parameter instance
-	 * to the parameter and returns the instance.
+	 * Sets the allowEmptyValue property of a Parameter instance to the given value.
 	 *
-	 * @param allowEmptyValue
-	 * @return Parameter instance with the modified allowEmptyValue property
+	 * @param allowEmptyValue  specify the ability to pass empty-valued parameters
+	 * @return the current Parameter instance
 	 */
-
 	Parameter allowEmptyValue(Boolean allowEmptyValue);
 
 	/**
-	 * returns the style property from a Parameter instance.
+	 * Returns the style property from a Parameter instance.
 	 *
-	 * @return StyleEnum style
+	 * @return describes how the parameter value will be serialized
 	 **/
-
 	Parameter.StyleEnum getStyle();
 
 	/**
-	 * Sets the style property of a Parameter instance
-	 * to the parameter.
+	 * Sets the style property of a Parameter instance to the given value.
 	 *
-	 * @param style
+	 * @param style  describes how the parameter value will be serialized
 	 */
-
 	void setStyle(Parameter.StyleEnum style);
 
 	/**
-	 * Sets the style property of a Parameter instance
-	 * to the parameter and returns the instance.
+	 * Sets the style property of a Parameter instance to the given value.
 	 *
-	 * @param style
-	 * @return Parameter instance with the modified style property
+	 * @param style  describes how the parameter value will be serialized
+	 * @return the current Parameter instance
 	 */
-
 	Parameter style(Parameter.StyleEnum style);
 
 	/**
-	 * returns the explode property from a Parameter instance.
+	 * Returns the explode property from a Parameter instance.
 	 *
-	 * @return Boolean explode
+	 * @return whether parameter values of type "array" or "object" generate
+	 *         separate parameters for each value
 	 **/
-
 	Boolean getExplode();
 
 	/**
-	 * Sets the explode property of a Parameter instance
-	 * to the parameter.
+	 * Sets the explode property of a Parameter instance to the given value.
 	 *
 	 * @param explode
+	 *            whether parameter values of type "array" or "object" generate
+	 *            separate parameters for each value
 	 */
-
 	void setExplode(Boolean explode);
 
 	/**
-	 * Sets the explode property of a Parameter instance
-	 * to the parameter and returns the instance.
+	 * Sets the explode property of a Parameter instance to the given value.
 	 *
 	 * @param explode
-	 * @return Parameter instance with the modified explode property
+	 *            whether parameter values of type "array" or "object" generate
+	 *            separate parameters for each value
+	 * @return the current Parameter instance
 	 */
-
 	Parameter explode(Boolean explode);
 
 	/**
-	 * returns the allowReserved property from a Parameter instance.
+	 * Returns the allowReserved property from a Parameter instance.
 	 *
-	 * @return Boolean allowReserved
+	 * @return specifies whether the parameter value should allow reserved characters
 	 **/
-
 	Boolean getAllowReserved();
 
 	/**
-	 * Sets the allowReserved property of a Parameter instance
-	 * to the parameter.
+	 * Sets the allowReserved property of a Parameter instance to the given value.
 	 *
-	 * @param allowReserved
+	 * @param allowReserved  specifies whether the parameter value should allow reserved characters
 	 */
-
 	void setAllowReserved(Boolean allowReserved);
 
 	/**
-	 * Sets the allowReserved property of a Parameter instance
-	 * to the parameter and returns the instance.
+	 * Sets the allowReserved property of a Parameter instance to the given value.
 	 *
-	 * @param allowReserved
-	 * @return Parameter instance with the modified allowReserved property
+	 * @param allowReserved  specifies whether the parameter value should allow reserved characters
+	 * @return the current Parameter instance
 	 */
-
 	Parameter allowReserved(Boolean allowReserved);
 
 	/**
-	 * returns the schema property from a Parameter instance.
+	 * Returns the schema property from a Parameter instance.
 	 *
-	 * @return Schema schema
+	 * @return schema defining the type used for the parameter
 	 **/
-
 	Schema getSchema();
 
 	/**
-	 * Sets the schema property of a Parameter instance
-	 * to the parameter.
+	 * Sets the schema property of a Parameter instance to the given value.
 	 *
-	 * @param schema
+	 * @param schema  schema defining the type used for the parameter
 	 */
-
 	void setSchema(Schema schema);
 
 	/**
-	 * Sets the schema property of a Parameter instance
-	 * to the parameter and returns the instance.
+	 * Sets the schema property of a Parameter instance to the given value.
 	 *
-	 * @param schema
-	 * @return Parameter instance with the modified schema property
+	 * @param schema  schema defining the type used for the parameter
+	 * @return the current Parameter instance
 	 */
-
 	Parameter schema(Schema schema);
 
 	/**
-	 * returns the examples property from a Parameter instance.
+	 * Returns the examples property from a Parameter instance.
 	 *
-	 * @return Map&lt;String, Example&gt; examples
+	 * @return examples of the media type
 	 **/
-
 	Map<String, Example> getExamples();
 
+	/**
+	 * Sets the examples property of a Parameter instance to the given value.
+	 * Each example should contain a value in the correct format as specified in the parameter encoding.
+	 * The examples object is mutually exclusive of the example object.
+	 *
+	 * @param examples  examples of the media type
+	 */
 	void setExamples(Map<String, Example> examples);
 
 	/**
-	 * Sets the examples property of a Parameter instance
-	 * to the parameter.
+	 * Sets the examples property of a Parameter instance to the given value.
+	 * Each example should contain a value in the correct format as specified in the parameter encoding.
+	 * The examples object is mutually exclusive of the example object.
 	 *
-	 * @param examples
+	 * @param examples  examples of the media type
+	 * @return the current Parameter instance
 	 */
-
 	Parameter examples(Map<String, Example> examples);
 
 	/**
-	 * Adds an example item to the examples property of a Parameter instance
-	 * at the specified key and returns the instance.
-	 * If examples is null, creates a new HashMap and adds item
+	 * Adds an example of the media type using the specified key.
+	 * The example should contain a value in the correct format as specified in the parameter encoding.
 	 *
-	 * @param key
-	 * @param examplesItem
-	 * @return Parameter instance with the added example item
+	 * @param key string to represent the example
+	 * @param examplesItem  example of the media type
+	 * @return the current Parameter instance
 	 */
-
 	Parameter addExamples(String key, Example examplesItem);
 
 	/**
-	 * returns the example property from a Parameter instance.
+	 * Returns the example property from a Parameter instance.
 	 *
-	 * @return String example
+	 * @return example of the media type
 	 **/
-
-	String getExample();
+	Object getExample();
 
 	/**
-	 * Sets the example property of a Parameter instance
-	 * to the parameter.
+	 * Sets the example property of a Parameter instance to the given object.
+	 * The example should match the specified schema and encoding properties if present.
+	 * The examples object is mutually exclusive of the example object.
 	 *
-	 * @param example
+	 * @param example  example of the media type
 	 */
-
-	void setExample(String example);
+	void setExample(Object example);
 
 	/**
-	 * Sets the example property of a Parameter instance
-	 * to the parameter and returns the instance.
+	 * Sets the example property of a Parameter instance to the given object.
+	 * The example should match the specified schema and encoding properties if present.
+	 * The examples object is mutually exclusive of the example object.
 	 *
-	 * @param example
-	 * @return Parameter instance with the modified example property
+	 * @param example  example of the media type
+	 * @return the current Parameter instance
 	 */
-
-	Parameter example(String example);
+	Parameter example(Object example);
 
 	/**
-	 * returns the content property from a Parameter instance.
+	 * Returns the content property from a Parameter instance.
 	 *
-	 * @return Content content
+	 * @return a map containing the media representations for the parameter
 	 **/
-
 	Content getContent();
 
 	/**
-	 * Sets the content property of a Parameter instance
-	 * to the parameter.
+	 * Sets the content property of a Parameter instance to the given object.
 	 *
-	 * @param content
+	 * @param content  a map containing the media representations for the parameter
 	 */
-
 	void setContent(Content content);
 
 	/**
-	 * Sets the content property of a Parameter instance
-	 * to the parameter and returns the instance.
+	 * Sets the content property of a Parameter instance to the given object.
 	 *
-	 * @param content
-	 * @return Parameter instance with the modified content property
+	 * @param content  a map containing the media representations for the parameter
+	 * @return the current Parameter instance
 	 */
-
 	Parameter content(Content content);
-
-	/**
-	 * returns the $ref property from a Parameter instance.
-	 *
-	 * @return String $ref
-	 **/
-
-	String get$ref();
-
-	/**
-	 * Sets $ref property of a Parameter instance
-	 * to the parameter.
-	 *
-	 * @param $ref
-	 */
-
-	void set$ref(String $ref);
-
-	/**
-	 * Sets $ref property of a Parameter instance
-	 * to the parameter and return the instance.
-	 *
-	 * @param $ref
-	 * @return Parameter instance with the set $ref property.
-	 */
-
-	Parameter $ref(String $ref);
 
 }

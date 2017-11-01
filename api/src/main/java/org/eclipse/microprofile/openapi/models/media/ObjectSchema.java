@@ -18,18 +18,17 @@
 package org.eclipse.microprofile.openapi.models.media;
 
 /**
- * ObjectSchema
+ * The schema used for an object containing properties.
  */
 public interface ObjectSchema extends Schema<Object> {
 
 	/**
-	 * Sets the type property of ObjectSchema instance
-	 * to the parameter and returns the instance.
+	 * Change this ObjectSchema's type property from the default value to the
+	 * given string. 
 	 *
-	 * @param type
-	 * @return ObjectSchema instance with modified type property
+	 * @param type  the name of a valid type
+	 * @return the current ObjectSchema instance
 	 */
-
 	ObjectSchema type(String type);
 
 }

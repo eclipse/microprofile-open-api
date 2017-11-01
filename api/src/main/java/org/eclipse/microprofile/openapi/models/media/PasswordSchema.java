@@ -20,61 +20,53 @@ package org.eclipse.microprofile.openapi.models.media;
 import java.util.List;
 
 /**
- * PasswordSchema
+ * The schema used for an object that holds password data.
  */
 public interface PasswordSchema extends Schema<String> {
 
 	/**
-	 * Sets the type property of a PasswordSchema instance
-	 * to the parameter and returns the instance.
+	 * Change this PasswordSchema's type property from the default value to the
+	 * given string. 
 	 *
-	 * @param type
-	 * @return PasswordSchema instance with the modified type property
+	 * @param type  the name of a valid type
+	 * @return the current PasswordSchema instance
 	 */
-
 	PasswordSchema type(String type);
 
 	/**
-	 * Sets the format property for a PasswordSchema instance
-	 * to the parameter and returns the instance.
+	 * Change this PasswordSchema's format property from the default value to the
+	 * given format. The value may be one of the formats described in the OAS or
+	 * a user defined format.
 	 *
 	 * @param format
-	 * @return PasswordSchema instance with modified format
-	 **/
-
+	 *            the string specifying the data format
+	 * @return the current PasswordSchema instance
+	 */
 	PasswordSchema format(String format);
 
 	/**
-	 * Sets the inherited _default property of a PasswordSchema instance
-	 * to the parameter and returns the instance.
-	 * _default is inherited from Schema.
-	 *
-	 * @param _default
-	 * @return The instance of PasswordSchema with the set _default
+	 * Sets the default property of this PasswordSchema to the given default value.
+	 * 
+	 * @param defaultValue  a value to use as the default
+	 * @return the current PasswordSchema instance
 	 */
-
-	PasswordSchema _default(String _default);
+	PasswordSchema defaultValue(String defaultValue);
 
 	/**
-	 * Sets inherited _enum property of a PasswordSchema instance
-	 * to the parameter.
-	 * _enum is inherited from Schema.
+	 * Sets the enumerated list of values allowed for objects defined by this schema.
 	 *
-	 * @param _enum
-	 * @return A PasswordSchema instance with set _enum
-	 * @see SchemaImpl
+	 * @param enumeration a list of values allowed
+	 * @return the current PasswordSchema instance
 	 */
-
-	PasswordSchema _enum(List<String> _enum);
+	PasswordSchema enumeration(List<String> enumeration);
 
 	/**
-	 * Adds an item to _enum List.
-	 * If _enum is null, will create a new ArrayList and add the item.
+	 * Adds an item of the appropriate type to the enumerated list of values
+	 * allowed.
 	 *
-	 * @param _enumItem to be added to the _enum List
-	 * @return PasswordSchema instance with the modified _enum
+	 * @param enumerationItem  an object to add to the enumerated values
+	 * @return the current PasswordSchema instance
 	 */
-
-	PasswordSchema addEnumItem(String _enumItem);
+	PasswordSchema addEnumerationItem(String enumerationItem);
 
 }

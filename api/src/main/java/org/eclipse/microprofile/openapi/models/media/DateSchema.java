@@ -21,49 +21,53 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * DateSchema
+ * The schema to use for an object that holds date information.
  */
 public interface DateSchema extends Schema<Date> {
 
 	/**
-	   * sets this DateSchema's type property to the given type and
-	   * returns this instance of DateSchema
-	   *
-	   * @param String type
-	   * @return DateSchema
-	   */
+	 * Change this DateSchema's type property from the default value to the
+	 * given string. 
+	 *
+	 * @param type  the name of a valid type
+	 * @return the current DateSchema instance
+	 */
 	DateSchema type(String type);
 
 	/**
-	   * sets this DateSchema's format property to the given format and
-	   * returns this instance of DateSchema
-	   *
-	   * @param String format
-	   * @return DateSchema
-	   */
+	 * Change this DateSchema's format property from the default value to the
+	 * given format. The value may be one of the formats described in the OAS or
+	 * a user defined format.
+	 *
+	 * @param format
+	 *            the string specifying the data format
+	 * @return the current DateSchema instance
+	 */
 	DateSchema format(String format);
 
 	/**
-	   * sets the _default property of this DateSchema to the given _default value.
-	   * 
-	   * @param byte[] _default
-	   * @return DateSchema
-	   */
-	DateSchema _default(Date _default);
+	 * Sets the default property of this DateSchema to the given default value.
+	 * 
+	 * @param defaultValue  a value to use as the default
+	 * @return the current DateSchema instance
+	 */
+	DateSchema defaultValue(Date defaultValue);
 
 	/**
-	   * sets the _enum property of this DateSchema to the given _enum value.
-	   * 
-	   * @param List&lt;byte[]&gt; _enum
-	   * @return DateSchema
-	   */
-	DateSchema _enum(List<Date> _enum);
+	 * Sets the enumerated list of values allowed for objects defined by this schema.
+	 *
+	 * @param enumeration a list of values allowed
+	 * @return the current DateSchema instance
+	 */
+	DateSchema enumeration(List<Date> enumeration);
 
 	/**
-	   * Adds the given _enumItem to this DateSchema's List of _enumItems.
-	   *
-	   * @param byte[] _enumItem
-	   */
-	DateSchema addEnumItem(Date _enumItem);
+	 * Adds an item of the appropriate type to the enumerated list of values
+	 * allowed.
+	 *
+	 * @param enumerationItem  an object to add to the enumerated values
+	 * @return the current DateSchema instance
+	 */
+	DateSchema addEnumerationItem(Date enumerationItem);
 
 }

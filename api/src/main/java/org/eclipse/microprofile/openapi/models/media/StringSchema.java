@@ -20,57 +20,42 @@ package org.eclipse.microprofile.openapi.models.media;
 import java.util.List;
 
 /**
- * StringSchema
+ * The schema used for an object that holds a string.
  */
 public interface StringSchema extends Schema<String> {
 
 	/**
-	 * Sets the type property of a StringSchema instance
-	 * to the parameter and returns the instance.
+	 * Change this StringSchema's type property from the default value to the
+	 * given string. 
 	 *
-	 * @param type
-	 * @return StringSchema instance with modified type property.
+	 * @param type  the name of a valid type
+	 * @return the current StringSchema instance
 	 */
-
 	StringSchema type(String type);
 
 	/**
-	 * Sets inherited _default property of a StringSchema instance
-	 * to the parameter and returns the instance.
-	 * _default is inherited from super class Schema
-	 *
-	 * @param _default
-	 * @return StringSchema instance with the modified _default property
-	 * @see SchemaImpl
+	 * Sets the default property of this StringSchema to the given default value.
+	 * 
+	 * @param defaultValue  a value to use as the default
+	 * @return the current StringSchema instance
 	 */
-
-	StringSchema _default(String _default);
+	StringSchema defaultValue(String defaultValue);
 
 	/**
-	 * Sets inherited _enum property of a StringSchema instance
-	 * to the parameter.
-	 * <p>
-	 * _enum is inherited from super class Schema.
-	 * <p>
-	 * Uses super class method setEnum() and returns
-	 * the instance.
+	 * Sets the enumerated list of values allowed for objects defined by this schema.
 	 *
-	 * @param _enum
-	 * @return StringSchema instance with modified _enum.
-	 * @see SchemaImpl
+	 * @param enumeration a list of values allowed
+	 * @return the current StringSchema instance
 	 */
-
-	StringSchema _enum(List<String> _enum);
+	StringSchema enumeration(List<String> enumeration);
 
 	/**
-	 * Adds an item to _enum of a StringSchema instance
-	 * and returns the instance.
-	 * If _enum is null, creates a new ArrayList and adds item.
+	 * Adds an item of the appropriate type to the enumerated list of values
+	 * allowed.
 	 *
-	 * @param _enumItem
-	 * @return StringSchema instance with the added _enum item.
+	 * @param enumerationItem  an object to add to the enumerated values
+	 * @return the current StringSchema instance
 	 */
-
-	StringSchema addEnumItem(String _enumItem);
+	StringSchema addEnumerationItem(String enumerationItem);
 
 }
