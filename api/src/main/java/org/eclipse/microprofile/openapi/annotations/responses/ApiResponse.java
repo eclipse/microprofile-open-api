@@ -19,6 +19,7 @@ package org.eclipse.microprofile.openapi.annotations.responses;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
+import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
@@ -33,6 +34,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
 @Target({ ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
+@Repeatable(ApiResponses.class)
 public @interface ApiResponse {
     /**
      * A short description of the response.

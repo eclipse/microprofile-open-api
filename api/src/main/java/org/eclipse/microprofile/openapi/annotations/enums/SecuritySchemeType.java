@@ -1,0 +1,20 @@
+package org.eclipse.microprofile.openapi.annotations.enums;
+
+public enum SecuritySchemeType {
+    DEFAULT(""),
+    APIKEY("apiKey"),
+    HTTP("http"),
+    OPENIDCONNECT("openIdConnect"),
+    OAUTH2("oauth2");
+
+    private String value;
+
+    SecuritySchemeType(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
+    }
+}
