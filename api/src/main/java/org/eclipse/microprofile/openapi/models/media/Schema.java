@@ -24,6 +24,7 @@ import java.util.Map;
 import org.eclipse.microprofile.openapi.models.Constructible;
 import org.eclipse.microprofile.openapi.models.Extensible;
 import org.eclipse.microprofile.openapi.models.ExternalDocumentation;
+import org.eclipse.microprofile.openapi.models.Reference;
 
 /**
  * The Schema Object allows the definition of input and output data types. These
@@ -46,7 +47,7 @@ import org.eclipse.microprofile.openapi.models.ExternalDocumentation;
  *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#schemaObject">OpenAPI
  *      Specification Schema Object</a>
  */
-public interface Schema<T> extends Constructible, Extensible {
+public interface Schema<T> extends Constructible, Extensible, Reference<Schema<T>> {
 
 	/**
 	 * Returns the discriminator property from this schema instance.
@@ -673,32 +674,6 @@ public interface Schema<T> extends Constructible, Extensible {
 	 * @return the current Schema instance
 	 */
 	Schema format(String format);
-
-	/**
-	 * returns the $ref property from a Schema instance.
-	 *
-	 * @return String $ref
-	 **/
-	String get$ref();
-
-	/**
-	 * Set $ref property of a Schema instance
-	 * to the parameter.
-	 *
-	 * @param $ref
-	 */
-
-	void set$ref(String $ref);
-
-	/**
-	 * Set $ref property of a Schema instance
-	 * to the parameter and return the instance.
-	 *
-	 * @param $ref
-	 * @return Schema instance with the set $ref property.
-	 */
-
-	Schema $ref(String $ref);
 
 	/**
 	 * Returns the nullable property from this schema instance which indicates whether null is a 
