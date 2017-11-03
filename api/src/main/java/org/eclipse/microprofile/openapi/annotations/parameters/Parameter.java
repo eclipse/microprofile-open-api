@@ -19,21 +19,27 @@ package org.eclipse.microprofile.openapi.annotations.parameters;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
+import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import org.eclipse.microprofile.openapi.annotations.enums.Explode;
+import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
+import org.eclipse.microprofile.openapi.annotations.enums.ParameterStyle;
 import org.eclipse.microprofile.openapi.annotations.media.ArraySchema;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
+
 
 /**
  * Describes a single operation parameter
  **/
 @Target({ ElementType.PARAMETER,
-          ElementType.METHOD })
+          ElementType.METHOD,
+          ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
+@Repeatable(Parameters.class)
 @Inherited
 public @interface Parameter {
   /**
@@ -46,7 +52,7 @@ public @interface Parameter {
    * The location of the parameter.  Possible values are "query", "header", "path" or "cookie".  Ignored when empty string.
    * @return the parameter's location
    **/
-  String in() default "";
+  ParameterIn in() default ParameterIn.DEFAULT;
 
   /**
    * Additional description data to provide on the purpose of the parameter
@@ -76,7 +82,7 @@ public @interface Parameter {
    * Describes how the parameter value will be serialized depending on the type of the parameter value. Default values (based on value of in): for query - form; for path - simple; for header - simple; for cookie - form.  Ignored if the properties content or array are specified.
    * @return the style of the parameter
    **/
-  String style() default "";
+  ParameterStyle style() default ParameterStyle.DEFAULT;
 
   /**
    * When this is true, parameter values of type array or object generate separate parameters for each value of the array or key-value pair of the map. For other types of parameters this property has no effect. When style is form, the default value is true. For all other styles, the default value is false.  Ignored if the properties content or array are specified.
@@ -119,7 +125,7 @@ public @interface Parameter {
    * Provides an array examples of the schema.  When associated with a specific media type, the example string shall be parsed by the consumer to be treated as an object or an array.  Ignored if the properties content or array are specified.
    * @return the list of examples for this parameter
    **/
-  String[] examples() default {};
+   String[] examples() default {};
 
   /**
    * Provides an example of the schema.  When associated with a specific media type, the example string shall be parsed by the consumer to be treated as an object or an array.  Ignored if the properties examples, content or array are specified.

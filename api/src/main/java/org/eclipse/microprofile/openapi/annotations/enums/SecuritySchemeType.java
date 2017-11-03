@@ -15,26 +15,23 @@
  * limitations under the License.
  */
 
-package org.eclipse.microprofile.openapi.annotations.parameters;
+package org.eclipse.microprofile.openapi.annotations.enums;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+public enum SecuritySchemeType {
+    DEFAULT(""),
+    APIKEY("apiKey"),
+    HTTP("http"),
+    OPENIDCONNECT("openIdConnect"),
+    OAUTH2("oauth2");
 
-/**
- * This object encapsulates input parameters
- */
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.PARAMETER,
-        ElementType.METHOD })
-@Inherited
-public @interface Parameters {
-    /**
-     * An array of Parameters Objects for the operation
-     *
-     * @return the parameters
-     */
-    Parameter[] value() default {};
+    private String value;
+
+    SecuritySchemeType(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(value);
+    }
 }

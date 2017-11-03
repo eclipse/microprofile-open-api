@@ -1,5 +1,4 @@
 /**
- * Copyright (c) 2017 Contributors to the Eclipse Foundation
  * Copyright 2017 SmartBear Software
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,32 +14,29 @@
  * limitations under the License.
  */
 
-package org.eclipse.microprofile.openapi.annotations.security;
+package org.eclipse.microprofile.openapi.annotations.extensions;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
-import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Specifies a security requirement for an operation. 
+ * This object represents an array of extensions that can be added to the element.
  **/
-@Target({ ElementType.METHOD,
-          ElementType.TYPE })
+@Target({ ElementType.FIELD,
+        ElementType.METHOD,
+        ElementType.PARAMETER,
+        ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-@Repeatable(SecurityRequirements.class)
 @Inherited
-public @interface SecurityRequirement {
-	/**
-	 * This name must correspond to a declared SecurityRequirement.  
-	 */
-    String name();
-
+public @interface Extensions {
     /**
-     * If the security scheme is of type "oauth2" or "openIdConnect", then the value is a list of scope names required for the execution.  
-     * For other security scheme types, the array MUST be empty.
-     */
-    String[] scopes() default {};
+     * An array of Extension annotations
+     *
+     * @return the array of the extensions
+     **/
+    Extension[] value() default {};
+
 }

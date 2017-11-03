@@ -17,8 +17,11 @@
 
 package org.eclipse.microprofile.openapi.annotations.security;
 
+import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeIn;
+import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
+import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
@@ -31,6 +34,7 @@ import java.lang.annotation.Target;
 @Target({ ElementType.METHOD,
         ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
+@Repeatable(SecuritySchemes.class)
 @Inherited
 public @interface SecurityScheme {
   /**
@@ -38,7 +42,7 @@ public @interface SecurityScheme {
 	 * <p>
    * The type of the security scheme. Valid values are "apiKey", "http", "oauth2", "openIdConnect".
    **/
-  String type();
+  SecuritySchemeType type();
 
   /**
    * A short description for security scheme. CommonMark syntax can be used for rich text representation.
@@ -55,7 +59,7 @@ public @interface SecurityScheme {
    * The location of the API key. Valid values are "query" or "header". 
    * A REQUIRED property for apiKey type.
    **/
-  String in() default "";
+  SecuritySchemeIn in() default SecuritySchemeIn.DEFAULT;
 
   /**
    * The name of the HTTP Authorization scheme to be used in the Authorization header as defined in RFC 7235.  

@@ -51,12 +51,20 @@ public @interface Content {
      **/
     Schema schema() default @Schema();
 
-    /**
-     * An array of encodings
-     * The key, being the property name, MUST exist in the schema as a property.
-     *
-     * @return the array of encodings
-     */
-    Encoding[] encoding() default {};
+  /**
+   * The schema of the array that defines the type used for the content.
+   *
+   * @return the schema of the array
+   */
+  ArraySchema array() default @ArraySchema();
+
+
+  /**
+   * An array of encodings
+   * The key, being the property name, MUST exist in the schema as a property.
+   *
+   * @return the array of encodings
+   */
+  Encoding[] encoding() default {};
 
 }
