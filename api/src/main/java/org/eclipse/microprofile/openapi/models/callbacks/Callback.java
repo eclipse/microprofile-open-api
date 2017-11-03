@@ -37,18 +37,19 @@ import org.eclipse.microprofile.openapi.models.PathItem;
 public interface Callback extends Constructible, Extensible, Map<String, PathItem> {
 
 	/**
-	   * Adds the given PathItem to this Callback's list of PathItems using the string as its key.
-	   *
-	   * The key that identifies the Path Item Object is a runtime expression that can be 
-	   * evaluated in the context of a runtime HTTP request/response to identify the URL 
-	   * to be used for the callback request. A simple example might be $request.body#/url. 
-	   * However, using a runtime expression the complete HTTP message can be accessed. 
-	   * This includes accessing any part of a body that a JSON Pointer RFC6901 can 
-	   * reference. 
-	   * @param name a runtime expression that can be 
-	   * evaluated in the context of a runtime HTTP request/response
-	   * @param item a path to add to this Callback's list of PathItems
-	   */
+	 * Adds the given PathItem to this Callback's list of PathItems using the string as its key.
+	 *
+	 * The key that identifies the Path Item Object is a runtime expression that can be 
+	 * evaluated in the context of a runtime HTTP request/response to identify the URL 
+	 * to be used for the callback request. A simple example might be $request.body#/url. 
+	 * However, using a runtime expression the complete HTTP message can be accessed. 
+	 * This includes accessing any part of a body that a JSON Pointer RFC6901 can 
+	 * reference. 
+	 * @param name a runtime expression that can be 
+	 * evaluated in the context of a runtime HTTP request/response
+	 * @param item a path to add to this Callback's list of PathItems
+	 * @return the current Callback instance
+	 */
 	Callback addPathItem(String name, PathItem item);
 
 }
