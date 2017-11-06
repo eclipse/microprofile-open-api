@@ -44,33 +44,33 @@ public @interface Encoding {
 
     /**
      * The Content-Type for encoding a specific property.
+     * Default value depends on the property type: 
+	 * i.e. for binary string - contentType is application/octet-stream, for primitive types - text/plain, for object - application/json.
      **/
     String contentType() default "";
 
     /**
-     * Describes how a specific property value will be serialized depending on its type
-     **/
+    * Style describes how the encoding value will be serialized depending on the type of the parameter value.     
+    **/
     String style() default "";
 
     /**
-     *
      * When this is true, property values of type array or object generate separate parameters for each value of the array,
      * or key-value-pair of the map.
-     *
+     * For other types of properties this property has no effect. When style is form, the default value is true.
+	 * For all other styles, the default value is false.
      **/
     boolean explode() default false;
 
     /**
-     *
      * Determines whether the parameter value SHOULD allow reserved characters,
-     * as defined by RFC3986 :/?#[]@!$&'()*+,;= to be included without percent-encoding.
-     *
+     * as defined by RFC3986 to be included without percent-encoding.
+     * @see RFC3986 for full definition of reserved characters
      **/
     boolean allowReserved() default false;
 
     /**
-     * An array of header objects
-     *
+	 * Headers property of an Encoding is a map that allows additional information to be provided as headers.
      */
     Header[] headers() default {};
 
