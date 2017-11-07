@@ -37,7 +37,7 @@ public @interface OpenAPIDefinition {
      *
      * @return the metadata about this API
      */
-    Info info() default @Info;
+    Info info();
 
     /**
      * A list of tags used by the specification with additional metadata.
