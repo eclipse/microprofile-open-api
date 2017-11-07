@@ -38,27 +38,40 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
 public @interface ApiResponse {
     /**
      * A short description of the response.
+     * This is a REQUIRED property.
+     * 
+     * @return description of the response.
      **/
     String description() default "";
 
     /**
      * The HTTP response code, or 'default', for the supplied response. May only have 1 default entry.
+     * 
+     * @return HHTTP response code for this response instance or default
      **/
     String responseCode() default "default";
 
     /**
      * An array of response headers. Allows additional information to be included with response.
+     * <p> 
+     * RFC7230 states header names are case insensitive. 
+     * If a response header is defined with the name "Content-Type", it SHALL be ignored.
+     * 
+     * @return array of headers for this reponse instance
      **/
     Header[] headers() default {};
 
     /**
      * An array of operation links that can be followed from the response.
+     * 
+     * @return array of operation links for this response instance
      **/
     Link[] links() default {};
 
-    // TODO #2312 as array, according to spec
     /**
      * An array containing descriptions of potential response payloads, for different media types.
+     * 
+     * @return content of this response instance
      **/
     Content[] content() default {};
 

@@ -109,6 +109,8 @@ public @interface Operation {
 
     /**
      * A declaration of which security mechanisms can be used for this operation.
+     * 
+     * @return the list of security mechanisms for this operation
      */
     SecurityRequirement[] security() default {};
 

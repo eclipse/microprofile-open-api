@@ -32,11 +32,15 @@ import java.lang.annotation.Target;
 public @interface OAuthScope {
 	/**
 	 * Name of the scope.
+     * 
+     * @return the name of this scope
 	 */
     String name() default "";
 
     /**
      * Short description of the scope.
+     * 
+     * @return the description of this scope
      */
     String description() default "";
 }

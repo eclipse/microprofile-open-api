@@ -37,17 +37,23 @@ public @interface Server {
    * This URL supports Server Variables and may be relative, to indicate that the host location is relative to the location where the OpenAPI definition is being served. 
    * Variable substitutions will be made when a variable is named in {brackets}.
    * This is a REQUIRED property.
+   * 
+   * @return URL to the target host
    **/
   String url() default "";
 
   /**
    * An optional string describing the host designated by the URL. 
    * CommonMark syntax MAY be used for rich text representation.
+   * 
+   * @return description of the host designated by URL
    **/
   String description() default "";
 
   /**
    * An array of variables used for substitution in the server's URL template.
+   * 
+   * @return array of variables
    **/
   ServerVariable[] variables() default {};
 
