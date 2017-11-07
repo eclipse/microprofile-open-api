@@ -27,130 +27,136 @@ import org.eclipse.microprofile.openapi.models.Extensible;
  */
 public interface OAuthFlows extends Constructible, Extensible {
 
-	/**
-	 * This method returns the implicit property from OAuthFlows instance.
-	 * <p>
-	 * @return OAuthFlow implicit
-	 **/
+    /**
+     * This method returns the implicit property from OAuthFlows instance.
+     * <p>
+     * 
+     * @return OAuthFlow implicit
+     **/
 
-	OAuthFlow getImplicit();
+    OAuthFlow getImplicit();
 
-	/**
-	 * This method sets the implicit property of OAuthFlows instance
-	 * to the given implicit argument.
-	 * <p>
-	 * @param implicit
-	 */
+    /**
+     * This method sets the implicit property of OAuthFlows instance to the given implicit argument.
+     * <p>
+     * 
+     * @param implicit
+     */
 
-	void setImplicit(OAuthFlow implicit);
+    void setImplicit(OAuthFlow implicit);
 
-	/**
-	 * This method sets the implicit property of OAuthFlows instance
-	 * to the given implicit argument and returns the modified instance.
-	 * <p>
-	 * @param implicit
-	 * @return OAuthFlows instance with the set implicit property
-	 */
+    /**
+     * This method sets the implicit property of OAuthFlows instance to the given implicit argument and returns the modified instance.
+     * <p>
+     * 
+     * @param implicit
+     * @return OAuthFlows instance with the set implicit property
+     */
 
-	OAuthFlows implicit(OAuthFlow implicit);
+    OAuthFlows implicit(OAuthFlow implicit);
 
-	/**
-	 * OAuth Resource Owner Password flow
-	 * <p>
-	 * This method returns the password property from OAuthFlows instance.
-	 * <p>
-	 * @return OAuthFlow password
-	 **/
+    /**
+     * OAuth Resource Owner Password flow
+     * <p>
+     * This method returns the password property from OAuthFlows instance.
+     * <p>
+     * 
+     * @return OAuthFlow password
+     **/
 
-	OAuthFlow getPassword();
+    OAuthFlow getPassword();
 
-	/**
-	 * OAuth Resource Owner Password flow
-	 * <p>
-	 * This method sets the password property of OAuthFlows instance
-	 * to the given password argument.
-	 * <p>
-	 * @param password
-	 */
+    /**
+     * OAuth Resource Owner Password flow
+     * <p>
+     * This method sets the password property of OAuthFlows instance to the given password argument.
+     * <p>
+     * 
+     * @param password
+     */
 
-	void setPassword(OAuthFlow password);
+    void setPassword(OAuthFlow password);
 
-	/**
-	 * OAuth Resource Owner Password flow
-	 * <p>
-	 * This method sets the password property of an OAuthFlows instance
-	 * to the given password argument and returns the modified instance.
-	 * <p>
-	 * @param password
-	 * @return OAuthFlows instance with the set password property
-	 */
+    /**
+     * OAuth Resource Owner Password flow
+     * <p>
+     * This method sets the password property of an OAuthFlows instance to the given password argument and returns the modified instance.
+     * <p>
+     * 
+     * @param password
+     * @return OAuthFlows instance with the set password property
+     */
 
-	OAuthFlows password(OAuthFlow password);
+    OAuthFlows password(OAuthFlow password);
 
-	/**
-	 * OAuth Client Credential flow; previously called application in OpenAPI 2.0
-	 * <p>
-	 * This method returns the clientCredentials property from OAuthFlows instance.
-	 * <p>
-	 * @return OAuthFlow clientCredentials
-	 **/
+    /**
+     * OAuth Client Credential flow; previously called application in OpenAPI 2.0
+     * <p>
+     * This method returns the clientCredentials property from OAuthFlows instance.
+     * <p>
+     * 
+     * @return OAuthFlow clientCredentials
+     **/
 
-	OAuthFlow getClientCredentials();
+    OAuthFlow getClientCredentials();
 
-	/**
-	 * OAuth Client Credential flow; previously called application in OpenAPI 2.0
-	 * <p>
-	 * This method sets the clientCredentials property of OAuthFlows instance
-	 * to the given clientCredentials argument.
-	 * <p>
-	 * @param clientCredentials
-	 */
+    /**
+     * OAuth Client Credential flow; previously called application in OpenAPI 2.0
+     * <p>
+     * This method sets the clientCredentials property of OAuthFlows instance to the given clientCredentials argument.
+     * <p>
+     * 
+     * @param clientCredentials
+     */
 
-	void setClientCredentials(OAuthFlow clientCredentials);
+    void setClientCredentials(OAuthFlow clientCredentials);
 
-	/**
-	 * OAuth Client Credential flow; previously called application in OpenAPI 2.0
-	 * <p>
-	 * This method sets the clientCredentials property of OAuthFlows instance
-	 * to the given clientCredentials argument and returns the modified instance.
-	 * <p>
-	 * @param clientCredentials
-	 * @return OAuthFlows instance with the set clientCredentials property
-	 */
+    /**
+     * OAuth Client Credential flow; previously called application in OpenAPI 2.0
+     * <p>
+     * This method sets the clientCredentials property of OAuthFlows instance to the given clientCredentials argument and returns the modified
+     * instance.
+     * <p>
+     * 
+     * @param clientCredentials
+     * @return OAuthFlows instance with the set clientCredentials property
+     */
 
-	OAuthFlows clientCredentials(OAuthFlow clientCredentials);
+    OAuthFlows clientCredentials(OAuthFlow clientCredentials);
 
-	/**
-	 * OAuth Authorization Code flow; previously called accessCode in OpenAPI 2.0
-	 * <p>
-	 * This method returns the authorizationCode property from OAuthFlows instance.
-	 * <p>
-	 * @return OAuthFlow authorizationCode
-	 **/
+    /**
+     * OAuth Authorization Code flow; previously called accessCode in OpenAPI 2.0
+     * <p>
+     * This method returns the authorizationCode property from OAuthFlows instance.
+     * <p>
+     * 
+     * @return OAuthFlow authorizationCode
+     **/
 
-	OAuthFlow getAuthorizationCode();
+    OAuthFlow getAuthorizationCode();
 
-	/**
-	 * OAuth Authorization Code flow; previously called accessCode in OpenAPI 2.0
-	 * <p>
-	 * This method sets the authorizationCode property of OAuthFlows instance
-	 * to the given authorizationCode argument.
-	 * <p>
-	 * @param authorizationCode
-	 */
+    /**
+     * OAuth Authorization Code flow; previously called accessCode in OpenAPI 2.0
+     * <p>
+     * This method sets the authorizationCode property of OAuthFlows instance to the given authorizationCode argument.
+     * <p>
+     * 
+     * @param authorizationCode
+     */
 
-	void setAuthorizationCode(OAuthFlow authorizationCode);
+    void setAuthorizationCode(OAuthFlow authorizationCode);
 
-	/**
-	 * OAuth Authorization Code flow; previously called accessCode in OpenAPI 2.0
-	 * <p>
-	 * This method sets the authorizationCode property of OAuthFlows instance
-	 * to the given authorizationCode argument and returns the modified instance.
-	 * <p>
-	 * @param authorizationCode
-	 * @return OAuthFlows instance with the set authorizationCode property
-	 */
+    /**
+     * OAuth Authorization Code flow; previously called accessCode in OpenAPI 2.0
+     * <p>
+     * This method sets the authorizationCode property of OAuthFlows instance to the given authorizationCode argument and returns the modified
+     * instance.
+     * <p>
+     * 
+     * @param authorizationCode
+     * @return OAuthFlows instance with the set authorizationCode property
+     */
 
-	OAuthFlows authorizationCode(OAuthFlow authorizationCode);
+    OAuthFlows authorizationCode(OAuthFlow authorizationCode);
 
 }

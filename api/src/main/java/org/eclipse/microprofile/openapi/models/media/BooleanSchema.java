@@ -24,38 +24,36 @@ import java.util.List;
  */
 public interface BooleanSchema extends Schema<Boolean> {
 
-	/**
-	 * Change this BooleanSchema's type property from the default value to the
-	 * given string. 
-	 *
-	 * @param type  the name of a valid type
-	 * @return the current BooleanSchema instance
-	 */
-	BooleanSchema type(String type);
+    /**
+     * Change this BooleanSchema's type property from the default value to the given string.
+     *
+     * @param type the name of a valid type
+     * @return the current BooleanSchema instance
+     */
+    BooleanSchema type(String type);
 
-	/**
-	 * Sets the default property of this BooleanSchema to the given default value.
-	 * 
-	 * @param defaultValue  a value to use as the default
-	 * @return the current BooleanSchema instance
-	 */
-	BooleanSchema defaultValue(Boolean defaultValue);
+    /**
+     * Sets the default property of this BooleanSchema to the given default value.
+     * 
+     * @param defaultValue a value to use as the default
+     * @return the current BooleanSchema instance
+     */
+    BooleanSchema defaultValue(Boolean defaultValue);
 
-	/**
-	 * Sets the enumerated list of values allowed for objects defined by this schema.
-	 *
-	 * @param enumeration a list of values allowed
-	 * @return the current BooleanSchema instance
-	 */
-	BooleanSchema enumeration(List<Boolean> enumeration);
+    /**
+     * Sets the enumerated list of values allowed for objects defined by this schema.
+     *
+     * @param enumeration a list of values allowed
+     * @return the current BooleanSchema instance
+     */
+    BooleanSchema enumeration(List<Boolean> enumeration);
 
-	/**
-	 * Adds an item of the appropriate type to the enumerated list of values
-	 * allowed.
-	 *
-	 * @param enumerationItem  an object to add to the enumerated values
-	 * @return the current BooleanSchema instance
-	 */
-	BooleanSchema addEnumerationItem(Boolean enumerationItem);
+    /**
+     * Adds an item of the appropriate type to the enumerated list of values allowed.
+     *
+     * @param enumerationItem an object to add to the enumerated values
+     * @return the current BooleanSchema instance
+     */
+    BooleanSchema addEnumerationItem(Boolean enumerationItem);
 
 }

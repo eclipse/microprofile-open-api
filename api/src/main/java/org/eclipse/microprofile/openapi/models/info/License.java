@@ -27,51 +27,49 @@ import org.eclipse.microprofile.openapi.models.Extensible;
  */
 public interface License extends Constructible, Extensible {
 
-	/**
-	   * Returns the license name for this License instance that is used for the API.
-	   *
-	   * @return the license name used for the API
-	   **/
-	String getName();
+    /**
+     * Returns the license name for this License instance that is used for the API.
+     *
+     * @return the license name used for the API
+     **/
+    String getName();
 
-	/**
-	   * Sets the license name for this License instance that is used for the API.
-	   *
-	   * @param name the license name used for the API
-	   */
-	void setName(String name);
+    /**
+     * Sets the license name for this License instance that is used for the API.
+     *
+     * @param name the license name used for the API
+     */
+    void setName(String name);
 
-	/**
-	   * Sets this License instance's name used for the API and
-	   * returns this instance of License.
-	   *
-	   * @param name the license name used for the API
-	   * @return this License instance
-	   */
-	License name(String name);
+    /**
+     * Sets this License instance's name used for the API and returns this instance of License.
+     *
+     * @param name the license name used for the API
+     * @return this License instance
+     */
+    License name(String name);
 
-	/**
-	   * Returns the URL for this License instance that is used for the API.
-	   *
-	   * @return the URL to the license used for the API
-	   **/
+    /**
+     * Returns the URL for this License instance that is used for the API.
+     *
+     * @return the URL to the license used for the API
+     **/
 
-	String getUrl();
+    String getUrl();
 
-	/**
-	   * Sets this URL for this License instance that is used for the API.
-	   *
-	   * @param url the URL to the license used for the API
-	   */
-	void setUrl(String url);
+    /**
+     * Sets this URL for this License instance that is used for the API.
+     *
+     * @param url the URL to the license used for the API
+     */
+    void setUrl(String url);
 
-	/**
-	   * Sets this License instance's URL used for the API and
-	   * returns this instance of License.
-	   *
-	   * @param url the URL to the license used for the API
-	   * @return this License instance
-	   */
-	License url(String url);
+    /**
+     * Sets this License instance's URL used for the API and returns this instance of License.
+     *
+     * @param url the URL to the license used for the API
+     * @return this License instance
+     */
+    License url(String url);
 
 }

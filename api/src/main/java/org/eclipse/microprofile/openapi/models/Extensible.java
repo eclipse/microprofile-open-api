@@ -20,34 +20,33 @@ package org.eclipse.microprofile.openapi.models;
 import java.util.Map;
 
 /**
- * The base interface for OpenAPI model objects that can contain extensions.
- * Extensions contain data not required by the specification and may or may not
- * be supported by the tools you use.
+ * The base interface for OpenAPI model objects that can contain extensions. Extensions contain data not required by the specification and may or may
+ * not be supported by the tools you use.
  * <p>
  * The extensions property names are always prefixed by "x-".
  */
 public interface Extensible {
-	
-	/**
-	 * Returns the extensions property from an Extensible instance.
-	 *
-	 * @return a map containing keys which start with "x-" and values which provide additional information 
-	 **/
-	Map<String, Object> getExtensions();
 
-	/**
-	 * Adds the given object to this Extensible's map of extensions, with the given name as its key.
-	 *
-	 * @param name  the key used to access the extension object. Always prefixed by "x-".
-	 * @param value data not required by the specification
-	 */
-	void addExtension(String name, Object value);
+    /**
+     * Returns the extensions property from an Extensible instance.
+     *
+     * @return a map containing keys which start with "x-" and values which provide additional information
+     **/
+    Map<String, Object> getExtensions();
 
-	/**
-	 * Sets this Extensible's extensions property to the given map of extensions.
-	 *
-	 * @param a map containing keys which start with "x-" and values which provide additional information
-	 */
-	void setExtensions(Map<String, Object> extensions);
+    /**
+     * Adds the given object to this Extensible's map of extensions, with the given name as its key.
+     *
+     * @param name the key used to access the extension object. Always prefixed by "x-".
+     * @param value data not required by the specification
+     */
+    void addExtension(String name, Object value);
+
+    /**
+     * Sets this Extensible's extensions property to the given map of extensions.
+     *
+     * @param a map containing keys which start with "x-" and values which provide additional information
+     */
+    void setExtensions(Map<String, Object> extensions);
 
 }

@@ -37,8 +37,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
 @Repeatable(ApiResponses.class)
 public @interface ApiResponse {
     /**
-     * A short description of the response.
-     * This is a REQUIRED property.
+     * A short description of the response. This is a REQUIRED property.
      * 
      * @return description of the response.
      **/
@@ -53,9 +52,8 @@ public @interface ApiResponse {
 
     /**
      * An array of response headers. Allows additional information to be included with response.
-     * <p> 
-     * RFC7230 states header names are case insensitive. 
-     * If a response header is defined with the name "Content-Type", it SHALL be ignored.
+     * <p>
+     * RFC7230 states header names are case insensitive. If a response header is defined with the name "Content-Type", it SHALL be ignored.
      * 
      * @return array of headers for this reponse instance
      **/

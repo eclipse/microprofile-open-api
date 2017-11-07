@@ -24,69 +24,68 @@ import java.util.ServiceLoader;
 
 public abstract class OASFactoryResolver {
 
-	private static volatile OASFactoryResolver instance = null;
-	
-	public abstract <T extends Constructible> T createObject(Class<T> clazz);
-	
-	public static OASFactoryResolver instance() {
-		if (instance == null) {
-			synchronized (OASFactoryResolver.class) {
-				if (instance != null) {
-					return instance;
-				}
+    private static volatile OASFactoryResolver instance = null;
 
-				ClassLoader cl = AccessController.doPrivileged(new PrivilegedAction<ClassLoader>() {
-					@Override
-					public ClassLoader run() {
-						return Thread.currentThread().getContextClassLoader();
-					}
-				});
-				if (cl == null) {
-					cl = OASFactoryResolver.class.getClassLoader();
-				}
+    public abstract <T extends Constructible> T createObject(Class<T> clazz);
 
-				OASFactoryResolver newInstance = loadSpi(cl);
+    public static OASFactoryResolver instance() {
+        if (instance == null) {
+            synchronized (OASFactoryResolver.class) {
+                if (instance != null) {
+                    return instance;
+                }
 
-				if (newInstance == null) {
-					throw new IllegalStateException("No OASFactoryResolver implementation found!");
-				}
+                ClassLoader cl = AccessController.doPrivileged(new PrivilegedAction<ClassLoader>() {
+                    @Override
+                    public ClassLoader run() {
+                        return Thread.currentThread().getContextClassLoader();
+                    }
+                });
+                if (cl == null) {
+                    cl = OASFactoryResolver.class.getClassLoader();
+                }
 
-				instance = newInstance;
-			}
-		}
+                OASFactoryResolver newInstance = loadSpi(cl);
 
-		return instance;
-	}
+                if (newInstance == null) {
+                    throw new IllegalStateException("No OASFactoryResolver implementation found!");
+                }
 
-	private static OASFactoryResolver loadSpi(ClassLoader cl) {
-		if (cl == null) {
-			return null;
-		}
-		
-		OASFactoryResolver instance = loadSpi(cl.getParent());
+                instance = newInstance;
+            }
+        }
 
-		if (instance == null) {
-			ServiceLoader<OASFactoryResolver> sl = ServiceLoader.load(OASFactoryResolver.class, cl);
-			for (OASFactoryResolver spi : sl) {
-				if (instance != null) {
-					throw new IllegalStateException("Multiple OASFactoryResolver implementations found: "
-							+ spi.getClass().getName() + " and " + instance.getClass().getName());
-				} else {
-					instance = spi;
-				}
-			}
-		}
-		return instance;
-	}
+        return instance;
+    }
 
-	/**
-	 * Set the instance. It is used by OSGi environment while service loader
-	 * pattern is not supported.
-	 *
-	 * @param factory
-	 *            set the instance.
-	 */
-	public static void setInstance(OASFactoryResolver factory) {
-		instance = factory;
-	}
+    private static OASFactoryResolver loadSpi(ClassLoader cl) {
+        if (cl == null) {
+            return null;
+        }
+
+        OASFactoryResolver instance = loadSpi(cl.getParent());
+
+        if (instance == null) {
+            ServiceLoader<OASFactoryResolver> sl = ServiceLoader.load(OASFactoryResolver.class, cl);
+            for (OASFactoryResolver spi : sl) {
+                if (instance != null) {
+                    throw new IllegalStateException("Multiple OASFactoryResolver implementations found: " + spi.getClass().getName() + " and "
+                            + instance.getClass().getName());
+                }
+                else {
+                    instance = spi;
+                }
+            }
+        }
+        return instance;
+    }
+
+    /**
+     * Set the instance. It is used by OSGi environment while service loader pattern is not supported.
+     *
+     * @param factory set the instance.
+     */
+    public static void setInstance(OASFactoryResolver factory) {
+        instance = factory;
+    }
 }

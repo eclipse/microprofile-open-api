@@ -27,131 +27,124 @@ import org.eclipse.microprofile.openapi.models.links.Link;
 import org.eclipse.microprofile.openapi.models.media.Content;
 
 /**
- * This interface represents a single response from an API Operation, including design-time,
- * static links to operations based on the response.
+ * This interface represents a single response from an API Operation, including design-time, static links to operations based on the response.
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#responseObject"
  */
 public interface ApiResponse extends Constructible, Extensible, Reference<ApiResponse> {
 
-	/**
-	 * Returns a short description of this instance of ApiResponse.
-	 *
-	 * @return a short description of the response
-	 **/
+    /**
+     * Returns a short description of this instance of ApiResponse.
+     *
+     * @return a short description of the response
+     **/
 
-	String getDescription();
+    String getDescription();
 
-	/**
-	 * Sets the description of this instance of ApiResponse.
-	 *
-	 * @param description a short description of the response
-	 */
+    /**
+     * Sets the description of this instance of ApiResponse.
+     *
+     * @param description a short description of the response
+     */
 
-	void setDescription(String description);
+    void setDescription(String description);
 
-	/**
-	 * Sets the description  of this instance of ApiResponse and returns this ApiResponse
-	 * instance.
-	 *
-	 * @param description a short description of the response
-	 * @return this ApiResponse instance
-	 */
+    /**
+     * Sets the description of this instance of ApiResponse and returns this ApiResponse instance.
+     *
+     * @param description a short description of the response
+     * @return this ApiResponse instance
+     */
 
-	ApiResponse description(String description);
+    ApiResponse description(String description);
 
-	/**
-	 * Returns the map of Headers in this instance of ApiResponse.
-	 *
-	 * @return the headers of this response
-	 **/
+    /**
+     * Returns the map of Headers in this instance of ApiResponse.
+     *
+     * @return the headers of this response
+     **/
 
-	Map<String, Header> getHeaders();
+    Map<String, Header> getHeaders();
 
-	/**
-	 * Sets the Headers for this instance of ApiResponse with the given map of Headers.
-	 * The Header names are case insensitive and if a Header is defined with the name 'Content-Type',
-	 * then it will be ignored.
-	 *
-	 * @param headers the headers of the response
-	 */
+    /**
+     * Sets the Headers for this instance of ApiResponse with the given map of Headers. The Header names are case insensitive and if a Header is
+     * defined with the name 'Content-Type', then it will be ignored.
+     *
+     * @param headers the headers of the response
+     */
 
-	void setHeaders(Map<String, Header> headers);
+    void setHeaders(Map<String, Header> headers);
 
-	/**
-	 * Sets the Headers for this instance of ApiResponse with the given map of Headers and returns
-	 * this instance of ApiResponse. The Header names are case insensitive and if a Header is defined
-	 * with the name 'Content-Type', then it will be ignored.
-	 *
-	 * @param headers the headers of the response
-	 * @return this ApiResponse instance
-	 */
+    /**
+     * Sets the Headers for this instance of ApiResponse with the given map of Headers and returns this instance of ApiResponse. The Header names are
+     * case insensitive and if a Header is defined with the name 'Content-Type', then it will be ignored.
+     *
+     * @param headers the headers of the response
+     * @return this ApiResponse instance
+     */
 
-	ApiResponse headers(Map<String, Header> headers);
+    ApiResponse headers(Map<String, Header> headers);
 
-	/**
-	 * Adds the given Header to this ApiResponse instance's map of Headers with the given name and
-	 * return this instance of ApiResponse. If this ApiResponse instance does not have any headers, a new map
-	 * is created and the given header is added.
-	 *
-	 * @param name the unique name of the header
-	 * @param header a header for the response
-	 * @return this ApiResponse instance
-	 */
+    /**
+     * Adds the given Header to this ApiResponse instance's map of Headers with the given name and return this instance of ApiResponse. If this
+     * ApiResponse instance does not have any headers, a new map is created and the given header is added.
+     *
+     * @param name the unique name of the header
+     * @param header a header for the response
+     * @return this ApiResponse instance
+     */
 
-	ApiResponse addHeaderObject(String name, Header header);
+    ApiResponse addHeaderObject(String name, Header header);
 
-	/**
-	 * Returns the map containing descriptions of potential response payload for this instance of ApiResponse.
-	 *
-	 * @return the potential content of the response
-	 **/
+    /**
+     * Returns the map containing descriptions of potential response payload for this instance of ApiResponse.
+     *
+     * @return the potential content of the response
+     **/
 
-	Content getContent();
+    Content getContent();
 
-	/**
-	 * Sets the map containing descriptions of potential response payload for this instance of ApiResponse.
-	 *
-	 * @param content the potential content of the response
-	 */
+    /**
+     * Sets the map containing descriptions of potential response payload for this instance of ApiResponse.
+     *
+     * @param content the potential content of the response
+     */
 
-	void setContent(Content content);
+    void setContent(Content content);
 
-	/**
-	 * Sets the map containing descriptions of potential response payload for this instance of ApiResponse
-	 * and returns this ApiResponse instance.
-	 *
-	 * @param content the potential content of the response
-	 * @return this ApiResponse instance
-	 */
+    /**
+     * Sets the map containing descriptions of potential response payload for this instance of ApiResponse and returns this ApiResponse instance.
+     *
+     * @param content the potential content of the response
+     * @return this ApiResponse instance
+     */
 
-	ApiResponse content(Content content);
+    ApiResponse content(Content content);
 
-	/**
-	 * Returns the operations links that can be followed from tis instance of ApiResponse.
-	 *
-	 * @return operation links that can be followed from the response
-	 **/
+    /**
+     * Returns the operations links that can be followed from tis instance of ApiResponse.
+     *
+     * @return operation links that can be followed from the response
+     **/
 
-	Map<String, Link> getLinks();
+    Map<String, Link> getLinks();
 
-	/**
-	 * Sets the operations links that can be followed from tis instance of ApiResponse.
-	 *
-	 * @param links the operation links followed from the response
-	 */
+    /**
+     * Sets the operations links that can be followed from tis instance of ApiResponse.
+     *
+     * @param links the operation links followed from the response
+     */
 
-	void setLinks(Map<String, Link> links);
+    void setLinks(Map<String, Link> links);
 
-	/**
-	 * Sets the operations links for this instance of ApiResponse using the given
-	 * name and Link, and returns this ApiResponse instance.
-	 *
-	 * @param name the short name of the link
-	 * @param link the operation link that can be followed from the response
-	 * @return this ApiResponse instance
-	 */
+    /**
+     * Sets the operations links for this instance of ApiResponse using the given name and Link, and returns this ApiResponse instance.
+     *
+     * @param name the short name of the link
+     * @param link the operation link that can be followed from the response
+     * @return this ApiResponse instance
+     */
 
-	ApiResponse link(String name, Link link);
+    ApiResponse link(String name, Link link);
 
 }

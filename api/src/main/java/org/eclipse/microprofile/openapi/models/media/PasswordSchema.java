@@ -24,49 +24,45 @@ import java.util.List;
  */
 public interface PasswordSchema extends Schema<String> {
 
-	/**
-	 * Change this PasswordSchema's type property from the default value to the
-	 * given string. 
-	 *
-	 * @param type  the name of a valid type
-	 * @return the current PasswordSchema instance
-	 */
-	PasswordSchema type(String type);
+    /**
+     * Change this PasswordSchema's type property from the default value to the given string.
+     *
+     * @param type the name of a valid type
+     * @return the current PasswordSchema instance
+     */
+    PasswordSchema type(String type);
 
-	/**
-	 * Change this PasswordSchema's format property from the default value to the
-	 * given format. The value may be one of the formats described in the OAS or
-	 * a user defined format.
-	 *
-	 * @param format
-	 *            the string specifying the data format
-	 * @return the current PasswordSchema instance
-	 */
-	PasswordSchema format(String format);
+    /**
+     * Change this PasswordSchema's format property from the default value to the given format. The value may be one of the formats described in the
+     * OAS or a user defined format.
+     *
+     * @param format the string specifying the data format
+     * @return the current PasswordSchema instance
+     */
+    PasswordSchema format(String format);
 
-	/**
-	 * Sets the default property of this PasswordSchema to the given default value.
-	 * 
-	 * @param defaultValue  a value to use as the default
-	 * @return the current PasswordSchema instance
-	 */
-	PasswordSchema defaultValue(String defaultValue);
+    /**
+     * Sets the default property of this PasswordSchema to the given default value.
+     * 
+     * @param defaultValue a value to use as the default
+     * @return the current PasswordSchema instance
+     */
+    PasswordSchema defaultValue(String defaultValue);
 
-	/**
-	 * Sets the enumerated list of values allowed for objects defined by this schema.
-	 *
-	 * @param enumeration a list of values allowed
-	 * @return the current PasswordSchema instance
-	 */
-	PasswordSchema enumeration(List<String> enumeration);
+    /**
+     * Sets the enumerated list of values allowed for objects defined by this schema.
+     *
+     * @param enumeration a list of values allowed
+     * @return the current PasswordSchema instance
+     */
+    PasswordSchema enumeration(List<String> enumeration);
 
-	/**
-	 * Adds an item of the appropriate type to the enumerated list of values
-	 * allowed.
-	 *
-	 * @param enumerationItem  an object to add to the enumerated values
-	 * @return the current PasswordSchema instance
-	 */
-	PasswordSchema addEnumerationItem(String enumerationItem);
+    /**
+     * Adds an item of the appropriate type to the enumerated list of values allowed.
+     *
+     * @param enumerationItem an object to add to the enumerated values
+     * @return the current PasswordSchema instance
+     */
+    PasswordSchema addEnumerationItem(String enumerationItem);
 
 }

@@ -27,24 +27,21 @@ import java.lang.annotation.Target;
  * This object represents a Schema of type array, allowing the items to have a Schema annotation inside of this object.
  *
  */
-@Target({ ElementType.FIELD,
-        ElementType.METHOD,
-        ElementType.PARAMETER,
-        ElementType.TYPE })
+@Target({ ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface ArraySchema {
     Schema schema() default @Schema;
 
     /**
-     * sets the maximum number of items in an array.  Ignored if value is Integer.MIN_VALUE.
+     * sets the maximum number of items in an array. Ignored if value is Integer.MIN_VALUE.
      * 
      * @return the maximum number of items in this array
      **/
     int maxItems() default Integer.MIN_VALUE;
 
     /**
-     * sets the minimum number of items in an array.  Ignored if value is Integer.MAX_VALUE.
+     * sets the minimum number of items in an array. Ignored if value is Integer.MAX_VALUE.
      * 
      * @return the minimum number of items in this array
      **/

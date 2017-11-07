@@ -34,44 +34,39 @@ import org.eclipse.microprofile.openapi.annotations.headers.Header;
 public @interface Encoding {
 
     /**
-     * The name of this encoding object instance.
-     * This property is a key in encoding map of MediaType object and
-     * MUST exist in a schema as a property.
+     * The name of this encoding object instance. This property is a key in encoding map of MediaType object and MUST exist in a schema as a property.
      * 
      * @return the name of this encoding instance
      **/
     String name() default "";
 
     /**
-     * The Content-Type for encoding a specific property.
-     * Default value depends on the property type:
-     * <p> 
-	 * i.e. for binary string - contentType is application/octet-stream, for primitive types - text/plain, for object - application/json.
+     * The Content-Type for encoding a specific property. Default value depends on the property type:
+     * <p>
+     * i.e. for binary string - contentType is application/octet-stream, for primitive types - text/plain, for object - application/json.
      * 
      * @return the contentType property of this encoding instance
      **/
     String contentType() default "";
 
     /**
-    * Style describes how the encoding value will be serialized depending on the type of the parameter value.
-    *
-    * @return the style of this encoding instance    
-    **/
+     * Style describes how the encoding value will be serialized depending on the type of the parameter value.
+     *
+     * @return the style of this encoding instance
+     **/
     String style() default "";
 
     /**
-     * When this is true, property values of type array or object generate separate parameters for each value of the array,
-     * or key-value-pair of the map.
-     * For other types of properties this property has no effect. When style is form, the default value is true.
-	 * For all other styles, the default value is false.
+     * When this is true, property values of type array or object generate separate parameters for each value of the array, or key-value-pair of the
+     * map. For other types of properties this property has no effect. When style is form, the default value is true. For all other styles, the
+     * default value is false.
      * 
-     * @return whether or not this array type encoding will have separate parameters generated for each array value 
+     * @return whether or not this array type encoding will have separate parameters generated for each array value
      **/
     boolean explode() default false;
 
     /**
-     * Determines whether the parameter value SHOULD allow reserved characters,
-     * as defined by RFC3986 to be included without percent-encoding.
+     * Determines whether the parameter value SHOULD allow reserved characters, as defined by RFC3986 to be included without percent-encoding.
      * <p>
      * See RFC3986 for full definition of reserved characters.
      * 
@@ -80,7 +75,7 @@ public @interface Encoding {
     boolean allowReserved() default false;
 
     /**
-	 * Headers property of an Encoding is a map that allows additional information to be provided as headers.
+     * Headers property of an Encoding is a map that allows additional information to be provided as headers.
      * 
      * @return the headers array
      */

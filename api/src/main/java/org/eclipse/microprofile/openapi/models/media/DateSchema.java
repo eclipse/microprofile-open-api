@@ -25,49 +25,45 @@ import java.util.List;
  */
 public interface DateSchema extends Schema<Date> {
 
-	/**
-	 * Change this DateSchema's type property from the default value to the
-	 * given string. 
-	 *
-	 * @param type  the name of a valid type
-	 * @return the current DateSchema instance
-	 */
-	DateSchema type(String type);
+    /**
+     * Change this DateSchema's type property from the default value to the given string.
+     *
+     * @param type the name of a valid type
+     * @return the current DateSchema instance
+     */
+    DateSchema type(String type);
 
-	/**
-	 * Change this DateSchema's format property from the default value to the
-	 * given format. The value may be one of the formats described in the OAS or
-	 * a user defined format.
-	 *
-	 * @param format
-	 *            the string specifying the data format
-	 * @return the current DateSchema instance
-	 */
-	DateSchema format(String format);
+    /**
+     * Change this DateSchema's format property from the default value to the given format. The value may be one of the formats described in the OAS
+     * or a user defined format.
+     *
+     * @param format the string specifying the data format
+     * @return the current DateSchema instance
+     */
+    DateSchema format(String format);
 
-	/**
-	 * Sets the default property of this DateSchema to the given default value.
-	 * 
-	 * @param defaultValue  a value to use as the default
-	 * @return the current DateSchema instance
-	 */
-	DateSchema defaultValue(Date defaultValue);
+    /**
+     * Sets the default property of this DateSchema to the given default value.
+     * 
+     * @param defaultValue a value to use as the default
+     * @return the current DateSchema instance
+     */
+    DateSchema defaultValue(Date defaultValue);
 
-	/**
-	 * Sets the enumerated list of values allowed for objects defined by this schema.
-	 *
-	 * @param enumeration a list of values allowed
-	 * @return the current DateSchema instance
-	 */
-	DateSchema enumeration(List<Date> enumeration);
+    /**
+     * Sets the enumerated list of values allowed for objects defined by this schema.
+     *
+     * @param enumeration a list of values allowed
+     * @return the current DateSchema instance
+     */
+    DateSchema enumeration(List<Date> enumeration);
 
-	/**
-	 * Adds an item of the appropriate type to the enumerated list of values
-	 * allowed.
-	 *
-	 * @param enumerationItem  an object to add to the enumerated values
-	 * @return the current DateSchema instance
-	 */
-	DateSchema addEnumerationItem(Date enumerationItem);
+    /**
+     * Adds an item of the appropriate type to the enumerated list of values allowed.
+     *
+     * @param enumerationItem an object to add to the enumerated values
+     * @return the current DateSchema instance
+     */
+    DateSchema addEnumerationItem(Date enumerationItem);
 
 }

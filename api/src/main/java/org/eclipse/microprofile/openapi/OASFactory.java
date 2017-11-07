@@ -20,11 +20,15 @@ import org.eclipse.microprofile.openapi.models.Constructible;
 import org.eclipse.microprofile.openapi.spi.OASFactoryResolver;
 
 public final class OASFactory {
-	
+    
+    private OASFactory() {
+        
+    }
+
     private static final OASFactoryResolver INSTANCE = OASFactoryResolver.instance();
 
-    public static <T extends Constructible> T createObject(Class<T> clazz){
-		return INSTANCE.createObject(clazz);
-	}
-    
+    public static <T extends Constructible> T createObject(Class<T> clazz) {
+        return INSTANCE.createObject(clazz);
+    }
+
 }

@@ -25,7 +25,7 @@ import java.lang.annotation.Target;
 /**
  * This object represents an array of SecurityRequirement that can be specified for the operation or at definition level.
  **/
-@Target({ElementType.METHOD, ElementType.TYPE})
+@Target({ ElementType.METHOD, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface SecurityRequirements {

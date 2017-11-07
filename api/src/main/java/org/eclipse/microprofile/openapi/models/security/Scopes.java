@@ -25,20 +25,20 @@ import org.eclipse.microprofile.openapi.models.Extensible;
 /**
  * Scopes is a property of OAuth Flow Object.
  * <p>
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#oauthFlowsObject" 
+ * 
+ * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#oauthFlowsObject"
  **/
 
 public interface Scopes extends Constructible, Extensible, Map<String, String> {
 
-	/**
-	 * Adds name of an existing scope object and item parameters to a Scopes instance
-	 * as a key-value pair in a map.
-	 *
-	 * @param name
-	 * @param item
-	 * @return Scopes instance with the added key-value pair
-	 */
+    /**
+     * Adds name of an existing scope object and item parameters to a Scopes instance as a key-value pair in a map.
+     *
+     * @param name
+     * @param item
+     * @return Scopes instance with the added key-value pair
+     */
 
-	Scopes addString(String name, String item);
+    Scopes addString(String name, String item);
 
 }

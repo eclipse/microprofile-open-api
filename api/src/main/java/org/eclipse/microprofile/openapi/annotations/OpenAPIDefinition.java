@@ -40,16 +40,16 @@ public @interface OpenAPIDefinition {
     Info info();
 
     /**
-     * A list of tags used by the specification with additional metadata.
-     * The order of the tags can be used to reflect on their order by the parsing tools.
+     * A list of tags used by the specification with additional metadata. The order of the tags can be used to reflect on their order by the parsing
+     * tools.
      *
      * @return the tags used by the specification with any additional metadata
      */
     Tag[] tags() default {};
 
     /**
-     * An array of Server Objects, which provide connectivity information to a target server.
-     * If the servers property is not provided, or is an empty array, the default value would be a Server Object with a url value of /.
+     * An array of Server Objects, which provide connectivity information to a target server. If the servers property is not provided, or is an empty
+     * array, the default value would be a Server Object with a url value of /.
      *
      * @return the servers of this API
      */

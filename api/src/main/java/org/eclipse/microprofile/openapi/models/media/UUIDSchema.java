@@ -25,58 +25,53 @@ import java.util.UUID;
  */
 public interface UUIDSchema extends Schema<UUID> {
 
-	/**
-	 * Change this UUIDSchema's type property from the default value to the
-	 * given string. 
-	 *
-	 * @param type  the name of a valid type
-	 * @return the current UUIDSchema instance
-	 */
-	UUIDSchema type(String type);
+    /**
+     * Change this UUIDSchema's type property from the default value to the given string.
+     *
+     * @param type the name of a valid type
+     * @return the current UUIDSchema instance
+     */
+    UUIDSchema type(String type);
 
-	/**
-	 * Change this UUIDSchema's format property from the default value to the
-	 * given format. The value may be one of the formats described in the OAS or
-	 * a user defined format.
-	 *
-	 * @param format
-	 *            the string specifying the data format
-	 * @return the current UUIDSchema instance
-	 */
-	UUIDSchema format(String format);
+    /**
+     * Change this UUIDSchema's format property from the default value to the given format. The value may be one of the formats described in the OAS
+     * or a user defined format.
+     *
+     * @param format the string specifying the data format
+     * @return the current UUIDSchema instance
+     */
+    UUIDSchema format(String format);
 
-	/**
-	 * Sets the default property of this UUIDSchema to the given default value.
-	 * 
-	 * @param defaultValue  a value to use as the default
-	 * @return the current UUIDSchema instance
-	 */
-	UUIDSchema defaultValue(UUID defaultValue);
+    /**
+     * Sets the default property of this UUIDSchema to the given default value.
+     * 
+     * @param defaultValue a value to use as the default
+     * @return the current UUIDSchema instance
+     */
+    UUIDSchema defaultValue(UUID defaultValue);
 
-	/**
-	 * Sets the default property of this UUIDSchema by converting the given string
-	 * to a valid default value.
-	 * 
-	 * @param defaultValue  a value to use as the default
-	 * @return the current UUIDSchema instance
-	 */
-	UUIDSchema defaultValue(String defaultValue);
+    /**
+     * Sets the default property of this UUIDSchema by converting the given string to a valid default value.
+     * 
+     * @param defaultValue a value to use as the default
+     * @return the current UUIDSchema instance
+     */
+    UUIDSchema defaultValue(String defaultValue);
 
-	/**
-	 * Sets the enumerated list of values allowed for objects defined by this schema.
-	 *
-	 * @param enumeration a list of values allowed
-	 * @return the current UUIDSchema instance
-	 */
-	UUIDSchema enumeration(List<UUID> enumeration);
+    /**
+     * Sets the enumerated list of values allowed for objects defined by this schema.
+     *
+     * @param enumeration a list of values allowed
+     * @return the current UUIDSchema instance
+     */
+    UUIDSchema enumeration(List<UUID> enumeration);
 
-	/**
-	 * Adds an item of the appropriate type to the enumerated list of values
-	 * allowed.
-	 *
-	 * @param enumerationItem  an object to add to the enumerated values
-	 * @return the current UUIDSchema instance
-	 */
-	UUIDSchema addEnumerationItem(UUID enumerationItem);
+    /**
+     * Adds an item of the appropriate type to the enumerated list of values allowed.
+     *
+     * @param enumerationItem an object to add to the enumerated values
+     * @return the current UUIDSchema instance
+     */
+    UUIDSchema addEnumerationItem(UUID enumerationItem);
 
 }

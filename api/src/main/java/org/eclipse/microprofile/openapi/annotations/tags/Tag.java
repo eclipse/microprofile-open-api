@@ -29,7 +29,7 @@ import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
 /**
  * This object represents a tag. See https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#tagObject
  */
-@Target({ ElementType.TYPE,  ElementType.METHOD })
+@Target({ ElementType.TYPE, ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
 @Repeatable(Tags.class)
 @Inherited

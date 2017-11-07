@@ -29,30 +29,30 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 /**
  * This object represents a callback URL that will be invoked.
  **/
-@Target({ ElementType.FIELD,
-          ElementType.METHOD,
-          ElementType.PARAMETER,
-          ElementType.TYPE })
+@Target({ ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Repeatable(Callbacks.class)
 @Inherited
 public @interface Callback {
-  /**
-   * The friendly name used to refer to this callback
-   * @return the name of the callback
-   **/
-  String name() default "";
+    /**
+     * The friendly name used to refer to this callback
+     * 
+     * @return the name of the callback
+     **/
+    String name() default "";
 
-/**
- * An absolute URL which defines the destination which will be called with the supplied operation definition.  
- * @return the callback URL
- */
-  String callbackUrlExpression() default "";
+    /**
+     * An absolute URL which defines the destination which will be called with the supplied operation definition.
+     * 
+     * @return the callback URL
+     */
+    String callbackUrlExpression() default "";
 
-  /**
-   * The array of operations that will be called out-of band 
-   * @return the callback operations
-   **/
-  Operation[] operation() default {};
+    /**
+     * The array of operations that will be called out-of band
+     * 
+     * @return the callback operations
+     **/
+    Operation[] operation() default {};
 
 }

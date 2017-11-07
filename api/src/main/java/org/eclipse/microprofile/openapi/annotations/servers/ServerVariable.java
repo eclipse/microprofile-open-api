@@ -25,38 +25,37 @@ import java.lang.annotation.Target;
 /**
  * An object representing a Server Variable for server URL template substitution.
  **/
-@Target({  })
+@Target({})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface ServerVariable {
-  /**
-   * The name of this server variable. This is a REQUIRED property.
-   * 
-   * @return the name of the server variable
-   **/
-  String name();
+    /**
+     * The name of this server variable. This is a REQUIRED property.
+     * 
+     * @return the name of the server variable
+     **/
+    String name();
 
-  /**
-   * An array of enum values for this variable.  This field maps to the enum property in the OAS schema
-   * and to enumeration field of ServerVariable model.
-   * 
-   * @return array of possible values for this ServerVariable
-   **/
-  String[] enumeration() default "";
+    /**
+     * An array of enum values for this variable. This field maps to the enum property in the OAS schema and to enumeration field of ServerVariable
+     * model.
+     * 
+     * @return array of possible values for this ServerVariable
+     **/
+    String[] enumeration() default "";
 
-  /**
-   * The default value of this server variable. This is a REQUIRED property.
-   * 
-   * @return the defualt value of this server variable
-   **/
-  String defaultValue();
+    /**
+     * The default value of this server variable. This is a REQUIRED property.
+     * 
+     * @return the defualt value of this server variable
+     **/
+    String defaultValue();
 
-  /**
-   * An optional description for the server variable. 
-   * CommonMark syntax can be used for rich text representation.
-   * 
-   * @return the description of this server variable
-   **/
-  String description() default "";
+    /**
+     * An optional description for the server variable. CommonMark syntax can be used for rich text representation.
+     * 
+     * @return the description of this server variable
+     **/
+    String description() default "";
 
 }

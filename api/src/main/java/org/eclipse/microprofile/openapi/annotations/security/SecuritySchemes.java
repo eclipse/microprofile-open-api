@@ -25,7 +25,7 @@ import java.lang.annotation.Target;
 /**
  * This object represents an array of SecurityScheme that can be specified at definition level.
  **/
-@Target({ElementType.TYPE})
+@Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface SecuritySchemes {

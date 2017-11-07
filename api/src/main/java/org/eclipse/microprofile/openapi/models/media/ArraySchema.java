@@ -22,26 +22,26 @@ package org.eclipse.microprofile.openapi.models.media;
  */
 public interface ArraySchema extends Schema {
 
-	/**
-	 * Returns the schema used for all the elements of an ArraySchema instance (array).
-	 *
-	 * @return the schema used for all the elements
-	 **/
-	Schema getItems();
+    /**
+     * Returns the schema used for all the elements of an ArraySchema instance (array).
+     *
+     * @return the schema used for all the elements
+     **/
+    Schema getItems();
 
-	/**
-	 * Set the schema used for all the elements of an ArraySchema instance (array).
-	 *
-	 * @param items  the schema used by this array
-	 */
-	void setItems(Schema items);
+    /**
+     * Set the schema used for all the elements of an ArraySchema instance (array).
+     *
+     * @param items the schema used by this array
+     */
+    void setItems(Schema items);
 
-	/**
-	 * Set the schema used for all the elements of an ArraySchema instance (array).
-	 *
-	 * @param items  the schema used by this array
-	 * @return the current ArraySchema instance
-	 */
-	ArraySchema items(Schema items);
+    /**
+     * Set the schema used for all the elements of an ArraySchema instance (array).
+     *
+     * @param items the schema used by this array
+     * @return the current ArraySchema instance
+     */
+    ArraySchema items(Schema items);
 
 }

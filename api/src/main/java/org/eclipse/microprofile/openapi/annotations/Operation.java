@@ -52,7 +52,7 @@ public @interface Operation {
     String[] tags() default {};
 
     /**
-     * Provides a brief description of this operation. 
+     * Provides a brief description of this operation.
      *
      * @return a summary of this operation
      **/
@@ -130,6 +130,7 @@ public @interface Operation {
 
     /**
      * Allows this operation to be marked as hidden
+     * 
      * @return whether or not this operation is hidden
      */
     boolean hidden() default false;

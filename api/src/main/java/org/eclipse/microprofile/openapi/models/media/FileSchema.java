@@ -22,24 +22,21 @@ package org.eclipse.microprofile.openapi.models.media;
  */
 public interface FileSchema extends Schema<String> {
 
-	/**
-	 * Change this FileSchema's type property from the default value to the
-	 * given string. 
-	 *
-	 * @param type  the name of a valid type
-	 * @return the current FileSchema instance
-	 */
-	FileSchema type(String type);
+    /**
+     * Change this FileSchema's type property from the default value to the given string.
+     *
+     * @param type the name of a valid type
+     * @return the current FileSchema instance
+     */
+    FileSchema type(String type);
 
-	/**
-	 * Change this FileSchema's format property from the default value to the
-	 * given format. The value may be one of the formats described in the OAS or
-	 * a user defined format.
-	 *
-	 * @param format
-	 *            the string specifying the data format
-	 * @return the current FileSchema instance
-	 */
-	FileSchema format(String format);
+    /**
+     * Change this FileSchema's format property from the default value to the given format. The value may be one of the formats described in the OAS
+     * or a user defined format.
+     *
+     * @param format the string specifying the data format
+     * @return the current FileSchema instance
+     */
+    FileSchema format(String format);
 
 }

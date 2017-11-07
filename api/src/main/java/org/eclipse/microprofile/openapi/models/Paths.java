@@ -22,29 +22,22 @@ import java.util.Map;
 /**
  * Paths
  * <p>
- * Holds the relative paths to the individual endpoints and their operations.
- * The path is appended to the URL from the Server Object in order to construct
- * the full URL. The Paths MAY be empty, due to <a href=
- * "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-filtering">security
- * constraints</a>.
+ * Holds the relative paths to the individual endpoints and their operations. The path is appended to the URL from the Server Object in order to
+ * construct the full URL. The Paths MAY be empty, due to
+ * <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-filtering">security constraints</a>.
  * <p>
  * 
- * @see <a href=
- *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#pathsObject">
- *      OpenAPI Specification Paths Object</a>
+ * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#pathsObject"> OpenAPI Specification Paths Object</a>
  */
 public interface Paths extends Constructible, Extensible, Map<String, PathItem> {
 
-	/**
-	 * Adds the given path item to this Paths and return this instance of Paths
-	 * 
-	 * @param name
-	 *            a path name in the format valid for a Paths object. The field
-	 *            name MUST begin with a slash.
-	 * @param item
-	 *            the path item added to the list of paths
-	 * @return the current Paths instance
-	 */
-	Paths addPathItem(String name, PathItem item);
+    /**
+     * Adds the given path item to this Paths and return this instance of Paths
+     * 
+     * @param name a path name in the format valid for a Paths object. The field name MUST begin with a slash.
+     * @param item the path item added to the list of paths
+     * @return the current Paths instance
+     */
+    Paths addPathItem(String name, PathItem item);
 
 }

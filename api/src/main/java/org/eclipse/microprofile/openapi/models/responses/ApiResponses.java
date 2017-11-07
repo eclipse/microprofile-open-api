@@ -22,43 +22,41 @@ import java.util.Map;
 import org.eclipse.microprofile.openapi.models.Constructible;
 
 /**
- * This interface represents the container for the expected responses of an operation.
- * The container maps a HTTP response code to the expected response.
+ * This interface represents the container for the expected responses of an operation. The container maps a HTTP response code to the expected
+ * response.
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#responsesObject"
  */
 public interface ApiResponses extends Constructible, Map<String, ApiResponse> {
 
-	public static final String DEFAULT = "default";
+    public static final String DEFAULT = "default";
 
-	ApiResponses addApiResponse(String name, ApiResponse item);
+    ApiResponses addApiResponse(String name, ApiResponse item);
 
-	/**
-	 * Returns the default documentation of responses other than the ones declared for specific HTTP response codes
-	 * in this instance of ApiResponses.
-	 *
-	 * @return the default documentation of responses
-	 **/
+    /**
+     * Returns the default documentation of responses other than the ones declared for specific HTTP response codes in this instance of ApiResponses.
+     *
+     * @return the default documentation of responses
+     **/
 
-	ApiResponse getDefault();
+    ApiResponse getDefault();
 
-	/**
-	 * Sets the default documentation of responses for this instance of ApiResponses. This will cover all the
-	 * undeclared responses.
-	 *
-	 * @param _default the default documentation of responses
-	 */
+    /**
+     * Sets the default documentation of responses for this instance of ApiResponses. This will cover all the undeclared responses.
+     *
+     * @param _default the default documentation of responses
+     */
 
-	void setDefault(ApiResponse _default);
+    void setDefaultValue(ApiResponse defaultValue);
 
-	/**
-	 * Sets the default documentation of responses for this instance of ApiResponses and
-	 * return this instance of ApiResponses. This will cover all the undeclared responses.
-	 *
-	 * @param _default the default documentation of responses
-	 * @return this ApiResponses instance
-	 */
+    /**
+     * Sets the default documentation of responses for this instance of ApiResponses and return this instance of ApiResponses. This will cover all the
+     * undeclared responses.
+     *
+     * @param _default the default documentation of responses
+     * @return this ApiResponses instance
+     */
 
-	ApiResponses _default(ApiResponse _default);
+    ApiResponses defaultValue(ApiResponse defaultValue);
 
 }

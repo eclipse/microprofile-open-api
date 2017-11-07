@@ -22,13 +22,12 @@ package org.eclipse.microprofile.openapi.models.media;
  */
 public interface ObjectSchema extends Schema<Object> {
 
-	/**
-	 * Change this ObjectSchema's type property from the default value to the
-	 * given string. 
-	 *
-	 * @param type  the name of a valid type
-	 * @return the current ObjectSchema instance
-	 */
-	ObjectSchema type(String type);
+    /**
+     * Change this ObjectSchema's type property from the default value to the given string.
+     *
+     * @param type the name of a valid type
+     * @return the current ObjectSchema instance
+     */
+    ObjectSchema type(String type);
 
 }

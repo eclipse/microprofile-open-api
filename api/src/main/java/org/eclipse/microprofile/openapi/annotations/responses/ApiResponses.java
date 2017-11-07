@@ -25,7 +25,7 @@ import java.lang.annotation.Target;
 /**
  * This object represents an array of ApiResponse that can be specified for the operation.
  **/
-@Target({ElementType.METHOD})
+@Target({ ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface ApiResponses {
