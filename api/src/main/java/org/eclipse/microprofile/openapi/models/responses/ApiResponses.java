@@ -25,12 +25,19 @@ import org.eclipse.microprofile.openapi.models.Constructible;
  * This interface represents the container for the expected responses of an operation. The container maps a HTTP response code to the expected
  * response.
  *
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#responsesObject"
+ * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#responsesObject">Responses Object</a>
  */
 public interface ApiResponses extends Constructible, Map<String, ApiResponse> {
 
     public static final String DEFAULT = "default";
 
+    /**
+     * Adds an ApiResponse in the format of the name as a key and the item as the value to ApiResponses map
+     * 
+     * @param name the name of ApiResponse 
+     * @param item the ApiResponse object to be added to ApiResponses map
+     * @return ApiResponses map with the added ApiResponse instance
+     **/
     ApiResponses addApiResponse(String name, ApiResponse item);
 
     /**
@@ -44,7 +51,7 @@ public interface ApiResponses extends Constructible, Map<String, ApiResponse> {
     /**
      * Sets the default documentation of responses for this instance of ApiResponses. This will cover all the undeclared responses.
      *
-     * @param _default the default documentation of responses
+     * @param defaultValue the default documentation of responses
      */
 
     void setDefaultValue(ApiResponse defaultValue);
@@ -53,7 +60,7 @@ public interface ApiResponses extends Constructible, Map<String, ApiResponse> {
      * Sets the default documentation of responses for this instance of ApiResponses and return this instance of ApiResponses. This will cover all the
      * undeclared responses.
      *
-     * @param _default the default documentation of responses
+     * @param defaultValue the default documentation of responses
      * @return this ApiResponses instance
      */
 

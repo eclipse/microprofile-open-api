@@ -23,7 +23,7 @@ import org.eclipse.microprofile.openapi.models.Extensible;
 /**
  * Configuration details for a supportde OAuthFlow
  *
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#oauthFlowsObject"
+ * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#oauthFlowObject">OAuthFlow Object</a>
  */
 public interface OAuthFlow extends Constructible, Extensible {
 
@@ -31,152 +31,136 @@ public interface OAuthFlow extends Constructible, Extensible {
      * The authorization URL to be used for this flow. This MUST be in the form of a URL. This is a REQUIRED property.
      * <p>
      * This method returns the authorizationUrl property from OAuthFlow instance.
-     * <p>
-     * 
+     * </p>
      * @return String authorizationUrl
      **/
-
     String getAuthorizationUrl();
 
     /**
      * The authorization URL to be used for this flow. This MUST be in the form of a URL. This is a REQUIRED property.
      * <p>
      * Applies to oauth2 ("implicit", "authorizationCode").
+     * </p>
      * <p>
      * This method sets the authorizationUrl property of an OAuthFlow instance to the given authorizationUrl argument.
-     * <p>
-     * 
-     * @param authorizationUrl
+     * </p>
+     * @param authorizationUrl the authorization URL used for this flow
      */
-
     void setAuthorizationUrl(String authorizationUrl);
 
     /**
      * The authorization URL to be used for this flow. This MUST be in the form of a URL. This is a REQUIRED property.
      * <p>
      * Applies to oauth2 ("implicit", "authorizationCode").
+     * </p>
      * <p>
      * This method sets the authorizationUrl property of OAuthFlow instance to the given authorizationUrl argument and returns the modified instance.
-     * <p>
-     * 
-     * @param authorizationUrl
+     * </p>
+     * @param authorizationUrl the authorization URL used for this flow
      * @return OAuthFlow instance with the set authorizationUrl property
      */
-
     OAuthFlow authorizationUrl(String authorizationUrl);
 
     /**
      * The token URL to be used for this flow. This MUST be in the form of a URL. This is a REQUIRED property.
      * <p>
      * This method returns the tokenUrl property from OAuthFlow instance.
-     * <p>
-     * 
+     * </p> 
      * @return String tokenUrl
      **/
-
     String getTokenUrl();
 
     /**
      * The token URL to be used for this flow. This MUST be in the form of a URL. This is a REQUIRED property.
      * <p>
      * Applies to oauth2 ("password", "clientCredentials", "authorizationCode").
+     * </p>
      * <p>
      * This method sets the tokenUrl property of OAuthFlow instance to the given tokenUrl argument.
-     * <p>
-     * 
-     * @param tokenkUrl
+     * </p>
+     * @param tokenUrl the token URL to be used for this flow
      */
-
     void setTokenUrl(String tokenUrl);
 
     /**
      * The token URL to be used for this flow. This MUST be in the form of a URL. This is a REQUIRED property.
      * <p>
      * Applies to oauth2 ("password", "clientCredentials", "authorizationCode").
+     * </p>
      * <p>
      * This method sets the tokenUrl property of OAuthFlow instance to the given tokenUrl argument and returns the instance.
-     * <p>
-     * 
-     * @param tokenUrl
+     * </p>
+     * @param tokenUrl the token URL to be used for this flow
      * @return OAuthFlow instance with the set tokenUrl property
      */
-
     OAuthFlow tokenUrl(String tokenUrl);
 
     /**
      * The URL to be used for obtaining refresh tokens. This MUST be in the form of a URL.
      * <p>
      * This method returns the refreshUrl property from OAuthFlow instance.
-     * <p>
-     * 
+     * </p> 
      * @return String refreshUrl
      **/
-
     String getRefreshUrl();
 
     /**
      * The URL to be used for obtaining refresh tokens. This MUST be in the form of a URL.
      * <p>
      * Applies to oauth2.
+     * </p>
      * <p>
      * This method sets the refreshUrl property of OAuthFlow instance to the given refreshUrl argument.
-     * <p>
-     * 
-     * @param refreshUrl
+     * </p>
+     * @param refreshUrl the URL to be used for obtaining refresh tokens
      */
-
     void setRefreshUrl(String refreshUrl);
 
     /**
      * The URL to be used for obtaining refresh tokens. This MUST be in the form of a URL.
      * <p>
      * Applies to oauth2.
+     * </p>
      * <p>
      * This method sets the refreshUrl property of OAuthFlow instance to the given refreshUrl argument and returns the modified instance.
-     * <p>
-     * 
-     * @param refreshUrl
+     * </p>
+     * @param refreshUrl the URL to be used for obtaining refresh tokens
      * @return OAuthFlow instance with the set refreshUrl property
      */
-
     OAuthFlow refreshUrl(String refreshUrl);
 
     /**
      * The available scopes for the OAuth2 security scheme. A map between the scope name and a short description for it. This is a REQUIRED property.
      * <p>
      * This method returns the scopes property from OAuthFlow instance.
-     * <p>
-     * 
+     * </p> 
      * @return Scopes scopes
      **/
-
     Scopes getScopes();
 
     /**
      * The available scopes for the OAuth2 security scheme. A map between the scope name and a short description for it. This is a REQUIRED property.
      * <p>
      * Applies to oauth2.
+     * </p>
      * <p>
      * This method sets the scopes property of OAuthFlow instance to the given argument.
-     * <p>
-     * 
-     * @param scopes
+     * </p>
+     * @param scopes the available scopes for the OAuth2 security scheme
      */
-
     void setScopes(Scopes scopes);
 
     /**
      * The available scopes for the OAuth2 security scheme. A map between the scope name and a short description for it. This is a REQUIRED property.
      * <p>
      * Applies to oauth2.
+     * </p>
      * <p>
      * This method sets the scopes property of OAuthFlow instance to the given argument and returns the modified instance.
-     * <p>
-     * 
-     * @param scopes
+     * </p>
+     * @param scopes the available scopes for the OAuth2 security scheme
      * @return OAuthFlow instance with the set scopes property
      */
-
     OAuthFlow scopes(Scopes scopes);
 
 }

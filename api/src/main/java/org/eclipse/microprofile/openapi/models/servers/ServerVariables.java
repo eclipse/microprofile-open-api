@@ -25,18 +25,17 @@ import org.eclipse.microprofile.openapi.models.Extensible;
 /**
  * ServerVariables
  *
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#serverVariablesObject"
+ * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#serverVariablesObject">ServerVariables Object</a>
  */
 public interface ServerVariables extends Constructible, Extensible, Map<String, ServerVariable> {
 
     /**
      * This method adds a key-value item to a ServerVariables instance from the name-item parameter pair and returns the modified instance.
      *
-     * @param name
-     * @param item
+     * @param name the name of ServerVariable instance
+     * @param item the ServerVariable instance
      * @return ServerVariables instance with the added name-item pair.
      */
-
     ServerVariables addServerVariable(String name, ServerVariable item);
 
 }

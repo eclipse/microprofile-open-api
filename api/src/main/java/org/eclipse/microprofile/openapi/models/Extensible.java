@@ -45,7 +45,7 @@ public interface Extensible {
     /**
      * Sets this Extensible's extensions property to the given map of extensions.
      *
-     * @param a map containing keys which start with "x-" and values which provide additional information
+     * @param extensions map containing keys which start with "x-" and values which provide additional information
      */
     void setExtensions(Map<String, Object> extensions);
 
