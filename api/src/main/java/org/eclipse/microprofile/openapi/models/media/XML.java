@@ -24,8 +24,8 @@ import org.eclipse.microprofile.openapi.models.Extensible;
  * A metadata object that allows for more fine-tuned XML model definitions. When using arrays, XML element names are not inferred (for singular/plural
  * forms) and the name property SHOULD be used to add that information.
  * <p>
- * 
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#xmlObject"
+ * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#xmlObject">XML Object</a>
+ * </p>
  */
 public interface XML extends Constructible, Extensible {
 
@@ -33,10 +33,8 @@ public interface XML extends Constructible, Extensible {
      * This method returns the name property from XML instance.
      * <p>
      * The name property replaces the name of the element/attribute used for the described schema property.
-     * <p>
-     * 
+     * </p> 
      * @return String name
-     * @see https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#xml-object
      **/
     String getName();
 
@@ -44,10 +42,8 @@ public interface XML extends Constructible, Extensible {
      * This method sets the name property of XML instance to the given String argument.
      * <p>
      * The name property replaces the name of the element/attribute used for the described schema property.
-     * <p>
-     * 
-     * @param name
-     * @see https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#xml-object
+     * </p>
+     * @param name the name of this XML instance
      */
     void setName(String name);
 
@@ -55,11 +51,9 @@ public interface XML extends Constructible, Extensible {
      * This method sets the name property of XML instance to the given String argument and returns the modified instance.
      * <p>
      * The name property replaces the name of the element/attribute used for the described schema property.
-     * <p>
-     * 
-     * @param name
+     * </p>
+     * @param name the name of this XML instance
      * @return XML instance with the set name property
-     * @see https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#xml-object
      */
     XML name(String name);
 
@@ -67,8 +61,7 @@ public interface XML extends Constructible, Extensible {
      * This method returns the namespace property of XML instance.
      * <p>
      * The namespace property is the URI of the namespace definition. Value MUST be in the form of an absolute URI.
-     * <p>
-     * 
+     * </p> 
      * @return String namespace
      **/
     String getNamespace();
@@ -77,9 +70,8 @@ public interface XML extends Constructible, Extensible {
      * This method sets the namespace property of XML instance to the given String argument.
      * <p>
      * The namespace property is the URI of the namespace definition. Value MUST be in the form of an absolute URI.
-     * <p>
-     * 
-     * @param namespace
+     * </p> 
+     * @param namespace the URI of the namespace definition
      */
     void setNamespace(String namespace);
 
@@ -87,9 +79,8 @@ public interface XML extends Constructible, Extensible {
      * This method sets the namespace property of XML instance to the given String argument and returns the modified instance.
      * <p>
      * The namespace property is the URI of the namespace definition. Value MUST be in the form of an absolute URI.
-     * <p>
-     * 
-     * @param namespace
+     * </p> 
+     * @param namespace the URI of the namespace definition
      * @return XML instance with the set namespace property
      */
     XML namespace(String namespace);
@@ -98,8 +89,7 @@ public interface XML extends Constructible, Extensible {
      * This method returns the prefix property of XML instance.
      * <p>
      * This property is a String prefix to be used for the name.
-     * <p>
-     * 
+     * </p> 
      * @return String prefix
      **/
     String getPrefix();
@@ -108,9 +98,8 @@ public interface XML extends Constructible, Extensible {
      * This method sets the prefix property of XML instance to the given String argument.
      * <p>
      * This property is a String prefix to be used for the name.
-     * <p>
-     * 
-     * @param prefix
+     * </p> 
+     * @param prefix string prefix to be used with the name
      */
     void setPrefix(String prefix);
 
@@ -118,9 +107,8 @@ public interface XML extends Constructible, Extensible {
      * This method sets the prefix property of XML instance to the given String argument and returns the modified instance.
      * <p>
      * This property is a String prefix to be used for the name.
-     * <p>
-     * 
-     * @param prefix
+     * </p>
+     * @param prefix string prefix to be used with the name
      * @return XML instance with the set prefix property
      */
     XML prefix(String prefix);
@@ -129,8 +117,7 @@ public interface XML extends Constructible, Extensible {
      * This method returns the attribute property of XML instance.
      * <p>
      * Attribute property declares whether the property definition translates to an attribute instead of an element. Default value is FALSE.
-     * <p>
-     * 
+     * </p> 
      * @return Boolean attribute
      **/
     Boolean getAttribute();
@@ -139,9 +126,8 @@ public interface XML extends Constructible, Extensible {
      * This method sets the attribute property of XML instance to the given Boolean argument.
      * <p>
      * Attribute property declares whether the property definition translates to an attribute instead of an element. Default value is FALSE.
-     * <p>
-     * 
-     * @param attribute
+     * </p> 
+     * @param attribute a boolean that declares whether the property definition translates to an attribute instead of an element
      */
     void setAttribute(Boolean attribute);
 
@@ -149,9 +135,8 @@ public interface XML extends Constructible, Extensible {
      * This method sets the attribute property of XML instance to the given Boolean argument and returns the modified instance.
      * <p>
      * Attribute property declares whether the property definition translates to an attribute instead of an element. Default value is FALSE.
-     * <p>
-     * 
-     * @param attribute
+     * </p> 
+     * @param attribute a boolean that declares whether the property definition translates to an attribute instead of an element
      * @return XML instance with the set attribute property
      */
     XML attribute(Boolean attribute);
@@ -161,8 +146,7 @@ public interface XML extends Constructible, Extensible {
      * <p>
      * Wrapped property MAY be used only for an array definition. Signifies whether the array is wrapped. The definition takes effect only when
      * defined alongside type being array. Default value is FALSE.
-     * <p>
-     * 
+     * </p> 
      * @return Boolean wrapped
      **/
     Boolean getWrapped();
@@ -172,9 +156,8 @@ public interface XML extends Constructible, Extensible {
      * <p>
      * Wrapped property MAY be used only for an array definition. Signifies whether the array is wrapped. The definition takes effect only when
      * defined alongside type being array. Default value is FALSE.
-     * <p>
-     * 
-     * @param wrapped
+     * </p>
+     * @param wrapped a boolean that signifies whether the array is wrapped
      */
     void setWrapped(Boolean wrapped);
 
@@ -183,9 +166,8 @@ public interface XML extends Constructible, Extensible {
      * <p>
      * Wrapped property MAY be used only for an array definition. Signifies whether the array is wrapped. The definition takes effect only when
      * defined alongside type being array. Default value is FALSE.
-     * <p>
-     * 
-     * @param wrapped
+     * </p> 
+     * @param wrapped a boolean that signifies whether the array is wrapped
      * @return XML instance with the set wrapped property
      */
     XML wrapped(Boolean wrapped);

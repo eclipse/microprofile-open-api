@@ -26,7 +26,7 @@ import org.eclipse.microprofile.openapi.models.headers.Header;
 /**
  * Encoding
  *
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#encodingObject"
+ * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#encodingObject">Encoding Object</a>
  */
 public interface Encoding extends Constructible, Extensible {
 
@@ -50,9 +50,8 @@ public interface Encoding extends Constructible, Extensible {
      * application/octet-stream, for primitive types - text/plain, for object - application/json.
      * <p>
      * This method sets contentType property for the Encoding instance to the passed parameter and returns the modified instance
-     * <p>
-     * 
-     * @param String contentType
+     * </p> 
+     * @param contentType a string that describes the type of content of the encoding
      * @return Encoding
      */
     Encoding contentType(String contentType);
@@ -62,8 +61,7 @@ public interface Encoding extends Constructible, Extensible {
      * application/octet-stream, for primitive types - text/plain, for object - application/json.
      * <p>
      * This method returns the contentType property from an Encoding instance.
-     * <p>
-     * 
+     * </p>
      * @return String contentType
      **/
     String getContentType();
@@ -73,9 +71,8 @@ public interface Encoding extends Constructible, Extensible {
      * application/octet-stream, for primitive types - text/plain, for object - application/json.
      * <p>
      * This method sets thecontentType property of an Encoding instance to the passed contentType parameter.
-     * <p>
-     * 
-     * @param String contentType
+     * </p>
+     * @param contentType a string that describes the type of content of the encoding
      */
     void setContentType(String contentType);
 
@@ -83,9 +80,8 @@ public interface Encoding extends Constructible, Extensible {
      * Headers property of an Encoding is a map that allows additional information to be provided as headers
      * <p>
      * This method sets the headers property of Encoding instance to the passed headers argument and returns the modified instance.
-     * <p>
-     * 
-     * @param Map&lt;String, Header&gt; headers
+     * </p>
+     * @param headers a map of name to corresponding header object
      * @return Encoding
      */
     Encoding headers(Map<String, Header> headers);
@@ -94,8 +90,7 @@ public interface Encoding extends Constructible, Extensible {
      * Headers property of an Encoding is a map that allows additional information to be provided as headers
      * <p>
      * This method returns the headers property from a Encoding instance.
-     * <p>
-     * 
+     * </p>
      * @return Map&lt;String, Header&gt; headers
      **/
     Map<String, Header> getHeaders();
@@ -104,9 +99,8 @@ public interface Encoding extends Constructible, Extensible {
      * Headers property of an Encoding is a map that allows additional information to be provided as headers
      * <p>
      * This method sets the headers property of Encoding instance to the passed headers argument.
-     * <p>
-     * 
-     * @param Map&lt;String, Header&gt; headers
+     * </p>
+     * @param headers a map of name to corresponding header object
      */
     void setHeaders(Map<String, Header> headers);
 
@@ -114,9 +108,8 @@ public interface Encoding extends Constructible, Extensible {
      * Style describes how the encoding value will be serialized depending on the type of the parameter value.
      * <p>
      * This method sets the style property of Encoding instance to the passed style argument and returns the modified instance
-     * <p>
-     * 
-     * @param String style
+     * </p>
+     * @param style a string that descibes how encoding value will be serialized
      * @return Encoding
      */
     Encoding style(String style);
@@ -125,10 +118,8 @@ public interface Encoding extends Constructible, Extensible {
      * Style describes how the encoding value will be serialized depending on the type of the parameter value.
      * <p>
      * This method returns the style property from a Encoding instance.
-     * <p>
-     * 
+     * </p>
      * @return String style
-     * @see Parameter for more details on style property
      **/
     String getStyle();
 
@@ -136,9 +127,8 @@ public interface Encoding extends Constructible, Extensible {
      * Style describes how the encoding value will be serialized depending on the type of the parameter value.
      * <p>
      * This method sets the style property of Encoding instance to the given style argument.
-     * <p>
-     * 
-     * @param String style
+     * </p>
+     * @param style a string that descibes how encoding value will be serialized
      */
     void setStyle(String style);
 
@@ -148,9 +138,8 @@ public interface Encoding extends Constructible, Extensible {
      * default value is false.
      * <p>
      * This method sets the explode property of Encoding instance to the given explode argument and returns the instance.
-     * <p>
-     * 
-     * @param Boolean explode
+     * </p>
+     * @param explode a boolean that indicates whether the property values of array or object will generate separate parameters
      * @return Encoding
      */
     Encoding explode(Boolean explode);
@@ -161,8 +150,7 @@ public interface Encoding extends Constructible, Extensible {
      * default value is false.
      * <p>
      * This method returns the explode property from a Encoding instance.
-     * <p>
-     * 
+     * </p>
      * @return Boolean explode
      **/
     Boolean getExplode();
@@ -173,9 +161,8 @@ public interface Encoding extends Constructible, Extensible {
      * default value is false.
      * <p>
      * This method sets the explode property of Encoding instance to the given explode argument.
-     * <p>
-     * 
-     * @param Boolean explode
+     * </p> 
+     * @param explode a boolean that indicates whether the property values of array or object will generate separate parameters
      */
     void setExplode(Boolean explode);
 
@@ -183,11 +170,9 @@ public interface Encoding extends Constructible, Extensible {
      * AllowReserved determines whether the parameter value SHOULD allow reserved characters to be encoded without percent-encoding.
      * <p>
      * This method sets the allowReserved property of Encoding instance to the given allowReserved argument and returns the instance.
-     * <p>
-     * 
-     * @param Boolean allowReserved
+     * </p>
+     * @param allowReserved a boolean that determines whether the parameter value SHOULD allow reserved characters
      * @return Encoding
-     * @see RFC3986 for full definition of reserved characters
      */
     Encoding allowReserved(Boolean allowReserved);
 
@@ -195,10 +180,8 @@ public interface Encoding extends Constructible, Extensible {
      * AllowReserved determines whether the parameter value SHOULD allow reserved characters to be encoded without percent-encoding.
      * <p>
      * This method returns the allowReserved property from a Encoding instance.
-     * <p>
-     * 
+     * </p>
      * @return Boolean allowReserved
-     * @see RFC3986 for full definition of reserved characters
      **/
     Boolean getAllowReserved();
 
@@ -206,9 +189,8 @@ public interface Encoding extends Constructible, Extensible {
      * AllowReserved determines whether the parameter value SHOULD allow reserved characters to be encoded without percent-encoding.
      * <p>
      * This method sets the allowReserved property to the given allowReserved argument.
-     *
-     * @param Boolean allowReserved
-     * @see RFC3986 for full definition of reserved characters
+     * </p>
+     * @param allowReserved a boolean that determines whether the parameter value SHOULD allow reserved characters
      */
     void setAllowReserved(Boolean allowReserved);
 
