@@ -22,6 +22,7 @@ import java.util.Map;
 import org.eclipse.microprofile.openapi.models.Constructible;
 import org.eclipse.microprofile.openapi.models.Extensible;
 import org.eclipse.microprofile.openapi.models.PathItem;
+import org.eclipse.microprofile.openapi.models.Reference;
 
 /**
  * Callback
@@ -32,7 +33,7 @@ import org.eclipse.microprofile.openapi.models.PathItem;
  * 
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#callbackObject">OpenAPI Specification Callback Object</a>
  */
-public interface Callback extends Constructible, Extensible, Map<String, PathItem> {
+public interface Callback extends Constructible, Extensible, Reference<Callback>, Map<String, PathItem> {
 
     /**
      * Adds the given PathItem to this Callback's list of PathItems using the string as its key.
