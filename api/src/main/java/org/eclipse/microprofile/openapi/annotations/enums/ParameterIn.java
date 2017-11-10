@@ -1,5 +1,6 @@
 /**
  * Copyright (c) 2017 Contributors to the Eclipse Foundation
+ * Copyright 2017 SmartBear Software
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,21 +15,19 @@
  * limitations under the License.
  */
 
-package org.eclipse.microprofile.openapi;
+package org.eclipse.microprofile.openapi.annotations.enums;
 
-import org.eclipse.microprofile.openapi.models.Constructible;
-import org.eclipse.microprofile.openapi.spi.OASFactoryResolver;
+public enum ParameterIn {
+    DEFAULT(""), HEADER("header"), QUERY("query"), PATH("path"), COOKIE("cookie");
 
-public final class OASFactory {
-    
-    private OASFactory() {
-        
+    private String value;
+
+    ParameterIn(String value) {
+        this.value = value;
     }
 
-    private static final OASFactoryResolver INSTANCE = OASFactoryResolver.instance();
-
-    public static <T extends Constructible> T createObject(Class<T> clazz) {
-        return INSTANCE.createObject(clazz);
+    @Override
+    public String toString() {
+        return String.valueOf(value);
     }
-
 }

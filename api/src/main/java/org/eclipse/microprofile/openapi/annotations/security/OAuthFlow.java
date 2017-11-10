@@ -25,28 +25,37 @@ import java.lang.annotation.Target;
 /**
  * Configuration details for a supported OAuth Flow.
  **/
-@Target({  })
+@Target({})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface OAuthFlow {
-  /**
-   * The authorization URL to be used for this flow. This must be in the form of a URL.  Applies to oauth2 ("implicit", "authorizationCode") type.
-   **/
-  String authorizationUrl() default "";
+    /**
+     * The authorization URL to be used for this flow. This must be in the form of a URL. Applies to oauth2 ("implicit", "authorizationCode") type.
+     * 
+     * @return authorization URL for this flow
+     **/
+    String authorizationUrl() default "";
 
-  /**
-   * The token URL to be used for this flow. This must be in the form of a URL.  Applies to oauth2 ("password", "clientCredentials", "authorizationCode") type.
-   **/
-  String tokenUrl() default "";
+    /**
+     * The token URL to be used for this flow. This must be in the form of a URL. Applies to oauth2 ("password", "clientCredentials",
+     * "authorizationCode") type.
+     * 
+     * @return token URL for this flow
+     **/
+    String tokenUrl() default "";
 
-  /**
-   * The URL to be used for obtaining refresh tokens. This must be in the form of a URL.  Applies to oauth2 type.
-   **/
-  String refreshUrl() default "";
+    /**
+     * The URL to be used for obtaining refresh tokens. This MUST be in the form of a URL. Applies to oauth2 type.
+     * 
+     * @return URL for obtaining refresh tokens
+     **/
+    String refreshUrl() default "";
 
-  /**
-   * The available scopes for the OAuth2 security scheme.  Applies to oauth2 type.
-   **/
-  OAuthScope[] scopes() default {};
+    /**
+     * The available scopes for the OAuth2 security scheme. Applies to oauth2 type.
+     * 
+     * @return scoped available for this security scheme
+     **/
+    OAuthScope[] scopes() default {};
 
 }

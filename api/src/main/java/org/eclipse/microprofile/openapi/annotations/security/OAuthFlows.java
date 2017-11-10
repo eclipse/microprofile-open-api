@@ -22,32 +22,39 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-
 /**
  * Allows configuration of the supported OAuth Flows.
  **/
-@Target({  })
+@Target({})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface OAuthFlows {
-  /**
-   * Configuration for the OAuth Implicit flow.
-   **/
-  OAuthFlow implicit() default @OAuthFlow();
+    /**
+     * Configuration for the OAuth Implicit flow.
+     * 
+     * @return implicit OAuth flow
+     **/
+    OAuthFlow implicit() default @OAuthFlow();
 
-  /**
-   * Configuration for the OAuth Resource Owner Password flow.
-   **/
-  OAuthFlow password() default @OAuthFlow();
+    /**
+     * Configuration for the OAuth Resource Owner Password flow.
+     * 
+     * @return OAuth Resource Owner Password flow
+     **/
+    OAuthFlow password() default @OAuthFlow();
 
-  /**
-   * Configuration for the OAuth Client Credentials flow. 
-   **/
-  OAuthFlow clientCredentials() default @OAuthFlow();
+    /**
+     * Configuration for the OAuth Client Credentials flow.
+     * 
+     * @return OAuth Client Credentials flow
+     **/
+    OAuthFlow clientCredentials() default @OAuthFlow();
 
-  /**
-   * Configuration for the OAuth Authorization Code flow. 
-   **/
-  OAuthFlow authorizationCode() default @OAuthFlow();
+    /**
+     * Configuration for the OAuth Authorization Code flow.
+     * 
+     * @return OAuth Authorization Code flow
+     **/
+    OAuthFlow authorizationCode() default @OAuthFlow();
 
 }

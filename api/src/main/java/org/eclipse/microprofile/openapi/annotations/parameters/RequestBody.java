@@ -32,19 +32,27 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface RequestBody {
-  /**
-   * A brief description of the request body.
-   **/
-  String description() default "";
+    /**
+     * A brief description of the request body.
+     * <p>
+     * This could contain examples of use. CommonMark syntax MAY be used for rich text representation.
+     * 
+     * @return description of this requestBody instance
+     **/
+    String description() default "";
 
-  /**
-   * The content of the request body.
-   **/
-  Content[] content() default {};
+    /**
+     * This is a REQUIRED property. The content of the request body.
+     * 
+     * @return content of this requestBody instance
+     **/
+    Content[] content() default {};
 
-  /**
-   * Determines if the request body is required in the request. Defaults to false.
-   **/
-  boolean required() default false;
+    /**
+     * Determines if the request body is required in the request. Defaults to false.
+     * 
+     * @return whether or not this requestBody is required
+     **/
+    boolean required() default false;
 
 }

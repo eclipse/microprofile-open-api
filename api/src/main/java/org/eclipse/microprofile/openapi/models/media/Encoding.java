@@ -26,190 +26,172 @@ import org.eclipse.microprofile.openapi.models.headers.Header;
 /**
  * Encoding
  *
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#encodingObject"
+ * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#encodingObject">Encoding Object</a>
  */
 public interface Encoding extends Constructible, Extensible {
 
-	enum StyleEnum {
-	    FORM("form"),
-	    SPACE_DELIMITED("spaceDelimited"),
-	    PIPE_DELIMITED("pipeDelimited"),
-	    DEEP_OBJECT("deepObject");
-	
-	    private String value;
-	
-	    StyleEnum(String value) {
-	        this.value = value;
-	    }
-	
-	    @Override
-	    public String toString() {
-	        return String.valueOf(value);
-	    }
-	}
+    enum StyleEnum {
+        FORM("form"), SPACE_DELIMITED("spaceDelimited"), PIPE_DELIMITED("pipeDelimited"), DEEP_OBJECT("deepObject");
 
-	/**
-	 * The Content-Type for encoding a specific property. 
-	 * Default value depends on the property type: 
-	 * i.e. for binary string - contentType is application/octet-stream, for primitive types - text/plain, for object - application/json.
-	 * <p>
-	 * This method sets contentType property for the Encoding instance to the passed parameter
-	 * and returns the modified instance
-	 * <p>
-	 * @param String contentType
-	 * @return Encoding
-	 */
-	Encoding contentType(String contentType);
+        private String value;
 
-	/**
-	 * The Content-Type for encoding a specific property. 
-	 * Default value depends on the property type: 
-	 * i.e. for binary string - contentType is application/octet-stream, for primitive types - text/plain, for object - application/json.
-	 * <p>
-	 * This method returns the contentType property from an Encoding instance.
-	 * <p>
-	 * @return String contentType
-	 **/
-	String getContentType();
+        StyleEnum(String value) {
+            this.value = value;
+        }
 
-	/**
-	 * The Content-Type for encoding a specific property. 
-	 * Default value depends on the property type: 
-	 * i.e. for binary string - contentType is application/octet-stream, for primitive types - text/plain, for object - application/json.
-	 * <p>
-	 * This method sets thecontentType property of an Encoding instance to the passed contentType parameter.
-	 * <p>
-	 * @param String contentType
-	 */
-	void setContentType(String contentType);
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+    }
 
-	/**
-	 * Headers property of an Encoding is a map that allows additional information to be provided as headers
-	 * <p>
-	 * This method sets the headers property of Encoding instance to the passed headers argument and
-	 * returns the modified instance.
-	 * <p>
-	 * @param Map&lt;String, Header&gt; headers
-	 * @return Encoding
-	 */
-	Encoding headers(Map<String, Header> headers);
+    /**
+     * The Content-Type for encoding a specific property. Default value depends on the property type: i.e. for binary string - contentType is
+     * application/octet-stream, for primitive types - text/plain, for object - application/json.
+     * <p>
+     * This method sets contentType property for the Encoding instance to the passed parameter and returns the modified instance
+     * </p> 
+     * @param contentType a string that describes the type of content of the encoding
+     * @return Encoding
+     */
+    Encoding contentType(String contentType);
 
-	/**
-	 * Headers property of an Encoding is a map that allows additional information to be provided as headers
-	 * <p>
-	 * This method returns the headers property from a Encoding instance.
-	 * <p>
-	 * @return Map&lt;String, Header&gt; headers
-	 **/
-	Map<String, Header> getHeaders();
+    /**
+     * The Content-Type for encoding a specific property. Default value depends on the property type: i.e. for binary string - contentType is
+     * application/octet-stream, for primitive types - text/plain, for object - application/json.
+     * <p>
+     * This method returns the contentType property from an Encoding instance.
+     * </p>
+     * @return String contentType
+     **/
+    String getContentType();
 
-	/**
-	 * Headers property of an Encoding is a map that allows additional information to be provided as headers
-	 * <p>
-	 * This method sets the headers property of Encoding instance to the passed headers argument.
-	 * <p>
-	 * @param Map&lt;String, Header&gt; headers
-	 */
-	void setHeaders(Map<String, Header> headers);
+    /**
+     * The Content-Type for encoding a specific property. Default value depends on the property type: i.e. for binary string - contentType is
+     * application/octet-stream, for primitive types - text/plain, for object - application/json.
+     * <p>
+     * This method sets thecontentType property of an Encoding instance to the passed contentType parameter.
+     * </p>
+     * @param contentType a string that describes the type of content of the encoding
+     */
+    void setContentType(String contentType);
 
-	/**
-	 * Style describes how the encoding value will be serialized depending on the type of the parameter value.
-	 * <p>
-	 * This method sets the style property of Encoding instance to the passed style argument and
-	 * returns the modified instance
-	 * <p>
-	 * @param String style
-	 * @return Encoding
-	 */
-	Encoding style(String style);
+    /**
+     * Headers property of an Encoding is a map that allows additional information to be provided as headers
+     * <p>
+     * This method sets the headers property of Encoding instance to the passed headers argument and returns the modified instance.
+     * </p>
+     * @param headers a map of name to corresponding header object
+     * @return Encoding
+     */
+    Encoding headers(Map<String, Header> headers);
 
-	/**
-	 * Style describes how the encoding value will be serialized depending on the type of the parameter value.
-	 * <p>
-	 * This method returns the style property from a Encoding instance.
-	 * <p>
-	 * @return String style
-	 * @see Parameter for more details on style property
-	 **/
-	String getStyle();
+    /**
+     * Headers property of an Encoding is a map that allows additional information to be provided as headers
+     * <p>
+     * This method returns the headers property from a Encoding instance.
+     * </p>
+     * @return Map&lt;String, Header&gt; headers
+     **/
+    Map<String, Header> getHeaders();
 
-	/**
-	 * Style describes how the encoding value will be serialized depending on the type of the parameter value.
-	 * <p>
-	 * This method sets the style property of Encoding instance to the given style argument.
-	 * <p>
-	 * @param String style
-	 */
-	void setStyle(String style);
+    /**
+     * Headers property of an Encoding is a map that allows additional information to be provided as headers
+     * <p>
+     * This method sets the headers property of Encoding instance to the passed headers argument.
+     * </p>
+     * @param headers a map of name to corresponding header object
+     */
+    void setHeaders(Map<String, Header> headers);
 
-	/**
-	 * When this is true, property values of type array or object generate separate parameters for each value of the array, 
-	 * or key-value-pair of the map. 
-	 * For other types of properties this property has no effect. When style is form, the default value is true.
-	 * For all other styles, the default value is false.
-	 * <p>
-	 * This method sets the explode property of Encoding instance to the given explode argument and
-	 * returns the instance.
-	 * <p>
-	 * @param Boolean explode
-	 * @return Encoding
-	 */
-	Encoding explode(Boolean explode);
+    /**
+     * Style describes how the encoding value will be serialized depending on the type of the parameter value.
+     * <p>
+     * This method sets the style property of Encoding instance to the passed style argument and returns the modified instance
+     * </p>
+     * @param style a string that descibes how encoding value will be serialized
+     * @return Encoding
+     */
+    Encoding style(String style);
 
-	/**
-	 * When this is true, property values of type array or object generate separate parameters for each value of the array, 
-	 * or key-value-pair of the map. 
-	 * For other types of properties this property has no effect. When style is form, the default value is true.
-	 * For all other styles, the default value is false.
-	 * <p>
-	 * This method returns the explode property from a Encoding instance.
-	 * <p>
-	 * @return Boolean explode
-	 **/
-	Boolean getExplode();
+    /**
+     * Style describes how the encoding value will be serialized depending on the type of the parameter value.
+     * <p>
+     * This method returns the style property from a Encoding instance.
+     * </p>
+     * @return String style
+     **/
+    String getStyle();
 
-	/**
-	 * When this is true, property values of type array or object generate separate parameters for each value of the array, 
-	 * or key-value-pair of the map. 
-	 * For other types of properties this property has no effect. When style is form, the default value is true.
-	 * For all other styles, the default value is false.
-	 * <p>
-	 * This method sets the explode property of Encoding instance to the given explode argument.
-	 * <p>
-	 * @param Boolean explode
-	 */
-	void setExplode(Boolean explode);
+    /**
+     * Style describes how the encoding value will be serialized depending on the type of the parameter value.
+     * <p>
+     * This method sets the style property of Encoding instance to the given style argument.
+     * </p>
+     * @param style a string that descibes how encoding value will be serialized
+     */
+    void setStyle(String style);
 
-	/**
-	 * AllowReserved determines whether the parameter value SHOULD allow reserved characters to be encoded without percent-encoding.
-	 * <p>
-	 * This method sets the allowReserved property of Encoding instance to the given allowReserved argument and
-	 * returns the instance.
-	 * <p>
-	 * @param Boolean allowReserved
-	 * @return Encoding
-	 * @see RFC3986 for full definition of reserved characters
-	 */
-	Encoding allowReserved(Boolean allowReserved);
+    /**
+     * When this is true, property values of type array or object generate separate parameters for each value of the array, or key-value-pair of the
+     * map. For other types of properties this property has no effect. When style is form, the default value is true. For all other styles, the
+     * default value is false.
+     * <p>
+     * This method sets the explode property of Encoding instance to the given explode argument and returns the instance.
+     * </p>
+     * @param explode a boolean that indicates whether the property values of array or object will generate separate parameters
+     * @return Encoding
+     */
+    Encoding explode(Boolean explode);
 
-	/**
-	 * AllowReserved determines whether the parameter value SHOULD allow reserved characters to be encoded without percent-encoding.
-	 * <p>
-	 * This method returns the allowReserved property from a Encoding instance.
-	 * <p>
-	 * @return Boolean allowReserved
-	 * @see RFC3986 for full definition of reserved characters
-	 **/
-	Boolean getAllowReserved();
+    /**
+     * When this is true, property values of type array or object generate separate parameters for each value of the array, or key-value-pair of the
+     * map. For other types of properties this property has no effect. When style is form, the default value is true. For all other styles, the
+     * default value is false.
+     * <p>
+     * This method returns the explode property from a Encoding instance.
+     * </p>
+     * @return Boolean explode
+     **/
+    Boolean getExplode();
 
-	/**
-	 * AllowReserved determines whether the parameter value SHOULD allow reserved characters to be encoded without percent-encoding.
-	 * <p>
-	 * This method sets the allowReserved property to the given allowReserved argument.
-	 *
-	 * @param Boolean allowReserved
-	 * @see RFC3986 for full definition of reserved characters
-	 */
-	void setAllowReserved(Boolean allowReserved);
+    /**
+     * When this is true, property values of type array or object generate separate parameters for each value of the array, or key-value-pair of the
+     * map. For other types of properties this property has no effect. When style is form, the default value is true. For all other styles, the
+     * default value is false.
+     * <p>
+     * This method sets the explode property of Encoding instance to the given explode argument.
+     * </p> 
+     * @param explode a boolean that indicates whether the property values of array or object will generate separate parameters
+     */
+    void setExplode(Boolean explode);
+
+    /**
+     * AllowReserved determines whether the parameter value SHOULD allow reserved characters to be encoded without percent-encoding.
+     * <p>
+     * This method sets the allowReserved property of Encoding instance to the given allowReserved argument and returns the instance.
+     * </p>
+     * @param allowReserved a boolean that determines whether the parameter value SHOULD allow reserved characters
+     * @return Encoding
+     */
+    Encoding allowReserved(Boolean allowReserved);
+
+    /**
+     * AllowReserved determines whether the parameter value SHOULD allow reserved characters to be encoded without percent-encoding.
+     * <p>
+     * This method returns the allowReserved property from a Encoding instance.
+     * </p>
+     * @return Boolean allowReserved
+     **/
+    Boolean getAllowReserved();
+
+    /**
+     * AllowReserved determines whether the parameter value SHOULD allow reserved characters to be encoded without percent-encoding.
+     * <p>
+     * This method sets the allowReserved property to the given allowReserved argument.
+     * </p>
+     * @param allowReserved a boolean that determines whether the parameter value SHOULD allow reserved characters
+     */
+    void setAllowReserved(Boolean allowReserved);
 
 }

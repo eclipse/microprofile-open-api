@@ -25,88 +25,83 @@ import org.eclipse.microprofile.openapi.models.media.Content;
 /**
  * This interface represents the request body of an operation in which body parameters can be specified.
  *
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#requestBodyObject"
+ * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#requestBodyObject">requestBody Object</a>
  */
 public interface RequestBody extends Constructible, Extensible, Reference<RequestBody> {
 
-	/**
-	 * Returns the description of this instance of RequestBody.
-	 *
-	 * @return a brief description of the RequestBody
-	 **/
+    /**
+     * Returns the description of this instance of RequestBody.
+     *
+     * @return a brief description of the RequestBody
+     **/
 
-	String getDescription();
+    String getDescription();
 
-	/**
-	 * Sets the description of this instance of RequestBody.
-	 * to the parameter.
-	 *
-	 * @param description the brief description of the RequestBody
-	 */
+    /**
+     * Sets the description of this instance of RequestBody. to the parameter.
+     *
+     * @param description the brief description of the RequestBody
+     */
 
-	void setDescription(String description);
+    void setDescription(String description);
 
-	/**
-	 * Sets the description of this RequestBody and return this instance
-	 * of RequestBody
-	 *
-	 * @param description the brief description of the RequestBody
-	 * @return this RequestBody instance
-	 */
+    /**
+     * Sets the description of this RequestBody and return this instance of RequestBody
+     *
+     * @param description the brief description of the RequestBody
+     * @return this RequestBody instance
+     */
 
-	RequestBody description(String description);
+    RequestBody description(String description);
 
-	/**
-	 * Returns the content of this instance of RequestBody, where the keys in content are media type names
-	 * and the values describe it.
-	 *
-	 * @return the content of this RequestBody
-	 **/
+    /**
+     * Returns the content of this instance of RequestBody, where the keys in content are media type names and the values describe it.
+     *
+     * @return the content of this RequestBody
+     **/
 
-	Content getContent();
+    Content getContent();
 
-	/**
-	 * Sets the content of this instance of RequestBody, where the keys in content are media type names
-	 * and the values describe it.
-	 *
-	 * @param content the content that describes the RequestBody
-	 */
+    /**
+     * Sets the content of this instance of RequestBody, where the keys in content are media type names and the values describe it.
+     *
+     * @param content the content that describes the RequestBody
+     */
 
-	void setContent(Content content);
+    void setContent(Content content);
 
-	/**
-	 * Sets the content of this instance of RequestBody, where the keys in content are media type names
-	 * and the values describe it.
-	 *
-	 * @param content
-	 * @return RequestBody instance with the modified content property
-	 */
+    /**
+     * Sets the content of this instance of RequestBody, where the keys in content are media type names and the values describe it.
+     *
+     * @param content the content that describes the RequestBody
+     * @return RequestBody instance with the modified content property
+     */
 
-	RequestBody content(Content content);
+    RequestBody content(Content content);
 
-	/**
-	 * Returns whether this instance of RequestBody is required for the operation.
-	 *
-	 * @return true iff the RequestBody is required, false otherwise
-	 **/
+    /**
+     * Returns whether this instance of RequestBody is required for the operation.
+     *
+     * @return true iff the RequestBody is required, false otherwise
+     **/
 
-	Boolean getRequired();
+    Boolean getRequired();
 
-	/**
-	 * Sets whether this instance of RequestBody is required or not.
-	 *
-	 * @param required true iff the RequestBody is required, false otherwise
-	 */
+    /**
+     * Sets whether this instance of RequestBody is required or not.
+     *
+     * @param required true iff the RequestBody is required, false otherwise
+     */
 
-	void setRequired(Boolean required);
+    void setRequired(Boolean required);
 
-	/**
-	 * Sets whether this instance of RequestBody is required or not and returns this instance of RequestBody
-	 *
-	 * @param required true iff the RequestBody is required, false otherwise
-	 * @return this RequestBody instance
-	 */
+    /**
+     * Sets whether this instance of RequestBody is required or not and returns this instance of RequestBody
+     *
+     * @param required true iff the RequestBody is required, false otherwise
+     * @return this RequestBody instance
+     */
 
-	RequestBody required(Boolean required);
+    RequestBody required(Boolean required);
 
 }

@@ -24,19 +24,24 @@ import java.lang.annotation.Target;
 
 /**
  * Represents an OAuth scope.
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#oauthFlowsObject" 
+ * 
+ * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#oauthFlowsObject"
  **/
-@Target({  })
+@Target({})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface OAuthScope {
-	/**
-	 * Name of the scope.
-	 */
+    /**
+     * Name of the scope.
+     * 
+     * @return the name of this scope
+     */
     String name() default "";
 
     /**
      * Short description of the scope.
+     * 
+     * @return the description of this scope
      */
     String description() default "";
 }

@@ -25,45 +25,40 @@ import org.eclipse.microprofile.openapi.models.Constructible;
 /**
  * SecurityRequirement
  *
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#securityRequirementObject"
+ * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#securityRequirementObject">SecuirtyRequirement Object</a>
  */
 public interface SecurityRequirement extends Constructible, Map<String, List<String>> {
 
-	/**
-	 * Adds a List item to a SecurityRequirement instance
-	 * based on the name and item parameters provided as key-value pair.
-	 * <p>
-	 * Takes value as a String object.
-	 * 
-	 * @param name
-	 * @param item
-	 * @return Updated SecurityRequirement instance
-	 */
+    /**
+     * Adds a List item to a SecurityRequirement instance based on the name and item parameters provided as key-value pair.
+     * <p>
+     * Takes value as a String object.
+     * </p>
+     * @param name the name of SecurityRequirement
+     * @param item parameter of SecurityRequirement
+     * @return Updated SecurityRequirement instance
+     */
+    SecurityRequirement addList(String name, String item);
 
-	SecurityRequirement addList(String name, String item);
+    /**
+     * Adds a List item to a SecurityRequirement instance based on the name and item parameters provided as key-value pair to the map.
+     * <p>
+     * Takes value as a List of String objects.
+     * </p>
+     * @param name the name of SecurityRequirement
+     * @param item parameter of SecurityRequirement
+     * @return Updated SecurityRequirement instance
+     */
 
-	/**
-	 * Adds a List item to a SecurityRequirement instance
-	 * based on the name and item parameters provided as key-value pair
-	 * to the map.
-	 * <p>
-	 * Takes value as a List of String objects.
-	 * 
-	 * @param name
-	 * @param item
-	 * @return Updated SecurityRequirement instance
-	 */
+    SecurityRequirement addList(String name, List<String> item);
 
-	SecurityRequirement addList(String name, List<String> item);
+    /**
+     * Adds a new empty List item to a SecurityRequirement instance based on the name parameter provided as key to the map.
+     * 
+     * @param name the name of SecurityRequirement
+     * @return Updated SecurityRequirement instance
+     */
 
-	/**
-	 * Adds a new empty List item to a SecurityRequirement instance
-	 * based on the name parameter provided as key to the map.
-	 * 
-	 * @param name
-	 * @return Updated SecurityRequirement instance
-	 */
-
-	SecurityRequirement addList(String name);
+    SecurityRequirement addList(String name);
 
 }

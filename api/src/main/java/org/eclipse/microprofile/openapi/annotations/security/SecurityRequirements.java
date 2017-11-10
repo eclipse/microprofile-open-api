@@ -1,5 +1,4 @@
 /**
- * Copyright (c) 2017 Contributors to the Eclipse Foundation
  * Copyright 2017 SmartBear Software
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.eclipse.microprofile.openapi.annotations.info;
+package org.eclipse.microprofile.openapi.annotations.security;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
@@ -24,24 +23,17 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * License information for the exposed API.
+ * This object represents an array of SecurityRequirement that can be specified for the operation or at definition level.
  **/
 @Target({ ElementType.METHOD, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
-public @interface License {
+public @interface SecurityRequirements {
     /**
-     * The license name used for the API.
-     * 
-     * @return the name of the license
+     * An array of SecurityRequirement annotations
+     *
+     * @return the array of the SecurityRequirement
      **/
-    String name() default "";
-
-    /**
-     * A URL to the license used for the API. MUST be in the format of a URL.
-     * 
-     * @return the URL of the license
-     **/
-    String url() default "";
+    SecurityRequirement[] value() default {};
 
 }

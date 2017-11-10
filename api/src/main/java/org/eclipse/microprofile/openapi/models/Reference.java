@@ -21,27 +21,27 @@ package org.eclipse.microprofile.openapi.models;
  * Base interface for OpenAPI model objects that can be references to other objects.
  */
 public interface Reference<T extends Reference<T>> {
-	
-	/**
-	 * Returns the reference property from this Reference instance.
-	 *
-	 * @return a reference to a T object in the components in this OpenAPI document
-	 **/
-	String getRef();
 
-	/**
-	 * Sets this Reference's reference property to the given string.
-	 *
-	 * @param ref a reference to a T object in the components in this OpenAPI document
-	 **/
-	void setRef(String ref);
+    /**
+     * Returns the reference property from this Reference instance.
+     *
+     * @return a reference to a T object in the components in this OpenAPI document
+     **/
+    String getRef();
 
-	/**
-	 * Sets this Reference's reference property to the given string.
-	 *
-	 * @param ref a reference to a T object in the components in this OpenAPI document
-	 * @return the current instance
-	 **/
-	T ref(String ref);
+    /**
+     * Sets this Reference's reference property to the given string.
+     *
+     * @param ref a reference to a T object in the components in this OpenAPI document
+     **/
+    void setRef(String ref);
+
+    /**
+     * Sets this Reference's reference property to the given string.
+     *
+     * @param ref a reference to a T object in the components in this OpenAPI document
+     * @return the current instance
+     **/
+    T ref(String ref);
 
 }

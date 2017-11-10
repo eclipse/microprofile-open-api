@@ -28,337 +28,291 @@ import org.eclipse.microprofile.openapi.models.Reference;
  */
 public interface SecurityScheme extends Constructible, Extensible, Reference<SecurityScheme> {
 
-	/**
-	 * Type is a REQUIRED property that specifies the type of SecurityScheme instance.
-	 * <p>
-	 * This method is used in getType and setType to get or set the type of SecurityScheme object 
-	 * to one of the valid values. 
-	 */
-	public enum Type {
-	    APIKEY("apiKey"),
-	    HTTP("http"),
-	    OAUTH2("oauth2"),
-	    OPENIDCONNECT("openIdConnect");
-	
-	    private final String value;
-	
-	    Type(String value) {
-	        this.value = value;
-	    }
-	
-	    @Override
-	    public String toString() {
-	        return String.valueOf(value);
-	    }
-	}
+    /**
+     * Type is a REQUIRED property that specifies the type of SecurityScheme instance.
+     * <p>
+     * This class is used in getType and setType to get or set the type of SecurityScheme object to one of the valid values.
+     * </p>
+     */
+    public enum Type {
+        APIKEY("apiKey"), HTTP("http"), OAUTH2("oauth2"), OPENIDCONNECT("openIdConnect");
 
-	/**
-	 * In is a REQUIRED property that specifies the location of the API key.
-	 * <p>
-	 * This method is used in getIn and setIn to get or set the in of SecurityScheme object 
-	 * to one of the enum constants listed.
-	 */
-	public enum In {
-	    COOKIE("cookie"),
-	    HEADER("header"),
-	    QUERY("query");
-	
-	    private final String value;
-	
-	    In(String value) {
-	        this.value = value;
-	    }
-	
-	    @Override
-	    public String toString() {
-	        return String.valueOf(value);
-	    }
-	}
+        private final String value;
 
-	/**
-	 * Type is a REQUIRED property that specifies the type of SecurityScheme instance.
-	 * <p>
-	 * This method returns the type property from SecurityScheme instance.
-	 * <p>
-	 * @return Type type
-	 **/
+        Type(String value) {
+            this.value = value;
+        }
 
-	SecurityScheme.Type getType();
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+    }
 
-	/**
-	 * Type is a REQUIRED property that specifies the type of SecurityScheme instance.
-	 * <p>
-	 * This method sets the type property of SecurityScheme instance
-	 * to the given Type argument.
-	 * <p>
-	 * @param type
-	 */
+    /**
+     * In is a REQUIRED property that specifies the location of the API key.
+     * <p>
+     * This class is used in getIn and setIn to get or set the in of SecurityScheme object to one of the enum constants listed.
+     * </p>
+     */
+    public enum In {
+        COOKIE("cookie"), HEADER("header"), QUERY("query");
 
-	void setType(SecurityScheme.Type type);
+        private final String value;
 
-	/**
-	 * Type is a REQUIRED property that specifies the type of SecurityScheme instance.
-	 * <p>
-	 * This method sets the type property of SecurityScheme instance
-	 * to the given Type argument and returns the modified instance.
-	 * <p>
-	 * @param type
-	 * @return SecurityScheme instance with the set type property
-	 */
+        In(String value) {
+            this.value = value;
+        }
 
-	SecurityScheme type(SecurityScheme.Type type);
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+    }
 
-	/**
-	 * A short description for security schema.
-	 * <p>
-	 * This method returns the description property from SecurityScheme instance.
-	 * <p>
-	 * @return String description
-	 **/
+    /**
+     * Type is a REQUIRED property that specifies the type of SecurityScheme instance.
+     * <p>
+     * This method returns the type property from SecurityScheme instance.
+     * </p>
+     * @return Type type
+     **/
+    SecurityScheme.Type getType();
 
-	String getDescription();
+    /**
+     * Type is a REQUIRED property that specifies the type of SecurityScheme instance.
+     * <p>
+     * This method sets the type property of SecurityScheme instance to the given Type argument.
+     * </p>
+     * @param type the type of SecurityScheme instance
+     */
+    void setType(SecurityScheme.Type type);
 
-	/**
-	 * A short description for security schema.
-	 * <p>
-	 * This method sets the description property of SecurityScheme instance.
-	 * <p>
-	 * @param description
-	 */
+    /**
+     * Type is a REQUIRED property that specifies the type of SecurityScheme instance.
+     * <p>
+     * This method sets the type property of SecurityScheme instance to the given Type argument and returns the modified instance.
+     * </p> 
+     * @param type the type of SecurityScheme instance
+     * @return SecurityScheme instance with the set type property
+     */
+    SecurityScheme type(SecurityScheme.Type type);
 
-	void setDescription(String description);
+    /**
+     * A short description for security schema.
+     * <p>
+     * This method returns the description property from SecurityScheme instance.
+     * </p> 
+     * @return String description
+     **/
+    String getDescription();
 
-	/**
-	 * A short description for security schema.
-	 * <p>
-	 * This method sets the description property of SecurityScheme instance
-	 * and returns the modified instance.
-	 * <p>
-	 * @param description
-	 * @return SecurityScheme instance with the set description property
-	 */
+    /**
+     * A short description for security schema.
+     * <p>
+     * This method sets the description property of SecurityScheme instance.
+     * </p> 
+     * @param description short description of the SecuirtyScheme instance
+     */
+    void setDescription(String description);
 
-	SecurityScheme description(String description);
+    /**
+     * A short description for security schema.
+     * <p>
+     * This method sets the description property of SecurityScheme instance and returns the modified instance.
+     * </p> 
+     * @param description short description of the SecuirtyScheme instance
+     * @return SecurityScheme instance with the set description property
+     */
+    SecurityScheme description(String description);
 
-	/**
-	 * Name is a REQUIRED property - this is the name of the header, query or cookie parameter to be used.
-	 * <p>
-	 * This method returns the name property from SecurityScheme instance.
-	 * <p>
-	 * @return String name
-	 **/
+    /**
+     * Name is a REQUIRED property - this is the name of the header, query or cookie parameter to be used.
+     * <p>
+     * This method returns the name property from SecurityScheme instance.
+     * </p> 
+     * @return String name
+     **/
+    String getName();
 
-	String getName();
+    /**
+     * Name is a REQUIRED property - this is the name of the header, query or cookie parameter to be used.
+     * <p>
+     * This method sets the name property of SecurityScheme instance to the parameter.
+     * </p> 
+     * @param name the name of the header, query or cookie parameter to be used
+     */
+    void setName(String name);
 
-	/**
-	 * Name is a REQUIRED property - this is the name of the header, query or cookie parameter to be used.
-	 * <p>
-	 * This method sets the name property of SecurityScheme instance
-	 * to the parameter.
-	 * <p>
-	 * @param name
-	 */
+    /**
+     * Name is a REQUIRED property - this is the name of the header, query or cookie parameter to be used.
+     * <p>
+     * This method sets the name property of SecurityScheme instance to the given String argument and returns the modified instance.
+     * </p>
+     * @param name the name of the header, query or cookie parameter to be used
+     * @return SecurityScheme instance with the set name property
+     */
+    SecurityScheme name(String name);
 
-	void setName(String name);
+    /**
+     * In is a REQUIRED property that indicates the location of the API key. Valid values are "query", "header", "cookie".
+     * <p>
+     * This method returns the in property from SecurityScheme instance.
+     * </p>
+     * @return In in
+     **/
+    SecurityScheme.In getIn();
 
-	/**
-	 * Name is a REQUIRED property - this is the name of the header, query or cookie parameter to be used.
-	 * <p>
-	 * This method sets the name property of SecurityScheme instance
-	 * to the given String argument and returns the modified instance.
-	 * <p>
-	 * @param name
-	 * @return SecurityScheme instance with the set name property
-	 */
+    /**
+     * In is a REQUIRED property that indicates the location of the API key. Valid values are "query", "header", "cookie".
+     * <p>
+     * The method sets the in property of SecurityScheme instance to the given In argument.
+     * </p> 
+     * @param in the location of the API key
+     */
+    void setIn(SecurityScheme.In in);
 
-	SecurityScheme name(String name);
+    /**
+     * In is a REQUIRED property that indicates the location of the API key. Valid values are "query", "header", "cookie".
+     * <p>
+     * This method sets the in property of SecurityScheme instance to the given In argument and returns the modified instance.
+     * </p> 
+     * @param in the location of the API key
+     * @return SecurityScheme instance with the set in property
+     */
+    SecurityScheme in(SecurityScheme.In in);
 
-	/**
-	 * In is a REQUIRED property that indicates the location of the API key. 
-	 * Valid values are "query", "header", "cookie".
-	 * <p> 
-	 * This method returns the in property from SecurityScheme instance.
-	 * <p>
-	 * @return In in
-	 **/
+    /**
+     * Schema is a REQUIRED property that is the name of the HTTP Authorization scheme to be used in the Authorization header as defined in RFC7235.
+     * <p>
+     * This method returns the scheme property from SecurityScheme instance.
+     * </p> 
+     * @return String scheme
+     **/
+    String getScheme();
 
-	SecurityScheme.In getIn();
+    /**
+     * Schema is a REQUIRED property that is the name of the HTTP Authorization scheme to be used in the Authorization header as defined in RFC7235.
+     * <p>
+     * This method sets the scheme property of SecurityScheme instance to the given String argument.
+     * </p>
+     * @param scheme the name of the HTTP Authorization scheme to be used in the Authorization header
+     */
+    void setScheme(String scheme);
 
-	/**
-	 * In is a REQUIRED property that indicates the location of the API key. 
-	 * Valid values are "query", "header", "cookie".
-	 * <p>
-	 * The method sets the in property of SecurityScheme instance
-	 * to the given In argument.
-	 * <p>
-	 * @param in
-	 */
+    /**
+     * Schema is a REQUIRED property that is the name of the HTTP Authorization scheme to be used in the Authorization header as defined in RFC7235.
+     * <p>
+     * This method sets the scheme property of SecurityScheme instance to the given String argument and returns the modified instance.
+     * </p>
+     * @param scheme the name of the HTTP Authorization scheme to be used in the Authorization header
+     * @return SecurityScheme instance with the set scheme property
+     */
+    SecurityScheme scheme(String scheme);
 
-	void setIn(SecurityScheme.In in);
+    /**
+     * bearerFormat is intended as a hint to the client to identify how the bearer token is formatted. Bearer tokens are usually generated by an
+     * authorization server, so this information is primarily for documentation purposes.
+     * <p>
+     * This method returns the bearerFormat property from SecurityScheme instance.
+     * </p> 
+     * @return String bearerFormat
+     **/
+    String getBearerFormat();
 
-	/**
-	 * In is a REQUIRED property that indicates the location of the API key. 
-	 * Valid values are "query", "header", "cookie".
-	 * <p>
-	 * This method sets the in property of SecurityScheme instance
-	 * to the given In argument and returns the modified instance.
-	 * <p>
-	 * @param in
-	 * @return SecurityScheme instance with the set in property
-	 */
+    /**
+     * bearerFormat is intended as a hint to the client to identify how the bearer token is formatted. Bearer tokens are usually generated by an
+     * authorization server, so this information is primarily for documentation purposes.
+     * <p>
+     * This method sets the bearerFormat property of SecurityScheme instance to the given String argument.
+     * </p>
+     * @param bearerFormat a hint to the client to identify how the bearer token is formatted
+     */
+    void setBearerFormat(String bearerFormat);
 
-	SecurityScheme in(SecurityScheme.In in);
+    /**
+     * bearerFormat is intended as a hint to the client to identify how the bearer token is formatted. Bearer tokens are usually generated by an
+     * authorization server, so this information is primarily for documentation purposes.
+     * <p>
+     * This method sets the bearerFormat property of SecurityScheme instance to the given String argument and returns the modified instance.
+     * </p>
+     * @param bearerFormat a hint to the client to identify how the bearer token is formatted
+     * @return SecurityScheme instance with the set bearerFormat property
+     */
+    SecurityScheme bearerFormat(String bearerFormat);
 
-	/**
-	 * Schema is a REQUIRED property that is the name of the HTTP Authorization scheme
-	 * to be used in the Authorization header as defined in RFC7235.
-	 * <p>
-	 * This method returns the scheme property from SecurityScheme instance.
-	 * <p>
-	 * @return String scheme
-	 **/
+    /**
+     * Flows is a REQUIRED property.
+     * <p>
+     * Flows is an object containing configuration information for the flow types supported.
+     * </p>
+     * <p>
+     * This method returns the flows property from SecurityScheme instance.
+     * </p>
+     * @return OAuthFlows flows
+     **/
+    OAuthFlows getFlows();
 
-	String getScheme();
+    /**
+     * Flows is a REQUIRED property.
+     * <p>
+     * Flows is an object containing configuration information for the flow types supported.
+     * </p>
+     * <p>
+     * This method sets the flows property of SecurityScheme instance to the given OAuthFlows argument.
+     * </p>
+     * @param flows an object containing configuration information for the flow types supported
+     */
+    void setFlows(OAuthFlows flows);
 
-	/**
-	 * Schema is a REQUIRED property that is the name of the HTTP Authorization scheme
-	 * to be used in the Authorization header as defined in RFC7235.
-	 * <p>
-	 * This method sets the scheme property of SecurityScheme instance
-	 * to the given String argument.
-	 * <p>
-	 * @param scheme
-	 */
+    /**
+     * Flows is a REQUIRED property.
+     * <p>
+     * Flows is an object containing configuration information for the flow types supported.
+     * </p>
+     * <p>
+     * This method sets the flows property of SecurityScheme instance to the given OAuthFlows argument and returns the modified instance.
+     * </p>
+     * @param flows an object containing configuration information for the flow types supported
+     * @return SecurityScheme instance with the set flows property
+     */
+    SecurityScheme flows(OAuthFlows flows);
 
-	void setScheme(String scheme);
+    /**
+     * openIdConnectUrl is a REQUIRED property.
+     * <p>
+     * This property allows to discover OAuth2 configuration values. openIdConnectUrl MUST be in a form of a URL.
+     * </p>
+     * <p>
+     * This method returns the openIdConnectUrl property from SecurityScheme instance.
+     * </p>
+     * @return String openIdConnectUrl
+     **/
+    String getOpenIdConnectUrl();
 
-	/**
-	 * Schema is a REQUIRED property that is the name of the HTTP Authorization scheme
-	 * to be used in the Authorization header as defined in RFC7235.
-	 * <p>
-	 * This method sets the scheme property of SecurityScheme instance
-	 * to the given String argument and returns the modified instance.
-	 * <p>
-	 * @param scheme
-	 * @return SecurityScheme instance with the set scheme property
-	 */
+    /**
+     * openIdConnectUrl is a REQUIRED property.
+     * <p>
+     * This property allows to discover OAuth2 configuration values. openIdConnectUrl MUST be in a form of a URL.
+     * </p>
+     * <p>
+     * This method sets the openIdConnectUrl property of a SecurityScheme instance to the given String argument.
+     * </p>
+     * @param openIdConnectUrl a URL where OAuth2 configuration values are stored
+     */
+    void setOpenIdConnectUrl(String openIdConnectUrl);
 
-	SecurityScheme scheme(String scheme);
-
-	/**
-	 * bearerFormat is intended as a hint to the client to identify how the bearer token is formatted. 
-	 * Bearer tokens are usually generated by an authorization server, so this information is primarily for documentation purposes.
-	 * <p>
-	 * This method returns the bearerFormat property from SecurityScheme instance.
-	 * <p>
-	 * @return String bearerFormat
-	 **/
-
-	String getBearerFormat();
-
-	/**
-	 * bearerFormat is intended as a hint to the client to identify how the bearer token is formatted. 
-	 * Bearer tokens are usually generated by an authorization server, so this information is primarily for documentation purposes.
-	 * <p>
-	 * This method sets the bearerFormat property of SecurityScheme instance
-	 * to the given String argument.
-	 * <p>
-	 * @param bearerFormat
-	 */
-
-	void setBearerFormat(String bearerFormat);
-
-	/**
-	 * bearerFormat is intended as a hint to the client to identify how the bearer token is formatted. 
-	 * Bearer tokens are usually generated by an authorization server, so this information is primarily for documentation purposes.
-	 * <p>
-	 * This method sets the bearerFormat property of SecurityScheme instance to the given String argument
-	 * and returns the modified instance.
-	 * <p>
-	 * @param bearerFormat
-	 * @return SecurityScheme instance with the set bearerFormat property
-	 */
-
-	SecurityScheme bearerFormat(String bearerFormat);
-
-	/**
-	 * Flows is a REQUIRED property.
-	 * <p>
-	 * Flows is an object containing configuration information for the flow types supported.
-	 * <p>
-	 * This method returns the flows property from SecurityScheme instance.
-	 *
-	 * @return OAuthFlows flows
-	 **/
-
-	OAuthFlows getFlows();
-
-	/**
-	 * Flows is a REQUIRED property.
-	 * <p>
-	 * Flows is an object containing configuration information for the flow types supported.
-	 * <p>
-	 * This method sets the flows property of SecurityScheme instance
-	 * to the given OAuthFlows argument.
-	 * @param flows
-	 */
-
-	void setFlows(OAuthFlows flows);
-
-	/**
-	 * Flows is a REQUIRED property.
-	 * <p>
-	 * Flows is an object containing configuration information for the flow types supported.
-	 * <p>
-	 * This method sets the flows property of SecurityScheme instance
-	 * to the given OAuthFlows argument and returns the modified instance.
-	 * <p>
-	 * @param flows
-	 * @return SecurityScheme instance with the set flows property
-	 */
-
-	SecurityScheme flows(OAuthFlows flows);
-
-	/**
-	 * openIdConnectUrl is a REQUIRED property.
-	 * <p>
-	 * This property allows to discover OAuth2 configuration values. 
-	 * openIdConnectUrl MUST be in a form of a URL.
-	 * <p>
-	 * This method returns the openIdConnectUrl property from SecurityScheme instance.
-	 *
-	 * @return String openIdConnectUrl
-	 **/
-
-	String getOpenIdConnectUrl();
-
-	/**
-	 * openIdConnectUrl is a REQUIRED property.
-	 * <p>
-	 * This property allows to discover OAuth2 configuration values. 
-	 * openIdConnectUrl MUST be in a form of a URL.
-	 * <p>
-	 * This method sets the openIdConnectUrl property of a SecurityScheme instance
-	 * to the given String argument.
-	 *
-	 * @param openIdConnectUrl
-	 */
-
-	void setOpenIdConnectUrl(String openIdConnectUrl);
-
-	/**
-	 * penIdConnectUrl is a REQUIRED property.
-	 * <p>
-	 * This property allows to discover OAuth2 configuration values. 
-	 * openIdConnectUrl MUST be in a form of a URL.
-	 * <p>
-	 * This method sets the openIdConnectUrl property of SecurityScheme instance
-	 * to the given String argument and returns the modified instance.
-	 * <p>
-	 * @param openIdConnectUrl
-	 * @return SecurityScheme instance with the set openIdConnectUrl property
-	 */
-
-	SecurityScheme openIdConnectUrl(String openIdConnectUrl);
+    /**
+     * penIdConnectUrl is a REQUIRED property.
+     * <p>
+     * This property allows to discover OAuth2 configuration values. openIdConnectUrl MUST be in a form of a URL.
+     * </p>
+     * <p>
+     * This method sets the openIdConnectUrl property of SecurityScheme instance to the given String argument and returns the modified instance.
+     * </p>
+     * @param openIdConnectUrl a URL where OAuth2 configuration values are stored
+     * @return SecurityScheme instance with the set openIdConnectUrl property
+     */
+    SecurityScheme openIdConnectUrl(String openIdConnectUrl);
 
 }

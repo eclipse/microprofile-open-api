@@ -24,49 +24,45 @@ import java.util.List;
  */
 public interface ByteArraySchema extends Schema<byte[]> {
 
-	/**
-	 * Change this ByteArraySchema's type property from the default value to the
-	 * given string. 
-	 *
-	 * @param type  the name of a valid type
-	 * @return the current ByteArraySchema instance
-	 */
-	ByteArraySchema type(String type);
+    /**
+     * Change this ByteArraySchema's type property from the default value to the given string.
+     *
+     * @param type the name of a valid type
+     * @return the current ByteArraySchema instance
+     */
+    ByteArraySchema type(String type);
 
-	/**
-	 * Change this ByteArraySchema's format property from the default value to the
-	 * given format. The value may be one of the formats described in the OAS or
-	 * a user defined format.
-	 *
-	 * @param format
-	 *            the string specifying the data format
-	 * @return the current ByteArraySchema instance
-	 */
-	ByteArraySchema format(String format);
+    /**
+     * Change this ByteArraySchema's format property from the default value to the given format. The value may be one of the formats described in the
+     * OAS or a user defined format.
+     *
+     * @param format the string specifying the data format
+     * @return the current ByteArraySchema instance
+     */
+    ByteArraySchema format(String format);
 
-	/**
-	 * Sets the default property of this ByteArraySchema to the given default value.
-	 * 
-	 * @param defaultValue  a value to use as the default
-	 * @return the current ByteArraySchema instance
-	 */
-	ByteArraySchema defaultValue(byte[] defaultValue);
+    /**
+     * Sets the default property of this ByteArraySchema to the given default value.
+     * 
+     * @param defaultValue a value to use as the default
+     * @return the current ByteArraySchema instance
+     */
+    ByteArraySchema defaultValue(byte[] defaultValue);
 
-	/**
-	 * Sets the enumerated list of values allowed for objects defined by this schema.
-	 *
-	 * @param enumeration a list of values allowed
-	 * @return the current ByteArraySchema instance
-	 */
-	ByteArraySchema enumeration(List<byte[]> enumeration);
+    /**
+     * Sets the enumerated list of values allowed for objects defined by this schema.
+     *
+     * @param enumeration a list of values allowed
+     * @return the current ByteArraySchema instance
+     */
+    ByteArraySchema enumeration(List<byte[]> enumeration);
 
-	/**
-	 * Adds an item of the appropriate type to the enumerated list of values
-	 * allowed.
-	 *
-	 * @param enumerationItem  an object to add to the enumerated values
-	 * @return the current ByteArraySchema instance
-	 */
-	ByteArraySchema addEnumerationItem(byte[] enumerationItem);
+    /**
+     * Adds an item of the appropriate type to the enumerated list of values allowed.
+     *
+     * @param enumerationItem an object to add to the enumerated values
+     * @return the current ByteArraySchema instance
+     */
+    ByteArraySchema addEnumerationItem(byte[] enumerationItem);
 
 }

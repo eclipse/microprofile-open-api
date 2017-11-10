@@ -31,7 +31,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
 
         <checkstyle.version>2.17</checkstyle.version>
-        <checkstyle.methodNameFormat>^_?[a-z][a-zA-Z0-9]*$</checkstyle.methodNameFormat>
+        <checkstyle.methodNameFormat>^_?[a-z][a-zA-Z0-9]*$|DELETE|GET|HEAD|OPTIONS|PATCH|POST|PUT|TRACE</checkstyle.methodNameFormat>
         <cdi-version>1.2</cdi-version>
         <autorelease>false</autorelease>
     </properties>

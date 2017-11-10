@@ -27,76 +27,73 @@ import org.eclipse.microprofile.openapi.models.Extensible;
  */
 public interface Contact extends Constructible, Extensible {
 
-	/**
-	   * Returns the identifying name of this Contact instance.
-	   *
-	   * @return the name of the contact person/organization
-	   **/
-	String getName();
+    /**
+     * Returns the identifying name of this Contact instance.
+     *
+     * @return the name of the contact person/organization
+     **/
+    String getName();
 
-	/**
-	   * Sets the identifying name of this Contact instance.
-	   *
-	   * @param name the name of the contact person/organization
-	   */
-	void setName(String name);
+    /**
+     * Sets the identifying name of this Contact instance.
+     *
+     * @param name the name of the contact person/organization
+     */
+    void setName(String name);
 
-	/**
-	   * Sets this Contact instance's identifying name to the given name and
-	   * returns this instance of Contact.
-	   *
-	   * @param name the name of the contact person/organization
-	   * @return this Contact instance
-	   */
-	Contact name(String name);
+    /**
+     * Sets this Contact instance's identifying name to the given name and returns this instance of Contact.
+     *
+     * @param name the name of the contact person/organization
+     * @return this Contact instance
+     */
+    Contact name(String name);
 
-	/**
-	   * Returns the URL pointing to the contact information for this Contact instance.
-	   *
-	   * @return the URL pointing to the contact information
-	   **/
+    /**
+     * Returns the URL pointing to the contact information for this Contact instance.
+     *
+     * @return the URL pointing to the contact information
+     **/
 
-	String getUrl();
+    String getUrl();
 
-	/**
-       * Sets this Contact instance's URL pointing to the contact information.
-       * The URL must be in the format of a URL.
-       *
-	   * @param url the URL pointing to the contact information
-	   */
-	void setUrl(String url);
+    /**
+     * Sets this Contact instance's URL pointing to the contact information. The URL must be in the format of a URL.
+     *
+     * @param url the URL pointing to the contact information
+     */
+    void setUrl(String url);
 
-	/**
-	   * Sets this Contact instance's URL pointing to the contact information and
-	   * returns this instance of Contact. The URL must be in the format of a URL.
-	   *
-	   * @param url the url pointing to the contact information
-	   * @return this Contact instance
-	   */
-	Contact url(String url);
+    /**
+     * Sets this Contact instance's URL pointing to the contact information and returns this instance of Contact. The URL must be in the format of a
+     * URL.
+     *
+     * @param url the url pointing to the contact information
+     * @return this Contact instance
+     */
+    Contact url(String url);
 
-	/**
-	   * Returns the contact email of this Contact instance.
-	   *
-	   * @return the email of the contact person/organization
-	   **/
+    /**
+     * Returns the contact email of this Contact instance.
+     *
+     * @return the email of the contact person/organization
+     **/
 
-	String getEmail();
+    String getEmail();
 
-	/**
-	   * Sets the contact email of this instance of Contact.
-	   *
-	   * @param email the email of the contact person/organization
-	   */
-	void setEmail(String email);
+    /**
+     * Sets the contact email of this instance of Contact.
+     *
+     * @param email the email of the contact person/organization
+     */
+    void setEmail(String email);
 
-	/**
-	   * Sets this Contact instance's contact email to the given email and
-	   * returns this instance of Contact
-	   *
-	   * @param email the email of the contact person/organization
-	   * @return this Contact instance
-	   */
-	Contact email(String email);
+    /**
+     * Sets this Contact instance's contact email to the given email and returns this instance of Contact
+     *
+     * @param email the email of the contact person/organization
+     * @return this Contact instance
+     */
+    Contact email(String email);
 
 }

@@ -1,5 +1,4 @@
 /**
- * Copyright (c) 2017 Contributors to the Eclipse Foundation
  * Copyright 2017 SmartBear Software
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,44 +14,26 @@
  * limitations under the License.
  */
 
-package org.eclipse.microprofile.openapi.annotations.callbacks;
+package org.eclipse.microprofile.openapi.annotations.extensions;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
-import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.eclipse.microprofile.openapi.annotations.Operation;
-
 /**
- * This object represents a callback URL that will be invoked.
+ * This object represents an array of extensions that can be added to the element.
  **/
 @Target({ ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-@Repeatable(Callbacks.class)
 @Inherited
-public @interface Callback {
+public @interface Extensions {
     /**
-     * The friendly name used to refer to this callback
-     * 
-     * @return the name of the callback
+     * An array of Extension annotations
+     *
+     * @return the array of the extensions
      **/
-    String name() default "";
-
-    /**
-     * An absolute URL which defines the destination which will be called with the supplied operation definition.
-     * 
-     * @return the callback URL
-     */
-    String callbackUrlExpression() default "";
-
-    /**
-     * The array of operations that will be called out-of band
-     * 
-     * @return the callback operations
-     **/
-    Operation[] operation() default {};
+    Extension[] value() default {};
 
 }

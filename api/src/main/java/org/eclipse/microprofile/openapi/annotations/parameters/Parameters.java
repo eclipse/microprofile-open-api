@@ -27,15 +27,13 @@ import java.lang.annotation.Target;
  * This object encapsulates input parameters
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.PARAMETER,
-        ElementType.METHOD })
+@Target({ ElementType.PARAMETER, ElementType.METHOD })
 @Inherited
 public @interface Parameters {
-
-	/**
-	 * An array of parameters that represent the input to a particular operation
-	 * 
-	 * @return an array of parameters
-	 */
-    public Parameter[] value() default {};
+    /**
+     * An array of Parameters Objects for the operation
+     *
+     * @return the parameters
+     */
+    Parameter[] value() default {};
 }

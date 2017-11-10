@@ -1,5 +1,4 @@
 /**
- * Copyright (c) 2017 Contributors to the Eclipse Foundation
  * Copyright 2017 SmartBear Software
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,19 +14,26 @@
  * limitations under the License.
  */
 
-package org.eclipse.microprofile.openapi.models.media;
+package org.eclipse.microprofile.openapi.annotations.responses;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * The schema used for an object containing properties.
- */
-public interface ObjectSchema extends Schema<Object> {
-
+ * This object represents an array of ApiResponse that can be specified for the operation.
+ **/
+@Target({ ElementType.METHOD })
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
+public @interface ApiResponses {
     /**
-     * Change this ObjectSchema's type property from the default value to the given string.
+     * An array of ApiResponse annotations
      *
-     * @param type the name of a valid type
-     * @return the current ObjectSchema instance
-     */
-    ObjectSchema type(String type);
+     * @return the array of the ApiResponse
+     **/
+    ApiResponse[] value() default {};
 
 }

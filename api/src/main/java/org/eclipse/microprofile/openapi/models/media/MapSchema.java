@@ -22,13 +22,12 @@ package org.eclipse.microprofile.openapi.models.media;
  */
 public interface MapSchema extends Schema {
 
-	/**
-	 * Change this MapSchema's type property from the default value to the
-	 * given string. 
-	 *
-	 * @param type  the name of a valid type
-	 * @return the current MapSchema instance
-	 */
-	MapSchema type(String type);
+    /**
+     * Change this MapSchema's type property from the default value to the given string.
+     *
+     * @param type the name of a valid type
+     * @return the current MapSchema instance
+     */
+    MapSchema type(String type);
 
 }

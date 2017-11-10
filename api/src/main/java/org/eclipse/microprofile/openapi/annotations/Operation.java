@@ -52,7 +52,7 @@ public @interface Operation {
     String[] tags() default {};
 
     /**
-     * Provides a brief description of this operation. Should be 120 characters or less for proper visibility in Swagger-UI.
+     * Provides a brief description of this operation.
      *
      * @return a summary of this operation
      **/
@@ -109,6 +109,8 @@ public @interface Operation {
 
     /**
      * A declaration of which security mechanisms can be used for this operation.
+     * 
+     * @return the list of security mechanisms for this operation
      */
     SecurityRequirement[] security() default {};
 
@@ -125,4 +127,11 @@ public @interface Operation {
      * @return an optional array of extensions
      */
     Extension[] extensions() default {};
+
+    /**
+     * Allows this operation to be marked as hidden
+     * 
+     * @return whether or not this operation is hidden
+     */
+    boolean hidden() default false;
 }
