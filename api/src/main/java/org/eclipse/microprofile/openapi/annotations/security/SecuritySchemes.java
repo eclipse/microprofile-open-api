@@ -23,16 +23,16 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This object represents an array of SecurityScheme that can be specified at definition level.
+ * This object represents an array of SecurityScheme annotations that can be specified at the definition level.
  **/
 @Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface SecuritySchemes {
     /**
-     * An array of SecurityScheme annotations
+     * An array of SecurityScheme annotations that can be specified at definition level.
      *
-     * @return the array of the SecurityScheme
+     * @return the array of the SecurityScheme annotations
      **/
     SecurityScheme[] value() default {};
 
