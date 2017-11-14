@@ -22,7 +22,6 @@ import java.util.Map;
 import org.eclipse.microprofile.openapi.models.Constructible;
 import org.eclipse.microprofile.openapi.models.Extensible;
 import org.eclipse.microprofile.openapi.models.Reference;
-import org.eclipse.microprofile.openapi.models.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.models.servers.Server;
 
 /**
@@ -92,14 +91,14 @@ public interface Link extends Constructible, Extensible, Reference<Link> {
      *
      * @return a literal value or runtime expression to use as a request body when calling the target operation
      **/
-    RequestBody getRequestBody();
+    Object getRequestBody();
 
     /**
      * Sets this Link's requestBody property to the given object.
      *
      * @param requestBody a literal value or runtime expression to use as a request body when calling the target operation
      */
-    void setRequestBody(RequestBody requestBody);
+    void setRequestBody(Object requestBody);
 
     /**
      * Sets this Link's requestBody property to the given object.
@@ -107,7 +106,7 @@ public interface Link extends Constructible, Extensible, Reference<Link> {
      * @param requestBody a literal value or runtime expression to use as a request body when calling the target operation
      * @return the current Link instance
      */
-    Link requestBody(RequestBody requestBody);
+    Link requestBody(Object requestBody);
 
     /**
      * Returns the operationId property for this instance of Link.
