@@ -25,7 +25,20 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * An object representing a Server.
+ * This annotation represents a Server used in an operation or used by all operations in an
+ * OpenAPI document. 
+ * <p>
+ * When a Server annotation appears on a method the server is added to the corresponding
+ * OpenAPI operation servers field.
+ * <p>
+ * When a Server annotation appears on a type then the server is added to all the operations 
+ * defined in that type except for those operations which already have one or more servers 
+ * defined. The server is also added to the servers defined in the root level of the 
+ * OpenAPI document. 
+ * <p>
+ * @see <a href=
+ * "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#server-object">
+ *      OpenAPI Specification Server Object</a>
  **/
 @Target({ ElementType.TYPE, ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
@@ -33,16 +46,19 @@ import java.lang.annotation.Target;
 @Inherited
 public @interface Server {
     /**
-     * A URL to the target host. This URL supports Server Variables and may be relative, to indicate that the host location is relative to the
-     * location where the OpenAPI definition is being served. Variable substitutions will be made when a variable is named in {brackets}. This is a
-     * REQUIRED property.
+     * A URL to the target host. This URL supports Server Variables and may be
+     * relative, to indicate that the host location is relative to the location
+     * where the OpenAPI definition is being served. Variable substitutions will
+     * be made when a variable is named in {brackets}. This is a REQUIRED
+     * property.
      * 
      * @return URL to the target host
      **/
     String url() default "";
 
     /**
-     * An optional string describing the host designated by the URL. CommonMark syntax MAY be used for rich text representation.
+     * An optional string describing the host designated by the URL. CommonMark
+     * syntax MAY be used for rich text representation.
      * 
      * @return description of the host designated by URL
      **/
