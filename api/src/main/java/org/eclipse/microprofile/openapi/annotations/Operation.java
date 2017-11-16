@@ -54,7 +54,7 @@ public @interface Operation {
     String[] tags() default {};
 
     /**
-     * Provides a brief description of this operation does.
+     * Provides a brief description of what this operation does.
      *
      * @return a summary of this operation
      **/
