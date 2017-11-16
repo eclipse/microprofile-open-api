@@ -31,7 +31,7 @@ import org.eclipse.microprofile.openapi.models.media.Content;
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#responseObject"
  */
-public interface ApiResponse extends Constructible, Extensible, Reference<ApiResponse> {
+public interface APIResponse extends Constructible, Extensible, Reference<APIResponse> {
 
     /**
      * Returns a short description of this instance of ApiResponse.
@@ -56,7 +56,7 @@ public interface ApiResponse extends Constructible, Extensible, Reference<ApiRes
      * @return this ApiResponse instance
      */
 
-    ApiResponse description(String description);
+    APIResponse description(String description);
 
     /**
      * Returns the map of Headers in this instance of ApiResponse.
@@ -83,7 +83,7 @@ public interface ApiResponse extends Constructible, Extensible, Reference<ApiRes
      * @return this ApiResponse instance
      */
 
-    ApiResponse headers(Map<String, Header> headers);
+    APIResponse headers(Map<String, Header> headers);
 
     /**
      * Adds the given Header to this ApiResponse instance's map of Headers with the given name and return this instance of ApiResponse. If this
@@ -94,7 +94,7 @@ public interface ApiResponse extends Constructible, Extensible, Reference<ApiRes
      * @return this ApiResponse instance
      */
 
-    ApiResponse addHeaderObject(String name, Header header);
+    APIResponse addHeaderObject(String name, Header header);
 
     /**
      * Returns the map containing descriptions of potential response payload for this instance of ApiResponse.
@@ -119,7 +119,7 @@ public interface ApiResponse extends Constructible, Extensible, Reference<ApiRes
      * @return this ApiResponse instance
      */
 
-    ApiResponse content(Content content);
+    APIResponse content(Content content);
 
     /**
      * Returns the operations links that can be followed from tis instance of ApiResponse.
@@ -145,6 +145,6 @@ public interface ApiResponse extends Constructible, Extensible, Reference<ApiRes
      * @return this ApiResponse instance
      */
 
-    ApiResponse link(String name, Link link);
+    APIResponse link(String name, Link link);
 
 }

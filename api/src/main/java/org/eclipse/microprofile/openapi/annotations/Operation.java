@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
 import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
-import org.eclipse.microprofile.openapi.annotations.responses.ApiResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.annotations.servers.Server;
 
@@ -98,7 +98,7 @@ public @interface Operation {
      *
      * @return the list of responses for this operation
      **/
-    ApiResponse[] responses() default {};
+    APIResponse[] responses() default {};
 
     /**
      * Allows an operation to be marked as deprecated. Alternatively use the @Deprecated annotation
