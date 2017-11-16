@@ -50,8 +50,8 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
 @Target({ ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
-@Repeatable(ApiResponses.class)
-public @interface ApiResponse {
+@Repeatable(APIResponses.class)
+public @interface APIResponse {
     /**
      * A short description of the response. This is a REQUIRED property.
      * 

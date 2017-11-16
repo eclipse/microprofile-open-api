@@ -23,7 +23,7 @@ import java.util.Map;
 import org.eclipse.microprofile.openapi.models.callbacks.Callback;
 import org.eclipse.microprofile.openapi.models.parameters.Parameter;
 import org.eclipse.microprofile.openapi.models.parameters.RequestBody;
-import org.eclipse.microprofile.openapi.models.responses.ApiResponses;
+import org.eclipse.microprofile.openapi.models.responses.APIResponses;
 import org.eclipse.microprofile.openapi.models.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.models.servers.Server;
 
@@ -213,14 +213,14 @@ public interface Operation extends Constructible, Extensible {
      *
      * @return collection of possible responses from executing this operation
      **/
-    ApiResponses getResponses();
+    APIResponses getResponses();
 
     /**
      * Sets this Operation's responses property to the given responses.
      *
      * @param responses collection of possible responses from executing this operation
      **/
-    void setResponses(ApiResponses responses);
+    void setResponses(APIResponses responses);
 
     /**
      * Sets this Operation's responses property to the given responses.
@@ -228,7 +228,7 @@ public interface Operation extends Constructible, Extensible {
      * @param responses collection of possible responses from executing this operation
      * @return the current Operation object
      **/
-    Operation responses(ApiResponses responses);
+    Operation responses(APIResponses responses);
 
     /**
      * Returns the callbacks property from an Operation instance.

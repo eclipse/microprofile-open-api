@@ -26,7 +26,7 @@ import org.eclipse.microprofile.openapi.models.links.Link;
 import org.eclipse.microprofile.openapi.models.media.Schema;
 import org.eclipse.microprofile.openapi.models.parameters.Parameter;
 import org.eclipse.microprofile.openapi.models.parameters.RequestBody;
-import org.eclipse.microprofile.openapi.models.responses.ApiResponse;
+import org.eclipse.microprofile.openapi.models.responses.APIResponse;
 import org.eclipse.microprofile.openapi.models.security.SecurityScheme;
 
 /**
@@ -87,14 +87,14 @@ public interface Components extends Constructible, Extensible {
      *
      * @return a Map containing the keys and the reusable responses from API operations for this OpenAPI document
      **/
-    Map<String, ApiResponse> getResponses();
+    Map<String, APIResponse> getResponses();
 
     /**
      * Sets this Components' responses property to the given Map containing keys and reusable response objects.
      *
      * @param responses a Map containing keys and reusable response objects
      */
-    void setResponses(Map<String, ApiResponse> responses);
+    void setResponses(Map<String, APIResponse> responses);
 
     /**
      * Sets this Components' responses property to the given Map containing keys and reusable response objects.
@@ -102,7 +102,7 @@ public interface Components extends Constructible, Extensible {
      * @param responses a Map containing keys and reusable response objects
      * @return the current Components object
      */
-    Components responses(Map<String, ApiResponse> responses);
+    Components responses(Map<String, APIResponse> responses);
 
     /**
      * Adds the given response to this Components' map of responses with the given string as its key.
@@ -111,7 +111,7 @@ public interface Components extends Constructible, Extensible {
      * @param responsesItem a reusable response object
      * @return the current Components object
      */
-    Components addResponses(String key, ApiResponse responsesItem);
+    Components addResponses(String key, APIResponse responsesItem);
 
     /**
      * Returns the parameters property from a Components instance.
