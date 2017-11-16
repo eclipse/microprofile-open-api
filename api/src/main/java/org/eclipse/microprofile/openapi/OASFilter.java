@@ -49,7 +49,9 @@ public interface OASFilter {
      * @param pathItem the current PathItem element
      * @return the PathItem to be used or null 
      */
-    PathItem filterPathItem(PathItem pathItem);
+    default PathItem filterPathItem(PathItem pathItem){
+        return pathItem;
+    }
     
     /**
      * Allows filtering of a particular Operation.  Implementers of this method can choose to update the given Operation,
@@ -58,7 +60,9 @@ public interface OASFilter {
      * @param operation the current Operation element
      * @return the Operation to be used or null 
      */
-    Operation filterOperation(Operation operation);
+    default Operation filterOperation(Operation operation) {
+        return operation;
+    }
     
     /**
      * Allows filtering of a particular Parameter.  Implementers of this method can choose to update the given Parameter,
@@ -67,7 +71,9 @@ public interface OASFilter {
      * @param parameter the current Parameter element
      * @return the Parameter to be used or null 
      */
-    Parameter filterParameter(Parameter parameter);
+    default Parameter filterParameter(Parameter parameter) {
+        return parameter;
+    }
     
     /**
      * Allows filtering of a particular Header.  Implementers of this method can choose to update the given Header,
@@ -76,7 +82,9 @@ public interface OASFilter {
      * @param header the current Header element
      * @return the Header to be used or null 
      */
-    Header filterHeader(Header header);
+    default Header filterHeader(Header header) {
+        return header;
+    }
     
     /**
      * Allows filtering of a particular RequestBody.  Implementers of this method can choose to update the given RequestBody,
@@ -85,7 +93,9 @@ public interface OASFilter {
      * @param requestBody the current RequestBody element
      * @return the RequestBody to be used or null 
      */
-    RequestBody filterRequestBody(RequestBody requestBody);
+    default RequestBody filterRequestBody(RequestBody requestBody) {
+        return requestBody;
+    }
     
     /**
      * Allows filtering of a particular APIResponse.  Implementers of this method can choose to update the given APIResponse,
@@ -94,7 +104,9 @@ public interface OASFilter {
      * @param apiResponse the current APIResponse element
      * @return the APIResponse to be used or null 
      */
-    APIResponse filterAPIResponse(APIResponse apiResponse);
+    default APIResponse filterAPIResponse(APIResponse apiResponse) {
+        return apiResponse;
+    }
     
     /**
      * Allows filtering of a particular Schema.  Implementers of this method can choose to update the given Schema,
@@ -103,7 +115,9 @@ public interface OASFilter {
      * @param schema the current Schema element
      * @return the Schema to be used or null 
      */
-    Schema<?> filterSchema(Schema<?> schema);
+    default Schema<?> filterSchema(Schema<?> schema) {
+        return schema;
+    }
     
     /**
      * Allows filtering of a particular SecurityScheme.  Implementers of this method can choose to update the given SecurityScheme,
@@ -112,7 +126,9 @@ public interface OASFilter {
      * @param securityScheme the current SecurityScheme element
      * @return the SecurityScheme to be used or null 
      */
-    SecurityScheme filterSecurityScheme(SecurityScheme securityScheme);
+    default SecurityScheme filterSecurityScheme(SecurityScheme securityScheme) {
+        return securityScheme;
+    }
     
     /**
      * Allows filtering of a particular Server.  Implementers of this method can choose to update the given Server,
@@ -121,7 +137,9 @@ public interface OASFilter {
      * @param server the current Server element
      * @return the Server to be used or null 
      */
-    Server filterServer(Server server);
+    default Server filterServer(Server server) {
+        return server;
+    }
     
     /**
      * Allows filtering of a particular Tag.  Implementers of this method can choose to update the given Tag,
@@ -130,7 +148,9 @@ public interface OASFilter {
      * @param tag the current Tag element
      * @return the Tag to be used or null 
      */
-    Tag filterTag(Tag tag);
+    default Tag filterTag(Tag tag) {
+        return tag;
+    }
     
     /**
      * Allows filtering of a particular Link.  Implementers of this method can choose to update the given Link,
@@ -139,7 +159,9 @@ public interface OASFilter {
      * @param link the current Link element
      * @return the Link to be used or null 
      */
-    Link filterLink(Link link);
+    default Link filterLink(Link link) {
+        return link;
+    }
     
     /**
      * Allows filtering of a particular Callback.  Implementers of this method can choose to update the given Callback,
@@ -148,7 +170,9 @@ public interface OASFilter {
      * @param callback the current Callback element
      * @return the Callback to be used or null 
      */
-    Callback filterCallback(Callback callback);
+    default Callback filterCallback(Callback callback) {
+        return callback;
+    }
     
     /**
      * Allows filtering of the singleton OpenAPI element.  Implementers of this method can choose to update this element, or
@@ -158,5 +182,5 @@ public interface OASFilter {
      * 
      * @param openAPI the current OpenAPI element
      */
-    void filterOpenAPI(OpenAPI openAPI);
+    default void filterOpenAPI(OpenAPI openAPI) {}
 }
