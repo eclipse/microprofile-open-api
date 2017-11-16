@@ -27,7 +27,7 @@ import org.eclipse.microprofile.openapi.models.Constructible;
  *
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#responsesObject">Responses Object</a>
  */
-public interface ApiResponses extends Constructible, Map<String, ApiResponse> {
+public interface APIResponses extends Constructible, Map<String, APIResponse> {
 
     public static final String DEFAULT = "default";
 
@@ -38,7 +38,7 @@ public interface ApiResponses extends Constructible, Map<String, ApiResponse> {
      * @param item the ApiResponse object to be added to ApiResponses map
      * @return ApiResponses map with the added ApiResponse instance
      **/
-    ApiResponses addApiResponse(String name, ApiResponse item);
+    APIResponses addApiResponse(String name, APIResponse item);
 
     /**
      * Returns the default documentation of responses other than the ones declared for specific HTTP response codes in this instance of ApiResponses.
@@ -46,7 +46,7 @@ public interface ApiResponses extends Constructible, Map<String, ApiResponse> {
      * @return the default documentation of responses
      **/
 
-    ApiResponse getDefault();
+    APIResponse getDefault();
 
     /**
      * Sets the default documentation of responses for this instance of ApiResponses. This will cover all the undeclared responses.
@@ -54,7 +54,7 @@ public interface ApiResponses extends Constructible, Map<String, ApiResponse> {
      * @param defaultValue the default documentation of responses
      */
 
-    void setDefaultValue(ApiResponse defaultValue);
+    void setDefaultValue(APIResponse defaultValue);
 
     /**
      * Sets the default documentation of responses for this instance of ApiResponses and return this instance of ApiResponses. This will cover all the
@@ -64,6 +64,6 @@ public interface ApiResponses extends Constructible, Map<String, ApiResponse> {
      * @return this ApiResponses instance
      */
 
-    ApiResponses defaultValue(ApiResponse defaultValue);
+    APIResponses defaultValue(APIResponse defaultValue);
 
 }

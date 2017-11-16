@@ -31,12 +31,12 @@ import java.lang.annotation.Target;
 @Target({ ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
-public @interface ApiResponses {
+public @interface APIResponses {
     /**
      * An array of ApiResponse annotations
      *
      * @return the array of the ApiResponse
      **/
-    ApiResponse[] value() default {};
+    APIResponse[] value() default {};
 
 }
