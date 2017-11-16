@@ -27,7 +27,52 @@ import java.lang.annotation.Target;
 import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
 
 /**
- * This object represents a tag. See https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#tagObject
+ * This object represents a tag. A tag is meta-information you can use to help
+ * organize your API endpoints and it can appear in two contexts.
+ * <p>
+ * Define tag objects on a method that implements an operation or on a type that
+ * contains operations. They will be gathered and stored in the root object of
+ * the OpenAPI document.
+ * <p>
+ * If the tag annotation is associated with a method that corresponds to an
+ * operation then the tag name will be added to the OpenAPI document and also be
+ * added to the operation tags (see @Operation).
+ * <p>
+ * If more than one tag is defined with the same name then only one tag with that name
+ * will appear in the OpenAPI document. 
+ * <p>
+ * If more than one tag is defined with the same name and only one tag contains a 
+ * description that is a non-empty string then that description will be preserved in 
+ * the OpenAPI document. If more than one non-empty description is specified the results 
+ * are implementation dependent. 
+ * <p>
+ * If more than one tag is defined with the same name and only one tag contains an
+ * external documentation that is defined with at least one non-empty string then that 
+ * external documentation will be preserved in the OpenAPI document. If more than one 
+ * non-empty external documentation is specified the results are implementation dependent. 
+ * <pre>
+ * &#64;Tag(name = "luggage", description = "Operations related to luggage handling.")
+ * &#64;GET
+ * public Location getLuggage(LuggageID id) {
+ *     return getLuggageLocation(id);
+ * }
+ * </pre>
+ * <p>
+ * If the tag annotation is applied to a type then the tag is defined in OpenAPI and a
+ * reference is added to each operation in the type.
+ * <p>
+ * Operations in your application can contain references to tag definitions to
+ * help organize the software. The @Operation annotation may contain a list of
+ * tag names.
+ * 
+ * <pre>
+ * &#64;Operation(summary = "Track luggage in the international division", 
+ *      tags = { "luggage", "international" }, ...
+ * </pre>
+ * 
+ * @see <a href=
+ *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#tagObject">
+ *      OpenAPI Specification Tag Object</a>
  */
 @Target({ ElementType.TYPE, ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)

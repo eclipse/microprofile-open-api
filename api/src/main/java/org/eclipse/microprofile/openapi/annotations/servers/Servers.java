@@ -22,14 +22,23 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * 
+ * The Servers annotation is a container for @Server annotations. When used on a method or a type
+ * it is treated as if each server annotation were applied individually.
+ * 
+ * @see Server
+ *
+ */
 @Target({ ElementType.TYPE, ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface Servers {
     /**
-     * An array of Server Objects which is used to provide connectivity information to a target server.
+     * An array of Server objects which is used to provide connectivity
+     * information to a target server.
      *
-     * @return the servers used for this API
+     * @return the servers used for this API or endpoint.
      */
     Server[] value() default {};
 }

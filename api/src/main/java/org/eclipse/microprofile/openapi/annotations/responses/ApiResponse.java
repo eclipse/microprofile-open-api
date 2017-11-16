@@ -29,7 +29,23 @@ import org.eclipse.microprofile.openapi.annotations.links.Link;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 
 /**
- * Describes a single response from an API Operation, including design-time, static links to operations based on the response.
+ * The ApiResponse annotation corresponds to the OpenAPI Response model object which 
+ * describes a single response from an API Operation, including design-time,
+ * static links to operations based on the response.
+ * <p>
+ * When this annotation is applied to a method the response is added to the responses
+ * defined in the corresponding OpenAPI operation. If the operation already has a 
+ * response with the specified responseCode the annotation on the method is ignored. 
+ * 
+ * <pre>
+ * &#64;ApiResponse(responseCode="200", description="Calculate load size", content=
+ *     [ &#64;Content(mediaType="application/json", Schema=&#64;Schema(type="integer")) ] )
+ * &#64;GET
+ * public getLuggageWeight(Flight id) {
+ *     return getBagWeight(id) + getCargoWeight(id);
+ * }
+ * </pre>
+ * 
  **/
 @Target({ ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
@@ -55,7 +71,7 @@ public @interface ApiResponse {
      * <p>
      * RFC7230 states header names are case insensitive. If a response header is defined with the name "Content-Type", it SHALL be ignored.
      * 
-     * @return array of headers for this reponse instance
+     * @return array of headers for this response instance
      **/
     Header[] headers() default {};
 
@@ -67,7 +83,7 @@ public @interface ApiResponse {
     Link[] links() default {};
 
     /**
-     * An array containing descriptions of potential response payloads, for different media types.
+     * An array containing descriptions of potential response payloads for different media types.
      * 
      * @return content of this response instance
      **/
