@@ -17,7 +17,6 @@
 
 package org.eclipse.microprofile.openapi.annotations.media;
 
-import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -26,7 +25,7 @@ import java.lang.annotation.Target;
 /**
  * This object provides schema and examples for a particular media type.
  **/
-@Target({ ElementType.FIELD })
+@Target({})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface Content {
@@ -59,8 +58,11 @@ public @interface Content {
     ArraySchema array() default @ArraySchema();
 
     /**
-     * An array of encodings The key, being the property name, MUST exist in the schema as a property.
-     *
+     * An array of encoding corresponding to a map of property name and its encoding information in MediaType model. 
+     * The key, being the property name, MUST exist in the schema as a property.
+     * <p> 
+     * The encoding object SHALL only apply to requestBody objects when the media type is multipart or application/x-www-form-urlencoded.
+     * </p>
      * @return the array of encodings
      */
     Encoding[] encoding() default {};

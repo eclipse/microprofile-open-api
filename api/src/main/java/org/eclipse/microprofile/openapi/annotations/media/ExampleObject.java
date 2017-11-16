@@ -17,7 +17,6 @@
 
 package org.eclipse.microprofile.openapi.annotations.media;
 
-import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -26,35 +25,48 @@ import java.lang.annotation.Target;
 /**
  * This object illustrates an example of a particular content
  **/
-@Target({ ElementType.METHOD })
+@Target({})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface ExampleObject {
     /**
-     * A unique name to identify this particular example
+     * A unique name to identify this particular example in a map.
      * 
-     * @return the name of the example
+     * @return the name of this example
      **/
     String name() default "";
 
     /**
      * A brief summary of the purpose or context of the example
      * 
-     * @return a summary of the example
+     * @return a summary of this example
      **/
     String summary() default "";
 
     /**
-     * A string representation of the example. This is mutually exclusive with the externalValue property, and ignored if the externalValue property
-     * is specified. If the media type associated with the example allows parsing into an object, it may be converted from a string
+     * Long description for the example. 
+     * CommonMark syntax MAY be used for rich text representation.
      * 
+     * @return a description of this example
+     **/
+    String description() default "";
+
+    /**
+     * A string representation of the example. 
+     * <p>
+     * This is mutually exclusive with the externalValue property, and ignored if the externalValue property is specified. 
+     * </p>
+     * If the media type associated with the example allows parsing into an object, it may be converted from a string.
      * @return the value of the example
      **/
     String value() default "";
 
     /**
-     * A URL to point to an external document to be used as an example. This is mutually exclusive with the value property.
-     * 
+     * A URL to point to an external document to be used as an example.
+     * This provides the capability to reference examples that cannot easily be included in JSON or YAML documents.
+     * <p> 
+     * This is mutually exclusive with the value property.
+     * </p>
      * @return an external URL of the example
      **/
     String externalValue() default "";

@@ -31,7 +31,7 @@ import java.lang.annotation.Target;
 @Inherited
 public @interface Parameters {
     /**
-     * An array of Parameters Objects for the operation
+     * An array of Parameter Objects for the operation
      *
      * @return the parameters
      */

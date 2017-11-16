@@ -37,13 +37,20 @@ import java.lang.annotation.Target;
 @Inherited
 public @interface SecurityScheme {
     /**
+     * The name of this SecurityScheme.
+     * Used as a key in the key-value pair of a SecuritySchemes map 
+     * 
+     * @return the name of this SecurityScheme instance
+     **/
+    String securitySchemeName() default "";
+    /**
      * Type is a REQUIRED property that specifies the type of SecurityScheme instance.
      * <p>
      * The type of the security scheme. Valid values are defined by SecuritySchemeType enum.
      * </p>
      * @return the type of this SecuirtyScheme instance
      **/
-    SecuritySchemeType type() default SecuritySchemeType.DEFAULT;
+    SecuritySchemeType type();
 
     /**
      * A short description for security scheme. 
@@ -58,9 +65,9 @@ public @interface SecurityScheme {
      * <p>
      * The name of the header, query or cookie parameter to be used. 
      * </p>
-     * @return the name of this SecurityScheme instance
+     * @return the name of this apiKey type SecurityScheme instance 
      **/
-    String name() default "";
+    String apiKeyName() default "";
 
     /**
      * Applies to and is REQUIRED for SecurityScheme of apiKey type.
@@ -70,7 +77,7 @@ public @interface SecurityScheme {
      * </p>
      * @return the location of the API key
      **/
-    SecuritySchemeIn in() default SecuritySchemeIn.DEFAULT;
+    SecuritySchemeIn in() default SecuritySchemeIn.QUERY;
 
     /**
      * Applies to and is REQUIRED for SecurityScheme of http type.
