@@ -26,16 +26,16 @@ import java.lang.annotation.Target;
  * The ApiResponses annotation is a container for @ApiResponse annotations. When used on a method
  * it is treated as if each ApiResponse annotation were applied individually.
  * 
- * @see ApiResponse
+ * @see APIResponse
  **/
 @Target({ ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface APIResponses {
     /**
-     * An array of ApiResponse annotations
+     * An array of APIResponse annotations
      *
-     * @return the array of the ApiResponse
+     * @return the array of the APIResponse
      **/
     APIResponse[] value() default {};
 

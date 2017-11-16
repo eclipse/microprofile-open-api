@@ -41,11 +41,12 @@ import org.eclipse.microprofile.openapi.models.tags.Tag;
  *
  */
 public interface OASFilter {    
-	
-    /**
+
+    /** 
      * Allows filtering of a particular PathItem.  Implementers of this method can choose to update the given PathItem,
      * pass it back as-is, or return null if removing this PathItem.
      * 
+     * @param pathItem the current PathItem element
      * @return the PathItem to be used or null 
      */
     PathItem filterPathItem(PathItem pathItem);
@@ -54,6 +55,7 @@ public interface OASFilter {
      * Allows filtering of a particular Operation.  Implementers of this method can choose to update the given Operation,
      * pass it back as-is, or return null if removing this Operation.
      * 
+     * @param operation the current Operation element
      * @return the Operation to be used or null 
      */
     Operation filterOperation(Operation operation);
@@ -62,6 +64,7 @@ public interface OASFilter {
      * Allows filtering of a particular Parameter.  Implementers of this method can choose to update the given Parameter,
      * pass it back as-is, or return null if removing this Parameter.
      * 
+     * @param parameter the current Parameter element
      * @return the Parameter to be used or null 
      */
     Parameter filterParameter(Parameter parameter);
@@ -70,6 +73,7 @@ public interface OASFilter {
      * Allows filtering of a particular Header.  Implementers of this method can choose to update the given Header,
      * pass it back as-is, or return null if removing this Header.
      * 
+     * @param header the current Header element
      * @return the Header to be used or null 
      */
     Header filterHeader(Header header);
@@ -78,6 +82,7 @@ public interface OASFilter {
      * Allows filtering of a particular RequestBody.  Implementers of this method can choose to update the given RequestBody,
      * pass it back as-is, or return null if removing this RequestBody.
      * 
+     * @param requestBody the current RequestBody element
      * @return the RequestBody to be used or null 
      */
     RequestBody filterRequestBody(RequestBody requestBody);
@@ -86,6 +91,7 @@ public interface OASFilter {
      * Allows filtering of a particular APIResponse.  Implementers of this method can choose to update the given APIResponse,
      * pass it back as-is, or return null if removing this APIResponse.
      * 
+     * @param apiResponse the current APIResponse element
      * @return the APIResponse to be used or null 
      */
     APIResponse filterAPIResponse(APIResponse apiResponse);
@@ -94,6 +100,7 @@ public interface OASFilter {
      * Allows filtering of a particular Schema.  Implementers of this method can choose to update the given Schema,
      * pass it back as-is, or return null if removing this Schema.
      * 
+     * @param schema the current Schema element
      * @return the Schema to be used or null 
      */
     Schema<?> filterSchema(Schema<?> schema);
@@ -102,6 +109,7 @@ public interface OASFilter {
      * Allows filtering of a particular SecurityScheme.  Implementers of this method can choose to update the given SecurityScheme,
      * pass it back as-is, or return null if removing this SecurityScheme.
      * 
+     * @param securityScheme the current SecurityScheme element
      * @return the SecurityScheme to be used or null 
      */
     SecurityScheme filterSecurityScheme(SecurityScheme securityScheme);
@@ -110,6 +118,7 @@ public interface OASFilter {
      * Allows filtering of a particular Server.  Implementers of this method can choose to update the given Server,
      * pass it back as-is, or return null if removing this Server.
      * 
+     * @param server the current Server element
      * @return the Server to be used or null 
      */
     Server filterServer(Server server);
@@ -118,6 +127,7 @@ public interface OASFilter {
      * Allows filtering of a particular Tag.  Implementers of this method can choose to update the given Tag,
      * pass it back as-is, or return null if removing this Tag.
      * 
+     * @param tag the current Tag element
      * @return the Tag to be used or null 
      */
     Tag filterTag(Tag tag);
@@ -126,6 +136,7 @@ public interface OASFilter {
      * Allows filtering of a particular Link.  Implementers of this method can choose to update the given Link,
      * pass it back as-is, or return null if removing this Link.
      * 
+     * @param link the current Link element
      * @return the Link to be used or null 
      */
     Link filterLink(Link link);
@@ -134,6 +145,7 @@ public interface OASFilter {
      * Allows filtering of a particular Callback.  Implementers of this method can choose to update the given Callback,
      * pass it back as-is, or return null if removing this Callback.
      * 
+     * @param callback the current Callback element
      * @return the Callback to be used or null 
      */
     Callback filterCallback(Callback callback);
@@ -143,7 +155,7 @@ public interface OASFilter {
      * do nothing if no change is required.  Note that one cannot remove this element from the model tree, hence the return type
      * of void.  
      * 
-     * @return the OpenAPI object to be used
+     * @param openAPI the current OpenAPI element
      */
     void filterOpenAPI(OpenAPI openAPI);
 }

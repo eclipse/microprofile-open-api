@@ -32,5 +32,5 @@ public interface OASReader {
      * 
      * @return the OpenAPI model to be used by the vendor
      */
-	OpenAPI read();
+    OpenAPI read();
 }
