@@ -40,92 +40,122 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 @Inherited
 public @interface Parameter {
     /**
-     * The name of the parameter.
-     * 
-     * @return the parameter's name
+     * This is a REQUIRED property of a parameter instance.
+     * The name of the parameter. Parameter names are case sensitive.
+     * <p>
+     * If in is "path", the name field MUST correspond to the associated path segment from the path field in the Paths Object. 
+     * See Path Templating for further information.
+     * </p>
+     * If in is "header" and the name field is "Accept", "Content-Type" or "Authorization", the parameter definition SHALL be ignored.
+     * <p>
+     * For all other cases, the name corresponds to the parameter name used by the in property.
+     * </p>
+     * @return this parameter's name
      **/
     String name() default "";
 
     /**
-     * The location of the parameter. Possible values are "query", "header", "path" or "cookie". Ignored when empty string.
-     * 
-     * @return the parameter's location
+     * This is a REQUIRED property of a parameter instance.
+     * <p>
+     * The location of the parameter. 
+     * Possible values are specified in ParameterIn enum. Ignored when empty string.
+     * </p>
+     * @return this parameter's location
      **/
     ParameterIn in() default ParameterIn.DEFAULT;
 
     /**
-     * Additional description data to provide on the purpose of the parameter
+     * A brief description of the parameter. This could contain examples of use. 
+     * CommonMark syntax MAY be used for rich text representation.
      * 
-     * @return the parameter's description
+     * @return this parameter's description
      **/
     String description() default "";
 
     /**
-     * Determines whether this parameter is mandatory. If the parameter location is "path", this property is required and its value must be true.
+     * Determines whether this parameter is mandatory. 
+     * <p>
+     * If the parameter location is "path", this property is REQUIRED and its value MUST be true.
      * Otherwise, the property may be included and its default value is false.
-     * 
-     * @return whether or not the parameter is required
+     * </p>
+     * @return whether or not this parameter is required
      **/
     boolean required() default false;
 
     /**
-     * Specifies that a parameter is deprecated and should be transitioned out of usage.
+     * Specifies that a parameter is deprecated and SHOULD be transitioned out of usage.
      * 
-     * @return whether or not the parameter is deprecated
+     * @return whether or not this parameter is deprecated
      **/
     boolean deprecated() default false;
 
     /**
-     * When true, allows sending an empty value. If false, the parameter will be considered \&quot;null\&quot; if no value is present. This may create
-     * validation errors when the parameter is required.
+     * When true, allows sending an empty value. If false, the parameter will be considered \&quot;null\&quot; if no value is present. 
+     * <p>
+     * This may create validation errors when the parameter is required. 
+     * Valid only for query parameters and allows sending a parameter with an empty value. 
+     * </p>
+     * If style is used, and if behavior is n/a (cannot be serialized), the value of allowEmptyValue SHALL be ignored.
      * 
-     * @return whether or not the parameter allows empty values
+     * @return whether or not this parameter allows empty values
      **/
     boolean allowEmptyValue() default false;
 
     /**
-     * Describes how the parameter value will be serialized depending on the type of the parameter value. Default values (based on value of in): for
-     * query - form; for path - simple; for header - simple; for cookie - form. Ignored if the properties content or array are specified.
+     * Describes how the parameter value will be serialized depending on the type of the parameter value.
+     * <p> 
+     * Default values (based on value of in): 
+     * for query - form; for path - simple; for header - simple; for cookie - form. 
+     * </p>
+     * Ignored if the properties content or array are specified.
      * 
-     * @return the style of the parameter
+     * @return the style of this parameter
      **/
     ParameterStyle style() default ParameterStyle.DEFAULT;
 
     /**
-     * When this is true, parameter values of type array or object generate separate parameters for each value of the array or key-value pair of the
-     * map. For other types of parameters this property has no effect. When style is form, the default value is true. For all other styles, the
-     * default value is false. Ignored if the properties content or array are specified.
+     * When this is true, parameter values of type array or object generate separate parameters 
+     * for each value of the array or key-value pair of the map. 
+     * <p>
+     * For other types of parameters this property has no effect. 
+     * When style is form, the default value is true. For all other styles, the default value is false.
+     * </p> 
+     * Ignored if the properties content or array are specified.
      * 
      * @return whether or not to expand individual array members
      **/
     Explode explode() default Explode.DEFAULT;
 
     /**
-     * Determines whether the parameter value should allow reserved characters, as defined by RFC3986. This property only applies to parameters with
-     * an in value of query. The default value is false. Ignored if the properties content or array are specified.
-     * 
-     * @return whether or not the parameter allows reserved characters
+     * Determines whether the parameter value SHOULD allow reserved characters, as defined by RFC3986. 
+     * <p>
+     * This property only applies to parameters with an in value of query.  
+     * Ignored if the properties content or array are specified.
+     * </p>
+     * @return whether or not this parameter allows reserved characters
      **/
     boolean allowReserved() default false;
 
     /**
-     * The schema defining the type used for the parameter. Ignored if the properties content or array are specified.
+     * The schema defining the type used for the parameter. 
+     * Ignored if the properties content or array are specified.
      * 
-     * @return the schema of the parameter
+     * @return the schema of this parameter
      **/
     Schema schema() default @Schema();
 
     /**
-     * The schema of the array that defines this parameter. Ignored if the property content is specified.
+     * The schema of the individual array values that defines this parameter. 
+     * Ignored if the property content is specified.
      * 
-     * @return the schema of the array
+     * @return the schema of the individual array values
      */
     ArraySchema array() default @ArraySchema();
 
     /**
      * The representation of this parameter, for different media types.
      * 
-     * @return the content of the parameter
+     * @return the content of this parameter
      **/
     Content[] content() default {};
 
@@ -137,16 +167,30 @@ public @interface Parameter {
     boolean hidden() default false;
 
     /**
-     * Provides an array examples of the schema. When associated with a specific media type, the example string shall be parsed by the consumer to be
-     * treated as an object or an array. Ignored if the properties content or array are specified.
+     * Provides an array examples of the schema.
+     * Each example SHOULD contain a value in the correct format as specified in the parameter encoding.
+     * Furthermore, if referencing a schema which contains an example, the examples value SHALL override the example provided by the schema. 
+     * <p>
+     * When associated with a specific media type, the example string shall be parsed by the consumer to be
+     * treated as an object or an array.
+     * </p> 
+     * Ignored if the properties content or array are specified.
      * 
      * @return the list of examples for this parameter
      **/
     String[] examples() default {};
 
     /**
-     * Provides an example of the schema. When associated with a specific media type, the example string shall be parsed by the consumer to be treated
-     * as an object or an array. Ignored if the properties examples, content or array are specified.
+     * Provides an example of the schema. 
+     * The example SHOULD match the specified schema and encoding properties if present. 
+     * Furthermore, if referencing a schema which contains an example, the example value SHALL override the example provided by the schema. 
+     * To represent examples of media types that cannot naturally be represented in JSON or YAML, 
+     * a string value can contain the example with escaping where necessary.
+     * <p>
+     * When associated with a specific media type, the example string SHALL be parsed by the consumer to be treated
+     * as an object or an array. 
+     * </p>
+     * Ignored if the properties examples, content or array are specified.
      * 
      * @return an example of the parameter
      **/
