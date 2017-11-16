@@ -17,7 +17,6 @@
 
 package org.eclipse.microprofile.openapi.annotations.info;
 
-import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -26,7 +25,7 @@ import java.lang.annotation.Target;
 /**
  * Contact information for the exposed API.
  **/
-@Target({ ElementType.METHOD, ElementType.TYPE })
+@Target({ })
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface Contact {
