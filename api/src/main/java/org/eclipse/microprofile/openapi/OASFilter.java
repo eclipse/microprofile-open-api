@@ -153,7 +153,8 @@ public interface OASFilter {
     /**
      * Allows filtering of the singleton OpenAPI element.  Implementers of this method can choose to update this element, or
      * do nothing if no change is required.  Note that one cannot remove this element from the model tree, hence the return type
-     * of void.  
+     * of void. This is the last method called for a given filter, therefore it symbolizes the end of processing by the vendor
+     * framework.
      * 
      * @param openAPI the current OpenAPI element
      */
