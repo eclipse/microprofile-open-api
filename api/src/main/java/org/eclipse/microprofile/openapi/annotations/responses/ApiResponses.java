@@ -23,7 +23,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This object represents an array of ApiResponse that can be specified for the operation.
+ * The ApiResponses annotation is a container for @ApiResponse annotations. When used on a method
+ * it is treated as if each ApiResponse annotation were applied individually.
+ * 
+ * @see ApiResponse
  **/
 @Target({ ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)

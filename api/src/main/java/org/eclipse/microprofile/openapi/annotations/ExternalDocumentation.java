@@ -24,7 +24,15 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Allows referencing an external resource for extended documentation.
+ * This annotation allows referencing an external resource for extended documentation.
+ * <p>
+ * When it is applied to a method the value of the annotation is added to the corresponding 
+ * OpenAPI operation definition.
+ * <p>
+ * When it is applied to a type and one or more of the fields are not empty strings the
+ * annotation value is added to the OpenAPI document root. If more than one non-empty 
+ * annotation is applied to a type in the application or if the externalDocs field of the 
+ * OpenAPIDefinition annotation is supplied the results are not defined. 
  **/
 @Target({ ElementType.METHOD, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
