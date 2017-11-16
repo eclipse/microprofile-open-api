@@ -19,8 +19,12 @@
 
 = Eclipse Microprofile OpenAPI
 
-This specification aims at providing a unified Java API for the OpenAPI v3
-specification (https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md),
+This specification aims at providing a unified Java API for the link:++https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md++[OpenAPI v3 specification],
 that all application developers can use to expose their API documentation.
 
-The specification is composed of annotations, models, and configuration interfaces.
+The specification is composed of annotations, models, and programming interfaces.
+
+* To chat or ask questions about the spec, join the discussion on Gitter: image:https://badges.gitter.im/eclipse/microprofile-open-api.svg[link=https://gitter.im/eclipse/microprofile-open-api]
+* For announcements, visit the link:++https://groups.google.com/forum/#!forum/microprofile++[Microprofile Google Group].
+* Extended examples that supplement the spec can be found link:++https://github.com/eclipse/microprofile-open-api/wiki++[here].
+* Eclipse release information and further logistics about the project can be found link:++https://wiki.eclipse.org/MicroProfile/OpenAPI++[here].
