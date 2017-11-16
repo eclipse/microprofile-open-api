@@ -1,0 +1,54 @@
+:sectanchors:
+:doctype: book
+:license: Apache License v2.0
+:source-highlighter: coderay
+:sectnums:
+:toc: left
+:toclevels: 4
+
+= MicroProfile OpenAPI Specification
+
+== Introduction
+
+== Architecture
+
+== OpenAPI Endpoint
+=== Overview
+=== Content format
+=== Query parameters
+=== Context root behaviour
+=== Multiple applications
+== Documentation Mechanisms
+
+=== Annotations
+
+==== Table of annotations
+==== Usage 
+
+===== Operation
+===== ApiResponse
+===== Servers
+===== Schema
+===== And more.....
+
+=== Models
+==== How to build OpenAPI model in Java™
+
+=== Filter/Interceptor
+==== Filter mechanics
+
+=== Static OpenAPI files
+==== Location and formats
+==== Stub
+==== Precedence
+
+=== Processing rules
+
+=== Precedence of documentation mechanisms
+
+== Configuration
+=== List of configurable items
+=== Configuration approaches
+=== Vendor specific configuration
+
+== Limitations
