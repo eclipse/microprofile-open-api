@@ -32,17 +32,61 @@
 == Architecture
 
 == OpenAPI Endpoint
+
 === Overview
+A fully processed and valid OpenAPI document must be available at the root
+URL `/openapi`, as a `HTTP GET` operation.
+
+For example, `GET http://myHost:myPort/openapi`.
+
+This document represents the result of the applied <<Processing rules>>.
+
 === Content format
+The default `Content-Type` of the `/openapi` endpoint is `application/yaml`.
+
+Vendors must also support the type `application/json` if requested via the
+`Content` header.
+
 === Query parameters
+No query parameter are required for the `/openapi` endpoint.  However, one
+suggested but optional query parameter for vendors to support is `format`,
+where the value can be `json`, to facilate the toggle between the default `yaml`
+format and `json` format.
+
 === Context root behaviour
+Vendors are required to ensure that the combination of each global https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#serverObject[server]
+element and https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#pathItemObject[pathItem] element resolve to the absolute backend URL of that
+particular path.  If that `pathItem` contains a `servers` element , then this
+list of operation-level `server` elements replaces the global list of servers
+for that particular `pathItem`.
+
+For example:  an application may have an `ApplicationPath` annotation with the
+value of `/`, but is assigned the context root of `/myApp` during deployment. In
+this case, the `server` elements (either global or operation-level) must either
+end with `/myApp` or a corresponding proxy.  Alternatively it is valid, but discourauged, to
+add that context root (`/myApp`) to every `pathItem` defined in that application.
+
 === Multiple applications
+
+The 1.0 version of the MicroProfile OpenAPI specification does not define how
+the `/openapi` endpoint may be partitioned in the event that the MicroProfile
+runtime supports deployment of multiple applications. If an implementation wishes
+to support multiple applications within a MicroProfile runtime, the semantics of
+the `/openapi` endpoint are expected to be the logical AND of all the application
+in the runtime, which would imply merging multiple OpenAPI documents into a single
+valid document (handling conflicting IDs and unique names).
+
+== Configuration
+=== List of configurable items
+=== Configuration approaches
+=== Vendor specific configuration
+
 == Documentation Mechanisms
 
 === Annotations
 
 ==== Table of annotations
-==== Usage 
+==== Usage
 
 ===== Operation
 ===== ApiResponse
@@ -58,16 +102,36 @@
 
 === Static OpenAPI files
 ==== Location and formats
-==== Stub
 ==== Precedence
 
 === Processing rules
 
-=== Precedence of documentation mechanisms
+The processed document available from `/openapi` is built from a variety of sources,
+which were outlined in the sub-headings of <<Documentation Mechanisms>>.  Vendors
+are required to process these different sources in the following order:
 
-== Configuration
-=== List of configurable items
-=== Configuration approaches
-=== Vendor specific configuration
+1. Configuration values from `mp.openapi` namespace
+2. OASModelReader
+3. OASFilter
+4. Static OpenAPI file
+5. Annotations
+
+Example processing: +
+ A vendor starts by fetching all available <<Configuration>>.  If
+an `OASModelReader` was specified in that configuration list, its `buildModel`
+method is called to form the starting OpenAPI model tree for this application. +
+Any <<Vendor specific configuration>> are added on top of that starting model (overriding
+conflicts), or create a new model if an `OASModelReader` was not registered. +
+If an `OASFilter` was specified the vendor registers the filter with its framework,
+which will call the filter upon any future internal model events (ie: adding new operation). +
+Next, the vendor searches for a file as defined in the section <<Static OpenAPI files>>.
+If found, it will read that document and merge with the model that it got from
+the `OASModelReader`, where conflicting elements from the static file will override
+the values from the original model. +
+Lastly, if annotation scanning was not disabled,
+the JAX-RS and OpenAPI annotations from the application will be processed, further
+overriding any conflicting elements from the current model.
+
+
 
 == Limitations
