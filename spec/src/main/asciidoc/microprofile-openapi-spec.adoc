@@ -45,7 +45,7 @@ This document represents the result of the applied <<Processing rules>>.
 The default `Content-Type` of the `/openapi` endpoint is `application/yaml`.
 
 Vendors must also support the type `application/json` if requested via the
-`Content` header.
+`Accept` header.
 
 === Query parameters
 No query parameter are required for the `/openapi` endpoint.  However, one
@@ -135,3 +135,12 @@ overriding any conflicting elements from the current model.
 
 
 == Limitations
+
+=== Internationalization
+The 1.0 version of the MicroProfile OpenAPI spec does not require vendors to
+support multiple languages based on the `Accept-Language`.  One reasonable
+approach is for vendors to support unique keys (instead of hardcoded text) via
+the various <<Documentation Mechanisms>>, so that the implementing framework can
+perform a global replacement of the keys with the language-specific text that
+matches the `Accept-Language` request for the `/openapi` endpoint.  A cache of
+processed languages can be kept to improve performance. 
