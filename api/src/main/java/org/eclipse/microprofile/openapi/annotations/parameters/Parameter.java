@@ -151,4 +151,11 @@ public @interface Parameter {
      * @return an example of the parameter
      **/
     String example() default "";
+
+    /**
+     * Reference value to a Parameter object.
+     *
+     * @return reference to a parameter
+     **/
+    String ref() default "";
 }
