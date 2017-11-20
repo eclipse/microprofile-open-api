@@ -28,7 +28,7 @@ import org.eclipse.microprofile.openapi.annotations.links.Link;
 import org.eclipse.microprofile.openapi.annotations.media.ExampleObject;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
-import org.eclipse.microprofile.openapi.annotations.responses.ApiResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
@@ -52,7 +52,7 @@ public @interface Components {
      *
      * @return the reusable ApiResponse objects.
      */
-    ApiResponse[] responses() default {};
+    APIResponse[] responses() default {};
 
     /**
      * An object to hold reusable Parameter Objects.
