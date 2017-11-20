@@ -36,7 +36,7 @@ public @interface Header {
      * 
      * @return this header's name
      **/
-    String name() default "";
+    String name();
 
     /**
      * Additional description data to provide on the purpose of the header
