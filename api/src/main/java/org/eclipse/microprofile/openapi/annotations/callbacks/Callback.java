@@ -55,4 +55,10 @@ public @interface Callback {
      **/
     Operation[] operation() default {};
 
+    /**
+     * Reference value to a Callback object.
+     *
+     * @return reference to a callback
+     **/
+    String ref() default "";
 }

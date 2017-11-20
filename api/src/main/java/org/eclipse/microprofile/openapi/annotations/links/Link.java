@@ -85,4 +85,11 @@ public @interface Link {
      **/
     Server server() default @Server;
 
+    /**
+     * Reference value to a Link object.
+     *
+     * @return reference to a link
+     **/
+    String ref() default "";
+
 }

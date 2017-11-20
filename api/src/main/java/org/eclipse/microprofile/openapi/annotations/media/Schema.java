@@ -187,7 +187,7 @@ public @interface Schema {
     String format() default "";
 
     /**
-     * References a schema definition in an external OpenAPI document.
+     * Reference value to a Schema definition.
      * 
      * @return a reference to this schema
      **/

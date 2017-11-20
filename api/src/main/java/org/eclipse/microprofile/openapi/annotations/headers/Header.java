@@ -74,4 +74,11 @@ public @interface Header {
      **/
     boolean allowEmptyValue() default false;
 
+    /**
+     * Reference value to a Header object.
+     *
+     * @return reference to a header
+     **/
+    String ref() default "";
+
 }
