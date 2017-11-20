@@ -26,7 +26,6 @@ import org.eclipse.microprofile.openapi.models.OpenAPI;
  * The registration of this model reader is controlled by setting the key <b>mp.openapi.model.reader</b> using
  * one of the configuration sources specified in <a href="https://github.com/eclipse/microprofile-config">MicroProfile Config</a>.
  * The value is the fully qualified name of the model reader implementation, which needs to be visible to the application's classloader.
-
  */
 public interface OASModelReader {
 
