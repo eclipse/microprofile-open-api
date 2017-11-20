@@ -55,7 +55,7 @@ public @interface ApiResponse {
      * <p>
      * RFC7230 states header names are case insensitive. If a response header is defined with the name "Content-Type", it SHALL be ignored.
      * 
-     * @return array of headers for this reponse instance
+     * @return array of headers for this response instance
      **/
     Header[] headers() default {};
 
@@ -72,5 +72,12 @@ public @interface ApiResponse {
      * @return content of this response instance
      **/
     Content[] content() default {};
+
+    /**
+     * Reference value to a Response object.
+     *
+     * @return reference to a response
+     **/
+    String ref() default "";
 
 }
