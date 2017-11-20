@@ -17,7 +17,6 @@
 
 package org.eclipse.microprofile.openapi.annotations.links;
 
-import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -26,7 +25,7 @@ import java.lang.annotation.Target;
 /**
  * Represents a parameter to pass to an operation as specified with operationId or identified via operationRef.
  **/
-@Target({ ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.TYPE })
+@Target({})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface LinkParameter {
@@ -40,7 +39,7 @@ public @interface LinkParameter {
     /**
      * A constant or an expression to be evaluated and passed to the linked operation.
      * 
-     * @return the parameter's value
+     * @return the parameter's literal value or expression
      **/
     String expression() default "";
 

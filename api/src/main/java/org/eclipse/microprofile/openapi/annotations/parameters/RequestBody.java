@@ -35,8 +35,9 @@ public @interface RequestBody {
     /**
      * A brief description of the request body.
      * <p>
-     * This could contain examples of use. CommonMark syntax MAY be used for rich text representation.
-     * 
+     * This could contain examples of use. 
+     * CommonMark syntax MAY be used for rich text representation.
+     * </p>
      * @return description of this requestBody instance
      **/
     String description() default "";
@@ -49,7 +50,7 @@ public @interface RequestBody {
     Content[] content() default {};
 
     /**
-     * Determines if the request body is required in the request. Defaults to false.
+     * Determines if the request body is required in the request.
      * 
      * @return whether or not this requestBody is required
      **/

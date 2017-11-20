@@ -37,13 +37,12 @@ public @interface Extension {
      *
      * @return an option name for these extensions - will be prefixed with "x-"
      */
-    String name() default "";
+    String name();
 
     /**
-     * The extension properties.
-     *
-     * @return the actual extension properties
-     * @see ExtensionProperty
+     * The extension value.
+     * If the value allows parsing into an object or array, it should be converted from a string
+     * @return the actual extension value
      */
-    ExtensionProperty[] properties();
+    String value();
 }

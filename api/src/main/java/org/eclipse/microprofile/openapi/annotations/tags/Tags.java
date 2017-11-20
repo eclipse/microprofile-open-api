@@ -23,6 +23,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * The Tags annotation is a container for @Tag annotations. When used on a method or a type
+ * it is treated as if each tag annotation were applied individually.
+ * 
+ * @see Tag
+ *
+ */
 @Target({ ElementType.TYPE, ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
@@ -30,7 +37,7 @@ public @interface Tags {
     /**
      * An array of Tag annotation objects which hold metadata for the API
      *
-     * @return rray of Tags
+     * @return an array of Tag annotations
      */
     Tag[] value() default {};
 }

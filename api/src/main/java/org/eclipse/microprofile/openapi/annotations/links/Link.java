@@ -17,7 +17,6 @@
 
 package org.eclipse.microprofile.openapi.annotations.links;
 
-import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -29,7 +28,7 @@ import org.eclipse.microprofile.openapi.annotations.servers.Server;
  * The Link object represents a possible design-time link for a response. The presence of a link does not guarantee the caller's ability to
  * successfully invoke it, rather it provides a known relationship and traversal mechanism between responses and other operations.
  **/
-@Target({ ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.TYPE })
+@Target({})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface Link {

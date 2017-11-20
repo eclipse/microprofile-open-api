@@ -17,7 +17,6 @@
 
 package org.eclipse.microprofile.openapi.annotations.info;
 
-import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -26,7 +25,7 @@ import java.lang.annotation.Target;
 /**
  * This annotation provides metadata about the API, and maps to the Info object in OpenAPI Specification 3.
  **/
-@Target({ ElementType.METHOD, ElementType.TYPE })
+@Target({})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface Info {
@@ -63,7 +62,7 @@ public @interface Info {
      * 
      * @return the license of the application
      **/
-    License license() default @License();
+    License license() default @License(name="");
 
     /**
      * The version of the API definition.

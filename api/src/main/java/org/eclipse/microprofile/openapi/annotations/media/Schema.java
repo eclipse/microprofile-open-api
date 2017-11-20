@@ -26,15 +26,17 @@ import java.lang.annotation.Target;
 import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
 
 /**
- * The Schema Object allows the definition of input and output data types. These types can be objects, but also primitives and arrays. This object is
- * an extended subset of the JSON Schema Specification Wright Draft 00.
+ * The Schema Object allows the definition of input and output data types. 
+ * These types can be objects, but also primitives and arrays. 
+ * This object is an extended subset of the JSON Schema Specification Wright Draft 00.
  **/
 @Target({ ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface Schema {
     /**
-     * Provides a java class as implementation for this schema. When provided, additional information in the Schema annotation (except for type
+     * Provides a java class as implementation for this schema. 
+     * When provided, additional information in the Schema annotation (except for type
      * information) will augment the java class after introspection.
      * 
      * @return a class that implements this schema
@@ -43,31 +45,38 @@ public @interface Schema {
 
     /**
      * Provides a java class to be used to disallow matching properties.
+     * Inline or referenced schema MUST be of a Schema Object and not a standard JSON Schema.
      * 
      * @return a class with disallowed properties
      **/
     Class<?> not() default Void.class;
 
     /**
-     * Provides an array of java class implementations which can be used to describe multiple acceptable schemas. If more than one match the derived
-     * schemas, a validation error will occur.
-     * 
+     * Provides an array of java class implementations which can be used to describe multiple acceptable schemas. 
+     * If more than one match the derived schemas, a validation error will occur.
+     * <p>
+     * Inline or referenced schema MUST be of a Schema Object and not a standard JSON Schema.
+     * </p>
      * @return the list of possible classes for a single match
      **/
     Class<?>[] oneOf() default {};
 
     /**
-     * Provides an array of java class implementations which can be used to describe multiple acceptable schemas. If any match, the schema will be
-     * considered valid.
-     * 
+     * Provides an array of java class implementations which can be used to describe multiple acceptable schemas. 
+     * If any match, the schema will be considered valid.
+     * <p>
+     * Inline or referenced schema MUST be of a Schema Object and not a standard JSON Schema.
+     * </p>
      * @return the list of possible class matches
      **/
     Class<?>[] anyOf() default {};
 
     /**
-     * Provides an array of java class implementations which can be used to describe multiple acceptable schemas. If all match, the schema will be
-     * considered valid
-     * 
+     * Provides an array of java class implementations which can be used to describe multiple acceptable schemas. 
+     * If all match, the schema will be considered valid.
+     * <p>
+     * Inline or referenced schema MUST be of a Schema Object and not a standard JSON Schema.
+     * </p>
      * @return the list of classes to match
      **/
     Class<?>[] allOf() default {};
@@ -87,28 +96,31 @@ public @interface Schema {
     String title() default "";
 
     /**
-     * Constrains a value such that when divided by the multipleOf, the remainder must be an integer. Ignored if the value is 0.
+     * Constrains a value such that when divided by the multipleOf, the remainder must be an integer. 
+     * Ignored if the value is 0.
      * 
      * @return the multiplier constraint of the schema
      **/
     double multipleOf() default 0;
 
     /**
-     * Sets the maximum numeric value for a property. Ignored if the value is an empty string.
+     * Sets the maximum numeric value for a property. 
+     * Ignored if the value is an empty string.
      * 
      * @return the maximum value for this schema
      **/
     String maximum() default "";
 
     /**
-     * if true, makes the maximum value exclusive, or a less-than criteria.
+     * If true, makes the maximum value exclusive, or a less-than criteria.
      * 
      * @return the exclusive maximum value for this schema
      **/
     boolean exclusiveMaximum() default false;
 
     /**
-     * Sets the minimum numeric value for a property. Ignored if the value is an empty string or not a number.
+     * Sets the minimum numeric value for a property. 
+     * Ignored if the value is an empty string or not a number.
      * 
      * @return the minimum value for this schema
      **/
@@ -122,35 +134,40 @@ public @interface Schema {
     boolean exclusiveMinimum() default false;
 
     /**
-     * Sets the maximum length of a string value. Ignored if the value is negative.
+     * Sets the maximum length of a string value. 
+     * Ignored if the value is negative.
      * 
      * @return the maximum length of this schema
      **/
     int maxLength() default Integer.MAX_VALUE;
 
     /**
-     * Sets the minimum length of a string value. Ignored if the value is negative.
+     * Sets the minimum length of a string value. 
+     * Ignored if the value is negative.
      * 
      * @return the minimum length of this schema
      **/
     int minLength() default 0;
 
     /**
-     * A pattern that the value must satisfy. Ignored if the value is an empty string.
+     * A pattern that the value must satisfy. 
+     * Ignored if the value is an empty string.
      * 
      * @return the pattern of this schema
      **/
     String pattern() default "";
 
     /**
-     * Constrains the number of arbitrary properties when additionalProperties is defined. Ignored if value is 0.
+     * Constrains the number of arbitrary properties when additionalProperties is defined. 
+     * Ignored if value is 0.
      * 
      * @return the maximum number of properties for this schema
      **/
     int maxProperties() default 0;
 
     /**
-     * Constrains the number of arbitrary properties when additionalProperties is defined. Ignored if value is 0.
+     * Constrains the number of arbitrary properties when additionalProperties is defined. 
+     * Ignored if value is 0.
      * 
      * @return the minimum number of properties for this schema
      **/
@@ -164,7 +181,7 @@ public @interface Schema {
     String[] requiredProperties() default {};
 
     /**
-     * Mandates that the annotated item is required or not.
+     * Mandates whether the annotated item is required or not.
      * 
      * @return whether or not this schema is required
      **/
@@ -173,16 +190,18 @@ public @interface Schema {
     /**
      * A description of the schema.
      * 
-     * @return the schema's description
+     * @return this schema's description
      **/
     String description() default "";
 
     /**
-     * Provides an optional override for the format. If a consumer is unaware of the meaning of the format, they shall fall back to using the basic
-     * type without format. For example, if \&quot;type: integer, format: int128\&quot; were used to designate a very large integer, most consumers
+     * Provides an optional override for the format.
+     * <p> 
+     * If a consumer is unaware of the meaning of the format, they shall fall back to using the basic type without format. 
+     * For example, if \&quot;type: integer, format: int128\&quot; were used to designate a very large integer, most consumers
      * will not understand how to handle it, and fall back to simply \&quot;type: integer\&quot;
-     * 
-     * @return the schema's format
+     * </p>
+     * @return this schema's format
      **/
     String format() default "";
 
@@ -194,30 +213,42 @@ public @interface Schema {
     String ref() default "";
 
     /**
-     * If true, designates a value as possibly null.
+     * Allows sending a null value for the defined schema.
      * 
      * @return whether or not this schema is nullable
      **/
     boolean nullable() default false;
 
     /**
-     * Sets whether the value should only be read during a response but not written to during a request.
-     * 
+     * Relevant only for Schema "properties" definitions. 
+     * Declares the property as "read only". This means that it MAY be sent as part of a response but SHOULD NOT be sent as part of the request. 
+     * <p>
+     * If the property is marked as readOnly being true and is in the required list, the required will take effect on the response only. 
+     * A property MUST NOT be marked as both readOnly and writeOnly being true. 
+     * </p> 
      * @return whether or not this schema is read only
      **/
     boolean readOnly() default false;
 
     /**
-     * Sets whether a value should only be written to during a request but not returned during a response.
-     * 
+     * Relevant only for Schema "properties" definitions. 
+     * Declares the property as "write only". Therefore, it MAY be sent as part of a request but SHOULD NOT be sent as part of the response.
+     * <p>
+     * If the property is marked as writeOnly being true and is in the required list, the required will take effect on the request only. 
+     * A property MUST NOT be marked as both readOnly and writeOnly being true.
+     * </p>
      * @return whether or not this schema is write only
      **/
     boolean writeOnly() default false;
 
     /**
-     * Provides an example of the schema. When associated with a specific media type, the example string shall be parsed by the consumer to be treated
-     * as an object or an array.
-     * 
+     * A free-form property to include an example of an instance for this schema.
+     * <p>
+     * To represent examples that cannot be naturally represented in JSON or YAML, 
+     * a string value is used to contain the example with escaping where necessary.
+     * </p>
+     * When associated with a specific media type, the example string shall be parsed 
+     * by the consumer to be treated as an object or an array.
      * @return an example of this schema
      **/
     String example() default "";
@@ -230,21 +261,26 @@ public @interface Schema {
     ExternalDocumentation externalDocs() default @ExternalDocumentation();
 
     /**
-     * Specifies that a schema is deprecated and should be transitioned out of usage.
+     * Specifies that a schema is deprecated and SHOULD be transitioned out of usage.
      * 
      * @return whether or not this schema is deprecated
      **/
     boolean deprecated() default false;
 
     /**
-     * Provides an override for the basic type of the schema. Must be a valid type per the OpenAPI Specification.
+     * Provides an override for the basic type of the schema.
+     * <p>
+     * Value MUST be a string. Multiple types via an array are not supported.
+     * </p> 
+     * MUST be a valid type per the OpenAPI Specification.
      * 
      * @return the type of this schema
      **/
     String type() default "";
 
     /**
-     * Provides a list of enum values. This field maps to the enum property in the OAS schema and the enumeration property in the corresponding model.
+     * Provides a list of enum values. 
+     * Corresponds to the enum property in the OAS schema and the enumeration property in the schema model.
      * 
      * @return a list of allowed schema values
      */
@@ -252,6 +288,12 @@ public @interface Schema {
 
     /**
      * Provides a default value.
+     * The default value represents what would be assumed by the consumer of the input as the value of the schema 
+     * if one is not provided. 
+     * <p>
+     * Unlike JSON Schema, the value MUST conform to the defined type for the Schema Object defined at the same level. 
+     * </p>
+     * For example, if type is string, then default can be "foo" but cannot be 1.
      * 
      * @return the default value of this schema
      */
@@ -259,15 +301,19 @@ public @interface Schema {
 
     /**
      * Provides a discriminator property value.
-     * 
+     * Adds support for polymorphism. 
+     * <p>
+     * The discriminator is an object name that is used to differentiate between other schemas 
+     * which may satisfy the payload description.
+     * </p>
      * @return the discriminator property
      */
     String discriminatorProperty() default "";
 
     /**
-     * Provides discriminator mapping values.
+     * An array of discriminator mappings.
      * 
-     * @return the discriminator mappings
+     * @return the discriminator mappings for this schema
      */
     DiscriminatorMapping[] discriminatorMapping() default {};
 
