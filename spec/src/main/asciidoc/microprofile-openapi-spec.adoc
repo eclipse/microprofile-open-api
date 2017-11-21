@@ -63,7 +63,7 @@ for that particular `pathItem`.
 For example:  an application may have an `ApplicationPath` annotation with the
 value of `/`, but is assigned the context root of `/myApp` during deployment. In
 this case, the `server` elements (either global or operation-level) must either
-end with `/myApp` or a corresponding proxy.  Alternatively it is valid, but discourauged, to
+end with `/myApp` or a corresponding proxy.  Alternatively it is valid, but discouraged, to
 add that context root (`/myApp`) to every `pathItem` defined in that application.
 
 === Multiple applications
@@ -72,7 +72,7 @@ The 1.0 version of the MicroProfile OpenAPI specification does not define how
 the `/openapi` endpoint may be partitioned in the event that the MicroProfile
 runtime supports deployment of multiple applications. If an implementation wishes
 to support multiple applications within a MicroProfile runtime, the semantics of
-the `/openapi` endpoint are expected to be the logical AND of all the application
+the `/openapi` endpoint are expected to be the logical AND of all the applications
 in the runtime, which would imply merging multiple OpenAPI documents into a single
 valid document (handling conflicting IDs and unique names).
 
@@ -123,7 +123,7 @@ method is called to form the starting OpenAPI model tree for this application. +
 Any <<Vendor specific configuration>> are added on top of that starting model (overriding
 conflicts), or create a new model if an `OASModelReader` was not registered. +
 If an `OASFilter` was specified the vendor registers the filter with its framework,
-which will call the filter upon any future internal model events (ie: adding new operation). +
+which will call the filter upon any future internal model events (e.g. adding new operation). +
 Next, the vendor searches for a file as defined in the section <<Static OpenAPI files>>.
 If found, it will read that document and merge with the model that it got from
 the `OASModelReader`, where conflicting elements from the static file will override
