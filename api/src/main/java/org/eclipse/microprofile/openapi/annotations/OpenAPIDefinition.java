@@ -68,4 +68,14 @@ public @interface OpenAPIDefinition {
      * @return the external documentation for this API.
      */
     ExternalDocumentation externalDocs() default @ExternalDocumentation;
+    
+    /**
+     * An element to hold a set of reusable objects for different aspects of the OpenAPI Specification (OAS).
+     *
+     * All objects defined within the components object will have no effect on the API unless they are
+     * explicitly referenced from properties outside the components object.
+     *
+     * @return the element with a set of reusable objects for different aspects of the OAS.
+     */
+    Components components() default @Components;
 }

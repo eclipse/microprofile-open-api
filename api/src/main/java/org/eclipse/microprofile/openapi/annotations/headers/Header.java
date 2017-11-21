@@ -36,7 +36,7 @@ public @interface Header {
      * 
      * @return this header's name
      **/
-    String name() default "";
+    String name();
 
     /**
      * Additional description data to provide on the purpose of the header
@@ -73,5 +73,12 @@ public @interface Header {
      * @return whether or not the header allows empty values
      **/
     boolean allowEmptyValue() default false;
+
+    /**
+     * Reference value to a Header object.
+     *
+     * @return reference to a header
+     **/
+    String ref() default "";
 
 }

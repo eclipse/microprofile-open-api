@@ -56,4 +56,11 @@ public @interface RequestBody {
      **/
     boolean required() default false;
 
+    /**
+     * Reference value to a RequestBody object.
+     *
+     * @return reference to a request body
+     **/
+    String ref() default "";
+
 }

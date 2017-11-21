@@ -117,4 +117,11 @@ public @interface SecurityScheme {
      **/
     String openIdConnectUrl() default "";
 
+    /**
+     * Reference value to a SecurityScheme object.
+     *
+     * @return reference to a security scheme
+     **/
+    String ref() default "";
+
 }

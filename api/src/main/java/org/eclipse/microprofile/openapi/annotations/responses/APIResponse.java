@@ -89,4 +89,11 @@ public @interface APIResponse {
      **/
     Content[] content() default {};
 
+    /**
+     * Reference value to a Response object.
+     *
+     * @return reference to a response
+     **/
+    String ref() default "";
+
 }

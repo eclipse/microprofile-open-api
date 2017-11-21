@@ -71,4 +71,11 @@ public @interface ExampleObject {
      **/
     String externalValue() default "";
 
+    /**
+     * Reference value to an Example object.
+     *
+     * @return reference to an example
+     **/
+    String ref() default "";
+
 }
