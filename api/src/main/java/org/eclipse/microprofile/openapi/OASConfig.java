@@ -23,14 +23,16 @@ public final class OASConfig {
     private OASConfig(){}
 
     /**
-     * Configuration property to specify the fully qualified name of the model reader implementation.
+     * Configuration property to specify the fully qualified name of the OASModelReader implementation.
      * 
+     * @see org.eclipse.microprofile.openapi.OASModelReader
      */
     public static final String MODEL_READER = "mp.openapi.model.reader";
 
     /**
-     * Configuration property to specify the fully qualified name of the filter implementation.
+     * Configuration property to specify the fully qualified name of the OASFilter implementation.
      * 
+     * @see org.eclipse.microprofile.openapi.OASFilter
      */
     public static final String FILTER = "mp.openapi.filter";
 
@@ -59,13 +61,13 @@ public final class OASConfig {
     public static final String SERVERS = "mp.openapi.servers";
 
     /**
-     * Prefix of configuration property to specify an alternative list of servers to service all operations in a path.
+     * Prefix of the configuration property to specify an alternative list of servers to service all operations in a path.
      * 
      */
     public static final String SERVERS_PATH_PREFIX = "mp.openapi.servers.path.";
 
     /**
-     * Prefix of configuration property to specify an alternative list of servers to service an operation.
+     * Prefix of the configuration property to specify an alternative list of servers to service an operation.
      * 
      */
     public static final String SERVERS_OPERATION_PREFIX = "mp.openapi.servers.operation.";
