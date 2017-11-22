@@ -22,12 +22,35 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.ServiceLoader;
 
+/**
+ * This class is not intended to be used by end-users. It should
+ * be used by vendors to set their implementation of OASFactoryResolver.
+ *
+ * <br><br>Service provider for OASFactoryResolver. The implementation registers
+ * itself via the {@link java.util.ServiceLoader} mechanism or by manually
+ * setting their implementation using the setInstance method.
+ *
+ */
 public abstract class OASFactoryResolver {
 
     private static volatile OASFactoryResolver instance = null;
 
+    /**
+     * Create a new instance of a constructible element from the OpenAPI model tree.
+     * 
+     * @param <T> describes the type parameter
+     * @param clazz represents a model which extends the org.eclipse.microprofile.openapi.models.Constructible interface
+
+     * @return a new instance of the requested model
+     */
     public abstract <T extends Constructible> T createObject(Class<T> clazz);
 
+    /**
+     * Creates an OASFactoryResolver object.
+     * Only used internally from within {@link org.eclipse.microprofile.openapi.OASFactory}
+     * 
+     * @return an instance of OASFactoryResolver
+     */
     public static OASFactoryResolver instance() {
         if (instance == null) {
             synchronized (OASFactoryResolver.class) {
