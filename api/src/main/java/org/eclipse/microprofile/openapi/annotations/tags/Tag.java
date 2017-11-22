@@ -100,4 +100,11 @@ public @interface Tag {
      * @return the external documentation for this tag
      */
     ExternalDocumentation externalDocs() default @ExternalDocumentation();
+
+    /**
+     * Reference value to a Tag object.
+     *
+     * @return reference to a tag
+     **/
+    String ref() default "";
 }
