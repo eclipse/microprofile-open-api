@@ -24,7 +24,8 @@ import org.eclipse.microprofile.openapi.spi.OASFactoryResolver;
  * 
  * <br><br>For example, to start a new top-level OpenAPI element with an ExternalDocument inside of it an application developer would write:
  * 
- * <pre><code>OASFactory.createObject(OpenAPI.class).setExternalDocs(OASFactory.createObject(ExternalDocumentation.class).url("http://myDoc"));</code></pre>
+ * <pre><code>OASFactory.createObject(OpenAPI.class)
+ *          .setExternalDocs(OASFactory.createObject(ExternalDocumentation.class).url("http://myDoc"));</code></pre>
  */
 public final class OASFactory {
     

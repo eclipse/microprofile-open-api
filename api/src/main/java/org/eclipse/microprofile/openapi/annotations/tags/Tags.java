@@ -40,4 +40,11 @@ public @interface Tags {
      * @return an array of Tag annotations
      */
     Tag[] value() default {};
+
+    /**
+     * An array of referenced Tag objects which hold metadata for the API
+     *
+     * @return an array of references to tags
+     **/
+    String[] refs() default "";
 }
