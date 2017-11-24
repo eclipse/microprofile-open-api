@@ -49,7 +49,7 @@ OpenAPI document, which are described in <<Documentation Mechanisms>>.  The pict
 below provides a quick overview of the different types of components that make up
 the MP OpenAPI specification:
 
-TODO: image
+TODO: image (issue #55)
 
 The remaining sections of this specification will go into the details of each component.
 
@@ -120,8 +120,9 @@ before any code is written.  In this case, we refer to the OpenAPI document as t
 The MP OpenAPI specification also provides a <<Programming model>> that allows
 application developers to provide a bootstrap or complete OpenAPI model tree.
 
-Lastly, we'll look at how to <<Filter>> different parts of the OpenAPI document
-during various processing stages.
+Lastly, a <<Filter>> is described which can update different parts of the OpenAPI
+document during various processing stages independently of which documentation
+mechanisms are being used.
 
 === Annotations
 
@@ -131,9 +132,19 @@ library and wish to take advantage to the official MP OpenAPI interfaces.
 
 ==== Quick overview of annotations
 
+The following annotations are found in the https://github.com/eclipse/microprofile-open-api/tree/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations[org.eclipse.microprofile.openapi.annotations] package.
+
 [cols="1,4"]
 |===
 | Annotation | Description
+
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/Operation.java[@Operation] | Describes an operation or typically a HTTP method against a specific path.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/servers/Server.java[@Server]|  Represents a Server used in an operation or used by all operations in an OpenAPI document.
+|  |
+|  |
+|  |
+|  |
+|  |
 |  |
 |  |
 |  |
@@ -142,26 +153,171 @@ library and wish to take advantage to the official MP OpenAPI interfaces.
 ==== Detailed usage of key annotations
 
 ===== Operation
+
+TODO: Detailed usage description of annotation (issue #10)
+
+.Sample 1
+[source,Java]
+----
+@GET
+@Path("/findByStatus")
+@Operation(summary = "Finds Pets by status",
+           description = "Multiple status values can be provided with comma separated strings")
+public Response findPetsByStatus(...) { ... }
+----
+
+.Output for Sample 1
+[source, yaml]
+----
+/pet/findByStatus:
+    get:
+    summary: Finds Pets by status
+    description: Multiple status values can be provided with comma separated strings
+    operationId: findPetsByStatus
+----
+
+
 ===== APIResponse
+
+TODO: Detailed usage description of annotation (issue #10)
+
+.Sample 1
+[source,Java]
+----
+
+----
+
+.Output for Sample 1
+[source, yaml]
+----
+
+----
+
 ===== Servers
+
+.Sample 1
+[source,Java]
+----
+
+----
+
+.Output for Sample 1
+[source, yaml]
+----
+
+----
+
 ===== Schema
+
+TODO: Detailed usage description of annotation (issue #10)
+
+.Sample 1
+[source,Java]
+----
+
+----
+
+.Output for Sample 1
+[source, yaml]
+----
+
+----
+
+
 ===== And more.....
 
+TODO: Add other key annotations (issue #10)
+
 === Static OpenAPI files
+
+Application developers may wish to include a pre-generated OpenAPI document that
+was written separately from the code (eg: with an editor such as https://editor.swagger.io/[this]).
+
+Depending on the scenario, the document may be fully complete or partially complete.
+If a document is fully complete then the application developer will want to set the
+`mp.openapi.scan.disable` configuration to `true`.  If a document is partially
+complete, then the application developer will need to augment the OpenAPI snippet
+with annotations, programming model, or via the filter.
+
 ==== Location and formats
+
+Vendors are required to fetch a single document with extension of `yml`, `yaml` or
+`json`, inside the application's `META-INF/openapi` folder.  If there are more than
+one document found that matched one of these extensions the behavior of which file
+is chosen is undefined (ie: each vendor may implement their own logic), which means
+that application developers should only place a single document into that folder.
 
 === Programming model
 
-==== OASModelReader
+Application developers are able to provide OpenAPI elements via Java POJOs. The
+complete set of models are found in the https://github.com/eclipse/microprofile-open-api/tree/master/api/src/main/java/org/eclipse/microprofile/openapi/models[org.eclipse.microprofile.openapi.models] package.
 
 ==== OASFactory
 
+The https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/OASFactory.java[OASFactory] is used to create all of the elements of an OpenAPI tree.
+
+For example, the following snippet creates a simple https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/models/info/Info.java[Info] element that contains a title, description and version.
+
+[source,java]
+----
+OASFactory.createObject(Info.class).title("Airlines").description("Airlines APIs").version("1.0.0");
+----
+
+==== OASModelReader
+
+The https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/OASModelReader.java[OASModelReader] interface allows application developers to bootstrap the OpenAPI model tree
+used by the processing framework.  To use it, simply create an implementation of
+this interface and register it using the `mp.openapi.model.reader` configuration
+key, where the value is the qualified name of the reader.
+
+.Sample META-INF/microprofile-config.properties
+[code,property]
+----
+mp.openapi.model.reader=com.mypackage.MyModelReader
+----
+
+Similar to static files, the model reader can be used to provide either complete
+or partial model trees. If providing a complete OpenAPI model tree, application
+developers should set the `mp.openapi.scan.disable` configuration to `true`.
+Oherwise this partial model will be used as the base model during the processing
+of the other <<Documentation Mechanisms>>.
+
+Vendors are required to call the OASReader a single time, in the order defined by
+the <<Processing rules>> section.  Only a single OASReader instance is allowed per
+application.
 
 === Filter
 
+There are many scenarios where application developers may wish to update or remove
+certain elements and fields of the OpenAPI document.  This is done via a filter,
+which is called during various stages of the processing lifecycle.
+
 ==== OASFilter
 
+The https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/OASFilter.java[OASFilter] interface allows application developers
+to receive a callbacks for various key OpenAPI elements.  The interface has a default
+implementation for every method, which allows application developers to only override
+the methods they care about.  To use it, simply create an implementation of
+this interface and register it using the `mp.openapi.filter` configuration
+key, where the value is the qualified name of the filter.
 
+.Sample META-INF/microprofile-config.properties
+[code,property]
+----
+mp.openapi.filter=com.mypackage.MyFilter
+----
+
+Vendors are required to call all registered filters in the application (0..N) during
+the end of each filtered element.  For example, the method `filterPathItem` is
+called *after* the corresponding `PathItem` element is fully populated.  This allows
+application developers to filter the element and any of its descendants.
+
+The order of filter methods called is undefined, with two exceptions:
+1.  All filterable descendant elements of a filtered element must be called before its ancestor.
+2.  The `filterOpenAPI` method must be the *last* method called on a filter (which
+is just a specialization of the first exception).
+
+TODO: Document solution from issue #56 once ready
 
 === Processing rules
 
@@ -169,11 +325,11 @@ The processed document available from the <<OpenAPI Endpoint>> is built from a v
 which were outlined in the sub-headings of <<Documentation Mechanisms>>.  Vendors
 are required to process these different sources in the following order:
 
-1. Configuration values from `mp.openapi` namespace
-2. OASModelReader
-3. OASFilter
-4. Static OpenAPI file
-5. Annotations
+1. Fetch configuration values from `mp.openapi` namespace
+2. Call OASModelReader
+3. Register OASFilter
+4. Fetch static OpenAPI file
+5. Process annotations
 
 Example processing: +
  A vendor starts by fetching all available <<Configuration>>.  If
