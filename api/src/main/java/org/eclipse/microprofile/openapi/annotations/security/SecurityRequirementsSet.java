@@ -23,19 +23,19 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This object represents an array of security requirements that can be specified for the operation or at definition level.
- * Only one of requirements needs be satisfied
+ * This object represents a map of security requirements that can be specified for the operation or at definition level.
+ * All requirements in a set must be satisfied
  * <pre>
  * <b>Example:</b> 
  * security: 
- *   - oauth_implicit: []
- *   - api_secret: []
+ *  - api_secret: []
+ *    oauth_implicit: []
  * </pre>
  **/
 @Target({ ElementType.METHOD, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
-public @interface SecurityRequirements {
+public @interface SecurityRequirementsSet {
     /**
      * An array of SecurityRequirement annotations that can be specified for the operation or at definition level.
      *
