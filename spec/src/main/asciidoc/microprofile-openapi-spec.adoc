@@ -295,7 +295,7 @@ which is called during various stages of the processing lifecycle.
 ==== OASFilter
 
 The https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/OASFilter.java[OASFilter] interface allows application developers
-to receive a callbacks for various key OpenAPI elements.  The interface has a default
+to receive callbacks for various key OpenAPI elements.  The interface has a default
 implementation for every method, which allows application developers to only override
 the methods they care about.  To use it, simply create an implementation of
 this interface and register it using the `mp.openapi.filter` configuration
@@ -367,7 +367,7 @@ Vendors must also support the type `application/json` if requested via the
 === Query parameters
 No query parameter are required for the `/openapi` endpoint.  However, one
 suggested but optional query parameter for vendors to support is `format`,
-where the value can be `json`, to facilate the toggle between the default `yaml`
+where the value can be `json`, to facilitate the toggle between the default `yaml`
 format and `json` format.
 
 === Context root behaviour
