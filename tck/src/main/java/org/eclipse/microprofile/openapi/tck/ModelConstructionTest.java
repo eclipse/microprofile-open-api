@@ -72,8 +72,8 @@ import org.eclipse.microprofile.openapi.models.parameters.Parameter;
 import org.eclipse.microprofile.openapi.models.parameters.PathParameter;
 import org.eclipse.microprofile.openapi.models.parameters.QueryParameter;
 import org.eclipse.microprofile.openapi.models.parameters.RequestBody;
-import org.eclipse.microprofile.openapi.models.responses.ApiResponse;
-import org.eclipse.microprofile.openapi.models.responses.ApiResponses;
+import org.eclipse.microprofile.openapi.models.responses.APIResponse;
+import org.eclipse.microprofile.openapi.models.responses.APIResponses;
 import org.eclipse.microprofile.openapi.models.security.OAuthFlow;
 import org.eclipse.microprofile.openapi.models.security.OAuthFlows;
 import org.eclipse.microprofile.openapi.models.security.Scopes;
@@ -132,7 +132,8 @@ public class ModelConstructionTest {
         public Object invokeGetter(Object target) {
             try {
                 return getter.invoke(target);
-            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+            }
+            catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
                 Assert.fail("Invocation of getter method \"" + getter.getName() + "\" failed: " + e.getMessage());
                 throw new RuntimeException(e);
             }
@@ -140,7 +141,8 @@ public class ModelConstructionTest {
         public void invokeSetter(Object target, Object value) {
             try {
                 setter.invoke(target, value);
-            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+            }
+            catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
                 Assert.fail("Invocation of setter method \"" + setter.getName() + "\" failed: " + e.getMessage());
                 throw new RuntimeException(e);
             }
@@ -148,7 +150,8 @@ public class ModelConstructionTest {
         public Object invokeBuilder(Object target, Object value) {
             try {
                 return builder.invoke(target, value);
-            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+            }
+            catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
                 Assert.fail("Invocation of builder method \"" + builder.getName() + "\" failed: " + e.getMessage());
                 throw new RuntimeException(e);
             }
@@ -361,12 +364,12 @@ public class ModelConstructionTest {
     
     @Test
     public void apiResponseTest() {
-        processConstructible(ApiResponse.class);
+        processConstructible(APIResponse.class);
     }
     
     @Test
     public void apiResponsesTest() {
-        processConstructible(ApiResponses.class);
+        processConstructible(APIResponses.class);
     }
     
     @Test
@@ -453,8 +456,10 @@ public class ModelConstructionTest {
         Assert.assertEquals("The extensions map is expected to contain two entries.", 2, map.size());
         Assert.assertTrue("The extensions map is expected to contain the key: " + extensionName1, map.containsKey(extensionName1));
         Assert.assertTrue("The extensions map is expected to contain the key: " + extensionName2, map.containsKey(extensionName2));
-        Assert.assertSame("The value associated with the key: " + extensionName1 + " is expected to be the same one that was added.", obj1, map.get(extensionName1));
-        Assert.assertSame("The value associated with the key: " + extensionName2 + " is expected to be the same one that was added.", obj2, map.get(extensionName2));
+        Assert.assertSame("The value associated with the key: " + extensionName1 + " is expected to be the same one that was added.",
+                obj1, map.get(extensionName1));
+        Assert.assertSame("The value associated with the key: " + extensionName2 + " is expected to be the same one that was added.",
+                obj2, map.get(extensionName2));
         // Check that the extension map can be replaced with the setter and that it is returned by the getter.
         final Map<String, Object> newMap = new HashMap<>();
         e.setExtensions(newMap);
@@ -569,7 +574,7 @@ public class ModelConstructionTest {
     
     private String createReference(Reference<?> r, String v) {
         final StringBuilder sb = new StringBuilder();
-        if (r instanceof ApiResponse) {
+        if (r instanceof APIResponse) {
             sb.append("#/components/responses/");
         }
         else if (r instanceof Callback) {
