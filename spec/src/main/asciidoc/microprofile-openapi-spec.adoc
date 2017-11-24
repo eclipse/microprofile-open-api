@@ -313,6 +313,7 @@ called *after* the corresponding `PathItem` element is fully populated.  This al
 application developers to filter the element and any of its descendants.
 
 The order of filter methods called is undefined, with two exceptions:
+
 1.  All filterable descendant elements of a filtered element must be called before its ancestor.
 2.  The `filterOpenAPI` method must be the *last* method called on a filter (which
 is just a specialization of the first exception).
