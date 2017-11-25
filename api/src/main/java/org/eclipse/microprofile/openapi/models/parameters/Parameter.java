@@ -68,6 +68,23 @@ public interface Parameter extends Extensible, Reference<Parameter> {
             return String.valueOf(value);
         }
     }
+    /**
+     * The values allowed for the in field.
+     */
+    enum In {
+        PATH("path"), QUERY("query"), HEADER("header"), COOKIE("cookie");
+
+        private final String value;
+
+        In(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+    }
 
     /**
      * Returns the name property from a Parameter instance.
@@ -96,7 +113,7 @@ public interface Parameter extends Extensible, Reference<Parameter> {
      *
      * @return the location of the parameter
      **/
-    String getIn();
+    In getIn();
 
     /**
      * Sets the in property of a Parameter instance to the given string. If the in property is set to "path" then also sets the required property to
@@ -104,7 +121,7 @@ public interface Parameter extends Extensible, Reference<Parameter> {
      *
      * @param in the location of the parameter
      */
-    void setIn(String in);
+    void setIn(In in);
 
     /**
      * Sets the in property of a Parameter instance to the given string. If the in property is set to "path" then also sets the required property to
@@ -113,7 +130,7 @@ public interface Parameter extends Extensible, Reference<Parameter> {
      * @param in the location of the parameter
      * @return the current Parameter instance
      */
-    Parameter in(String in);
+    Parameter in(In in);
 
     /**
      * Returns the description property from a Parameter instance.

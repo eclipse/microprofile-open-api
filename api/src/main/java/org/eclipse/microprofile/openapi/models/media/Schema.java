@@ -39,6 +39,7 @@ import org.eclipse.microprofile.openapi.models.Reference;
  * 
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#schemaObject">OpenAPI Specification Schema Object</a>
  */
+@SuppressWarnings("rawtypes")
 public interface Schema<T> extends Constructible, Extensible, Reference<Schema<T>> {
 
     /**
