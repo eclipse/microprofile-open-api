@@ -39,11 +39,13 @@ public final class OASFactory {
      * <br><br>Example:
      * <pre><code>OASFactory.createObject(Info.class).title("Airlines").description("Airlines APIs").version("1.0.0");
      * </code></pre>
-
      * @param <T> describes the type parameter
      * @param clazz represents a model which extends the {@link org.eclipse.microprofile.openapi.models.Constructible} interface
      *
-     * @return a new instance of the requested model
+     * @return a new instance of the requested model class
+     * 
+     * @throws NullPointerException if the specified class is null
+     * @throws IllegalArgumentException if an instance could not be created, most likely, due to an illegal or inappropriate class
      */
     public static <T extends Constructible> T createObject(Class<T> clazz) {
         return INSTANCE.createObject(clazz);

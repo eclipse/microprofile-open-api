@@ -92,6 +92,8 @@ The following is a list of configuration values that every vendor must support.
 | `mp.openapi.scan.disable`  |  Configuration property to disable annotation scanning.
 | `mp.openapi.scan.packages`  |  Configuration property to specify the list of packages to scan.
 | `mp.openapi.scan.classes`  |  Configuration property to specify the list of classes to scan.
+| `mp.openapi.scan.exclude.packages`  |  Configuration property to specify the list of packages to exclude from scans.
+| `mp.openapi.scan.exclude.classes`  |  Configuration property to specify the list of classes to exclude from scans.
 | `mp.openapi.servers`  |  Configuration property to specify the list of global servers that provide connectivity information.
 | `mp.openapi.servers.path.`   |  Prefix of the configuration property to specify an alternative list of servers to service all operations in a path.
 | `mp.openapi.servers.operation.` | Prefix of the configuration property to specify an alternative list of servers to service an operation.
