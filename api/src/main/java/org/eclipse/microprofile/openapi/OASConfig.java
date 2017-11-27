@@ -53,6 +53,18 @@ public final class OASConfig {
      * 
      */
     public static final String SCAN_CLASSES = "mp.openapi.scan.classes";
+    
+    /**
+     * Configuration property to specify the list of packages to exclude from scans.
+     * 
+     */
+    public static final String SCAN_EXCLUDE_PACKAGES = "mp.openapi.scan.exclude.packages";
+    
+    /**
+     * Configuration property to specify the list of classes to exclude from scans.
+     * 
+     */
+    public static final String SCAN_EXCLUDE_CLASSES = "mp.openapi.scan.exclude.classes";
 
     /**
      * Configuration property to specify the list of global servers that provide connectivity information.
@@ -77,6 +89,5 @@ public final class OASConfig {
      * 
      */
     public static final String EXTENSIONS_PREFIX = "mp.openapi.extensions.";
-
 
 }
