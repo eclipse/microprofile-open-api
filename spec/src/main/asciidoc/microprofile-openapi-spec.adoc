@@ -120,9 +120,8 @@ before any code is written.  In this case, we refer to the OpenAPI document as t
 The MP OpenAPI specification also provides a <<Programming model>> that allows
 application developers to provide a bootstrap or complete OpenAPI model tree.
 
-Lastly, a <<Filter>> is described which can update different parts of the OpenAPI
-document during various processing stages independently of which documentation
-mechanisms are being used.
+Lastly, a <<Filter>> is described which can update the OpenAPI model after it has
+been built from the previously described documentation mechanisms.
 
 === Annotations
 
@@ -290,7 +289,7 @@ application.
 
 There are many scenarios where application developers may wish to update or remove
 certain elements and fields of the OpenAPI document.  This is done via a filter,
-which is called during various stages of the processing lifecycle.
+which is called once after all other documentation mechanisms have completed.
 
 ==== OASFilter
 
@@ -307,9 +306,9 @@ key, where the value is the qualified name of the filter.
 mp.openapi.filter=com.mypackage.MyFilter
 ----
 
-Vendors are required to call all registered filters in the application (0..N) during
-the end of each filtered element.  For example, the method `filterPathItem` is
-called *after* the corresponding `PathItem` element is fully populated.  This allows
+Vendors are required to call all registered filters in the application (0..N) once
+for each filtered element.  For example, the method `filterPathItem` is
+called *for each* corresponding `PathItem` element in the model tree.  This allows
 application developers to filter the element and any of its descendants.
 
 The order of filter methods called is undefined, with two exceptions:
@@ -328,25 +327,26 @@ are required to process these different sources in the following order:
 
 1. Fetch configuration values from `mp.openapi` namespace
 2. Call OASModelReader
-3. Register OASFilter
-4. Fetch static OpenAPI file
-5. Process annotations
+3. Fetch static OpenAPI file
+4. Process annotations
+5. Filter model via OASFilter
 
-Example processing: +
- A vendor starts by fetching all available <<Configuration>>.  If
+**Example processing**:
+
+* A vendor starts by fetching all available <<Configuration>>.  If
 an `OASModelReader` was specified in that configuration list, its `buildModel`
-method is called to form the starting OpenAPI model tree for this application. +
-Any <<Vendor specific configuration>> are added on top of that starting model (overriding
-conflicts), or create a new model if an `OASModelReader` was not registered. +
-If an `OASFilter` was specified the vendor registers the filter with its framework,
-which will call the filter upon any future internal model events (e.g. adding new operation). +
-Next, the vendor searches for a file as defined in the section <<Static OpenAPI files>>.
-If found, it will read that document and merge with the model that it got from
-the `OASModelReader`, where conflicting elements from the static file will override
-the values from the original model. +
-Lastly, if annotation scanning was not disabled,
-the JAX-RS and OpenAPI annotations from the application will be processed, further
-overriding any conflicting elements from the current model.
+method is called to form the starting OpenAPI model tree for this application.
+* Any <<Vendor specific configuration>> are added on top of that starting model (overriding
+conflicts), or create a new model if an `OASModelReader` was not registered.
+* The vendor searches for a file as defined in the section <<Static OpenAPI files>>.
+If found, it will read that document and merge with the model produced by previous
+processing steps (if any), where conflicting elements from the static file will override
+the values from the original model.
+* If annotation scanning was not disabled, the JAX-RS and OpenAPI annotations from
+the application will be processed, further overriding any conflicting elements
+from the current model.
+* The final model is filtered by walking the model tree and invoking all registered
+<<OASFilter>> classes.
 
 == OpenAPI Endpoint
 
