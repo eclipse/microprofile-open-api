@@ -13,7 +13,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-package org.eclipse.microprofile.openapi.samples.jaxrs.resources;
+package org.eclipse.microprofile.openapi.apps.airlines.resources;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +32,8 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.eclipse.microprofile.openapi.annotations.tags.Tags;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
-import org.eclipse.microprofile.openapi.samples.jaxrs.app.JAXRSApp;
-import org.eclipse.microprofile.openapi.samples.jaxrs.model.Flight;
+import org.eclipse.microprofile.openapi.apps.airlines.JAXRSApp;
+import org.eclipse.microprofile.openapi.apps.airlines.model.Flight;
 
 @Path("/availability")
 @Tags(

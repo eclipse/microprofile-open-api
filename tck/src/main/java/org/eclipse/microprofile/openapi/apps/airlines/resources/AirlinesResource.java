@@ -13,7 +13,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-package org.eclipse.microprofile.openapi.samples.jaxrs.resources;
+package org.eclipse.microprofile.openapi.apps.airlines.resources;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -29,9 +29,9 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.eclipse.microprofile.openapi.annotations.tags.Tags;
-import org.eclipse.microprofile.openapi.samples.jaxrs.app.JAXRSApp;
-import org.eclipse.microprofile.openapi.samples.jaxrs.model.Airline;
-import org.eclipse.microprofile.openapi.samples.jaxrs.model.Flight;
+import org.eclipse.microprofile.openapi.apps.airlines.JAXRSApp;
+import org.eclipse.microprofile.openapi.apps.airlines.model.Airline;
+import org.eclipse.microprofile.openapi.apps.airlines.model.Flight;
 
 @Path("")
 @Schema(name = "Airline Booking API")

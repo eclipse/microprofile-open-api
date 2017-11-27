@@ -14,12 +14,12 @@
  *  limitations under the License.
  */
 
-package org.eclipse.microprofile.openapi.samples.jaxrs.exception;
+package org.eclipse.microprofile.openapi.apps.airlines.exception;
 
-public class ApiException extends Exception{
+public class BadRequestException extends ApiException{
   private int code;
-  public ApiException (int code, String msg) {
-    super(msg);
+  public BadRequestException (int code, String msg) {
+    super(code, msg);
     this.code = code;
   }
 }

@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package org.eclipse.microprofile.openapi.samples.jaxrs.model;
+package org.eclipse.microprofile.openapi.apps.airlines.model;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 

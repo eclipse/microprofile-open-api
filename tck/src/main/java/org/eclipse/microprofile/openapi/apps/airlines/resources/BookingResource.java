@@ -13,7 +13,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-package org.eclipse.microprofile.openapi.samples.jaxrs.resources;
+package org.eclipse.microprofile.openapi.apps.airlines.resources;
 
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
@@ -41,7 +41,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import org.eclipse.microprofile.openapi.samples.jaxrs.model.Booking;
+import org.eclipse.microprofile.openapi.apps.airlines.model.Booking;
 
 @Path("/bookings")
 @Tags(

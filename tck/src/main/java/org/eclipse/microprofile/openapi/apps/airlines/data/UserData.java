@@ -14,12 +14,12 @@
 * limitations under the License.
 */
 
-package org.eclipse.microprofile.openapi.samples.jaxrs.data;
+package org.eclipse.microprofile.openapi.apps.airlines.data;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.microprofile.openapi.samples.jaxrs.model.User;
+import org.eclipse.microprofile.openapi.apps.airlines.model.User;
 
 public class UserData {
   static List<User> users = new ArrayList<User>();

@@ -13,7 +13,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-package org.eclipse.microprofile.openapi.samples.jaxrs.app;
+package org.eclipse.microprofile.openapi.apps.airlines;
 
 import java.util.HashSet;
 import java.util.Random;
@@ -35,10 +35,11 @@ import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeIn;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
 import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
-import org.eclipse.microprofile.openapi.samples.jaxrs.resources.AirlinesResource;
-import org.eclipse.microprofile.openapi.samples.jaxrs.resources.AvailabilityResource;
-import org.eclipse.microprofile.openapi.samples.jaxrs.resources.BookingResource;
-import org.eclipse.microprofile.openapi.samples.jaxrs.resources.ReviewResource;
+
+import org.eclipse.microprofile.openapi.apps.airlines.resources.AirlinesResource;
+import org.eclipse.microprofile.openapi.apps.airlines.resources.AvailabilityResource;
+import org.eclipse.microprofile.openapi.apps.airlines.resources.BookingResource;
+import org.eclipse.microprofile.openapi.apps.airlines.resources.ReviewResource;
 
 @ApplicationPath("/")
 @OpenAPIDefinition(

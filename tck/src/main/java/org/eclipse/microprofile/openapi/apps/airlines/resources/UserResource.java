@@ -14,13 +14,12 @@
 * limitations under the License.
 */
 
-package org.eclipse.microprofile.openapi.samples.jaxrs.resources;
+package org.eclipse.microprofile.openapi.apps.airlines.resources;
 
 import org.eclipse.microprofile.openapi.annotations.info.Contact;
 import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
-
 import org.eclipse.microprofile.openapi.annotations.info.Info;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.info.License;
@@ -39,10 +38,11 @@ import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
-import org.eclipse.microprofile.openapi.samples.jaxrs.data.UserData;
-import org.eclipse.microprofile.openapi.samples.jaxrs.model.User;
-import org.eclipse.microprofile.openapi.samples.jaxrs.exception.ApiException;
-import org.eclipse.microprofile.openapi.samples.jaxrs.exception.NotFoundException;
+
+import org.eclipse.microprofile.openapi.apps.airlines.data.UserData;
+import org.eclipse.microprofile.openapi.apps.airlines.model.User;
+import org.eclipse.microprofile.openapi.apps.airlines.exception.ApiException;
+import org.eclipse.microprofile.openapi.apps.airlines.exception.NotFoundException;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;

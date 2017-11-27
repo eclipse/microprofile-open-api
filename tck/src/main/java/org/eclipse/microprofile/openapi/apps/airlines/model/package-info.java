@@ -12,4 +12,4 @@
  */
 
 @org.osgi.annotation.versioning.Version("1.0")
-package org.eclipse.microprofile.openapi.samples;
+package org.eclipse.microprofile.openapi.apps.airlines.model;

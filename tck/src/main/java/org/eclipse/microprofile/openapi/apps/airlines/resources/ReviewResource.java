@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-package org.eclipse.microprofile.openapi.samples.jaxrs.resources;
+package org.eclipse.microprofile.openapi.apps.airlines.resources;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,6 @@ import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import org.eclipse.microprofile.openapi.annotations.callbacks.Callback;
 import org.eclipse.microprofile.openapi.annotations.callbacks.Callbacks;
-
 import org.eclipse.microprofile.openapi.annotations.security.OAuthFlows;
 import org.eclipse.microprofile.openapi.annotations.security.OAuthFlow;
 import org.eclipse.microprofile.openapi.annotations.servers.Server;
@@ -55,9 +54,10 @@ import org.eclipse.microprofile.openapi.annotations.servers.Servers;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.eclipse.microprofile.openapi.annotations.security.OAuthScope;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
-import org.eclipse.microprofile.openapi.samples.jaxrs.model.Airline;
-import org.eclipse.microprofile.openapi.samples.jaxrs.model.Review;
-import org.eclipse.microprofile.openapi.samples.jaxrs.model.User;
+
+import org.eclipse.microprofile.openapi.apps.airlines.model.Airline;
+import org.eclipse.microprofile.openapi.apps.airlines.model.Review;
+import org.eclipse.microprofile.openapi.apps.airlines.model.User;
 
 
 @Path("/reviews")
