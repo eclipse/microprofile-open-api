@@ -89,14 +89,22 @@ The following is a list of configuration values that every vendor must support.
 
 | `mp.openapi.model.reader` | Configuration property to specify the fully qualified name of the <<OASModelReader>> implementation.
 | `mp.openapi.filter` | Configuration property to specify the fully qualified name of the <<OASFilter>> implementation.
-| `mp.openapi.scan.disable`  |  Configuration property to disable annotation scanning.
-| `mp.openapi.scan.packages`  |  Configuration property to specify the list of packages to scan.
-| `mp.openapi.scan.classes`  |  Configuration property to specify the list of classes to scan.
-| `mp.openapi.scan.exclude.packages`  |  Configuration property to specify the list of packages to exclude from scans.
-| `mp.openapi.scan.exclude.classes`  |  Configuration property to specify the list of classes to exclude from scans.
-| `mp.openapi.servers`  |  Configuration property to specify the list of global servers that provide connectivity information.
-| `mp.openapi.servers.path.`   |  Prefix of the configuration property to specify an alternative list of servers to service all operations in a path.
+| `mp.openapi.scan.disable`  |  Configuration property to disable annotation scanning. Default value is `false`.
+| `mp.openapi.scan.packages`  |  Configuration property to specify the list of packages to scan. For example,
+`mp.openapi.scan.packages=com.xyz.PackageA,com.xyz.PackageB`
+| `mp.openapi.scan.classes`  |  Configuration property to specify the list of classes to scan. For example,
+`mp.openapi.scan.classes=com.xyz.MyClassA,com.xyz.MyClassB`
+| `mp.openapi.scan.exclude.packages`  |  Configuration property to specify the list of packages to exclude from scans. For example,
+`mp.openapi.scan.exclude.packages=com.xyz.PackageC,com.xyz.PackageD`
+| `mp.openapi.scan.exclude.classes`  |  Configuration property to specify the list of classes to exclude from scans. For example,
+`mp.openapi.scan.exclude.classes=com.xyz.MyClassC,com.xyz.MyClassD`
+| `mp.openapi.servers`  |  Configuration property to specify the list of global servers that provide connectivity information. For example,
+`mp.openapi.servers=https://xyz.com/v1,https://abc.com/v1`
+| `mp.openapi.servers.path.`   |  Prefix of the configuration property to specify an alternative list of servers to service all operations in a path. For example,
+`mp.openapi.servers.path./airlines/bookings/{id}=https://xyz.io/v1`
 | `mp.openapi.servers.operation.` | Prefix of the configuration property to specify an alternative list of servers to service an operation.
+Operations that want to specify an alternative list of servers must define an `operationId`, a unique string used to identify the operation. For example,
+`mp.openapi.servers.operation.getBooking=https://abc.io/v1`
 |===
 
 ==== Vendor extensions
