@@ -48,7 +48,7 @@ import org.eclipse.microprofile.openapi.models.media.Schema;
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject">OpenAPI Specification Parameter
  *      Object</a>
  */
-public interface Parameter extends Extensible, Reference<Parameter> {
+public interface Parameter<T extends Parameter<T>> extends Extensible, Reference<T> {
 
     /**
      * The values allowed for the style field.
@@ -106,7 +106,7 @@ public interface Parameter extends Extensible, Reference<Parameter> {
      * @param name the name of the parameter
      * @return the current Parameter instance
      */
-    Parameter name(String name);
+    T name(String name);
 
     /**
      * Returns the in property from a Parameter instance.
@@ -114,23 +114,6 @@ public interface Parameter extends Extensible, Reference<Parameter> {
      * @return the location of the parameter
      **/
     In getIn();
-
-    /**
-     * Sets the in property of a Parameter instance to the given string. If the in property is set to "path" then also sets the required property to
-     * true.
-     *
-     * @param in the location of the parameter
-     */
-    void setIn(In in);
-
-    /**
-     * Sets the in property of a Parameter instance to the given string. If the in property is set to "path" then also sets the required property to
-     * true.
-     *
-     * @param in the location of the parameter
-     * @return the current Parameter instance
-     */
-    Parameter in(In in);
 
     /**
      * Returns the description property from a Parameter instance.
@@ -152,7 +135,7 @@ public interface Parameter extends Extensible, Reference<Parameter> {
      * @param description a brief description of the parameter
      * @return the current Parameter instance
      */
-    Parameter description(String description);
+    T description(String description);
 
     /**
      * Returns the required property from a Parameter instance.
@@ -174,7 +157,7 @@ public interface Parameter extends Extensible, Reference<Parameter> {
      * @param required indicates whether this parameter is mandatory
      * @return the current Parameter instance
      */
-    Parameter required(Boolean required);
+    T required(Boolean required);
 
     /**
      * Returns the deprecated property from a Parameter instance.
@@ -196,7 +179,7 @@ public interface Parameter extends Extensible, Reference<Parameter> {
      * @param deprecated specifies that a parameter is deprecated
      * @return the current Parameter instance
      */
-    Parameter deprecated(Boolean deprecated);
+    T deprecated(Boolean deprecated);
 
     /**
      * Returns the allowEmptyValue property from a Parameter instance.
@@ -218,7 +201,7 @@ public interface Parameter extends Extensible, Reference<Parameter> {
      * @param allowEmptyValue specify the ability to pass empty-valued parameters
      * @return the current Parameter instance
      */
-    Parameter allowEmptyValue(Boolean allowEmptyValue);
+    T allowEmptyValue(Boolean allowEmptyValue);
 
     /**
      * Returns the style property from a Parameter instance.
@@ -240,7 +223,7 @@ public interface Parameter extends Extensible, Reference<Parameter> {
      * @param style describes how the parameter value will be serialized
      * @return the current Parameter instance
      */
-    Parameter style(Parameter.StyleEnum style);
+    T style(Parameter.StyleEnum style);
 
     /**
      * Returns the explode property from a Parameter instance.
@@ -262,7 +245,7 @@ public interface Parameter extends Extensible, Reference<Parameter> {
      * @param explode whether parameter values of type "array" or "object" generate separate parameters for each value
      * @return the current Parameter instance
      */
-    Parameter explode(Boolean explode);
+    T explode(Boolean explode);
 
     /**
      * Returns the allowReserved property from a Parameter instance.
@@ -284,7 +267,7 @@ public interface Parameter extends Extensible, Reference<Parameter> {
      * @param allowReserved specifies whether the parameter value should allow reserved characters
      * @return the current Parameter instance
      */
-    Parameter allowReserved(Boolean allowReserved);
+    T allowReserved(Boolean allowReserved);
 
     /**
      * Returns the schema property from a Parameter instance.
@@ -306,7 +289,7 @@ public interface Parameter extends Extensible, Reference<Parameter> {
      * @param schema schema defining the type used for the parameter
      * @return the current Parameter instance
      */
-    Parameter schema(Schema schema);
+    T schema(Schema schema);
 
     /**
      * Returns the examples property from a Parameter instance.
@@ -330,7 +313,7 @@ public interface Parameter extends Extensible, Reference<Parameter> {
      * @param examples examples of the media type
      * @return the current Parameter instance
      */
-    Parameter examples(Map<String, Example> examples);
+    T examples(Map<String, Example> examples);
 
     /**
      * Adds an example of the media type using the specified key. The example should contain a value in the correct format as specified in the
@@ -340,7 +323,7 @@ public interface Parameter extends Extensible, Reference<Parameter> {
      * @param examplesItem example of the media type
      * @return the current Parameter instance
      */
-    Parameter addExamples(String key, Example examplesItem);
+    T addExamples(String key, Example examplesItem);
 
     /**
      * Returns the example property from a Parameter instance.
@@ -364,7 +347,7 @@ public interface Parameter extends Extensible, Reference<Parameter> {
      * @param example example of the media type
      * @return the current Parameter instance
      */
-    Parameter example(Object example);
+    T example(Object example);
 
     /**
      * Returns the content property from a Parameter instance.
@@ -386,6 +369,6 @@ public interface Parameter extends Extensible, Reference<Parameter> {
      * @param content a map containing the media representations for the parameter
      * @return the current Parameter instance
      */
-    Parameter content(Content content);
+    T content(Content content);
 
 }
