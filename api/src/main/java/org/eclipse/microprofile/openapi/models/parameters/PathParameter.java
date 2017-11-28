@@ -24,6 +24,6 @@ import org.eclipse.microprofile.openapi.models.Constructible;
  * <p>
  * A path parameter is a {@link Parameter Parameter} where the "in" property has the value "path."
  */
-public interface PathParameter extends Constructible, Parameter {
+public interface PathParameter extends Constructible, Parameter<PathParameter> {
 
 }
