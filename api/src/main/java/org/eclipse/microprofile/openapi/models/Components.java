@@ -49,6 +49,7 @@ import org.eclipse.microprofile.openapi.models.security.SecurityScheme;
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#componentsObject"> OpenAPI Specification Components
  *      Object</a>
  */
+@SuppressWarnings("rawtypes")
 public interface Components extends Constructible, Extensible {
 
     /**
@@ -77,10 +78,10 @@ public interface Components extends Constructible, Extensible {
      * Adds the given schema to this Components' list of schemas with the given string as its key.
      *
      * @param key a key conforming to the format required for this object
-     * @param schemasItem a reusable schema object
+     * @param schema a reusable schema object
      * @return the current Components object
      */
-    Components addSchemas(String key, Schema schemasItem);
+    Components addSchema(String key, Schema schema);
 
     /**
      * Returns the responses property from a Components instance.
@@ -108,10 +109,10 @@ public interface Components extends Constructible, Extensible {
      * Adds the given response to this Components' map of responses with the given string as its key.
      *
      * @param key a key conforming to the format required for this object
-     * @param responsesItem a reusable response object
+     * @param response a reusable response object
      * @return the current Components object
      */
-    Components addResponses(String key, APIResponse responsesItem);
+    Components addResponse(String key, APIResponse response);
 
     /**
      * Returns the parameters property from a Components instance.
@@ -139,10 +140,10 @@ public interface Components extends Constructible, Extensible {
      * Adds the given parameter to this Components' map of parameters with the given string as its key.
      *
      * @param key a key conforming to the format required for this object
-     * @param parametersItem a reusable parameter object
+     * @param parameter a reusable parameter object
      * @return the current Components object
      */
-    Components addParameters(String key, Parameter parametersItem);
+    Components addParameter(String key, Parameter parameter);
 
     /**
      * Returns the examples property from a Components instance.
@@ -170,10 +171,10 @@ public interface Components extends Constructible, Extensible {
      * Adds the given example to this Components' map of examples with the given string as its key.
      *
      * @param key a key conforming to the format required for this object
-     * @param examplesItem a reusable example object
+     * @param example a reusable example object
      * @return the current Components object
      */
-    Components addExamples(String key, Example examplesItem);
+    Components addExample(String key, Example example);
 
     /**
      * Returns the requestBodies property from a Components instance.
@@ -201,10 +202,10 @@ public interface Components extends Constructible, Extensible {
      * Adds the given request body to this Components' map of request bodies with the given string as its key.
      *
      * @param key a key conforming to the format required for this object
-     * @param requestBodiesItem a reusable request body object
+     * @param requestBody a reusable request body object
      * @return the current Components object
      */
-    Components addRequestBodies(String key, RequestBody requestBodiesItem);
+    Components addRequestBody(String key, RequestBody requestBody);
 
     /**
      * Returns the headers property from a Components instance.
@@ -232,10 +233,10 @@ public interface Components extends Constructible, Extensible {
      * Adds the given header to this Components' map of headers with the given string as its key.
      *
      * @param key a key conforming to the format required for this object
-     * @param headersItem a reusable header object
+     * @param header a reusable header object
      * @return the current Components object
      */
-    Components addHeaders(String key, Header headersItem);
+    Components addHeader(String key, Header header);
 
     /**
      * Returns the securitySchemes property from a Components instance.
@@ -263,10 +264,10 @@ public interface Components extends Constructible, Extensible {
      * Adds the given security scheme to this Components' map of security schemes with the given string as its key.
      *
      * @param key a key conforming to the format required for this object
-     * @param securitySchemesItem a reusable security scheme object
+     * @param securityScheme a reusable security scheme object
      * @return the current Components object
      */
-    Components addSecuritySchemes(String key, SecurityScheme securitySchemesItem);
+    Components addSecurityScheme(String key, SecurityScheme securityScheme);
 
     /**
      * Returns the links property from a Components instance.
@@ -294,10 +295,10 @@ public interface Components extends Constructible, Extensible {
      * Adds the given link to this Components' map of links with the given string as its key.
      *
      * @param key a key conforming to the format required for this object
-     * @param linksItem a reusable link object
+     * @param link a reusable link object
      * @return the current Components object
      */
-    Components addLinks(String key, Link linksItem);
+    Components addLink(String key, Link link);
 
     /**
      * Returns the callbacks property from a Components instance.
@@ -325,9 +326,9 @@ public interface Components extends Constructible, Extensible {
      * Adds the given callback to this Components' map of callbacks with the given string as its key.
      *
      * @param key a key conforming to the format required for this object
-     * @param callbacksItem a reusable callback object
+     * @param callback a reusable callback object
      * @return the current Components object
      */
-    Components addCallbacks(String key, Callback callbacksItem);
+    Components addCallback(String key, Callback callback);
 
 }
