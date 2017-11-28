@@ -15,10 +15,15 @@ package org.eclipse.microprofile.openapi.apps.petstore.util;
 
 import java.io.IOException;
 
-import javax.servlet.*;
+import javax.servlet.Filter;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.FilterConfig;
 import javax.servlet.http.HttpServletResponse;
 
-public class ApiOriginFilter implements javax.servlet.Filter {
+public class ApiOriginFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain) throws IOException, ServletException {

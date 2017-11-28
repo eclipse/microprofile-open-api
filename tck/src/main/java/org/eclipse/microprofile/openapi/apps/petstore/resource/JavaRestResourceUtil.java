@@ -27,12 +27,18 @@ public class JavaRestResourceUtil {
             output = defaultValue;
         }
 
-        if (output < minVal) output = minVal;
-        if (maxVal == -1) {
-            if (output < minVal) output = minVal;
+        if (output < minVal){
+            output = minVal;
         }
-            else if (output > maxVal) output = maxVal;
-                return output;
+        if (maxVal == -1) {
+            if (output < minVal){
+                output = minVal;
+            }
+        }
+        else if (output > maxVal){
+            output = maxVal;
+        }
+        return output;
     }
 
     public long getLong(long minVal, long maxVal, long defaultValue, String inputString) {
@@ -43,13 +49,18 @@ public class JavaRestResourceUtil {
         catch (Exception e){
             output = defaultValue;
         }
-
-        if (output < minVal) output = minVal;
-        if (maxVal == -1) { 
-            if (output < minVal) output = minVal; 
+        if (output < minVal){
+            output = minVal;
         }
-        else if (output > maxVal) output = maxVal;
-            return output;
+        if (maxVal == -1) { 
+            if (output < minVal){
+                output = minVal; 
+            }
+        }
+        else if (output > maxVal){
+            output = maxVal;
+        }
+        return output;
     }
 
     public double getDouble(double minVal, double maxVal, double defaultValue, String inputString) {
@@ -60,23 +71,36 @@ public class JavaRestResourceUtil {
         catch (Exception e){
             output = defaultValue;
         }
-
-        if (output < minVal) output = minVal;
-        if (maxVal == -1) { 
-            if (output < minVal) output = minVal; 
+        if (output < minVal){
+            output = minVal;
         }
-            else if (output > maxVal) output = maxVal;
-                return output;
+        if (maxVal == -1) { 
+            if (output < minVal){
+                output = minVal; 
+            }
+        }
+        else if (output > maxVal){
+            output = maxVal;
+        }
+        return output;
     }
 
     public boolean getBoolean(boolean defaultValue, String booleanString) {
         boolean output = defaultValue;
-        if (booleanString == null) output = defaultValue;
+        if (booleanString == null){
+            output = defaultValue;
+        }
 
         //  treat "", "YES" as "true"
-        if ("".equals(booleanString)) output = true;
-        else if ("YES".equalsIgnoreCase(booleanString)) output = true;
-        else if ("NO".equalsIgnoreCase(booleanString)) output = false;
+        if ("".equals(booleanString)){
+            output = true;
+        }
+        else if ("YES".equalsIgnoreCase(booleanString)){ 
+            output = true;
+        }
+        else if ("NO".equalsIgnoreCase(booleanString)){
+            output = false;
+        }
         else {
             try {
                 output = Boolean.parseBoolean(booleanString);

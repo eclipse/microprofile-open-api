@@ -19,6 +19,8 @@ import org.eclipse.microprofile.openapi.apps.petstore.model.Tag;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 public class PetData {
   static List<Pet> pets = new ArrayList<Pet>();
@@ -86,7 +88,7 @@ public class PetData {
     for (Pet pet : pets) {
         for (String s : statuses) {
             if (s.equals(pet.getStatus())) {
-            result.add(pet);
+                result.add(pet);
             }
         }
     }
@@ -99,10 +101,11 @@ public class PetData {
     for (Pet pet : pets) {
         if (null != pet.getTags()) {
             for (Tag tag : pet.getTags()) {
-            for (String tagListString : tagList) {
-                if (tagListString.equals(tag.getName()))
-                result.add(pet);
-            }
+                for (String tagListString : tagList) {
+                    if (tagListString.equals(tag.getName())){
+                        result.add(pet);
+                    }
+                }
             }
         }
     }
@@ -114,7 +117,7 @@ public class PetData {
         long maxId = 0;
         for (int i = pets.size() - 1; i >= 0; i--) {
             if(pets.get(i).getId() > maxId) {
-            maxId = pets.get(i).getId();
+                maxId = pets.get(i).getId();
             }
         }
         pet.setId(maxId + 1);
@@ -122,7 +125,7 @@ public class PetData {
     if (pets.size() > 0) {
         for (int i = pets.size() - 1; i >= 0; i--) {
             if (pets.get(i).getId() == pet.getId()) {
-            pets.remove(i);
+                pets.remove(i);
             }
         }
     }
@@ -136,10 +139,12 @@ public class PetData {
         String status = pet.getStatus();
         if(status != null && !"".equals(status)) {
             Integer count = output.get(status);
-            if(count == null)
-            count = new Integer(1);
-            else
-            count = count.intValue() + 1;
+            if(count == null){
+                count = new Integer(1);
+            }
+            else{
+                count = count.intValue() + 1;
+            }
             output.put(status, count);
         }
     }

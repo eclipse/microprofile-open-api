@@ -25,13 +25,9 @@ import org.eclipse.microprofile.openapi.apps.petstore.exception.NotFoundExceptio
 import org.eclipse.microprofile.openapi.apps.petstore.data.PetData;
 
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.StreamingOutput;
-import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.GET;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -45,7 +41,7 @@ public class PetStoreResource {
 
     @GET
     @Path("/inventory")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({"application/json", "application/xml"})
     @Operation(
         method = "get",
         summary = "Returns pet inventories by status", 
