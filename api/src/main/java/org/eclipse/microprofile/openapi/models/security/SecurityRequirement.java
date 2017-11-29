@@ -30,35 +30,35 @@ import org.eclipse.microprofile.openapi.models.Constructible;
 public interface SecurityRequirement extends Constructible, Map<String, List<String>> {
 
     /**
-     * Adds a List item to a SecurityRequirement instance based on the name and item parameters provided as key-value pair.
-     * <p>
-     * Takes value as a String object.
-     * </p>
-     * @param name the name of SecurityRequirement
-     * @param item parameter of SecurityRequirement
-     * @return Updated SecurityRequirement instance
-     */
-    SecurityRequirement addList(String name, String item);
-
-    /**
-     * Adds a List item to a SecurityRequirement instance based on the name and item parameters provided as key-value pair to the map.
-     * <p>
-     * Takes value as a List of String objects.
-     * </p>
-     * @param name the name of SecurityRequirement
-     * @param item parameter of SecurityRequirement
-     * @return Updated SecurityRequirement instance
-     */
-
-    SecurityRequirement addList(String name, List<String> item);
-
-    /**
-     * Adds a new empty List item to a SecurityRequirement instance based on the name parameter provided as key to the map.
+     * Adds a security scheme to the SecurityRequirement instance based on the scheme name and 
+     * required scope (optional) provided.
      * 
-     * @param name the name of SecurityRequirement
+     * @param securitySchemeName the name of security scheme declared in the Components section of the OpenAPI document
+     * @param scope a required scope - only valid when the defined scheme is 'oauth2' or 'openIdConnect'
+     * @return Updated SecurityRequirement instance
+     */
+    SecurityRequirement addScheme(String securitySchemeName, String scope);
+
+    /**
+     * Adds a security scheme to the SecurityRequirement instance based on the scheme name and 
+     * required scopes (optional) provided.
+     * 
+     * @param securitySchemeName the name of security scheme declared in the Components section of the OpenAPI document
+     * @param scopes the scopes required - only valid when the defined scheme is 'oauth2' or 'openIdConnect'
      * @return Updated SecurityRequirement instance
      */
 
-    SecurityRequirement addList(String name);
+    SecurityRequirement addScheme(String securitySchemeName, List<String> scopes);
+
+    /**
+     * Adds a security scheme to the SecurityRequirement instance based on the scheme name.  No 
+     * scopes are included, resulting in an empty list of scopes for the security scheme.  This
+     * is valid when the defined security scheme is not 'oauth2' or 'openIdConnect'.
+     * 
+     * @param securitySchemeName the name of security scheme declared in the Components section of the OpenAPI document
+     * @return Updated SecurityRequirement instance
+     */
+
+    SecurityRequirement addList(String securitySchemeName);
 
 }

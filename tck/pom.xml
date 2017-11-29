@@ -24,7 +24,7 @@
     </parent>
 
     <artifactId>microprofile-openapi-tck</artifactId>
-    <name>MicroProfile OpenAPI - TCK</name>
+    <name>MicroProfile OpenAPI TCK</name>
     <description>MicroProfile OpenAPI :: TCK</description>
 
     <build>

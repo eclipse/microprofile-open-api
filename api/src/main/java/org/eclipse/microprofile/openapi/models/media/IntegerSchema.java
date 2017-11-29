@@ -57,12 +57,4 @@ public interface IntegerSchema extends Schema<Integer> {
      */
     IntegerSchema enumeration(List<Integer> enumeration);
 
-    /**
-     * Adds an item of the appropriate type to the enumerated list of values allowed.
-     *
-     * @param enumerationItem an object to add to the enumerated values
-     * @return the current IntegerSchema instance
-     */
-    IntegerSchema addEnumerationItem(Integer enumerationItem);
-
 }

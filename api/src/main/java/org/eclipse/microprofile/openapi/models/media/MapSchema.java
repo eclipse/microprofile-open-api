@@ -20,6 +20,7 @@ package org.eclipse.microprofile.openapi.models.media;
 /**
  * The schema used for an object that holds map data.
  */
+@SuppressWarnings("rawtypes")
 public interface MapSchema extends Schema {
 
     /**
