@@ -302,10 +302,10 @@ public interface PathItem extends Constructible, Extensible, Reference<PathItem>
     /**
      * Adds the given server to this PathItem's list of servers.
      *
-     * @param serversItem a server to service operations in this path item
+     * @param server a server to service operations in this path item
      * @return the current PathItem instance
      **/
-    PathItem addServersItem(Server serversItem);
+    PathItem addServer(Server server);
 
     /**
      * Returns the parameters property from this PathItem instance.
@@ -332,9 +332,9 @@ public interface PathItem extends Constructible, Extensible, Reference<PathItem>
     /**
      * Adds the given parameter to this PathItem's list of parameters.
      *
-     * @param parametersItem a parameter that is applicable to all the operations described under this path
+     * @param parameter a parameter that is applicable to all the operations described under this path
      * @return the current PathItem instance
      **/
-    PathItem addParametersItem(Parameter parametersItem);
+    PathItem addParameter(Parameter parameter);
 
 }
