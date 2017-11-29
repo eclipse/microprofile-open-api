@@ -32,6 +32,7 @@ import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
 import org.eclipse.microprofile.openapi.annotations.enums.ParameterStyle;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
+import org.eclipse.microprofile.openapi.annotations.servers.Server;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
@@ -336,7 +337,7 @@ public class UserResource {
                 description = "User updated successfully",
                 content = @Content(
                     schema = @Schema(
-                        name = "upadtedUser",
+                        name = "updatedUser",
                         implementation = User.class
                         ),
                     encoding = @Encoding(
@@ -467,15 +468,25 @@ public class UserResource {
                 responseCode = "200",
                 description = "Successfully retrieved user by id.",
                 content = @Content(
-                    schema = @Schema(implementation = User.class)
-                ),
-                links = @Link(
+                    schema = @Schema(implementation = User.class)),
+                links = { 
+                    @Link(
                         name = "User name",
                         description = "The username corresponding to provided user id",
                         operationId = "getUserByName",
                         parameters = @LinkParameter(
                             name = "userId",
-                            expression = "$request.path.id"))
+                            expression = "$request.path.id")),
+                    @Link(
+                         name = "Review",
+                         description = "The reviews provided by user",
+                         operationRef = "/db/reviews/{userName}",
+                         parameters = @LinkParameter(
+                             name = "path.userName",
+                             expression = "$response.body#userName"),
+                         requestBody = "$request.path.id",
+                         server = @Server(url = "http://example.com"))
+                }
                 ),
             @APIResponse(
                 responseCode = "400",

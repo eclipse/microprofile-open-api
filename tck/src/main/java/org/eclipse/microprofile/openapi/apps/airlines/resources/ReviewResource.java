@@ -189,9 +189,7 @@ public class ReviewResource {
             description = "username of the user for the reviews",
             required = true,
             in = ParameterIn.PATH,
-            content = @Content(
-                examples = @ExampleObject(
-                    value = "bsmith")))
+            examples = { "bsmith", "pat@example.com" } )
         @PathParam("user") String user){
 
             List<Review> reviewsByUser = new ArrayList<Review>();
@@ -222,9 +220,7 @@ public class ReviewResource {
                 description = "name of the airlines for the reviews",
                 required = true,
                 in = ParameterIn.PATH,
-                content = @Content(
-                    examples = @ExampleObject(
-                        value = "Acme Air")))
+                example = "Acme Air")
         },
         responses={
             @APIResponse(
@@ -345,7 +341,7 @@ public class ReviewResource {
                 )
             )
         }
-            )
+    )
     @Operation(
         method = "post",
         summary="Create a Review",

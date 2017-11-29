@@ -18,6 +18,8 @@ import java.util.Set;
 
 import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
 import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
+import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
+import org.eclipse.microprofile.openapi.annotations.extensions.Extensions;
 import org.eclipse.microprofile.openapi.annotations.info.Contact;
 import org.eclipse.microprofile.openapi.annotations.info.Info;
 import org.eclipse.microprofile.openapi.annotations.info.License;
@@ -43,12 +45,20 @@ import javax.ws.rs.core.Application;
             name = "Apache 2.0", 
             url="http://www.apache.org/licenses/LICENSE-2.0.html")
     ),
+    externalDocs = @ExternalDocumentation(
+        url = "http://swagger.io", 
+        description="Find out more about our store"),
     tags={
         @Tag(name="pet", description="Everything about your Pets"),
         @Tag(name="store", description="Access to PetStore orders"),
-        @Tag(name="user", description="Operations about user")
+        @Tag(name="user", description="Operations about user",
+            externalDocs = @ExternalDocumentation(
+                url = "http://swagger.io", 
+                description="Find out more about our store"))
     }
 )
+@Extension(name = "x-mp-openapi1", value = "true")
+@Extensions( { @Extension(name = "x-mp-openapi2", value = "true"), @Extension(value = "false", name = "x-mp-openapi3") } )
 @Schema(
     externalDocs = @ExternalDocumentation(
         url = "http://swagger.io", 

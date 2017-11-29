@@ -13,6 +13,8 @@
 
 package org.eclipse.microprofile.openapi.apps.petstore.model;
 
+import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
+import org.eclipse.microprofile.openapi.annotations.extensions.Extensions;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -20,6 +22,8 @@ import javax.xml.bind.annotation.XmlElement;
 
 @XmlRootElement(name = "User")
 public class User {
+    @Extension(name = "x-mp-field1", value = "true")
+    @Extensions( { @Extension(name = "x-mp-field2", value = "true"), @Extension(value = "false", name = "x-mp-field3") } )
     private long id;
     private String username;
     private String firstName;

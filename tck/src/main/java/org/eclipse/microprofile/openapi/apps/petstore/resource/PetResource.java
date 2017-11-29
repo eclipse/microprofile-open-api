@@ -25,6 +25,8 @@ import org.eclipse.microprofile.openapi.annotations.security.OAuthFlow;
 import org.eclipse.microprofile.openapi.annotations.security.OAuthFlows;
 import org.eclipse.microprofile.openapi.annotations.security.OAuthScope;
 import org.eclipse.microprofile.openapi.annotations.callbacks.Callback;
+import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
+import org.eclipse.microprofile.openapi.annotations.extensions.Extensions;
 import org.eclipse.microprofile.openapi.annotations.info.Info;
 import org.eclipse.microprofile.openapi.annotations.info.License;
 import org.eclipse.microprofile.openapi.annotations.info.Contact;
@@ -284,7 +286,8 @@ public class PetResource {
         requestBody = @RequestBody(
             content = @Content(
                 mediaType = "application/json",
-                schema = @Schema(implementation = Pet.class)),
+                schema = @Schema(implementation = Pet.class), 
+                examples = @ExampleObject(ref = "http://example.org/petapi-examples/openapi.json#/components/examples/pet-example") ),
             required = true,
             description = "example of a new pet to add"
         )
@@ -356,6 +359,8 @@ public class PetResource {
                 )
         }
     )
+    @Extension(name = "x-mp-method1", value = "true")
+    @Extensions( { @Extension(name = "x-mp-method2", value = "true"), @Extension(value = "false", name = "x-mp-method3") } )
     public Response findPetsByStatus(
         @Parameter(
             name = "status",
@@ -380,7 +385,10 @@ public class PetResource {
                     }
                 )
             },
-            allowEmptyValue = true) String status) {
+            allowEmptyValue = true)
+        @Extension(name = "x-mp-parm1", value = "true")
+        @Extensions( { @Extension(name = "x-mp-parm2", value = "true"), @Extension(value = "false", name = "x-mp-parm3") } )
+        String status) {
                 return Response.ok(petData.findPetByStatus(status)).build();
             }
 
