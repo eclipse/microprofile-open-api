@@ -19,16 +19,8 @@ package org.eclipse.microprofile.openapi.models;
 
 import java.util.List;
 
-import org.eclipse.microprofile.openapi.models.callbacks.Callback;
-import org.eclipse.microprofile.openapi.models.examples.Example;
-import org.eclipse.microprofile.openapi.models.headers.Header;
 import org.eclipse.microprofile.openapi.models.info.Info;
-import org.eclipse.microprofile.openapi.models.links.Link;
-import org.eclipse.microprofile.openapi.models.media.Schema;
-import org.eclipse.microprofile.openapi.models.parameters.Parameter;
-import org.eclipse.microprofile.openapi.models.responses.APIResponse;
 import org.eclipse.microprofile.openapi.models.security.SecurityRequirement;
-import org.eclipse.microprofile.openapi.models.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.models.servers.Server;
 import org.eclipse.microprofile.openapi.models.tags.Tag;
 
@@ -39,7 +31,6 @@ import org.eclipse.microprofile.openapi.models.tags.Tag;
  * 
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#openapi-object">OpenAPI Specification OpenAPI Object</a>
  */
-@SuppressWarnings("rawtypes")
 public interface OpenAPI extends Constructible, Extensible {
 
     /**
@@ -251,87 +242,5 @@ public interface OpenAPI extends Constructible, Extensible {
      * @return the current OpenAPI object
      */
     OpenAPI components(Components components);
-
-    /**
-     * Adds the given schema to this OpenAPI instance's components property.
-     * 
-     * @param name the canonical name of the given schema
-     * @param schema a schema to add to the components property
-     * @return the current OpenAPI object
-     */
-    OpenAPI schema(String name, Schema schema);
-
-    /**
-     * Adds the given response to this OpenAPI instance's components property.
-     * 
-     * @param name the canonical name of the given response
-     * @param response a response to add to the components property
-     * @return the current OpenAPI object
-     */
-    OpenAPI response(String name, APIResponse response);
-
-    /**
-     * Adds the given parameter to this OpenAPI instance's components property.
-     * 
-     * @param name the canonical name of the given parameter
-     * @param parameter a parameter to add to the components property
-     * @return the current OpenAPI object
-     */
-    OpenAPI parameter(String name, Parameter parameter);
-
-    /**
-     * Adds the given example to this OpenAPI instance's components property.
-     * 
-     * @param name the canonical name of the given example
-     * @param example a example to add to the components property
-     * @return the current OpenAPI object
-     */
-    OpenAPI example(String name, Example example);
-
-    /**
-     * Adds the given request body to this OpenAPI instance's components property.
-     * 
-     * @param name the canonical name of the given request body
-     * @param requestBody a request body to add to the components property
-     * @return the current OpenAPI object
-     */
-    OpenAPI requestBody(String name, Example requestBody);
-
-    /**
-     * Adds the given header to this OpenAPI instance's components property.
-     * 
-     * @param name the canonical name of the given header
-     * @param header a header to add to the components property
-     * @return the current OpenAPI object
-     */
-    OpenAPI header(String name, Header header);
-
-    /**
-     * Adds the given security scheme to this OpenAPI instance's components property. This convenience method is similar to
-     * Components.addSecuritySchemes.
-     * 
-     * @param name the canonical name of the given security scheme
-     * @param securityScheme a security scheme to add to the components property
-     * @return the current OpenAPI object
-     */
-    OpenAPI securityScheme(String name, SecurityScheme securityScheme);
-
-    /**
-     * Adds the given link to this OpenAPI instance's components property.
-     * 
-     * @param name the canonical name of the given link
-     * @param link a link to add to the components property
-     * @return the current OpenAPI object
-     */
-    OpenAPI link(String name, Link link);
-
-    /**
-     * Adds the given callback to this OpenAPI instance's components property.
-     * 
-     * @param name the canonical name of the given callback
-     * @param callback a callback to add to the components property
-     * @return the current OpenAPI object
-     */
-    OpenAPI callback(String name, Callback callback);
 
 }
