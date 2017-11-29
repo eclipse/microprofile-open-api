@@ -33,9 +33,9 @@ public interface ServerVariables extends Constructible, Extensible, Map<String, 
      * This method adds a key-value item to a ServerVariables instance from the name-item parameter pair and returns the modified instance.
      *
      * @param name the name of ServerVariable instance
-     * @param item the ServerVariable instance
+     * @param serverVariable the ServerVariable instance
      * @return ServerVariables instance with the added name-item pair.
      */
-    ServerVariables addServerVariable(String name, ServerVariable item);
+    ServerVariables addServerVariable(String name, ServerVariable serverVariable);
 
 }

@@ -125,9 +125,9 @@ public interface Schema<T> extends Constructible, Extensible, Reference<Schema<T
     /**
      * Adds an item of the appropriate type to the enumerated list of values allowed.
      *
-     * @param enumerationItem an object to add to the enumerated values
+     * @param enumeration an object to add to the enumerated values
      */
-    void addEnumerationItemObject(T enumerationItem);
+    void addEnumeration(T enumeration);
 
     /**
      * Returns the multipleOf property from this schema instance.
@@ -454,10 +454,10 @@ public interface Schema<T> extends Constructible, Extensible, Reference<Schema<T
     /**
      * Adds the name of an item to the list of fields required in objects defined by this schema.
      *
-     * @param requiredItem the name of an item required in objects defined by this schema instance
+     * @param required the name of an item required in objects defined by this schema instance
      * @return the current Schema instance
      */
-    Schema addRequiredItem(String requiredItem);
+    Schema addRequired(String required);
 
     /**
      * Returns the type property from this schema.
@@ -529,10 +529,10 @@ public interface Schema<T> extends Constructible, Extensible, Reference<Schema<T
      * Adds a schema property of the provided name using the given schema.
      *
      * @param key the name of a new schema property
-     * @param propertiesItem the schema which describes the properties of the named property
+     * @param propertySchema the schema which describes the properties of the named property
      * @return the current Schema instance
      */
-    Schema addProperties(String key, Schema propertiesItem);
+    Schema addProperty(String key, Schema propertySchema);
 
     /**
      * Returns the schema which defines new properties added to objects defined by the current schema.

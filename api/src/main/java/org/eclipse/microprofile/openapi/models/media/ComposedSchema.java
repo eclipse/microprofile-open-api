@@ -23,6 +23,7 @@ import java.util.List;
  * Create a schema composed of other schemas. An object with this schema can take a value conforming to one (or more) of the schemas used to build
  * this one.
  */
+@SuppressWarnings("rawtypes")
 public interface ComposedSchema extends Schema {
 
     /**
@@ -50,10 +51,10 @@ public interface ComposedSchema extends Schema {
     /**
      * Adds the given schema to this ComposedSchema's list of schemas used by the allOf property.
      * 
-     * @param allOfItem a schema to use with the allOf property
+     * @param allOf a schema to use with the allOf property
      * @return the current ComposedSchema instance
      */
-    ComposedSchema addAllOfItem(Schema allOfItem);
+    ComposedSchema addAllOf(Schema allOf);
 
     /**
      * Returns the schemas used by the anyOf property in a ComposedSchema instance.
@@ -80,10 +81,10 @@ public interface ComposedSchema extends Schema {
     /**
      * Adds the given schema to this ComposedSchema's list of schemas used by the anyOf property.
      * 
-     * @param anyOfItem a schema to use with the anyOf property
+     * @param anyOf a schema to use with the anyOf property
      * @return the current ComposedSchema instance
      */
-    ComposedSchema addAnyOfItem(Schema anyOfItem);
+    ComposedSchema addAnyOf(Schema anyOf);
 
     /**
      * Returns the schemas used by the oneOf property in a ComposedSchema instance.
@@ -110,9 +111,9 @@ public interface ComposedSchema extends Schema {
     /**
      * Adds the given schema to this ComposedSchema's list of schemas used by the oneOf property.
      * 
-     * @param oneOfItem a schema to use with the oneOf property
+     * @param oneOf a schema to use with the oneOf property
      * @return the current ComposedSchema instance
      */
-    ComposedSchema addOneOfItem(Schema oneOfItem);
+    ComposedSchema addOneOf(Schema oneOf);
 
 }

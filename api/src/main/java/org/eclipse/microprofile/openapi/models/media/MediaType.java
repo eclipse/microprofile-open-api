@@ -32,6 +32,7 @@ import org.eclipse.microprofile.openapi.models.examples.Example;
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#mediaTypeObject">OpenAPI Specification Media Type
  *      Object</a>
  */
+@SuppressWarnings("rawtypes")
 public interface MediaType extends Constructible, Extensible {
 
     /**
@@ -85,10 +86,10 @@ public interface MediaType extends Constructible, Extensible {
      * present.
      *
      * @param key any unique name to identify the example object
-     * @param examplesItem an example of a media type
+     * @param example an example of a media type
      * @return the current MediaType instance
      */
-    MediaType addExamples(String key, Example examplesItem);
+    MediaType addExample(String key, Example example);
 
     /**
      * Returns the example property from a MediaType instance.

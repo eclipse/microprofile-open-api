@@ -33,10 +33,10 @@ public interface Scopes extends Constructible, Extensible, Map<String, String> {
     /**
      * Adds name of an existing scope object and item parameters to a Scopes instance as a key-value pair in a map.
      *
-     * @param name the name of an existing scope
-     * @param item a parameter of an existing scope
+     * @param scope the name of a scope
+     * @param description description of the scope
      * @return Scopes instance with the added key-value pair
      */
-    Scopes addString(String name, String item);
+    Scopes addScope(String scope, String description);
 
 }

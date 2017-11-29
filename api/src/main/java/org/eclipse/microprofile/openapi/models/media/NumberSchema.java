@@ -49,12 +49,4 @@ public interface NumberSchema extends Schema<BigDecimal> {
      */
     NumberSchema enumeration(List<BigDecimal> enumeration);
 
-    /**
-     * Adds an item of the appropriate type to the enumerated list of values allowed.
-     *
-     * @param enumerationItem an object to add to the enumerated values
-     * @return the current NumberSchema instance
-     */
-    NumberSchema addEnumerationItem(BigDecimal enumerationItem);
-
 }

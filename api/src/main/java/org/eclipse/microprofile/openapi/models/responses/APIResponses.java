@@ -35,10 +35,10 @@ public interface APIResponses extends Constructible, Map<String, APIResponse> {
      * Adds an ApiResponse in the format of the name as a key and the item as the value to ApiResponses map
      * 
      * @param name the name of ApiResponse 
-     * @param item the ApiResponse object to be added to ApiResponses map
+     * @param apiResponse the ApiResponse object to be added to ApiResponses map
      * @return ApiResponses map with the added ApiResponse instance
      **/
-    APIResponses addApiResponse(String name, APIResponse item);
+    APIResponses addApiResponse(String name, APIResponse apiResponse);
 
     /**
      * Returns the default documentation of responses other than the ones declared for specific HTTP response codes in this instance of ApiResponses.

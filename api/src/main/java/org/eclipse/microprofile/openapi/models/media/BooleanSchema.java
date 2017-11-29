@@ -48,12 +48,4 @@ public interface BooleanSchema extends Schema<Boolean> {
      */
     BooleanSchema enumeration(List<Boolean> enumeration);
 
-    /**
-     * Adds an item of the appropriate type to the enumerated list of values allowed.
-     *
-     * @param enumerationItem an object to add to the enumerated values
-     * @return the current BooleanSchema instance
-     */
-    BooleanSchema addEnumerationItem(Boolean enumerationItem);
-
 }

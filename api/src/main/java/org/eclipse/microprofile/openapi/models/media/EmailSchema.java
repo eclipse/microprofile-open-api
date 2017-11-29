@@ -56,12 +56,4 @@ public interface EmailSchema extends Schema<String> {
      */
     EmailSchema enumeration(List<String> enumeration);
 
-    /**
-     * Adds an item of the appropriate type to the enumerated list of values allowed.
-     *
-     * @param enumerationItem an object to add to the enumerated values
-     * @return the current EmailSchema instance
-     */
-    EmailSchema addEnumerationItem(String enumerationItem);
-
 }

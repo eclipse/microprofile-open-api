@@ -58,12 +58,4 @@ public interface DateSchema extends Schema<Date> {
      */
     DateSchema enumeration(List<Date> enumeration);
 
-    /**
-     * Adds an item of the appropriate type to the enumerated list of values allowed.
-     *
-     * @param enumerationItem an object to add to the enumerated values
-     * @return the current DateSchema instance
-     */
-    DateSchema addEnumerationItem(Date enumerationItem);
-
 }

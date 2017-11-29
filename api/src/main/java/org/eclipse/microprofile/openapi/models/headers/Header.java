@@ -34,6 +34,7 @@ import org.eclipse.microprofile.openapi.models.media.Schema;
  * 
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#header-object">OpenAPI Specification Header Object</a>
  */
+@SuppressWarnings("rawtypes")
 public interface Header extends Constructible, Extensible, Reference<Header> {
 
     /**
@@ -237,10 +238,10 @@ public interface Header extends Constructible, Extensible, Reference<Header> {
      * specified in the parameter encoding.
      *
      * @param key string to represent the example
-     * @param examplesItem example of the media type
+     * @param example example of the media type
      * @return the current Header instance
      */
-    Header addExample(String key, Example examplesItem);
+    Header addExample(String key, Example example);
 
     /**
      * Returns the example property from a Header instance.
