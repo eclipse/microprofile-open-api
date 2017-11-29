@@ -98,6 +98,10 @@ public class UserResource {
                 schema = @Schema(
                     name = "testUser",
                     type = "object",
+                    maxProperties = 1024,
+                    minProperties = 1,
+                    requiredProperties = { "id", "username", "password" },
+                    required = true, 
                     implementation = User.class),
                 examples = @ExampleObject(
                     name = "user",
@@ -248,6 +252,8 @@ public class UserResource {
                 array = @ArraySchema(
                     schema = @Schema(
                         type = "object",
+                        nullable = true,
+                        writeOnly = true,
                         implementation = User.class
                     ),
                     minItems = 2

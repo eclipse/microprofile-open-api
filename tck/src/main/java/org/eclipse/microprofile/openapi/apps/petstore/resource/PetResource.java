@@ -37,6 +37,9 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.apps.petstore.data.PetData;
 import org.eclipse.microprofile.openapi.apps.petstore.model.Pet;
 import org.eclipse.microprofile.openapi.apps.petstore.model.ApiResponse;
+import org.eclipse.microprofile.openapi.apps.petstore.model.Cat;
+import org.eclipse.microprofile.openapi.apps.petstore.model.Dog;
+import org.eclipse.microprofile.openapi.apps.petstore.model.Lizard;
 import org.eclipse.microprofile.openapi.apps.petstore.exception.NotFoundException;
 
 import java.io.*;
@@ -137,7 +140,9 @@ public class PetResource {
                         responseCode = "200",
                         content = @Content(
                             mediaType = "application/json",
-                            schema = @Schema(type = "array", implementation = Pet.class))
+                            schema = @Schema(type = "array", implementation = Pet.class, 
+                              oneOf = { Cat.class, Dog.class, Lizard.class }, 
+                              readOnly = true))
                     )
             }
     )
@@ -148,8 +153,11 @@ public class PetResource {
             required = true,
             schema = @Schema(
                 implementation = Long.class,
-                maximum = "10",
-                minimum = "1"))
+                maximum = "101",
+                exclusiveMaximum = true,
+                minimum = "9",
+                exclusiveMinimum = true, 
+                multipleOf = 10))
         @PathParam("petId") Long petId)
     throws NotFoundException {
         Pet pet = petData.getPetById(petId);
@@ -234,7 +242,8 @@ public class PetResource {
         @Parameter(
             name = "apiKey",
             description = "authentication key to access this method",
-            schema = @Schema(type = "String", implementation = String.class))
+            schema = @Schema(type = "String", implementation = String.class,
+              maxLength = 256, minLength = 32))
         @HeaderParam("api_key") String apiKey,
         @Parameter(
             name = "petId",
@@ -407,7 +416,9 @@ public class PetResource {
             name = "tags",
             description = "Tags to filter by",
             required = true,
-            deprecated = true)
+            deprecated = true,
+            schema = @Schema(implementation = String.class, deprecated = true,
+              enumeration = { "Cat", "Dog", "Lizard" }, defaultValue = "Dog" ))
         @QueryParam("tags") String tags) {
             return Response.ok(petData.findPetByTags(tags)).build();
         }

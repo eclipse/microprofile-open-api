@@ -15,6 +15,7 @@ package org.eclipse.microprofile.openapi.apps.petstore.resource;
 
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.DiscriminatorMapping;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
@@ -25,7 +26,9 @@ import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirements;
 
 import org.eclipse.microprofile.openapi.apps.petstore.data.StoreData;
+import org.eclipse.microprofile.openapi.apps.petstore.model.BadOrder;
 import org.eclipse.microprofile.openapi.apps.petstore.model.Order;
+import org.eclipse.microprofile.openapi.apps.petstore.model.Pet;
 import org.eclipse.microprofile.openapi.apps.petstore.exception.NotFoundException;
 import org.eclipse.microprofile.openapi.apps.petstore.data.PetData;
 
@@ -100,21 +103,27 @@ public class PetStoreResource {
                 responseCode = "200", 
                 description = "successful operation",
                 content = @Content(
-                    schema = @Schema(implementation = Order.class)
+                    schema = @Schema(implementation = Order.class, 
+                      allOf = { Order.class, Pet.class},
+                      not = BadOrder.class )
                 )
             ),
             @APIResponse(
                 responseCode = "400", 
                 description = "Invalid ID supplied",
                 content = @Content(
-                    schema = @Schema(implementation = Order.class)
+                    schema = @Schema(implementation = Order.class,
+                      hidden = true)
                 )
             ),
             @APIResponse(
                 responseCode = "404", 
                 description = "Order not found",
                 content = @Content(
-                    schema = @Schema(implementation = Order.class)
+                    schema = @Schema(implementation = Order.class, 
+                      anyOf = { Order.class, BadOrder.class},
+                      discriminatorProperty = "id", 
+                      discriminatorMapping = @DiscriminatorMapping(value = "0", schema = BadOrder.class) )
                 )
             )
         }
