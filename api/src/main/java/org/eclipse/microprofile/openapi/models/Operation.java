@@ -36,6 +36,7 @@ import org.eclipse.microprofile.openapi.models.servers.Server;
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#operationObject">OpenAPI Specification Operation
  *      Object</a>
  */
+@SuppressWarnings("rawtypes")
 public interface Operation extends Constructible, Extensible {
 
     /**
@@ -63,10 +64,10 @@ public interface Operation extends Constructible, Extensible {
     /**
      * Adds the given tag to this Operation's list of tags.
      *
-     * @param tagsItem a tag for API documentation control
+     * @param tag a tag for API documentation control
      * @return the current Operation object
      **/
-    Operation addTagsItem(String tagsItem);
+    Operation addTag(String tag);
 
     /**
      * Returns the summary property from an Operation instance.
@@ -181,10 +182,10 @@ public interface Operation extends Constructible, Extensible {
     /**
      * Adds the given parameter item to this Operation's list of parameters.
      *
-     * @param parametersItem a parameter that is applicable for this operation
+     * @param parameter a parameter that is applicable for this operation
      * @return the current Operation object
      **/
-    Operation addParametersItem(Parameter parametersItem);
+    Operation addParameter(Parameter parameter);
 
     /**
      * Returns the requestBody property from an Operation instance.
@@ -299,10 +300,10 @@ public interface Operation extends Constructible, Extensible {
     /**
      * Adds the given security requirement item to this Operation's list of security mechanisms.
      *
-     * @param securityItem security mechanism which can be used for this operation
+     * @param securityRequirement security mechanism which can be used for this operation
      * @return the current Operation object
      **/
-    Operation addSecurityItem(SecurityRequirement securityItem);
+    Operation addSecurityRequirement(SecurityRequirement securityRequirement);
 
     /**
      * Returns the servers property from an Operation instance.
@@ -329,9 +330,9 @@ public interface Operation extends Constructible, Extensible {
     /**
      * Adds the given server to this Operation's list of servers.
      *
-     * @param serversItem server which can service this operation
+     * @param server server which can service this operation
      * @return the current Operation object
      **/
-    Operation addServersItem(Server serversItem);
+    Operation addServer(Server server);
 
 }
