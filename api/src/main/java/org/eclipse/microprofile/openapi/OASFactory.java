@@ -31,8 +31,6 @@ public final class OASFactory {
     
     private OASFactory() {}
 
-    private static final OASFactoryResolver INSTANCE = OASFactoryResolver.instance();
-
     /**
      * This method creates a new instance of a constructible element from the OpenAPI model tree.
      *
@@ -48,7 +46,7 @@ public final class OASFactory {
      * @throws IllegalArgumentException if an instance could not be created, most likely, due to an illegal or inappropriate class
      */
     public static <T extends Constructible> T createObject(Class<T> clazz) {
-        return INSTANCE.createObject(clazz);
+        return OASFactoryResolver.instance().createObject(clazz);
     }
 
 }
