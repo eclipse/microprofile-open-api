@@ -24,7 +24,6 @@ import org.eclipse.microprofile.openapi.annotations.headers.Header;
 import org.eclipse.microprofile.openapi.annotations.links.Link;
 import org.eclipse.microprofile.openapi.annotations.links.LinkParameter;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
-import org.eclipse.microprofile.openapi.annotations.media.ArraySchema;
 import org.eclipse.microprofile.openapi.annotations.media.ExampleObject;
 import org.eclipse.microprofile.openapi.annotations.media.Encoding;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
@@ -240,7 +239,10 @@ public class UserResource {
                     mediaType = "application/json",
                     schema = @Schema(
                         type = "array",
-                        implementation = User.class
+                        implementation = User.class,
+                        nullable = true,
+                        writeOnly = true,
+                        minItems = 2
                     ),
                     encoding = @Encoding(
                         name = "firstName",
@@ -249,15 +251,6 @@ public class UserResource {
                         allowReserved = true,
                         explode = true
                     )
-                ),
-                array = @ArraySchema(
-                    schema = @Schema(
-                        type = "object",
-                        nullable = true,
-                        writeOnly = true,
-                        implementation = User.class
-                    ),
-                    minItems = 2
                 )
             )
         },
