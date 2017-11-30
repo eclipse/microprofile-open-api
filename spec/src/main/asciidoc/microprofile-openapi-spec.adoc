@@ -341,6 +341,14 @@ are required to process these different sources in the following order:
 4. Process annotations
 5. Filter model via OASFilter
 
+==== Validation
+
+The MP OpenAPI 1.0 specification does not mandate vendors to validate the resulting
+OpenAPI v3 model (after processing the 5 steps previously mentioned), which means
+that the behavior of invalid models is vendor specific (i.e. vendors may choose to
+ignore, reject, or pass-through invalid inputs).   
+
+
 **Example processing**:
 
 * A vendor starts by fetching all available <<Configuration>>.  If
