@@ -81,7 +81,7 @@ import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
 public @interface Tag {
 
     /**
-     * The name of this tag. This is a REQUIRED property unless this is only a reference to a tag instance.
+     * The name of this tag. It is a REQUIRED property unless this is only a reference to a tag instance.
      *
      * @return the name of this tag
      */

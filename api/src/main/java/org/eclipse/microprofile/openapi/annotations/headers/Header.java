@@ -34,7 +34,7 @@ public @interface Header {
     /**
      * The name of the header. The name is only used as the key to add this header to a map.
      * <p>
-     * This is a REQUIRED property unless this is only a reference to a header instance.
+     * It is a REQUIRED property unless this is only a reference to a header instance.
      * </p>
      * When the header is defined within {@link org.eclipse.microprofile.openapi.annotations.Components}, 
      * the name will be used as the key to add this header to the 'headers' map for reuse.

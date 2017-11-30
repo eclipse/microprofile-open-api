@@ -39,7 +39,7 @@ public @interface SecurityScheme {
     /**
      * The name of this SecurityScheme. Used as the key to add this security scheme to the 'securitySchemes' map under Components object.
      * <p>
-     * This is a REQUIRED property unless this is only a reference to a security scheme instance.
+     * It is a REQUIRED property unless this is only a reference to a security scheme instance.
      * </p>
      * @return the name of this SecurityScheme instance
      **/

@@ -43,7 +43,7 @@ public @interface RequestBody {
     String description() default "";
 
     /**
-     * The content of the request body. This is a REQUIRED property unless this is only a reference to a request body instance.
+     * The content of the request body. It is a REQUIRED property unless this is only a reference to a request body instance.
      * 
      * @return content of this requestBody instance
      **/

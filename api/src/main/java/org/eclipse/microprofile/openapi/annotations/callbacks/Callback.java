@@ -35,7 +35,7 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 @Inherited
 public @interface Callback {
     /**
-     * The friendly name used to refer to this callback. This is a REQUIRED property unless this is only a reference to a callback.
+     * The friendly name used to refer to this callback. It is a REQUIRED property unless this is only a reference to a callback.
      * <p>
      * The name is REQUIRED when the callback is defined within {@link org.eclipse.microprofile.openapi.annotations.Components}. The 
      * name will be used as the key to add this callback to the 'callbacks' map for reuse.
@@ -48,7 +48,7 @@ public @interface Callback {
     /**
      * An absolute URL which defines the destination which will be called with the supplied operation definition.
      * <p>
-     * This is a REQUIRED property unless this is only a reference to a callback instance.
+     * It is a REQUIRED property unless this is only a reference to a callback instance.
      * </p>
      * 
      * @return the callback URL

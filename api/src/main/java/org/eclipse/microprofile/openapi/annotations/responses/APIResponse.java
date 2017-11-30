@@ -53,7 +53,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
 @Repeatable(APIResponses.class)
 public @interface APIResponse {
     /**
-     * A short description of the response. This is a REQUIRED property unless this is only a reference to a response instance.
+     * A short description of the response. It is a REQUIRED property unless this is only a reference to a response instance.
      * 
      * @return description of the response.
      **/
