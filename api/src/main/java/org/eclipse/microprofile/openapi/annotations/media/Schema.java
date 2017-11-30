@@ -323,4 +323,38 @@ public @interface Schema {
      * @return whether or not this schema is hidden
      */
     boolean hidden() default false;
+    
+    /**
+     * Only applicable if type=array.  Sets the maximum number of items in an array.
+     * This integer MUST be greater than, or equal to, 0.
+     * <p>
+     * An array instance is valid against "maxItems" if its size is less than, or equal to, the value of this keyword.
+     * </p> 
+     * Ignored if value is Integer.MIN_VALUE.
+     * 
+     * @return the maximum number of items in this array
+     **/
+    int maxItems() default Integer.MIN_VALUE;
+
+    /**
+     * Only applicable if type=array.  Sets the minimum number of items in an array.
+     * This integer MUST be greater than, or equal to, 0. 
+     * <p>
+     * An array instance is valid against "minItems" if its size is greater than, or equal to, the value of this keyword.
+     * </p>
+     * Ignored if value is Integer.MAX_VALUE.
+     * 
+     * @return the minimum number of items in this array
+     **/
+    int minItems() default Integer.MAX_VALUE;
+
+    /**
+     * Only applicable if type=array.  Determines if the items in the array SHOULD be unique.
+     * <p>
+     * If false, the instance validates successfully.
+     * If true, the instance validates successfully if all of its elements are unique.
+     * </p>
+     * @return whether the items in this array are unique
+     **/
+    boolean uniqueItems() default false;
 }

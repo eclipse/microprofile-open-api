@@ -27,7 +27,6 @@ import java.lang.annotation.Target;
 import org.eclipse.microprofile.openapi.annotations.enums.Explode;
 import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
 import org.eclipse.microprofile.openapi.annotations.enums.ParameterStyle;
-import org.eclipse.microprofile.openapi.annotations.media.ArraySchema;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
@@ -143,14 +142,6 @@ public @interface Parameter {
      * @return the schema of this parameter
      **/
     Schema schema() default @Schema();
-
-    /**
-     * The schema of the individual array values that defines this parameter. 
-     * Ignored if the property content is specified.
-     * 
-     * @return the schema of the individual array values
-     */
-    ArraySchema array() default @ArraySchema();
 
     /**
      * The representation of this parameter, for different media types.
