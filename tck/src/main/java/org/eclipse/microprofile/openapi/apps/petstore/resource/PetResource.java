@@ -16,6 +16,14 @@ package org.eclipse.microprofile.openapi.apps.petstore.resource;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
+import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeIn;
+import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
+import org.eclipse.microprofile.openapi.annotations.security.SecuritySchemes;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
+import org.eclipse.microprofile.openapi.annotations.security.OAuthFlow;
+import org.eclipse.microprofile.openapi.annotations.security.OAuthFlows;
+import org.eclipse.microprofile.openapi.annotations.security.OAuthScope;
 import org.eclipse.microprofile.openapi.annotations.callbacks.Callback;
 import org.eclipse.microprofile.openapi.annotations.info.Info;
 import org.eclipse.microprofile.openapi.annotations.info.License;
@@ -50,8 +58,8 @@ import javax.ws.rs.Consumes;
 
 @Path("/pet")
 @Schema(
-        name = "/pet",
-        description = "Operations about pets")
+        name = "pet",
+        description = "Operations on pets resource")
 @OpenAPIDefinition(
     info = @Info(
         title = "Pets Operations",
@@ -61,10 +69,46 @@ import javax.ws.rs.Consumes;
             name = "Apache 2.0",
             url = "http://www.apache.org/licenses/LICENSE-2.0.html"),
         contact = @Contact(
-            name = "",
-            url = "",
-            email = "")
+            name = "PetStore API Support",
+            url = "https://github.com/eclipse/microprofile-open-api",
+            email = "support@petstore.com")
     )
+)
+@SecuritySchemes(
+    value = {
+        @SecurityScheme(
+            securitySchemeName = "petsApiKey",
+            type = SecuritySchemeType.APIKEY,
+            description = "authentication needed to create a new pet profile for the store",
+            apiKeyName = "createPetProfile",
+            in = SecuritySchemeIn.HEADER
+        ),
+        @SecurityScheme(
+            securitySchemeName = "petsOAuth2",
+            type = SecuritySchemeType.OAUTH2,
+            description = "authentication needed to delete a pet profile", 
+            flows = @OAuthFlows(
+                implicit = @OAuthFlow(
+                    authorizationUrl = "https://example.com/api/oauth/dialog",
+                    scopes = @OAuthScope(
+                        name = "write:pets",
+                        description = "delete a pet profile"
+                    )
+                ),
+                authorizationCode = @OAuthFlow(
+                    authorizationUrl = "https://example.com/api/oauth/dialog",
+                    tokenUrl = "https://example.com/api/oauth/token"
+                )
+            )
+        ),
+        @SecurityScheme(
+            securitySchemeName = "petsHttp",
+            type = SecuritySchemeType.HTTP,
+            description = "authentication needed to update an exsiting record of a pet in the store",
+            scheme = "bearer",
+            bearerFormat = "jwt"
+        )    
+    }
 )
 public class PetResource {
 
@@ -171,6 +215,10 @@ public class PetResource {
         method = "DELETE",
         summary = "Deletes a pet by ID",
         description = "Returns a pet when ID is less than or equal to 10",
+        security = @SecurityRequirement(
+            name = "petsOAuth2",
+            scopes = "write:pets"
+        ),
         responses = {
             @APIResponse(
                 responseCode = "400",
@@ -206,12 +254,15 @@ public class PetResource {
         }
 
     @POST
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Consumes({"application/json", "application/xml"})
+    @Produces({"application/json", "application/xml"})
     @Operation(
         method = "POST",
         summary = "Add pet to store",
         description = "Add a new pet to the store",
+        security = @SecurityRequirement(
+            name = "petsApiKey"
+        ),
         responses = {
             @APIResponse(
                 responseCode = "400",
@@ -240,11 +291,14 @@ public class PetResource {
             }
 
     @PUT
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Consumes({"application/json", "application/xml"})
     @Operation(
         method = "PUT",
         summary = "Update an existing pet",
         description = "Update an existing pet with the given new attributes",
+        security = @SecurityRequirement(
+            name = "petsHttp"
+        ),
         responses = {
             @APIResponse(
                 responseCode = "400",

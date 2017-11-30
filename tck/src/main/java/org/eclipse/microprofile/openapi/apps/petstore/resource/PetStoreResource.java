@@ -18,6 +18,11 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
+import org.eclipse.microprofile.openapi.annotations.security.SecuritySchemes;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirements;
 
 import org.eclipse.microprofile.openapi.apps.petstore.data.StoreData;
 import org.eclipse.microprofile.openapi.apps.petstore.model.Order;
@@ -35,6 +40,33 @@ import javax.ws.rs.Produces;
 @Path("/store")
 @Schema(name="/store")
 @Produces({"application/json", "application/xml"})
+@SecuritySchemes(
+    value = {
+        @SecurityScheme(
+            securitySchemeName = "storeOpenIdConnect",
+            type = SecuritySchemeType.OPENIDCONNECT,
+            description = "openId Connect authentication to access the pet store resource",
+            openIdConnectUrl = "https://petstoreauth.com:4433/oidc/petstore/oidcprovider/authorize"
+        ),
+        @SecurityScheme(
+            securitySchemeName = "storeHttp",
+            type = SecuritySchemeType.HTTP,
+            description = "Basic http authentication to access the pet store resource",
+            scheme = "basic"
+        )
+    }
+)
+@SecurityRequirements(
+    value = {
+        @SecurityRequirement(
+            name  = "storeOpenIdConnect",
+            scopes = {"write:store", "read:store"}
+        ),
+        @SecurityRequirement(
+            name = "storeHttp"
+        )
+    }
+)
 public class PetStoreResource {
     static StoreData storeData = new StoreData();
     static PetData petData = new PetData();

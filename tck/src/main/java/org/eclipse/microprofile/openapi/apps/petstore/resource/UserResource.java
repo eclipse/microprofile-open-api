@@ -18,6 +18,13 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeIn;
+import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
+import org.eclipse.microprofile.openapi.annotations.security.SecuritySchemes;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirements;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirementsSet;
 
 import org.eclipse.microprofile.openapi.apps.petstore.data.UserData;
 import org.eclipse.microprofile.openapi.apps.petstore.model.User;
@@ -37,6 +44,32 @@ import javax.ws.rs.Produces;
 @Path("/user")
 @Schema(name = "/user")
 @Produces({"application/json", "application/xml"})
+@SecuritySchemes(
+    value = {
+        @SecurityScheme(
+            securitySchemeName = "userApiKey",
+            type = SecuritySchemeType.APIKEY,
+            description = "authentication needed to create a new user profile for the store",
+            apiKeyName = "createOrUpdateUserProfile1",
+            in = SecuritySchemeIn.HEADER
+        ),
+        @SecurityScheme(
+            securitySchemeName = "userBasicHttp",
+            type = SecuritySchemeType.HTTP,
+            description = "authentication needed to create a new user profile for the store",
+            apiKeyName = "createOrUpdateUserProfile2",
+            scheme = "basic"
+        ),
+        @SecurityScheme(
+            securitySchemeName = "userBearerHttp",
+            type = SecuritySchemeType.HTTP,
+            description = "authentication needed to create a new user profile for the store",
+            apiKeyName = "createOrUpdateUserProfile3",
+            scheme = "bearer",
+            bearerFormat = "JWT"
+        )
+    }
+)
 public class UserResource {
     static UserData userData = new UserData();
 
@@ -48,6 +81,19 @@ public class UserResource {
         responses = {
             @APIResponse(
                 description = "successful operation"
+            )
+        }
+    )
+    @SecurityRequirements(
+        value = {
+            @SecurityRequirement(
+                name = "userApiKey"
+            ),
+            @SecurityRequirement(
+                name = "userBasicHttp"
+            ),
+            @SecurityRequirement(
+                name = "userBearerHttp"
             )
         }
     )
@@ -118,6 +164,16 @@ public class UserResource {
             @APIResponse(
                 responseCode = "404",
                 description = "User not found"
+            )
+        }
+    )
+    @SecurityRequirementsSet(
+        value = {
+            @SecurityRequirement(
+                name = "userApiKey"
+            ),
+            @SecurityRequirement(
+                name = "userBearerHttp"
             )
         }
     )
