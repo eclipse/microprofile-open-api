@@ -33,7 +33,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 @Inherited
 public @interface OpenAPIDefinition {
     /**
-     * Provides metadata about the API. The metadata MAY be used by tooling as required.
+     * Required: Provides metadata about the API. The metadata MAY be used by tooling as required.
      *
      * @return the metadata about this API
      */

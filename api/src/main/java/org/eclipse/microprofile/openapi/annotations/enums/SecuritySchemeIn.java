@@ -18,7 +18,7 @@
 package org.eclipse.microprofile.openapi.annotations.enums;
 
 public enum SecuritySchemeIn {
-    HEADER("header"), QUERY("query"), COOKIE("cookie");
+    DEFAULT(""), HEADER("header"), QUERY("query"), COOKIE("cookie");
 
     private String value;
 

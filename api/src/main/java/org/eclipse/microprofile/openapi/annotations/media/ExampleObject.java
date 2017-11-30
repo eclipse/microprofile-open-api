@@ -31,6 +31,10 @@ import java.lang.annotation.Target;
 public @interface ExampleObject {
     /**
      * A unique name to identify this particular example in a map.
+     * <p>
+     * The name is REQUIRED when the example is defined within {@link org.eclipse.microprofile.openapi.annotations.Components}. The 
+     * name will be used as the key to add this example to the 'examples' map for reuse.
+     * </p>
      * 
      * @return the name of this example
      **/
