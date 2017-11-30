@@ -100,7 +100,7 @@ public class UserResource {
     public Response createUser(
         @Parameter(
             description = "Created user object",
-            schema = @Schema(implementation = User.class),
+            schema = @Schema(ref = "#/components/schemas/User"),
             required = true
             ) User user) {
                 userData.addUser(user);
@@ -280,9 +280,9 @@ public class UserResource {
             @APIResponse(
                 responseCode = "200",
                 description = "successful operation",
-                    content = @Content(
-                        schema = @Schema(implementation = String.class)
-                    )
+                content = @Content(
+                    schema = @Schema(implementation = String.class)
+                )
             ),
             @APIResponse(
                 responseCode = "400",

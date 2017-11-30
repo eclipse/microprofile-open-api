@@ -25,6 +25,8 @@ import org.eclipse.microprofile.openapi.annotations.security.OAuthFlow;
 import org.eclipse.microprofile.openapi.annotations.security.OAuthFlows;
 import org.eclipse.microprofile.openapi.annotations.security.OAuthScope;
 import org.eclipse.microprofile.openapi.annotations.callbacks.Callback;
+import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
+import org.eclipse.microprofile.openapi.annotations.extensions.Extensions;
 import org.eclipse.microprofile.openapi.annotations.info.Info;
 import org.eclipse.microprofile.openapi.annotations.info.License;
 import org.eclipse.microprofile.openapi.annotations.info.Contact;
@@ -37,6 +39,9 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.apps.petstore.data.PetData;
 import org.eclipse.microprofile.openapi.apps.petstore.model.Pet;
 import org.eclipse.microprofile.openapi.apps.petstore.model.ApiResponse;
+import org.eclipse.microprofile.openapi.apps.petstore.model.Cat;
+import org.eclipse.microprofile.openapi.apps.petstore.model.Dog;
+import org.eclipse.microprofile.openapi.apps.petstore.model.Lizard;
 import org.eclipse.microprofile.openapi.apps.petstore.exception.NotFoundException;
 
 import java.io.*;
@@ -137,7 +142,9 @@ public class PetResource {
                         responseCode = "200",
                         content = @Content(
                             mediaType = "application/json",
-                            schema = @Schema(type = "array", implementation = Pet.class))
+                            schema = @Schema(type = "array", implementation = Pet.class, 
+                              oneOf = { Cat.class, Dog.class, Lizard.class }, 
+                              readOnly = true))
                     )
             }
     )
@@ -148,8 +155,11 @@ public class PetResource {
             required = true,
             schema = @Schema(
                 implementation = Long.class,
-                maximum = "10",
-                minimum = "1"))
+                maximum = "101",
+                exclusiveMaximum = true,
+                minimum = "9",
+                exclusiveMinimum = true, 
+                multipleOf = 10))
         @PathParam("petId") Long petId)
     throws NotFoundException {
         Pet pet = petData.getPetById(petId);
@@ -234,7 +244,8 @@ public class PetResource {
         @Parameter(
             name = "apiKey",
             description = "authentication key to access this method",
-            schema = @Schema(type = "String", implementation = String.class))
+            schema = @Schema(type = "String", implementation = String.class,
+              maxLength = 256, minLength = 32))
         @HeaderParam("api_key") String apiKey,
         @Parameter(
             name = "petId",
@@ -275,7 +286,8 @@ public class PetResource {
         requestBody = @RequestBody(
             content = @Content(
                 mediaType = "application/json",
-                schema = @Schema(implementation = Pet.class)),
+                schema = @Schema(implementation = Pet.class), 
+                examples = @ExampleObject(ref = "http://example.org/petapi-examples/openapi.json#/components/examples/pet-example") ),
             required = true,
             description = "example of a new pet to add"
         )
@@ -347,6 +359,8 @@ public class PetResource {
                 )
         }
     )
+    @Extension(name = "x-mp-method1", value = "true")
+    @Extensions( { @Extension(name = "x-mp-method2", value = "true"), @Extension(value = "false", name = "x-mp-method3") } )
     public Response findPetsByStatus(
         @Parameter(
             name = "status",
@@ -371,7 +385,10 @@ public class PetResource {
                     }
                 )
             },
-            allowEmptyValue = true) String status) {
+            allowEmptyValue = true)
+        @Extension(name = "x-mp-parm1", value = "true")
+        @Extensions( { @Extension(name = "x-mp-parm2", value = "true"), @Extension(value = "false", name = "x-mp-parm3") } )
+        String status) {
                 return Response.ok(petData.findPetByStatus(status)).build();
             }
 
@@ -407,7 +424,9 @@ public class PetResource {
             name = "tags",
             description = "Tags to filter by",
             required = true,
-            deprecated = true)
+            deprecated = true,
+            schema = @Schema(implementation = String.class, deprecated = true,
+              enumeration = { "Cat", "Dog", "Lizard" }, defaultValue = "Dog" ))
         @QueryParam("tags") String tags) {
             return Response.ok(petData.findPetByTags(tags)).build();
         }
