@@ -130,7 +130,7 @@ public interface APIResponse extends Constructible, Extensible, Reference<APIRes
     Map<String, Link> getLinks();
 
     /**
-     * Sets the operations links that can be followed from tis instance of ApiResponse.
+     * Sets the operations links that can be followed from this instance of ApiResponse.
      *
      * @param links the operation links followed from the response
      */
@@ -138,13 +138,21 @@ public interface APIResponse extends Constructible, Extensible, Reference<APIRes
     void setLinks(Map<String, Link> links);
 
     /**
-     * Sets the operations links for this instance of ApiResponse using the given name and Link, and returns this ApiResponse instance.
+     * Sets the operations links that can be followed from this instance of ApiResponse.
+     *
+     * @param links the operation links followed from the response
+     */
+
+    APIResponse links(Map<String, Link> links);
+
+    /**
+     * Adds a link to this instance of ApiResponse using the given name and Link, and returns this ApiResponse instance.
      *
      * @param name the short name of the link
      * @param link the operation link that can be followed from the response
      * @return this ApiResponse instance
      */
 
-    APIResponse link(String name, Link link);
+    APIResponse addLink(String name, Link link);
 
 }
