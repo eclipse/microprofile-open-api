@@ -54,13 +54,13 @@ public interface Parameter<T extends Parameter<T>> extends Extensible, Reference
     /**
      * The values allowed for the style field.
      */
-    enum StyleEnum {
+    enum Style {
         MATRIX("matrix"), LABEL("label"), FORM("form"), SIMPLE("simple"), SPACEDELIMITED("spaceDelimited"), PIPEDELIMITED(
                 "pipeDelimited"), DEEPOBJECT("deepObject");
 
         private final String value;
 
-        StyleEnum(String value) {
+        Style(String value) {
             this.value = value;
         }
 
@@ -209,14 +209,14 @@ public interface Parameter<T extends Parameter<T>> extends Extensible, Reference
      *
      * @return describes how the parameter value will be serialized
      **/
-    Parameter.StyleEnum getStyle();
+    Parameter.Style getStyle();
 
     /**
      * Sets the style property of a Parameter instance to the given value.
      *
      * @param style describes how the parameter value will be serialized
      */
-    void setStyle(Parameter.StyleEnum style);
+    void setStyle(Parameter.Style style);
 
     /**
      * Sets the style property of a Parameter instance to the given value.
@@ -224,7 +224,7 @@ public interface Parameter<T extends Parameter<T>> extends Extensible, Reference
      * @param style describes how the parameter value will be serialized
      * @return the current Parameter instance
      */
-    T style(Parameter.StyleEnum style);
+    T style(Parameter.Style style);
 
     /**
      * Returns the explode property from a Parameter instance.

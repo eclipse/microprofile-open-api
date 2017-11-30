@@ -30,12 +30,12 @@ import org.eclipse.microprofile.openapi.models.headers.Header;
  */
 public interface Encoding extends Constructible, Extensible {
 
-    enum StyleEnum {
+    enum Style {
         FORM("form"), SPACE_DELIMITED("spaceDelimited"), PIPE_DELIMITED("pipeDelimited"), DEEP_OBJECT("deepObject");
 
         private String value;
 
-        StyleEnum(String value) {
+        Style(String value) {
             this.value = value;
         }
 

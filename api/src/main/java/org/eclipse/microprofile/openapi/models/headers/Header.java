@@ -40,12 +40,12 @@ public interface Header extends Constructible, Extensible, Reference<Header> {
     /**
      * Controls the style of serialization. Only one style is supported for headers.
      */
-    public enum StyleEnum {
+    public enum Style {
         SIMPLE("simple");
 
         private final String value;
 
-        StyleEnum(String value) {
+        Style(String value) {
             this.value = value;
         }
 
@@ -148,14 +148,14 @@ public interface Header extends Constructible, Extensible, Reference<Header> {
      *
      * @return how the parameter value will be serialized
      **/
-    StyleEnum getStyle();
+    Style getStyle();
 
     /**
      * Sets this Header's style property to the given style.
      *
      * @param style how the parameter value will be serialized
      */
-    void setStyle(StyleEnum style);
+    void setStyle(Style style);
 
     /**
      * Sets this Header's style property to the given style.
@@ -163,7 +163,7 @@ public interface Header extends Constructible, Extensible, Reference<Header> {
      * @param style how the parameter value will be serialized
      * @return the current Header instance
      */
-    Header style(StyleEnum style);
+    Header style(Style style);
 
     /**
      * Returns the explode property from a Header instance.
