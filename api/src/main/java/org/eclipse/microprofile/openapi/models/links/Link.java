@@ -146,6 +146,13 @@ public interface Link extends Constructible, Extensible, Reference<Link> {
     void setParameters(Map<String, Object> parameters);
 
     /**
+     * Sets this Link's parameters property to the given map and returns the modified Link instance.
+     *
+     * @param parameters a map representing parameters to pass to this link's operation as specified with operationId or identified via operationRef
+     */
+    Link parameters(Map<String, Object> parameters);
+
+    /**
      * Add a new parameter to the parameters property of this instance of Link.
      *
      * @param name The name of the parameter. Can be qualified using the parameter location [{in}.]{name} for operations that use the same parameter
@@ -153,7 +160,7 @@ public interface Link extends Constructible, Extensible, Reference<Link> {
      * @param parameter a constant or an expression to be evaluated at runtime and passed to the linked operation
      * @return the current Link instance
      */
-    Link parameters(String name, Object parameter);
+    Link addParameter(String name, Object parameter);
 
     /**
      * Returns the description property from a Link instance.

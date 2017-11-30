@@ -94,7 +94,7 @@ public interface APIResponse extends Constructible, Extensible, Reference<APIRes
      * @return this ApiResponse instance
      */
 
-    APIResponse addHeaderObject(String name, Header header);
+    APIResponse addHeader(String name, Header header);
 
     /**
      * Returns the map containing descriptions of potential response payload for this instance of ApiResponse.

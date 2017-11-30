@@ -57,12 +57,4 @@ public interface BinarySchema extends Schema<byte[]> {
      */
     BinarySchema enumeration(List<byte[]> enumeration);
 
-    /**
-     * Adds an item of the appropriate type to the enumerated list of values allowed.
-     *
-     * @param enumerationItem an object to add to the enumerated values
-     * @return the current BinarySchema instance
-     */
-    BinarySchema addEnumerationItem(byte[] enumerationItem);
-
 }

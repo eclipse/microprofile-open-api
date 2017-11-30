@@ -62,10 +62,10 @@ public interface ServerVariable extends Constructible, Extensible {
      * <p>
      * If the enumeration list is null, this method should create a new ArrayList and add the item.
      * </p>
-     * @param enumerationItem an item to be added to enum list
+     * @param enumeration an item to be added to enum list
      * @return ServerVariable instance with the added enum item.
      */
-    ServerVariable addEnumerationItem(String enumerationItem);
+    ServerVariable addEnumeration(String enumeration);
 
     /**
      * The default value to use for substitution, and to send, if an alternate value is not supplied. This value MUST be provided by the consumer and

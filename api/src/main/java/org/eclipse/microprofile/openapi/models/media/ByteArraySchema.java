@@ -57,12 +57,4 @@ public interface ByteArraySchema extends Schema<byte[]> {
      */
     ByteArraySchema enumeration(List<byte[]> enumeration);
 
-    /**
-     * Adds an item of the appropriate type to the enumerated list of values allowed.
-     *
-     * @param enumerationItem an object to add to the enumerated values
-     * @return the current ByteArraySchema instance
-     */
-    ByteArraySchema addEnumerationItem(byte[] enumerationItem);
-
 }

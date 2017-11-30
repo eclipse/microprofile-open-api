@@ -34,9 +34,9 @@ public interface Content extends Constructible, Map<String, MediaType> {
      * into or returned from an operation.
      *
      * @param name the name of a media type e.g. application/json.
-     * @param item an object that describes the content passed into or returned from an operation.
+     * @param mediaType an object that describes the content passed into or returned from an operation.
      * @return the current Content instance
      */
-    Content addMediaType(String name, MediaType item);
+    Content addMediaType(String name, MediaType mediaType);
 
 }

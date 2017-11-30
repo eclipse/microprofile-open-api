@@ -20,9 +20,7 @@ package org.eclipse.microprofile.openapi.models;
 import java.util.List;
 
 import org.eclipse.microprofile.openapi.models.info.Info;
-import org.eclipse.microprofile.openapi.models.media.Schema;
 import org.eclipse.microprofile.openapi.models.security.SecurityRequirement;
-import org.eclipse.microprofile.openapi.models.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.models.servers.Server;
 import org.eclipse.microprofile.openapi.models.tags.Tag;
 
@@ -33,6 +31,7 @@ import org.eclipse.microprofile.openapi.models.tags.Tag;
  * 
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#openapi-object">OpenAPI Specification OpenAPI Object</a>
  */
+@SuppressWarnings("rawtypes")
 public interface OpenAPI extends Constructible, Extensible {
 
     /**
@@ -126,10 +125,10 @@ public interface OpenAPI extends Constructible, Extensible {
     /**
      * Adds the given server to this OpenAPI instance's list of servers.
      *
-     * @param serversItem Server object which provides connectivity information to a target server
+     * @param server Server object which provides connectivity information to a target server
      * @return the current OpenAPI object
      */
-    OpenAPI addServersItem(Server serversItem);
+    OpenAPI addServer(Server server);
 
     /**
      * Returns the security property from an OpenAPI instance.
@@ -156,10 +155,10 @@ public interface OpenAPI extends Constructible, Extensible {
     /**
      * Adds the given security requirement to this OpenAPI instance's list of security requirements.
      *
-     * @param securityItem security mechanism which can be used across the API
+     * @param securityRequirement security mechanism which can be used across the API
      * @return the current OpenAPI object
      */
-    OpenAPI addSecurityItem(SecurityRequirement securityItem);
+    OpenAPI addSecurityRequirement(SecurityRequirement securityRequirement);
 
     /**
      * Returns the tags property from an OpenAPI instance.
@@ -187,10 +186,10 @@ public interface OpenAPI extends Constructible, Extensible {
     /**
      * Adds the given tag to this OpenAPI instance's list of tags.
      *
-     * @param tagsItem a tag used by the specification with additional metadata
+     * @param tag a tag used by the specification with additional metadata
      * @return the current OpenAPI object
      */
-    OpenAPI addTagsItem(Tag tagsItem);
+    OpenAPI addTag(Tag tag);
 
     /**
      * Returns the paths property from an OpenAPI instance.
@@ -245,22 +244,4 @@ public interface OpenAPI extends Constructible, Extensible {
      */
     OpenAPI components(Components components);
 
-    /**
-     * Adds the given schema to this OpenAPI instance's components property.
-     * 
-     * @param name the canonical name of the given schema
-     * @param schema a schema to add to the components property
-     * @return the current OpenAPI object
-     */
-    OpenAPI schema(String name, Schema schema);
-
-    /**
-     * Adds the given security scheme to this OpenAPI instance's components property. This convenience method is similar to
-     * Components.addSecuritySchemes.
-     * 
-     * @param name the canonical name of the given security scheme
-     * @param securityScheme a security scheme to add to the components property
-     * @return the current OpenAPI object
-     */
-    OpenAPI securityScheme(String name, SecurityScheme securityScheme);
 }

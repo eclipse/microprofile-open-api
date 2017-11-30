@@ -20,6 +20,7 @@ package org.eclipse.microprofile.openapi.models.media;
 /**
  * The schema used for the elements of an array. All elements must be the same type.
  */
+@SuppressWarnings("rawtypes")
 public interface ArraySchema extends Schema {
 
     /**

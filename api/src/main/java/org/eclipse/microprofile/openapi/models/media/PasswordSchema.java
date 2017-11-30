@@ -57,12 +57,4 @@ public interface PasswordSchema extends Schema<String> {
      */
     PasswordSchema enumeration(List<String> enumeration);
 
-    /**
-     * Adds an item of the appropriate type to the enumerated list of values allowed.
-     *
-     * @param enumerationItem an object to add to the enumerated values
-     * @return the current PasswordSchema instance
-     */
-    PasswordSchema addEnumerationItem(String enumerationItem);
-
 }
