@@ -16,6 +16,8 @@ package org.eclipse.microprofile.openapi.apps.airlines.resources;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
+import org.eclipse.microprofile.openapi.annotations.parameters.Parameters;
+import org.eclipse.microprofile.openapi.annotations.enums.ParameterStyle;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.callbacks.Callback;
@@ -139,9 +141,20 @@ public class BookingResource {
             bookings.put(currentId, task);
             return Response.status(Status.CREATED).entity("{\"id\":" + currentId++ + "}").build();
         }
-
+    
     @GET
     @Path("{id}")
+    @Parameters(
+        {
+            @Parameter(
+                        name = "id",
+                        description = "ID of the booking",
+                        required = true,
+                        in = ParameterIn.PATH,
+                        style = ParameterStyle.SIMPLE
+                    )
+            }
+            )
     @Produces("application/json")
     @Operation(
         method = "get",
@@ -160,11 +173,6 @@ public class BookingResource {
                 description="Booking not found")
         })
     public Response getBooking(
-        @Parameter(
-            name = "id",
-            description = "ID of the booking",
-            required = true,
-            in = ParameterIn.PATH)
         @PathParam("id") int id){
             Booking booking = bookings.get(id);
             if(booking!=null){
@@ -176,7 +184,6 @@ public class BookingResource {
         }
 
     @PUT
-    @Path("{id}")
     @Consumes("application/json")
     @Produces("text/plain")
     @Operation(
@@ -206,7 +213,6 @@ public class BookingResource {
         }
 
     @DELETE
-    @Path("{id}")
     @Operation(
         method = "delete",
         summary="Delete a booking with ID",

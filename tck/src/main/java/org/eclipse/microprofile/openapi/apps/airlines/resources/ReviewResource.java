@@ -32,6 +32,9 @@ import javax.ws.rs.core.Response.Status;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameters;
+
+import org.eclipse.microprofile.openapi.annotations.links.LinkParameter;
+import org.eclipse.microprofile.openapi.annotations.links.Link;
 import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import org.eclipse.microprofile.openapi.annotations.callbacks.Callback;
@@ -367,18 +370,32 @@ public class ReviewResource {
             })
         },
         security = @SecurityRequirement(
-            name = "reviewoauth2",
-            scopes = "write:reviews"),
+                     name = "reviewoauth2",
+                     scopes = "write:reviews"),
         responses={
-            @APIResponse(
-                responseCode="201",
-                description="review created",
-                content = @Content(
-                    schema=@Schema(
-                        name= "id",
-                        description = "id of the new review",
-                        type="string")))
-            },
+                    @APIResponse(
+                            responseCode="201",
+                            description="review created",
+                            content = @Content(
+                                    schema = @Schema(
+                                            name= "id",
+                                            description = "id of the new review",
+                                            type="string")),
+                            links = {
+                                    @Link(
+                                            name="Review",
+                                            description="get the review that was added",
+                                            operationId="getReviewById",
+                                            server = @Server(
+                                                    description = "endpoint for all the review related methods",
+                                                    url = "http://localhost:9080/airlines/reviews/"),
+                                                    parameters = @LinkParameter(
+                                                            name = "reviewId",
+                                                            expression = "$request.path.id")
+                                            )
+                            }
+                            )
+        },
         requestBody = @RequestBody(
             content = @Content(
                 mediaType = "application/json",
