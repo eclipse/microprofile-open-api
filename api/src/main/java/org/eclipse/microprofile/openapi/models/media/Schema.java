@@ -39,8 +39,27 @@ import org.eclipse.microprofile.openapi.models.Reference;
  * 
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#schemaObject">OpenAPI Specification Schema Object</a>
  */
-@SuppressWarnings("rawtypes")
-public interface Schema<T> extends Constructible, Extensible, Reference<Schema<T>> {
+public interface Schema extends Extensible, Constructible, Reference<Schema> {
+
+    
+    /**
+    * The values allowed for the in field.
+    */
+   enum SchemaType {
+       INTEGER("integer"), NUMBER("number"), BOOLEAN("boolean"), 
+       STRING("string"), OBJECT("object"), ARRAY("array");
+
+       private final String value;
+
+       SchemaType(String value) {
+           this.value = value;
+       }
+
+       @Override
+       public String toString() {
+           return String.valueOf(value);
+       }
+   }
 
     /**
      * Returns the discriminator property from this schema instance.
@@ -91,7 +110,7 @@ public interface Schema<T> extends Constructible, Extensible, Reference<Schema<T
      *
      * @return the default value object
      **/
-    T getDefaultValue();
+    Object getDefaultValue();
 
     /**
      * Set the default value property of this schema instance to the value given.
@@ -113,21 +132,23 @@ public interface Schema<T> extends Constructible, Extensible, Reference<Schema<T
      *
      * @return the list of values allowed for objects defined by this schema
      */
-    List<T> getEnumeration();
+    List<Object> getEnumeration();
 
     /**
      * Sets the enumerated list of values allowed for objects defined by this schema.
      *
      * @param enumeration a list of values allowed
      */
-    void setEnumeration(List<T> enumeration);
+    void setEnumeration(List<Object> enumeration);
+
+    Schema enumeration(List<Object> enumeration);
 
     /**
      * Adds an item of the appropriate type to the enumerated list of values allowed.
      *
      * @param enumeration an object to add to the enumerated values
      */
-    void addEnumeration(T enumeration);
+    Schema addEnumeration(Object enumeration);
 
     /**
      * Returns the multipleOf property from this schema instance.
@@ -462,24 +483,26 @@ public interface Schema<T> extends Constructible, Extensible, Reference<Schema<T
     /**
      * Returns the type property from this schema.
      *
-     * @return the name of the type used in this schema
+     * @return the type used in this schema. Default value <b>must</b> be <code>null</code>
      **/
-    String getType();
+    SchemaType getType();
 
     /**
      * Sets the type used by this schema to the string given.
      *
-     * @param type the name of the type used by this schema
+     * @param type the type used by this schema or <code>null</code> for
+     * reference schemas
      */
-    void setType(String type);
+    void setType(SchemaType type);
 
     /**
      * Sets the type used by this schema to the string given.
      *
-     * @param type the name of the type used by this schema
+     * @param type the type used by this schema or <code>null</code> for
+     * reference schemas
      * @return the current Schema instance
      */
-    Schema type(String type);
+    Schema type(SchemaType type);
 
     /**
      * Returns a schema which describes properties not allowed in objects defined by the current schema.
@@ -759,5 +782,118 @@ public interface Schema<T> extends Constructible, Extensible, Reference<Schema<T
      * @return the current Schema instance
      */
     Schema xml(XML xml);
+    
+    
+    /**
+     * Returns the schema used for all the elements of an ArraySchema instance (array).
+     *
+     * @return the schema used for all the elements
+     **/
+    Schema getItems();
+
+    /**
+     * Set the schema used for all the elements of an ArraySchema instance (array).
+     *
+     * @param items the schema used by this array
+     */
+    void setItems(Schema items);
+
+    /**
+     * Set the schema used for all the elements of an ArraySchema instance (array).
+     *
+     * @param items the schema used by this array
+     * @return the current ArraySchema instance
+     */
+    Schema items(Schema items);
+    
+    /**
+     * Returns the schemas used by the allOf property in a ComposedSchema instance.
+     *
+     * @return the list of schemas used by the allOf property
+     **/
+    List<Schema> getAllOf();
+
+    /**
+     * Sets the schemas used by the allOf property of this schema.
+     * 
+     * @param allOf the list of schemas used by the allOf property
+     */
+    void setAllOf(List<Schema> allOf);
+
+    /**
+     * Sets the schemas used by the allOf property of this schema.
+     * 
+     * @param allOf the list of schemas used by the allOf property
+     * @return the current ComposedSchema instance
+     */
+    Schema allOf(List<Schema> allOf);
+
+    /**
+     * Adds the given schema to this ComposedSchema's list of schemas used by the allOf property.
+     * 
+     * @param allOf a schema to use with the allOf property
+     * @return the current ComposedSchema instance
+     */
+    Schema addAllOf(Schema allOf);
+
+    /**
+     * Returns the schemas used by the anyOf property in a ComposedSchema instance.
+     *
+     * @return the list of schemas used by the anyOf property
+     **/
+    List<Schema> getAnyOf();
+
+    /**
+     * Sets the schemas used by the anyOf property of this schema.
+     * 
+     * @param anyOf the list of schemas used by the anyOf property
+     */
+    void setAnyOf(List<Schema> anyOf);
+
+    /**
+     * Sets the schemas used by the anyOf property of this schema.
+     * 
+     * @param anyOf the list of schemas used by the anyOf property
+     * @return the current ComposedSchema instance
+     */
+    Schema anyOf(List<Schema> anyOf);
+
+    /**
+     * Adds the given schema to this ComposedSchema's list of schemas used by the anyOf property.
+     * 
+     * @param anyOf a schema to use with the anyOf property
+     * @return the current ComposedSchema instance
+     */
+    Schema addAnyOf(Schema anyOf);
+
+    /**
+     * Returns the schemas used by the oneOf property in a ComposedSchema instance.
+     *
+     * @return the list of schemas used by the oneOf property
+     **/
+    List<Schema> getOneOf();
+
+    /**
+     * Sets the schemas used by the oneOf property of this schema.
+     * 
+     * @param oneOf the list of schemas used by the oneOf property
+     */
+    void setOneOf(List<Schema> oneOf);
+
+    /**
+     * Sets the schemas used by the oneOf property of this schema.
+     * 
+     * @param oneOf the list of schemas used by the oneOf property
+     * @return the current ComposedSchema instance
+     */
+    Schema oneOf(List<Schema> oneOf);
+
+    /**
+     * Adds the given schema to this ComposedSchema's list of schemas used by the oneOf property.
+     * 
+     * @param oneOf a schema to use with the oneOf property
+     * @return the current ComposedSchema instance
+     */
+    Schema addOneOf(Schema oneOf);
 
 }
