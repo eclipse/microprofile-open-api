@@ -21,7 +21,10 @@ import java.util.Map;
 import org.eclipse.microprofile.openapi.OASFactory;
 import org.eclipse.microprofile.openapi.models.Constructible;
 import org.eclipse.microprofile.openapi.models.info.License;
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -60,6 +63,12 @@ public class OASFactoryErrorTest {
         public License url(String url) {
             return null;
         }
+    }
+    
+    @Deployment
+    public static WebArchive createProxy() {
+        WebArchive war = ShrinkWrap.create(WebArchive.class);
+        return war;
     }
     
     @Test(expected = NullPointerException.class)

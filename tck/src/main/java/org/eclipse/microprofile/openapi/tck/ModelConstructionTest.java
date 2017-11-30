@@ -45,26 +45,11 @@ import org.eclipse.microprofile.openapi.models.info.Contact;
 import org.eclipse.microprofile.openapi.models.info.Info;
 import org.eclipse.microprofile.openapi.models.info.License;
 import org.eclipse.microprofile.openapi.models.links.Link;
-import org.eclipse.microprofile.openapi.models.media.ArraySchema;
-import org.eclipse.microprofile.openapi.models.media.BinarySchema;
-import org.eclipse.microprofile.openapi.models.media.BooleanSchema;
-import org.eclipse.microprofile.openapi.models.media.ByteArraySchema;
-import org.eclipse.microprofile.openapi.models.media.ComposedSchema;
 import org.eclipse.microprofile.openapi.models.media.Content;
-import org.eclipse.microprofile.openapi.models.media.DateSchema;
 import org.eclipse.microprofile.openapi.models.media.Discriminator;
-import org.eclipse.microprofile.openapi.models.media.EmailSchema;
 import org.eclipse.microprofile.openapi.models.media.Encoding;
-import org.eclipse.microprofile.openapi.models.media.FileSchema;
-import org.eclipse.microprofile.openapi.models.media.IntegerSchema;
-import org.eclipse.microprofile.openapi.models.media.MapSchema;
 import org.eclipse.microprofile.openapi.models.media.MediaType;
-import org.eclipse.microprofile.openapi.models.media.NumberSchema;
-import org.eclipse.microprofile.openapi.models.media.ObjectSchema;
-import org.eclipse.microprofile.openapi.models.media.PasswordSchema;
 import org.eclipse.microprofile.openapi.models.media.Schema;
-import org.eclipse.microprofile.openapi.models.media.StringSchema;
-import org.eclipse.microprofile.openapi.models.media.UUIDSchema;
 import org.eclipse.microprofile.openapi.models.media.XML;
 import org.eclipse.microprofile.openapi.models.parameters.CookieParameter;
 import org.eclipse.microprofile.openapi.models.parameters.HeaderParameter;
@@ -83,7 +68,10 @@ import org.eclipse.microprofile.openapi.models.servers.Server;
 import org.eclipse.microprofile.openapi.models.servers.ServerVariable;
 import org.eclipse.microprofile.openapi.models.servers.ServerVariables;
 import org.eclipse.microprofile.openapi.models.tags.Tag;
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -97,7 +85,6 @@ import org.junit.runner.RunWith;
 public class ModelConstructionTest {
     
     private static final Map<String,Property> PARAMETER_PROPERTIES = Collections.unmodifiableMap(collectProperties0(Parameter.class));
-    private static final Map<String,Property> SCHEMA_PROPERTIES = Collections.unmodifiableMap(collectProperties0(Schema.class));
     
     // Container for matched getter, setter and builder methods
     static final class Property {
@@ -167,6 +154,12 @@ public class ModelConstructionTest {
         }
     }
     
+    @Deployment
+    public static WebArchive createProxy() {
+        WebArchive war = ShrinkWrap.create(WebArchive.class);
+        return war;
+    }
+    
     @Test
     public void componentsTest() {
         processConstructible(Components.class);
@@ -233,38 +226,8 @@ public class ModelConstructionTest {
     }
     
     @Test
-    public void arraySchemaTest() {
-        processConstructible(ArraySchema.class);
-    }
-    
-    @Test
-    public void binarySchemaTest() {
-        processConstructible(BinarySchema.class);
-    }
-    
-    @Test
-    public void booleanSchemaTest() {
-        processConstructible(BooleanSchema.class);
-    }
-    
-    @Test
-    public void byteArraySchemaTest() {
-        processConstructible(ByteArraySchema.class);
-    }
-    
-    @Test
-    public void composedSchemaTest() {
-        processConstructible(ComposedSchema.class);
-    }
-    
-    @Test
     public void contentTest() {
         processConstructible(Content.class);
-    }
-    
-    @Test
-    public void dateSchemaTest() {
-        processConstructible(DateSchema.class);
     }
     
     @Test
@@ -273,28 +236,8 @@ public class ModelConstructionTest {
     }
     
     @Test
-    public void emailSchemaTest() {
-        processConstructible(EmailSchema.class);
-    }
-    
-    @Test
     public void encodingTest() {
         processConstructible(Encoding.class);
-    }
-    
-    @Test
-    public void fileSchemaTest() {
-        processConstructible(FileSchema.class);
-    }
-    
-    @Test
-    public void integerSchemaTest() {
-        processConstructible(IntegerSchema.class);
-    }
-    
-    @Test
-    public void mapSchemaTest() {
-        processConstructible(MapSchema.class);
     }
     
     @Test
@@ -303,33 +246,8 @@ public class ModelConstructionTest {
     }
     
     @Test
-    public void numberSchemaTest() {
-        processConstructible(NumberSchema.class);
-    }
-    
-    @Test
-    public void objectSchemaTest() {
-        processConstructible(ObjectSchema.class);
-    }
-    
-    @Test
-    public void passwordSchemaTest() {
-        processConstructible(PasswordSchema.class);
-    }
-    
-    @Test
     public void schemaTest() {
         processConstructible(Schema.class);
-    }
-    
-    @Test
-    public void stringSchemaTest() {
-        processConstructible(StringSchema.class);
-    }
-    
-    @Test
-    public void uuidSchemaTest() {
-        processConstructible(UUIDSchema.class);
     }
     
     @Test
@@ -339,22 +257,34 @@ public class ModelConstructionTest {
     
     @Test
     public void cookieParameterTest() {
-        processConstructible(CookieParameter.class);
+        final CookieParameter cp = processConstructible(CookieParameter.class);
+        // Check value of read-only 'in' property.
+        Assert.assertEquals("The value of the 'in' property is expected to be 'cookie'.",
+                Parameter.In.COOKIE, cp.getIn());
     }
     
     @Test
     public void headerParameterTest() {
-        processConstructible(HeaderParameter.class);
+        final HeaderParameter hp = processConstructible(HeaderParameter.class);
+        // Check value of read-only 'in' property.
+        Assert.assertEquals("The value of the 'in' property is expected to be 'header'.",
+                Parameter.In.HEADER, hp.getIn());
     }
     
     @Test
     public void pathParameterTest() {
-        processConstructible(PathParameter.class);
+        final PathParameter pp = processConstructible(PathParameter.class);
+        // Check value of read-only 'in' property.
+        Assert.assertEquals("The value of the 'in' property is expected to be 'path'.",
+                Parameter.In.PATH, pp.getIn());
     }
     
     @Test
     public void queryParameterTest() {
-        processConstructible(QueryParameter.class);
+        final QueryParameter qp = processConstructible(QueryParameter.class);
+        // Check value of read-only 'in' property.
+        Assert.assertEquals("The value of the 'in' property is expected to be 'query'.",
+                Parameter.In.QUERY, qp.getIn());
     }
     
     @Test
@@ -515,6 +445,9 @@ public class ModelConstructionTest {
     // Returns instances for testing getter, setter and builder methods.
     @SuppressWarnings("unchecked")
     private Object getInstanceOf(Class<?> clazz, boolean alternateEnumValue) {
+        if (clazz == Parameter.class) {
+            clazz = CookieParameter.class;
+        }
         if (Constructible.class.isAssignableFrom(clazz)) {
             return createConstructibleInstance((Class<Constructible>) clazz);
         }
@@ -567,7 +500,7 @@ public class ModelConstructionTest {
             return new BigDecimal("1.0");
         }
         else if (clazz == Object.class) {
-            return new Object();
+            return new String("object");
         }
         return null;
     }
@@ -609,20 +542,11 @@ public class ModelConstructionTest {
     }
     
     private Map<String,Property> collectProperties(Class<?> clazz) {
-        final Map<String,Property> properties;
-        if (clazz == Schema.class) {
-            properties = SCHEMA_PROPERTIES;
-        }
-        else {
-            properties = collectProperties0(clazz);
-            // Schema and Parameter have sub-types.
-            // Add the getter/setter/builder methods from the base type.
-            if (Schema.class.isAssignableFrom(clazz)) {
-                properties.putAll(SCHEMA_PROPERTIES);
-            }
-            else if (Parameter.class.isAssignableFrom(clazz)) {
-                properties.putAll(PARAMETER_PROPERTIES);
-            }  
+        final Map<String,Property> properties = collectProperties0(clazz);
+        // Parameter has sub-types.
+        // Add the getter/setter/builder methods from the base type.
+        if (Parameter.class.isAssignableFrom(clazz)) {
+            properties.putAll(PARAMETER_PROPERTIES);
         }
         return properties;
     }
