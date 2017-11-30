@@ -51,13 +51,6 @@ public @interface Content {
     Schema schema() default @Schema();
 
     /**
-     * The schema of the array that defines the type used for the content.
-     *
-     * @return the schema of the array
-     */
-    ArraySchema array() default @ArraySchema();
-
-    /**
      * An array of encoding corresponding to a map of property name and its encoding information in MediaType model. 
      * The key, being the property name, MUST exist in the schema as a property.
      * <p> 
