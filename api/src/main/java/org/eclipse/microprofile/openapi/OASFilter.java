@@ -116,7 +116,7 @@ public interface OASFilter {
      * @param schema the current Schema element
      * @return the Schema to be used or null 
      */
-    default Schema<?> filterSchema(Schema<?> schema) {
+    default Schema filterSchema(Schema schema) {
         return schema;
     }
     
