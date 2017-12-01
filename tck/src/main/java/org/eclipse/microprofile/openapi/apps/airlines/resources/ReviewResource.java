@@ -192,7 +192,7 @@ public class ReviewResource {
             content = @Content(
                 examples = @ExampleObject(
                     value = "bsmith")),
-            examples = { "bsmith", "pat@example.com" } )
+            examples = { @ExampleObject("bsmith"), @ExampleObject("pat@example.com")})
         @PathParam("user") String user){
 
             List<Review> reviewsByUser = new ArrayList<Review>();
