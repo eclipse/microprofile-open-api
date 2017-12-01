@@ -34,6 +34,10 @@ import org.eclipse.microprofile.openapi.annotations.servers.Server;
 public @interface Link {
     /**
      * The name of this link.
+     * <p>
+     * The name is REQUIRED when the link is defined within {@link org.eclipse.microprofile.openapi.annotations.Components}. The
+     * name will be used as the key to add this link to the 'links' map for reuse.
+     * </p>
      * 
      * @return the link's name
      **/

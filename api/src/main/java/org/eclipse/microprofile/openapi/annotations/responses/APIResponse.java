@@ -53,7 +53,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
 @Repeatable(APIResponses.class)
 public @interface APIResponse {
     /**
-     * A short description of the response. This is a REQUIRED property.
+     * A short description of the response. It is a REQUIRED property unless this is only a reference to a response instance.
      * 
      * @return description of the response.
      **/
@@ -62,7 +62,7 @@ public @interface APIResponse {
     /**
      * The HTTP response code, or 'default', for the supplied response. May only have 1 default entry.
      * 
-     * @return HHTTP response code for this response instance or default
+     * @return HTTP response code for this response instance or default
      **/
     String responseCode() default "default";
 
@@ -88,6 +88,15 @@ public @interface APIResponse {
      * @return content of this response instance
      **/
     Content[] content() default {};
+
+    /**
+     * The unique name to identify this response. Only REQUIRED when the response is defined
+     * within {@link org.eclipse.microprofile.openapi.annotations.Components}. The name will
+     * be used as the key to add this response to the 'responses' map for reuse.
+     * 
+     * @return this response's name
+     **/
+    String name() default "";
 
     /**
      * Reference value to a Response object.

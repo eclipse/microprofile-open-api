@@ -83,6 +83,10 @@ public @interface Schema {
 
     /**
      * The name of the schema or property.
+     * <p>
+     * The name is REQUIRED when the schema is defined within {@link org.eclipse.microprofile.openapi.annotations.Components}. The 
+     * name will be used as the key to add this schema to the 'schemas' map for reuse.
+     * </p>
      * 
      * @return the name of the schema
      **/

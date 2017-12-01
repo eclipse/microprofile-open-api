@@ -39,8 +39,11 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 @Inherited
 public @interface Parameter {
     /**
-     * This is a REQUIRED property of a parameter instance.
      * The name of the parameter. Parameter names are case sensitive.
+     * It is a REQUIRED property unless this is only a reference to a parameter instance.
+     * <p>
+     * When the parameter is defined within {@link org.eclipse.microprofile.openapi.annotations.Components}, 
+     * the name will be used as the key to add this parameter to the 'parameters' map for reuse.
      * <p>
      * If in is "path", the name field MUST correspond to the associated path segment from the path field in the Paths Object. 
      * See Path Templating for further information.
@@ -54,9 +57,8 @@ public @interface Parameter {
     String name() default "";
 
     /**
-     * This is a REQUIRED property of a parameter instance.
+     * The location of the parameter. It is a REQUIRED property unless this is only a reference to a parameter instance.
      * <p>
-     * The location of the parameter. 
      * Possible values are specified in ParameterIn enum. Ignored when empty string.
      * </p>
      * @return this parameter's location
