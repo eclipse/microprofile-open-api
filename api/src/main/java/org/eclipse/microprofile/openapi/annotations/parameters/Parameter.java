@@ -29,6 +29,7 @@ import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
 import org.eclipse.microprofile.openapi.annotations.enums.ParameterStyle;
 import org.eclipse.microprofile.openapi.annotations.media.ArraySchema;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.ExampleObject;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 /**
@@ -178,7 +179,7 @@ public @interface Parameter {
      * 
      * @return the list of examples for this parameter
      **/
-    String[] examples() default {};
+    ExampleObject[] examples() default {};
 
     /**
      * Provides an example of the schema. 

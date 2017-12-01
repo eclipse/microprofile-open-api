@@ -112,7 +112,7 @@ public interface Encoding extends Constructible, Extensible {
      * @param style a string that descibes how encoding value will be serialized
      * @return Encoding
      */
-    Encoding style(String style);
+    Encoding style(StyleEnum style);
 
     /**
      * Style describes how the encoding value will be serialized depending on the type of the parameter value.
@@ -121,7 +121,7 @@ public interface Encoding extends Constructible, Extensible {
      * </p>
      * @return String style
      **/
-    String getStyle();
+    StyleEnum getStyle();
 
     /**
      * Style describes how the encoding value will be serialized depending on the type of the parameter value.
@@ -130,7 +130,7 @@ public interface Encoding extends Constructible, Extensible {
      * </p>
      * @param style a string that descibes how encoding value will be serialized
      */
-    void setStyle(String style);
+    void setStyle(StyleEnum style);
 
     /**
      * When this is true, property values of type array or object generate separate parameters for each value of the array, or key-value-pair of the
