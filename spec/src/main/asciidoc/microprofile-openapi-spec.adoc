@@ -49,7 +49,8 @@ OpenAPI document, which are described in <<Documentation Mechanisms>>.  The pict
 below provides a quick overview of the different types of components that make up
 the MP OpenAPI specification:
 
-TODO: image (issue #55)
+:imagesdir: images
+image::diagram.png[Architecture Diagram]
 
 The remaining sections of this specification will go into the details of each component.
 
@@ -346,7 +347,7 @@ are required to process these different sources in the following order:
 The MP OpenAPI 1.0 specification does not mandate vendors to validate the resulting
 OpenAPI v3 model (after processing the 5 steps previously mentioned), which means
 that the behavior of invalid models is vendor specific (i.e. vendors may choose to
-ignore, reject, or pass-through invalid inputs).   
+ignore, reject, or pass-through invalid inputs).
 
 
 **Example processing**:
