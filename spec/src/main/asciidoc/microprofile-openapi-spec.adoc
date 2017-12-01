@@ -49,8 +49,8 @@ OpenAPI document, which are described in <<Documentation Mechanisms>>.  The pict
 below provides a quick overview of the different types of components that make up
 the MP OpenAPI specification:
 
-
-![alternate text](https://sourceforge.net/images/icon_linux.gif)
+:imagesdir: images
+image::diagram.png[Architecture Diagram]
 
 The remaining sections of this specification will go into the details of each component.
 
