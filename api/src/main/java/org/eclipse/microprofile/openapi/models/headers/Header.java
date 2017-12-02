@@ -34,7 +34,6 @@ import org.eclipse.microprofile.openapi.models.media.Schema;
  * 
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#header-object">OpenAPI Specification Header Object</a>
  */
-@SuppressWarnings("rawtypes")
 public interface Header extends Constructible, Extensible, Reference<Header> {
 
     /**
