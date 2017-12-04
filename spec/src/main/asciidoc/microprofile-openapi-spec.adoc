@@ -118,25 +118,36 @@ of another native configuration framework) must use the prefix `mp.openapi.exten
 There are many different ways to provide input for the generation of the resulting
 OpenAPI document.
 
-The easiest way to get started is via the <<Annotations>>, since
-they augment (not replace) the existing JAX-RS annotations.  Using annotations means
+The MP OpenAPI specification requires vendors to produce a valid OpenAPI document
+from pure JAX-RS 2.0 applications.  This means that vendors must process all the
+relevant JAX-RS annotations (such as `@Path` and `@Consumes`) as well as Java objects
+(POJOs) used as input or output to JAX-RS operations.  This is a good place to
+start for application developers that are new to OpenAPI: just deploy your existing
+JAX-RS application into a MP OpenAPI vendor and check out the output from `/openapi`!
+
+The application developer then has a few choices:
+
+1.  Augment those JAX-RS annotations with the
+OpenAPI <<Annotations>>.  Using annotations means
 developers don't have to re-write the portions of the OpenAPI document that are
 already covered by the JAX-RS framework (e.g. the HTTP method of an operation).
 
-Another way to document your APIs is via <<Static OpenAPI files>>.  This
-is often adopted by enterprises that want to lock-in the contract of the API
-before any code is written.  In this case, we refer to the OpenAPI document as the
-"source of truth", by which the client and provider must abide.
+2. Take the initial output from `/openapi` as a starting point to document
+your APIs is via <<Static OpenAPI files>>.  It's worth mentioning that these static
+files can also be written before any code, which is an approach often adopted by
+enterprises that want to lock-in the contract of the API.  In this case, we refer
+to the OpenAPI document as the "source of truth", by which the client and provider
+must abide.
 
-The MP OpenAPI specification also defines a <<Programming model>> that allows
-application developers to provide a bootstrap (or complete) OpenAPI model tree.
+3. Use the <<Programming model>> to provide a bootstrap (or complete)
+OpenAPI model tree.
 
-Lastly, a <<Filter>> is described which can update the OpenAPI model after it has
+Additionally, a <<Filter>> is described which can update the OpenAPI model after it has
 been built from the previously described documentation mechanisms.
 
 === Annotations
 
-Many of these annotations were derived from the https://github.com/swagger-api/swagger-core[Swagger Core] library, which
+Many of these OpenAPI v3 annotations were derived from the https://github.com/swagger-api/swagger-core[Swagger Core] library, which
 allows for a mostly-mechanical transformation of applications that are using that
 library and wish to take advantage to the official MP OpenAPI interfaces.
 
