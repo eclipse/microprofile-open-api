@@ -77,6 +77,10 @@ public @interface ExampleObject {
 
     /**
      * Reference value to an Example object.
+     * <p>
+     * This property provides a reference to an object defined elsewhere. This property and
+     * all other properties are mutually exclusive. If other properties are defined in addition
+     * to the ref property then the result is undefined.
      *
      * @return reference to an example
      **/
