@@ -40,7 +40,7 @@ import io.restassured.parsing.Parser;
 import io.restassured.response.Response;
 
 @RunWith(Arquillian.class)
-public class SampleTest {
+public class EndpointTest {
     private static final String APPLICATION_JSON = "application/json";
     private static final String APPLICATION_YAML = "application/yaml";
 
@@ -73,7 +73,6 @@ public class SampleTest {
             RestAssured.authentication = RestAssured.basic(userName, password);
             RestAssured.useRelaxedHTTPSValidation();
         }
-        System.out.println("TEST:"+userName + ":" + password + "@" + serverUrl);
     }
 
     @Deployment(name = "proxy")
@@ -103,10 +102,8 @@ public class SampleTest {
 
     @Test
     @RunAsClient
-    public void testTextPlainResponseContentType() throws InterruptedException {
+    public void testVersion() throws InterruptedException {
         Response response = given().when().get("/proxy");
         response.then().parser("", Parser.JSON).statusCode(200).body("openapi", equalTo("3.0.0")).body("info.description", containsString("Liberty"));
-        String doc = response.asString();
-        System.out.println(doc);
     }
 }

@@ -18,7 +18,6 @@ package org.eclipse.microprofile.openapi.tck.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Enumeration;
@@ -29,6 +28,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -37,6 +37,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -44,9 +45,6 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 @WebServlet("/")
 public class YamlToJsonConverterServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
-    private static final String APPLICATION_JSON = "application/json";
-    private static final String APPLICATION_YAML = "application/yaml";
 
     private static final String DEFAULT_PROTOCOL = "http";
     private static final String DEFAULT_HOST = "localhost";
@@ -104,30 +102,28 @@ public class YamlToJsonConverterServlet extends HttpServlet {
             Arrays.stream(targetResponse.getAllHeaders()).forEach(h -> response.addHeader(h.getName(), h.getValue()));
 
             // Copy the content
-            rd = new BufferedReader(new InputStreamReader(targetResponse.getEntity().getContent()));
-            String line = "";
-            StringBuffer sb = new StringBuffer();
-            while ((line = rd.readLine()) != null) {
-                sb.append(line).append("\n");
-            }
+            String yaml = EntityUtils.toString(targetResponse.getEntity());
 
-            String yaml = sb.toString();
+            // Convert the yaml to json
             ObjectMapper yamlReader = new ObjectMapper(new YAMLFactory());
             Object obj = yamlReader.readValue(yaml, Object.class);
 
             ObjectMapper jsonWriter = new ObjectMapper();
             String json = jsonWriter.writeValueAsString(obj);
-
             writer = response.getWriter();
             writer.print(json);
             writer.close();
         }
         catch (Exception e) {
-            response.sendError(500, "Failed to convert the request: " + e);
+            response.sendError(500, "Failed to convert the request: " + ExceptionUtils.getMessage(e));
         }
         finally {
             if (rd != null) {
-                rd.close();
+                try {
+                    rd.close();
+                }
+                catch (IOException e) {
+                }
             }
             if (writer != null) {
                 writer.close();
