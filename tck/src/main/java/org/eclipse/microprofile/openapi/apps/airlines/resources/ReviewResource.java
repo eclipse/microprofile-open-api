@@ -42,6 +42,7 @@ import org.eclipse.microprofile.openapi.annotations.servers.Server;
 import org.eclipse.microprofile.openapi.annotations.servers.ServerVariable;
 import org.eclipse.microprofile.openapi.annotations.tags.Tags;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.headers.Header;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.media.ExampleObject;
@@ -117,7 +118,8 @@ public class ReviewResource {
                     type = "array",
                     implementation = Review.class
                 )
-            )
+            ),
+            headers = @Header(ref="Request-Limit")
         )
     )
     @Produces("application/json")
