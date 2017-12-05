@@ -1,0 +1,1306 @@
+openapi: 3.0.0
+info:
+  title: User Resource API
+  description: API resource for User model of the AirlinesRatingApp.
+  termsOfService: http://exampleurl.com/termsofservice
+  contact:
+    name: AirlinesRatingApp API Support Team
+    url: http://exampleurl.com/contact
+    email: ask@airlinessupport.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+externalDocs:
+  description: instructions for how to deploy this app
+  url: https://github.com/microservices-api/oas3-airlines/blob/master/README.md
+servers:
+- url: localhost:9080/oas3-airlines/
+  description: Home page of airlines app
+  variables:
+    reviews:
+      description: Reviews of the app by users
+      default: reviews
+    bookings:
+      description: Booking data
+      default: bookings
+    user:
+      description: User data
+      default: user
+    availability:
+      description: Flight availabilities
+      default: availability
+security:
+- airlinesRatingApp_auth: []
+tags:
+- name: Airlines
+  description: airlines app
+- name: getAirlines
+  description: method to retrieve all airlines
+- name: getFlights
+  description: method to retrieve all flights available
+  externalDocs:
+    description: A list of all the flights offered by the app
+    url: http://airlinesratingapp.com/ourflights
+- name: Availability
+  description: All the availibility methods
+- name: Bookings
+  description: All the bookings methods
+- name: Reviews
+  description: All the review methods
+paths:
+  /:
+    get:
+      tags:
+      - airlines
+      - Airlines
+      summary: Retrieve all available airlines
+      operationId: getAirlines
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Airline'
+        404:
+          description: No airlines found
+          content:
+            n/a: {}
+  /availability:
+    get:
+      tags:
+      - getFlights
+      - availability
+      - Availability
+      summary: Retrieve all available flights
+      operationId: getFlights
+      parameters:
+      - name: departureDate
+        in: query
+        description: Customer departure date
+        required: true
+        schema:
+          type: string
+      - name: airportFrom
+        in: query
+        description: Airport the customer departs from
+        required: true
+        schema:
+          type: string
+      - name: returningDate
+        in: query
+        description: Customer return date
+        required: true
+        schema:
+          type: string
+      - name: airportTo
+        in: query
+        description: Airport the customer returns to
+        required: true
+        schema:
+          type: string
+      - name: numberOfAdults
+        in: query
+        description: Number of adults on the flight
+        required: true
+        schema:
+          minimum: 0
+          type: string
+      - name: numberOfChildren
+        in: query
+        description: Number of children on the flight
+        required: true
+        schema:
+          minimum: 0
+          type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            applictaion/json:
+              schema:
+                $ref: '#/components/schemas/Flight'
+        404:
+          description: No available flights found
+          content:
+            n/a: {}
+  /bookings:
+    get:
+      tags:
+      - booking
+      - Bookings
+      summary: Retrieve all bookings for current user
+      operationId: getAllBookings
+      responses:
+        200:
+          description: Bookings retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+        404:
+          description: No bookings found for the user.
+    post:
+      tags:
+      - booking
+      - Bookings
+      summary: Create a booking
+      description: Create a new booking record with the booking information provided.
+      operationId: createBooking
+      requestBody:
+        description: booking to create
+        required: true
+      responses:
+        201:
+          description: Booking created
+          content:
+            application/json:
+              schema:
+                type: string
+                description: id of the new booking
+      callbacks:
+        get all the bookings:
+          http://localhost:9080/airlines/bookings: {}
+  /bookings/{id}:
+    get:
+      tags:
+      - booking
+      - Bookings
+      summary: Get a booking with ID
+      operationId: getBookingById
+      parameters:
+      - name: id
+        in: path
+        description: ID of the booking
+        required: true
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Booking retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Booking'
+        404:
+          description: Booking not found
+    put:
+      tags:
+      - booking
+      - Bookings
+      summary: Update a booking with ID
+      operationId: updateBookingId
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+              - airMiles
+              - creditCard
+              - departtureFlight
+              - returningFlight
+              - seatPreference
+              type: object
+              properties:
+                departtureFlight:
+                  required:
+                  - airline
+                  - airportFrom
+                  - airportTo
+                  - dateTime
+                  - number
+                  - price
+                  - status
+                  type: object
+                  properties:
+                    airline:
+                      required:
+                      - contactPhone
+                      - name
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: Acme Air
+                        contactPhone:
+                          type: string
+                          example: 1-888-1234-567
+                    dateTime:
+                      pattern: dateTime
+                      type: string
+                      example: 2016-03-05 18:00
+                    number:
+                      type: string
+                      example: AC190
+                    status:
+                      type: string
+                      example: On Schedule
+                    airportFrom:
+                      type: string
+                      example: YYZ
+                    airportTo:
+                      type: string
+                      example: LAX
+                    price:
+                      type: string
+                      example: US$350
+                returningFlight:
+                  required:
+                  - airline
+                  - airportFrom
+                  - airportTo
+                  - dateTime
+                  - number
+                  - price
+                  - status
+                  type: object
+                  properties:
+                    airline:
+                      required:
+                      - contactPhone
+                      - name
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: Acme Air
+                        contactPhone:
+                          type: string
+                          example: 1-888-1234-567
+                    dateTime:
+                      pattern: dateTime
+                      type: string
+                      example: 2016-03-05 18:00
+                    number:
+                      type: string
+                      example: AC190
+                    status:
+                      type: string
+                      example: On Schedule
+                    airportFrom:
+                      type: string
+                      example: YYZ
+                    airportTo:
+                      type: string
+                      example: LAX
+                    price:
+                      type: string
+                      example: US$350
+                creditCard:
+                  required:
+                  - cardNumber
+                  - cardholderName
+                  - cvv
+                  - expiryDate
+                  - issuer
+                  type: object
+                  properties:
+                    issuer:
+                      type: string
+                      example: VISA
+                    cardholderName:
+                      type: string
+                      example: Joe Smith
+                    cardNumber:
+                      type: string
+                      example: '**********1234'
+                    cvv:
+                      type: string
+                      example: "0322"
+                    expiryDate:
+                      type: string
+                      example: 04/19
+                airMiles:
+                  type: string
+                  example: 32126319
+                seatPreference:
+                  type: string
+                  example: window
+      responses:
+        200:
+          description: Booking updated
+        404:
+          description: Booking not found
+    delete:
+      tags:
+      - booking
+      - Bookings
+      summary: Delete a booking with ID
+      operationId: deleteBookingById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Booking deleted successfully.
+        404:
+          description: Booking not found.
+  /reviews:
+    get:
+      tags:
+      - review
+      - Reviews
+      summary: get all the reviews
+      operationId: getAllReviews
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+    post:
+      tags:
+      - review
+      - Reviews
+      summary: Create a Review
+      operationId: createReview
+      requestBody:
+        description: review to create
+        required: true
+      responses:
+        201:
+          description: review created
+          content:
+            application/json:
+              schema:
+                type: string
+                description: id of the new review
+      callbacks:
+        testCallback:
+          http://localhost:9080/oas3-airlines/reviews:
+            get:
+              summary: Get all reviews
+              operationId: getAllReviews_1
+              responses:
+                200:
+                  description: successful operation
+                  content:
+                    application/json:
+                      schema:
+                        $ref: '#/components/schemas/Review'
+      security:
+      - reviewoauth2:
+        - write:reviews
+      servers:
+      - url: localhost:9080/oas3-airlines/reviews/1
+        description: view of all the reviews
+        variables:
+          id:
+            description: id of the review
+            default: "1"
+  /reviews/{id}:
+    get:
+      tags:
+      - review
+      - Reviews
+      summary: Get a review with ID
+      operationId: getReviewById
+      parameters:
+      - name: id
+        in: path
+        description: ID of the booking
+        required: true
+        content:
+          '*/*':
+            schema:
+              type: integer
+      responses:
+        200:
+          description: Review retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+        404:
+          description: Review not found
+    delete:
+      tags:
+      - review
+      - Reviews
+      summary: Delete a Review with ID
+      operationId: deleteReview
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Review deleted
+        404:
+          description: Review not found
+  /reviews/{user}:
+    get:
+      tags:
+      - review
+      - Reviews
+      summary: Get all reviews by user
+      operationId: getReviewByUser
+      parameters:
+      - name: user
+        in: path
+        description: username of the user for the reviews
+        required: true
+        content:
+          '*/*':
+            schema:
+              type: string
+      responses:
+        200:
+          description: Review(s) retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+        404:
+          description: Review(s) not found
+  /reviews/{airline}:
+    get:
+      tags:
+      - review
+      - Reviews
+      summary: Get all reviews by airlines
+      operationId: getReviewByAirline
+      parameters:
+      - name: airline
+        in: path
+        description: name of the airlines for the reviews
+        required: true
+        content:
+          '*/*':
+            schema:
+              type: string
+      responses:
+        200:
+          description: Review(s) retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+        404:
+          description: Review(s) not found
+  /reviews/{user}/{airlines}:
+    get:
+      tags:
+      - review
+      - Reviews
+      summary: Get all reviews for an airline by User
+      operationId: getReviewByAirlineAndUser
+      parameters:
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: airlines
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Review(s) retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+        404:
+          description: Review(s) not found
+  /user:
+    post:
+      tags:
+      - user
+      summary: Create user
+      description: This can only be done by the logged in user.
+      operationId: createUser
+      requestBody:
+        description: Created user object
+        content:
+          '*/*':
+            schema:
+              required:
+              - age
+              - email
+              - firstName
+              - id
+              - lastName
+              - password
+              - phone
+              - sex
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 3456
+                password:
+                  type: string
+                  example: bobSm37
+                firstName:
+                  type: string
+                  example: Bob
+                lastName:
+                  type: string
+                  example: Smith
+                sex:
+                  type: string
+                  example: M
+                age:
+                  type: integer
+                  example: 37
+                email:
+                  type: string
+                  example: bob@test.ca
+                phone:
+                  type: string
+                  example: 123-456-7890
+                username:
+                  type: string
+                status:
+                  title: User Status
+                  type: integer
+        required: true
+      responses:
+        200:
+          description: New user record successfully created.
+        400:
+          description: Unable to create this user record.
+      security:
+      - httpTestScheme:
+        - write:users
+  /user/createWithArray:
+    post:
+      tags:
+      - user
+      summary: Creates list of users with given input array
+      operationId: createUsersFromArray
+      requestBody:
+        description: Array of user object
+        content:
+          '*/*':
+            schema:
+              type: array
+              items:
+                required:
+                - age
+                - email
+                - firstName
+                - id
+                - lastName
+                - password
+                - phone
+                - sex
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 3456
+                  password:
+                    type: string
+                    example: bobSm37
+                  firstName:
+                    type: string
+                    example: Bob
+                  lastName:
+                    type: string
+                    example: Smith
+                  sex:
+                    type: string
+                    example: M
+                  age:
+                    type: integer
+                    example: 37
+                  email:
+                    type: string
+                    example: bob@test.ca
+                  phone:
+                    type: string
+                    example: 123-456-7890
+                  username:
+                    type: string
+                  status:
+                    title: User Status
+                    type: integer
+        required: true
+      responses:
+        200:
+          description: Successfully created list of users.
+        400:
+          description: Unable to create list of users.
+      security:
+      - httpTestScheme:
+        - write:users
+  /user/createWithList:
+    post:
+      tags:
+      - user
+      summary: Creates list of users with given input list
+      operationId: createUsersFromList
+      requestBody:
+        description: List of user object
+        content:
+          '*/*':
+            schema:
+              type: array
+              items:
+                required:
+                - age
+                - email
+                - firstName
+                - id
+                - lastName
+                - password
+                - phone
+                - sex
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 3456
+                  password:
+                    type: string
+                    example: bobSm37
+                  firstName:
+                    type: string
+                    example: Bob
+                  lastName:
+                    type: string
+                    example: Smith
+                  sex:
+                    type: string
+                    example: M
+                  age:
+                    type: integer
+                    example: 37
+                  email:
+                    type: string
+                    example: bob@test.ca
+                  phone:
+                    type: string
+                    example: 123-456-7890
+                  username:
+                    type: string
+                  status:
+                    title: User Status
+                    type: integer
+        required: true
+      responses:
+        200:
+          description: Successfully created list of users.
+        400:
+          description: Unable to create list of users.
+      security:
+      - httpTestScheme:
+        - write:users
+  /user/{username}:
+    get:
+      tags:
+      - user
+      summary: Get user by user name
+      operationId: getUserByUserName
+      parameters:
+      - name: username
+        in: path
+        description: The name that needs to be fetched. Use Bob1 for testing.
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Successfully retrieved user by user name.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          description: Invalid username supplied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+        404:
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+      security:
+      - httpTestScheme:
+        - write:users
+    put:
+      tags:
+      - user
+      summary: Update user
+      description: This can only be done by the logged in user.
+      operationId: updateUser
+      parameters:
+      - name: username
+        in: path
+        description: User that needs to be updated
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Updated user object
+        content:
+          '*/*':
+            schema:
+              required:
+              - age
+              - email
+              - firstName
+              - id
+              - lastName
+              - password
+              - phone
+              - sex
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 3456
+                password:
+                  type: string
+                  example: bobSm37
+                firstName:
+                  type: string
+                  example: Bob
+                lastName:
+                  type: string
+                  example: Smith
+                sex:
+                  type: string
+                  example: M
+                age:
+                  type: integer
+                  example: 37
+                email:
+                  type: string
+                  example: bob@test.ca
+                phone:
+                  type: string
+                  example: 123-456-7890
+                username:
+                  type: string
+                status:
+                  title: User Status
+                  type: integer
+        required: true
+      responses:
+        200:
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              encoding:
+                password:
+                  contentType: text/plain
+                  style: form
+                  explode: true
+                  allowReserved: true
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+              encoding:
+                password:
+                  contentType: text/plain
+                  style: form
+                  explode: true
+                  allowReserved: true
+        400:
+          description: Invalid user supplied
+        404:
+          description: User not found
+      security:
+      - httpTestScheme:
+        - write:users
+    delete:
+      tags:
+      - user
+      summary: Delete user
+      description: This can only be done by the logged in user.
+      operationId: deleteUser
+      parameters:
+      - name: username
+        in: path
+        description: The name that needs to be deleted
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: User deleted successfully
+        400:
+          description: Invalid username supplied
+        404:
+          description: User not found
+      security:
+      - httpTestScheme:
+        - write:users
+  /user/{id}:
+    get:
+      tags:
+      - user
+      summary: Get user by id
+      operationId: getUserById
+      parameters:
+      - name: id
+        in: path
+        description: The name that needs to be fetched. Use 1 for testing.
+        required: true
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Successfully retrieved user by id.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+          links:
+            User name:
+              operationId: getUserByName
+              parameters:
+                userId: $request.path.id
+              description: The username corresponding to provided user id
+            Review:
+              operationRef: /db/reviews/{userName}
+              parameters:
+                path.userName: $response.body#userName
+              description: The reviews provided by user
+        400:
+          description: Invalid id supplied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+        404:
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+      security:
+      - httpTestScheme:
+        - write:users
+  /user/login:
+    get:
+      tags:
+      - user
+      summary: Logs user into the system
+      externalDocs:
+        description: Policy on user security.
+        url: http://exampleurl.com/policy
+      operationId: logInUser
+      parameters:
+      - name: username
+        in: query
+        description: The user name for login
+        required: true
+        schema:
+          type: string
+      - name: password
+        in: query
+        description: The password for login in clear text
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Successful user login.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          description: Invalid username/password supplied
+      security:
+      - httpTestScheme:
+        - write:users
+  /user/logout:
+    get:
+      tags:
+      - user
+      summary: Logs out current logged in user session
+      externalDocs:
+        description: Policy on user security.
+        url: http://exampleurl.com/policy
+      operationId: logOutUser
+      responses:
+        200:
+          description: Successful user logout.
+      security:
+      - httpTestScheme:
+        - write:users
+components:
+  schemas:
+    User:
+      required:
+      - age
+      - email
+      - firstName
+      - id
+      - lastName
+      - password
+      - phone
+      - sex
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 3456
+        password:
+          type: string
+          example: bobSm37
+        firstName:
+          type: string
+          example: Bob
+        lastName:
+          type: string
+          example: Smith
+        sex:
+          type: string
+          example: M
+        age:
+          type: integer
+          example: 37
+        email:
+          type: string
+          example: bob@test.ca
+        phone:
+          type: string
+          example: 123-456-7890
+        username:
+          type: string
+        status:
+          title: User Status
+          type: integer
+    Airline:
+      required:
+      - contactPhone
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+          example: Acme Air
+        contactPhone:
+          type: string
+          example: 1-888-1234-567
+    Flight:
+      required:
+      - airline
+      - airportFrom
+      - airportTo
+      - dateTime
+      - number
+      - price
+      - status
+      type: object
+      properties:
+        airline:
+          required:
+          - contactPhone
+          - name
+          type: object
+          properties:
+            name:
+              type: string
+              example: Acme Air
+            contactPhone:
+              type: string
+              example: 1-888-1234-567
+        dateTime:
+          pattern: dateTime
+          type: string
+          example: 2016-03-05 18:00
+        number:
+          type: string
+          example: AC190
+        status:
+          type: string
+          example: On Schedule
+        airportFrom:
+          type: string
+          example: YYZ
+        airportTo:
+          type: string
+          example: LAX
+        price:
+          type: string
+          example: US$350
+    Booking:
+      required:
+      - airMiles
+      - creditCard
+      - departtureFlight
+      - returningFlight
+      - seatPreference
+      type: object
+      properties:
+        departtureFlight:
+          required:
+          - airline
+          - airportFrom
+          - airportTo
+          - dateTime
+          - number
+          - price
+          - status
+          type: object
+          properties:
+            airline:
+              required:
+              - contactPhone
+              - name
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Acme Air
+                contactPhone:
+                  type: string
+                  example: 1-888-1234-567
+            dateTime:
+              pattern: dateTime
+              type: string
+              example: 2016-03-05 18:00
+            number:
+              type: string
+              example: AC190
+            status:
+              type: string
+              example: On Schedule
+            airportFrom:
+              type: string
+              example: YYZ
+            airportTo:
+              type: string
+              example: LAX
+            price:
+              type: string
+              example: US$350
+        returningFlight:
+          required:
+          - airline
+          - airportFrom
+          - airportTo
+          - dateTime
+          - number
+          - price
+          - status
+          type: object
+          properties:
+            airline:
+              required:
+              - contactPhone
+              - name
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Acme Air
+                contactPhone:
+                  type: string
+                  example: 1-888-1234-567
+            dateTime:
+              pattern: dateTime
+              type: string
+              example: 2016-03-05 18:00
+            number:
+              type: string
+              example: AC190
+            status:
+              type: string
+              example: On Schedule
+            airportFrom:
+              type: string
+              example: YYZ
+            airportTo:
+              type: string
+              example: LAX
+            price:
+              type: string
+              example: US$350
+        creditCard:
+          required:
+          - cardNumber
+          - cardholderName
+          - cvv
+          - expiryDate
+          - issuer
+          type: object
+          properties:
+            issuer:
+              type: string
+              example: VISA
+            cardholderName:
+              type: string
+              example: Joe Smith
+            cardNumber:
+              type: string
+              example: '**********1234'
+            cvv:
+              type: string
+              example: "0322"
+            expiryDate:
+              type: string
+              example: 04/19
+        airMiles:
+          type: string
+          example: 32126319
+        seatPreference:
+          type: string
+          example: window
+    Review:
+      required:
+      - airlines
+      - id
+      - rating
+      - user
+      type: object
+      properties:
+        id:
+          type: string
+          example: 0
+        user:
+          required:
+          - age
+          - email
+          - firstName
+          - id
+          - lastName
+          - password
+          - phone
+          - sex
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 3456
+            password:
+              type: string
+              example: bobSm37
+            firstName:
+              type: string
+              example: Bob
+            lastName:
+              type: string
+              example: Smith
+            sex:
+              type: string
+              example: M
+            age:
+              type: integer
+              example: 37
+            email:
+              type: string
+              example: bob@test.ca
+            phone:
+              type: string
+              example: 123-456-7890
+            username:
+              type: string
+            status:
+              title: User Status
+              type: integer
+        airlines:
+          required:
+          - contactPhone
+          - name
+          type: object
+          properties:
+            name:
+              type: string
+              example: Acme Air
+            contactPhone:
+              type: string
+              example: 1-888-1234-567
+        rating:
+          type: integer
+          example: 8
+        comment:
+          type: string
+          example: Great service!
+    CreditCard:
+      required:
+      - cardNumber
+      - cardholderName
+      - cvv
+      - expiryDate
+      - issuer
+      type: object
+      properties:
+        issuer:
+          type: string
+          example: VISA
+        cardholderName:
+          type: string
+          example: Joe Smith
+        cardNumber:
+          type: string
+          example: '**********1234'
+        cvv:
+          type: string
+          example: "0322"
+        expiryDate:
+          type: string
+          example: 04/19
+  securitySchemes:
+    httpTestScheme:
+      type: http
+      description: user security scheme
+      name: httpTestScheme
+      in: query
+      scheme: testScheme
+    airlinesRatingApp_auth:
+      type: apiKey
+      description: authentication needed to access Airlines app
+      name: airlinesRatingApp_auth
+      in: header
+    reviewoauth2:
+      type: oauth2
+      description: authentication needed to create and delete reviews
+      name: reviewoauth2
+      in: query
+      flows:
+        implicit:
+          authorizationUrl: https://example.com/api/oauth/dialog
+          scopes:
+            write:reviews: create a review
+        authorizationCode:
+          authorizationUrl: https://example.com/api/oauth/dialog
+          tokenUrl: https://example.com/api/oauth/token
