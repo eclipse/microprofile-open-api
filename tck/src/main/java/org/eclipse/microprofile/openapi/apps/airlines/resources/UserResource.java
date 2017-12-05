@@ -13,13 +13,9 @@
 
 package org.eclipse.microprofile.openapi.apps.airlines.resources;
 
-import org.eclipse.microprofile.openapi.annotations.info.Contact;
-import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
-import org.eclipse.microprofile.openapi.annotations.info.Info;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
-import org.eclipse.microprofile.openapi.annotations.info.License;
 import org.eclipse.microprofile.openapi.annotations.headers.Header;
 import org.eclipse.microprofile.openapi.annotations.links.Link;
 import org.eclipse.microprofile.openapi.annotations.links.LinkParameter;
@@ -56,23 +52,6 @@ import javax.ws.rs.core.Response;
 
 @Path("/user")
 @Produces({"application/json", "application/xml"})
-@OpenAPIDefinition(
-    info = @Info(
-        title = "User Resource API",
-        version = "1.0.0",
-        description = "API resource for User model of the AirlinesRatingApp.",
-        termsOfService = "http://exampleurl.com/termsofservice",
-        contact = @Contact(
-            name = "AirlinesRatingApp API Support Team",
-            url = "http://exampleurl.com/contact",
-            email = "ask@airlinessupport.com"
-            ),
-        license = @License(
-            name = "Apache 2.0",
-            url = "http://www.apache.org/licenses/LICENSE-2.0.html"
-            )
-    )
-)
 @SecurityScheme(
     description = "user security scheme",
     type = SecuritySchemeType.HTTP,
@@ -542,6 +521,12 @@ public class UserResource {
             }
     )
 
+    @SecurityScheme(
+        ref = "#/components/securitySchemes/httpTestScheme"
+    )
+    @SecurityRequirement(
+        name = "httpTestScheme"
+    )
     public Response loginUser(
         @Parameter(
             name = "username",

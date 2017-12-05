@@ -14,7 +14,6 @@
 package org.eclipse.microprofile.openapi.apps.petstore.resource;
 
 import org.eclipse.microprofile.openapi.annotations.Operation;
-import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeIn;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
@@ -27,9 +26,6 @@ import org.eclipse.microprofile.openapi.annotations.security.OAuthScope;
 import org.eclipse.microprofile.openapi.annotations.callbacks.Callback;
 import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 import org.eclipse.microprofile.openapi.annotations.extensions.Extensions;
-import org.eclipse.microprofile.openapi.annotations.info.Info;
-import org.eclipse.microprofile.openapi.annotations.info.License;
-import org.eclipse.microprofile.openapi.annotations.info.Contact;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
@@ -65,20 +61,6 @@ import javax.ws.rs.Consumes;
 @Schema(
         name = "pet",
         description = "Operations on pets resource")
-@OpenAPIDefinition(
-    info = @Info(
-        title = "Pets Operations",
-        version = "1.0",
-        description = "Operations about pets",
-        license = @License(
-            name = "Apache 2.0",
-            url = "http://www.apache.org/licenses/LICENSE-2.0.html"),
-        contact = @Contact(
-            name = "PetStore API Support",
-            url = "https://github.com/eclipse/microprofile-open-api",
-            email = "support@petstore.com")
-    )
-)
 @SecuritySchemes(
     value = {
         @SecurityScheme(

@@ -24,6 +24,9 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.eclipse.microprofile.openapi.annotations.tags.Tags;
+import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -46,7 +49,12 @@ import org.eclipse.microprofile.openapi.apps.airlines.model.Booking;
     value = @Tag(
         name = "Bookings", 
         description = "All the bookings methods"))
-
+@SecurityScheme(
+    securitySchemeName = "bookingSecurityScheme",
+    type = SecuritySchemeType.OPENIDCONNECT,
+    description = "Security Scheme for booking resource",
+    openIdConnectUrl = "http://openidconnect.com/testurl"
+)
 public class BookingResource {
     private Map<Integer, Booking> bookings = new ConcurrentHashMap<Integer, Booking>();
     private volatile int currentId = 0;
@@ -100,6 +108,10 @@ public class BookingResource {
         description = "Create a new booking record with the booking information provided.",
         operationId = "createBooking",
         tags = {"booking"},
+        security = @SecurityRequirement(
+            name = "bookingSecurityScheme",
+            scopes = {"write:bookings", "read:bookings"}
+        ),
         requestBody = @RequestBody(
             description = "Create a new booking with the provided information.",
             content = @Content(
