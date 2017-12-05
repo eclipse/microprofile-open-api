@@ -42,7 +42,7 @@ public @interface ServerVariable {
      * 
      * @return array of possible values for this ServerVariable
      **/
-    String[] enumeration() default "";
+    String[] enumeration() default {};
 
     /**
      * The default value of this server variable. This is a REQUIRED property.
