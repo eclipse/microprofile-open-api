@@ -80,23 +80,12 @@ import org.eclipse.microprofile.openapi.apps.airlines.resources.ReviewResource;
             url = "localhost:9080/oas3-airlines/",
             description = "Home page of airlines app",
             variables = {
-                @ServerVariable(
-                    name = "reviews",
-                    description = "Reviews of the app by users",
-                    defaultValue = "reviews"),
-                @ServerVariable(
-                    name = "bookings",
-                    description = "Booking data",
-                    defaultValue = "bookings"),
-                @ServerVariable(
-                    name = "user",
-                    description = "User data",
-                    defaultValue = "user"),
-                @ServerVariable(
-                    name = "availability",
-                    description = "Flight availabilities",
-                    defaultValue = "availability")
-            })
+                    @ServerVariable(
+                            name = "endpoint",
+                            description = "explore the API by tags",
+                            defaultValue = "",
+                            enumeration = {"availability", "bookings", "user", "reviews"})
+                    })
         },
         components = @Components(
                 schemas = { 
