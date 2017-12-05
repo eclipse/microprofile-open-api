@@ -80,7 +80,7 @@ import org.eclipse.microprofile.openapi.apps.airlines.model.User;
         authorizationCode = @OAuthFlow(
             authorizationUrl = "https://example.com/api/oauth/dialog",
             tokenUrl = "https://example.com/api/oauth/token"
-        )
+        ),
         password = @OAuthFlow(
             refreshUrl = "https://example.com/api/oauth/refresh"
         ),
@@ -89,6 +89,7 @@ import org.eclipse.microprofile.openapi.apps.airlines.model.User;
             scopes = @OAuthScope(
                 name = "read:reviews",
                 description = "search for a review"
+            )
         )
     )
 )

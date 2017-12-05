@@ -24,6 +24,9 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.eclipse.microprofile.openapi.annotations.tags.Tags;
+import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -108,7 +111,7 @@ public class BookingResource {
         security = @SecurityRequirement(
             name = "bookingSecurityScheme",
             scopes = {"write:bookings", "read:bookings"}
-        )
+        ),
         requestBody = @RequestBody(
             description = "Create a new booking with the provided information.",
             content = @Content(
