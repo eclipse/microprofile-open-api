@@ -1,47 +1,64 @@
 openapi: 3.0.0
 info:
-  title: Liberty REST APIs
-  description: Discover REST APIs available within Liberty
+  title: User Resource API
+  description: API resource for User model of the AirlinesRatingApp.
+  termsOfService: http://exampleurl.com/termsofservice
+  contact:
+    name: AirlinesRatingApp API Support Team
+    url: http://exampleurl.com/contact
+    email: ask@airlinessupport.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
   version: 1.0.0
+externalDocs:
+  description: instructions for how to deploy this app
+  url: https://github.com/microservices-api/oas3-airlines/blob/master/README.md
 servers:
-- url: http://arthurs-mbp.war.can.ibm.com:9080
-- url: https://arthurs-mbp.war.can.ibm.com:9443
+- url: localhost:9080/oas3-airlines/
+  description: Home page of airlines app
+  variables:
+    reviews:
+      description: Reviews of the app by users
+      default: reviews
+    bookings:
+      description: Booking data
+      default: bookings
+    user:
+      description: User data
+      default: user
+    availability:
+      description: Flight availabilities
+      default: availability
+security:
+- airlinesRatingApp_auth: []
 tags:
-- name: availability
-  description: availability
-- name: Bookings
-  description: All the bookings methods
-- name: Reviews
-  description: All the review methods
-- name: Availability
-  description: All the availibility methods
-- name: create
-  description: Operations about create
+- name: Airlines
+  description: airlines app
+- name: getAirlines
+  description: method to retrieve all airlines
 - name: getFlights
   description: method to retrieve all flights available
   externalDocs:
     description: A list of all the flights offered by the app
     url: http://airlinesratingapp.com/ourflights
-- name: booking
-  description: booking
-- name: airlines
-  description: airlines
-- name: user
-  description: Operations about user
-- name: Airlines
-  description: airlines app
-- name: review
-  description: review
+- name: Availability
+  description: All the availibility methods
+- name: Bookings
+  description: All the bookings methods
+- name: Reviews
+  description: All the review methods
 paths:
   /:
     get:
       tags:
       - airlines
+      - Airlines
       summary: Retrieve all available airlines
       operationId: getAirlines
       responses:
         200:
-          description: successfully found airlines
+          description: successful operation
           content:
             application/json:
               schema:
@@ -50,28 +67,12 @@ paths:
           description: No airlines found
           content:
             n/a: {}
-      security:
-      - airlinesRatingApp_auth: []
-    servers:
-    - url: localhost:9080/oas3-airlines/
-      description: Home page of airlines app
-      variables:
-        reviews:
-          description: Reviews of the app by users
-          default: reviews
-        bookings:
-          description: Booking data
-          default: bookings
-        user:
-          description: User data
-          default: user
-        availability:
-          description: Flight availabilities
-          default: availability
   /availability:
     get:
       tags:
+      - getFlights
       - availability
+      - Availability
       summary: Retrieve all available flights
       operationId: getFlights
       parameters:
@@ -105,16 +106,14 @@ paths:
         required: true
         schema:
           minimum: 0
-          type: integer
-          format: int32
+          type: string
       - name: numberOfChildren
         in: query
         description: Number of children on the flight
         required: true
         schema:
           minimum: 0
-          type: integer
-          format: int32
+          type: string
       responses:
         200:
           description: successful operation
@@ -126,28 +125,11 @@ paths:
           description: No available flights found
           content:
             n/a: {}
-      security:
-      - airlinesRatingApp_auth: []
-    servers:
-    - url: localhost:9080/oas3-airlines/
-      description: Home page of airlines app
-      variables:
-        reviews:
-          description: Reviews of the app by users
-          default: reviews
-        bookings:
-          description: Booking data
-          default: bookings
-        user:
-          description: User data
-          default: user
-        availability:
-          description: Flight availabilities
-          default: availability
   /bookings:
     get:
       tags:
       - booking
+      - Bookings
       summary: Retrieve all bookings for current user
       operationId: getAllBookings
       responses:
@@ -159,25 +141,16 @@ paths:
                 $ref: '#/components/schemas/Booking'
         404:
           description: No bookings found for the user.
-      security:
-      - airlinesRatingApp_auth: []
     post:
       tags:
       - booking
+      - Bookings
       summary: Create a booking
       description: Create a new booking record with the booking information provided.
       operationId: createBooking
       requestBody:
-        description: Create a new booking with the provided information.
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Booking'
-            examples:
-              booking:
-                summary: External booking example
-                description: booking
-                externalValue: http://foo.bar/examples/booking-example.json
+        description: booking to create
+        required: true
       responses:
         201:
           description: Booking created
@@ -189,28 +162,11 @@ paths:
       callbacks:
         get all the bookings:
           http://localhost:9080/airlines/bookings: {}
-      security:
-      - airlinesRatingApp_auth: []
-    servers:
-    - url: localhost:9080/oas3-airlines/
-      description: Home page of airlines app
-      variables:
-        reviews:
-          description: Reviews of the app by users
-          default: reviews
-        bookings:
-          description: Booking data
-          default: bookings
-        user:
-          description: User data
-          default: user
-        availability:
-          description: Flight availabilities
-          default: availability
   /bookings/{id}:
     get:
       tags:
       - booking
+      - Bookings
       summary: Get a booking with ID
       operationId: getBookingById
       parameters:
@@ -220,7 +176,6 @@ paths:
         required: true
         schema:
           type: integer
-          format: int32
       responses:
         200:
           description: Booking retrieved
@@ -230,11 +185,10 @@ paths:
                 $ref: '#/components/schemas/Booking'
         404:
           description: Booking not found
-      security:
-      - airlinesRatingApp_auth: []
     put:
       tags:
       - booking
+      - Bookings
       summary: Update a booking with ID
       operationId: updateBookingId
       parameters:
@@ -243,22 +197,141 @@ paths:
         required: true
         schema:
           type: integer
-          format: int32
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Booking'
+              required:
+              - airMiles
+              - creditCard
+              - departtureFlight
+              - returningFlight
+              - seatPreference
+              type: object
+              properties:
+                departtureFlight:
+                  required:
+                  - airline
+                  - airportFrom
+                  - airportTo
+                  - dateTime
+                  - number
+                  - price
+                  - status
+                  type: object
+                  properties:
+                    airline:
+                      required:
+                      - contactPhone
+                      - name
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: Acme Air
+                        contactPhone:
+                          type: string
+                          example: 1-888-1234-567
+                    dateTime:
+                      pattern: dateTime
+                      type: string
+                      example: 2016-03-05 18:00
+                    number:
+                      type: string
+                      example: AC190
+                    status:
+                      type: string
+                      example: On Schedule
+                    airportFrom:
+                      type: string
+                      example: YYZ
+                    airportTo:
+                      type: string
+                      example: LAX
+                    price:
+                      type: string
+                      example: US$350
+                returningFlight:
+                  required:
+                  - airline
+                  - airportFrom
+                  - airportTo
+                  - dateTime
+                  - number
+                  - price
+                  - status
+                  type: object
+                  properties:
+                    airline:
+                      required:
+                      - contactPhone
+                      - name
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: Acme Air
+                        contactPhone:
+                          type: string
+                          example: 1-888-1234-567
+                    dateTime:
+                      pattern: dateTime
+                      type: string
+                      example: 2016-03-05 18:00
+                    number:
+                      type: string
+                      example: AC190
+                    status:
+                      type: string
+                      example: On Schedule
+                    airportFrom:
+                      type: string
+                      example: YYZ
+                    airportTo:
+                      type: string
+                      example: LAX
+                    price:
+                      type: string
+                      example: US$350
+                creditCard:
+                  required:
+                  - cardNumber
+                  - cardholderName
+                  - cvv
+                  - expiryDate
+                  - issuer
+                  type: object
+                  properties:
+                    issuer:
+                      type: string
+                      example: VISA
+                    cardholderName:
+                      type: string
+                      example: Joe Smith
+                    cardNumber:
+                      type: string
+                      example: '**********1234'
+                    cvv:
+                      type: string
+                      example: "0322"
+                    expiryDate:
+                      type: string
+                      example: 04/19
+                airMiles:
+                  type: string
+                  example: 32126319
+                seatPreference:
+                  type: string
+                  example: window
       responses:
         200:
           description: Booking updated
         404:
           description: Booking not found
-      security:
-      - airlinesRatingApp_auth: []
     delete:
       tags:
       - booking
+      - Bookings
       summary: Delete a booking with ID
       operationId: deleteBookingById
       parameters:
@@ -267,71 +340,33 @@ paths:
         required: true
         schema:
           type: integer
-          format: int32
       responses:
         200:
           description: Booking deleted successfully.
         404:
           description: Booking not found.
-      security:
-      - airlinesRatingApp_auth: []
-    servers:
-    - url: localhost:9080/oas3-airlines/
-      description: Home page of airlines app
-      variables:
-        reviews:
-          description: Reviews of the app by users
-          default: reviews
-        bookings:
-          description: Booking data
-          default: bookings
-        user:
-          description: User data
-          default: user
-        availability:
-          description: Flight availabilities
-          default: availability
   /reviews:
     get:
       tags:
       - review
+      - Reviews
       summary: get all the reviews
       operationId: getAllReviews
       responses:
         200:
           description: successful operation
-          headers:
-            Request-Limit:
-              description: The number of allowed requests in the current period
-              style: simple
-              schema:
-                type: integer
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Review'
-      security:
-      - airlinesRatingApp_auth: []
-      servers:
-      - url: http://localhost:9080/airlines/reviews/
-        description: endpoint for all the review related methods
-        variables: {}
     post:
       tags:
       - review
+      - Reviews
       summary: Create a Review
       operationId: createReview
       requestBody:
-        description: example review to add
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Review'
-            examples:
-              review:
-                summary: External review example
-                description: review
-                externalValue: http://foo.bar/examples/review-example.json
+        description: review to create
         required: true
       responses:
         201:
@@ -364,26 +399,11 @@ paths:
           id:
             description: id of the review
             default: "1"
-    servers:
-    - url: localhost:9080/oas3-airlines/
-      description: Home page of airlines app
-      variables:
-        reviews:
-          description: Reviews of the app by users
-          default: reviews
-        bookings:
-          description: Booking data
-          default: bookings
-        user:
-          description: User data
-          default: user
-        availability:
-          description: Flight availabilities
-          default: availability
   /reviews/{id}:
     get:
       tags:
       - review
+      - Reviews
       summary: Get a review with ID
       operationId: getReviewById
       parameters:
@@ -391,9 +411,10 @@ paths:
         in: path
         description: ID of the booking
         required: true
-        schema:
-          type: integer
-          format: int32
+        content:
+          '*/*':
+            schema:
+              type: integer
       responses:
         200:
           description: Review retrieved
@@ -403,15 +424,10 @@ paths:
                 $ref: '#/components/schemas/Review'
         404:
           description: Review not found
-      security:
-      - airlinesRatingApp_auth: []
-      servers:
-      - url: http://localhost:9080/airlines/reviews/
-        description: endpoint for all the review related methods
-        variables: {}
     delete:
       tags:
       - review
+      - Reviews
       summary: Delete a Review with ID
       operationId: deleteReview
       parameters:
@@ -420,38 +436,16 @@ paths:
         required: true
         schema:
           type: integer
-          format: int32
       responses:
         200:
           description: Review deleted
         404:
           description: Review not found
-      security:
-      - airlinesRatingApp_auth: []
-      servers:
-      - url: http://localhost:9080/airlines/reviews/
-        description: endpoint for all the review related methods
-        variables: {}
-    servers:
-    - url: localhost:9080/oas3-airlines/
-      description: Home page of airlines app
-      variables:
-        reviews:
-          description: Reviews of the app by users
-          default: reviews
-        bookings:
-          description: Booking data
-          default: bookings
-        user:
-          description: User data
-          default: user
-        availability:
-          description: Flight availabilities
-          default: availability
   /reviews/{user}:
     get:
       tags:
       - review
+      - Reviews
       summary: Get all reviews by user
       operationId: getReviewByUser
       parameters:
@@ -459,8 +453,10 @@ paths:
         in: path
         description: username of the user for the reviews
         required: true
-        schema:
-          type: string
+        content:
+          '*/*':
+            schema:
+              type: string
       responses:
         200:
           description: Review(s) retrieved
@@ -470,32 +466,11 @@ paths:
                 $ref: '#/components/schemas/Review'
         404:
           description: Review(s) not found
-      security:
-      - airlinesRatingApp_auth: []
-      servers:
-      - url: http://localhost:9080/airlines/reviews/
-        description: endpoint for all the review related methods
-        variables: {}
-    servers:
-    - url: localhost:9080/oas3-airlines/
-      description: Home page of airlines app
-      variables:
-        reviews:
-          description: Reviews of the app by users
-          default: reviews
-        bookings:
-          description: Booking data
-          default: bookings
-        user:
-          description: User data
-          default: user
-        availability:
-          description: Flight availabilities
-          default: availability
   /reviews/{airline}:
     get:
       tags:
       - review
+      - Reviews
       summary: Get all reviews by airlines
       operationId: getReviewByAirline
       parameters:
@@ -503,8 +478,10 @@ paths:
         in: path
         description: name of the airlines for the reviews
         required: true
-        schema:
-          type: string
+        content:
+          '*/*':
+            schema:
+              type: string
       responses:
         200:
           description: Review(s) retrieved
@@ -514,32 +491,11 @@ paths:
                 $ref: '#/components/schemas/Review'
         404:
           description: Review(s) not found
-      security:
-      - airlinesRatingApp_auth: []
-      servers:
-      - url: http://localhost:9080/airlines/reviews/
-        description: endpoint for all the review related methods
-        variables: {}
-    servers:
-    - url: localhost:9080/oas3-airlines/
-      description: Home page of airlines app
-      variables:
-        reviews:
-          description: Reviews of the app by users
-          default: reviews
-        bookings:
-          description: Booking data
-          default: bookings
-        user:
-          description: User data
-          default: user
-        availability:
-          description: Flight availabilities
-          default: availability
   /reviews/{user}/{airlines}:
     get:
       tags:
       - review
+      - Reviews
       summary: Get all reviews for an airline by User
       operationId: getReviewByAirlineAndUser
       parameters:
@@ -562,165 +518,73 @@ paths:
                 $ref: '#/components/schemas/Review'
         404:
           description: Review(s) not found
-      security:
-      - airlinesRatingApp_auth: []
-      servers:
-      - url: http://localhost:9080/airlines/reviews/
-        description: endpoint for all the review related methods
-        variables: {}
-    servers:
-    - url: localhost:9080/oas3-airlines/
-      description: Home page of airlines app
-      variables:
-        reviews:
-          description: Reviews of the app by users
-          default: reviews
-        bookings:
-          description: Booking data
-          default: bookings
-        user:
-          description: User data
-          default: user
-        availability:
-          description: Flight availabilities
-          default: availability
   /user:
     post:
       tags:
       - user
-      - create
       summary: Create user
       description: This can only be done by the logged in user.
       operationId: createUser
-      parameters:
-      - name: id
-        in: query
-        description: User id for the new user record to be created
-        required: true
-        style: form
-        allowReserved: true
-        schema:
-          type: integer
-          format: int32
-      - name: userName
-        in: query
-        description: Username for the new user record to be created
-        required: true
-        schema:
-          type: string
-          externalDocs:
-            description: How to create good user names.
-            url: http://exampleurl.com/usernames
-      - name: password
-        in: query
-        description: User password for the new user record to be created
-        required: true
-        schema:
-          type: string
-          externalDocs:
-            description: How to create good passwords.
-            url: http://exampleurl.com/passwords
-      - name: firstName
-        in: query
-        description: User's first name for the new user record to be created
-        required: true
-        schema:
-          type: string
-      - name: lastName
-        in: query
-        description: User's last name for the new user record to be created
-        required: true
-        style: form
-        schema:
-          type: string
-      - name: sex
-        in: query
-        description: User's sex for the new user record to be created
-        required: true
-        style: form
-        schema:
-          type: string
-      - name: age
-        in: query
-        description: User's age for the new user record to be created
-        required: true
-        schema:
-          type: integer
-          format: int64
-      - name: phone
-        in: query
-        description: User phone number for the new user record to be created
-        required: true
-        schema:
-          type: string
-      - name: status
-        in: query
-        description: User status for the new user record to be created
-        required: true
-        schema:
-          type: integer
       requestBody:
-        description: Record of a new user to be created in the system.
+        description: Created user object
         content:
-          application/json:
+          '*/*':
             schema:
-              $ref: '#/components/schemas/User'
-            examples:
-              user:
-                summary: External user example
-                description: user
-                externalValue: http://foo.bar/examples/user-example.json
-            encoding:
-              email:
-                contentType: text/plain
-                style: form
-                explode: true
-                allowReserved: true
+              required:
+              - age
+              - email
+              - firstName
+              - id
+              - lastName
+              - password
+              - phone
+              - sex
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 3456
+                password:
+                  type: string
+                  example: bobSm37
+                firstName:
+                  type: string
+                  example: Bob
+                lastName:
+                  type: string
+                  example: Smith
+                sex:
+                  type: string
+                  example: M
+                age:
+                  type: integer
+                  example: 37
+                email:
+                  type: string
+                  example: bob@test.ca
+                phone:
+                  type: string
+                  example: 123-456-7890
+                username:
+                  type: string
+                status:
+                  title: User Status
+                  type: integer
         required: true
       responses:
         200:
-          description: Successfully created list of users.
+          description: New user record successfully created.
         400:
-          description: Unable to create list of users.
+          description: Unable to create this user record.
       security:
-      - airlinesRatingApp_auth: []
-    servers:
-    - url: localhost:9080/oas3-airlines/
-      description: Home page of airlines app
-      variables:
-        reviews:
-          description: Reviews of the app by users
-          default: reviews
-        bookings:
-          description: Booking data
-          default: bookings
-        user:
-          description: User data
-          default: user
-        availability:
-          description: Flight availabilities
-          default: availability
+      - httpTestScheme:
+        - write:users
   /user/createWithArray:
     post:
       tags:
       - user
       summary: Creates list of users with given input array
       operationId: createUsersFromArray
-      parameters:
-      - name: userArray
-        in: query
-        description: An array of User objects to create records.
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-            encoding:
-              firstName:
-                contentType: text/plain
-                style: form
-                explode: true
-                allowReserved: true
       requestBody:
         description: Array of user object
         content:
@@ -728,7 +592,46 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/User'
+                required:
+                - age
+                - email
+                - firstName
+                - id
+                - lastName
+                - password
+                - phone
+                - sex
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 3456
+                  password:
+                    type: string
+                    example: bobSm37
+                  firstName:
+                    type: string
+                    example: Bob
+                  lastName:
+                    type: string
+                    example: Smith
+                  sex:
+                    type: string
+                    example: M
+                  age:
+                    type: integer
+                    example: 37
+                  email:
+                    type: string
+                    example: bob@test.ca
+                  phone:
+                    type: string
+                    example: 123-456-7890
+                  username:
+                    type: string
+                  status:
+                    title: User Status
+                    type: integer
         required: true
       responses:
         200:
@@ -736,23 +639,8 @@ paths:
         400:
           description: Unable to create list of users.
       security:
-      - airlinesRatingApp_auth: []
-    servers:
-    - url: localhost:9080/oas3-airlines/
-      description: Home page of airlines app
-      variables:
-        reviews:
-          description: Reviews of the app by users
-          default: reviews
-        bookings:
-          description: Booking data
-          default: bookings
-        user:
-          description: User data
-          default: user
-        availability:
-          description: Flight availabilities
-          default: availability
+      - httpTestScheme:
+        - write:users
   /user/createWithList:
     post:
       tags:
@@ -766,7 +654,46 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/User'
+                required:
+                - age
+                - email
+                - firstName
+                - id
+                - lastName
+                - password
+                - phone
+                - sex
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 3456
+                  password:
+                    type: string
+                    example: bobSm37
+                  firstName:
+                    type: string
+                    example: Bob
+                  lastName:
+                    type: string
+                    example: Smith
+                  sex:
+                    type: string
+                    example: M
+                  age:
+                    type: integer
+                    example: 37
+                  email:
+                    type: string
+                    example: bob@test.ca
+                  phone:
+                    type: string
+                    example: 123-456-7890
+                  username:
+                    type: string
+                  status:
+                    title: User Status
+                    type: integer
         required: true
       responses:
         200:
@@ -774,23 +701,8 @@ paths:
         400:
           description: Unable to create list of users.
       security:
-      - airlinesRatingApp_auth: []
-    servers:
-    - url: localhost:9080/oas3-airlines/
-      description: Home page of airlines app
-      variables:
-        reviews:
-          description: Reviews of the app by users
-          default: reviews
-        bookings:
-          description: Booking data
-          default: bookings
-        user:
-          description: User data
-          default: user
-        availability:
-          description: Flight availabilities
-          default: availability
+      - httpTestScheme:
+        - write:users
   /user/{username}:
     get:
       tags:
@@ -833,7 +745,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
       security:
-      - airlinesRatingApp_auth: []
+      - httpTestScheme:
+        - write:users
     put:
       tags:
       - user
@@ -848,16 +761,51 @@ paths:
         schema:
           type: string
       requestBody:
-        description: Record of a new user to be created in the system.
+        description: Updated user object
         content:
-          application/json:
+          '*/*':
             schema:
-              $ref: '#/components/schemas/User'
-            examples:
-              user:
-                summary: Example user properties to update
-                description: user
-                value: Properties to update in JSON format here
+              required:
+              - age
+              - email
+              - firstName
+              - id
+              - lastName
+              - password
+              - phone
+              - sex
+              type: object
+              properties:
+                id:
+                  type: integer
+                  example: 3456
+                password:
+                  type: string
+                  example: bobSm37
+                firstName:
+                  type: string
+                  example: Bob
+                lastName:
+                  type: string
+                  example: Smith
+                sex:
+                  type: string
+                  example: M
+                age:
+                  type: integer
+                  example: 37
+                email:
+                  type: string
+                  example: bob@test.ca
+                phone:
+                  type: string
+                  example: 123-456-7890
+                username:
+                  type: string
+                status:
+                  title: User Status
+                  type: integer
+        required: true
       responses:
         200:
           description: User updated successfully
@@ -885,7 +833,8 @@ paths:
         404:
           description: User not found
       security:
-      - airlinesRatingApp_auth: []
+      - httpTestScheme:
+        - write:users
     delete:
       tags:
       - user
@@ -907,23 +856,8 @@ paths:
         404:
           description: User not found
       security:
-      - airlinesRatingApp_auth: []
-    servers:
-    - url: localhost:9080/oas3-airlines/
-      description: Home page of airlines app
-      variables:
-        reviews:
-          description: Reviews of the app by users
-          default: reviews
-        bookings:
-          description: Booking data
-          default: bookings
-        user:
-          description: User data
-          default: user
-        availability:
-          description: Flight availabilities
-          default: availability
+      - httpTestScheme:
+        - write:users
   /user/{id}:
     get:
       tags:
@@ -937,7 +871,6 @@ paths:
         required: true
         schema:
           type: integer
-          format: int32
       responses:
         200:
           description: Successfully retrieved user by id.
@@ -978,23 +911,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
       security:
-      - airlinesRatingApp_auth: []
-    servers:
-    - url: localhost:9080/oas3-airlines/
-      description: Home page of airlines app
-      variables:
-        reviews:
-          description: Reviews of the app by users
-          default: reviews
-        bookings:
-          description: Booking data
-          default: bookings
-        user:
-          description: User data
-          default: user
-        availability:
-          description: Flight availabilities
-          default: availability
+      - httpTestScheme:
+        - write:users
   /user/login:
     get:
       tags:
@@ -1030,23 +948,8 @@ paths:
         400:
           description: Invalid username/password supplied
       security:
-      - airlinesRatingApp_auth: []
-    servers:
-    - url: localhost:9080/oas3-airlines/
-      description: Home page of airlines app
-      variables:
-        reviews:
-          description: Reviews of the app by users
-          default: reviews
-        bookings:
-          description: Booking data
-          default: bookings
-        user:
-          description: User data
-          default: user
-        availability:
-          description: Flight availabilities
-          default: availability
+      - httpTestScheme:
+        - write:users
   /user/logout:
     get:
       tags:
@@ -1057,26 +960,11 @@ paths:
         url: http://exampleurl.com/policy
       operationId: logOutUser
       responses:
-        default:
-          description: no description
+        200:
+          description: Successful user logout.
       security:
-      - airlinesRatingApp_auth: []
-    servers:
-    - url: localhost:9080/oas3-airlines/
-      description: Home page of airlines app
-      variables:
-        reviews:
-          description: Reviews of the app by users
-          default: reviews
-        bookings:
-          description: Booking data
-          default: bookings
-        user:
-          description: User data
-          default: user
-        availability:
-          description: Flight availabilities
-          default: availability
+      - httpTestScheme:
+        - write:users
 components:
   schemas:
     User:
@@ -1093,7 +981,6 @@ components:
       properties:
         id:
           type: integer
-          format: int32
           example: 3456
         password:
           type: string
@@ -1109,7 +996,6 @@ components:
           example: M
         age:
           type: integer
-          format: int32
           example: 37
         email:
           type: string
@@ -1120,8 +1006,8 @@ components:
         username:
           type: string
         status:
+          title: User Status
           type: integer
-          format: int32
     Airline:
       required:
       - contactPhone
@@ -1136,6 +1022,7 @@ components:
           example: 1-888-1234-567
     Flight:
       required:
+      - airline
       - airportFrom
       - airportTo
       - dateTime
@@ -1145,7 +1032,17 @@ components:
       type: object
       properties:
         airline:
-          $ref: '#/components/schemas/Airline'
+          required:
+          - contactPhone
+          - name
+          type: object
+          properties:
+            name:
+              type: string
+              example: Acme Air
+            contactPhone:
+              type: string
+              example: 1-888-1234-567
         dateTime:
           pattern: dateTime
           type: string
@@ -1168,37 +1065,192 @@ components:
     Booking:
       required:
       - airMiles
+      - creditCard
+      - departtureFlight
+      - returningFlight
       - seatPreference
       type: object
       properties:
         departtureFlight:
-          $ref: '#/components/schemas/Flight'
+          required:
+          - airline
+          - airportFrom
+          - airportTo
+          - dateTime
+          - number
+          - price
+          - status
+          type: object
+          properties:
+            airline:
+              required:
+              - contactPhone
+              - name
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Acme Air
+                contactPhone:
+                  type: string
+                  example: 1-888-1234-567
+            dateTime:
+              pattern: dateTime
+              type: string
+              example: 2016-03-05 18:00
+            number:
+              type: string
+              example: AC190
+            status:
+              type: string
+              example: On Schedule
+            airportFrom:
+              type: string
+              example: YYZ
+            airportTo:
+              type: string
+              example: LAX
+            price:
+              type: string
+              example: US$350
         returningFlight:
-          $ref: '#/components/schemas/Flight'
+          required:
+          - airline
+          - airportFrom
+          - airportTo
+          - dateTime
+          - number
+          - price
+          - status
+          type: object
+          properties:
+            airline:
+              required:
+              - contactPhone
+              - name
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Acme Air
+                contactPhone:
+                  type: string
+                  example: 1-888-1234-567
+            dateTime:
+              pattern: dateTime
+              type: string
+              example: 2016-03-05 18:00
+            number:
+              type: string
+              example: AC190
+            status:
+              type: string
+              example: On Schedule
+            airportFrom:
+              type: string
+              example: YYZ
+            airportTo:
+              type: string
+              example: LAX
+            price:
+              type: string
+              example: US$350
         creditCard:
-          $ref: '#/components/schemas/CreditCard'
+          required:
+          - cardNumber
+          - cardholderName
+          - cvv
+          - expiryDate
+          - issuer
+          type: object
+          properties:
+            issuer:
+              type: string
+              example: VISA
+            cardholderName:
+              type: string
+              example: Joe Smith
+            cardNumber:
+              type: string
+              example: '**********1234'
+            cvv:
+              type: string
+              example: "0322"
+            expiryDate:
+              type: string
+              example: 04/19
         airMiles:
           type: string
-          example: "32126319"
+          example: 32126319
         seatPreference:
           type: string
           example: window
     Review:
       required:
+      - airlines
       - id
       - rating
+      - user
       type: object
       properties:
         id:
           type: string
-          example: "0"
+          example: 0
         user:
-          $ref: '#/components/schemas/User'
+          required:
+          - age
+          - email
+          - firstName
+          - id
+          - lastName
+          - password
+          - phone
+          - sex
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 3456
+            password:
+              type: string
+              example: bobSm37
+            firstName:
+              type: string
+              example: Bob
+            lastName:
+              type: string
+              example: Smith
+            sex:
+              type: string
+              example: M
+            age:
+              type: integer
+              example: 37
+            email:
+              type: string
+              example: bob@test.ca
+            phone:
+              type: string
+              example: 123-456-7890
+            username:
+              type: string
+            status:
+              title: User Status
+              type: integer
         airlines:
-          $ref: '#/components/schemas/Airline'
+          required:
+          - contactPhone
+          - name
+          type: object
+          properties:
+            name:
+              type: string
+              example: Acme Air
+            contactPhone:
+              type: string
+              example: 1-888-1234-567
         rating:
           type: integer
-          format: int32
           example: 8
         comment:
           type: string
@@ -1232,8 +1284,9 @@ components:
       type: http
       description: user security scheme
       name: httpTestScheme
+      in: query
       scheme: testScheme
-    api_key:
+    airlinesRatingApp_auth:
       type: apiKey
       description: authentication needed to access Airlines app
       name: airlinesRatingApp_auth
@@ -1241,6 +1294,8 @@ components:
     reviewoauth2:
       type: oauth2
       description: authentication needed to create and delete reviews
+      name: reviewoauth2
+      in: query
       flows:
         implicit:
           authorizationUrl: https://example.com/api/oauth/dialog
