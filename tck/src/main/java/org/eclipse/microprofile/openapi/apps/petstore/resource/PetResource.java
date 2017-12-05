@@ -65,20 +65,6 @@ import javax.ws.rs.Consumes;
 @Schema(
         name = "pet",
         description = "Operations on pets resource")
-@OpenAPIDefinition(
-    info = @Info(
-        title = "Pets Operations",
-        version = "1.0",
-        description = "Operations about pets",
-        license = @License(
-            name = "Apache 2.0",
-            url = "http://www.apache.org/licenses/LICENSE-2.0.html"),
-        contact = @Contact(
-            name = "PetStore API Support",
-            url = "https://github.com/eclipse/microprofile-open-api",
-            email = "support@petstore.com")
-    )
-)
 @SecuritySchemes(
     value = {
         @SecurityScheme(

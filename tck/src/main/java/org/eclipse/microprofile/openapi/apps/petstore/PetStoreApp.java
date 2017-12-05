@@ -36,14 +36,16 @@ import javax.ws.rs.core.Application;
 @Path("/")
 @OpenAPIDefinition(
     info = @Info(
-        title="Swagger Petstore", 
-        version = "1.0", 
-        contact=@Contact(
-            email="apiteam@swagger.io", 
-            name = ""), 
-        license=@License(
-            name = "Apache 2.0", 
-            url="http://www.apache.org/licenses/LICENSE-2.0.html")
+        title = "Pet Store App",
+        version = "2.0",
+        description = "Pet Store App API",
+        license = @License(
+            name = "Apache 2.0",
+            url = "http://www.apache.org/licenses/LICENSE-2.0.html"),
+        contact = @Contact(
+            name = "PetStore API Support",
+            url = "https://github.com/eclipse/microprofile-open-api",
+            email = "support@petstore.com")
     ),
     externalDocs = @ExternalDocumentation(
         url = "http://swagger.io", 

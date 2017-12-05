@@ -46,7 +46,12 @@ import org.eclipse.microprofile.openapi.apps.airlines.model.Booking;
     value = @Tag(
         name = "Bookings", 
         description = "All the bookings methods"))
-
+@SecurityScheme(
+    securitySchemeName = "bookingSecurityScheme",
+    type = SecuritySchemeType.OPENIDCONNECT,
+    description = "Security Scheme for booking resource",
+    openIdConnectUrl = "http://openidconnect.com/testurl"
+)
 public class BookingResource {
     private Map<Integer, Booking> bookings = new ConcurrentHashMap<Integer, Booking>();
     private volatile int currentId = 0;
@@ -100,6 +105,10 @@ public class BookingResource {
         description = "Create a new booking record with the booking information provided.",
         operationId = "createBooking",
         tags = {"booking"},
+        security = @SecurityRequirement(
+            name = "bookingSecurityScheme",
+            scopes = {"write:bookings", "read:bookings"}
+        )
         requestBody = @RequestBody(
             description = "Create a new booking with the provided information.",
             content = @Content(
