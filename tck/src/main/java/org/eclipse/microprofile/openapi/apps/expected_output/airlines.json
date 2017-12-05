@@ -1,0 +1,1372 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Liberty REST APIs",
+        "description": "Discover REST APIs available within Liberty",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://9.42.28.163:30703"
+        }
+    ],
+    "tags": [
+        {
+            "name": "bookings",
+            "description": "all the bookings methods"
+        },
+        {
+            "name": "reviews",
+            "description": "all the review methods"
+        },
+        {
+            "name": "availability",
+            "description": "all the availibility methods"
+        },
+        {
+            "name": "Airlines",
+            "description": "airlines app"
+        },
+        {
+            "name": "airline",
+            "description": "all the airlines methods"
+        }
+    ],
+    "paths": {
+        "/airlines/": {
+            "get": {
+                "tags": [
+                    "airline"
+                ],
+                "summary": "Retrieve all available airlines",
+                "operationId": "getAirlines",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Airline"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No airlines found",
+                        "content": {
+                            "n/a": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/airlines/availability": {
+            "get": {
+                "tags": [
+                    "availability"
+                ],
+                "summary": "Retrieve all available flights",
+                "operationId": "getFlights",
+                "parameters": [
+                    {
+                        "name": "departureDate",
+                        "in": "query",
+                        "description": "Customer departure date",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "airportFrom",
+                        "in": "query",
+                        "description": "Airport the customer departs from",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "returningDate",
+                        "in": "query",
+                        "description": "Customer return date",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "airportTo",
+                        "in": "query",
+                        "description": "Airport the customer returns to",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "numberOfAdults",
+                        "in": "query",
+                        "description": "Number of adults on the flight",
+                        "required": true,
+                        "schema": {
+                            "minimum": 0,
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "numberOfChildren",
+                        "in": "query",
+                        "description": "Number of children on the flight",
+                        "required": true,
+                        "schema": {
+                            "minimum": 0,
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "applictaion/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Flight"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No available flights found",
+                        "content": {
+                            "n/a": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/airlines/bookings/{id}": {
+            "get": {
+                "tags": [
+                    "bookings"
+                ],
+                "summary": "Get a booking with ID",
+                "operationId": "getBooking",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the booking",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Booking retrieved",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Booking"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Booking not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "bookings"
+                ],
+                "summary": "Update a booking with ID",
+                "operationId": "updateBooking",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Booking"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Booking updated"
+                    },
+                    "404": {
+                        "description": "Booking not found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "bookings"
+                ],
+                "summary": "Delete a booking with ID",
+                "operationId": "deleteBooking",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Booking deleted successfully."
+                    },
+                    "404": {
+                        "description": "Booking not found."
+                    }
+                }
+            }
+        },
+        "/airlines/bookings": {
+            "get": {
+                "tags": [
+                    "bookings"
+                ],
+                "summary": "Retrieve all bookings for current user",
+                "operationId": "getBookings",
+                "responses": {
+                    "200": {
+                        "description": "Bookings retrieved",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Booking"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "No bookings found for the user."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "bookings"
+                ],
+                "summary": "Create a booking",
+                "description": "Create a new booking record with the booking information provided.",
+                "operationId": "createBooking",
+                "requestBody": {
+                    "description": "Create a new booking with the provided information.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Booking"
+                            },
+                            "examples": {
+                                "booking": {
+                                    "summary": "External booking example",
+                                    "description": "booking",
+                                    "externalValue": "http://foo.bar/examples/booking-example.json"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Booking created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string",
+                                    "description": "id of the new booking"
+                                }
+                            }
+                        }
+                    }
+                },
+                "callbacks": {
+                    "get all the bookings": {
+                        "http://localhost:9080/airlines/bookings": {}
+                    }
+                }
+            }
+        },
+        "/airlines/reviews": {
+            "get": {
+                "tags": [
+                    "reviews"
+                ],
+                "summary": "get all the reviews",
+                "operationId": "getAllReviews",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Review"
+                                }
+                            }
+                        }
+                    }
+                },
+                "servers": [
+                    {
+                        "url": "http://localhost:9080/airlines/reviews/",
+                        "description": "endpoint for all the review related methods",
+                        "variables": {}
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "reviews"
+                ],
+                "summary": "Create a Review",
+                "operationId": "createReview",
+                "requestBody": {
+                    "description": "example review to add",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Review"
+                            },
+                            "examples": {
+                                "review": {
+                                    "summary": "External review example",
+                                    "description": "review",
+                                    "externalValue": "http://foo.bar/examples/review-example.json"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "review created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string",
+                                    "description": "id of the new review"
+                                }
+                            }
+                        }
+                    }
+                },
+                "callbacks": {
+                    "testCallback": {
+                        "localhost:9080/airlines/reviews/{id}": {}
+                    },
+                    "testCallback1": {
+                        "localhost:9080/airlines/reviews/{id}/1": {
+                            "get": {
+                                "summary": "get all the reviews",
+                                "operationId": "getAllReviews_1",
+                                "responses": {
+                                    "200": {
+                                        "description": "successful operation",
+                                        "content": {
+                                            "application/json": {
+                                                "schema": {
+                                                    "$ref": "#/components/schemas/Review"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "reviews": [
+                            "write:reviews"
+                        ]
+                    }
+                ],
+                "servers": [
+                    {
+                        "url": "localhost:9080/airlines/reviews/{id}",
+                        "description": "view of all the reviews",
+                        "variables": {
+                            "id": {
+                                "description": "id of the review",
+                                "default": "1"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "/airlines/reviews/{id}": {
+            "get": {
+                "tags": [
+                    "reviews"
+                ],
+                "summary": "Get a review with ID",
+                "operationId": "getReviewById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the booking",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Review retrieved",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Review"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Review not found"
+                    }
+                },
+                "servers": [
+                    {
+                        "url": "http://localhost:9080/airlines/reviews/",
+                        "description": "endpoint for all the review related methods",
+                        "variables": {}
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "reviews"
+                ],
+                "summary": "Delete a Review with ID",
+                "operationId": "deleteReview",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Review deleted"
+                    },
+                    "404": {
+                        "description": "Review not found"
+                    }
+                },
+                "servers": [
+                    {
+                        "url": "http://localhost:9080/airlines/reviews/",
+                        "description": "endpoint for all the review related methods",
+                        "variables": {}
+                    }
+                ]
+            }
+        },
+        "/airlines/reviews/{user}": {
+            "get": {
+                "tags": [
+                    "reviews"
+                ],
+                "summary": "Get all reviews by user",
+                "operationId": "getReviewByUser",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "username of the user for the reviews",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Review(s) retrieved",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Review"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Review(s) not found"
+                    }
+                },
+                "servers": [
+                    {
+                        "url": "http://localhost:9080/airlines/reviews/",
+                        "description": "endpoint for all the review related methods",
+                        "variables": {}
+                    }
+                ]
+            }
+        },
+        "/airlines/reviews/{user}/{airlines}": {
+            "get": {
+                "tags": [
+                    "reviews"
+                ],
+                "summary": "Get all reviews for an airline by User",
+                "operationId": "getReviewByAirlineAndUser",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "airlines",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Review(s) retrieved",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Review"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Review(s) not found"
+                    }
+                },
+                "servers": [
+                    {
+                        "url": "http://localhost:9080/airlines/reviews/",
+                        "description": "endpoint for all the review related methods",
+                        "variables": {}
+                    }
+                ]
+            }
+        },
+        "/airlines/reviews/{airline}": {
+            "get": {
+                "tags": [
+                    "reviews"
+                ],
+                "summary": "Get all reviews by airlines",
+                "operationId": "getReviewByAirline",
+                "parameters": [
+                    {
+                        "name": "airline",
+                        "in": "path",
+                        "description": "name of the airlines for the reviews",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Review(s) retrieved",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Review"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Review(s) not found"
+                    }
+                },
+                "servers": [
+                    {
+                        "url": "http://localhost:9080/airlines/reviews/",
+                        "description": "endpoint for all the review related methods",
+                        "variables": {}
+                    }
+                ]
+            }
+        },
+        "/airlines/user/createWithArray": {
+            "post": {
+                "summary": "Creates list of users with given input array",
+                "operationId": "createUsersFromArray",
+                "parameters": [
+                    {
+                        "name": "userArray",
+                        "in": "query",
+                        "description": "An array of User objects to create records.",
+                        "required": true,
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                },
+                                "encoding": {
+                                    "firstName": {
+                                        "contentType": "application/json",
+                                        "style": "UTF-8",
+                                        "allowReserved": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Array of user object",
+                    "content": {
+                        "*/*": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully created list of users."
+                    },
+                    "400": {
+                        "description": "Unable to create list of users."
+                    }
+                }
+            }
+        },
+        "/airlines/user/{id}": {
+            "get": {
+                "summary": "Get user by id",
+                "operationId": "getUserById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The name that needs to be fetched. Use 1 for testing.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved user by id.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        },
+                        "links": {
+                            "User name": {
+                                "operationId": "getUserByName",
+                                "parameters": {
+                                    "userId": "$request.path.id"
+                                },
+                                "description": "The username corresponding to provided user id"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid id supplied",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/airlines/user/{username}": {
+            "get": {
+                "summary": "Get user by user name",
+                "operationId": "getUserByUserName",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "path",
+                        "description": "The name that needs to be fetched. Use Bob1 for testing.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully retrieved user by user name.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid username supplied",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update user",
+                "description": "This can only be done by the logged in user.",
+                "operationId": "updateUser",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "path",
+                        "description": "User that needs to be updated",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Record of a new user to be created in the system.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            },
+                            "examples": {
+                                "user": {
+                                    "summary": "Example user properties to update",
+                                    "description": "user",
+                                    "value": "Properties to update in JSON format here"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                },
+                                "encoding": {
+                                    "password": {
+                                        "contentType": "application/json",
+                                        "style": "UTF-8",
+                                        "allowReserved": true
+                                    }
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                },
+                                "encoding": {
+                                    "password": {
+                                        "contentType": "application/json",
+                                        "style": "UTF-8",
+                                        "allowReserved": true
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid user supplied"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete user",
+                "description": "This can only be done by the logged in user.",
+                "operationId": "deleteUser",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "path",
+                        "description": "The name that needs to be deleted",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User deleted successfully"
+                    },
+                    "400": {
+                        "description": "Invalid username supplied"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/airlines/user/createWithList": {
+            "post": {
+                "summary": "Creates list of users with given input list",
+                "operationId": "createUsersFromList",
+                "requestBody": {
+                    "description": "List of user object",
+                    "content": {
+                        "*/*": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully created list of users."
+                    },
+                    "400": {
+                        "description": "Unable to create list of users."
+                    }
+                }
+            }
+        },
+        "/airlines/user/login": {
+            "get": {
+                "summary": "Logs user into the system",
+                "externalDocs": {
+                    "description": "Policy on user security.",
+                    "url": "http://exampleurl.com/policy"
+                },
+                "operationId": "logInUser",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "The user name for login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "The password for login in clear text",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful user login.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            },
+                            "application/xml": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    }
+                }
+            }
+        },
+        "/airlines/user/logout": {
+            "get": {
+                "summary": "Logs out current logged in user session",
+                "externalDocs": {
+                    "description": "Policy on user security.",
+                    "url": "http://exampleurl.com/policy"
+                },
+                "operationId": "logOutUser",
+                "responses": {
+                    "200": {
+                        "description": "Successful user logout."
+                    }
+                }
+            }
+        },
+        "/airlines/user": {
+            "post": {
+                "summary": "Create user",
+                "description": "This can only be done by the logged in user.",
+                "operationId": "createUser",
+                "parameters": [
+                    {
+                        "name": "_id",
+                        "in": "query",
+                        "description": "User id for the new user record to be created",
+                        "required": true,
+                        "style": "form",
+                        "allowReserved": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "userName",
+                        "in": "query",
+                        "description": "Username for the new user record to be created",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "externalDocs": {
+                                "description": "How to create good user names.",
+                                "url": "http://exampleurl.com/usernames"
+                            }
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "User password for the new user record to be created",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "externalDocs": {
+                                "description": "How to create good passwords.",
+                                "url": "http://exampleurl.com/passwords"
+                            }
+                        }
+                    },
+                    {
+                        "name": "firstName",
+                        "in": "query",
+                        "description": "User's first name for the new user record to be created",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "lastName",
+                        "in": "query",
+                        "description": "User's last name for the new user record to be created",
+                        "required": true,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "sex",
+                        "in": "query",
+                        "description": "User's sex for the new user record to be created",
+                        "required": true,
+                        "style": "form",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "age",
+                        "in": "query",
+                        "description": "User's age for the new user record to be created",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "phone",
+                        "in": "query",
+                        "description": "User phone number for the new user record to be created",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "User status for the new user record to be created",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Record of a new user to be created in the system.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            },
+                            "examples": {
+                                "user": {
+                                    "summary": "External user example",
+                                    "description": "user",
+                                    "externalValue": "http://foo.bar/examples/user-example.json"
+                                }
+                            },
+                            "encoding": {
+                                "email": {
+                                    "contentType": "text/plain",
+                                    "style": "UTF-8",
+                                    "explode": true,
+                                    "allowReserved": true
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "New user record successfully created."
+                    },
+                    "400": {
+                        "description": "Unable to create this user record."
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "User": {
+                "required": [
+                    "age",
+                    "email",
+                    "firstName",
+                    "lastName",
+                    "password",
+                    "phone",
+                    "sex"
+                ],
+                "type": "object",
+                "properties": {
+                    "password": {
+                        "type": "string",
+                        "example": "bobSm37"
+                    },
+                    "firstName": {
+                        "type": "string",
+                        "example": "Bob"
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "example": "Smith"
+                    },
+                    "sex": {
+                        "type": "string",
+                        "example": "M"
+                    },
+                    "age": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 37
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "bob@test.ca"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "123-456-7890"
+                    },
+                    "id": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "username": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                }
+            },
+            "Airline": {
+                "required": [
+                    "contactPhone",
+                    "name"
+                ],
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Acme Air"
+                    },
+                    "contactPhone": {
+                        "type": "string",
+                        "example": "1-888-1234-567"
+                    }
+                }
+            },
+            "Flight": {
+                "required": [
+                    "airportFrom",
+                    "airportTo",
+                    "dateTime",
+                    "number",
+                    "price",
+                    "status"
+                ],
+                "type": "object",
+                "properties": {
+                    "airline": {
+                        "$ref": "#/components/schemas/Airline"
+                    },
+                    "dateTime": {
+                        "pattern": "dateTime",
+                        "type": "string",
+                        "example": "2016-03-05 18:00"
+                    },
+                    "number": {
+                        "type": "string",
+                        "example": "AC190"
+                    },
+                    "status": {
+                        "type": "string",
+                        "example": "On Schedule"
+                    },
+                    "airportFrom": {
+                        "type": "string",
+                        "example": "YYZ"
+                    },
+                    "airportTo": {
+                        "type": "string",
+                        "example": "LAX"
+                    },
+                    "price": {
+                        "type": "string",
+                        "example": "US$350"
+                    }
+                }
+            },
+            "Booking": {
+                "required": [
+                    "airMiles",
+                    "seatPreference"
+                ],
+                "type": "object",
+                "properties": {
+                    "departtureFlight": {
+                        "$ref": "#/components/schemas/Flight"
+                    },
+                    "returningFlight": {
+                        "$ref": "#/components/schemas/Flight"
+                    },
+                    "creditCard": {
+                        "$ref": "#/components/schemas/CreditCard"
+                    },
+                    "airMiles": {
+                        "type": "string",
+                        "example": "32126319"
+                    },
+                    "seatPreference": {
+                        "type": "string",
+                        "example": "window"
+                    }
+                }
+            },
+            "Review": {
+                "required": [
+                    "rating"
+                ],
+                "type": "object",
+                "properties": {
+                    "user": {
+                        "$ref": "#/components/schemas/User"
+                    },
+                    "airlines": {
+                        "$ref": "#/components/schemas/Airline"
+                    },
+                    "rating": {
+                        "type": "integer",
+                        "format": "int32",
+                        "example": 8
+                    },
+                    "comment": {
+                        "type": "string",
+                        "example": "Great service!"
+                    }
+                }
+            },
+            "CreditCard": {
+                "required": [
+                    "cardNumber",
+                    "cardholderName",
+                    "cvv",
+                    "expiryDate",
+                    "issuer"
+                ],
+                "type": "object",
+                "properties": {
+                    "issuer": {
+                        "type": "string",
+                        "example": "VISA"
+                    },
+                    "cardholderName": {
+                        "type": "string",
+                        "example": "Joe Smith"
+                    },
+                    "cardNumber": {
+                        "type": "string",
+                        "example": "**********1234"
+                    },
+                    "cvv": {
+                        "type": "string",
+                        "example": "0322"
+                    },
+                    "expiryDate": {
+                        "type": "string",
+                        "example": "04/19"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "test": {
+                "type": "http",
+                "description": "user security scheme",
+                "name": "test",
+                "scheme": "testScheme"
+            },
+            "reviewoauth2": {
+                "type": "oauth2",
+                "description": "authentication needed to create and delete reviews",
+                "name": "reviewoauth2",
+                "flows": {
+                    "implicit": {
+                        "authorizationUrl": "https://example.com/api/oauth/dialog",
+                        "scopes": {
+                            "write:reviews": "create a review"
+                        }
+                    },
+                    "authorizationCode": {
+                        "authorizationUrl": "https://example.com/api/oauth/dialog",
+                        "tokenUrl": "https://example.com/api/oauth/token"
+                    }
+                }
+            }
+        }
+    }
+}
