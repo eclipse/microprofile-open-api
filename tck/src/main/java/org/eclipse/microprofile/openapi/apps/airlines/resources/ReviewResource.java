@@ -36,6 +36,7 @@ import org.eclipse.microprofile.openapi.annotations.parameters.Parameters;
 import org.eclipse.microprofile.openapi.annotations.links.LinkParameter;
 import org.eclipse.microprofile.openapi.annotations.links.Link;
 import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
+import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import org.eclipse.microprofile.openapi.annotations.callbacks.Callback;
 import org.eclipse.microprofile.openapi.annotations.callbacks.Callbacks;
@@ -128,7 +129,7 @@ public class ReviewResource {
             content = @Content(
                 mediaType = "application/json",
                 schema = @Schema(
-                    type = "array",
+                    type = SchemaType.ARRAY,
                     implementation = Review.class
                 )
             ),
@@ -354,7 +355,7 @@ public class ReviewResource {
                     content = @Content(
                         mediaType = "application/json",
                         schema = @Schema(
-                            type = "array",
+                            type = SchemaType.ARRAY,
                             implementation = Review.class
                             )
                         )
@@ -390,7 +391,7 @@ public class ReviewResource {
                                     schema = @Schema(
                                             name= "id",
                                             description = "id of the new review",
-                                            type="string")),
+                                            type = SchemaType.STRING)),
                             links = {
                                     @Link(
                                             name="Review",

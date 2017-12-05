@@ -32,6 +32,7 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.apps.airlines.JAXRSApp;
 import org.eclipse.microprofile.openapi.apps.airlines.model.Flight;
+import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 
 @Path("/availability")
 @Tags(
@@ -53,7 +54,7 @@ public class AvailabilityResource {
                 content = @Content(
                     mediaType = "applictaion/json",
                     schema = @Schema(
-                        type = "array",
+                        type = SchemaType.ARRAY,
                         implementation = Flight.class
                     )
                 )

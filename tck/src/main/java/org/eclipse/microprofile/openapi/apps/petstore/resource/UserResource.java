@@ -19,6 +19,7 @@ import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeIn;
+import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.annotations.security.SecuritySchemes;
@@ -181,7 +182,7 @@ public class UserResource {
         @Parameter(
             name = "username",
             description = "name that need to be deleted",
-            schema = @Schema(type = "String"),
+            schema = @Schema(type = SchemaType.STRING),
             required = true
         )
         @PathParam("username") String username,
@@ -213,7 +214,7 @@ public class UserResource {
         @Parameter(
             name = "username",
             description = "The name that needs to be deleted",
-            schema = @Schema(type = "String"),
+            schema = @Schema(type = SchemaType.STRING),
             required = true
         )
         @PathParam("username") String username) {
@@ -258,7 +259,7 @@ public class UserResource {
         @Parameter(
             name = "username",
             description = "The name that needs to be fetched. Use user1 for testing.",
-            schema = @Schema(type = "String"),
+            schema = @Schema(type = SchemaType.STRING),
             required = true
         )
         @PathParam("username") String username) throws ApiException {
@@ -297,14 +298,14 @@ public class UserResource {
         @Parameter(
             name = "username",
             description = "The user name for login",
-            schema = @Schema(type = "String"),
+            schema = @Schema(type = SchemaType.STRING),
             required = true
         )
         @QueryParam("username") String username,
         @Parameter(
             name = "password",
             description = "The password for login in clear text",
-            schema = @Schema(type = "String"),
+            schema = @Schema(type = SchemaType.STRING),
             required = true)
         @QueryParam("password") String password) {
             return Response.ok()

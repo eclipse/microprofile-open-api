@@ -24,6 +24,7 @@ import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.annotations.security.SecuritySchemes;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirements;
+import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 
 import org.eclipse.microprofile.openapi.apps.petstore.data.StoreData;
 import org.eclipse.microprofile.openapi.apps.petstore.model.BadOrder;
@@ -133,7 +134,7 @@ public class PetStoreResource {
             name = "orderId",
             description = "ID of pet that needs to be fetched", 
             schema = @Schema(
-                type = "long", 
+                type = SchemaType.INTEGER, 
                 minimum = "1", 
                 maximum = "10"), 
             required = true
@@ -197,7 +198,7 @@ public class PetStoreResource {
             name = "orderId",
             description = "ID of the order that needs to be deleted",  
             schema = @Schema(
-                type = "long", 
+                type = SchemaType.INTEGER, 
                 minimum = "1"
             ), 
             required = true
