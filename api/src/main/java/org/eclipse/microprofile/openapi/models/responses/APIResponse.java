@@ -141,6 +141,7 @@ public interface APIResponse extends Constructible, Extensible, Reference<APIRes
      * Sets the operations links that can be followed from this instance of ApiResponse.
      *
      * @param links the operation links followed from the response
+     * @return current APIResponse instance
      */
 
     APIResponse links(Map<String, Link> links);
