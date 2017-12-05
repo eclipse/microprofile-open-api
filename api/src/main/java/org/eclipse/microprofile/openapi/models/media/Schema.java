@@ -558,26 +558,59 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
     Schema addProperty(String key, Schema propertySchema);
 
     /**
-     * Returns the schema which defines new properties added to objects defined by the current schema.
+     * Returns the value of the "additionalProperties" setting, which controls whether 
+     * properties not otherwise defined are allowed.  This setting MUST either be a {@link Boolean}
+     * or {@link Schema}.
+     * 
+     * <ul>
+     *   <li>If "additionalProperties" is true, validation always succeeds.</li>
+     *
+     *   <li>If "additionalProperties" is false, validation succeeds only if the
+     *   instance is an object and all properties on the instance were covered
+     *   by "properties" and/or "patternProperties".</li>
+     *
+     *   <li>If "additionalProperties" is a Schema, validate the value as a
+     *   schema to all of the properties that weren't validated by
+     *   "properties" nor "patternProperties".</li>
+     * </ul>
      *
      * @return this schema's additionalProperties property
-     **/
-    Schema getAdditionalProperties();
+     */
+    Object getAdditionalProperties();
 
     /**
-     * Sets the schema which defines new properties added to objects defined by the current schema.
+     * Sets the schema which defines additional properties not defined by "properties" or "patternProperties".
+     * See the javadoc for {@link Schema#getAdditionalProperties()} for more details on this setting.
      *
      * @param additionalProperties a schema which defines additional properties
      */
     void setAdditionalProperties(Schema additionalProperties);
+    
+    /**
+     * Sets the value of "additionalProperties" to either True or False.  See the javadoc for 
+     * {@link Schema#getAdditionalProperties()} for more details on this setting.
+     *
+     * @param additionalProperties a schema which defines additional properties
+     */
+    void setAdditionalProperties(Boolean additionalProperties);
 
     /**
-     * Sets the schema which defines new properties added to objects defined by the current schema.
+     * Sets the schema which defines additional properties not defined by "properties" or "patternProperties".
+     * See the javadoc for {@link Schema#getAdditionalProperties()} for more details on this setting.
      *
      * @param additionalProperties a schema which defines additional properties
      * @return the current Schema instance
      */
     Schema additionalProperties(Schema additionalProperties);
+
+    /**
+     * Sets the value of "additionalProperties" to either True or False.  See the javadoc for 
+     * {@link Schema#getAdditionalProperties()} for more details on this setting.
+     *
+     * @param additionalProperties a schema which defines additional properties
+     * @return the current Schema instance
+     */
+    Schema additionalProperties(Boolean additionalProperties);
 
     /**
      * Returns a description of the purpose of this schema.
