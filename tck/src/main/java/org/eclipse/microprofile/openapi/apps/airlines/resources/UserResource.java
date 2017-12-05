@@ -32,6 +32,7 @@ import org.eclipse.microprofile.openapi.annotations.servers.Server;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.eclipse.microprofile.openapi.annotations.tags.Tags;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
+import org.eclipse.microprofile.openapi.annotations.enums.Explode;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 
@@ -63,8 +64,15 @@ import javax.ws.rs.core.Response;
 )
 public class UserResource {
 
-    static UserData userData = new UserData();
+    private static UserData userData = new UserData();
 
+    public UserData getUserData() {
+        return this.userData;
+    }
+
+    public void setUserData(UserData userData) {
+        this.userData = userData;
+    }
     @POST
     @Tags(refs={"user","create"})
     @APIResponses(value={
@@ -218,6 +226,7 @@ public class UserResource {
                 in = ParameterIn.QUERY,
                 description = "An array of User objects to create records.",
                 required = true,
+                explode = Explode.FALSE,
                 content = @Content(
                     mediaType = "application/json",
                     schema = @Schema(
@@ -286,9 +295,8 @@ public class UserResource {
                 }
                 return Response.ok().entity("").build();
             }
-
+    @Path("/{username}")
       @PUT
-      @Path("/{username}")
       @Operation(
         method = "put",
         summary = "Update user",
