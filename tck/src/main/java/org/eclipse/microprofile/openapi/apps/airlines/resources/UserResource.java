@@ -379,6 +379,7 @@ public class UserResource {
             }
 
       @DELETE
+      @Path("/{username}")
       @Operation(
         method = "delete",
         summary = "Delete user",
@@ -416,6 +417,7 @@ public class UserResource {
         }
 
     @GET
+    @Path("/{username}")
     @Operation(
         method = "get",
         summary = "Get user by user name",

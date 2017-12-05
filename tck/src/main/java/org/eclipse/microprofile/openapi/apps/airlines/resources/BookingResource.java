@@ -184,6 +184,7 @@ public class BookingResource {
         }
 
     @PUT
+    @Path("{id}")
     @Consumes("application/json")
     @Produces("text/plain")
     @Operation(
@@ -213,6 +214,7 @@ public class BookingResource {
         }
 
     @DELETE
+    @Path("{id}")
     @Operation(
         method = "delete",
         summary="Delete a booking with ID",
