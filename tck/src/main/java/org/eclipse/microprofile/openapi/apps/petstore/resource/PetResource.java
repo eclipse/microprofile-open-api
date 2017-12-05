@@ -17,6 +17,7 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeIn;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
+import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.annotations.security.SecuritySchemes;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
@@ -124,7 +125,7 @@ public class PetResource {
                         responseCode = "200",
                         content = @Content(
                             mediaType = "application/json",
-                            schema = @Schema(type = "array", implementation = Pet.class, 
+                            schema = @Schema(type = SchemaType.ARRAY, implementation = Pet.class, 
                               oneOf = { Cat.class, Dog.class, Lizard.class }, 
                               readOnly = true))
                     )
@@ -226,7 +227,7 @@ public class PetResource {
         @Parameter(
             name = "apiKey",
             description = "authentication key to access this method",
-            schema = @Schema(type = "String", implementation = String.class,
+            schema = @Schema(type = SchemaType.STRING, implementation = String.class,
               maxLength = 256, minLength = 32))
         @HeaderParam("api_key") String apiKey,
         @Parameter(
@@ -337,7 +338,7 @@ public class PetResource {
                 responseCode = "200",
                 content = @Content(
                     mediaType = "application/json",
-                    schema = @Schema(type = "list", implementation = Pet.class))
+                    schema = @Schema(type = SchemaType.ARRAY, implementation = Pet.class))
                 )
         }
     )
@@ -394,7 +395,7 @@ public class PetResource {
                     responseCode = "200",
                     content = @Content(
                         mediaType = "application/json",
-                        schema = @Schema(type = "list", implementation = Pet.class))
+                        schema = @Schema(type = SchemaType.ARRAY, implementation = Pet.class))
                     )
             }
         )

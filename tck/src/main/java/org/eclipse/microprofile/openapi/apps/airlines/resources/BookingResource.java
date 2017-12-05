@@ -27,6 +27,7 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.eclipse.microprofile.openapi.annotations.tags.Tags;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
+import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 
@@ -73,7 +74,7 @@ public class BookingResource {
                 description="Bookings retrieved",
                 content=@Content(
                     schema=@Schema(
-                        type="array",
+                        type = SchemaType.ARRAY,
                         implementation=Booking.class))
                 ),
             @APIResponse(
@@ -97,7 +98,7 @@ public class BookingResource {
                     description="Bookings retrieved",
                     content=@Content(
                         schema=@Schema(
-                            type="array",
+                            type = SchemaType.ARRAY,
                             implementation=Booking.class))
                 ),
                 @APIResponse(
@@ -134,7 +135,7 @@ public class BookingResource {
                     schema=@Schema(
                         name= "id",
                         description = "id of the new booking",
-                        type="string"
+                        type=SchemaType.STRING
                     )
                 )
             )

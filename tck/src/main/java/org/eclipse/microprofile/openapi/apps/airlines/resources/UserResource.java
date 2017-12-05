@@ -32,6 +32,7 @@ import org.eclipse.microprofile.openapi.annotations.servers.Server;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.eclipse.microprofile.openapi.annotations.tags.Tags;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
+import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.enums.Explode;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
@@ -97,7 +98,7 @@ public class UserResource {
                 mediaType = "application/json",
                 schema = @Schema(
                     name = "testUser",
-                    type = "object",
+                    type = SchemaType.OBJECT,
                     maxProperties = 1024,
                     minProperties = 1,
                     requiredProperties = { "id", "username", "password" },
@@ -128,7 +129,7 @@ public class UserResource {
                 required = true,
                 allowReserved = true,
                 style = ParameterStyle.FORM,
-                schema = @Schema(type = "integer", format = "int32")
+                schema = @Schema(type = SchemaType.INTEGER, format = "int32")
             ),
             @Parameter(
                 name = "userName",
@@ -136,7 +137,7 @@ public class UserResource {
                 description = "Username for the new user record to be created",
                 required = true,
                 schema = @Schema(
-                    type = "string",
+                    type = SchemaType.STRING,
                     externalDocs = @ExternalDocumentation(
                         description = "How to create good user names.",
                         url = "http://exampleurl.com/usernames"
@@ -150,7 +151,7 @@ public class UserResource {
                 required = true,
                 hidden = true,
                 schema = @Schema(
-                    type = "string",
+                    type = SchemaType.STRING,
                     externalDocs = @ExternalDocumentation(
                         description = "How to create good passwords.",
                         url = "http://exampleurl.com/passwords"
@@ -162,7 +163,7 @@ public class UserResource {
                 in = ParameterIn.QUERY,
                 description = "User's first name for the new user record to be created",
                 required = true,
-                schema = @Schema(type = "string")
+                schema = @Schema(type = SchemaType.STRING)
             ),
             @Parameter(
                 name = "lastName",
@@ -170,7 +171,7 @@ public class UserResource {
                 description = "User's last name for the new user record to be created",
                 style = ParameterStyle.FORM,
                 required = true,
-                schema = @Schema(type = "string")
+                schema = @Schema(type = SchemaType.STRING)
             ),
             @Parameter(
                 name = "sex",
@@ -178,28 +179,28 @@ public class UserResource {
                 description = "User's sex for the new user record to be created",
                 required = true,
                 style = ParameterStyle.FORM,
-                schema = @Schema(type = "string")
+                schema = @Schema(type = SchemaType.STRING)
             ),
             @Parameter(
                 name = "age",
                 in = ParameterIn.QUERY,
                 description = "User's age for the new user record to be created",
                 required = true,
-                schema = @Schema(type = "integer", format = "int64")
+                schema = @Schema(type = SchemaType.INTEGER, format = "int64")
             ),
             @Parameter(
                 name = "phone",
                 in = ParameterIn.QUERY,
                 description = "User phone number for the new user record to be created",
                 required = true,
-                schema = @Schema(type = "string")
+                schema = @Schema(type = SchemaType.STRING)
             ),
             @Parameter(
                 name = "status",
                 in = ParameterIn.QUERY,
                 description = "User status for the new user record to be created",
                 required = true,
-                schema = @Schema(type = "integer")
+                schema = @Schema(type = SchemaType.INTEGER)
             )
         })
     public Response createUser(
@@ -230,7 +231,7 @@ public class UserResource {
                 content = @Content(
                     mediaType = "application/json",
                     schema = @Schema(
-                        type = "array",
+                        type = SchemaType.ARRAY,
                         implementation = User.class,
                         nullable = true,
                         writeOnly = true,
@@ -346,7 +347,7 @@ public class UserResource {
         @Parameter(
             name = "username",
             description = "User that needs to be updated",
-            schema = @Schema(type = "String"),
+            schema = @Schema(type = SchemaType.STRING),
             required = true
             )
         @PathParam("username") String username,
@@ -383,7 +384,7 @@ public class UserResource {
         @Parameter(
             name = "username",
             description = "The name that needs to be deleted",
-            schema = @Schema(type = "String"),
+            schema = @Schema(type = SchemaType.STRING),
             required = true
             )
         @PathParam("username") String userName) {
@@ -427,7 +428,7 @@ public class UserResource {
         @Parameter(
             name = "username",
             description = "The name that needs to be fetched. Use Bob1 for testing.",
-            schema = @Schema(type = "String"),
+            schema = @Schema(type = SchemaType.STRING),
             required = true
             )
         @PathParam("username") String userName) throws ApiException {
@@ -490,7 +491,7 @@ public class UserResource {
         @Parameter(
             name = "id",
             description = "The name that needs to be fetched. Use 1 for testing.",
-            schema = @Schema(type = "integer"),
+            schema = @Schema(type = SchemaType.INTEGER),
             required = true
         )
         @PathParam("id") int id) throws ApiException {
@@ -539,14 +540,14 @@ public class UserResource {
         @Parameter(
             name = "username",
             description = "The user name for login",
-            schema = @Schema(type = "String"),
+            schema = @Schema(type = SchemaType.STRING),
             required = true
             )
         @QueryParam("username") String username,
         @Parameter(
             name = "password",
             description = "The password for login in clear text",
-            schema = @Schema(type = "String"),
+            schema = @Schema(type = SchemaType.STRING),
             required = true)
         @QueryParam("password") String password) {
             return Response.ok()

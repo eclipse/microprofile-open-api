@@ -24,6 +24,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
+import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 
 /**
  * The Schema Object allows the definition of input and output data types. 
@@ -286,7 +287,7 @@ public @interface Schema {
      * 
      * @return the type of this schema
      **/
-    String type() default "";
+    SchemaType type() default SchemaType.DEFAULT;;
 
     /**
      * Provides a list of enum values. 
