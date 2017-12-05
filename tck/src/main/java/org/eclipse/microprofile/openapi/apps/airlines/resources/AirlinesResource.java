@@ -93,15 +93,7 @@ public class AirlinesResource {
         tags = {"airlines"},
         responses = {
             @APIResponse(
-                responseCode = "200",
-                description = "successful operation",
-                content = @Content(
-                    mediaType = "application/json",
-                    schema = @Schema(
-                        type = "array",
-                        implementation = Airline.class
-                    )
-                )
+                ref = "FoundAirlines"
             ),
             @APIResponse(
                 responseCode = "404",

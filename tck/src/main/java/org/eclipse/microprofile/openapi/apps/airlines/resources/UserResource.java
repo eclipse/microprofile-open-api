@@ -30,8 +30,11 @@ import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
 import org.eclipse.microprofile.openapi.annotations.enums.ParameterStyle;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.annotations.servers.Server;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import org.eclipse.microprofile.openapi.annotations.tags.Tags;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
@@ -84,12 +87,22 @@ public class UserResource {
     static UserData userData = new UserData();
 
     @POST
+    @Tags(refs={"user","create"})
+    @APIResponses(value={
+            @APIResponse(
+                    responseCode = "200",
+                    description = "New user record successfully created."
+                ),
+                @APIResponse(
+                    responseCode = "400",
+                    description = "Unable to create this user record."
+                )
+    })
     @Operation(
         method = "post",
         summary = "Create user",
         description = "This can only be done by the logged in user.",
         operationId = "createUser",
-        tags = {"user"},
         requestBody = @RequestBody(
             description = "Record of a new user to be created in the system.",
             required = true,
@@ -201,16 +214,6 @@ public class UserResource {
                 required = true,
                 schema = @Schema(type = "integer")
             )
-        },
-        responses = {
-            @APIResponse(
-                responseCode = "200",
-                description = "New user record successfully created."
-            ),
-            @APIResponse(
-                responseCode = "400",
-                description = "Unable to create this user record."
-            )
         })
     public Response createUser(
         @Parameter(
@@ -224,11 +227,12 @@ public class UserResource {
 
     @POST
     @Path("/createWithArray")
+    @Tag(ref="user")
     @Operation(
         method = "post",
         summary = "Creates list of users with given input array", //Array of User objects
         operationId = "createUsersFromArray",
-        tags = {"user"},
+        /* tags = {"user"}, //this operation intentionally doesn't have tags attribute, since above Tag ref should apply */
         parameters = {
             @Parameter(
                 name = "userArray",
@@ -559,6 +563,10 @@ public class UserResource {
 
     @GET
     @Path("/logout")
+    @APIResponse(
+                responseCode = "200",
+                description = "Successful user logout."
+                )
     @Operation(
         method = "get",
         summary = "Logs out current logged in user session",
@@ -567,13 +575,7 @@ public class UserResource {
         externalDocs = @ExternalDocumentation(
             description = "Policy on user security.",
             url = "http://exampleurl.com/policy"
-            ),
-        responses = {
-            @APIResponse(
-                responseCode = "200",
-                description = "Successful user logout."
-                )
-            })
+            ))
     public Response logoutUser() {
     return Response.ok().entity("").build();
     }

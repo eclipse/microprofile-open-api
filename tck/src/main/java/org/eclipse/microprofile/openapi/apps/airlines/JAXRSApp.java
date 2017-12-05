@@ -23,7 +23,14 @@ import javax.ws.rs.core.Application;
 import org.eclipse.microprofile.openapi.annotations.info.Contact;
 import org.eclipse.microprofile.openapi.annotations.info.Info;
 import org.eclipse.microprofile.openapi.annotations.info.License;
+import org.eclipse.microprofile.openapi.annotations.links.Link;
+import org.eclipse.microprofile.openapi.annotations.links.LinkParameter;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.ExampleObject;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
@@ -31,9 +38,15 @@ import org.eclipse.microprofile.openapi.annotations.servers.Server;
 import org.eclipse.microprofile.openapi.annotations.servers.ServerVariable;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeIn;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
+import org.eclipse.microprofile.openapi.annotations.headers.Header;
 import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
 import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
-
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.callbacks.Callback;
+import org.eclipse.microprofile.openapi.annotations.Components;
+import org.eclipse.microprofile.openapi.apps.airlines.model.Airline;
+import org.eclipse.microprofile.openapi.apps.airlines.model.Booking;
+import org.eclipse.microprofile.openapi.apps.airlines.model.Review;
 import org.eclipse.microprofile.openapi.apps.airlines.resources.AirlinesResource;
 import org.eclipse.microprofile.openapi.apps.airlines.resources.AvailabilityResource;
 import org.eclipse.microprofile.openapi.apps.airlines.resources.BookingResource;
@@ -41,7 +54,11 @@ import org.eclipse.microprofile.openapi.apps.airlines.resources.ReviewResource;
 
 @ApplicationPath("/")
 @OpenAPIDefinition(
-    tags = @Tag(name = "Airlines", description = "airlines app"),
+    tags = {
+            @Tag(name = "Airlines", description = "airlines app"),
+            @Tag(name="user", description="Operations about user"),
+            @Tag(name="create", description="Operations about create")
+    },
     externalDocs = @ExternalDocumentation(
         description = "instructions for how to deploy this app",
         url = "https://github.com/microservices-api/oas3-airlines/blob/master/README.md"),
@@ -80,7 +97,46 @@ import org.eclipse.microprofile.openapi.apps.airlines.resources.ReviewResource;
                     description = "Flight availabilities",
                     defaultValue = "availability")
             })
-        })
+        },
+        components = @Components(
+                schemas = { 
+                        @Schema(name = "Bookings", type = "array", implementation = Booking.class),
+                        @Schema(name = "Airlines", type = "array", implementation = Airline.class),
+                        @Schema(name = "AirlinesRef", ref = "#/components/schemas/Airlines") }, 
+                responses = {
+                        @APIResponse(name = "FoundAirlines", responseCode = "200", description = "successfully found airlines", 
+                                content = @Content(mediaType = "application/json", schema = @Schema(type = "array", implementation = Airline.class))),
+                        @APIResponse(name = "FoundBookings", responseCode = "200", description = "Bookings retrieved", 
+                                content = @Content(schema = @Schema(type = "array", implementation = Booking.class))) }, 
+                parameters = {
+                        @Parameter(name = "departureDate", required = true, description = "Customer departure date", 
+                                schema = @Schema(implementation = String.class)),
+                        @Parameter(name = "username", description = "The name that needs to be deleted", 
+                        schema = @Schema(type = "String"), required = true) }, 
+                examples = {
+                        @ExampleObject(name = "review", summary = "External review example", 
+                                externalValue = "http://foo.bar/examples/review-example.json"),
+                        @ExampleObject(name = "user", summary = "External user example", 
+                                externalValue = "http://foo.bar/examples/user-example.json") }, 
+                requestBodies = {
+                        @RequestBody(name = "review", content = @Content(mediaType = "application/json", 
+                                schema = @Schema(implementation = Review.class)), required = true, description = "example review to add") }, 
+                headers = {
+                        @Header(name = "Max-Rate", description = "Maximum rate", schema = @Schema(type = "integer"), 
+                                required = true, allowEmptyValue = true, deprecated = true),
+                        @Header(name = "Request-Limit", description = "The number of allowed requests in the current period", 
+                                schema = @Schema(type = "integer")) }, 
+                securitySchemes = {
+                        @SecurityScheme(securitySchemeName = "httpTestScheme", description = "user security scheme", 
+                                type = SecuritySchemeType.HTTP, scheme = "testScheme") }, 
+                links = {
+                        @Link(name = "UserName", description = "The username corresponding to provided user id", operationId = "getUserByName", 
+                                parameters = @LinkParameter(name = "userId", expression = "$request.path.id")) }, 
+                callbacks = {
+                        @Callback(name = "GetBookings", callbackUrlExpression = "http://localhost:9080/airlines/bookings", 
+                                operation = @Operation(summary = "Retrieve all bookings for current user", 
+                                responses = {@APIResponse(ref = "FoundBookings") })) 
+                        }))
 @SecurityScheme(
     securitySchemeName = "airlinesRatingApp_auth",
     description = "authentication needed to access Airlines app",
