@@ -473,6 +473,151 @@
                 }
             ]
         },
+        "/reviews": {
+            "get": {
+                "tags": [
+                    "review"
+                ],
+                "summary": "get all the reviews",
+                "operationId": "getAllReviews",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "Request-Limit": {
+                                "description": "The number of allowed requests in the current period",
+                                "style": "simple",
+                                "schema": {
+                                    "type": "integer"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Review"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "airlinesRatingApp_auth": []
+                    }
+                ],
+                "servers": [
+                    {
+                        "url": "http://localhost:9080/airlines/reviews/",
+                        "description": "endpoint for all the review related methods",
+                        "variables": {}
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "review"
+                ],
+                "summary": "Create a Review",
+                "operationId": "createReview",
+                "requestBody": {
+                    "description": "example review to add",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Review"
+                            },
+                            "examples": {
+                                "review": {
+                                    "summary": "External review example",
+                                    "description": "review",
+                                    "externalValue": "http://foo.bar/examples/review-example.json"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "review created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string",
+                                    "description": "id of the new review"
+                                }
+                            }
+                        }
+                    }
+                },
+                "callbacks": {
+                    "testCallback": {
+                        "http://localhost:9080/oas3-airlines/reviews": {
+                            "get": {
+                                "summary": "Get all reviews",
+                                "operationId": "getAllReviews_1",
+                                "responses": {
+                                    "200": {
+                                        "description": "successful operation",
+                                        "content": {
+                                            "application/json": {
+                                                "schema": {
+                                                    "$ref": "#/components/schemas/Review"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "reviewoauth2": [
+                            "write:reviews"
+                        ]
+                    }
+                ],
+                "servers": [
+                    {
+                        "url": "localhost:9080/oas3-airlines/reviews/1",
+                        "description": "view of all the reviews",
+                        "variables": {
+                            "id": {
+                                "description": "id of the review",
+                                "default": "1"
+                            }
+                        }
+                    }
+                ]
+            },
+            "servers": [
+                {
+                    "url": "localhost:9080/oas3-airlines/",
+                    "description": "Home page of airlines app",
+                    "variables": {
+                        "reviews": {
+                            "description": "Reviews of the app by users",
+                            "default": "reviews"
+                        },
+                        "bookings": {
+                            "description": "Booking data",
+                            "default": "bookings"
+                        },
+                        "user": {
+                            "description": "User data",
+                            "default": "user"
+                        },
+                        "availability": {
+                            "description": "Flight availabilities",
+                            "default": "availability"
+                        }
+                    }
+                }
+            ]
+        },
         "/reviews/{id}": {
             "get": {
                 "tags": [
@@ -626,151 +771,6 @@
                         "url": "http://localhost:9080/airlines/reviews/",
                         "description": "endpoint for all the review related methods",
                         "variables": {}
-                    }
-                ]
-            },
-            "servers": [
-                {
-                    "url": "localhost:9080/oas3-airlines/",
-                    "description": "Home page of airlines app",
-                    "variables": {
-                        "reviews": {
-                            "description": "Reviews of the app by users",
-                            "default": "reviews"
-                        },
-                        "bookings": {
-                            "description": "Booking data",
-                            "default": "bookings"
-                        },
-                        "user": {
-                            "description": "User data",
-                            "default": "user"
-                        },
-                        "availability": {
-                            "description": "Flight availabilities",
-                            "default": "availability"
-                        }
-                    }
-                }
-            ]
-        },
-        "/reviews": {
-            "get": {
-                "tags": [
-                    "review"
-                ],
-                "summary": "get all the reviews",
-                "operationId": "getAllReviews",
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "headers": {
-                            "Request-Limit": {
-                                "description": "The number of allowed requests in the current period",
-                                "style": "simple",
-                                "schema": {
-                                    "type": "integer"
-                                }
-                            }
-                        },
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Review"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "airlinesRatingApp_auth": []
-                    }
-                ],
-                "servers": [
-                    {
-                        "url": "http://localhost:9080/airlines/reviews/",
-                        "description": "endpoint for all the review related methods",
-                        "variables": {}
-                    }
-                ]
-            },
-            "post": {
-                "tags": [
-                    "review"
-                ],
-                "summary": "Create a Review",
-                "operationId": "createReview",
-                "requestBody": {
-                    "description": "example review to add",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Review"
-                            },
-                            "examples": {
-                                "review": {
-                                    "summary": "External review example",
-                                    "description": "review",
-                                    "externalValue": "http://foo.bar/examples/review-example.json"
-                                }
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "201": {
-                        "description": "review created",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "string",
-                                    "description": "id of the new review"
-                                }
-                            }
-                        }
-                    }
-                },
-                "callbacks": {
-                    "testCallback": {
-                        "http://localhost:9080/oas3-airlines/reviews": {
-                            "get": {
-                                "summary": "Get all reviews",
-                                "operationId": "getAllReviews_1",
-                                "responses": {
-                                    "200": {
-                                        "description": "successful operation",
-                                        "content": {
-                                            "application/json": {
-                                                "schema": {
-                                                    "$ref": "#/components/schemas/Review"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "reviewoauth2": [
-                            "write:reviews"
-                        ]
-                    }
-                ],
-                "servers": [
-                    {
-                        "url": "localhost:9080/oas3-airlines/reviews/1",
-                        "description": "view of all the reviews",
-                        "variables": {
-                            "id": {
-                                "description": "id of the review",
-                                "default": "1"
-                            }
-                        }
                     }
                 ]
             },
