@@ -28,6 +28,8 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 
 /**
  * This object represents a callback URL that will be invoked.
+ * 
+ * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#callbackObject">OpenAPI Specification Callback Object</a>
  **/
 @Target({ ElementType.METHOD, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)

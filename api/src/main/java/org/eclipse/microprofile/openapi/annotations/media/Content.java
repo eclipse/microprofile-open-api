@@ -24,6 +24,9 @@ import java.lang.annotation.Target;
 
 /**
  * This object provides schema and examples for a particular media type.
+ * 
+ * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#mediaTypeObject">OpenAPI Specification Media Type
+ *      Object</a>
  **/
 @Target({})
 @Retention(RetentionPolicy.RUNTIME)

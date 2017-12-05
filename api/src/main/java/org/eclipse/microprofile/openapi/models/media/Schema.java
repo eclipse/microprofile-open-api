@@ -147,6 +147,7 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * Adds an item of the appropriate type to the enumerated list of values allowed.
      *
      * @param enumeration an object to add to the enumerated values
+     * @return current schema instance
      */
     Schema addEnumeration(Object enumeration);
 

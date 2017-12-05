@@ -27,6 +27,8 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
 
 /**
  * Describes a single request body.
+ * 
+ * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#requestBodyObject">requestBody Object</a>
  **/
 @Target({ ElementType.PARAMETER })
 @Retention(RetentionPolicy.RUNTIME)
