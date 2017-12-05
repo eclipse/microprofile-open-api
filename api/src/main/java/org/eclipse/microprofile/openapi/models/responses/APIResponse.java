@@ -29,7 +29,7 @@ import org.eclipse.microprofile.openapi.models.media.Content;
 /**
  * This interface represents a single response from an API Operation, including design-time, static links to operations based on the response.
  *
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#responseObject"
+ * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responseObject"
  */
 public interface APIResponse extends Constructible, Extensible, Reference<APIResponse> {
 

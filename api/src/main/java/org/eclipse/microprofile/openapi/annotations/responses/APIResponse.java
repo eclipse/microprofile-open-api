@@ -46,6 +46,8 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
  * }
  * </pre>
  * 
+ * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responseObject"
+ * 
  **/
 @Target({ ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)

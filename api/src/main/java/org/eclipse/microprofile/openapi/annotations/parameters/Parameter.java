@@ -33,6 +33,9 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 /**
  * Describes a single operation parameter
+ * 
+ * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject">OpenAPI Specification Parameter
+ *      Object</a>
  **/
 @Target({ ElementType.PARAMETER, ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)

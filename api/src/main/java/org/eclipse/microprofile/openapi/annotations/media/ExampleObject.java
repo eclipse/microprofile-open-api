@@ -24,6 +24,8 @@ import java.lang.annotation.Target;
 
 /**
  * This object illustrates an example of a particular content
+ * 
+ * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#exampleObject">OpenAPI Specification Example Object</a>
  **/
 @Target({})
 @Retention(RetentionPolicy.RUNTIME)

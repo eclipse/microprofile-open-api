@@ -27,6 +27,8 @@ import org.eclipse.microprofile.openapi.annotations.servers.Server;
 /**
  * The Link object represents a possible design-time link for a response. The presence of a link does not guarantee the caller's ability to
  * successfully invoke it, rather it provides a known relationship and traversal mechanism between responses and other operations.
+ * 
+ * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#linkObject"> OpenAPI Specification Link Object</a>
  **/
 @Target({})
 @Retention(RetentionPolicy.RUNTIME)
