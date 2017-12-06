@@ -21,7 +21,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>MicroProfile OpenAPI</name>
-    <description>Eclipse MicroProfile OpenAPI Feature :: Parent POM</description>
+    <description>Eclipse MicroProfile OpenAPI</description>
 
     <url>http://microprofile.io</url>
 
@@ -55,15 +55,15 @@
     </developers>
 
     <scm>
-        <url>https://github.com/eclipse/microprofile-openapi</url>
-        <connection>scm:git:https://github.com/eclipse/microprofile-openapi.git</connection>
-        <developerConnection>scm:git:git@github.com:eclipse/microprofile-openapi.git</developerConnection>
+        <url>https://github.com/eclipse/microprofile-open-api</url>
+        <connection>scm:git:https://github.com/eclipse/microprofile-open-api.git</connection>
+        <developerConnection>scm:git:git@github.com:eclipse/microprofile-open-api.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/eclipse/microprofile-openapi/issues</url>
+        <url>https://github.com/eclipse/microprofile-open-api/issues</url>
     </issueManagement>
 
     <distributionManagement>
@@ -105,43 +105,49 @@
 
     <build>
         <pluginManagement>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.3</version>
-                <configuration>
-                    <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <useReleaseProfile>false</useReleaseProfile>
-                    <localCheckout>true</localCheckout>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.eclipse.cbi.maven.plugins</groupId>
-                <artifactId>eclipse-jarsigner-plugin</artifactId>
-                <version>1.1.4</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${checkstyle.version}</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.0.2</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>3.0.1</version>
-            </plugin>
-            <plugin>
-                 <groupId>org.apache.maven.plugins</groupId>
-                 <artifactId>maven-javadoc-plugin</artifactId>
-                 <version>2.10.4</version>
-            </plugin>
-        </plugins>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.5.3</version>
+                    <configuration>
+                        <autoVersionSubmodules>true</autoVersionSubmodules>
+                        <localCheckout>true</localCheckout>
+                        <useReleaseProfile>false</useReleaseProfile>
+                        <arguments>${arguments} -Prelease -Drevremark=${revremark}</arguments>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.eclipse.cbi.maven.plugins</groupId>
+                    <artifactId>eclipse-jarsigner-plugin</artifactId>
+                    <version>1.1.4</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>${checkstyle.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.0.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.0.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>2.10.4</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>1.6</version>
+                </plugin>
+            </plugins>
         </pluginManagement>
         <plugins>
             <plugin>
@@ -274,20 +280,32 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.3</version>
-                        <extensions>true</extensions>
-                        <configuration>
-                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                            <serverId>ossrh</serverId>
-                            <autoReleaseAfterClose>${autorelease}</autoReleaseAfterClose>
-                        </configuration>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
