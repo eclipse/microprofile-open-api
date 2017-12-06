@@ -276,15 +276,15 @@ public Response getUserByName(
 [source,Java]
 ----
 @POST
-        @Path("/user")
-        @Operation(summary = "Create user",
-                   description = "This can only be done by the logged in user.")
-        public Response methodWithRequestBodyAndTwoParameters(
-                @RequestBody(description = "Created user object", required = true,
-                             content = @Content(
-                             schema = @Schema(implementation = User.class))) User user,
-                @QueryParam("name") String name, @QueryParam("code") String code)
-                { ... }
+@Path("/user")
+@Operation(summary = "Create user",
+           description = "This can only be done by the logged in user.")
+public Response methodWithRequestBodyAndTwoParameters(
+          @RequestBody(description = "Created user object", required = true,
+                       content = @Content(
+                       schema = @Schema(implementation = User.class))) User user,
+          @QueryParam("name") String name, @QueryParam("code") String code)
+          { ... }
 ----
 
 .Output for Sample 1
