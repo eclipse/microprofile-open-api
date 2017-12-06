@@ -98,10 +98,16 @@ import org.eclipse.microprofile.openapi.apps.airlines.model.User;
     )
 )
 @Tags(
-    value = @Tag(
-        name = "Reviews",
-        description = "All the review methods"
-    )
+    value = {
+            @Tag(
+                    name = "Reviews",
+                    description = "All the review methods"
+                    ),
+            @Tag(
+                    name = "Ratings",
+                    description = "All the ratings methods"
+                    )
+            }
 )
 public class ReviewResource {
 
@@ -122,7 +128,6 @@ public class ReviewResource {
         operationId = "getAllReviews",
         summary = "get all the reviews",
         method = "get",
-        tags = {"review"},
         responses = @APIResponse(
             responseCode = "200",
             description = "successful operation",
@@ -147,7 +152,6 @@ public class ReviewResource {
         operationId = "getReviewById",
         summary="Get a review with ID",
         method= "get",
-        tags = {"review"},
         responses={
             @APIResponse(
                 responseCode="200",
@@ -186,7 +190,6 @@ public class ReviewResource {
         method = "get",
         operationId = "getReviewByUser",
         summary="Get all reviews by user",
-        tags = {"review"},
         responses={
             @APIResponse(
                 responseCode="200",
@@ -232,7 +235,6 @@ public class ReviewResource {
         method = "get",
         operationId = "getReviewByAirline",
         summary="Get all reviews by airlines",
-        tags = {"review"},
         parameters = {
             @Parameter(
                 name = "airline",
@@ -288,7 +290,6 @@ public class ReviewResource {
         method = "get",
         operationId = "getReviewByAirlineAndUser",
         summary="Get all reviews for an airline by User",
-        tags = {"review"},
         responses={
             @APIResponse(
                 responseCode="200",
@@ -368,7 +369,7 @@ public class ReviewResource {
         method = "post",
         summary="Create a Review",
         operationId = "createReview",
-        tags = {"review"},
+        tags = {"Reviews"},
         servers = {
             @Server(
                 url = "localhost:9080/oas3-airlines/reviews/{id}",
@@ -435,7 +436,6 @@ public class ReviewResource {
         method = "delete",
         summary="Delete a Review with ID",
         operationId = "deleteReview",
-        tags = {"review"},
         responses={
             @APIResponse(
                 responseCode="200",

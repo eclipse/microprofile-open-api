@@ -56,7 +56,6 @@ import org.eclipse.microprofile.openapi.apps.airlines.resources.ReviewResource;
 @ApplicationPath("/")
 @OpenAPIDefinition(
     tags = {
-            @Tag(name = "Airlines", description = "airlines app"),
             @Tag(name="user", description="Operations about user"),
             @Tag(name="create", description="Operations about create")
     },

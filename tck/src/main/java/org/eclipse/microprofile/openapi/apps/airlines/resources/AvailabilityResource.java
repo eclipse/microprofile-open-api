@@ -27,7 +27,6 @@ import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-import org.eclipse.microprofile.openapi.annotations.tags.Tags;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.apps.airlines.JAXRSApp;
@@ -35,18 +34,23 @@ import org.eclipse.microprofile.openapi.apps.airlines.model.Flight;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 
 @Path("/availability")
-@Tags(
-    value = @Tag(
+@Tag(
         name = "Availability", 
-        description = "All the availibility methods"))
+        description = "All the availability methods")
 public class AvailabilityResource {
 
     @GET
+    @Tag(
+            name = "Get Flights",
+            description = "method to retrieve all flights available",
+            externalDocs = @ExternalDocumentation(
+                description = "A list of all the flights offered by the app",
+                url = "http://airlinesratingapp.com/ourflights")
+        )
     @Operation(
         method = "get",
         summary = "Retrieve all available flights",
         operationId = "getFlights",
-        tags = {"availability"},
         responses = {
             @APIResponse(
                 responseCode = "200",
@@ -66,13 +70,6 @@ public class AvailabilityResource {
                     mediaType = "n/a")
             )
         })
-    @Tag(
-        name = "getFlights",
-        description = "method to retrieve all flights available",
-        externalDocs = @ExternalDocumentation(
-            description = "A list of all the flights offered by the app",
-            url = "http://airlinesratingapp.com/ourflights")
-    )
     @Produces("application/json")
     public Response getFlights(
         @Parameter(

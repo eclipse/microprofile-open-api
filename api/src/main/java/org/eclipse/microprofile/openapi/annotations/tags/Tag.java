@@ -30,7 +30,7 @@ import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
  * This object represents a tag. A tag is meta-information you can use to help
  * organize your API endpoints and it can appear in two contexts.
  * <p>
- * Define tag objects on a method that implements an operation or on a type that
+ * Define tag objects on a method that implements an operation or on a class that
  * contains operations. They will be gathered and stored in the root object of
  * the OpenAPI document.
  * <p>
@@ -38,18 +38,16 @@ import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
  * operation then the tag name will be added to the OpenAPI document and also be
  * added to the operation tags (see @Operation).
  * <p>
- * If more than one tag is defined with the same name then only one tag with that name
- * will appear in the OpenAPI document. 
+ * Reference to a Tag can be created by setting the 'ref' attribute.
  * <p>
- * If more than one tag is defined with the same name and only one tag contains a 
- * description that is a non-empty string then that description will be preserved in 
- * the OpenAPI document. If more than one non-empty description is specified the results 
- * are implementation dependent. 
+ * This annotation is {@link java.lang.annotation.Repeatable Repeatable}.
  * <p>
- * If more than one tag is defined with the same name and only one tag contains an
- * external documentation that is defined with at least one non-empty string then that 
- * external documentation will be preserved in the OpenAPI document. If more than one 
- * non-empty external documentation is specified the results are implementation dependent. 
+ * If more than one tag is defined with the same name then only one tag with that name will appear 
+ * in the OpenAPI document and the results are implementation dependent. 
+ * <p>
+ * <b>Note:</b> If both {@link org.eclipse.microprofile.openapi.annotations.tags.Tag Tag} and 
+ * {@link org.eclipse.microprofile.openapi.annotations.tags.Tags Tags} annotations are specified on the same method or class,
+ * then both tag definitions should be applied.
  * <pre>
  * &#64;Tag(name = "luggage", description = "Operations related to luggage handling.")
  * &#64;GET
@@ -81,7 +79,8 @@ import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
 public @interface Tag {
 
     /**
-     * The name of this tag. It is a REQUIRED property unless this is only a reference to a tag instance.
+     * The name of this tag. The name must be unique and is case sensitive. 
+     * It is a REQUIRED property unless this is only a reference to a tag instance.
      *
      * @return the name of this tag
      */
