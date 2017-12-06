@@ -424,14 +424,7 @@ public class ReviewResource {
     )
     @Consumes("application/json")
     @Produces("application/json")
-    public Response createReview(
-        @Parameter(
-            description = "review to create",
-            required = true,
-            content = @Content(
-                mediaType = "application/json",
-                schema = @Schema(implementation = Review.class)))
-    Review review) {
+    public Response createReview(Review review) {
         reviews.put(currentId, review);
         return Response.status(Status.CREATED).entity("{\"id\":" + currentId++ + "}").build();
     }
