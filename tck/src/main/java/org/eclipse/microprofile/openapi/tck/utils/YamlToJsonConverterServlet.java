@@ -50,7 +50,7 @@ public class YamlToJsonConverterServlet extends HttpServlet {
     private static final String DEFAULT_HOST = "localhost";
     private static final int DEFAULT_PORT = 9080;
 
-    private static final String OPENAPI_PATH = "/api/docs";
+    private static final String OPENAPI_PATH = "/openapi";
 
     private String username;
     private String password;
