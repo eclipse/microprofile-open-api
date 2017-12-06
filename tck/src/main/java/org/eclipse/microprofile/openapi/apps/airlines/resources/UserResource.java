@@ -429,10 +429,7 @@ public class UserResource {
                 })
     public Response getUserByName(
         @Parameter(
-            name = "username",
-            description = "The name that needs to be fetched. Use Bob1 for testing.",
-            schema = @Schema(type = SchemaType.STRING),
-            required = true
+            ref= "username"
             )
         @PathParam("username") String userName) throws ApiException {
             User user = userData.findUserByName(userName);
