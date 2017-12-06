@@ -133,7 +133,7 @@ developers don't have to re-write the portions of the OpenAPI document that are
 already covered by the JAX-RS framework (e.g. the HTTP method of an operation).
 
 2. Take the initial output from `/openapi` as a starting point to document
-your APIs is via <<Static OpenAPI files>>.  It's worth mentioning that these static
+your APIs via <<Static OpenAPI files>>.  It's worth mentioning that these static
 files can also be written before any code, which is an approach often adopted by
 enterprises that want to lock-in the contract of the API.  In this case, we refer
 to the OpenAPI document as the "source of truth", by which the client and provider
@@ -221,7 +221,7 @@ public Response findPetsByStatus(...) { ... }
 [source, yaml]
 ----
 /pet/findByStatus:
-    get:
+  get:
     summary: Finds Pets by status
     description: Multiple status values can be provided with comma separated strings
     operationId: findPetsByStatus
@@ -233,11 +233,11 @@ public Response findPetsByStatus(...) { ... }
 @GET
 @Path("/{username}")
 @Operation(summary = "Get user by user name",
-        responses = {
+           responses = {
                 @APIResponse(description = "The user",
-                        content = @Content(mediaType = "application/json",
-                                schema = @Schema(implementation = User.class))),
-                @AAPIResponse(responseCode = "400", description = "User not found")})
+                             content = @Content(mediaType = "application/json",
+                             schema = @Schema(implementation = User.class))),
+                @APIResponse(responseCode = "400", description = "User not found")})
 public Response getUserByName(
         @Parameter(description = "The name that needs to be fetched. Use user1 for testing. ", required = true) @PathParam("username") String username)
  {...}
@@ -278,11 +278,11 @@ public Response getUserByName(
 @POST
         @Path("/user")
         @Operation(summary = "Create user",
-                description = "This can only be done by the logged in user.")
+                   description = "This can only be done by the logged in user.")
         public Response methodWithRequestBodyAndTwoParameters(
                 @RequestBody(description = "Created user object", required = true,
-                        content = @Content(
-                                schema = @Schema(implementation = User.class))) User user,
+                             content = @Content(
+                             schema = @Schema(implementation = User.class))) User user,
                 @QueryParam("name") String name, @QueryParam("code") String code)
                 { ... }
 ----
@@ -306,7 +306,7 @@ post:
     requestBody:
       description: Created user object
       content:
-      '*/*':
+       '*/*':
         schema:
           $ref: '#/components/schemas/User'
           required: true
