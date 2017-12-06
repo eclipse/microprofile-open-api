@@ -78,15 +78,19 @@ public class AirlinesResource {
         airlines.put(3, new Airline("PanAm 5000", "1-855-1267-561"));
     }
     
-    @Tag(
-        name = "getAirlines",
-        description = "method to retrieve all airlines"
-    )
     public static Airline getRandomAirline(){
         return airlines.get(JAXRSApp.getRandomNumber(2,1));
     }
     
     @GET
+    @Tag(
+            name = "Get Airlines",
+            description = "method to get all airlines"
+        )
+    @Tag(
+            name = "Retrieve Airlines",
+            description = "method to retrieve all airlines"
+            )
     @Operation(
         method = "get",
         summary = "Retrieve all available airlines",

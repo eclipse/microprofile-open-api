@@ -216,6 +216,7 @@ public class UserResource {
     @POST
     @Path("/createWithArray")
     @Tag(ref="user")
+    @Tag(ref="create")
     @Operation(
         method = "post",
         summary = "Creates list of users with given input array", //Array of User objects
@@ -269,8 +270,10 @@ public class UserResource {
         }
 
     @POST
-      @Path("/createWithList")
-      @Operation(
+    @Path("/createWithList")
+    @Tag(ref="user")
+    @Tags(refs="create")
+    @Operation(
         method = "post",
         summary = "Creates list of users with given input list", //List of User objects
         operationId = "createUsersFromList",
@@ -565,7 +568,7 @@ public class UserResource {
         method = "get",
         summary = "Logs out current logged in user session",
         operationId = "logOutUser",
-        tags = {"user"},
+        /* tags = {"user"}, // intentionally removed to have a method with no tags */
         externalDocs = @ExternalDocumentation(
             description = "Policy on user security.",
             url = "http://exampleurl.com/policy"

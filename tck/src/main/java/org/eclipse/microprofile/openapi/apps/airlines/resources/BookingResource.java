@@ -48,10 +48,13 @@ import javax.ws.rs.core.Response.Status;
 import org.eclipse.microprofile.openapi.apps.airlines.model.Booking;
 
 @Path("/bookings")
+@Tag(
+        name = "Bookings", 
+        description = "All the bookings methods")
 @Tags(
     value = @Tag(
-        name = "Bookings", 
-        description = "All the bookings methods"))
+            name = "Reservations", 
+            description = "All the reservation methods"))
 @SecurityScheme(
     securitySchemeName = "bookingSecurityScheme",
     type = SecuritySchemeType.OPENIDCONNECT,
@@ -110,7 +113,6 @@ public class BookingResource {
         summary="Create a booking",
         description = "Create a new booking record with the booking information provided.",
         operationId = "createBooking",
-        tags = {"booking"},
         security = @SecurityRequirement(
             name = "bookingSecurityScheme",
             scopes = {"write:bookings", "read:bookings"}
@@ -166,7 +168,6 @@ public class BookingResource {
         method = "get",
         summary="Get a booking with ID",
         operationId = "getBookingById",
-        tags = {"booking"},
         responses={
             @APIResponse(
                 responseCode="200",
@@ -197,7 +198,6 @@ public class BookingResource {
         method = "put",
         summary="Update a booking with ID",
         operationId = "updateBookingId",
-        tags = {"booking"},
         responses={
             @APIResponse(
                 responseCode="200",
@@ -225,7 +225,6 @@ public class BookingResource {
         method = "delete",
         summary="Delete a booking with ID",
         operationId = "deleteBookingById",
-        tags = {"booking"},
         responses={
             @APIResponse(
                 responseCode="200",
