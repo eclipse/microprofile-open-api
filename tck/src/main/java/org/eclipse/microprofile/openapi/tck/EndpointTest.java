@@ -25,19 +25,20 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.eclipse.microprofile.openapi.tck.utils.YamlToJsonConverterServlet;
+import org.hamcrest.Matchers;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import io.restassured.RestAssured;
 import io.restassured.parsing.Parser;
-import io.restassured.response.Response;
+import io.restassured.response.ValidatableResponse;
 
 @RunWith(Arquillian.class)
 public class EndpointTest {
@@ -48,8 +49,10 @@ public class EndpointTest {
     private static final String DEFAULT_HOST = "localhost";
     private static final int DEFAULT_PORT = 9080;
 
+    private static ValidatableResponse vr;
+
     @BeforeClass
-    static public void setup() throws MalformedURLException {
+    public static void setUp() throws MalformedURLException {
         // set base URI and port number to use for all requests
         String serverUrl = System.getProperty("test.url");
         String protocol = DEFAULT_PROTOCOL;
@@ -74,10 +77,15 @@ public class EndpointTest {
             RestAssured.useRelaxedHTTPSValidation();
         }
     }
+    
+    @Before
+    public void setUpTest() {
+        vr = given().when().get("/proxy").then().parser("", Parser.JSON).statusCode(200);
+    }
 
     @Deployment(name = "proxy")
     public static WebArchive createProxy() {
-        WebArchive war = ShrinkWrap.create(WebArchive.class, "proxy.war")
+        return ShrinkWrap.create(WebArchive.class, "proxy.war")
                 .addClass(YamlToJsonConverterServlet.class)
                 .addAsLibraries(new File("./lib/httpclient-4.5.2.jar"))
                 .addAsLibraries(new File("./lib/httpcore-4.4.4.jar"))
@@ -87,23 +95,54 @@ public class EndpointTest {
                 .addAsLibraries(new File("./lib/jackson-annotations-2.9.1.jar"))
                 .addAsLibraries(new File("./lib/snakeyaml-1.18.jar"))
                 .addAsLibraries(new File("./lib/commons-logging-1.2.jar"));
-        System.out.println(war.toString(true));
-        return war;
     }
 
     @Deployment(name = "airlines")
     public static WebArchive createDeployment() {
-        WebArchive war = ShrinkWrap.create(WebArchive.class, "airlines.war")
+        return ShrinkWrap.create(WebArchive.class, "airlines.war")
                 .addPackages(true, "org.eclipse.microprofile.openapi.apps.airlines")
-                .addAsManifestResource(EmptyAsset.INSTANCE, "/openapi/openapi.yaml");
-        System.out.println(war.toString(true));
-        return war;
+                .addAsManifestResource("openapi.yaml", "openapi.yaml");
     }
 
     @Test
     @RunAsClient
-    public void testVersion() throws InterruptedException {
-        Response response = given().when().get("/proxy");
-        response.then().parser("", Parser.JSON).statusCode(200).body("openapi", equalTo("3.0.0")).body("info.description", containsString("Liberty"));
+    public void testVersion() {
+        vr.body("openapi", equalTo("3.0.0"));
+    }
+
+    @Test
+    @RunAsClient
+    public void testInfo() {
+        vr.body("info.title", equalTo("AirlinesRatingApp API"));
+        vr.body("info.version", equalTo("1.0"));
+        vr.body("info.termsOfService", equalTo("http://airlinesratingapp.com/terms"));
+    }
+
+    @Test
+    @RunAsClient
+    public void testContact() {
+        vr.body("info.contact.name", equalTo("AirlinesRatingApp API Support"));
+        vr.body("info.contact.url", equalTo("https://github.com/microservices-api/oas3-airlines"));
+        vr.body("info.contact.email", equalTo("techsupport@airlinesratingapp.com"));
+    }
+
+    @Test
+    @RunAsClient
+    public void testLicense() {
+        vr.body("info.license.name", equalTo("Apache 2.0"));
+        vr.body("info.license.url", equalTo("http://www.apache.org/licenses/LICENSE-2.0.html"));
+    }
+
+    @Test
+    @RunAsClient
+    public void testExternalDocumentation() {
+        vr.body("externalDocs.description", equalTo("instructions for how to deploy this app"));
+        vr.body("externalDocs.url", containsString("README.md"));
+    }
+
+    @Test
+    @RunAsClient
+    public void testServer() {
+        vr.body("servers[*]", Matchers.hasSize(8));
     }
 }

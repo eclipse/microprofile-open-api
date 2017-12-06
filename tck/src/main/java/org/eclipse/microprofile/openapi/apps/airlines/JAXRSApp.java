@@ -74,20 +74,13 @@ import org.eclipse.microprofile.openapi.apps.airlines.resources.ReviewResource;
         license = @License(
             name = "Apache 2.0",
             url = "http://www.apache.org/licenses/LICENSE-2.0.html")),
-    security = @SecurityRequirement(
-        name = "airlinesRatingApp_auth"),
-    servers = {
-        @Server(
-            url = "localhost:9080/oas3-airlines/",
-            description = "Home page of airlines app",
-            variables = {
-                    @ServerVariable(
-                            name = "endpoint",
-                            description = "explore the API by tags",
-                            defaultValue = "",
-                            enumeration = {"availability", "bookings", "user", "reviews"})
-                    })
-        },
+        security = @SecurityRequirement(name = "airlinesRatingApp_auth"),
+        servers = {
+                @Server(url = "https://{username}.gigantic-server.com:{port}/{basePath}", description = "The production API server",
+                        variables = { @ServerVariable(name = "username", description = "Reviews of the app by users", defaultValue = "reviews"),
+                                @ServerVariable(name = "port", description = "Booking data", enumeration = { "8443", "443" }, defaultValue = "8443"),
+                                @ServerVariable(name = "user", description = "User data", defaultValue = "user"),
+                                @ServerVariable(name = "basePath", defaultValue = "v2") }) },
         components = @Components(
                 schemas = { 
                         @Schema(name = "Bookings", type = SchemaType.ARRAY, implementation = Booking.class),

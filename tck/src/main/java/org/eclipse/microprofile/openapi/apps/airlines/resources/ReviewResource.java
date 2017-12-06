@@ -63,12 +63,11 @@ import org.eclipse.microprofile.openapi.apps.airlines.model.User;
 
 
 @Path("/reviews")
-@Servers(
-    value = {
-        @Server(
-            description = "endpoint for all the review related methods",
-            url = "http://localhost:9080/airlines/reviews/")
-    })
+@Servers({ @Server(description = "Secure server", url = "https://gigantic-server.com:443"),
+        @Server(description = "Unsecure server", url = "http://gigantic-server.com:80") })
+@Server(url = "https://gigantic-server.com:{port}",
+        description = "The production API server",
+        variables = { @ServerVariable(name = "port", description = "Review data", enumeration = { "9080", "9443" }, defaultValue = "9080") })
 @SecurityScheme(
     securitySchemeName = "reviewoauth2",
     type = SecuritySchemeType.OAUTH2,
@@ -371,7 +370,7 @@ public class ReviewResource {
         tags = {"review"},
         servers = {
             @Server(
-                url = "localhost:9080/oas3-airlines/reviews/1",
+                url = "localhost:9080/oas3-airlines/reviews/{id}",
                 description = "view of all the reviews",
                 variables = {
                     @ServerVariable(
