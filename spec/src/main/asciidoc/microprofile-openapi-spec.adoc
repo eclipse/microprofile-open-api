@@ -450,35 +450,63 @@ paths:
 
 ===== Schema
 
-TODO: Detailed usage description of annotation (issue #10)
-
-.Sample 1
+.Sample 1 - Schema POJO
 [source,Java]
 ----
+@Schema(name="MyBooking", description="POJO that represents a booking.")
+public class Booking {
+    @Schema(required = true, example = "32126319")
+    private String airMiles;
 
+    @Schema(required = true, example = "window")
+    private String seatPreference;
+}
 ----
 
 .Output for Sample 1
 [source, yaml]
 ----
-
+components:
+  schemas:
+    MyBooking:
+      description: POJO that represents a booking.
+      required:
+      - airMiles
+      - seatPreference
+      type: object
+      properties:
+        airMiles:
+          type: string
+          example: "32126319"
+        seatPreference:
+          type: string
+          example: window
 ----
 
-===== Tags
 
-TODO: Detailed usage description of annotation (issue #10)
-
-.Sample 1
+.Sample 2 - Schema POJO reference
 [source,Java]
 ----
-
+@POST
+public Response createBooking(
+     @RequestBody(description = "Create a new booking.",
+                  content = @Content(mediaType = "application/json",
+                                     schema = @Schema(implementation = Booking.class))) Booking booking) {
 ----
 
-.Output for Sample 1
+.Output for Sample 2
 [source, yaml]
 ----
-
+post:
+  operationId: createBooking
+  requestBody:
+    description: Create a new booking with the provided information.
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/MyBooking'
 ----
+
 
 For more samples please see the https://github.com/eclipse/microprofile-open-api/wiki[MicroProfile Wiki].
 
