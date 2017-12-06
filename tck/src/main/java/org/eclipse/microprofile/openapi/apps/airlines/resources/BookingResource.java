@@ -143,14 +143,7 @@ public class BookingResource {
     )
     @Consumes("application/json")
     @Produces("application/json")
-    public Response createBooking(
-        @Parameter(
-            description = "booking to create",
-            required = true,
-            content = @Content(
-                mediaType = "application/json",
-                schema = @Schema(implementation = Booking.class)))
-        Booking task) {
+    public Response createBooking(Booking task) {
             bookings.put(currentId, task);
             return Response.status(Status.CREATED).entity("{\"id\":" + currentId++ + "}").build();
         }
