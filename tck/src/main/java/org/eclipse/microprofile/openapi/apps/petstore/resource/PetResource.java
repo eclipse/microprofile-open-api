@@ -136,6 +136,7 @@ public class PetResource {
             name = "petId",
             description = "ID of pet that needs to be fetched",
             required = true,
+            example = "1",
             schema = @Schema(
                 implementation = Long.class,
                 maximum = "101",

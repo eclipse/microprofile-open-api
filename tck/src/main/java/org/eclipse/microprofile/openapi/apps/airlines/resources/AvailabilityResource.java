@@ -73,16 +73,13 @@ public class AvailabilityResource {
     @Produces("application/json")
     public Response getFlights(
         @Parameter(
-            name = "departureDate",
-            required = true,
-            description = "Customer departure date",
-            schema = @Schema(
-                implementation = String.class)
+            ref = "#/components/parameters/departureDate"
         )
         @QueryParam("departureDate") String departureDate,
         @Parameter(
             name = "airportFrom",
             required = true,
+            allowEmptyValue = true,
             description = "Airport the customer departs from",
             schema = @Schema(
                 implementation = String.class)
@@ -91,6 +88,7 @@ public class AvailabilityResource {
         @Parameter(
             name = "returningDate",
             required = true,
+            allowReserved = true,
             description = "Customer return date",
             schema = @Schema(
                 implementation = String.class)
@@ -116,6 +114,7 @@ public class AvailabilityResource {
         @Parameter(
             name = "numberOfChildren",
             required = true,
+            deprecated = true,
             description = "Number of children on the flight",
             schema = @Schema(
                 minimum = "0",

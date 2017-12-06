@@ -409,18 +409,7 @@ public class ReviewResource {
                             )
         },
         requestBody = @RequestBody(
-            content = @Content(
-                mediaType = "application/json",
-                schema = @Schema(
-                    implementation = Review.class),
-                examples = @ExampleObject(
-                    name = "review",
-                    summary = "External review example",
-                    externalValue = "http://foo.bar/examples/review-example.json"
-                    )
-                ),
-            required = true,
-            description = "example review to add"
+                ref = "#/components/requestBodies/review"
         )
     )
     @Consumes("application/json")
