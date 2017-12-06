@@ -118,25 +118,36 @@ of another native configuration framework) must use the prefix `mp.openapi.exten
 There are many different ways to provide input for the generation of the resulting
 OpenAPI document.
 
-The easiest way to get started is via the <<Annotations>>, since
-they augment (not replace) the existing JAX-RS annotations.  Using annotations means
+The MP OpenAPI specification requires vendors to produce a valid OpenAPI document
+from pure JAX-RS 2.0 applications.  This means that vendors must process all the
+relevant JAX-RS annotations (such as `@Path` and `@Consumes`) as well as Java objects
+(POJOs) used as input or output to JAX-RS operations.  This is a good place to
+start for application developers that are new to OpenAPI: just deploy your existing
+JAX-RS application into a MP OpenAPI vendor and check out the output from `/openapi`!
+
+The application developer then has a few choices:
+
+1.  Augment those JAX-RS annotations with the
+OpenAPI <<Annotations>>.  Using annotations means
 developers don't have to re-write the portions of the OpenAPI document that are
 already covered by the JAX-RS framework (e.g. the HTTP method of an operation).
 
-Another way to document your APIs is via <<Static OpenAPI files>>.  This
-is often adopted by enterprises that want to lock-in the contract of the API
-before any code is written.  In this case, we refer to the OpenAPI document as the
-"source of truth", by which the client and provider must abide.
+2. Take the initial output from `/openapi` as a starting point to document
+your APIs via <<Static OpenAPI files>>.  It's worth mentioning that these static
+files can also be written before any code, which is an approach often adopted by
+enterprises that want to lock-in the contract of the API.  In this case, we refer
+to the OpenAPI document as the "source of truth", by which the client and provider
+must abide.
 
-The MP OpenAPI specification also defines a <<Programming model>> that allows
-application developers to provide a bootstrap (or complete) OpenAPI model tree.
+3. Use the <<Programming model>> to provide a bootstrap (or complete)
+OpenAPI model tree.
 
-Lastly, a <<Filter>> is described which can update the OpenAPI model after it has
+Additionally, a <<Filter>> is described which can update the OpenAPI model after it has
 been built from the previously described documentation mechanisms.
 
 === Annotations
 
-Many of these annotations were derived from the https://github.com/swagger-api/swagger-core[Swagger Core] library, which
+Many of these OpenAPI v3 annotations were derived from the https://github.com/swagger-api/swagger-core[Swagger Core] library, which
 allows for a mostly-mechanical transformation of applications that are using that
 library and wish to take advantage to the official MP OpenAPI interfaces.
 
@@ -148,25 +159,55 @@ The following annotations are found in the https://github.com/eclipse/microprofi
 |===
 | Annotation | Description
 
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/callbacks/Callback.java[@Callback] | Represents a callback URL that will be invoked.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/callbacks/Callbacks.java[@Callbacks] | Represents an array of Callback URLs that can be invoked.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/Components.java[@Components] | A container that holds various reusable objects for different aspects of the OpenAPI Specification.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/enums/Explode.java[@Explode] | Enumeration used to define the value of the `explode` property.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/enums/ParameterIn.java[@ParameterIn] | Enumeration representing the parameter's `in` property.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/enums/ParameterStyle.java[@ParameterStyle] | Enumeration for the parameter's `style` property.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/enums/SecuritySchemeIn.java[@SecuritySchemeIn] | Enumeration for the security scheme's `in` property.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/enums/SecuritySchemeType.java[@SecuritySchemeType] | Enumeration for the security scheme's `type` property.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/extensions/Extension.java[@Extension] | Adds an extension with contained properties.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/extension/Extensions.java[@Extensions] | Adds custom properties to an extension.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/ExternalDocumentation.java[@ExternalDocumentation] | References an external resource for extended documentation.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/headers/Header.java[@Header] | Describes a single header object.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/info/Contact.java[@Contact] | Contact information for the exposed API.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/info/Info.java[@Info] | This annotation encapsulates metadata about the API.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/info/License.java[@License] | License information for the exposed API.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/links/Link.java[@Link] | Represents a design-time link for a response.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/links/LinkParameter.java[@LinkParameter] | Represents a parameter to pass to the linked operation.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/media/Content.java[@Content] | Provides schema and examples for a particular media type.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/media/DiscriminatorMapping.java[@DiscriminatorMapping] | Used to differentiate between other schemas which may satisfy the payload description.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/media/Encoding.java[@Encoding] | Single encoding definition to be applied to single Schema Object.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/media/ExampleObject.java[@ExampleObject] | Illustrates an example of a particular content.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/media/Schema.java[@Schema] | Allows the definition of input and output data types.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/OpenAPIDefinition.java[@OpenAPIDefinition] | General metadata for an OpenAPI definition.
 | https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/Operation.java[@Operation] | Describes an operation or typically a HTTP method against a specific path.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/servers/Server.java[@Server]|  Represents a Server used in an operation or used by all operations in an OpenAPI document.
-|  |
-|  |
-|  |
-|  |
-|  |
-|  |
-|  |
-|  |
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/parameters/Parameter.java[@Parameter] | Describes a single operation parameter.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/parameters/Parameters.java[@Parameters] | Encapsulates input parameters.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/parameters/RequestBody.java[@RequestBody] | Describes a single request body.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/response/APIResponse.java[@APIResponse] | Describes a single response from an API operation.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/response/APIResponses.java[@APIResponses] | A container for multiple responses from an API operation.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/OAuthFlow.java[@OAuthFlow] | Configuration details for a supported OAuth Flow.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/OAuthFlows.java[@OAuthFlows] | Allows configuration of the supported OAuth Flows.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/OAuthScope.java[@OAuthScope] | Represents an OAuth scope.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/SecurityRequirement.java[@SecurityRequirement] |  Specifies a security requirement for an operation.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/SecurityRequirements.java[@SecurityRequirements] | Represents an array of security requirements where only one needs to be satisfied.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/SecurityRequirementsSet.java[@SecurityRequirementsSet] | Represents an array of security requirements that need to be satisfied.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/SecurityScheme.java[@SecurityScheme] |  Defines a security scheme that can be used by the operations.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/SecuritySchemes.java[@SecuritySchemes] | Represents an array of security schemes that can be specified.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/servers/Server.java[@Server]|  Represents a server used in an operation or used by all operations in an OpenAPI document.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/servers/Servers.java[@Servers] | A container for multiple server definitions.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/servers/ServerVariable.java[@ServerVariable] | Represents a server variable for server URL template substitution.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/tags/Tag.java[@Tag] | Represents a tag for the API endpoint.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/tags/Tags.java[@Tags] | A container of multiple tags.
 |===
 
 ==== Detailed usage of key annotations
 
 ===== Operation
 
-TODO: Detailed usage description of annotation (issue #10)
-
-.Sample 1
+.Sample 1 - Simple operation description
 [source,Java]
 ----
 @GET
@@ -180,41 +221,231 @@ public Response findPetsByStatus(...) { ... }
 [source, yaml]
 ----
 /pet/findByStatus:
-    get:
+  get:
     summary: Finds Pets by status
     description: Multiple status values can be provided with comma separated strings
     operationId: findPetsByStatus
 ----
 
-
-===== APIResponse
-
-TODO: Detailed usage description of annotation (issue #10)
-
-.Sample 1
+.Sample 2 - Operation with different responses
 [source,Java]
 ----
+@GET
+@Path("/{username}")
+@Operation(summary = "Get user by user name",
+           responses = {
+                @APIResponse(description = "The user",
+                             content = @Content(mediaType = "application/json",
+                             schema = @Schema(implementation = User.class))),
+                @APIResponse(responseCode = "400", description = "User not found")})
+public Response getUserByName(
+        @Parameter(description = "The name that needs to be fetched. Use user1 for testing. ", required = true) @PathParam("username") String username)
+ {...}
+----
 
+.Output for Sample 2
+[source, yaml]
+----
+/user/{username}:
+    get:
+      summary: Get user by user name
+      operationId: getUserByName
+      parameters:
+      - name: username
+        in: path
+        description: 'The name that needs to be fetched. Use user1 for testing. '
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: The user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        400:
+          description: User not found
+----
+
+
+===== RequestBody
+
+
+.Sample 1 - Simple RequestBody
+[source,Java]
+----
+@POST
+@Path("/user")
+@Operation(summary = "Create user",
+           description = "This can only be done by the logged in user.")
+public Response methodWithRequestBodyAndTwoParameters(
+          @RequestBody(description = "Created user object", required = true,
+                       content = @Content(
+                       schema = @Schema(implementation = User.class))) User user,
+          @QueryParam("name") String name, @QueryParam("code") String code)
+          { ... }
 ----
 
 .Output for Sample 1
 [source, yaml]
 ----
-
+post:
+    summary: Create user
+      description: This can only be done by the logged in user.
+      operationId: methodWithRequestBodyAndTwoParameters
+    parameters:
+    - name: name
+      in: query
+      schema:
+      type: string
+    - name: code
+      in: query
+      schema:
+      type: string
+    requestBody:
+      description: Created user object
+      content:
+       '*/*':
+        schema:
+          $ref: '#/components/schemas/User'
+          required: true
+    responses:
+      default:
+        description: no description
 ----
 
 ===== Servers
 
-.Sample 1
+.Sample 1 - Extended Server scenarios
 [source,Java]
 ----
+@OpenAPIDefinition(
+    servers = {
+        @Server(
+            description = "definition server 1",
+            url = "http://definition1",
+            variables = {
+                @ServerVariable(name = "var1", description = "var 1", defaultValue = "1", allowableValues = {"1", "2"}),
+                @ServerVariable(name = "var2", description = "var 2", defaultValue = "1", allowableValues = {"1", "2"})
+            })
+    }
+)
+@Server(
+        description = "class server 1",
+        url = "http://class1",
+        variables = {
+                @ServerVariable(name = "var1", description = "var 1", defaultValue = "1", allowableValues = {"1", "2"}),
+                @ServerVariable(name = "var2", description = "var 2", defaultValue = "1", allowableValues = {"1", "2"})
+        })
+@Server(
+        description = "class server 2",
+        url = "http://class2",
+        variables = {
+                @ServerVariable(name = "var1", description = "var 1", defaultValue = "1", allowableValues = {"1", "2"})
+        })
+public class ServersResource {
 
+    @GET
+    @Path("/")
+    @Operation(servers = {
+            @Server(
+                    description = "operation server 1",
+                    url = "http://op1",
+                    variables = {
+                            @ServerVariable(name = "var1", description = "var 1", defaultValue = "1", allowableValues = {"1", "2"})
+                    })
+    })
+    @Server(
+            description = "method server 1",
+            url = "http://method1",
+            variables = {
+                    @ServerVariable(name = "var1", description = "var 1", defaultValue = "1", allowableValues = {"1", "2"})
+            })
+    @Server(
+            description = "method server 2",
+            url = "http://method2"
+    )
+
+    public Response getServers() {
+        return Response.ok().entity("ok").build();
+    }
+}
 ----
 
 .Output for Sample 1
 [source, yaml]
 ----
-
+openapi: 3.0.0
+servers:
+- url: http://definition1
+  description: definition server 1
+  variables:
+    var1:
+      description: var 1
+      enum:
+      - "1"
+      - "2"
+      default: "1"
+    var2:
+      description: var 2
+      enum:
+      - "1"
+      - "2"
+      default: "1"
+paths:
+  /:
+    get:
+      operationId: getServers
+      responses:
+        default:
+          description: default response
+      servers:
+      - url: http://class1
+        description: class server 1
+        variables:
+          var1:
+            description: var 1
+            enum:
+            - "1"
+            - "2"
+            default: "1"
+          var2:
+            description: var 2
+            enum:
+            - "1"
+            - "2"
+            default: "1"
+      - url: http://class2
+        description: class server 2
+        variables:
+          var1:
+            description: var 1
+            enum:
+            - "1"
+            - "2"
+            default: "1"
+      - url: http://method1
+        description: method server 1
+        variables:
+          var1:
+            description: var 1
+            enum:
+            - "1"
+            - "2"
+            default: "1"
+      - url: http://method2
+        description: method server 2
+        variables: {}
+      - url: http://op1
+        description: operation server 1
+        variables:
+          var1:
+            description: var 1
+            enum:
+            - "1"
+            - "2"
+            default: "1"
 ----
 
 ===== Schema
@@ -233,10 +464,23 @@ TODO: Detailed usage description of annotation (issue #10)
 
 ----
 
+===== Tags
 
-===== And more.....
+TODO: Detailed usage description of annotation (issue #10)
 
-TODO: Add other key annotations (issue #10)
+.Sample 1
+[source,Java]
+----
+
+----
+
+.Output for Sample 1
+[source, yaml]
+----
+
+----
+
+For more samples please see the https://github.com/eclipse/microprofile-open-api/wiki[MicroProfile Wiki].
 
 === Static OpenAPI files
 
@@ -251,11 +495,12 @@ with annotations, programming model, or via the filter.
 
 ==== Location and formats
 
-Vendors are required to fetch a single document with extension of `yml`, `yaml` or
-`json`, inside the application's `META-INF/openapi` folder.  If there is more than
-one document found that matches one of these extensions the behavior of which file
-is chosen is undefined (i.e. each vendor may implement their own logic), which means
-that application developers should only place a single document into that folder.
+Vendors are required to fetch a single document named `openapi` with an extension
+of `yml`, `yaml` or `json`, inside the application's `META-INF` folder.  If there
+is more than one document found that matches one of these extensions the behavior
+of which file is chosen is undefined (i.e. each vendor may implement their own logic),
+which means that application developers should only place a single `openapi` document
+into that folder.
 
 === Programming model
 
@@ -378,10 +623,11 @@ For example, `GET http://myHost:myPort/openapi`.
 This document represents the result of the applied <<Processing rules>>.
 
 === Content format
-The default `Content-Type` of the `/openapi` endpoint is `application/yaml`.
+The default format of the `/openapi` endpoint is `YAML`.
 
-Vendors must also support the type `application/json` if requested via the
-`Accept` header.
+Vendors must also support the `JSON` format if the request contains an `Accept`
+header with a value of `application/json`, in which case the response must contain
+a `Content-Type` header with value of `application/json`.
 
 === Query parameters
 No query parameters are required for the `/openapi` endpoint.  However, one
