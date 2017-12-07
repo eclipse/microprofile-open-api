@@ -323,7 +323,7 @@ post:
     servers = {
         @Server(
             description = "definition server 1",
-            url = "http:/{var1}.definition1/{var2}",
+            url = "http://{var1}.definition1/{var2}",
             variables = {
                 @ServerVariable(name = "var1",
                                 description = "var 1",
@@ -335,7 +335,7 @@ post:
                                 enumeration = {"1", "2"})})})
 @Server(
     description = "class server 1",
-    url = "http:/{var1}.class1/{var2}",
+    url = "http://{var1}.class1/{var2}",
     variables = {
             @ServerVariable(
                       name = "var1",
@@ -349,7 +349,7 @@ post:
                       enumeration = {"1", "2"})})
 @Server(
     description = "class server 2",
-    url = "http:/{var1}.class2",
+    url = "http://{var1}.class2",
     variables = {
             @ServerVariable(
                        name = "var1",
@@ -362,7 +362,7 @@ public class ServersResource {
     @Path("/")
     @Server(
         description = "method server 1",
-        url = "http:/{var1}.method1",
+        url = "http://{var1}.method1",
         variables = {
             @ServerVariable(
                       name = "var1",
@@ -384,7 +384,7 @@ public class ServersResource {
 ----
 openapi: 3.0.0
 servers:
-- url: http://definition1
+- url: http://{var1}.definition1/{var2}
   description: definition server 1
   variables:
     var1:
@@ -407,7 +407,7 @@ paths:
         default:
           description: default response
       servers:
-      - url: http://class1
+      - url: http://{var1}.class1/{var2}
         description: class server 1
         variables:
           var1:
@@ -422,7 +422,7 @@ paths:
             - "1"
             - "2"
             default: "1"
-      - url: http://class2
+      - url: http://{var1}.class2
         description: class server 2
         variables:
           var1:
@@ -431,7 +431,7 @@ paths:
             - "1"
             - "2"
             default: "1"
-      - url: http://method1
+      - url: http://{var1}.method1
         description: method server 1
         variables:
           var1:
