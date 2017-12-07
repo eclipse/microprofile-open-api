@@ -162,7 +162,52 @@ public class ModelConstructionTest {
     
     @Test
     public void componentsTest() {
-        processConstructible(Components.class);
+        final Components c = processConstructible(Components.class);
+        
+        final String callbackKey = "myCallback";
+        final Callback callbackValue = createConstructibleInstance(Callback.class);
+        checkSameObject(c, c.addCallback(callbackKey, callbackValue));
+        checkMapEntry(c.getCallbacks(), callbackKey, callbackValue);
+        
+        final String exampleKey = "myExample";
+        final Example exampleValue = createConstructibleInstance(Example.class);
+        checkSameObject(c, c.addExample(exampleKey, exampleValue));
+        checkMapEntry(c.getExamples(), exampleKey, exampleValue);
+        
+        final String headerKey = "myHeader";
+        final Header headerValue = createConstructibleInstance(Header.class);
+        checkSameObject(c, c.addHeader(headerKey, headerValue));
+        checkMapEntry(c.getHeaders(), headerKey, headerValue);
+        
+        final String linkKey = "myLink";
+        final Link linkValue = createConstructibleInstance(Link.class);
+        checkSameObject(c, c.addLink(linkKey, linkValue));
+        checkMapEntry(c.getLinks(), linkKey, linkValue);
+        
+        final String parameterKey = "myParameter";
+        final Parameter<?> parameterValue = createConstructibleInstance(CookieParameter.class);
+        checkSameObject(c, c.addParameter(parameterKey, parameterValue));
+        checkMapEntry(c.getParameters(), parameterKey, parameterValue);
+        
+        final String requestBodyKey = "myRequestBody";
+        final RequestBody requestBodyValue = createConstructibleInstance(RequestBody.class);
+        checkSameObject(c, c.addRequestBody(requestBodyKey, requestBodyValue));
+        checkMapEntry(c.getRequestBodies(), requestBodyKey, requestBodyValue);
+        
+        final String responseKey = "myResponse";
+        final APIResponse responseValue = createConstructibleInstance(APIResponse.class);
+        checkSameObject(c, c.addResponse(responseKey, responseValue));
+        checkMapEntry(c.getResponses(), responseKey, responseValue);
+        
+        final String schemaKey = "mySchema";
+        final Schema schemaValue = createConstructibleInstance(Schema.class);
+        checkSameObject(c, c.addSchema(schemaKey, schemaValue));
+        checkMapEntry(c.getSchemas(), schemaKey, schemaValue);
+        
+        final String securitySchemeKey = "mySecurityScheme";
+        final SecurityScheme securitySchemeValue = createConstructibleInstance(SecurityScheme.class);
+        checkSameObject(c, c.addSecurityScheme(securitySchemeKey, securitySchemeValue));
+        checkMapEntry(c.getSecuritySchemes(), securitySchemeKey, securitySchemeValue);
     }
     
     @Test
@@ -172,27 +217,87 @@ public class ModelConstructionTest {
     
     @Test
     public void openAPITest() {
-        processConstructible(OpenAPI.class);
+        final OpenAPI o = processConstructible(OpenAPI.class);
+        
+        final SecurityRequirement sr = createConstructibleInstance(SecurityRequirement.class);
+        checkSameObject(o, o.addSecurityRequirement(sr));
+        checkListEntry(o.getSecurity(), sr);
+        
+        final Server s = createConstructibleInstance(Server.class);
+        checkSameObject(o, o.addServer(s));
+        checkListEntry(o.getServers(), s);
+        
+        final Tag t = createConstructibleInstance(Tag.class);
+        checkSameObject(o, o.addTag(t));
+        checkListEntry(o.getTags(), t);
     }
     
     @Test
     public void operationTest() {
-        processConstructible(Operation.class);
+        final Operation o = processConstructible(Operation.class);
+        
+        final Parameter<?> p = createConstructibleInstance(CookieParameter.class);
+        checkSameObject(o, o.addParameter(p));
+        checkListEntry(o.getParameters(), p);
+        
+        final SecurityRequirement sr = createConstructibleInstance(SecurityRequirement.class);
+        checkSameObject(o, o.addSecurityRequirement(sr));
+        checkListEntry(o.getSecurity(), sr);
+        
+        final Server s = createConstructibleInstance(Server.class);
+        checkSameObject(o, o.addServer(s));
+        checkListEntry(o.getServers(), s);
+        
+        final String tag = new String("myTag");
+        checkSameObject(o, o.addTag(tag));
+        checkListEntry(o.getTags(), tag);
     }
     
     @Test
     public void pathItemTest() {
-        processConstructible(PathItem.class);
+        final PathItem pi = processConstructible(PathItem.class);
+        
+        final Parameter<?> p = createConstructibleInstance(CookieParameter.class);
+        checkSameObject(pi, pi.addParameter(p));
+        checkListEntry(pi.getParameters(), p);
+        
+        final Server s = createConstructibleInstance(Server.class);
+        checkSameObject(pi, pi.addServer(s));
+        checkListEntry(pi.getServers(), s);
     }
     
     @Test
     public void pathsTest() {
-        processConstructible(Paths.class);
+        final Paths p = processConstructible(Paths.class);
+        
+        final String pathItemKey = "myPathItem";
+        final PathItem pathItemValue = createConstructibleInstance(PathItem.class);
+        checkSameObject(p, p.addPathItem(pathItemKey, pathItemValue));
+        checkMapEntry(p, pathItemKey, pathItemValue);
+        
+        final String pathItemKey2 = "myPathItem2";
+        final PathItem pathItemValue2 = createConstructibleInstance(PathItem.class);
+        Assert.assertNull("No previous mapping expected.", p.put(pathItemKey2, pathItemValue2));
+        checkMapEntry(p, pathItemKey2, pathItemValue2);
+        
+        Assert.assertEquals("The map is expected to contain two entries.", 2, p.size());
     }
     
     @Test
     public void callbackTest() {
-        processConstructible(Callback.class);
+        final Callback c = processConstructible(Callback.class);
+        
+        final String pathItemKey = "myPathItem";
+        final PathItem pathItemValue = createConstructibleInstance(PathItem.class);
+        checkSameObject(c, c.addPathItem(pathItemKey, pathItemValue));
+        checkMapEntry(c, pathItemKey, pathItemValue);
+        
+        final String pathItemKey2 = "myPathItem2";
+        final PathItem pathItemValue2 = createConstructibleInstance(PathItem.class);
+        Assert.assertNull("No previous mapping expected.", c.put(pathItemKey2, pathItemValue2));
+        checkMapEntry(c, pathItemKey2, pathItemValue2);
+        
+        Assert.assertEquals("The map is expected to contain two entries.", 2, c.size());
     }
     
     @Test
@@ -202,7 +307,12 @@ public class ModelConstructionTest {
     
     @Test
     public void headerTest() {
-        processConstructible(Header.class);
+        final Header h = processConstructible(Header.class);
+        
+        final String exampleKey = "myExample";
+        final Example exampleValue = createConstructibleInstance(Example.class);
+        checkSameObject(h, h.addExample(exampleKey, exampleValue));
+        checkMapEntry(h.getExamples(), exampleKey, exampleValue);
     }
     
     @Test
@@ -222,17 +332,39 @@ public class ModelConstructionTest {
     
     @Test
     public void linkTest() {
-        processConstructible(Link.class);
+        final Link l = processConstructible(Link.class);
+        
+        final String parameterKey = "myParameter";
+        final Parameter<?> parameterValue = createConstructibleInstance(CookieParameter.class);
+        checkSameObject(l, l.addParameter(parameterKey, parameterValue));
+        checkMapEntry(l.getParameters(), parameterKey, parameterValue);
     }
     
     @Test
     public void contentTest() {
-        processConstructible(Content.class);
+        final Content c = processConstructible(Content.class);
+        
+        final String mediaTypeKey = "myPathItem";
+        final MediaType mediaTypeValue = createConstructibleInstance(MediaType.class);
+        checkSameObject(c, c.addMediaType(mediaTypeKey, mediaTypeValue));
+        checkMapEntry(c, mediaTypeKey, mediaTypeValue);
+        
+        final String mediaTypeKey2 = "myPathItem2";
+        final MediaType mediaTypeValue2 = createConstructibleInstance(MediaType.class);
+        Assert.assertNull("No previous mapping expected.", c.put(mediaTypeKey2, mediaTypeValue2));
+        checkMapEntry(c, mediaTypeKey2, mediaTypeValue2);
+        
+        Assert.assertEquals("The map is expected to contain two entries.", 2, c.size());
     }
     
     @Test
     public void discriminatorTest() {
-        processConstructible(Discriminator.class);
+        final Discriminator d = processConstructible(Discriminator.class);
+        
+        final String key = "myKey";
+        final String value = new String("myValue");
+        checkSameObject(d, d.addMapping(key, value));
+        checkMapEntry(d.getMapping(), key, value);
     }
     
     @Test
@@ -242,12 +374,47 @@ public class ModelConstructionTest {
     
     @Test
     public void mediaTypeTest() {
-        processConstructible(MediaType.class);
+        final MediaType mt = processConstructible(MediaType.class);
+        
+        final String encodingKey = "myEncoding";
+        final Encoding encodingValue = createConstructibleInstance(Encoding.class);
+        checkSameObject(mt, mt.addEncoding(encodingKey, encodingValue));
+        checkMapEntry(mt.getEncoding(), encodingKey, encodingValue);
+        
+        final String exampleKey = "myExample";
+        final Example exampleValue = createConstructibleInstance(Example.class);
+        checkSameObject(mt, mt.addExample(exampleKey, exampleValue));
+        checkMapEntry(mt.getExamples(), exampleKey, exampleValue);
     }
     
     @Test
     public void schemaTest() {
-        processConstructible(Schema.class);
+        final Schema s = processConstructible(Schema.class);
+        
+        final Schema allOf = createConstructibleInstance(Schema.class);
+        checkSameObject(s, s.addAllOf(allOf));
+        checkListEntry(s.getAllOf(), allOf);
+        
+        final Schema anyOf = createConstructibleInstance(Schema.class);
+        checkSameObject(s, s.addAnyOf(anyOf));
+        checkListEntry(s.getAnyOf(), anyOf);
+        
+        final String enumeration = new String("enumValue");
+        checkSameObject(s, s.addEnumeration(enumeration));
+        checkListEntry(s.getEnumeration(), enumeration);
+        
+        final Schema oneOf = createConstructibleInstance(Schema.class);
+        checkSameObject(s, s.addOneOf(oneOf));
+        checkListEntry(s.getOneOf(), oneOf);
+        
+        final String propertySchemaKey = "myPropertySchemaKey";
+        final Schema propertySchemaValue = createConstructibleInstance(Schema.class);
+        checkSameObject(s, s.addProperty(propertySchemaKey, propertySchemaValue));
+        checkMapEntry(s.getProperties(), propertySchemaKey, propertySchemaValue);
+        
+        final String required = new String("required");
+        checkSameObject(s, s.addRequired(required));
+        checkListEntry(s.getRequired(), required);
     }
     
     @Test
@@ -258,33 +425,25 @@ public class ModelConstructionTest {
     @Test
     public void cookieParameterTest() {
         final CookieParameter cp = processConstructible(CookieParameter.class);
-        // Check value of read-only 'in' property.
-        Assert.assertEquals("The value of the 'in' property is expected to be 'cookie'.",
-                Parameter.In.COOKIE, cp.getIn());
+        checkParameterCommon(cp, Parameter.In.COOKIE, "cookie");
     }
-    
+
     @Test
     public void headerParameterTest() {
         final HeaderParameter hp = processConstructible(HeaderParameter.class);
-        // Check value of read-only 'in' property.
-        Assert.assertEquals("The value of the 'in' property is expected to be 'header'.",
-                Parameter.In.HEADER, hp.getIn());
+        checkParameterCommon(hp, Parameter.In.HEADER, "header");
     }
     
     @Test
     public void pathParameterTest() {
         final PathParameter pp = processConstructible(PathParameter.class);
-        // Check value of read-only 'in' property.
-        Assert.assertEquals("The value of the 'in' property is expected to be 'path'.",
-                Parameter.In.PATH, pp.getIn());
+        checkParameterCommon(pp, Parameter.In.PATH, "path");
     }
     
     @Test
     public void queryParameterTest() {
         final QueryParameter qp = processConstructible(QueryParameter.class);
-        // Check value of read-only 'in' property.
-        Assert.assertEquals("The value of the 'in' property is expected to be 'query'.",
-                Parameter.In.QUERY, qp.getIn());
+        checkParameterCommon(qp, Parameter.In.QUERY, "query");
     }
     
     @Test
@@ -294,12 +453,34 @@ public class ModelConstructionTest {
     
     @Test
     public void apiResponseTest() {
-        processConstructible(APIResponse.class);
+        final APIResponse response = processConstructible(APIResponse.class);
+        
+        final String headerKey = "myHeaderKey";
+        final Header headerValue = createConstructibleInstance(Header.class);
+        checkSameObject(response, response.addHeader(headerKey, headerValue));
+        checkMapEntry(response.getHeaders(), headerKey, headerValue);
+        
+        final String linkKey = "myLinkKey";
+        final Link linkValue = createConstructibleInstance(Link.class);
+        checkSameObject(response, response.addLink(linkKey, linkValue));
+        checkMapEntry(response.getLinks(), linkKey, linkValue);
     }
     
     @Test
     public void apiResponsesTest() {
-        processConstructible(APIResponses.class);
+        final APIResponses responses = processConstructible(APIResponses.class);
+        
+        final String responseKey = "myResponse";
+        final APIResponse responseValue = createConstructibleInstance(APIResponse.class);
+        checkSameObject(responses, responses.addApiResponse(responseKey, responseValue));
+        checkMapEntry(responses, responseKey, responseValue);
+        
+        final String responseKey2 = "myResponse2";
+        final APIResponse responseValue2 = createConstructibleInstance(APIResponse.class);
+        Assert.assertNull("No previous mapping expected.", responses.put(responseKey2, responseValue2));
+        checkMapEntry(responses, responseKey2, responseValue2);
+        
+        Assert.assertEquals("The map is expected to contain two entries.", 2, responses.size());
     }
     
     @Test
@@ -314,12 +495,36 @@ public class ModelConstructionTest {
     
     @Test
     public void scopesTest() {
-        processConstructible(Scopes.class);
+        final Scopes s = processConstructible(Scopes.class);
+        
+        final String scopeKey = "myScope";
+        final String scopeValue = new String("myDescription");
+        checkSameObject(s, s.addScope(scopeKey, scopeValue));
+        checkMapEntry(s, scopeKey, scopeValue);
+        
+        final String scopeKey2 = "myScope2";
+        final String scopeValue2 = new String("myDescription2");
+        Assert.assertNull("No previous mapping expected.", s.put(scopeKey2, scopeValue2));
+        checkMapEntry(s, scopeKey2, scopeValue2);
+        
+        Assert.assertEquals("The map is expected to contain two entries.", 2, s.size());
     }
     
     @Test
     public void securityRequirementTest() {
-        processConstructible(SecurityRequirement.class);
+        final SecurityRequirement sr = processConstructible(SecurityRequirement.class);
+        
+        final String schemeKey = "myResponse";
+        final List<String> schemeValue = new ArrayList<String>();
+        checkSameObject(sr, sr.addScheme(schemeKey, schemeValue));
+        checkMapEntry(sr, schemeKey, schemeValue);
+        
+        final String schemeKey2 = "myResponse2";
+        final List<String> schemeValue2 = new ArrayList<String>();
+        Assert.assertNull("No previous mapping expected.", sr.put(schemeKey2, schemeValue2));
+        checkMapEntry(sr, schemeKey2, schemeValue2);
+        
+        Assert.assertEquals("The map is expected to contain two entries.", 2, sr.size());
     }
     
     @Test
@@ -334,12 +539,28 @@ public class ModelConstructionTest {
     
     @Test
     public void serverVariableTest() {
-        processConstructible(ServerVariable.class);
+        final ServerVariable sv = processConstructible(ServerVariable.class);
+        
+        final String enumeration = new String("enumValue");
+        checkSameObject(sv, sv.addEnumeration(enumeration));
+        checkListEntry(sv.getEnumeration(), enumeration);
     }
     
     @Test
     public void serverVariablesTest() {
-        processConstructible(ServerVariables.class);
+        final ServerVariables svs = processConstructible(ServerVariables.class);
+        
+        final String varKey = "myServerVariable";
+        final ServerVariable varValue = createConstructibleInstance(ServerVariable.class);
+        checkSameObject(svs, svs.addServerVariable(varKey, varValue));
+        checkMapEntry(svs, varKey, varValue);
+        
+        final String varKey2 = "myServerVariable2";
+        final ServerVariable varValue2 = createConstructibleInstance(ServerVariable.class);
+        Assert.assertNull("No previous mapping expected.", svs.put(varKey2, varValue2));
+        checkMapEntry(svs, varKey2, varValue2);
+        
+        Assert.assertEquals("The map is expected to contain two entries.", 2, svs.size());
     }
     
     @Test
@@ -403,11 +624,26 @@ public class ModelConstructionTest {
         final String myRef1 = createReference(r, "myRef1");
         r.setRef(myRef1);
         Assert.assertEquals("The return value of getRef() is expected to be equal to the value that was set.", myRef1, r.getRef());
+        // Check that the short name ref value can be set using the setter method and that the getter method returns the expanded value.
+        if (!(r instanceof PathItem)) {
+            final String shortName = "myRef2";
+            final String myRef2 = createReference(r, shortName);
+            r.setRef(shortName);
+            Assert.assertEquals("The return value of getRef() is expected to be a fully expanded name.", myRef2, r.getRef());
+        }
         // Check that the ref value can be set using the builder method and that the getter method returns the same value.
-        final String myRef2 = createReference(r, "myRef2");
-        final Reference<?> self = r.ref(myRef2);
+        final String myRef3 = createReference(r, "myRef3");
+        final Reference<?> self = r.ref(myRef3);
         Assert.assertSame("The return value of ref() is expected to return the current instance.", r, self);
-        Assert.assertEquals("The return value of getRef() is expected to be equal to the value that was set.", myRef2, r.getRef());
+        Assert.assertEquals("The return value of getRef() is expected to be equal to the value that was set.", myRef3, r.getRef());
+        // Check that the short name ref value can be set using the builder method and that the getter method returns the expanded value.
+        if (!(r instanceof PathItem)) {
+            final String shortName = "myRef4";
+            final String myRef4 = createReference(r, shortName);
+            final Reference<?> self2 = r.ref(shortName);
+            Assert.assertSame("The return value of ref() is expected to return the current instance.", r, self2);
+            Assert.assertEquals("The return value of getRef() is expected to be a fully expanded name.", myRef4, r.getRef());
+        }
     }
     
     private void processConstructibleProperty(Constructible o, Property p, Class<?> enclosingInterface) {
@@ -606,5 +842,32 @@ public class ModelConstructionTest {
             }
         });
         return properties;
+    }
+    
+    private <T extends Parameter<T>> void checkParameterCommon(Parameter<T> p, Parameter.In expectedIn, String name) {
+        final String exampleKey = "myExample";
+        final Example exampleValue = createConstructibleInstance(Example.class);
+        checkSameObject(p, p.addExample(exampleKey, exampleValue));
+        checkMapEntry(p.getExamples(), exampleKey, exampleValue);
+        
+        // Check value of read-only 'in' property.
+        Assert.assertEquals("The value of the 'in' property is expected to be '" + name + "'.",
+                expectedIn, p.getIn());
+    }
+    
+    private <T> void checkMapEntry(Map<String,T> map, String key, T value) {
+        Assert.assertNotNull("The map must not be null.", map);
+        Assert.assertTrue("The map is expected to contain the key: " + key, map.containsKey(key));
+        Assert.assertSame("The value associated with the key: " + key + " is expected to be the same one that was added.",
+                value, map.get(key));
+    }
+    
+    private <T> void checkListEntry(List<T> list, T value) {
+        Assert.assertNotNull("The list must not be null.", list);
+        Assert.assertTrue("The list is expected to contain the value: " + value, list.stream().anyMatch((v) -> v == value));
+    }
+    
+    private <T> void checkSameObject(T expected, T actual) {
+        Assert.assertSame("Expecting same object.", expected, actual);
     }
 }
