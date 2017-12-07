@@ -15,15 +15,16 @@ package org.eclipse.microprofile.openapi.apps.airlines.model;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
+@Schema(maxProperties = 1024, minProperties = 1, requiredProperties = { "id", "username", "password" })
 public class User {
     
-    @Schema(required = true, example = "3456")
+    @Schema(example = "3456")
     private int id;
     
-    @Schema(required = true, example = "user1")
+    @Schema(example = "user1")
     private String userName;
     
-    @Schema(required = true, example = "bobSm37")
+    @Schema(example = "bobSm37")
     private String password;
     
     @Schema(required = true, example = "Bob")

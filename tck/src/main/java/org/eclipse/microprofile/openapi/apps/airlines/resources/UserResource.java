@@ -227,6 +227,8 @@ public class UserResource {
                     nullable = true,
                     writeOnly = true,
                     minItems = 2
+                    maxItems = 20,
+                    uniqueItems = true
                 ),
                 encoding = @Encoding(
                     name = "firstName",

@@ -85,8 +85,9 @@ import org.eclipse.microprofile.openapi.apps.airlines.resources.ReviewResource;
                 @Server(url = "https://test-server.com:80/basePath", description = "The test API server") },
         components = @Components(
                 schemas = { 
-                        @Schema(name = "Bookings", type = SchemaType.ARRAY, implementation = Booking.class),
-                        @Schema(name = "Airlines", type = SchemaType.ARRAY, implementation = Airline.class),
+                        @Schema(name = "Bookings", title = "Bookings", type = SchemaType.ARRAY, implementation = Booking.class),
+                        @Schema(name = "Airlines", title = "Airlines", type = SchemaType.ARRAY, implementation = Airline.class),
+                        @Schema(name = "id", type = SchemaType.INTEGER, format="int32"),
                         @Schema(name = "AirlinesRef", ref = "#/components/schemas/Airlines") }, 
                 responses = {
                         @APIResponse(name = "FoundAirlines", responseCode = "200", description = "successfully found airlines", 

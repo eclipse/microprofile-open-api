@@ -14,6 +14,7 @@
 package org.eclipse.microprofile.openapi.apps.petstore.resource;
 
 import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeIn;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
@@ -397,6 +398,7 @@ public class PetResource {
             required = true,
             deprecated = true,
             schema = @Schema(implementation = String.class, deprecated = true,
+              externalDocs = @ExternalDocumentation(description = "Pet Types", url = "http://example.com/pettypes"),
               enumeration = { "Cat", "Dog", "Lizard" }, defaultValue = "Dog" ))
         @QueryParam("tags") String tags) {
             return Response.ok(petData.findPetByTags(tags)).build();
