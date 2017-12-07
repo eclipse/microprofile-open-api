@@ -27,6 +27,9 @@
 
 = MicroProfile OpenAPI Specification
 
+include::license-alv2.asciidoc[]
+
+
 == Introduction
 Exposing APIs has become an essential part of all modern applications.  At the
 center of this revolution known as the API Economy we find RESTful APIs, which can
