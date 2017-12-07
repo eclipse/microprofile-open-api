@@ -17,6 +17,7 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeIn;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
@@ -75,15 +76,12 @@ public class UserResource {
     static UserData userData = new UserData();
 
     @POST
+    @APIResponse(
+            description = "successful operation"
+        )
     @Operation(
-        method = "post",
         summary = "Create user",
-        description = "This can only be done by the logged in user.",
-        responses = {
-            @APIResponse(
-                description = "successful operation"
-            )
-        }
+        description = "This can only be done by the logged in user."
     )
     @SecurityRequirements(
         value = {
@@ -110,14 +108,11 @@ public class UserResource {
 
     @POST
     @Path("/createWithArray")
+    @APIResponse(
+            description = "successful operation"
+        )
     @Operation(
-        method = "post",
-        summary = "Creates list of users with given input array",
-        responses = {
-            @APIResponse(
-                description = "successful operation"
-            )
-        }
+        summary = "Creates list of users with given input array"
     )
     public Response createUsersWithArrayInput(
         @Parameter(
@@ -132,14 +127,11 @@ public class UserResource {
 
     @POST
     @Path("/createWithList")
+    @APIResponse(
+            description = "successful operation"
+        )
     @Operation(
-        method = "post",
-        summary = "Creates list of users with given input array",
-        responses = {
-            @APIResponse(
-                description = "successful operation"
-            )
-        }
+        summary = "Creates list of users with given input array"
     )
     public Response createUsersWithListInput(
         @Parameter(
@@ -153,20 +145,17 @@ public class UserResource {
 
     @PUT
     @Path("/{username}")
+    @APIResponse(
+            responseCode = "400",
+            description = "Invalid user supplied"
+        )
+    @APIResponse(
+            responseCode = "404",
+            description = "User not found"
+        )
     @Operation(
-        method = "put",
         summary = "Updated user",
-        description = "This can only be done by the logged in user.",
-        responses = {
-            @APIResponse(
-                responseCode = "400",
-                description = "Invalid user supplied"
-            ),
-            @APIResponse(
-                responseCode = "404",
-                description = "User not found"
-            )
-        }
+        description = "This can only be done by the logged in user."
     )
     @SecurityRequirementsSet(
         value = {
@@ -195,20 +184,19 @@ public class UserResource {
 
     @DELETE
     @Path("/{username}")
+    @APIResponses(value={
+            @APIResponse(
+                    responseCode = "400",
+                    description = "Invalid username supplied"
+                ),
+                @APIResponse(
+                    responseCode = "404",
+                    description = "User not found"
+                )
+    })
     @Operation(
-        method = "delete",
         summary = "Delete user",
-        description = "This can only be done by the logged in user.",
-        responses = {
-            @APIResponse(
-                responseCode = "400",
-                description = "Invalid username supplied"
-            ),
-            @APIResponse(
-                responseCode = "404",
-                description = "User not found"
-            )
-        }
+        description = "This can only be done by the logged in user."
     )
     public Response deleteUser(
         @Parameter(
@@ -228,32 +216,31 @@ public class UserResource {
 
     @GET
     @Path("/{username}")
+    @APIResponses(value={
+            @APIResponse(
+                    responseCode = "200",
+                    description = "successful operation",
+                    content = @Content(
+                        schema = @Schema(implementation = User.class)
+                    )
+                ),
+            @APIResponse(
+                    responseCode = "400",
+                    description = "Invalid username supplied",
+                    content = @Content(
+                        schema = @Schema(implementation = User.class)
+                    )
+                ),
+            @APIResponse(
+                    responseCode = "404",
+                    description = "User not found",
+                    content = @Content(
+                        schema = @Schema(implementation = User.class)
+                    )
+                )
+    })
     @Operation(
-        method = "get",
-        summary = "Get user by user name",
-        responses = {
-            @APIResponse(
-                responseCode = "200",
-                description = "successful operation",
-                content = @Content(
-                    schema = @Schema(implementation = User.class)
-                )
-            ),
-            @APIResponse(
-                responseCode = "400",
-                description = "Invalid username supplied",
-                content = @Content(
-                    schema = @Schema(implementation = User.class)
-                )
-            ),
-            @APIResponse(
-                responseCode = "404",
-                description = "User not found",
-                content = @Content(
-                    schema = @Schema(implementation = User.class)
-                )
-            )
-        }
+        summary = "Get user by user name"
     )
     public Response getUserByName(
         @Parameter(
@@ -274,25 +261,22 @@ public class UserResource {
 
     @GET
     @Path("/login")
-    @Operation(
-        method = "get",
-        summary = "Logs user into the system",
-        responses = {
-            @APIResponse(
-                responseCode = "200",
-                description = "successful operation",
-                content = @Content(
-                    schema = @Schema(implementation = String.class)
-                )
-            ),
-            @APIResponse(
-                responseCode = "400",
-                description = "Invalid username/password supplied",
-                content = @Content(
-                    schema = @Schema(implementation = String.class)
-                )
+    @APIResponse(
+            responseCode = "200",
+            description = "successful operation",
+            content = @Content(
+                schema = @Schema(implementation = String.class)
             )
-        }
+        )
+    @APIResponse(
+            responseCode = "400",
+            description = "Invalid username/password supplied",
+            content = @Content(
+                schema = @Schema(implementation = String.class)
+            )
+        )
+    @Operation(
+        summary = "Logs user into the system"
     )
     public Response loginUser(
         @Parameter(
@@ -315,14 +299,11 @@ public class UserResource {
 
     @GET
     @Path("/logout")
+    @APIResponse(
+            description = "successful operation"
+        )
     @Operation(
-        method = "get",
-        summary = "Logs out current logged in user session",
-        responses = {
-            @APIResponse(
-                description = "successful operation"
-            )
-        }
+        summary = "Logs out current logged in user session"
     )
     public Response logoutUser() {
         return Response.ok().entity("").build();

@@ -42,8 +42,8 @@ import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import org.eclipse.microprofile.openapi.annotations.headers.Header;
 import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
 import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
-import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.callbacks.Callback;
+import org.eclipse.microprofile.openapi.annotations.callbacks.CallbackOperation;
 import org.eclipse.microprofile.openapi.annotations.Components;
 import org.eclipse.microprofile.openapi.apps.airlines.model.Airline;
 import org.eclipse.microprofile.openapi.apps.airlines.model.Booking;
@@ -120,7 +120,7 @@ import org.eclipse.microprofile.openapi.apps.airlines.resources.ReviewResource;
                                 parameters = @LinkParameter(name = "userId", expression = "$request.path.id")) }, 
                 callbacks = {
                         @Callback(name = "GetBookings", callbackUrlExpression = "http://localhost:9080/airlines/bookings", 
-                                operation = @Operation(summary = "Retrieve all bookings for current user", 
+                                operations = @CallbackOperation(summary = "Retrieve all bookings for current user", 
                                 responses = {@APIResponse(ref = "FoundBookings") })) 
                         }))
 @SecurityScheme(

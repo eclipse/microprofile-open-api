@@ -78,16 +78,13 @@ public class PetStoreResource {
     @GET
     @Path("/inventory")
     @Produces({"application/json", "application/xml"})
+    @APIResponse(
+            responseCode = "200", 
+            description = "successful operation"
+        )
     @Operation(
-        method = "get",
         summary = "Returns pet inventories by status", 
-        description = "Returns a map of status codes to quantities", 
-        responses = {
-            @APIResponse(
-                responseCode = "200", 
-                description = "successful operation"
-            )
-        }
+        description = "Returns a map of status codes to quantities"
     )
     public java.util.Map<String, Integer> getInventory() {
         return petData.getInventoryByStatus();
@@ -96,39 +93,36 @@ public class PetStoreResource {
     @GET
     @Path("/order/{orderId}")
     @Operation(
-        method = "get",
         summary = "Find purchase order by ID",
-        description = "For valid response try integer IDs with value between the integers of 1 and 10. Other values will generated exceptions",
-        responses = { 
-            @APIResponse(
-                responseCode = "200", 
-                description = "successful operation",
-                content = @Content(
-                    schema = @Schema(implementation = Order.class, 
-                      allOf = { Order.class, Pet.class},
-                      not = BadOrder.class )
-                )
-            ),
-            @APIResponse(
-                responseCode = "400", 
-                description = "Invalid ID supplied",
-                content = @Content(
-                    schema = @Schema(implementation = Order.class,
-                      hidden = true)
-                )
-            ),
-            @APIResponse(
-                responseCode = "404", 
-                description = "Order not found",
-                content = @Content(
-                    schema = @Schema(implementation = Order.class, 
-                      anyOf = { Order.class, BadOrder.class},
-                      discriminatorProperty = "id", 
-                      discriminatorMapping = @DiscriminatorMapping(value = "0", schema = BadOrder.class) )
-                )
-            )
-        }
+        description = "For valid response try integer IDs with value between the integers of 1 and 10. Other values will generated exceptions"
     )
+    @APIResponse(
+            responseCode = "200", 
+            description = "successful operation",
+            content = @Content(
+                schema = @Schema(implementation = Order.class, 
+                  allOf = { Order.class, Pet.class},
+                  not = BadOrder.class )
+            )
+        )
+    @APIResponse(
+            responseCode = "400", 
+            description = "Invalid ID supplied",
+            content = @Content(
+                schema = @Schema(implementation = Order.class,
+                  hidden = true)
+            )
+        )
+    @APIResponse(
+            responseCode = "404", 
+            description = "Order not found",
+            content = @Content(
+                schema = @Schema(implementation = Order.class, 
+                  anyOf = { Order.class, BadOrder.class},
+                  discriminatorProperty = "id", 
+                  discriminatorMapping = @DiscriminatorMapping(value = "0", schema = BadOrder.class) )
+            )
+        )
     public Response getOrderById(
         @Parameter(
             name = "orderId",
@@ -153,19 +147,16 @@ public class PetStoreResource {
     @POST
     @Path("/order")
     @Operation(
-        method = "post",
-        summary = "Place an order for a pet",
-        responses = {
-            @APIResponse(
-                responseCode = "200", 
-                description = "successful operation"
-            ),
-            @APIResponse(
-                responseCode = "400", 
-                description = "Invalid Order"
-            ) 
-        }
+        summary = "Place an order for a pet"
     )
+    @APIResponse(
+            responseCode = "200", 
+            description = "successful operation"
+        )
+    @APIResponse(
+            responseCode = "400", 
+            description = "Invalid Order"
+            ) 
     public Order placeOrder(
         @Parameter(
             description = "order placed for purchasing the pet",
@@ -178,20 +169,17 @@ public class PetStoreResource {
 
     @DELETE
     @Path("/order/{orderId}")
+    @APIResponse(
+            responseCode = "400", 
+            description = "Invalid ID supplied"
+            )
+    @APIResponse(
+            responseCode = "404", 
+            description = "Order not found"
+            ) 
     @Operation(
-        method = "delete",
         summary = "Delete purchase order by ID",
-        description = "For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors",
-        responses = { 
-            @APIResponse(
-                responseCode = "400", 
-                description = "Invalid ID supplied"
-                ),
-            @APIResponse(
-                responseCode = "404", 
-                description = "Order not found"
-                ) 
-        }
+        description = "For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors"
     )
     public Response deleteOrder(
         @Parameter(
