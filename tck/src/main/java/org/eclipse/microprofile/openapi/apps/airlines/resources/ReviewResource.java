@@ -65,9 +65,9 @@ import org.eclipse.microprofile.openapi.apps.airlines.model.User;
 @Path("/reviews")
 @Servers({ @Server(description = "Secure server", url = "https://gigantic-server.com:443"),
         @Server(description = "Unsecure server", url = "http://gigantic-server.com:80") })
-@Server(url = "https://gigantic-server.com:{port}",
+@Server(url = "{protocol}://test-server.com",
         description = "The production API server",
-        variables = { @ServerVariable(name = "port", description = "Review data", enumeration = { "9080", "9443" }, defaultValue = "9080") })
+        variables = { @ServerVariable(name = "protocol", enumeration = { "http", "https" }, defaultValue = "https") })
 @SecurityScheme(
     securitySchemeName = "reviewoauth2",
     type = SecuritySchemeType.OAUTH2,
@@ -371,16 +371,10 @@ public class ReviewResource {
         operationId = "createReview",
         tags = {"Reviews"},
         servers = {
-            @Server(
-                url = "localhost:9080/oas3-airlines/reviews/{id}",
-                description = "view of all the reviews",
-                variables = {
-                    @ServerVariable(
-                        name = "id",
-                        description = "id of the review",
-                        defaultValue = "1")
-            })
-        },
+                @Server(url = "localhost:9080/{proxyPath}/reviews/id",
+                        description = "view of all the reviews",
+                        variables = { @ServerVariable(name = "proxyPath", description = "Base path of the proxy", defaultValue = "proxy") }),
+                @Server(url = "http://random.url/reviews", description = "random text") },
         security = @SecurityRequirement(
                      name = "reviewoauth2",
                      scopes = "write:reviews"),

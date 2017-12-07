@@ -30,6 +30,7 @@ import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
+import org.eclipse.microprofile.openapi.annotations.servers.Server;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -61,6 +62,8 @@ import org.eclipse.microprofile.openapi.apps.airlines.model.Booking;
     description = "Security Scheme for booking resource",
     openIdConnectUrl = "http://openidconnect.com/testurl"
 )
+@Server(description = "Secure server", url = "https://gigantic-server.com:443")
+@Server(description = "Unsecure server", url = "http://gigantic-server.com:80")
 public class BookingResource {
     private Map<Integer, Booking> bookings = new ConcurrentHashMap<Integer, Booking>();
     private volatile int currentId = 0;
