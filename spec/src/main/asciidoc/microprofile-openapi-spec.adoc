@@ -161,6 +161,7 @@ The following annotations are found in the https://github.com/eclipse/microprofi
 
 | https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/callbacks/Callback.java[@Callback] | Represents a callback URL that will be invoked.
 | https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/callbacks/Callbacks.java[@Callbacks] | Represents an array of Callback URLs that can be invoked.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/callbacks/CallbackOperation.java[@CallbackOperation] | Represents an operation that will be invoked during the callback.
 | https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/Components.java[@Components] | A container that holds various reusable objects for different aspects of the OpenAPI Specification.
 | https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/enums/Explode.java[@Explode] | Enumeration used to define the value of the `explode` property.
 | https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/enums/ParameterIn.java[@ParameterIn] | Enumeration representing the parameter's `in` property.
@@ -232,12 +233,11 @@ public Response findPetsByStatus(...) { ... }
 ----
 @GET
 @Path("/{username}")
-@Operation(summary = "Get user by user name",
-           responses = {
-                @APIResponse(description = "The user",
-                             content = @Content(mediaType = "application/json",
-                             schema = @Schema(implementation = User.class))),
-                @APIResponse(responseCode = "400", description = "User not found")})
+@Operation(summary = "Get user by user name")
+@APIResponse(description = "The user",
+             content = @Content(mediaType = "application/json",
+                                schema = @Schema(implementation = User.class))),
+@APIResponse(responseCode = "400", description = "User not found")
 public Response getUserByName(
         @Parameter(description = "The name that needs to be fetched. Use user1 for testing. ", required = true) @PathParam("username") String username)
  {...}
@@ -279,10 +279,9 @@ public Response getUserByName(
 @Path("/user")
 @Operation(summary = "Create user",
            description = "This can only be done by the logged in user.")
-public Response methodWithRequestBodyAndTwoParameters(
+public Response methodWithRequestBody(
           @RequestBody(description = "Created user object", required = true,
-                       content = @Content(
-                       schema = @Schema(implementation = User.class))) User user,
+                       content = @Content(schema = @Schema(implementation = User.class))) User user,
           @QueryParam("name") String name, @QueryParam("code") String code)
           { ... }
 ----
@@ -293,7 +292,7 @@ public Response methodWithRequestBodyAndTwoParameters(
 post:
     summary: Create user
       description: This can only be done by the logged in user.
-      operationId: methodWithRequestBodyAndTwoParameters
+      operationId: methodWithRequestBody
     parameters:
     - name: name
       in: query
@@ -324,49 +323,56 @@ post:
     servers = {
         @Server(
             description = "definition server 1",
-            url = "http://definition1",
+            url = "http://{var1}.definition1/{var2}",
             variables = {
-                @ServerVariable(name = "var1", description = "var 1", defaultValue = "1", allowableValues = {"1", "2"}),
-                @ServerVariable(name = "var2", description = "var 2", defaultValue = "1", allowableValues = {"1", "2"})
-            })
-    }
-)
+                @ServerVariable(name = "var1",
+                                description = "var 1",
+                                defaultValue = "1",
+                                enumeration = {"1", "2"}),
+                @ServerVariable(name = "var2",
+                                description = "var 2",
+                                defaultValue = "1",
+                                enumeration = {"1", "2"})})})
 @Server(
-        description = "class server 1",
-        url = "http://class1",
-        variables = {
-                @ServerVariable(name = "var1", description = "var 1", defaultValue = "1", allowableValues = {"1", "2"}),
-                @ServerVariable(name = "var2", description = "var 2", defaultValue = "1", allowableValues = {"1", "2"})
-        })
+    description = "class server 1",
+    url = "http://{var1}.class1/{var2}",
+    variables = {
+            @ServerVariable(
+                      name = "var1",
+                      description = "var 1",
+                      defaultValue = "1",
+                      enumeration = {"1", "2"}),
+            @ServerVariable(
+                      name = "var2",
+                      description = "var 2",
+                      defaultValue = "1",
+                      enumeration = {"1", "2"})})
 @Server(
-        description = "class server 2",
-        url = "http://class2",
-        variables = {
-                @ServerVariable(name = "var1", description = "var 1", defaultValue = "1", allowableValues = {"1", "2"})
-        })
+    description = "class server 2",
+    url = "http://{var1}.class2",
+    variables = {
+            @ServerVariable(
+                       name = "var1",
+                       description = "var 1",
+                       defaultValue = "1",
+                       enumeration = {"1", "2"})})
 public class ServersResource {
 
     @GET
     @Path("/")
-    @Operation(servers = {
-            @Server(
-                    description = "operation server 1",
-                    url = "http://op1",
-                    variables = {
-                            @ServerVariable(name = "var1", description = "var 1", defaultValue = "1", allowableValues = {"1", "2"})
-                    })
-    })
     @Server(
-            description = "method server 1",
-            url = "http://method1",
-            variables = {
-                    @ServerVariable(name = "var1", description = "var 1", defaultValue = "1", allowableValues = {"1", "2"})
-            })
+        description = "method server 1",
+        url = "http://{var1}.method1",
+        variables = {
+            @ServerVariable(
+                      name = "var1",
+                      description = "var 1",
+                      defaultValue = "1",
+                      enumeration = {"1", "2"})})
     @Server(
-            description = "method server 2",
-            url = "http://method2"
+        description = "method server 2",
+        url = "http://method2"
     )
-
     public Response getServers() {
         return Response.ok().entity("ok").build();
     }
@@ -378,7 +384,7 @@ public class ServersResource {
 ----
 openapi: 3.0.0
 servers:
-- url: http://definition1
+- url: http://{var1}.definition1/{var2}
   description: definition server 1
   variables:
     var1:
@@ -401,7 +407,7 @@ paths:
         default:
           description: default response
       servers:
-      - url: http://class1
+      - url: http://{var1}.class1/{var2}
         description: class server 1
         variables:
           var1:
@@ -416,7 +422,7 @@ paths:
             - "1"
             - "2"
             default: "1"
-      - url: http://class2
+      - url: http://{var1}.class2
         description: class server 2
         variables:
           var1:
@@ -425,7 +431,7 @@ paths:
             - "1"
             - "2"
             default: "1"
-      - url: http://method1
+      - url: http://{var1}.method1
         description: method server 1
         variables:
           var1:
@@ -437,15 +443,6 @@ paths:
       - url: http://method2
         description: method server 2
         variables: {}
-      - url: http://op1
-        description: operation server 1
-        variables:
-          var1:
-            description: var 1
-            enum:
-            - "1"
-            - "2"
-            default: "1"
 ----
 
 ===== Schema
@@ -601,8 +598,6 @@ The order of filter methods called is undefined, with two exceptions:
 2.  The `filterOpenAPI` method must be the *last* method called on a filter (which
 is just a specialization of the first exception).
 
-TODO: Document solution from issue #56 once ready
-
 === Processing rules
 
 The processed document available from the <<OpenAPI Endpoint>> is built from a variety of sources,
@@ -614,14 +609,6 @@ are required to process these different sources in the following order:
 3. Fetch static OpenAPI file
 4. Process annotations
 5. Filter model via OASFilter
-
-==== Validation
-
-The MP OpenAPI 1.0 specification does not mandate vendors to validate the resulting
-OpenAPI v3 model (after processing the 5 steps previously mentioned), which means
-that the behavior of invalid models is vendor specific (i.e. vendors may choose to
-ignore, reject, or pass-through invalid inputs).
-
 
 **Example processing**:
 
@@ -649,6 +636,10 @@ URL `/openapi`, as a `HTTP GET` operation.
 For example, `GET http://myHost:myPort/openapi`.
 
 This document represents the result of the applied <<Processing rules>>.
+
+The protocol required is `http`.  Vendors are encouraged, but not required, to
+support the `https` protocol as well, to enable a secure connection to the OpenAPI
+endpoint.
 
 === Content format
 The default format of the `/openapi` endpoint is `YAML`.
@@ -697,3 +688,15 @@ the various <<Documentation Mechanisms>>, so that the implementing framework can
 perform a global replacement of the keys with the language-specific text that
 matches the `Accept-Language` request for the `/openapi` endpoint.  A cache of
 processed languages can be kept to improve performance.
+
+=== Validation
+
+The MP OpenAPI 1.0 specification does not mandate vendors to validate the resulting
+OpenAPI v3 model (after processing the 5 steps previously mentioned), which means
+that the behavior of invalid models is vendor specific (i.e. vendors may choose to
+ignore, reject, or pass-through invalid inputs).
+
+=== Cross Origin Resource Sharing (CORS)
+
+The MP OpenAPI 1.0 specification does not require vendors to support https://www.w3.org/TR/cors/[CORS]
+for the `/openapi` endpoint.  The behavior of CORS requests is implementation dependent.
