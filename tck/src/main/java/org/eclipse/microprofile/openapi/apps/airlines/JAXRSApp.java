@@ -68,7 +68,7 @@ import org.eclipse.microprofile.openapi.apps.airlines.resources.ReviewResource;
         termsOfService = "http://airlinesratingapp.com/terms", 
         contact = @Contact(
             name = "AirlinesRatingApp API Support",
-            url = "https://github.com/microservices-api/oas3-airlines",
+            url = "http://exampleurl.com/contact",
             email = "techsupport@airlinesratingapp.com"),
         license = @License(
             name = "Apache 2.0",
@@ -76,10 +76,13 @@ import org.eclipse.microprofile.openapi.apps.airlines.resources.ReviewResource;
         security = @SecurityRequirement(name = "airlinesRatingApp_auth"),
         servers = {
                 @Server(url = "https://{username}.gigantic-server.com:{port}/{basePath}", description = "The production API server",
-                        variables = { @ServerVariable(name = "username", description = "Reviews of the app by users", defaultValue = "reviews"),
-                                @ServerVariable(name = "port", description = "Booking data", enumeration = { "8443", "443" }, defaultValue = "8443"),
+                        variables = {
+                                @ServerVariable(name = "username", description = "Reviews of the app by users", defaultValue = "user1",
+                                        enumeration = { "user1", "user2" }),
+                                @ServerVariable(name = "port", description = "Booking data", defaultValue = "8443"),
                                 @ServerVariable(name = "user", description = "User data", defaultValue = "user"),
-                                @ServerVariable(name = "basePath", defaultValue = "v2") }) },
+                                @ServerVariable(name = "basePath", defaultValue = "v2") }),
+                @Server(url = "https://test-server.com:80/basePath", description = "The test API server") },
         components = @Components(
                 schemas = { 
                         @Schema(name = "Bookings", type = SchemaType.ARRAY, implementation = Booking.class),
@@ -132,7 +135,7 @@ import org.eclipse.microprofile.openapi.apps.airlines.resources.ReviewResource;
     description = "APIs for booking and managing air flights",
     externalDocs = @ExternalDocumentation(
         description = "For more information, see the link.",
-        url = "https://github.com/janamanoharan/airlinesratingapp")
+        url = "http://exampleurl.com/schema")
     )
 public class JAXRSApp extends Application {
     @Override
