@@ -226,7 +226,7 @@ public class UserResource {
                     implementation = User.class,
                     nullable = true,
                     writeOnly = true,
-                    minItems = 2
+                    minItems = 2,
                     maxItems = 20,
                     uniqueItems = true
                 ),
