@@ -40,6 +40,7 @@ import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import org.eclipse.microprofile.openapi.annotations.callbacks.Callback;
 import org.eclipse.microprofile.openapi.annotations.callbacks.Callbacks;
+import org.eclipse.microprofile.openapi.annotations.callbacks.CallbackOperation;
 import org.eclipse.microprofile.openapi.annotations.security.OAuthFlows;
 import org.eclipse.microprofile.openapi.annotations.security.OAuthFlow;
 import org.eclipse.microprofile.openapi.annotations.servers.Server;
@@ -51,6 +52,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.media.ExampleObject;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.annotations.servers.Servers;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
@@ -123,12 +125,9 @@ public class ReviewResource {
         "Parkings", "female", 23, "nora@mail.com", "12-12-12", 1), 
         new Airline("Acme Air", "1-888-1234-567"), 7, "good"));
     }
+    
     @GET
-    @Operation(
-        operationId = "getAllReviews",
-        summary = "get all the reviews",
-        method = "get",
-        responses = @APIResponse(
+    @APIResponse(
             responseCode = "200",
             description = "successful operation",
             content = @Content(
@@ -140,6 +139,9 @@ public class ReviewResource {
             ),
             headers = @Header(ref="Request-Limit")
         )
+    @Operation(
+        operationId = "getAllReviews",
+        summary = "get all the reviews"
     )
     @Produces("application/json")
     public Response getAllReviews(){
@@ -148,21 +150,18 @@ public class ReviewResource {
 
     @GET
     @Path("{id}")
+    @APIResponse(
+            responseCode="200",
+            description="Review retrieved",
+            content=@Content(
+                schema=@Schema(
+                    implementation=Review.class)))
+    @APIResponse(
+            responseCode="404",
+            description="Review not found")
     @Operation(
         operationId = "getReviewById",
-        summary="Get a review with ID",
-        method= "get",
-        responses={
-            @APIResponse(
-                responseCode="200",
-                description="Review retrieved",
-                content=@Content(
-                    schema=@Schema(
-                        implementation=Review.class))),
-            @APIResponse(
-                responseCode="404",
-                description="Review not found")
-        }
+        summary="Get a review with ID"
     )
     @Produces("application/json")
     public Response getReviewById(
@@ -187,20 +186,19 @@ public class ReviewResource {
     @GET
     @Path("{user}")
     @Operation(
-        method = "get",
         operationId = "getReviewByUser",
-        summary="Get all reviews by user",
-        responses={
+        summary="Get all reviews by user")
+    @APIResponses(value={
             @APIResponse(
-                responseCode="200",
-                description="Review(s) retrieved",
-                content=@Content(
-                    schema=@Schema(
-                        implementation=Review.class))),
+                    responseCode="200",
+                    description="Review(s) retrieved",
+                    content=@Content(
+                        schema=@Schema(
+                            implementation=Review.class))),
             @APIResponse(
-                responseCode="404",
-                description="Review(s) not found")
-        })
+                    responseCode="404",
+                    description="Review(s) not found")
+    })
     @Produces("application/json")
     public Response getReviewByUser(
         @Parameter(
@@ -232,31 +230,26 @@ public class ReviewResource {
     @GET
     @Path("{airline}")
     @Operation(
-        method = "get",
         operationId = "getReviewByAirline",
-        summary="Get all reviews by airlines",
-        parameters = {
-            @Parameter(
-                name = "airline",
-                description = "name of the airlines for the reviews",
-                required = true,
-                in = ParameterIn.PATH,
-                content = @Content(
-                    examples = @ExampleObject(
-                        value = "Acme Air")),
-                example = "Acme Air")
-        },
-        responses={
-            @APIResponse(
-                responseCode="200",
-                description="Review(s) retrieved",
-                content=@Content(
-                    schema=@Schema(
-                        implementation=Review.class))),
-            @APIResponse(
-                responseCode="404",
-                description="Review(s) not found")
-        })
+        summary="Get all reviews by airlines")
+    @Parameter(
+            name = "airline",
+            description = "name of the airlines for the reviews",
+            required = true,
+            in = ParameterIn.PATH,
+            content = @Content(
+                examples = @ExampleObject(
+                    value = "Acme Air")),
+            example = "Acme Air")
+    @APIResponse(
+            responseCode="200",
+            description="Review(s) retrieved",
+            content=@Content(
+                schema=@Schema(
+                    implementation=Review.class)))
+    @APIResponse(
+            responseCode="404",
+            description="Review(s) not found")
     @Produces("application/json")
     public Response getReviewByAirline(
         @Parameter(
@@ -286,21 +279,18 @@ public class ReviewResource {
 
     @GET
     @Path("{user}/{airlines}")
+    @APIResponse(
+            responseCode="200",
+            description="Review(s) retrieved",
+            content=@Content(
+                schema=@Schema(
+                implementation=Review.class)))
+    @APIResponse(
+            responseCode="404",
+            description="Review(s) not found")
     @Operation(
-        method = "get",
         operationId = "getReviewByAirlineAndUser",
-        summary="Get all reviews for an airline by User",
-        responses={
-            @APIResponse(
-                responseCode="200",
-                description="Review(s) retrieved",
-                content=@Content(
-                    schema=@Schema(
-                    implementation=Review.class))),
-            @APIResponse(
-                responseCode="404",
-                description="Review(s) not found")
-        })
+        summary="Get all reviews for an airline by User")
     @Produces("application/json")
     public Response getReviewByAirlineAndUser(
         @Parameters(
@@ -346,8 +336,7 @@ public class ReviewResource {
         {@Callback(
             name = "testCallback",
             callbackUrlExpression="http://localhost:9080/oas3-airlines/reviews",
-            operation = @Operation(
-                operationId = "getAllReviews",
+            operations = @CallbackOperation(
                 summary = "Get all reviews",
                 method = "get",
                 responses = @APIResponse(
@@ -365,46 +354,44 @@ public class ReviewResource {
             )
         }
     )
-    @Operation(
-        method = "post",
-        summary="Create a Review",
-        operationId = "createReview",
-        tags = {"Reviews"},
-        servers = {
-                @Server(url = "localhost:9080/{proxyPath}/reviews/id",
-                        description = "view of all the reviews",
-                        variables = { @ServerVariable(name = "proxyPath", description = "Base path of the proxy", defaultValue = "proxy") }),
-                @Server(url = "http://random.url/reviews", description = "random text") },
-        security = @SecurityRequirement(
-                     name = "reviewoauth2",
-                     scopes = "write:reviews"),
-        responses={
-                    @APIResponse(
-                            responseCode="201",
-                            description="review created",
-                            content = @Content(
-                                    schema = @Schema(
-                                            name= "id",
-                                            description = "id of the new review",
-                                            type = SchemaType.STRING)),
-                            links = {
-                                    @Link(
-                                            name="Review",
-                                            description="get the review that was added",
-                                            operationId="getReviewById",
-                                            server = @Server(
-                                                    description = "endpoint for all the review related methods",
-                                                    url = "http://localhost:9080/airlines/reviews/"),
-                                                    parameters = @LinkParameter(
-                                                            name = "reviewId",
-                                                            expression = "$request.path.id")
-                                            )
-                            }
+    @Tag(ref="Reviews")
+    @Servers(value={
+            @Server(url = "localhost:9080/{proxyPath}/reviews/id",
+                    description = "view of all the reviews",
+                    variables = { @ServerVariable(name = "proxyPath", description = "Base path of the proxy", defaultValue = "proxy") }),
+            @Server(url = "http://random.url/reviews", description = "random text")
+    })
+    @SecurityRequirement(
+            name = "reviewoauth2",
+            scopes = "write:reviews")
+    @APIResponse(
+            responseCode="201",
+            description="review created",
+            content = @Content(
+                    schema = @Schema(
+                            name= "id",
+                            description = "id of the new review",
+                            type = SchemaType.STRING)),
+            links = {
+                    @Link(
+                            name="Review",
+                            description="get the review that was added",
+                            operationId="getReviewById",
+                            server = @Server(
+                                    description = "endpoint for all the review related methods",
+                                    url = "http://localhost:9080/airlines/reviews/"),
+                                    parameters = @LinkParameter(
+                                            name = "reviewId",
+                                            expression = "$request.path.id")
                             )
-        },
-        requestBody = @RequestBody(
-                ref = "#/components/requestBodies/review"
-        )
+            }
+            )
+    @RequestBody(
+            ref = "#/components/requestBodies/review"
+    )
+    @Operation(
+        summary="Create a Review",
+        operationId = "createReview"
     )
     @Consumes("application/json")
     @Produces("application/json")
@@ -415,20 +402,18 @@ public class ReviewResource {
 
     @DELETE
     @Path("{id}")
+    @APIResponse(
+            responseCode="200",
+            description="Review deleted"
+            )
+    @APIResponse(
+            responseCode="404",
+            description="Review not found"
+            )
     @Operation(
-        method = "delete",
         summary="Delete a Review with ID",
-        operationId = "deleteReview",
-        responses={
-            @APIResponse(
-                responseCode="200",
-                description="Review deleted"
-                ),
-            @APIResponse(
-                responseCode="404",
-                description="Review not found"
-                )
-        })
+        operationId = "deleteReview"
+        )
     @Produces("text/plain")
     public Response deleteReview(
             @PathParam("id") int id){

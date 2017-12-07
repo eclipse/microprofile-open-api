@@ -47,29 +47,26 @@ public class AvailabilityResource {
                 description = "A list of all the flights offered by the app",
                 url = "http://airlinesratingapp.com/ourflights")
         )
-    @Operation(
-        method = "get",
-        summary = "Retrieve all available flights",
-        operationId = "getFlights",
-        responses = {
-            @APIResponse(
-                responseCode = "200",
-                description = "successful operation",
-                content = @Content(
-                    mediaType = "applictaion/json",
-                    schema = @Schema(
-                        type = SchemaType.ARRAY,
-                        implementation = Flight.class
-                    )
+    @APIResponse(
+            responseCode = "200",
+            description = "successful operation",
+            content = @Content(
+                mediaType = "applictaion/json",
+                schema = @Schema(
+                    type = SchemaType.ARRAY,
+                    implementation = Flight.class
                 )
-            ),
-            @APIResponse(
-                responseCode = "404",
-                description = "No available flights found",
-                content = @Content(
-                    mediaType = "n/a")
             )
-        })
+        )
+    @APIResponse(
+            responseCode = "404",
+            description = "No available flights found",
+            content = @Content(
+                mediaType = "n/a")
+        )
+    @Operation(
+        summary = "Retrieve all available flights",
+        operationId = "getFlights")
     @Produces("application/json")
     public Response getFlights(
         @Parameter(

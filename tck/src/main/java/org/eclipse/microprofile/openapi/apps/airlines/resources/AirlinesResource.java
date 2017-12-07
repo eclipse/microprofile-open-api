@@ -23,6 +23,7 @@ import javax.ws.rs.core.Response;
 
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.callbacks.Callback;
+import org.eclipse.microprofile.openapi.annotations.callbacks.CallbackOperation;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
@@ -43,11 +44,9 @@ import org.eclipse.microprofile.openapi.apps.airlines.model.Flight;
 @Callback(
     name = "availabilityCallback",
     callbackUrlExpression="http://localhost:9080/oas3-airlines/availability",
-    operation = @Operation(
+    operations = @CallbackOperation(
         method = "get",
         summary = "Retrieve all available flights",
-        operationId = "getFlights",
-        tags = {"availability"},
         responses = {
             @APIResponse(
                 responseCode = "200",
@@ -91,23 +90,20 @@ public class AirlinesResource {
             name = "Retrieve Airlines",
             description = "method to retrieve all airlines"
             )
-    @Operation(
-        method = "get",
-        summary = "Retrieve all available airlines",
-        operationId = "getAirlines",
-        tags = {"airlines"},
-        responses = {
-            @APIResponse(
-                ref = "FoundAirlines"
-            ),
-            @APIResponse(
-                responseCode = "404",
-                description = "No airlines found",
-                content = @Content(
-                    mediaType = "n/a"
-                )
+    @Tag(ref="airlines")
+    @APIResponse(
+            ref = "FoundAirlines"
+        )
+    @APIResponse(
+            responseCode = "404",
+            description = "No airlines found",
+            content = @Content(
+                mediaType = "n/a"
             )
-        })
+        )
+    @Operation(
+        summary = "Retrieve all available airlines",
+        operationId = "getAirlines")
     @Produces("application/json")
     public Response getAirlines(){
         return Response.ok().entity(airlines.values()).build();

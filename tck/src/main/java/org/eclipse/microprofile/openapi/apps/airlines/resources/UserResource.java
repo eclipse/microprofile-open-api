@@ -23,6 +23,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.media.ExampleObject;
 import org.eclipse.microprofile.openapi.annotations.media.Encoding;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
+import org.eclipse.microprofile.openapi.annotations.parameters.Parameters;
 import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
 import org.eclipse.microprofile.openapi.annotations.enums.ParameterStyle;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
@@ -86,129 +87,124 @@ public class UserResource {
                     description = "Unable to create this user record."
                 )
     })
+    @Parameters(value={
+            @Parameter(
+                    name = "id",
+                    in = ParameterIn.QUERY,
+                    description = "User id for the new user record to be created",
+                    required = true,
+                    allowReserved = true,
+                    style = ParameterStyle.FORM,
+                    schema = @Schema(type = SchemaType.INTEGER, format = "int32")
+                ),
+                @Parameter(
+                    name = "userName",
+                    in = ParameterIn.QUERY,
+                    description = "Username for the new user record to be created",
+                    required = true,
+                    schema = @Schema(
+                        type = SchemaType.STRING,
+                        externalDocs = @ExternalDocumentation(
+                            description = "How to create good user names.",
+                            url = "http://exampleurl.com/usernames"
+                        )
+                    )
+                ),
+                @Parameter(
+                    name = "password",
+                    in = ParameterIn.QUERY,
+                    description = "User password for the new user record to be created",
+                    required = true,
+                    hidden = true,
+                    schema = @Schema(
+                        type = SchemaType.STRING,
+                        externalDocs = @ExternalDocumentation(
+                            description = "How to create good passwords.",
+                            url = "http://exampleurl.com/passwords"
+                        )
+                    )
+                ),
+                @Parameter(
+                    name = "firstName",
+                    in = ParameterIn.QUERY,
+                    description = "User's first name for the new user record to be created",
+                    required = true,
+                    schema = @Schema(type = SchemaType.STRING)
+                ),
+                @Parameter(
+                    name = "lastName",
+                    in = ParameterIn.QUERY,
+                    description = "User's last name for the new user record to be created",
+                    style = ParameterStyle.FORM,
+                    required = true,
+                    schema = @Schema(type = SchemaType.STRING)
+                ),
+                @Parameter(
+                    name = "sex",
+                    in = ParameterIn.QUERY,
+                    description = "User's sex for the new user record to be created",
+                    required = true,
+                    style = ParameterStyle.FORM,
+                    schema = @Schema(type = SchemaType.STRING)
+                ),
+                @Parameter(
+                    name = "age",
+                    in = ParameterIn.QUERY,
+                    description = "User's age for the new user record to be created",
+                    required = true,
+                    schema = @Schema(type = SchemaType.INTEGER, format = "int64")
+                ),
+                @Parameter(
+                    name = "phone",
+                    in = ParameterIn.QUERY,
+                    description = "User phone number for the new user record to be created",
+                    required = true,
+                    schema = @Schema(type = SchemaType.STRING)
+                ),
+                @Parameter(
+                    name = "status",
+                    in = ParameterIn.QUERY,
+                    description = "User status for the new user record to be created",
+                    required = true,
+                    schema = @Schema(type = SchemaType.INTEGER)
+                )
+    })
     @Operation(
-        method = "post",
         summary = "Create user",
         description = "This can only be done by the logged in user.",
-        operationId = "createUser",
-        requestBody = @RequestBody(
-            description = "Record of a new user to be created in the system.",
-            required = true,
-            content = @Content(
-                mediaType = "application/json",
-                schema = @Schema(
-                    name = "testUser",
-                    type = SchemaType.OBJECT,
-                    maxProperties = 1024,
-                    minProperties = 1,
-                    requiredProperties = { "id", "username", "password" },
-                    required = true, 
-                    implementation = User.class),
-                examples = @ExampleObject(
-                    name = "user",
-                    summary = "External user example",
-                    externalValue = "http://foo.bar/examples/user-example.json"
-                    ),
-                encoding = @Encoding(
-                    name = "email",
-                    contentType = "text/plain",
-                    style = "form",
-                    allowReserved = true,
-                    explode = true,
-                    headers = @Header(
-                        name = "testHeader"
-                    )
-                )
-            )
-        ),
-        parameters = {
-            @Parameter(
-                name = "id",
-                in = ParameterIn.QUERY,
-                description = "User id for the new user record to be created",
-                required = true,
-                allowReserved = true,
-                style = ParameterStyle.FORM,
-                schema = @Schema(type = SchemaType.INTEGER, format = "int32")
-            ),
-            @Parameter(
-                name = "userName",
-                in = ParameterIn.QUERY,
-                description = "Username for the new user record to be created",
-                required = true,
-                schema = @Schema(
-                    type = SchemaType.STRING,
-                    externalDocs = @ExternalDocumentation(
-                        description = "How to create good user names.",
-                        url = "http://exampleurl.com/usernames"
-                    )
-                )
-            ),
-            @Parameter(
-                name = "password",
-                in = ParameterIn.QUERY,
-                description = "User password for the new user record to be created",
-                required = true,
-                hidden = true,
-                schema = @Schema(
-                    type = SchemaType.STRING,
-                    externalDocs = @ExternalDocumentation(
-                        description = "How to create good passwords.",
-                        url = "http://exampleurl.com/passwords"
-                    )
-                )
-            ),
-            @Parameter(
-                name = "firstName",
-                in = ParameterIn.QUERY,
-                description = "User's first name for the new user record to be created",
-                required = true,
-                schema = @Schema(type = SchemaType.STRING)
-            ),
-            @Parameter(
-                name = "lastName",
-                in = ParameterIn.QUERY,
-                description = "User's last name for the new user record to be created",
-                style = ParameterStyle.FORM,
-                required = true,
-                schema = @Schema(type = SchemaType.STRING)
-            ),
-            @Parameter(
-                name = "sex",
-                in = ParameterIn.QUERY,
-                description = "User's sex for the new user record to be created",
-                required = true,
-                style = ParameterStyle.FORM,
-                schema = @Schema(type = SchemaType.STRING)
-            ),
-            @Parameter(
-                name = "age",
-                in = ParameterIn.QUERY,
-                description = "User's age for the new user record to be created",
-                required = true,
-                schema = @Schema(type = SchemaType.INTEGER, format = "int64")
-            ),
-            @Parameter(
-                name = "phone",
-                in = ParameterIn.QUERY,
-                description = "User phone number for the new user record to be created",
-                required = true,
-                schema = @Schema(type = SchemaType.STRING)
-            ),
-            @Parameter(
-                name = "status",
-                in = ParameterIn.QUERY,
-                description = "User status for the new user record to be created",
-                required = true,
-                schema = @Schema(type = SchemaType.INTEGER)
-            )
-        })
+        operationId = "createUser"  
+        )
     public Response createUser(
-        @Parameter(
-            description = "Created user object",
-            schema = @Schema(implementation = User.class),
-            required = true
-        ) User user) {
+            @RequestBody(
+                    description = "Record of a new user to be created in the system.",
+                    required = true,
+                    content = @Content(
+                        mediaType = "application/json",
+                        schema = @Schema(
+                            name = "testUser",
+                            type = SchemaType.OBJECT,
+                            maxProperties = 1024,
+                            minProperties = 1,
+                            requiredProperties = { "id", "username", "password" },
+                            required = true, 
+                            implementation = User.class),
+                        examples = @ExampleObject(
+                            name = "user",
+                            summary = "External user example",
+                            externalValue = "http://foo.bar/examples/user-example.json"
+                            ),
+                        encoding = @Encoding(
+                            name = "email",
+                            contentType = "text/plain",
+                            style = "form",
+                            allowReserved = true,
+                            explode = true,
+                            headers = @Header(
+                                name = "testHeader"
+                            )
+                        )
+                    )
+                ) User user) {
         userData.addUser(user);
         return Response.ok().entity("").build();
         }
@@ -217,47 +213,43 @@ public class UserResource {
     @Path("/createWithArray")
     @Tag(ref="user")
     @Tag(ref="create")
-    @Operation(
-        method = "post",
-        summary = "Creates list of users with given input array", //Array of User objects
-        operationId = "createUsersFromArray",
-        /* tags = {"user"}, //this operation intentionally doesn't have tags attribute, since above Tag ref should apply */
-        parameters = {
-            @Parameter(
-                name = "userArray",
-                in = ParameterIn.QUERY,
-                description = "An array of User objects to create records.",
-                required = true,
-                explode = Explode.FALSE,
-                content = @Content(
-                    mediaType = "application/json",
-                    schema = @Schema(
-                        type = SchemaType.ARRAY,
-                        implementation = User.class,
-                        nullable = true,
-                        writeOnly = true,
-                        minItems = 2
-                    ),
-                    encoding = @Encoding(
-                        name = "firstName",
-                        contentType = "text/plain",
-                        style = "form",
-                        allowReserved = true,
-                        explode = true
-                    )
+    @Parameter(
+            name = "userArray",
+            in = ParameterIn.QUERY,
+            description = "An array of User objects to create records.",
+            required = true,
+            explode = Explode.FALSE,
+            content = @Content(
+                mediaType = "application/json",
+                schema = @Schema(
+                    type = SchemaType.ARRAY,
+                    implementation = User.class,
+                    nullable = true,
+                    writeOnly = true,
+                    minItems = 2
+                ),
+                encoding = @Encoding(
+                    name = "firstName",
+                    contentType = "text/plain",
+                    style = "form",
+                    allowReserved = true,
+                    explode = true
                 )
             )
-        },
-        responses = {
-            @APIResponse(
-                responseCode = "200",
-                description = "Successfully created list of users."
-            ),
-            @APIResponse(
-                responseCode = "400",
-                description = "Unable to create list of users."
-            )
-        })
+        )
+    @APIResponse(
+            responseCode = "200",
+            description = "Successfully created list of users."
+        )
+    @APIResponse(
+            responseCode = "400",
+            description = "Unable to create list of users."
+        )
+    @Operation(
+        summary = "Creates list of users with given input array", //Array of User objects
+        operationId = "createUsersFromArray"
+        /* tags = {"user"}, //this operation intentionally doesn't have tags attribute, since above Tag ref should apply */
+        )
     public Response createUsersWithArrayInput(
         @Parameter(
             description = "Array of user object",
@@ -273,21 +265,18 @@ public class UserResource {
     @Path("/createWithList")
     @Tag(ref="user")
     @Tags(refs="create")
+    @APIResponse(
+            responseCode = "200",
+            description = "Successfully created list of users."
+            )
+    @APIResponse(
+            responseCode = "400",
+            description = "Unable to create list of users."
+            )
     @Operation(
-        method = "post",
         summary = "Creates list of users with given input list", //List of User objects
-        operationId = "createUsersFromList",
-        tags = {"user"},
-        responses = {
-            @APIResponse(
-                responseCode = "200",
-                description = "Successfully created list of users."
-                ),
-            @APIResponse(
-                responseCode = "400",
-                description = "Unable to create list of users."
-                )
-        })
+        operationId = "createUsersFromList"
+        )
       public Response createUsersWithListInput(
             @Parameter(
                 description = "List of user object",
@@ -299,53 +288,54 @@ public class UserResource {
                 }
                 return Response.ok().entity("").build();
             }
+    
     @Path("/{username}")
       @PUT
+      @RequestBody(
+              name = "user",
+              description = "Record of a new user to be created in the system.",
+              content = @Content(
+                  mediaType = "application/json",
+                  schema = @Schema(implementation = User.class),
+                  examples = @ExampleObject(
+                      name = "user",
+                      summary = "Example user properties to update",
+                      value = "Properties to update in JSON format here"
+                  )
+              )
+          )
       @Operation(
-        method = "put",
         summary = "Update user",
         description = "This can only be done by the logged in user.",
-        operationId = "updateUser",
-        tags = {"user"},
-        requestBody = @RequestBody(
-            description = "Record of a new user to be created in the system.",
-            content = @Content(
-                mediaType = "application/json",
-                schema = @Schema(implementation = User.class),
-                examples = @ExampleObject(
-                    name = "user",
-                    summary = "Example user properties to update",
-                    value = "Properties to update in JSON format here"
-                )
-            )
-        ),
-        responses = {
+        operationId = "updateUser")
+    @APIResponses(value={
             @APIResponse(
-                responseCode = "200",
-                description = "User updated successfully",
-                content = @Content(
-                    schema = @Schema(
-                        name = "updatedUser",
-                        implementation = User.class
-                        ),
-                    encoding = @Encoding(
-                        name = "password",
-                        contentType = "text/plain",
-                        style = "form",
-                        allowReserved = true,
-                        explode = true
+                    responseCode = "200",
+                    description = "User updated successfully",
+                    content = @Content(
+                        schema = @Schema(
+                            name = "updatedUser",
+                            implementation = User.class
+                            ),
+                        encoding = @Encoding(
+                            name = "password",
+                            contentType = "text/plain",
+                            style = "form",
+                            allowReserved = true,
+                            explode = true
+                            )
                         )
-                    )
-            ),
-            @APIResponse(
-                responseCode = "400",
-                description = "Invalid user supplied"
-            ),
-            @APIResponse(
-                responseCode = "404",
-                description = "User not found"
-            )
-        })
+                ),
+                @APIResponse(
+                    responseCode = "400",
+                    description = "Invalid user supplied"
+                ),
+                @APIResponse(
+                    responseCode = "404",
+                    description = "User not found"
+                )
+    })
+    @Tag(ref="user")
     public Response updateUser(
         @Parameter(
             name = "username",
@@ -354,35 +344,30 @@ public class UserResource {
             required = true
             )
         @PathParam("username") String username,
-        @Parameter(
-            description = "Updated user object",
-            required = true) User user) {
+        User user) {
                 userData.addUser(user);
                 return Response.ok().entity("").build();
             }
 
       @DELETE
       @Path("/{username}")
+      @Tag(ref="user")
+      @APIResponse(
+              responseCode = "200",
+              description = "User deleted successfully"
+              )
+      @APIResponse(
+              responseCode = "400",
+              description = "Invalid username supplied"
+              )
+      @APIResponse(
+              responseCode = "404",
+              description = "User not found"
+              )
       @Operation(
-        method = "delete",
         summary = "Delete user",
         description = "This can only be done by the logged in user.",
-        operationId = "deleteUser",
-        tags = {"user"},
-        responses = {
-            @APIResponse(
-                responseCode = "200",
-                description = "User deleted successfully"
-                ),
-            @APIResponse(
-                responseCode = "400",
-                description = "Invalid username supplied"
-                ),
-            @APIResponse(
-                responseCode = "404",
-                description = "User not found"
-                )
-        })
+        operationId = "deleteUser")
     public Response deleteUser(
         @Parameter(
             name = "username",
@@ -401,32 +386,31 @@ public class UserResource {
 
     @GET
     @Path("/{username}")
-    @Operation(
-        method = "get",
-        summary = "Get user by user name",
-        operationId = "getUserByUserName",
-        tags = {"user"},
-        responses = {
+    @Tag(ref="user")
+    @APIResponses(value={
             @APIResponse(
-                responseCode = "200",
-                description = "Successfully retrieved user by user name.",
-                content = @Content(
-                    schema = @Schema(implementation = User.class)
-                )),
-            @APIResponse(
-                responseCode = "400",
-                description = "Invalid username supplied",
-                content = @Content(
+                    responseCode = "200",
+                    description = "Successfully retrieved user by user name.",
+                    content = @Content(
                         schema = @Schema(implementation = User.class)
-                )),
-            @APIResponse(
-                responseCode = "404",
-                description = "User not found",
-                        content = @Content(
-                                schema = @Schema(implementation = User.class)
-                        )
-                )
-                })
+                    )),
+                @APIResponse(
+                    responseCode = "400",
+                    description = "Invalid username supplied",
+                    content = @Content(
+                            schema = @Schema(implementation = User.class)
+                    )),
+                @APIResponse(
+                    responseCode = "404",
+                    description = "User not found",
+                            content = @Content(
+                                    schema = @Schema(implementation = User.class)
+                            )
+                    )
+    })
+    @Operation(
+        summary = "Get user by user name",
+        operationId = "getUserByUserName")
     public Response getUserByName(
         @Parameter(
             ref= "username"
@@ -443,50 +427,47 @@ public class UserResource {
 
     @GET
     @Path("/{id}")
-    @Operation(
-        method = "get",
-        summary = "Get user by id",
-        operationId = "getUserById",
-        tags = {"user"},
-        responses = {
-            @APIResponse(
-                responseCode = "200",
-                description = "Successfully retrieved user by id.",
-                content = @Content(
-                    schema = @Schema(implementation = User.class)),
-                links = { 
-                    @Link(
-                        name = "User name",
-                        description = "The username corresponding to provided user id",
-                        operationId = "getUserByName",
-                        parameters = @LinkParameter(
-                            name = "userId",
-                            expression = "$request.path.id")),
-                    @Link(
-                         name = "Review",
-                         description = "The reviews provided by user",
-                         operationRef = "/db/reviews/{userName}",
-                         parameters = @LinkParameter(
-                             name = "path.userName",
-                             expression = "$response.body#userName"),
-                         requestBody = "$request.path.id",
-                         server = @Server(url = "http://example.com"))
-                }
-                ),
-            @APIResponse(
-                responseCode = "400",
-                description = "Invalid id supplied",
+    @Tag(ref="user")
+    @APIResponse(
+            responseCode = "200",
+            description = "Successfully retrieved user by id.",
+            content = @Content(
+                schema = @Schema(implementation = User.class)),
+            links = { 
+                @Link(
+                    name = "User name",
+                    description = "The username corresponding to provided user id",
+                    operationId = "getUserByName",
+                    parameters = @LinkParameter(
+                        name = "userId",
+                        expression = "$request.path.id")),
+                @Link(
+                     name = "Review",
+                     description = "The reviews provided by user",
+                     operationRef = "/db/reviews/{userName}",
+                     parameters = @LinkParameter(
+                         name = "path.userName",
+                         expression = "$response.body#userName"),
+                     requestBody = "$request.path.id",
+                     server = @Server(url = "http://example.com"))
+            }
+            )
+    @APIResponse(
+            responseCode = "400",
+            description = "Invalid id supplied",
+            content = @Content(
+                schema = @Schema(implementation = User.class)
+            ))
+    @APIResponse(
+            responseCode = "404",
+            description = "User not found",
                 content = @Content(
                     schema = @Schema(implementation = User.class)
-                )),
-            @APIResponse(
-                responseCode = "404",
-                description = "User not found",
-                    content = @Content(
-                        schema = @Schema(implementation = User.class)
-                    )
                 )
-            })
+            )
+    @Operation(
+        summary = "Get user by id",
+        operationId = "getUserById")
     public Response getUserById(
         @Parameter(
             name = "id",
@@ -506,28 +487,25 @@ public class UserResource {
 
     @GET
     @Path("/login")
+    @Tag(ref="user")
+    @ExternalDocumentation(
+            description = "Policy on user security.",
+            url = "http://exampleurl.com/policy"
+    )
+    @APIResponse(
+            responseCode = "200",
+            description = "Successful user login.",
+            content = @Content(
+                schema = @Schema(implementation = User.class)
+            )
+        )
+    @APIResponse(
+            responseCode = "400",
+            description = "Invalid username/password supplied"
+            )
     @Operation(
-        method = "get",
         summary = "Logs user into the system",
-        operationId = "logInUser",
-        tags = {"user"},
-        externalDocs = @ExternalDocumentation(
-                description = "Policy on user security.",
-                url = "http://exampleurl.com/policy"
-        ),
-        responses = {
-            @APIResponse(
-                responseCode = "200",
-                description = "Successful user login.",
-                content = @Content(
-                    schema = @Schema(implementation = User.class)
-                )
-            ),
-            @APIResponse(
-                responseCode = "400",
-                description = "Invalid username/password supplied"
-                )
-            }
+        operationId = "logInUser"
     )
 
     @SecurityScheme(
@@ -561,15 +539,14 @@ public class UserResource {
                 responseCode = "200",
                 description = "Successful user logout."
                 )
-    @Operation(
-        method = "get",
-        summary = "Logs out current logged in user session",
-        operationId = "logOutUser",
-        /* tags = {"user"}, // intentionally removed to have a method with no tags */
-        externalDocs = @ExternalDocumentation(
+    @ExternalDocumentation(
             description = "Policy on user security.",
             url = "http://exampleurl.com/policy"
-            ))
+            )
+    @Operation(
+        summary = "Logs out current logged in user session",
+        operationId = "logOutUser"
+        /* tags = {"user"}, // intentionally removed to have a method with no tags */)
     public Response logoutUser() {
     return Response.ok().entity("").build();
     }
