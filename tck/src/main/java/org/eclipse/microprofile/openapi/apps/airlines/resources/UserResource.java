@@ -495,7 +495,7 @@ public class UserResource {
 
     @GET
     @Path("/login")
-    @Tag(ref="user")
+    @Tag()
     @ExternalDocumentation(
             description = "Policy on user security.",
             url = "http://exampleurl.com/policy"
