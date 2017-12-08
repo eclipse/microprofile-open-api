@@ -24,7 +24,6 @@ import org.eclipse.microprofile.openapi.annotations.security.SecuritySchemes;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.annotations.security.OAuthFlow;
 import org.eclipse.microprofile.openapi.annotations.security.OAuthFlows;
-import org.eclipse.microprofile.openapi.annotations.security.OAuthScope;
 import org.eclipse.microprofile.openapi.annotations.callbacks.Callback;
 import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 import org.eclipse.microprofile.openapi.annotations.extensions.Extensions;
