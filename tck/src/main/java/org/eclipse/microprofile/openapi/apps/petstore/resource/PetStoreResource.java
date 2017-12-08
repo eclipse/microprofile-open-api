@@ -101,7 +101,7 @@ public class PetStoreResource {
             description = "successful operation",
             content = @Content(
                 schema = @Schema(implementation = Order.class, 
-                  allOf = { Order.class, Pet.class},
+                  allOf = { Order.class, Pet.class },
                   not = BadOrder.class )
             )
         )
@@ -109,8 +109,7 @@ public class PetStoreResource {
             responseCode = "400", 
             description = "Invalid ID supplied",
             content = @Content(
-                schema = @Schema(implementation = Order.class,
-                  hidden = true)
+                schema = @Schema(implementation = Order.class)
             )
         )
     @APIResponse(
@@ -118,9 +117,16 @@ public class PetStoreResource {
             description = "Order not found",
             content = @Content(
                 schema = @Schema(implementation = Order.class, 
-                  anyOf = { Order.class, BadOrder.class},
+                  anyOf = { Order.class, BadOrder.class },
                   discriminatorProperty = "id", 
                   discriminatorMapping = @DiscriminatorMapping(value = "0", schema = BadOrder.class) )
+            )
+        )
+    @APIResponse(
+            responseCode = "900", 
+            description = "Invalid",
+            content = @Content(
+                schema = @Schema(implementation = Order.class, hidden = true)
             )
         )
     public Response getOrderById(
