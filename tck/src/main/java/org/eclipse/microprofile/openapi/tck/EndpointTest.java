@@ -44,28 +44,24 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.microprofile.openapi.tck.utils.YamlToJsonConverterServlet;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
-import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 import io.restassured.RestAssured;
 import io.restassured.parsing.Parser;
 import io.restassured.response.ValidatableResponse;
 
-@RunWith(Arquillian.class)
-public class EndpointTest {
+public class EndpointTest extends Arquillian {
     private static final String APPLICATION_JSON = "application/json";
-    private static final String APPLICATION_YAML = "application/yaml";
 
     private static final String DEFAULT_PROTOCOL = "http";
     private static final String DEFAULT_HOST = "localhost";
     private static final int DEFAULT_PORT = 9080;
 
-    private static ValidatableResponse vr;
     private static String serverUrl;
     private static String username;
     private static String password;
@@ -97,7 +93,7 @@ public class EndpointTest {
             RestAssured.useRelaxedHTTPSValidation();
         }
         RestAssured.defaultParser = Parser.JSON;
-        
+
         if (StringUtils.isBlank(serverUrl)) {
             serverUrl = DEFAULT_PROTOCOL + "://" + DEFAULT_HOST + ":" + DEFAULT_PORT;
         }
@@ -132,50 +128,67 @@ public class EndpointTest {
                 .addAsManifestResource("openapi.yaml", "openapi/openapi.yaml");
     }
 
-    @Before
-    public void setUpTest() {
-        vr = given().headers(headers).when().get("/proxy").then().statusCode(200);
+    private ValidatableResponse callEndpoint(String type) {
+        ValidatableResponse vr;
+        if ("JSON".equals(type)) {
+            vr = given().accept(APPLICATION_JSON).when().get("/openapi").then().statusCode(200);
+        }
+        else {
+            vr = given().headers(headers).when().get("/proxy").then().statusCode(200);
+        }
+        return vr;
     }
 
-    @Test
+    @DataProvider(name = "formatProvider")
+    public Object[][] provide() throws Exception {
+        return new Object[][] { { "JSON" }, { "YAML" } };
+    }
+
     @RunAsClient
-    public void testVersion() {
+    @Test(dataProvider = "formatProvider")
+    public void testVersion(String type) {
+        ValidatableResponse vr = callEndpoint(type);
         vr.body("openapi", equalTo("3.0.0"));
     }
 
-    @Test
     @RunAsClient
-    public void testInfo() {
+    @Test(dataProvider = "formatProvider")
+    public void testInfo(String type) {
+        ValidatableResponse vr = callEndpoint(type);
         vr.body("info.title", equalTo("AirlinesRatingApp API"));
         vr.body("info.version", equalTo("1.0"));
         vr.body("info.termsOfService", equalTo("http://airlinesratingapp.com/terms"));
     }
 
-    @Test
     @RunAsClient
-    public void testContact() {
+    @Test(dataProvider = "formatProvider")
+    public void testContact(String type) {
+        ValidatableResponse vr = callEndpoint(type);
         vr.body("info.contact.name", equalTo("AirlinesRatingApp API Support"));
         vr.body("info.contact.url", equalTo("http://exampleurl.com/contact"));
         vr.body("info.contact.email", equalTo("techsupport@airlinesratingapp.com"));
     }
 
-    @Test
     @RunAsClient
-    public void testLicense() {
+    @Test(dataProvider = "formatProvider")
+    public void testLicense(String type) {
+        ValidatableResponse vr = callEndpoint(type);
         vr.body("info.license.name", equalTo("Apache 2.0"));
         vr.body("info.license.url", equalTo("http://www.apache.org/licenses/LICENSE-2.0.html"));
     }
 
-    @Test
     @RunAsClient
-    public void testExternalDocumentation() {
+    @Test(dataProvider = "formatProvider")
+    public void testExternalDocumentation(String type) {
+        ValidatableResponse vr = callEndpoint(type);
         vr.body("externalDocs.description", equalTo("instructions for how to deploy this app"));
         vr.body("externalDocs.url", containsString("README.md"));
     }
 
-    @Test
     @RunAsClient
-    public void testServer() {
+    @Test(dataProvider = "formatProvider")
+    public void testServer(String type) {
+        ValidatableResponse vr = callEndpoint(type);
         vr.body("servers", hasSize(2));
         vr.body("servers.url", hasSize(2));
 
@@ -249,23 +262,26 @@ public class EndpointTest {
         vr.body(serverPath + ".variables", either(not(empty())).or(notNullValue()));
     }
 
-    @Test
     @RunAsClient
-    public void testOperationAirlinesResource() {
+    @Test(dataProvider = "formatProvider")
+    public void testOperationAirlinesResource(String type) {
+        ValidatableResponse vr = callEndpoint(type);
         vr.body("paths.'/'.get.summary", equalTo("Retrieve all available airlines"));
         vr.body("paths.'/'.get.operationId", equalTo("getAirlines"));
     }
 
-    @Test
     @RunAsClient
-    public void testOperationAvailabilityResource() {
+    @Test(dataProvider = "formatProvider")
+    public void testOperationAvailabilityResource(String type) {
+        ValidatableResponse vr = callEndpoint(type);
         vr.body("paths.'/availability'.get.summary", equalTo("Retrieve all available flights"));
         vr.body("paths.'/availability'.get.operationId", equalTo("getFlights"));
     }
 
-    @Test
     @RunAsClient
-    public void testOperationBookingResource() {
+    @Test(dataProvider = "formatProvider")
+    public void testOperationBookingResource(String type) {
+        ValidatableResponse vr = callEndpoint(type);
         vr.body("paths.'/bookings'.get.summary", equalTo("Retrieve all bookings for current user"));
         vr.body("paths.'/bookings'.get.operationId", equalTo("getAllBookings"));
 
@@ -283,9 +299,10 @@ public class EndpointTest {
         vr.body("paths.'/bookings/{id}'.delete.operationId", equalTo("deleteBookingById"));
     }
 
-    @Test
     @RunAsClient
-    public void testOperationReviewResource() {
+    @Test(dataProvider = "formatProvider")
+    public void testOperationReviewResource(String type) {
+        ValidatableResponse vr = callEndpoint(type);
         vr.body("paths.'/reviews'.get.summary", equalTo("get all the reviews"));
         vr.body("paths.'/reviews'.get.operationId", equalTo("getAllReviews"));
 
@@ -308,9 +325,10 @@ public class EndpointTest {
         vr.body("paths.'/reviews/{user}/{airlines}'.get.operationId", equalTo("getReviewByAirlineAndUser"));
     }
 
-    @Test
     @RunAsClient
-    public void testOperationUserResource() {
+    @Test(dataProvider = "formatProvider")
+    public void testOperationUserResource(String type) {
+        ValidatableResponse vr = callEndpoint(type);
         vr.body("paths.'/user'.post.summary", equalTo("Create user"));
         vr.body("paths.'/user'.post.description", equalTo("This can only be done by the logged in user."));
         vr.body("paths.'/user'.post.operationId", equalTo("createUser"));
@@ -342,16 +360,17 @@ public class EndpointTest {
         vr.body("paths.'/user/logout'.get.operationId", equalTo("logOutUser"));
     }
 
-    @Test
     @RunAsClient
-    public void testParameter() throws InterruptedException {
+    @Test(dataProvider = "formatProvider")
+    public void testParameter(String type) {
+        ValidatableResponse vr = callEndpoint(type);
         testAvailabilityGetParamater(vr);
         testBookingIdMethods(vr);
         testReviewIdMethods(vr);
         testUserLoginMethods(vr);
     }
 
-    private void testUserLoginMethods(ValidatableResponse vr2) {
+    private void testUserLoginMethods(ValidatableResponse vr) {
         String reviewParameters = "paths.'/user/login'.get.parameters";
         vr.body(reviewParameters, hasSize(2));
         vr.body(reviewParameters + ".findAll { it }.name", hasItems("username", "password"));
@@ -370,7 +389,7 @@ public class EndpointTest {
         }
     }
 
-    private void testReviewIdMethods(ValidatableResponse vr2) {
+    private void testReviewIdMethods(ValidatableResponse vr) {
         String reviewParameters = "paths.'/reviews/{id}'.get.parameters";
         vr.body(reviewParameters, hasSize(1));
         vr.body(reviewParameters + ".findAll { it }.name", contains("id"));
@@ -425,18 +444,20 @@ public class EndpointTest {
         vr.body(availabilityParameters + ".findAll { it.name == 'numberOfChildren' }.schema.minimum", both(hasSize(1)).and(contains(0)));
     }
 
-    @Test
     @RunAsClient
-    public void testExplode() throws InterruptedException {
+    @Test(dataProvider = "formatProvider")
+    public void testExplode(String type) {
+        ValidatableResponse vr = callEndpoint(type);
         String explode = "paths.'/user/{username}'.put.responses.'200'.content.'application/xml'.encoding.password.explode";
         vr.body(explode, equalTo(true));
         explode = "paths.'/user/{username}'.put.responses.'200'.content.'application/xml'.encoding.password.explode";
         vr.body(explode, equalTo(true));
     }
 
-    @Test
     @RunAsClient
-    public void testCallbackAnnotations() throws InterruptedException {
+    @Test(dataProvider = "formatProvider")
+    public void testCallbackAnnotations(String type) {
+        ValidatableResponse vr = callEndpoint(type);
         String endpoint = "paths.'/streams'.post.callbacks";
         vr.body(endpoint, hasKey("onData"));
         vr.body(endpoint + ".onData", hasKey("{$request.query.callbackUrl}/data"));
@@ -450,9 +471,10 @@ public class EndpointTest {
         vr.body(endpoint + ".'get all the bookings'", hasKey("http://localhost:9080/airlines/bookings"));
     }
 
-    @Test
     @RunAsClient
-    public void testSecuritySchemesInComponents() throws InterruptedException {
+    @Test(dataProvider = "formatProvider")
+    public void testSecuritySchemesInComponents(String type) {
+        ValidatableResponse vr = callEndpoint(type);
         String s = "components.securitySchemes";
         vr.body(s, hasKey("httpTestScheme"));
         vr.body(s, hasKey("airlinesRatingApp_auth"));
@@ -480,9 +502,10 @@ public class EndpointTest {
         vr.body(t + ".clientCredentials.scopes.'read:reviews'", equalTo("search for a review"));
     }
 
-    @Test
     @RunAsClient
-    public void testOAuthAnnotations() throws InterruptedException {
+    @Test(dataProvider = "formatProvider")
+    public void testOAuthAnnotations(String type) {
+        ValidatableResponse vr = callEndpoint(type);
         String endpoint = "components.securitySchemes.reviewoauth2.flows.";
 
         vr.body(endpoint + "implicit.authorizationUrl", equalTo("https://example.com/api/oauth/dialog"));
@@ -497,10 +520,11 @@ public class EndpointTest {
         vr.body(endpoint + "clientCredentials.tokenUrl", equalTo("https://example.com/api/oauth/token"));
         vr.body(endpoint + "clientCredentials.scopes.'read:reviews'", equalTo("search for a review"));
     }
-    
-    @Test
+
     @RunAsClient
-    public void testSecurityRequirement() throws InterruptedException {
+    @Test(dataProvider = "formatProvider")
+    public void testSecurityRequirement(String type) {
+        ValidatableResponse vr = callEndpoint(type);
         vr.body("security.airlinesRatingApp_auth[0][0]", equalTo(null));
 
         vr.body("paths.'/reviews'.post.security.reviewoauth2[0][0]", equalTo("write:reviews"));
@@ -539,9 +563,10 @@ public class EndpointTest {
         vr.body("paths.'/user/logout'.get.security.httpTestScheme", hasSize(1));
     }
 
-    @Test
     @RunAsClient
-    public void testSecuritySchemes() throws InterruptedException {
+    @Test(dataProvider = "formatProvider")
+    public void testSecuritySchemes(String type) {
+        ValidatableResponse vr = callEndpoint(type);
         String s = "components.securitySchemes";
         vr.body(s, hasKey("httpTestScheme"));
         vr.body(s, hasKey("airlinesRatingApp_auth"));
@@ -549,9 +574,10 @@ public class EndpointTest {
         vr.body(s, hasKey("bookingSecurityScheme"));
     }
 
-    @Test
     @RunAsClient
-    public void testSecurityScheme() throws InterruptedException {
+    @Test(dataProvider = "formatProvider")
+    public void testSecurityScheme(String type) {
+        ValidatableResponse vr = callEndpoint(type);
         String http = "components.securitySchemes.httpTestScheme.";
         vr.body(http + "type", equalTo("http"));
         vr.body(http + "description", equalTo("user security scheme"));
@@ -567,15 +593,16 @@ public class EndpointTest {
         vr.body(auth + "description", equalTo("authentication needed to access Airlines app"));
         vr.body(auth + "name", equalTo("api_key"));
         vr.body(auth + "in", equalTo("header"));
-        
+
         String reviewoauth2 = "components.securitySchemes.reviewoauth2.";
         vr.body(reviewoauth2 + "type", equalTo("oauth2"));
         vr.body(reviewoauth2 + "description", equalTo("authentication needed to create and delete reviews"));
     }
 
-    @Test
     @RunAsClient
-    public void testOAuthFlows() throws InterruptedException {
+    @Test(dataProvider = "formatProvider")
+    public void testOAuthFlows(String type) {
+        ValidatableResponse vr = callEndpoint(type);
         String t = "components.securitySchemes.reviewoauth2.flows";
         vr.body(t, hasKey("implicit"));
         vr.body(t, hasKey("authorizationCode"));
@@ -583,9 +610,10 @@ public class EndpointTest {
         vr.body(t, hasKey("clientCredentials"));
     }
 
-    @Test
     @RunAsClient
-    public void testOAuthFlow() throws InterruptedException {
+    @Test(dataProvider = "formatProvider")
+    public void testOAuthFlow(String type) {
+        ValidatableResponse vr = callEndpoint(type);
         String implicit = "components.securitySchemes.reviewoauth2.flows.implicit.";
         vr.body(implicit + "authorizationUrl", equalTo("https://example.com/api/oauth/dialog"));
 
@@ -597,22 +625,24 @@ public class EndpointTest {
         vr.body(password + "refreshUrl", equalTo("https://example.com/api/oauth/refresh"));
 
         String client = "components.securitySchemes.reviewoauth2.flows.clientCredentials.";
-        vr.body(client + "tokenUrl", equalTo("https://example.com/api/oauth/token"));   
+        vr.body(client + "tokenUrl", equalTo("https://example.com/api/oauth/token"));
     }
 
-    @Test
     @RunAsClient
-    public void testOAuthScope() throws InterruptedException {
+    @Test(dataProvider = "formatProvider")
+    public void testOAuthScope(String type) {
+        ValidatableResponse vr = callEndpoint(type);
         String implicit = "components.securitySchemes.reviewoauth2.flows.implicit.";
         vr.body(implicit + "scopes.'write:reviews'", equalTo("create a review"));
 
         String client = "components.securitySchemes.reviewoauth2.flows.clientCredentials.";
-        vr.body(client + "scopes.'read:reviews'", equalTo("search for a review"));   
+        vr.body(client + "scopes.'read:reviews'", equalTo("search for a review"));
     }
 
-    @Test
     @RunAsClient
-    public void testEncodingRequestBody() throws InterruptedException {
+    @Test(dataProvider = "formatProvider")
+    public void testEncodingRequestBody(String type) {
+        ValidatableResponse vr = callEndpoint(type);
         String s = "paths.'/user'.post.requestBody.content.'application/json'.encoding.email.";
         vr.body(s + "contentType", equalTo("text/plain"));
         vr.body(s + "style", equalTo("form"));
@@ -620,9 +650,10 @@ public class EndpointTest {
         vr.body(s + "allowReserved", equalTo(true));
     }
 
-    @Test
     @RunAsClient
-    public void testEncodingResponses() throws InterruptedException {
+    @Test(dataProvider = "formatProvider")
+    public void testEncodingResponses(String type) {
+        ValidatableResponse vr = callEndpoint(type);
         String s = "paths.'/user/{username}'.put.responses.'200'.content.'application/json'.encoding.password.";
         vr.body(s + "contentType", equalTo("text/plain"));
         vr.body(s + "style", equalTo("form"));
@@ -636,9 +667,10 @@ public class EndpointTest {
         vr.body(t + "allowReserved", equalTo(true));
     }
 
-    @Test
     @RunAsClient
-    public void testLink() throws InterruptedException {
+    @Test(dataProvider = "formatProvider")
+    public void testLink(String type) {
+        ValidatableResponse vr = callEndpoint(type);
         String s = "paths.'/user/{id}'.get.responses.'200'.links.'User name'.";
         vr.body(s + "operationId", equalTo("getUserByName"));
         vr.body(s + "description", equalTo("The username corresponding to provided user id"));
@@ -646,15 +678,16 @@ public class EndpointTest {
         String t = "paths.'/user/{id}'.get.responses.'200'.links.Review.";
         vr.body(t + "operationRef", equalTo("/db/reviews/{userName}"));
         vr.body(t + "description", equalTo("The reviews provided by user"));
-        
+
         String k = "paths.'/reviews'.post.responses.'201'.links.Review.";
         vr.body(k + "operationId", equalTo("getReviewById"));
         vr.body(k + "description", equalTo("get the review that was added"));
     }
 
-    @Test
     @RunAsClient
-    public void testLinkParameter() throws InterruptedException {
+    @Test(dataProvider = "formatProvider")
+    public void testLinkParameter(String type) {
+        ValidatableResponse vr = callEndpoint(type);
         String s = "paths.'/user/{id}'.get.responses.'200'.links.'User name'.";
         vr.body(s + "parameters.userId", equalTo("$request.path.id"));
 
@@ -665,9 +698,10 @@ public class EndpointTest {
         vr.body(k + "parameters.reviewId", equalTo("$request.path.id"));
     }
 
-    @Test
     @RunAsClient
-    public void testSchema() {
+    @Test(dataProvider = "formatProvider")
+    public void testSchema(String type) {
+        ValidatableResponse vr = callEndpoint(type);
         // Basic properties
         vr.body("components.schemas.AirlinesRef.ref", equalTo("#/components/schemas/Airlines"));
         vr.body("components.schemas.Airlines.title", equalTo("Airlines"));
@@ -692,9 +726,10 @@ public class EndpointTest {
         vr.body("paths.‘/user/createWithArray’.post.parameters.‘userArray’.content.schema.uniqueItems", equalTo(true));
     }
 
-    @Test
     @RunAsClient
-    public void testExampleObject() throws InterruptedException {
+    @Test(dataProvider = "formatProvider")
+    public void testExampleObject(String type) {
+        ValidatableResponse vr = callEndpoint(type);
         // Example in Components
         vr.body("components.examples.review.summary", equalTo("External review example"));
         vr.body("components.examples.review.description", equalTo("This example exemplifies the content on our site."));
