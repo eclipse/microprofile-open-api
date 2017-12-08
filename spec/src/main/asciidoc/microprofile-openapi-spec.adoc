@@ -17,6 +17,7 @@
 // limitations under the License.
 //
 
+:version-label!:
 :sectanchors:
 :doctype: book
 :license: Apache License v2.0
@@ -24,6 +25,11 @@
 :sectnums:
 :toc: left
 :toclevels: 4
+ifdef::backend-pdf[]
+:pagenums:
+endif::[]
+
+include::license-alv2.asciidoc[]
 
 = MicroProfile OpenAPI Specification
 
@@ -64,7 +70,7 @@ There are various ways to inject these configuration values into an MP OpenAPI
 framework, including the https://github.com/eclipse/microprofile-config/blob/master/spec/src/main/asciidoc/configsources.asciidoc#default-configources[default ConfigSource] as well as
 https://github.com/eclipse/microprofile-config/blob/master/spec/src/main/asciidoc/configsources.asciidoc#custom-configsources[custom ConfigSource].
 
-Vendors implementing the MP OpenAPI specification can also provide additional native
+Vendors implementing the MP OpenAPI specification can optionally provide additional native
 ways for these configuration values to be injected into the framework
 (e.g. via a server configuration file), as long as they also implement the MP Config
 specification.
@@ -700,3 +706,5 @@ ignore, reject, or pass-through invalid inputs).
 
 The MP OpenAPI 1.0 specification does not require vendors to support https://www.w3.org/TR/cors/[CORS]
 for the `/openapi` endpoint.  The behavior of CORS requests is implementation dependent.
+
+include::release_notes.asciidoc[]
