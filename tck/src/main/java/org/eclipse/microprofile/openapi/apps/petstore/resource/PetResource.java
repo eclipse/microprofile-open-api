@@ -80,7 +80,7 @@ import javax.ws.rs.Consumes;
             description = "authentication needed to delete a pet profile", 
             flows = @OAuthFlows(
                 implicit = @OAuthFlow(
-                    authorizationUrl = "https://example.com/api/oauth/dialog",
+                    authorizationUrl = "https://example.com/api/oauth/dialog"
                 ),
                 authorizationCode = @OAuthFlow(
                     authorizationUrl = "https://example.com/api/oauth/dialog",
