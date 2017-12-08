@@ -50,7 +50,7 @@ public class EndpointTestPetStore {
 
     private static final String DEFAULT_PROTOCOL = "http";
     private static final String DEFAULT_HOST = "localhost";
-    private static final int DEFAULT_PORT = 9081;
+    private static final int DEFAULT_PORT = 9080;
 
     private static ValidatableResponse vr;
 
