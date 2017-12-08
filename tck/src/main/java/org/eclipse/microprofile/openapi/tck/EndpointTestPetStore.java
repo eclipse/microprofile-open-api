@@ -128,7 +128,7 @@ public class EndpointTestPetStore {
         // Basic properties
         vr.body("paths.'/pet/findByTags'.get.parameters.find{ it.name == 'tags' }.schema.default", equalTo("Dog"));  // default val
         vr.body("paths.'/pet/findByTags'.get.parameters.find{ it.name == 'tags' }.schema.enum", hasItems("Cat", "Dog", "Lizard")); // enumeration 
-        vr.body("paths.'/pet/findByTags'.get.parameters.find{ it.name == 'tags' }.schema.externalDocs.description", equalTo("Pet Types")); // external docs
+        vr.body("paths.'/pet/findByTags'.get.parameters.find{ it.name == 'tags' }.schema.externalDocs.description", equalTo("Pet Types")); // ext doc
         vr.body("paths.'/pet/findByTags'.get.parameters.find{ it.name == 'tags' }.schema.deprecated", equalTo(true)); // deprecated
         vr.body("paths.'/store/order/{orderId}'.get.responses.'900'.schema", nullValue()); // hidden
         
@@ -144,12 +144,14 @@ public class EndpointTestPetStore {
         vr.body("paths.'/pet/{petId}'.delete.parameters.find{ it.name == 'apiKey' }.schema.minLength", equalTo(32)); // min length
 
         // Other properties
+        String storeOrderResponses = "paths.'/store/order/{orderId}'.get.responses";
         vr.body("paths.'/pet/{petId}'.get.responses.'200'.content.'application/json'.schema.readonly", equalTo(true)); //  readonly
-        vr.body("paths.'/store/order/{orderId}'.get.responses.'404'.content.'application/json'.schema.anyOf", hasItems("Order.class", "BadOrder.class")); //    any of
-        vr.body("paths.'/store/order/{orderId}'.get.responses.'200'.content.'application/json'.schema.allOf", hasItems("Order.class", "Pet.class")); //    all of
-        vr.body("paths.'/pet/{petId}'.get.responses.'200'.content.'application/json'.schema.oneOf", hasItems("Cat.class", "Dog.class", "Lizard.class")); //    one of
-        vr.body("paths.'/store/order/{orderId}'.get.responses.'200'.content.'application/json'.schema.not", equalTo("BadOrder.class")); //    not
-        vr.body("paths.'/store/order/{orderId}'.get.responses.'404'.content.'application/json'.schema.discriminatorProperty", equalTo("id")); //    discrimination prop
-        vr.body("paths.'/store/order/{orderId}'.get.responses.'404'.content.'application/json'.schema.discriminatorMapping", hasEntry("0", "BadOrder.class")); //    discrimination mapping 
+        vr.body(storeOrderResponses + ".'404'.content.'application/json'.schema.anyOf", hasItems("Order.class", "BadOrder.class")); //    any of
+        vr.body(storeOrderResponses + ".'200'.content.'application/json'.schema.allOf", hasItems("Order.class", "Pet.class")); //    all of
+        vr.body("paths.'/pet/{petId}'.get.responses.'200'.content.'application/json'.schema.oneOf", 
+                hasItems("Cat.class", "Dog.class", "Lizard.class")); //    one of
+        vr.body(storeOrderResponses + ".'200'.content.'application/json'.schema.not", equalTo("BadOrder.class")); //    not
+        vr.body(storeOrderResponses + ".'404'.content.'application/json'.schema.discriminatorProperty", equalTo("id")); //    discrimination prop
+        vr.body(storeOrderResponses + ".'404'.content.'application/json'.schema.discriminatorMapping", hasEntry("0", "BadOrder.class")); // mapping
     }
 }
