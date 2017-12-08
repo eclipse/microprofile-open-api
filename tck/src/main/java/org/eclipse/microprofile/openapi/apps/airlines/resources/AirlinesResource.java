@@ -27,6 +27,7 @@ import org.eclipse.microprofile.openapi.annotations.callbacks.CallbackOperation;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.eclipse.microprofile.openapi.annotations.tags.Tags;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
@@ -82,13 +83,15 @@ public class AirlinesResource {
     }
     
     @GET
-    @Tag(
-            name = "Get Airlines",
-            description = "method to get all airlines"
-        )
-    @Tag(
-            name = "Retrieve Airlines",
-            description = "method to retrieve all airlines"
+    @Tags(
+        value = {
+            @Tag(
+                name = "Get Airlines",
+                description = "method to get all airlines"
+            ),
+            @Tag(
+                name = "Retrieve Airlines",
+                description = "method to retrieve all airlines"
             )
     @Tag(ref="airlines")
     @APIResponse(
