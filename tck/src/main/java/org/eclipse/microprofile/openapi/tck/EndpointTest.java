@@ -436,6 +436,22 @@ public class EndpointTest {
 
     @Test
     @RunAsClient
+    public void testCallbackAnnotations() throws InterruptedException {
+        String endpoint = "paths.'/streams'.post.callbacks";
+        vr.body(endpoint, hasKey("onData"));
+        vr.body(endpoint + ".onData", hasKey("{$request.query.callbackUrl}/data"));
+
+        endpoint = "paths.'/reviews'.post.callbacks";
+        vr.body(endpoint, hasKey("testCallback"));
+        vr.body(endpoint + ".testCallback", hasKey("http://localhost:9080/oas3-airlines/reviews"));
+
+        endpoint = "paths.'/bookings'.post.callbacks";
+        vr.body(endpoint, hasKey("get all the bookings"));
+        vr.body(endpoint + ".'get all the bookings'", hasKey("http://localhost:9080/airlines/bookings"));
+    }
+
+    @Test
+    @RunAsClient
     public void testSecuritySchemesInComponents() throws InterruptedException {
         String s = "components.securitySchemes";
         vr.body(s, hasKey("httpTestScheme"));
@@ -674,5 +690,20 @@ public class EndpointTest {
         vr.body("paths.‘/user/createWithArray’.post.parameters.‘userArray’.content.schema.maxItems", equalTo(20));
         vr.body("paths.‘/user/createWithArray’.post.parameters.‘userArray’.content.schema.minItems", equalTo(2));
         vr.body("paths.‘/user/createWithArray’.post.parameters.‘userArray’.content.schema.uniqueItems", equalTo(true));
+    }
+
+    @Test
+    @RunAsClient
+    public void testExampleObject() throws InterruptedException {
+        // Example in Components
+        vr.body("components.examples.review.summary", equalTo("External review example"));
+        vr.body("components.examples.review.description", equalTo("This example exemplifies the content on our site."));
+        vr.body("components.examples.review.externalValue", equalTo("http://foo.bar/examples/review-example.json"));
+
+        // Example in Content
+        vr.body("paths.'/reviews/{user}'.parameters.find{ it.name=='user'}.content.examples.value", hasItem("bsmith"));
+
+        // Example in Parameter
+        vr.body("paths.'/reviews/{user}'.parameters.find{ it.name=='user'}.examples.value", hasItems("bsmith", "pat@example.com"));
     }
 }
