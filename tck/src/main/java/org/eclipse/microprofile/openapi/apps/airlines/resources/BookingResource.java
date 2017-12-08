@@ -51,9 +51,7 @@ import javax.ws.rs.core.Response.Status;
 import org.eclipse.microprofile.openapi.apps.airlines.model.Booking;
 
 @Path("/bookings")
-@Tag(
-        name = "Bookings", 
-        description = "All the bookings methods")
+@Tag(ref="Bookings")
 @Tags(
     value = @Tag(
             name = "Reservations", 
@@ -71,7 +69,7 @@ public class BookingResource {
     private volatile int currentId = 0;
 
     @GET
-    @Tag(ref="booking")
+    @Tag(ref="bookings")
     @APIResponses(value={
             @APIResponse(
                     responseCode="200",
@@ -217,6 +215,7 @@ public class BookingResource {
 
     @DELETE
     @Path("{id}")
+    @Tag()
     @APIResponse(
             responseCode="200",
             description="Booking deleted successfully."

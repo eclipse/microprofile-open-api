@@ -47,6 +47,7 @@ public class AvailabilityResource {
                 description = "A list of all the flights offered by the app",
                 url = "http://airlinesratingapp.com/ourflights")
         )
+    @Tag(ref="Availability")
     @APIResponse(
             responseCode = "200",
             description = "successful operation",
