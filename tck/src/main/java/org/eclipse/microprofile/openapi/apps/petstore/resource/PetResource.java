@@ -81,10 +81,6 @@ import javax.ws.rs.Consumes;
             flows = @OAuthFlows(
                 implicit = @OAuthFlow(
                     authorizationUrl = "https://example.com/api/oauth/dialog",
-                    scopes = @OAuthScope(
-                        name = "write:pets",
-                        description = "delete a pet profile"
-                    )
                 ),
                 authorizationCode = @OAuthFlow(
                     authorizationUrl = "https://example.com/api/oauth/dialog",
