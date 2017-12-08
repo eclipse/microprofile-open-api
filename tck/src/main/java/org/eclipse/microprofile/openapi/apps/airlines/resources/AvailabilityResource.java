@@ -51,7 +51,7 @@ public class AvailabilityResource {
             responseCode = "200",
             description = "successful operation",
             content = @Content(
-                mediaType = "applictaion/json",
+                mediaType = "application/json",
                 schema = @Schema(
                     type = SchemaType.ARRAY,
                     implementation = Flight.class
