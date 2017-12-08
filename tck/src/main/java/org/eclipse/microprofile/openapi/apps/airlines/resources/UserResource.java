@@ -200,7 +200,12 @@ public class UserResource {
                             allowReserved = true,
                             explode = true,
                             headers = @Header(
-                                name = "testHeader"
+                                name = "testHeader",
+                                description = "Minimum rate", 
+                                schema = @Schema(type = SchemaType.INTEGER), 
+                                required = true, 
+                                allowEmptyValue = true, 
+                                deprecated = true
                             )
                         )
                     )
@@ -324,7 +329,8 @@ public class UserResource {
                             contentType = "text/plain",
                             style = "form",
                             allowReserved = true,
-                            explode = true
+                            explode = true,
+                            headers = @Header(ref="Max-Rate")
                             )
                         )
                 ),

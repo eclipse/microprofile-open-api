@@ -137,7 +137,7 @@ public class ReviewResource {
                     implementation = Review.class
                 )
             ),
-            headers = @Header(ref="Request-Limit")
+            headers = @Header(ref="#/components/headers/Request-Limit")
         )
     @Operation(
         operationId = "getAllReviews",
@@ -155,7 +155,24 @@ public class ReviewResource {
             description="Review retrieved",
             content=@Content(
                 schema=@Schema(
-                    implementation=Review.class)))
+                    implementation=Review.class)),
+            headers = {
+                    @Header(
+                        name = "responseHeader1",
+                        description = "Max rate", 
+                        schema = @Schema(type = SchemaType.INTEGER), 
+                        required = true, 
+                        allowEmptyValue = true, 
+                        deprecated = true),
+                    @Header(
+                        name = "responseHeader2",
+                        description = "Input value", 
+                        schema = @Schema(type = SchemaType.STRING), 
+                        required = true, 
+                        allowEmptyValue = true, 
+                        deprecated = true
+                    )
+            })
     @APIResponse(
             responseCode="404",
             description="Review not found")
