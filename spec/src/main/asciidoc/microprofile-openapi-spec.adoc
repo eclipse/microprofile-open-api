@@ -17,7 +17,6 @@
 // limitations under the License.
 //
 
-:version-label!:
 :sectanchors:
 :doctype: book
 :license: Apache License v2.0
@@ -29,9 +28,10 @@ ifdef::backend-pdf[]
 :pagenums:
 endif::[]
 
+= MicroProfile OpenAPI Specification
+
 include::license-alv2.asciidoc[]
 
-= MicroProfile OpenAPI Specification
 
 == Introduction
 Exposing APIs has become an essential part of all modern applications.  At the
