@@ -59,14 +59,12 @@ import javax.ws.rs.Produces;
             securitySchemeName = "userBasicHttp",
             type = SecuritySchemeType.HTTP,
             description = "authentication needed to create a new user profile for the store",
-            apiKeyName = "createOrUpdateUserProfile2",
             scheme = "basic"
         ),
         @SecurityScheme(
             securitySchemeName = "userBearerHttp",
             type = SecuritySchemeType.HTTP,
             description = "authentication needed to create a new user profile for the store",
-            apiKeyName = "createOrUpdateUserProfile3",
             scheme = "bearer",
             bearerFormat = "JWT"
         )
