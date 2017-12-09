@@ -17,8 +17,8 @@
 // limitations under the License.
 //
 
-:authors: Arthur De Magalhaes
-:email: ademagalhaes@gmail.com
+:authors: Arthur De Magalhaes (Spec Lead), Leo Christy Jesuraj, Eric Wittmann
+:email: ademagalhaes@gmail.com, leo.jesuraj@gmail.com, eric.wittmann@redhat.com
 :version-label!:
 :sectanchors:
 :doctype: book
