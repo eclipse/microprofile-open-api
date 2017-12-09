@@ -17,6 +17,9 @@
 // limitations under the License.
 //
 
+:authors: Arthur De Magalhaes
+:email: ademagalhaes@gmail.com
+:version-label!:
 :sectanchors:
 :doctype: book
 :license: Apache License v2.0
