@@ -213,6 +213,24 @@ The following annotations are found in the https://github.com/eclipse/microprofi
 | https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/tags/Tags.java[@Tags] | A container of multiple tags.
 |===
 
+===== Overrides
+
+When the same annotation is used on a class and a method, the values from the
+method instance will take precedence for that particular method.  This commonly
+occurs with the `@Server` and `@Tag` annotations.
+
+In other cases, such as with `@Parameter` and `@RequestBody`, the annotation values
+from the method's parameters takes precedence over corresponding annotation values
+from the method itself - in this scenario the combined usage of these annotations is
+allowed but discouraged, as it is error prone.
+
+The `@Schema` annotation has a complex set of possible combinations.  It can placed
+on POJOs (and their fields / methods) and referenced from many other annotations.
+In the event that a `@Schema#implementation` value points to a POJO that also contains
+a `@Schema` annotation, the values are merged but with precedence given to
+the referrer annotation (i.e. the one that contains the `implementation` key).
+This allows POJO models to be reusable and configurable.    
+
 ==== Detailed usage of key annotations
 
 ===== Operation
@@ -663,7 +681,7 @@ suggested but optional query parameter for vendors to support is `format`,
 where the value can be either `json` or `yaml`, to facilitate the toggle between
 the default `yaml` format and `json` format.
 
-=== Context root behaviour
+=== Context root behavior
 Vendors are required to ensure that the combination of each global https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#serverObject[server]
 element and https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#pathItemObject[pathItem] element resolve to the absolute backend URL of that
 particular path.  If that `pathItem` contains a `servers` element , then this
