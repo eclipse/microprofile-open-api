@@ -332,10 +332,10 @@ post:
     requestBody:
       description: Created user object
       content:
-       '*/*':
-        schema:
-          $ref: '#/components/schemas/User'
-          required: true
+        '*/*':
+          schema:
+            $ref: '#/components/schemas/User'
+            required: true
     responses:
       default:
         description: no description
@@ -657,7 +657,7 @@ from the current model.
 == OpenAPI Endpoint
 
 === Overview
-A fully processed and valid OpenAPI document must be available at the root
+A fully processed OpenAPI document must be available at the root
 URL `/openapi`, as a `HTTP GET` operation.
 
 For example, `GET http://myHost:myPort/openapi`.
@@ -669,11 +669,12 @@ support the `https` protocol as well, to enable a secure connection to the OpenA
 endpoint.
 
 === Content format
-The default format of the `/openapi` endpoint is `YAML`.
+The default format of the `/openapi` endpoint is `YAML`, which should result in
+a response with a `Content-Type` header with a value of `application/yaml`.
 
 Vendors must also support the `JSON` format if the request contains an `Accept`
 header with a value of `application/json`, in which case the response must contain
-a `Content-Type` header with value of `application/json`.
+a `Content-Type` header with a value of `application/json`.
 
 === Query parameters
 No query parameters are required for the `/openapi` endpoint.  However, one
