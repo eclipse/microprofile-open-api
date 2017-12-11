@@ -21,15 +21,13 @@ import static org.hamcrest.Matchers.both;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.either;
-import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
 
 import java.io.File;
@@ -222,15 +220,14 @@ public class EndpointTest extends Arquillian {
         url = "http://gigantic-server.com:80";
         serverPath = "paths.'/reviews/{id}'.delete.servers.find { it.url == '" + url + "' }";
         vr.body(serverPath + ".description", equalTo("Unsecure server"));
-        vr.body(serverPath + ".variables", either(not(empty())).or(notNullValue()));
+        vr.body(serverPath + ".variables", not(hasSize(greaterThan(0)))); 
 
         url = "{protocol}://test-server.com";
         serverPath = "paths.'/reviews/{id}'.delete.servers.find { it.url == '" + url + "' }";
         vr.body(serverPath + ".description", equalTo("The production API server"));
         vr.body(serverPath + ".variables", aMapWithSize(1));
-        vr.body(serverPath + ".variables.proxyPath.description", equalTo("Base path of the proxy"));
-        vr.body(serverPath + ".variables.proxyPath.default", equalTo("http"));
-        vr.body(serverPath + ".variables.proxyPath.enum", containsInAnyOrder("http", "https"));
+        vr.body(serverPath + ".variables.protocol.default", equalTo("https"));
+        vr.body(serverPath + ".variables.protocol.enum", containsInAnyOrder("http", "https"));
 
         // Testing two @Server defined in an @operation annotation on a method
         // org.eclipse.microprofile.openapi.apps.airlines.resources.ReviewResource.createReview(Review)
@@ -250,16 +247,16 @@ public class EndpointTest extends Arquillian {
         // org.eclipse.microprofile.openapi.apps.airlines.resources.BookingResource
         vr.body("paths.'/bookings'.get.servers", hasSize(2));
         vr.body("paths.'/bookings'.get.servers.url", hasSize(2));
-
-        url = "https://gigantic-server.com:80";
+        
+        url = "http://gigantic-server.com:80";
         serverPath = "paths.'/bookings'.get.servers.find { it.url == '" + url + "' }";
-        vr.body(serverPath + ".description", equalTo("Secure server"));
-        vr.body(serverPath + ".variables", either(not(empty())).or(notNullValue()));
+        vr.body(serverPath + ".description", equalTo("Unsecure server"));
+        vr.body(serverPath + ".variables", not(hasSize(greaterThan(0)))); 
 
         url = "https://gigantic-server.com:443";
         serverPath = "paths.'/bookings'.get.servers.find { it.url == '" + url + "' }";
-        vr.body(serverPath + ".description", equalTo("Unsecure server"));
-        vr.body(serverPath + ".variables", either(not(empty())).or(notNullValue()));
+        vr.body(serverPath + ".description", equalTo("Secure server"));
+        vr.body(serverPath + ".variables", not(hasSize(greaterThan(0))));
     }
 
     @RunAsClient
