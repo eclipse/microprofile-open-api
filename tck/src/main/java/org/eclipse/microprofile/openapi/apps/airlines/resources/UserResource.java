@@ -29,6 +29,7 @@ import org.eclipse.microprofile.openapi.annotations.enums.ParameterStyle;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
+import org.eclipse.microprofile.openapi.annotations.security.SecuritySchemes;
 import org.eclipse.microprofile.openapi.annotations.servers.Server;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.eclipse.microprofile.openapi.annotations.tags.Tags;
@@ -55,13 +56,23 @@ import javax.ws.rs.core.Response;
 
 @Path("/user")
 @Produces({"application/json", "application/xml"})
-@SecurityScheme(
-    description = "user security scheme",
-    type = SecuritySchemeType.HTTP,
-    securitySchemeName = "httpTestScheme",
-    scheme = "testScheme")
+@SecuritySchemes(
+    value = {
+        @SecurityScheme(
+            description = "user security scheme",
+            type = SecuritySchemeType.HTTP,
+            securitySchemeName = "httpTestScheme",
+            scheme = "testScheme"),
+        @SecurityScheme(
+            description = "another user security scheme",
+            type = SecuritySchemeType.HTTP,
+            securitySchemeName = "httpTestSchemeWithScope",
+            scheme = "anotherTestScheme"
+        )
+    }
+)
 @SecurityRequirement(
-    name = "httpTestScheme",
+    name = "httpTestSchemeWithScope",
     scopes = "write:users"
 )
 public class UserResource {
@@ -516,9 +527,6 @@ public class UserResource {
         operationId = "logInUser"
     )
 
-    @SecurityScheme(
-        ref = "#/components/securitySchemes/httpTestScheme"
-    )
     @SecurityRequirement(
         name = "httpTestScheme"
     )
