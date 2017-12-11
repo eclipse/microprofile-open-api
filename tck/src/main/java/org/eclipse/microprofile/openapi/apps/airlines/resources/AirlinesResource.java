@@ -93,6 +93,8 @@ public class AirlinesResource {
                 name = "Retrieve Airlines",
                 description = "method to retrieve all airlines"
             )
+        }
+    )
     @Tag(ref="airlines")
     @APIResponse(
             ref = "FoundAirlines"
