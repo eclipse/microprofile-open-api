@@ -16,6 +16,14 @@
 
 package org.eclipse.microprofile.openapi.tck;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNotSame;
+import static org.testng.Assert.assertNull;
+import static org.testng.Assert.assertSame;
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
+
 import java.beans.Introspector;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -69,20 +77,17 @@ import org.eclipse.microprofile.openapi.models.servers.ServerVariable;
 import org.eclipse.microprofile.openapi.models.servers.ServerVariables;
 import org.eclipse.microprofile.openapi.models.tags.Tag;
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.testng.annotations.Test;
 
 /**
  * This test covers construction of the OpenAPI model. It verifies that the implementation can
  * create instances of all of the Constructible interfaces and then invokes methods (including
  * getters, setters and builders) on those instances to verify that they behave correctly.
  */
-@RunWith(Arquillian.class)
-public class ModelConstructionTest {
+public class ModelConstructionTest extends Arquillian {
     
     private static final Map<String,Property> PARAMETER_PROPERTIES = Collections.unmodifiableMap(collectProperties0(Parameter.class));
     
@@ -121,7 +126,7 @@ public class ModelConstructionTest {
                 return getter.invoke(target);
             }
             catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                Assert.fail("Invocation of getter method \"" + getter.getName() + "\" failed: " + e.getMessage());
+                fail("Invocation of getter method \"" + getter.getName() + "\" failed: " + e.getMessage());
                 throw new RuntimeException(e);
             }
         }
@@ -130,7 +135,7 @@ public class ModelConstructionTest {
                 setter.invoke(target, value);
             }
             catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                Assert.fail("Invocation of setter method \"" + setter.getName() + "\" failed: " + e.getMessage());
+                fail("Invocation of setter method \"" + setter.getName() + "\" failed: " + e.getMessage());
                 throw new RuntimeException(e);
             }
         }
@@ -139,7 +144,7 @@ public class ModelConstructionTest {
                 return builder.invoke(target, value);
             }
             catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                Assert.fail("Invocation of builder method \"" + builder.getName() + "\" failed: " + e.getMessage());
+                fail("Invocation of builder method \"" + builder.getName() + "\" failed: " + e.getMessage());
                 throw new RuntimeException(e);
             }
         }
@@ -153,13 +158,12 @@ public class ModelConstructionTest {
             return getter != null && setter != null;
         }
     }
-    
+
     @Deployment
-    public static WebArchive createProxy() {
-        WebArchive war = ShrinkWrap.create(WebArchive.class);
-        return war;
+    public static WebArchive createDeployment() {
+        return ShrinkWrap.create(WebArchive.class);
     }
-    
+
     @Test
     public void componentsTest() {
         final Components c = processConstructible(Components.class);
@@ -277,10 +281,10 @@ public class ModelConstructionTest {
         
         final String pathItemKey2 = "myPathItem2";
         final PathItem pathItemValue2 = createConstructibleInstance(PathItem.class);
-        Assert.assertNull("No previous mapping expected.", p.put(pathItemKey2, pathItemValue2));
+        assertNull(p.put(pathItemKey2, pathItemValue2), "No previous mapping expected.");
         checkMapEntry(p, pathItemKey2, pathItemValue2);
         
-        Assert.assertEquals("The map is expected to contain two entries.", 2, p.size());
+        assertEquals(p.size(), 2, "The map is expected to contain two entries.");
     }
     
     @Test
@@ -294,10 +298,10 @@ public class ModelConstructionTest {
         
         final String pathItemKey2 = "myPathItem2";
         final PathItem pathItemValue2 = createConstructibleInstance(PathItem.class);
-        Assert.assertNull("No previous mapping expected.", c.put(pathItemKey2, pathItemValue2));
+        assertNull(c.put(pathItemKey2, pathItemValue2), "No previous mapping expected.");
         checkMapEntry(c, pathItemKey2, pathItemValue2);
         
-        Assert.assertEquals("The map is expected to contain two entries.", 2, c.size());
+        assertEquals(c.size(), 2, "The map is expected to contain two entries.");
     }
     
     @Test
@@ -351,10 +355,10 @@ public class ModelConstructionTest {
         
         final String mediaTypeKey2 = "myPathItem2";
         final MediaType mediaTypeValue2 = createConstructibleInstance(MediaType.class);
-        Assert.assertNull("No previous mapping expected.", c.put(mediaTypeKey2, mediaTypeValue2));
+        assertNull(c.put(mediaTypeKey2, mediaTypeValue2), "No previous mapping expected.");
         checkMapEntry(c, mediaTypeKey2, mediaTypeValue2);
         
-        Assert.assertEquals("The map is expected to contain two entries.", 2, c.size());
+        assertEquals(c.size(), 2, "The map is expected to contain two entries.");
     }
     
     @Test
@@ -477,10 +481,10 @@ public class ModelConstructionTest {
         
         final String responseKey2 = "myResponse2";
         final APIResponse responseValue2 = createConstructibleInstance(APIResponse.class);
-        Assert.assertNull("No previous mapping expected.", responses.put(responseKey2, responseValue2));
+        assertNull(responses.put(responseKey2, responseValue2), "No previous mapping expected.");
         checkMapEntry(responses, responseKey2, responseValue2);
         
-        Assert.assertEquals("The map is expected to contain two entries.", 2, responses.size());
+        assertEquals(responses.size(), 2, "The map is expected to contain two entries.");
     }
     
     @Test
@@ -504,10 +508,10 @@ public class ModelConstructionTest {
         
         final String scopeKey2 = "myScope2";
         final String scopeValue2 = new String("myDescription2");
-        Assert.assertNull("No previous mapping expected.", s.put(scopeKey2, scopeValue2));
+        assertNull(s.put(scopeKey2, scopeValue2), "No previous mapping expected.");
         checkMapEntry(s, scopeKey2, scopeValue2);
         
-        Assert.assertEquals("The map is expected to contain two entries.", 2, s.size());
+        assertEquals(s.size(), 2, "The map is expected to contain two entries.");
     }
     
     @Test
@@ -521,10 +525,10 @@ public class ModelConstructionTest {
         
         final String schemeKey2 = "myResponse2";
         final List<String> schemeValue2 = new ArrayList<String>();
-        Assert.assertNull("No previous mapping expected.", sr.put(schemeKey2, schemeValue2));
+        assertNull(sr.put(schemeKey2, schemeValue2), "No previous mapping expected.");
         checkMapEntry(sr, schemeKey2, schemeValue2);
         
-        Assert.assertEquals("The map is expected to contain two entries.", 2, sr.size());
+        assertEquals(sr.size(), 2, "The map is expected to contain two entries.");
     }
     
     @Test
@@ -557,10 +561,10 @@ public class ModelConstructionTest {
         
         final String varKey2 = "myServerVariable2";
         final ServerVariable varValue2 = createConstructibleInstance(ServerVariable.class);
-        Assert.assertNull("No previous mapping expected.", svs.put(varKey2, varValue2));
+        assertNull(svs.put(varKey2, varValue2), "No previous mapping expected.");
         checkMapEntry(svs, varKey2, varValue2);
         
-        Assert.assertEquals("The map is expected to contain two entries.", 2, svs.size());
+        assertEquals(svs.size(), 2, "The map is expected to contain two entries.");
     }
     
     @Test
@@ -586,12 +590,12 @@ public class ModelConstructionTest {
     private <T extends Constructible> T createConstructibleInstance(Class<T> clazz) {
         // Check that the OASFactory is able to create an instance of the given Class.
         final T o1 = OASFactory.createObject(clazz);
-        Assert.assertNotNull("The return value of OASFactory.createObject(" + clazz.getName() + ") must not be null.", o1);
-        Assert.assertTrue("The return value of OASFactory.createObject() is expected to be an instance of: " + clazz.getName(), clazz.isInstance(o1));
+        assertNotNull(o1, "The return value of OASFactory.createObject(" + clazz.getName() + ") must not be null.");
+        assertTrue(clazz.isInstance(o1), "The return value of OASFactory.createObject() is expected to be an instance of: " + clazz.getName());
         final T o2 = OASFactory.createObject(clazz);
-        Assert.assertNotNull("The return value of OASFactory.createObject(" + clazz.getName() + ") must not be null.", o2);
-        Assert.assertTrue("The return value of OASFactory.createObject() is expected to be an instance of: " + clazz.getName(), clazz.isInstance(o2));
-        Assert.assertNotSame("OASFactory.createObject(" + clazz.getName() + ") is expected to create a new object on each invocation.", o1, o2);
+        assertNotNull(o2, "The return value of OASFactory.createObject(" + clazz.getName() + ") must not be null.");
+        assertTrue(clazz.isInstance(o2), "The return value of OASFactory.createObject() is expected to be an instance of: " + clazz.getName());
+        assertNotSame(o2, o1, "OASFactory.createObject(" + clazz.getName() + ") is expected to create a new object on each invocation.");
         return o1;
     }
     
@@ -604,45 +608,45 @@ public class ModelConstructionTest {
         e.addExtension(extensionName1, obj1);
         e.addExtension(extensionName2, obj2);
         final Map<String, Object> map = e.getExtensions();
-        Assert.assertEquals("The extensions map is expected to contain two entries.", 2, map.size());
-        Assert.assertTrue("The extensions map is expected to contain the key: " + extensionName1, map.containsKey(extensionName1));
-        Assert.assertTrue("The extensions map is expected to contain the key: " + extensionName2, map.containsKey(extensionName2));
-        Assert.assertSame("The value associated with the key: " + extensionName1 + " is expected to be the same one that was added.",
-                obj1, map.get(extensionName1));
-        Assert.assertSame("The value associated with the key: " + extensionName2 + " is expected to be the same one that was added.",
-                obj2, map.get(extensionName2));
+        assertEquals(map.size(), 2, "The extensions map is expected to contain two entries.");
+        assertTrue(map.containsKey(extensionName1), "The extensions map is expected to contain the key: " + extensionName1);
+        assertTrue(map.containsKey(extensionName2), "The extensions map is expected to contain the key: " + extensionName2);
+        assertSame(map.get(extensionName1), obj1,
+                "The value associated with the key: " + extensionName1 + " is expected to be the same one that was added.");
+        assertSame(map.get(extensionName2), obj2,
+                "The value associated with the key: " + extensionName2 + " is expected to be the same one that was added.");
         // Check that the extension map can be replaced with the setter and that it is returned by the getter.
         final Map<String, Object> newMap = new HashMap<>();
         e.setExtensions(newMap);
         final Map<String, Object> map2 = e.getExtensions();
-        Assert.assertEquals("The extensions map is expected to contain no entries.", 0, map2.size());
-        Assert.assertSame("The return value of getExtensions() is expected to be the same value that was set.", newMap, map2);
+        assertEquals(map2.size(), 0, "The extensions map is expected to contain no entries.");
+        assertSame(map2, newMap, "The return value of getExtensions() is expected to be the same value that was set.");
     }
     
     private void processReference(Reference<?> r) {
         // Check that the ref value can be set using the setter method and that the getter method returns the same value.
         final String myRef1 = createReference(r, "myRef1");
         r.setRef(myRef1);
-        Assert.assertEquals("The return value of getRef() is expected to be equal to the value that was set.", myRef1, r.getRef());
+        assertEquals(r.getRef(), myRef1, "The return value of getRef() is expected to be equal to the value that was set.");
         // Check that the short name ref value can be set using the setter method and that the getter method returns the expanded value.
         if (!(r instanceof PathItem)) {
             final String shortName = "myRef2";
             final String myRef2 = createReference(r, shortName);
             r.setRef(shortName);
-            Assert.assertEquals("The return value of getRef() is expected to be a fully expanded name.", myRef2, r.getRef());
+            assertEquals(r.getRef(), myRef2, "The return value of getRef() is expected to be a fully expanded name.");
         }
         // Check that the ref value can be set using the builder method and that the getter method returns the same value.
         final String myRef3 = createReference(r, "myRef3");
         final Reference<?> self = r.ref(myRef3);
-        Assert.assertSame("The return value of ref() is expected to return the current instance.", r, self);
-        Assert.assertEquals("The return value of getRef() is expected to be equal to the value that was set.", myRef3, r.getRef());
+        assertSame(self, r, "The return value of ref() is expected to return the current instance.");
+        assertEquals(r.getRef(), myRef3, "The return value of getRef() is expected to be equal to the value that was set.");
         // Check that the short name ref value can be set using the builder method and that the getter method returns the expanded value.
         if (!(r instanceof PathItem)) {
             final String shortName = "myRef4";
             final String myRef4 = createReference(r, shortName);
             final Reference<?> self2 = r.ref(shortName);
-            Assert.assertSame("The return value of ref() is expected to return the current instance.", r, self2);
-            Assert.assertEquals("The return value of getRef() is expected to be a fully expanded name.", myRef4, r.getRef());
+            assertSame(self2, r, "The return value of ref() is expected to return the current instance.");
+            assertEquals(r.getRef(), myRef4, "The return value of getRef() is expected to be a fully expanded name.");
         }
     }
     
@@ -650,30 +654,30 @@ public class ModelConstructionTest {
         final Object value1 = getInstanceOf(p.getType(), false);
         p.invokeSetter(o, value1);
         if (!p.isPrimitive()) {
-            Assert.assertSame("The return value of the getter method for property \"" + 
+            assertSame(p.invokeGetter(o), value1, "The return value of the getter method for property \"" + 
                     p.getName() + "\" of interface \"" + enclosingInterface.getName() +
-                    "\" is expected to be the same as the value that was set.", value1, p.invokeGetter(o));
+                    "\" is expected to be the same as the value that was set.");
         }
         else {
-            Assert.assertEquals("The return value of the getter method for property \"" + 
+            assertEquals(p.invokeGetter(o), value1, "The return value of the getter method for property \"" + 
                     p.getName() + "\" of interface \"" + enclosingInterface.getName() +
-                    "\" is expected to be equal to the value that was set.", value1, p.invokeGetter(o));
+                    "\" is expected to be equal to the value that was set.");
         }
         if (p.hasBuilder()) {
             final Object value2 = getInstanceOf(p.getType(), true);
             final Object self = p.invokeBuilder(o, value2);
-            Assert.assertSame("The return value of the builder method for property \"" + 
+            assertSame(self, o, "The return value of the builder method for property \"" + 
                     p.getName() + "\" of interface \"" + enclosingInterface.getName() +
-                    "\" is expected to be the same as the value that was set.", o, self);
+                    "\" is expected to be the same as the value that was set.");
             if (!p.isPrimitive()) {
-                Assert.assertSame("The return value of the getter method for property \"" + 
+                assertSame(p.invokeGetter(o), value2, "The return value of the getter method for property \"" + 
                         p.getName() + "\" of interface \"" + enclosingInterface.getName() +
-                        "\" is expected to be the same as the value that was set.", value2, p.invokeGetter(o));
+                        "\" is expected to be the same as the value that was set.");
             }
             else {
-                Assert.assertEquals("The return value of the getter method for property \"" + 
+                assertEquals(p.invokeGetter(o), value2, "The return value of the getter method for property \"" + 
                         p.getName() + "\" of interface \"" + enclosingInterface.getName() +
-                        "\" is expected to be equal to the value that was set.", value2, p.invokeGetter(o));
+                        "\" is expected to be equal to the value that was set.");
             }
         }
     }
@@ -851,23 +855,21 @@ public class ModelConstructionTest {
         checkMapEntry(p.getExamples(), exampleKey, exampleValue);
         
         // Check value of read-only 'in' property.
-        Assert.assertEquals("The value of the 'in' property is expected to be '" + name + "'.",
-                expectedIn, p.getIn());
+        assertEquals(p.getIn(), expectedIn, "The value of the 'in' property is expected to be '" + name + "'.");
     }
     
     private <T> void checkMapEntry(Map<String,T> map, String key, T value) {
-        Assert.assertNotNull("The map must not be null.", map);
-        Assert.assertTrue("The map is expected to contain the key: " + key, map.containsKey(key));
-        Assert.assertSame("The value associated with the key: " + key + " is expected to be the same one that was added.",
-                value, map.get(key));
+        assertNotNull(map, "The map must not be null.");
+        assertTrue(map.containsKey(key), "The map is expected to contain the key: " + key);
+        assertSame(map.get(key), value, "The value associated with the key: " + key + " is expected to be the same one that was added.");
     }
     
     private <T> void checkListEntry(List<T> list, T value) {
-        Assert.assertNotNull("The list must not be null.", list);
-        Assert.assertTrue("The list is expected to contain the value: " + value, list.stream().anyMatch((v) -> v == value));
+        assertNotNull(list, "The list must not be null.");
+        assertTrue(list.stream().anyMatch((v) -> v == value), "The list is expected to contain the value: " + value);
     }
     
     private <T> void checkSameObject(T expected, T actual) {
-        Assert.assertSame("Expecting same object.", expected, actual);
+        assertSame(actual, expected ,"Expecting same object.");
     }
 }
