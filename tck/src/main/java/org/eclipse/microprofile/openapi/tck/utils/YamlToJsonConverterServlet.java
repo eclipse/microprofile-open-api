@@ -21,6 +21,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -49,26 +51,22 @@ public class YamlToJsonConverterServlet extends HttpServlet {
     private static final String DEFAULT_PROTOCOL = "http";
     private static final String DEFAULT_HOST = "localhost";
     private static final int DEFAULT_PORT = 9080;
-
     private static final String OPENAPI_PATH = "/openapi";
 
-    private String username;
-    private String password;
-    private String serverUrl;
+    public static final String TCK_HEADER_USERNAME = "x-tck-username";
+    public static final String TCK_HEADER_PASSWORD = "x-tck-password";
+    public static final String TCK_HEADER_SERVERURL = "x-tck-serverurl";
 
-    @Override
-    public void init() throws ServletException {
-        username = System.getProperty("test.user");
-        password = System.getProperty("test.pwd");
+    private Set<String> ignoredHeaders = new HashSet<>(Arrays.asList(TCK_HEADER_USERNAME, TCK_HEADER_PASSWORD, TCK_HEADER_SERVERURL));
 
-        serverUrl = System.getProperty("test.url");
-        if (serverUrl == null) {
-            serverUrl = DEFAULT_PROTOCOL + "://" + DEFAULT_HOST + ":" + DEFAULT_PORT;
-        }
-    }
+    private String username = null;
+    private String password = null;
+    private String serverUrl = DEFAULT_PROTOCOL + "://" + DEFAULT_HOST + ":" + DEFAULT_PORT;
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        extractProperties(request);
+
         BufferedReader rd = null;
         PrintWriter writer = null;
 
@@ -88,9 +86,11 @@ public class YamlToJsonConverterServlet extends HttpServlet {
             Enumeration<String> headerNames = request.getHeaderNames();
             while (headerNames.hasMoreElements()) {
                 String headerName = headerNames.nextElement();
-                Enumeration<String> headers = request.getHeaders(headerName);
-                while (headers.hasMoreElements()) {
-                    targetRequest.addHeader(headerName, headers.nextElement());
+                if (!ignoredHeaders.contains(headerName)) {
+                    Enumeration<String> headers = request.getHeaders(headerName);
+                    while (headers.hasMoreElements()) {
+                        targetRequest.addHeader(headerName, headers.nextElement());
+                    }
                 }
             }
 
@@ -129,5 +129,11 @@ public class YamlToJsonConverterServlet extends HttpServlet {
                 writer.close();
             }
         }
+    }
+
+    private void extractProperties(HttpServletRequest request) {
+        serverUrl = request.getHeader(TCK_HEADER_SERVERURL);
+        username = request.getHeader(TCK_HEADER_USERNAME);
+        password = request.getHeader(TCK_HEADER_PASSWORD);
     }
 }

@@ -57,7 +57,8 @@ import org.eclipse.microprofile.openapi.apps.airlines.resources.ReviewResource;
 @OpenAPIDefinition(
     tags = {
             @Tag(name="user", description="Operations about user"),
-            @Tag(name="create", description="Operations about create")
+            @Tag(name="create", description="Operations about create"),
+            @Tag(name = "Bookings", description = "All the bookings methods")
     },
     externalDocs = @ExternalDocumentation(
         description = "instructions for how to deploy this app",

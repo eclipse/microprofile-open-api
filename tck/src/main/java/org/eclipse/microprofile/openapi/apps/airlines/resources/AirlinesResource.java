@@ -83,19 +83,6 @@ public class AirlinesResource {
     }
     
     @GET
-    @Tags(
-        value = {
-            @Tag(
-                name = "Get Airlines",
-                description = "method to get all airlines"
-            ),
-            @Tag(
-                name = "Retrieve Airlines",
-                description = "method to retrieve all airlines"
-            )
-        }
-    )
-    @Tag(ref="airlines")
     @APIResponse(
             ref = "FoundAirlines"
         )

@@ -17,6 +17,9 @@
 // limitations under the License.
 //
 
+:authors: Arthur De Magalhaes (Spec Lead), Leo Christy Jesuraj, Eric Wittmann
+:email: ademagalhaes@gmail.com, leo.jesuraj@gmail.com, eric.wittmann@gmail.com
+:version-label!:
 :sectanchors:
 :doctype: book
 :license: Apache License v2.0
@@ -24,8 +27,14 @@
 :sectnums:
 :toc: left
 :toclevels: 4
+ifdef::backend-pdf[]
+:pagenums:
+endif::[]
 
 = MicroProfile OpenAPI Specification
+
+include::license-alv2.asciidoc[]
+
 
 == Introduction
 Exposing APIs has become an essential part of all modern applications.  At the
@@ -64,7 +73,7 @@ There are various ways to inject these configuration values into an MP OpenAPI
 framework, including the https://github.com/eclipse/microprofile-config/blob/master/spec/src/main/asciidoc/configsources.asciidoc#default-configources[default ConfigSource] as well as
 https://github.com/eclipse/microprofile-config/blob/master/spec/src/main/asciidoc/configsources.asciidoc#custom-configsources[custom ConfigSource].
 
-Vendors implementing the MP OpenAPI specification can also provide additional native
+Vendors implementing the MP OpenAPI specification can optionally provide additional native
 ways for these configuration values to be injected into the framework
 (e.g. via a server configuration file), as long as they also implement the MP Config
 specification.
@@ -187,8 +196,8 @@ The following annotations are found in the https://github.com/eclipse/microprofi
 | https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/parameters/Parameter.java[@Parameter] | Describes a single operation parameter.
 | https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/parameters/Parameters.java[@Parameters] | Encapsulates input parameters.
 | https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/parameters/RequestBody.java[@RequestBody] | Describes a single request body.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/response/APIResponse.java[@APIResponse] | Describes a single response from an API operation.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/response/APIResponses.java[@APIResponses] | A container for multiple responses from an API operation.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/responses/APIResponse.java[@APIResponse] | Describes a single response from an API operation.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/responses/APIResponses.java[@APIResponses] | A container for multiple responses from an API operation.
 | https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/OAuthFlow.java[@OAuthFlow] | Configuration details for a supported OAuth Flow.
 | https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/OAuthFlows.java[@OAuthFlows] | Allows configuration of the supported OAuth Flows.
 | https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/OAuthScope.java[@OAuthScope] | Represents an OAuth scope.
@@ -203,6 +212,24 @@ The following annotations are found in the https://github.com/eclipse/microprofi
 | https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/tags/Tag.java[@Tag] | Represents a tag for the API endpoint.
 | https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/tags/Tags.java[@Tags] | A container of multiple tags.
 |===
+
+===== Overrides
+
+When the same annotation is used on a class and a method, the values from the
+method instance will take precedence for that particular method.  This commonly
+occurs with the `@Server` and `@Tag` annotations.
+
+In other cases, such as with `@Parameter` and `@RequestBody`, the annotation values
+from the method's parameters takes precedence over corresponding annotation values
+from the method itself - in this scenario the combined usage of these annotations is
+allowed but discouraged, as it is error prone.
+
+The `@Schema` annotation has a complex set of possible combinations.  It can placed
+on POJOs (and their fields / methods) and referenced from many other annotations.
+In the event that a `@Schema#implementation` value points to a POJO that also contains
+a `@Schema` annotation, the values are merged but with precedence given to
+the referrer annotation (i.e. the one that contains the `implementation` key).
+This allows POJO models to be reusable and configurable.
 
 ==== Detailed usage of key annotations
 
@@ -497,7 +524,7 @@ public Response createBooking(
 post:
   operationId: createBooking
   requestBody:
-    description: Create a new booking with the provided information.
+    description: Create a new booking.
     content:
       application/json:
         schema:
@@ -521,11 +548,11 @@ with annotations, programming model, or via the filter.
 ==== Location and formats
 
 Vendors are required to fetch a single document named `openapi` with an extension
-of `yml`, `yaml` or `json`, inside the application's `META-INF` folder.  If there
-is more than one document found that matches one of these extensions the behavior
-of which file is chosen is undefined (i.e. each vendor may implement their own logic),
-which means that application developers should only place a single `openapi` document
-into that folder.
+of `yml`, `yaml` or `json`, inside the application module's (i.e. WAR artifact)
+`META-INF` folder.  If there is more than one document found that matches one of
+these extensions the behavior of which file is chosen is undefined (i.e. each vendor
+may implement their own logic), which means that application developers should
+only place a single `openapi` document into that folder.
 
 === Programming model
 
@@ -654,7 +681,7 @@ suggested but optional query parameter for vendors to support is `format`,
 where the value can be either `json` or `yaml`, to facilitate the toggle between
 the default `yaml` format and `json` format.
 
-=== Context root behaviour
+=== Context root behavior
 Vendors are required to ensure that the combination of each global https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#serverObject[server]
 element and https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#pathItemObject[pathItem] element resolve to the absolute backend URL of that
 particular path.  If that `pathItem` contains a `servers` element , then this
@@ -673,7 +700,7 @@ The 1.0 version of the MicroProfile OpenAPI specification does not define how
 the `/openapi` endpoint may be partitioned in the event that the MicroProfile
 runtime supports deployment of multiple applications. If an implementation wishes
 to support multiple applications within a MicroProfile runtime, the semantics of
-the `/openapi` endpoint are expected to be the logical AND of all the applications
+the `/openapi` endpoint are expected to be the logical union of all the applications
 in the runtime, which would imply merging multiple OpenAPI documents into a single
 valid document (handling conflicting IDs and unique names).
 
@@ -700,3 +727,5 @@ ignore, reject, or pass-through invalid inputs).
 
 The MP OpenAPI 1.0 specification does not require vendors to support https://www.w3.org/TR/cors/[CORS]
 for the `/openapi` endpoint.  The behavior of CORS requests is implementation dependent.
+
+include::release_notes.asciidoc[]
