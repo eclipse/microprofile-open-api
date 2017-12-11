@@ -22,15 +22,13 @@ import org.eclipse.microprofile.openapi.OASFactory;
 import org.eclipse.microprofile.openapi.models.Constructible;
 import org.eclipse.microprofile.openapi.models.info.License;
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.testng.annotations.Test;
 
-@RunWith(Arquillian.class)
-public class OASFactoryErrorTest {
-    
+public class OASFactoryErrorTest extends Arquillian {
+
     public interface MyConstructible extends Constructible {}
     public interface MyLicense extends License {}
     public abstract class MyAbstractLicenseImpl implements License {}
@@ -64,44 +62,43 @@ public class OASFactoryErrorTest {
             return null;
         }
     }
-    
+
     @Deployment
-    public static WebArchive createProxy() {
-        WebArchive war = ShrinkWrap.create(WebArchive.class);
-        return war;
+    public static WebArchive createDeployment() {
+        return ShrinkWrap.create(WebArchive.class);
     }
-    
-    @Test(expected = NullPointerException.class)
+
+    @Test(expectedExceptions = { NullPointerException.class })
     public void nullValueTest() {
         @SuppressWarnings("unused")
         final Object o = OASFactory.createObject(null);
     }
-    
-    @Test(expected = IllegalArgumentException.class)
+
+    @Test(expectedExceptions = { IllegalArgumentException.class })
     public void baseInterfaceTest() {
         @SuppressWarnings("unused")
         final Constructible c = OASFactory.createObject(Constructible.class);
     }
-    
-    @Test(expected = IllegalArgumentException.class)
+
+    @Test(expectedExceptions = { IllegalArgumentException.class })
     public void extendedBaseInterfaceTest() {
         @SuppressWarnings("unused")
         final MyConstructible m = OASFactory.createObject(MyConstructible.class);
     }
-    
-    @Test(expected = IllegalArgumentException.class)
+
+    @Test(expectedExceptions = { IllegalArgumentException.class })
     public void extendedInterfaceTest() {
         @SuppressWarnings("unused")
         final MyLicense m = OASFactory.createObject(MyLicense.class);
     }
-    
-    @Test(expected = IllegalArgumentException.class)
+
+    @Test(expectedExceptions = { IllegalArgumentException.class })
     public void customAbstractClassTest() {
         @SuppressWarnings("unused")
         final MyAbstractLicenseImpl m = OASFactory.createObject(MyAbstractLicenseImpl.class);
     }
-    
-    @Test(expected = IllegalArgumentException.class)
+
+    @Test(expectedExceptions = { IllegalArgumentException.class })
     public void customClassTest() {
         @SuppressWarnings("unused")
         final MyLicenseImpl m = OASFactory.createObject(MyLicenseImpl.class);
