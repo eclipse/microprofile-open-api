@@ -18,7 +18,7 @@
 //
 
 :authors: Arthur De Magalhaes (Spec Lead), Leo Christy Jesuraj, Eric Wittmann
-:email: ademagalhaes@gmail.com, leo.jesuraj@gmail.com, eric.wittmann@redhat.com
+:email: ademagalhaes@gmail.com, leo.jesuraj@gmail.com, eric.wittmann@gmail.com
 :version-label!:
 :sectanchors:
 :doctype: book
@@ -229,7 +229,7 @@ on POJOs (and their fields / methods) and referenced from many other annotations
 In the event that a `@Schema#implementation` value points to a POJO that also contains
 a `@Schema` annotation, the values are merged but with precedence given to
 the referrer annotation (i.e. the one that contains the `implementation` key).
-This allows POJO models to be reusable and configurable.    
+This allows POJO models to be reusable and configurable.
 
 ==== Detailed usage of key annotations
 
