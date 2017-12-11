@@ -669,8 +669,7 @@ support the `https` protocol as well, to enable a secure connection to the OpenA
 endpoint.
 
 === Content format
-The default format of the `/openapi` endpoint is `YAML`, which should result in
-a response with a `Content-Type` header with a value of `application/yaml`.
+The default format of the `/openapi` endpoint is `YAML`.
 
 Vendors must also support the `JSON` format if the request contains an `Accept`
 header with a value of `application/json`, in which case the response must contain
