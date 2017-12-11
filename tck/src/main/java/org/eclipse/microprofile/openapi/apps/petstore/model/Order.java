@@ -16,10 +16,14 @@ package org.eclipse.microprofile.openapi.apps.petstore.model;
 import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+
 import javax.xml.bind.annotation.XmlElement;
 
 @XmlRootElement(name = "Order")
 public class Order {
+    @Schema(required = true) // discriminator
     private long id;
     private long petId;
     private int quantity;
