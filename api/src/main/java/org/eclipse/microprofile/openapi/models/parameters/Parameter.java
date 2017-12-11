@@ -19,6 +19,7 @@ package org.eclipse.microprofile.openapi.models.parameters;
 
 import java.util.Map;
 
+import org.eclipse.microprofile.openapi.models.Constructible;
 import org.eclipse.microprofile.openapi.models.Extensible;
 import org.eclipse.microprofile.openapi.models.Reference;
 import org.eclipse.microprofile.openapi.models.examples.Example;
@@ -48,7 +49,7 @@ import org.eclipse.microprofile.openapi.models.media.Schema;
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject">OpenAPI Specification Parameter
  *      Object</a>
  */
-public interface Parameter extends Extensible, Reference<Parameter> {
+public interface Parameter extends Constructible, Extensible, Reference<Parameter> {
 
     /**
      * The values allowed for the style field.
