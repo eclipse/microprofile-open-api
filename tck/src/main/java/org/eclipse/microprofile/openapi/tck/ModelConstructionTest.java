@@ -158,13 +158,12 @@ public class ModelConstructionTest extends Arquillian {
             return getter != null && setter != null;
         }
     }
-    
+
     @Deployment
-    public static WebArchive createProxy() {
-        WebArchive war = ShrinkWrap.create(WebArchive.class);
-        return war;
+    public static WebArchive createDeployment() {
+        return ShrinkWrap.create(WebArchive.class);
     }
-    
+
     @Test
     public void componentsTest() {
         final Components c = processConstructible(Components.class);

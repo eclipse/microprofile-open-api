@@ -16,7 +16,6 @@
 
 package org.eclipse.microprofile.openapi.tck;
 
-import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.both;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsInAnyOrder;
@@ -28,118 +27,26 @@ import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
 
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
-import org.eclipse.microprofile.openapi.tck.utils.YamlToJsonConverterServlet;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
-import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import io.restassured.RestAssured;
-import io.restassured.parsing.Parser;
 import io.restassured.response.ValidatableResponse;
 
-public class EndpointTest extends Arquillian {
-    private static final String APPLICATION_JSON = "application/json";
-
-    private static final String DEFAULT_PROTOCOL = "http";
-    private static final String DEFAULT_HOST = "localhost";
-    private static final int DEFAULT_PORT = 9080;
-
-    private static String serverUrl;
-    private static String username;
-    private static String password;
-    private static Map<String, String> headers = new HashMap<>();
-
-    @BeforeClass
-    public static void setUp() throws MalformedURLException {
-        // set base URI and port number to use for all requests
-        serverUrl = System.getProperty("test.url");
-        String protocol = DEFAULT_PROTOCOL;
-        String host = DEFAULT_HOST;
-        int port = DEFAULT_PORT;
-
-        if (serverUrl != null) {
-            URL url = new URL(serverUrl);
-            protocol = url.getProtocol();
-            host = url.getHost();
-            port = (url.getPort() == -1) ? DEFAULT_PORT : url.getPort();
-        }
-
-        RestAssured.baseURI = protocol + "://" + host;
-        RestAssured.port = port;
-
-        username = System.getProperty("test.user");
-        password = System.getProperty("test.pwd");
-
-        if (username != null && password != null) {
-            RestAssured.authentication = RestAssured.basic(username, password);
-            RestAssured.useRelaxedHTTPSValidation();
-        }
-        RestAssured.defaultParser = Parser.JSON;
-
-        if (StringUtils.isBlank(serverUrl)) {
-            serverUrl = DEFAULT_PROTOCOL + "://" + DEFAULT_HOST + ":" + DEFAULT_PORT;
-        }
-        headers.put(YamlToJsonConverterServlet.TCK_HEADER_SERVERURL, serverUrl);
-        if (StringUtils.isNotBlank(username)) {
-            headers.put(YamlToJsonConverterServlet.TCK_HEADER_USERNAME, username);
-        }
-        if (StringUtils.isNotBlank(password)) {
-            headers.put(YamlToJsonConverterServlet.TCK_HEADER_PASSWORD, password);
-        }
-    }
-
-    @Deployment(name = "proxy")
-    public static WebArchive createProxy() {
-        return ShrinkWrap.create(WebArchive.class, "proxy.war")
-                .addClass(YamlToJsonConverterServlet.class)
-                .addAsLibraries(new File("./lib/httpclient-4.5.2.jar"))
-                .addAsLibraries(new File("./lib/httpcore-4.4.4.jar"))
-                .addAsLibraries(new File("./lib/jackson-core-2.9.2.jar"))
-                .addAsLibraries(new File("./lib/jackson-dataformat-yaml-2.9.2.jar"))
-                .addAsLibraries(new File("./lib/jackson-databind-2.9.2.jar"))
-                .addAsLibraries(new File("./lib/jackson-annotations-2.9.1.jar"))
-                .addAsLibraries(new File("./lib/snakeyaml-1.18.jar"))
-                .addAsLibraries(new File("./lib/commons-logging-1.2.jar"))
-                .addAsLibraries(new File("./lib/commons-lang3-3.4.jar"));
-    }
-
+public class AirlinesAppTest extends AppTestBase {
     @Deployment(name = "airlines")
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "airlines.war")
                 .addPackages(true, "org.eclipse.microprofile.openapi.apps.airlines")
                 .addAsManifestResource("openapi.yaml", "openapi/openapi.yaml");
-    }
-
-    private ValidatableResponse callEndpoint(String type) {
-        ValidatableResponse vr;
-        if ("JSON".equals(type)) {
-            vr = given().accept(APPLICATION_JSON).when().get("/openapi").then().statusCode(200);
-        }
-        else {
-            vr = given().headers(headers).when().get("/proxy").then().statusCode(200);
-        }
-        return vr;
-    }
-
-    @DataProvider(name = "formatProvider")
-    public Object[][] provide() throws Exception {
-        return new Object[][] { { "JSON" }, { "YAML" } };
     }
 
     @RunAsClient
@@ -220,7 +127,7 @@ public class EndpointTest extends Arquillian {
         url = "http://gigantic-server.com:80";
         serverPath = "paths.'/reviews/{id}'.delete.servers.find { it.url == '" + url + "' }";
         vr.body(serverPath + ".description", equalTo("Unsecure server"));
-        vr.body(serverPath + ".variables", not(hasSize(greaterThan(0)))); 
+        vr.body(serverPath + ".variables", not(hasSize(greaterThan(0))));
 
         url = "{protocol}://test-server.com";
         serverPath = "paths.'/reviews/{id}'.delete.servers.find { it.url == '" + url + "' }";
@@ -247,11 +154,11 @@ public class EndpointTest extends Arquillian {
         // org.eclipse.microprofile.openapi.apps.airlines.resources.BookingResource
         vr.body("paths.'/bookings'.get.servers", hasSize(2));
         vr.body("paths.'/bookings'.get.servers.url", hasSize(2));
-        
+
         url = "http://gigantic-server.com:80";
         serverPath = "paths.'/bookings'.get.servers.find { it.url == '" + url + "' }";
         vr.body(serverPath + ".description", equalTo("Unsecure server"));
-        vr.body(serverPath + ".variables", not(hasSize(greaterThan(0)))); 
+        vr.body(serverPath + ".variables", not(hasSize(greaterThan(0))));
 
         url = "https://gigantic-server.com:443";
         serverPath = "paths.'/bookings'.get.servers.find { it.url == '" + url + "' }";
@@ -355,6 +262,43 @@ public class EndpointTest extends Arquillian {
 
         vr.body("paths.'/user/logout'.get.summary", equalTo("Logs out current logged in user session"));
         vr.body("paths.'/user/logout'.get.operationId", equalTo("logOutUser"));
+    }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testAPIResponse(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+        // @APIResponse at method level
+        vr.body("paths.'/availability'.get.responses", aMapWithSize(2));
+        vr.body("paths.'/availability'.get.responses.'200'.description", equalTo("successful operation"));
+        vr.body("paths.'/availability'.get.responses.'404'.description", equalTo("No available flights found"));
+
+        vr.body("paths.'/bookings'.post.responses", aMapWithSize(1));
+        vr.body("paths.'/bookings'.post.responses.'201'.description", equalTo("Booking created"));
+
+        vr.body("paths.'/user/{username}'.delete.responses", aMapWithSize(3));
+        vr.body("paths.'/user/{username}'.delete.responses.'200'.description", equalTo("User deleted successfully"));
+        vr.body("paths.'/user/{username}'.delete.responses.'400'.description", equalTo("Invalid username supplied"));
+        vr.body("paths.'/user/{username}'.delete.responses.'404'.description", equalTo("User not found"));
+    }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testAPIResponses(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+        // @APIResponse annotations nested within @APIResponses
+        vr.body("paths.'/bookings/{id}'.get.responses", aMapWithSize(2));
+        vr.body("paths.'/bookings/{id}'.get.responses.'200'.description", equalTo("Booking retrieved"));
+        vr.body("paths.'/bookings/{id}'.get.responses.'404'.description", equalTo("Booking not found"));
+
+        vr.body("paths.'/reviews/{user}'.get.responses", aMapWithSize(2));
+        vr.body("paths.'/reviews/{user}'.get.responses.'200'.description", equalTo("Review(s) retrieved"));
+        vr.body("paths.'/reviews/{user}'.get.responses.'404'.description", equalTo("Review(s) not found"));
+
+        vr.body("paths.'/user/{username}'.put.responses", aMapWithSize(3));
+        vr.body("paths.'/user/{username}'.put.responses.'200'.description", equalTo("User updated successfully"));
+        vr.body("paths.'/user/{username}'.put.responses.'400'.description", equalTo("Invalid user supplied"));
+        vr.body("paths.'/user/{username}'.put.responses.'404'.description", equalTo("User not found"));
     }
 
     @RunAsClient
@@ -470,52 +414,54 @@ public class EndpointTest extends Arquillian {
 
     @RunAsClient
     @Test(dataProvider = "formatProvider")
-    public void testSecuritySchemesInComponents(String type) {
+    public void testCallbackOperationAnnotations(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        String s = "components.securitySchemes";
-        vr.body(s, hasKey("httpTestScheme"));
-        vr.body(s, hasKey("airlinesRatingApp_auth"));
-        vr.body(s, hasKey("reviewoauth2"));
 
-        vr.body(s + ".httpTestScheme.type", equalTo("http"));
-        vr.body(s + ".httpTestScheme.description", equalTo("user security scheme"));
-        vr.body(s + ".httpTestScheme.scheme", equalTo("testScheme"));
+        // TODO: cover /streams endpoint
+        String endpoint = "paths.'/bookings'.post.callbacks.'get all the bookings'.'http://localhost:9080/airlines/bookings'";
+        vr.body(endpoint, hasKey("get"));
+        vr.body(endpoint + ".get.summary", hasKey("Retrieve all bookings for current user"));
+        vr.body(endpoint + ".get.responses.'200'.description", equalTo("Bookings retrieved"));
+        vr.body(endpoint + "get.responses.'200'.content.'application/json'.type", equalTo("array"));
 
-        vr.body(s + ".airlinesRatingApp_auth.type", equalTo("apiKey"));
-        vr.body(s + ".airlinesRatingApp_auth.description", equalTo("authentication needed to access Airlines app"));
-        vr.body(s + ".airlinesRatingApp_auth.name", equalTo("api_key"));
-        vr.body(s + ".airlinesRatingApp_auth.in", equalTo("header"));
+        endpoint = "paths.'/reviews'.post.callbacks.testCallback.'http://localhost:9080/oas3-airlines/reviews'";
+        vr.body(endpoint, hasKey("get"));
 
-        vr.body(s + ".reviewoauth2.type", equalTo("oauth2"));
-        vr.body(s + ".reviewoauth2.description", equalTo("authentication needed to create and delete reviews"));
-
-        String t = "components.securitySchemes.reviewoauth2.flows";
-        vr.body(t + ".implicit.authorizationUrl", equalTo("https://example.com/api/oauth/dialog"));
-        vr.body(t + ".implicit.scopes.'write:reviews'", equalTo("create a review"));
-        vr.body(t + ".authorizationCode.authorizationUrl", equalTo("https://example.com/api/oauth/dialog"));
-        vr.body(t + ".authorizationCode.tokenUrl", equalTo("https://example.com/api/oauth/token"));
-        vr.body(t + ".password.refreshUrl", equalTo("https://example.com/api/oauth/refresh"));
-        vr.body(t + ".clientCredentials.authorizationUrl", equalTo("https://example.com/api/oauth/clientcredentials"));
-        vr.body(t + ".clientCredentials.scopes.'read:reviews'", equalTo("search for a review"));
+        vr.body(endpoint + ".get.summary", equalTo("Get all reviews"));
+        vr.body(endpoint + ".get.operationId", equalTo("getAllReviews_1"));
+        vr.body(endpoint + "responses.'200'.description", equalTo("successful operation"));
+        vr.body(endpoint + "responses.'200'.content.'application/json'.schema.ref", equalTo("#/components/schemas/Review"));
     }
 
     @RunAsClient
     @Test(dataProvider = "formatProvider")
-    public void testOAuthAnnotations(String type) {
+    public void testRequestBodyAnnotations(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        String endpoint = "components.securitySchemes.reviewoauth2.flows.";
+        String endpoint = "paths.'/bookings'.post.requestBody";
+        vr.body(endpoint + ".description", equalTo("Create a new booking with the provided information."));
+        vr.body(endpoint + ".content", notNullValue());
 
-        vr.body(endpoint + "implicit.authorizationUrl", equalTo("https://example.com/api/oauth/dialog"));
-        vr.body(endpoint + "implicit.scopes.'write:reviews'", equalTo("create a review"));
+        endpoint = "paths.'/bookings/{id}'.put.requestBody";
+        vr.body(endpoint + ".content", notNullValue());
 
-        vr.body(endpoint + "authorizationCode.authorizationUrl", equalTo("https://example.com/api/oauth/dialog"));
-        vr.body(endpoint + "authorizationCode.tokenUrl", equalTo("https://example.com/api/oauth/token"));
+        endpoint = "paths.'/user'.post.requestBody";
+        vr.body(endpoint + ".description", equalTo("Record of a new user to be created in the system."));
+        vr.body(endpoint + ".content", notNullValue());
+        vr.body(endpoint + ".required", equalTo(true));
 
-        vr.body(endpoint + "password.tokenUrl", equalTo("https://example.com/api/oauth/token"));
-        vr.body(endpoint + "password.refreshUrl", equalTo("https://example.com/api/oauth/refresh"));
+        endpoint = "paths.'/user/{username}'.put.requestBody";
+        vr.body(endpoint + ".description", equalTo("Record of a new user to be created in the system."));
+        vr.body(endpoint + ".content", notNullValue());
 
-        vr.body(endpoint + "clientCredentials.tokenUrl", equalTo("https://example.com/api/oauth/token"));
-        vr.body(endpoint + "clientCredentials.scopes.'read:reviews'", equalTo("search for a review"));
+        endpoint = "paths.'/user/createWithArray'.post.requestBody";
+        vr.body(endpoint + ".description", equalTo("Array of user object"));
+        vr.body(endpoint + ".content", notNullValue());
+        vr.body(endpoint + ".required", equalTo(true));
+
+        endpoint = "paths.'/user/createWithList'.post.requestBody";
+        vr.body(endpoint + ".description", equalTo("List of user object"));
+        vr.body(endpoint + ".content", notNullValue());
+        vr.body(endpoint + ".required", equalTo(true));
     }
 
     @RunAsClient
@@ -737,5 +683,202 @@ public class EndpointTest extends Arquillian {
 
         // Example in Parameter
         vr.body("paths.'/reviews/{user}'.parameters.find{ it.name=='user'}.examples.value", hasItems("bsmith", "pat@example.com"));
+    }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testTagDeclarations(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+        String tagsPath = "tags.find { it.name == '";
+        String desc = "' }.description";
+        vr.body(tagsPath + "user" + desc, equalTo("Operations about user"));
+        vr.body(tagsPath + "create" + desc, equalTo("Operations about create"));
+        vr.body(tagsPath + "Airlines" + desc, equalTo("All the airlines methods"));
+        vr.body(tagsPath + "Availability" + desc, equalTo("All the availability methods"));
+        vr.body(tagsPath + "Get Flights" + desc, equalTo("method to retrieve all flights available"));
+        vr.body(tagsPath + "Get Flights" + "' }.externalDocs.description", equalTo("A list of all the flights offered by the app"));
+        vr.body(tagsPath + "Get Flights" + "' }.externalDocs.url", equalTo("http://airlinesratingapp.com/ourflights"));
+        vr.body(tagsPath + "Bookings" + desc, equalTo("All the bookings methods"));
+        vr.body(tagsPath + "Reservations" + desc, equalTo("All the reservation methods"));
+        vr.body(tagsPath + "Reviews" + desc, equalTo("All the review methods"));
+        vr.body(tagsPath + "Ratings" + desc, equalTo("All the ratings methods"));
+    }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testTagsInOperations(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+        vr.body("paths.'/availability'.get.tags", containsInAnyOrder("Get Flights", "Availability"));
+        vr.body("paths.'/bookings'.get.tags", containsInAnyOrder("bookings"));
+        vr.body("paths.'/bookings'.post.tags", containsInAnyOrder("Bookings", "Reservations"));
+        vr.body("paths.'/bookings/{id}'.get.tags", containsInAnyOrder("Bookings", "Reservations"));
+        vr.body("paths.'/bookings/{id}'.put.tags", containsInAnyOrder("Bookings", "Reservations"));
+        // no tag - class Tag was overwritten with empty Tag
+        vr.body("paths.'/bookings/{id}'.delete.tags", not(hasSize(greaterThan(0))));
+        vr.body("paths.'/reviews'.get.tags", containsInAnyOrder("Reviews", "Ratings"));
+        vr.body("paths.'/reviews'.post.tags", containsInAnyOrder("Reviews"));
+        vr.body("paths.'/reviews/{id}'.get.tags", containsInAnyOrder("Reviews", "Ratings"));
+        vr.body("paths.'/reviews/{id}'.delete.tags", containsInAnyOrder("Reviews", "Ratings"));
+        vr.body("paths.'/reviews/{user}'.get.tags", containsInAnyOrder("Reviews", "Ratings"));
+        vr.body("paths.'/reviews/{airline}'.get.tags", containsInAnyOrder("Reviews", "Ratings"));
+        vr.body("paths.'/reviews/{user}/{airlines}'.get.tags", containsInAnyOrder("Reviews", "Ratings"));
+        vr.body("paths.'/user'.post.tags", containsInAnyOrder("user", "create"));
+        vr.body("paths.'/user/createWithArray'.post.tags", containsInAnyOrder("user", "create"));
+        vr.body("paths.'/user/createWithList'.post.tags", containsInAnyOrder("user", "create"));
+        vr.body("paths.'/user/{username}'.get.tags", containsInAnyOrder("user"));
+        vr.body("paths.'/user/{username}'.put.tags", containsInAnyOrder("user"));
+        vr.body("paths.'/user/{username}'.delete.tags", containsInAnyOrder("user"));
+        vr.body("paths.'/user/{id}'.get.tags", containsInAnyOrder("user"));
+        // empty tag was defined
+        vr.body("paths.'/user/login'.get.tags", not(hasSize(greaterThan(0))));
+        // no tag was defined
+        vr.body("paths.'/user/logout'.get.tags", not(hasSize(greaterThan(0))));
+        vr.body("paths.'/'.get.tags", containsInAnyOrder("Airlines"));
+    }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testComponents(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+
+        // Tests to ensure that the reusable items declared using the
+        // @Components annotation (within @OpenAPIDefinition) exist.
+        // Each of these item types are tested elsewhere, so no need to test the
+        // content of them here.
+        vr.body("components.schemas.Bookings", notNullValue());
+        vr.body("components.schemas.Airlines", notNullValue());
+        vr.body("components.schemas.AirlinesRef", notNullValue());
+        vr.body("components.responses.FoundAirlines", notNullValue());
+        vr.body("components.responses.FoundBookings", notNullValue());
+        vr.body("components.parameters.departureDate", notNullValue());
+        vr.body("components.parameters.username", notNullValue());
+        vr.body("components.examples.review", notNullValue());
+        vr.body("components.examples.user", notNullValue());
+        vr.body("components.requestBodies.review", notNullValue());
+        vr.body("components.headers.Max-Rate", notNullValue());
+        vr.body("components.headers.Request-Limit", notNullValue());
+        vr.body("components.securitySchemes.httpTestScheme", notNullValue());
+        vr.body("components.links.UserName", notNullValue());
+        vr.body("components.callbacks.GetBookings", notNullValue());
+    }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testHeaderInAPIResponse(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+
+        // Headers within APIResponse
+        String responseHeader1 = "paths.'/reviews/{id}'.get.responses.'200'.headers.responseHeader1";
+        vr.body(responseHeader1, notNullValue());
+        vr.body(responseHeader1 + ".description", equalTo("Max rate"));
+        vr.body(responseHeader1 + ".required", equalTo(true));
+        vr.body(responseHeader1 + ".deprecated", equalTo(true));
+        vr.body(responseHeader1 + ".allowEmptyValue", equalTo(true));
+        vr.body(responseHeader1 + ".style", equalTo("simple"));
+        vr.body(responseHeader1 + ".schema.type", equalTo("integer"));
+
+        String responseHeader2 = "paths.'/reviews/{id}'.get.responses.'200'.headers.responseHeader2";
+        vr.body(responseHeader2, notNullValue());
+        vr.body(responseHeader2 + ".description", equalTo("Input value"));
+        vr.body(responseHeader2 + ".required", equalTo(true));
+        vr.body(responseHeader2 + ".deprecated", equalTo(true));
+        vr.body(responseHeader2 + ".allowEmptyValue", equalTo(true));
+        vr.body(responseHeader2 + ".style", equalTo("simple"));
+        vr.body(responseHeader2 + ".schema.type", equalTo("string"));
+    }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testHeaderInEncoding(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+
+        // Header within Encoding
+        String testHeader = "paths.'/user'.post.requestBody.content.'application/json'.encoding.email.headers.testHeader";
+        vr.body(testHeader, notNullValue());
+        vr.body(testHeader + ".description", equalTo("Minimum rate"));
+        vr.body(testHeader + ".required", equalTo(true));
+        vr.body(testHeader + ".deprecated", equalTo(true));
+        vr.body(testHeader + ".allowEmptyValue", equalTo(true));
+        vr.body(testHeader + ".style", equalTo("simple"));
+        vr.body(testHeader + ".schema.type", equalTo("integer"));
+    }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testRefHeaderInAPIResponse(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+
+        // Reference to Header within APIResponse
+        String responseRefHeader = "paths.'/reviews'.get.responses.'200'.headers.Request-Limit";
+        vr.body(responseRefHeader, notNullValue());
+        vr.body(responseRefHeader + ".$ref", equalTo("#/components/headers/Request-Limit"));
+    }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testRefHeaderInEncoding(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+
+        // Reference to Header within Encoding
+        String encodingRefHeader = "paths.'/user/{username}'.put.responses.'200'.content.'application/json'.encoding.password.headers.Max-Rate";
+        vr.body(encodingRefHeader, notNullValue());
+        vr.body(encodingRefHeader + ".$ref", equalTo("#/components/headers/Max-Rate"));
+    }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testHeaderInComponents(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+        String maxRate = "components.headers.Max-Rate";
+        vr.body(maxRate + ".description", equalTo("Maximum rate"));
+        vr.body(maxRate + ".required", equalTo(true));
+        vr.body(maxRate + ".deprecated", equalTo(true));
+        vr.body(maxRate + ".allowEmptyValue", equalTo(true));
+        vr.body(maxRate + ".style", equalTo("simple"));
+        vr.body(maxRate + ".schema.type", equalTo("integer"));
+    }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testContentInAPIResponse(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+
+        String content1 = "paths.'/availability'.get.responses.'200'.content.'application/json'";
+        vr.body(content1, notNullValue());
+        vr.body(content1 + ".schema.type", equalTo("array"));
+        vr.body(content1 + ".schema.items.$ref", equalTo("#/components/schemas/Flight"));
+
+        String content2 = "paths.'/user/{username}'.put.responses.'200'.content";
+        vr.body(content2, notNullValue());
+        vr.body(content2 + ".'application/json'", notNullValue());
+        vr.body(content2 + ".'application/json'.schema.$ref", equalTo("#/components/schemas/User"));
+        vr.body(content2 + ".'application/json'.encoding.password", notNullValue());
+
+        vr.body(content2, notNullValue());
+        vr.body(content2 + ".'application/xml'", notNullValue());
+        vr.body(content2 + ".'application/xml'.schema.$ref", equalTo("#/components/schemas/User"));
+        vr.body(content2 + ".'application/xml'.encoding.password", notNullValue());
+    }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testContentInRequestBody(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+
+        String contentJson = "paths.'/bookings'.post.requestBody.content.'application/json'";
+        vr.body(contentJson, notNullValue());
+        vr.body(contentJson + ".schema.$ref", equalTo("#/components/schemas/Booking"));
+        vr.body(contentJson + ".examples.booking.summary", equalTo("External booking example"));
+    }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testContentInParameter(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+
+        String content = "paths.'/reviews/{user}'.get.parameters.find{ it.name == 'user' }.content";
+        vr.body(content, notNullValue());
+        vr.body(content + ".'*/*'", notNullValue());
+        vr.body(content + ".'*/*'.schema.type", equalTo("string"));
     }
 }
