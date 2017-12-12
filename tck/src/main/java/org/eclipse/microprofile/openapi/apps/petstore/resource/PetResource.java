@@ -355,7 +355,6 @@ public class PetResource {
             },
             allowEmptyValue = true)
         @Extension(name = "x-mp-parm1", value = "true")
-        @Extensions( { @Extension(name = "x-mp-parm2", value = "true"), @Extension(value = "false", name = "x-mp-parm3") } )
         String status) {
                 return Response.ok(petData.findPetByStatus(status)).build();
             }
