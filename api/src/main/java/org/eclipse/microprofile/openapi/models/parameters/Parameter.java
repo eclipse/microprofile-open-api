@@ -30,7 +30,8 @@ import org.eclipse.microprofile.openapi.models.media.Schema;
  * <p>
  * Describes a single operation parameter.
  * <p>
- * A unique parameter is defined by a combination of a name and location. There are four possible parameter locations specified by the <code>in</code> field:
+ * A unique parameter is defined by a combination of a name and location. 
+ * There are four possible parameter locations specified by the <code>in</code> field:
  * <ul>
  * <li>path - Used together with Path Templating, where the parameter value is actually part of the operation's URL. This does not include the host or
  * base path of the API. For example, in /items/{itemId}, the path parameter is itemId.</li>
