@@ -20,7 +20,9 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.collection.IsEmptyCollection.empty;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
@@ -119,5 +121,115 @@ public class PetStoreAppTest extends AppTestBase {
         vr.body("paths." + endpoint + ".extensions", hasSize(2));
         vr.body("paths." + endpoint + ".extensions" + ext1, equalTo(true));
         vr.body("paths." + endpoint + ".extensions" + ext2, equalTo(false));
+    }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testSecurityRequirement(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+
+        vr.body("paths.'/pet'.put.security.petsHttp[0][0]", equalTo(null));
+
+        vr.body("paths.'/pet'.post.security.petsApiKey[0][0]", equalTo(null));
+
+        vr.body("paths.'/pet/{petId}'.delete.security.petsOAuth2[0][0]", equalTo("write:pets"));
+
+        vr.body("paths.'/store/inventory'.get.security.storeOpenIdConnect[0]", hasSize(2));
+        vr.body("paths.'/store/inventory'.get.security.storeOpenIdConnect[0][0]", equalTo("write:store"));
+        vr.body("paths.'/store/inventory'.get.security.storeOpenIdConnect[0][1]", equalTo("read:store"));
+        vr.body("paths.'/store/inventory'.get.security.storeHttp[0]", equalTo(null));
+
+        vr.body("paths.'/store/order/{orderId}'.get.security.storeOpenIdConnect", hasSize(2));
+        vr.body("paths.'/store/order/{orderId}'.get.security.storeOpenIdConnect[0][0]", equalTo("write:store"));
+        vr.body("paths.'/store/order/{orderId}'.get.security.storeOpenIdConnect[0][1]", equalTo("read:store"));
+        vr.body("paths.'/store/order/{orderId}'.get.security.find { it.storeHttp != null }.storeHttp", empty());
+        
+        vr.body("paths.'/user'.post.security.find { it.userApiKey != null }.userApiKey", empty());
+        vr.body("paths.'/user'.post.security.find { it.userBasicHttp != null }.userBasicHttp", empty());
+        vr.body("paths.'/user'.post.security.find { it.userBearerHttp != null }.userBearerHttp", empty());
+    }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testSecuritySchemes(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+        String s = "components.securitySchemes";
+        vr.body(s, hasKey("petsOAuth2"));
+        vr.body(s, hasKey("userApiKey"));
+        vr.body(s, hasKey("userBearerHttp"));
+        vr.body(s, hasKey("petsApiKey"));
+        vr.body(s, hasKey("storeOpenIdConnect"));
+        vr.body(s, hasKey("userBasicHttp"));
+        vr.body(s, hasKey("storeHttp"));
+        vr.body(s, hasKey("petsHttp"));
+    }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testSecurityScheme(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+        String petsApiKey = "components.securitySchemes.petsApiKey.";
+        vr.body(petsApiKey + "type", equalTo("apiKey"));
+        vr.body(petsApiKey + "description", equalTo("authentication needed to create a new pet profile for the store"));
+        vr.body(petsApiKey + "name", equalTo("createPetProfile"));
+        vr.body(petsApiKey + "in", equalTo("header"));
+
+        String userApiKey = "components.securitySchemes.userApiKey.";
+        vr.body(userApiKey + "type", equalTo("apiKey"));
+        vr.body(userApiKey + "description", equalTo("authentication needed to create a new user profile for the store"));
+        vr.body(userApiKey + "name", equalTo("createOrUpdateUserProfile1"));
+        vr.body(userApiKey + "in", equalTo("header"));
+
+        String userBearerHttp = "components.securitySchemes.userBearerHttp.";
+        vr.body(userBearerHttp + "type", equalTo("http"));
+        vr.body(userBearerHttp + "description", equalTo("authentication needed to create a new user profile for the store"));
+        vr.body(userBearerHttp + "scheme", equalTo("bearer"));
+        vr.body(userBearerHttp + "bearerFormat", equalTo("JWT"));
+
+        String petsOAuth2 = "components.securitySchemes.petsOAuth2.";
+        vr.body(petsOAuth2 + "type", equalTo("oauth2"));
+        vr.body(petsOAuth2 + "description", equalTo("authentication needed to delete a pet profile"));
+
+        String userBasicHttp = "components.securitySchemes.userBasicHttp.";
+        vr.body(userBasicHttp + "type", equalTo("http"));
+        vr.body(userBasicHttp + "description", equalTo("authentication needed to create a new user profile for the store"));
+        vr.body(userBasicHttp + "scheme", equalTo("basic"));
+
+        String storeHttp = "components.securitySchemes.storeHttp.";
+        vr.body(storeHttp + "type", equalTo("http"));
+        vr.body(storeHttp + "description", equalTo("Basic http authentication to access the pet store resource"));
+        vr.body(storeHttp + "scheme", equalTo("basic"));
+
+        String petsHttp = "components.securitySchemes.petsHttp.";
+        vr.body(petsHttp + "type", equalTo("http"));
+        vr.body(petsHttp + "description", equalTo("authentication needed to update an exsiting record of a pet in the store"));
+        vr.body(petsHttp + "scheme", equalTo("bearer"));
+        vr.body(petsHttp + "bearerFormat", equalTo("jwt"));
+
+        String storeOpenIdConnect = "components.securitySchemes.storeOpenIdConnect.";
+        vr.body(storeOpenIdConnect + "type", equalTo("openIdConnect"));
+        vr.body(storeOpenIdConnect + "description", equalTo("openId Connect authentication to access the pet store resource"));
+        vr.body(storeOpenIdConnect + "openIdConnectUrl", equalTo("https://petstoreauth.com:4433/oidc/petstore/oidcprovider/authorize"));
+    }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testOAuthFlows(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+        String t = "components.securitySchemes.petsOAuth2.flows";
+        vr.body(t, hasKey("implicit"));
+        vr.body(t, hasKey("authorizationCode"));
+    }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testOAuthFlow(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+        String implicit = "components.securitySchemes.petsOAuth2.flows.implicit.";
+        vr.body(implicit + "authorizationUrl", equalTo("https://example.com/api/oauth/dialog"));
+
+        String authCode = "components.securitySchemes.petsOAuth2.flows.authorizationCode.";
+        vr.body(authCode + "authorizationUrl", equalTo("https://example.com/api/oauth/dialog"));
+        vr.body(authCode + "tokenUrl", equalTo("https://example.com/api/oauth/token"));
     }
 }

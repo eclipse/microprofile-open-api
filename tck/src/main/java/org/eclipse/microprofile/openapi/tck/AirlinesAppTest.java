@@ -29,6 +29,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
+import static org.hamcrest.collection.IsEmptyCollection.empty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +47,7 @@ public class AirlinesAppTest extends AppTestBase {
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "airlines.war")
                 .addPackages(true, "org.eclipse.microprofile.openapi.apps.airlines")
-                .addAsManifestResource("openapi.yaml", "openapi/openapi.yaml");
+                .addAsManifestResource("openapi.yaml", "openapi.yaml");
     }
 
     @RunAsClient
@@ -478,32 +479,9 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/reviews'.post.security.bookingSecurityScheme", hasSize(1));
         vr.body("paths.'/bookings'.post.security.bookingSecurityScheme[0]", hasSize(2));
 
-        vr.body("paths.'/user'.post.security.httpTestScheme[0][0]", equalTo("write:users"));
-        vr.body("paths.'/user'.post.security.httpTestScheme", hasSize(1));
+        vr.body("paths.'/user'.post.security.httpSchemeForTest[0][0]", equalTo(null));
 
-        vr.body("paths.'/user/createWithArray'.post.security.httpTestScheme[0][0]", equalTo("write:users"));
-        vr.body("paths.'/user/createWithArray'.post.security.httpTestScheme", hasSize(1));
-
-        vr.body("paths.'/user/createWithList'.post.security.httpTestScheme[0][0]", equalTo("write:users"));
-        vr.body("paths.'/user/createWithList'.post.security.httpTestScheme", hasSize(1));
-
-        vr.body("paths.'/user/{username}'.get.security.httpTestScheme[0][0]", equalTo("write:users"));
-        vr.body("paths.'/user/{username}'.get.security.httpTestScheme", hasSize(1));
-
-        vr.body("paths.'/user/{username}'.put.security.httpTestScheme[0][0]", equalTo("write:users"));
-        vr.body("paths.'/user/{username}'.put.security.httpTestScheme", hasSize(1));
-
-        vr.body("paths.'/user/{username}'.delete.security.httpTestScheme[0][0]", equalTo("write:users"));
-        vr.body("paths.'/user/{username}'.delete.security.httpTestScheme", hasSize(1));
-
-        vr.body("paths.'/user/{id}'.get.security.httpTestScheme[0][0]", equalTo("write:users"));
-        vr.body("paths.'/user/{id}'.get.security.httpTestScheme", hasSize(1));
-
-        vr.body("paths.'/user/login'.get.security.httpTestScheme[0][0]", equalTo("write:users"));
-        vr.body("paths.'/user/login'.get.security.httpTestScheme", hasSize(1));
-
-        vr.body("paths.'/user/logout'.get.security.httpTestScheme[0][0]", equalTo("write:users"));
-        vr.body("paths.'/user/logout'.get.security.httpTestScheme", hasSize(1));
+        vr.body("paths.'/user/login'.get.security.find { it.httpTestScheme != null }.httpTestScheme", empty());
     }
 
     @RunAsClient
@@ -511,7 +489,7 @@ public class AirlinesAppTest extends AppTestBase {
     public void testSecuritySchemes(String type) {
         ValidatableResponse vr = callEndpoint(type);
         String s = "components.securitySchemes";
-        vr.body(s, hasKey("httpTestScheme"));
+        vr.body(s, hasKey("httpSchemeForTest"));
         vr.body(s, hasKey("airlinesRatingApp_auth"));
         vr.body(s, hasKey("reviewoauth2"));
         vr.body(s, hasKey("bookingSecurityScheme"));
@@ -521,7 +499,7 @@ public class AirlinesAppTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testSecurityScheme(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        String http = "components.securitySchemes.httpTestScheme.";
+        String http = "components.securitySchemes.httpSchemeForTest.";
         vr.body(http + "type", equalTo("http"));
         vr.body(http + "description", equalTo("user security scheme"));
         vr.body(http + "scheme", equalTo("testScheme"));
@@ -880,5 +858,49 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(content, notNullValue());
         vr.body(content + ".'*/*'", notNullValue());
         vr.body(content + ".'*/*'.schema.type", equalTo("string"));
+    }
+    
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testStaticFileDefinitions(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+        vr.body("paths.'/streams'.post.description", equalTo("subscribes a client to receive out-of-band data"));
+        
+        final String parametersPath = "paths.'/streams'.post.parameters";
+        vr.body(parametersPath, hasSize(1));
+        vr.body(parametersPath + ".find{ it.name == 'callbackUrl' }.in", equalTo("query"));
+        vr.body(parametersPath + ".find{ it.name == 'callbackUrl' }.required", equalTo(true));
+        vr.body(parametersPath + ".find{ it.name == 'callbackUrl' }.description",
+                containsString("the location where data will be sent."));
+        vr.body(parametersPath + ".find{ it.name == 'callbackUrl' }.schema.type", equalTo("string"));
+        vr.body(parametersPath + ".find{ it.name == 'callbackUrl' }.schema.format", equalTo("uri"));
+        vr.body(parametersPath + ".find{ it.name == 'callbackUrl' }.schema.example", equalTo("https://tonys-server.com"));
+        
+        final String responsePath = "paths.'/streams'.post.responses";
+        vr.body(responsePath, aMapWithSize(1));
+        
+        final String response201Path = responsePath + ".'201'";
+        vr.body(response201Path + ".description", equalTo("subscription successfully created"));
+        vr.body(response201Path + ".content.'application/json'.schema.description", equalTo("subscription information"));
+        vr.body(response201Path + ".content.'application/json'.schema.required", both(hasSize(1)).and(contains("subscriptionId")));
+        vr.body(response201Path + ".content.'application/json'.schema.properties.subscriptionId.description",
+                equalTo("this unique identifier allows management of the subscription"));
+        vr.body(response201Path + ".content.'application/json'.schema.properties.subscriptionId.type", equalTo("string"));
+        vr.body(response201Path + ".content.'application/json'.schema.properties.subscriptionId.example",
+                equalTo("2531329f-fb09-4ef7-887e-84e648214436"));
+        
+        final String callbacksPath = "paths.'/streams'.post.callbacks.onData.'{$request.query.callbackUrl}/data'.post";
+        vr.body(callbacksPath + ".requestBody.description", equalTo("subscription payload"));
+        vr.body(callbacksPath + ".requestBody.content.'application/json'.schema.properties.timestamp.type", equalTo("string"));
+        vr.body(callbacksPath + ".requestBody.content.'application/json'.schema.properties.timestamp.format",equalTo("date-time"));
+        vr.body(callbacksPath + ".requestBody.content.'application/json'.schema.properties.userData.type", equalTo("string"));
+        
+        vr.body(callbacksPath + ".responses", aMapWithSize(2));
+        vr.body(callbacksPath + ".responses.'202'.description",
+                both(containsString("Your server implementation should return this HTTP status code")).
+                and(containsString("if the data was received successfully")));
+        vr.body(callbacksPath + ".responses.'204'.description",
+                both(containsString("Your server should return this HTTP status code if no longer interested")).
+                and(containsString("in further updates")));
     }
 }

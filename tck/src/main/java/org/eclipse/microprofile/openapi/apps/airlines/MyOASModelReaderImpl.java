@@ -1,16 +1,28 @@
+/**
+ * Copyright (c) 2017 Contributors to the Eclipse Foundation
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.eclipse.microprofile.openapi.apps.airlines;
 
-import java.util.Collection;
-import java.util.Map;
 import java.util.HashMap;
-import java.util.Set;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.math.BigDecimal;
 
 import org.eclipse.microprofile.openapi.OASFactory;
+import org.eclipse.microprofile.openapi.OASModelReader;
 
-import org.eclipse.microprofile.openapi.apps.airlines.integration.OpenAPIConfiguration;
 import org.eclipse.microprofile.openapi.models.callbacks.Callback;
 import org.eclipse.microprofile.openapi.models.examples.Example;
 import org.eclipse.microprofile.openapi.models.headers.Header;
@@ -37,10 +49,11 @@ import org.eclipse.microprofile.openapi.models.responses.APIResponse;
 import org.eclipse.microprofile.openapi.models.responses.APIResponses;
 import org.eclipse.microprofile.openapi.models.security.SecurityRequirement;
 
-public class AirlinesModelBuilder implements OpenAPIConfiguration {
+
+public class MyOASModelReaderImpl implements OASModelReader {
 
     @Override
-    public OpenAPI getOpenAPI() {
+    public OpenAPI buildModel() {
         return OASFactory.createObject(OpenAPI.class)
                 .info(OASFactory.createObject(Info.class)
                     .title("AirlinesRatingApp API")
@@ -154,7 +167,7 @@ public class AirlinesModelBuilder implements OpenAPIConfiguration {
                         .name("Retrieve Airlines")
                         .description("method to retrieve all airlines"))
                 .paths(OASFactory.createObject(Paths.class)
-                    .addPathItem("/airlines", OASFactory.createObject(PathItem.class)
+                    .addPathItem("/modelReader/airlines", OASFactory.createObject(PathItem.class)
                         .GET(OASFactory.createObject(Operation.class)
                             .summary("Retrieve all available airlines")
                             .operationId("getAirlines")
@@ -216,7 +229,7 @@ public class AirlinesModelBuilder implements OpenAPIConfiguration {
                                     .description("Number of children on the flight")
                                     .schema(OASFactory.createObject(Schema.class)
                                         .minimum(new BigDecimal(0))))))
-                    .addPathItem("/bookings", OASFactory.createObject(PathItem.class)
+                    .addPathItem("/modelReader/bookings", OASFactory.createObject(PathItem.class)
                         .GET(OASFactory.createObject(Operation.class)
                             .tags(new ArrayList<String>())
                                 .addTag("bookings")
@@ -235,21 +248,8 @@ public class AirlinesModelBuilder implements OpenAPIConfiguration {
                             .security(new ArrayList<SecurityRequirement>())
                                 .addSecurityRequirement(OASFactory.createObject(SecurityRequirement.class)
                                     .addScheme("bookingSecurityScheme", new ArrayList<String>(Arrays.asList("write:bookings", "read:bookings"))))
-                            .callbacks(new HashMap<String, Callback>())
-                                // .addCallback("get all the bookings", OASFactory.createObject(Callback.class)
-                                //     .addPathItem("/bookings", OASFactory.createObject(PathItem.class)
-                                //         .GET(OASFactory.createObject(Operation.class)
-                                //             .summary("Retrieve all bookings for current user")
-                                //             .operationId("getAllBookings")
-                                //             .responses(OASFactory.createObject(APIResponses.class)
-                                //                 .addApiResponse("200", OASFactory.createObject(APIResponse.class)
-                                //                     .description("Bookings retrieved")
-                                //                     .content(OASFactory.createObject(Content.class)
-                                //                         .addMediaType("applictaion/json", OASFactory.createObject(MediaType.class)
-                                //                             .schema(OASFactory.createObject(Schema.class)
-                                //                                 .type(Schema.SchemaType.ARRAY)))))
-                                //                 .addApiResponse("404", OASFactory.createObject(APIResponse.class)
-                                //                     .description("No bookings found for the user"))))))
+                            .callbacks(new HashMap<String, Callback>())//.put("GetBookings", OASFactory.createObject(Callback.class)
+                                //.ref("#/components/callbacks/GetBookings")))
                             .summary("Create a booking")
                             .description("Create a new booking record with the booking information provided.")
                             .operationId("createBooking")
@@ -261,55 +261,6 @@ public class AirlinesModelBuilder implements OpenAPIConfiguration {
                                             .schema(OASFactory.createObject(Schema.class)
                                                 .title("id")
                                                 .description("id of the new booking")
-                                                .type(Schema.SchemaType.STRING)))))))));                            
+                                                .type(Schema.SchemaType.STRING)))))))));
     }
-
-    @Override
-    public String getReaderClass() {
-        // This method could be used for providing a custom OpenAPIReader implementation 
-        // as an alternative to specifying the fully qualifies class name in 
-        // META-INF/services/io.swagger.oas.integration.OpenAPIReader.
-        // return "io.swagger.sample.config.OpenAPIReaderImpl";
-        return null;
-    }
-
-    @Override
-    public Set<String> getResourceClasses() {
-        return null;
-    }
-
-    @Override
-    public Set<String> getResourcePackages() {
-        return null;
-    }
-
-    @Override
-    public String getScannerClass() {
-        // This method could be used for providing a custom OpenAPIScanner implementation 
-        // as an alternative to specifying the fully qualifies class name in 
-        // META-INF/services/io.swagger.oas.integration.OpenAPIScanner.
-        // return "io.swagger.sample.config.OpenAPIScannerImpl";
-        return null;
-    }
-
-    @Override
-    public Collection<String> getIgnoredRoutes() {
-        return null;
-    }
-
-    @Override
-    public Map<String, Object> getUserDefinedOptions() {
-        return null;
-    }
-
-    @Override
-    public Boolean isReadAllResources() {
-        return null;
-    }
-
-    @Override
-    public Boolean isScanningDisabled() {
-        return Boolean.FALSE;
-    }
-
 }
