@@ -61,8 +61,7 @@ import javax.ws.rs.core.Response;
     securitySchemeName = "httpSchemeForTest",
     scheme = "testScheme")
 @SecurityRequirement(
-    name = "httpSchemeForTest"//,
-    //scopes = {"write:users"}
+    name = "httpSchemeForTest"
 )
 public class UserResource {
 

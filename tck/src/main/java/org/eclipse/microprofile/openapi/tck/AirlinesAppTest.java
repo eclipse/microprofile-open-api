@@ -482,7 +482,6 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/user'.post.security.httpSchemeForTest[0][0]", equalTo(null));
 
         vr.body("paths.'/user/login'.get.security.find { it.httpTestScheme != null }.httpTestScheme", empty());
-        //vr.body("paths.'/user/login'.get.security.httpTestScheme[0]", equalTo(null));
     }
 
     @RunAsClient
