@@ -29,6 +29,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
+import static org.hamcrest.collection.IsEmptyCollection.empty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -478,32 +479,9 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/reviews'.post.security.bookingSecurityScheme", hasSize(1));
         vr.body("paths.'/bookings'.post.security.bookingSecurityScheme[0]", hasSize(2));
 
-        vr.body("paths.'/user'.post.security.httpTestScheme[0][0]", equalTo("write:users"));
-        vr.body("paths.'/user'.post.security.httpTestScheme", hasSize(1));
+        vr.body("paths.'/user'.post.security.httpSchemeForTest[0][0]", equalTo(null));
 
-        vr.body("paths.'/user/createWithArray'.post.security.httpTestScheme[0][0]", equalTo("write:users"));
-        vr.body("paths.'/user/createWithArray'.post.security.httpTestScheme", hasSize(1));
-
-        vr.body("paths.'/user/createWithList'.post.security.httpTestScheme[0][0]", equalTo("write:users"));
-        vr.body("paths.'/user/createWithList'.post.security.httpTestScheme", hasSize(1));
-
-        vr.body("paths.'/user/{username}'.get.security.httpTestScheme[0][0]", equalTo("write:users"));
-        vr.body("paths.'/user/{username}'.get.security.httpTestScheme", hasSize(1));
-
-        vr.body("paths.'/user/{username}'.put.security.httpTestScheme[0][0]", equalTo("write:users"));
-        vr.body("paths.'/user/{username}'.put.security.httpTestScheme", hasSize(1));
-
-        vr.body("paths.'/user/{username}'.delete.security.httpTestScheme[0][0]", equalTo("write:users"));
-        vr.body("paths.'/user/{username}'.delete.security.httpTestScheme", hasSize(1));
-
-        vr.body("paths.'/user/{id}'.get.security.httpTestScheme[0][0]", equalTo("write:users"));
-        vr.body("paths.'/user/{id}'.get.security.httpTestScheme", hasSize(1));
-
-        vr.body("paths.'/user/login'.get.security.httpTestScheme[0][0]", equalTo("write:users"));
-        vr.body("paths.'/user/login'.get.security.httpTestScheme", hasSize(1));
-
-        vr.body("paths.'/user/logout'.get.security.httpTestScheme[0][0]", equalTo("write:users"));
-        vr.body("paths.'/user/logout'.get.security.httpTestScheme", hasSize(1));
+        vr.body("paths.'/user/login'.get.security.find { it.httpTestScheme != null }.httpTestScheme", empty());
     }
 
     @RunAsClient
@@ -511,7 +489,7 @@ public class AirlinesAppTest extends AppTestBase {
     public void testSecuritySchemes(String type) {
         ValidatableResponse vr = callEndpoint(type);
         String s = "components.securitySchemes";
-        vr.body(s, hasKey("httpTestScheme"));
+        vr.body(s, hasKey("httpSchemeForTest"));
         vr.body(s, hasKey("airlinesRatingApp_auth"));
         vr.body(s, hasKey("reviewoauth2"));
         vr.body(s, hasKey("bookingSecurityScheme"));
@@ -521,7 +499,7 @@ public class AirlinesAppTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testSecurityScheme(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        String http = "components.securitySchemes.httpTestScheme.";
+        String http = "components.securitySchemes.httpSchemeForTest.";
         vr.body(http + "type", equalTo("http"));
         vr.body(http + "description", equalTo("user security scheme"));
         vr.body(http + "scheme", equalTo("testScheme"));

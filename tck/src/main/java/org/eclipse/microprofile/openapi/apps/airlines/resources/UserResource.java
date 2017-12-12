@@ -58,11 +58,10 @@ import javax.ws.rs.core.Response;
 @SecurityScheme(
     description = "user security scheme",
     type = SecuritySchemeType.HTTP,
-    securitySchemeName = "httpTestScheme",
+    securitySchemeName = "httpSchemeForTest",
     scheme = "testScheme")
 @SecurityRequirement(
-    name = "httpTestScheme",
-    scopes = "write:users"
+    name = "httpSchemeForTest"
 )
 public class UserResource {
 
