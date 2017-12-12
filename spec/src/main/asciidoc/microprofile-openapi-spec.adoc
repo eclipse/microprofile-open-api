@@ -17,8 +17,8 @@
 // limitations under the License.
 //
 
-:authors: Arthur De Magalhaes (Spec Lead), Leo Christy Jesuraj, Eric Wittmann, Michael Glavassevich, Artur Dzmitryieu, Navid Shakibapour, Anna Safonov, Jana Manoharan
-:email: ademagalhaes@gmail.com, leo.jesuraj@gmail.com, eric.wittmann@gmail.com, mrglavas@ca.ibm.com, dzmitry@ca.ibm.com, navid.shakibapour@gmail.com, anna.safonov@uoit.net, jana.manoharan96@gmail.com
+:authors: Arthur De Magalhaes (Spec Lead), Leo Christy Jesuraj, Eric Wittmann, Michael Glavassevich, Artur Dzmitryieu, Navid Shakibapour, Anna Safonov, Jana Manoharan, Paul Gooderham
+:email: ademagalhaes@gmail.com, leo.jesuraj@gmail.com, eric.wittmann@gmail.com, mrglavas@ca.ibm.com, dzmitry@ca.ibm.com, navid.shakibapour@gmail.com, anna.safonov@uoit.net, jana.manoharan96@gmail.com, turkeyonmarblerye@gmail.com
 :version-label!:
 :sectanchors:
 :doctype: book
