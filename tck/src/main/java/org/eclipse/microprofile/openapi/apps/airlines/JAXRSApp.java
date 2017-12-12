@@ -103,6 +103,7 @@ import org.eclipse.microprofile.openapi.apps.airlines.resources.ReviewResource;
                         schema = @Schema(type = SchemaType.STRING), required = true) }, 
                 examples = {
                         @ExampleObject(name = "review", summary = "External review example", 
+                                description = "This example exemplifies the content on our site.",
                                 externalValue = "http://foo.bar/examples/review-example.json"),
                         @ExampleObject(name = "user", summary = "External user example", 
                                 externalValue = "http://foo.bar/examples/user-example.json") }, 

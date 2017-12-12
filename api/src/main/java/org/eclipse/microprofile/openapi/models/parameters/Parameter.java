@@ -19,6 +19,7 @@ package org.eclipse.microprofile.openapi.models.parameters;
 
 import java.util.Map;
 
+import org.eclipse.microprofile.openapi.models.Constructible;
 import org.eclipse.microprofile.openapi.models.Extensible;
 import org.eclipse.microprofile.openapi.models.Reference;
 import org.eclipse.microprofile.openapi.models.examples.Example;
@@ -30,8 +31,8 @@ import org.eclipse.microprofile.openapi.models.media.Schema;
  * <p>
  * Describes a single operation parameter.
  * <p>
- * A unique parameter is defined by a combination of a name and location. 
- * There are four possible parameter locations specified by the <code>in</code> field:
+ * A unique parameter is defined by a combination of a name and location. There are four possible parameter locations
+ * specified by the <code>in</code> field:
  * <ul>
  * <li>path - Used together with Path Templating, where the parameter value is actually part of the operation's URL. This does not include the host or
  * base path of the API. For example, in /items/{itemId}, the path parameter is itemId.</li>
@@ -49,7 +50,7 @@ import org.eclipse.microprofile.openapi.models.media.Schema;
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject">OpenAPI Specification Parameter
  *      Object</a>
  */
-public interface Parameter extends Extensible, Reference<Parameter> {
+public interface Parameter extends Constructible, Extensible, Reference<Parameter> {
 
     /**
      * The values allowed for the style field.

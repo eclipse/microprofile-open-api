@@ -31,7 +31,6 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,11 +58,7 @@ import org.eclipse.microprofile.openapi.models.media.Encoding;
 import org.eclipse.microprofile.openapi.models.media.MediaType;
 import org.eclipse.microprofile.openapi.models.media.Schema;
 import org.eclipse.microprofile.openapi.models.media.XML;
-import org.eclipse.microprofile.openapi.models.parameters.CookieParameter;
-import org.eclipse.microprofile.openapi.models.parameters.HeaderParameter;
 import org.eclipse.microprofile.openapi.models.parameters.Parameter;
-import org.eclipse.microprofile.openapi.models.parameters.PathParameter;
-import org.eclipse.microprofile.openapi.models.parameters.QueryParameter;
 import org.eclipse.microprofile.openapi.models.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.models.responses.APIResponse;
 import org.eclipse.microprofile.openapi.models.responses.APIResponses;
@@ -88,8 +83,6 @@ import org.testng.annotations.Test;
  * getters, setters and builders) on those instances to verify that they behave correctly.
  */
 public class ModelConstructionTest extends Arquillian {
-    
-    private static final Map<String,Property> PARAMETER_PROPERTIES = Collections.unmodifiableMap(collectProperties0(Parameter.class));
     
     // Container for matched getter, setter and builder methods
     static final class Property {
@@ -189,7 +182,7 @@ public class ModelConstructionTest extends Arquillian {
         checkMapEntry(c.getLinks(), linkKey, linkValue);
         
         final String parameterKey = "myParameter";
-        final Parameter<?> parameterValue = createConstructibleInstance(CookieParameter.class);
+        final Parameter parameterValue = createConstructibleInstance(Parameter.class);
         checkSameObject(c, c.addParameter(parameterKey, parameterValue));
         checkMapEntry(c.getParameters(), parameterKey, parameterValue);
         
@@ -240,7 +233,7 @@ public class ModelConstructionTest extends Arquillian {
     public void operationTest() {
         final Operation o = processConstructible(Operation.class);
         
-        final Parameter<?> p = createConstructibleInstance(CookieParameter.class);
+        final Parameter p = createConstructibleInstance(Parameter.class);
         checkSameObject(o, o.addParameter(p));
         checkListEntry(o.getParameters(), p);
         
@@ -261,7 +254,7 @@ public class ModelConstructionTest extends Arquillian {
     public void pathItemTest() {
         final PathItem pi = processConstructible(PathItem.class);
         
-        final Parameter<?> p = createConstructibleInstance(CookieParameter.class);
+        final Parameter p = createConstructibleInstance(Parameter.class);
         checkSameObject(pi, pi.addParameter(p));
         checkListEntry(pi.getParameters(), p);
         
@@ -339,7 +332,7 @@ public class ModelConstructionTest extends Arquillian {
         final Link l = processConstructible(Link.class);
         
         final String parameterKey = "myParameter";
-        final Parameter<?> parameterValue = createConstructibleInstance(CookieParameter.class);
+        final Parameter parameterValue = createConstructibleInstance(Parameter.class);
         checkSameObject(l, l.addParameter(parameterKey, parameterValue));
         checkMapEntry(l.getParameters(), parameterKey, parameterValue);
     }
@@ -427,27 +420,13 @@ public class ModelConstructionTest extends Arquillian {
     }
     
     @Test
-    public void cookieParameterTest() {
-        final CookieParameter cp = processConstructible(CookieParameter.class);
-        checkParameterCommon(cp, Parameter.In.COOKIE, "cookie");
-    }
-
-    @Test
-    public void headerParameterTest() {
-        final HeaderParameter hp = processConstructible(HeaderParameter.class);
-        checkParameterCommon(hp, Parameter.In.HEADER, "header");
-    }
-    
-    @Test
-    public void pathParameterTest() {
-        final PathParameter pp = processConstructible(PathParameter.class);
-        checkParameterCommon(pp, Parameter.In.PATH, "path");
-    }
-    
-    @Test
-    public void queryParameterTest() {
-        final QueryParameter qp = processConstructible(QueryParameter.class);
-        checkParameterCommon(qp, Parameter.In.QUERY, "query");
+    public void parameterTest() {
+        final Parameter p = processConstructible(Parameter.class);
+        
+        final String exampleKey = "myExample";
+        final Example exampleValue = createConstructibleInstance(Example.class);
+        checkSameObject(p, p.addExample(exampleKey, exampleValue));
+        checkMapEntry(p.getExamples(), exampleKey, exampleValue);
     }
     
     @Test
@@ -685,9 +664,6 @@ public class ModelConstructionTest extends Arquillian {
     // Returns instances for testing getter, setter and builder methods.
     @SuppressWarnings("unchecked")
     private Object getInstanceOf(Class<?> clazz, boolean alternateEnumValue) {
-        if (clazz == Parameter.class) {
-            clazz = CookieParameter.class;
-        }
         if (Constructible.class.isAssignableFrom(clazz)) {
             return createConstructibleInstance((Class<Constructible>) clazz);
         }
@@ -780,18 +756,8 @@ public class ModelConstructionTest extends Arquillian {
         sb.append(v);
         return sb.toString();
     }
-    
+      
     private Map<String,Property> collectProperties(Class<?> clazz) {
-        final Map<String,Property> properties = collectProperties0(clazz);
-        // Parameter has sub-types.
-        // Add the getter/setter/builder methods from the base type.
-        if (Parameter.class.isAssignableFrom(clazz)) {
-            properties.putAll(PARAMETER_PROPERTIES);
-        }
-        return properties;
-    }
-        
-    private static Map<String,Property> collectProperties0(Class<?> clazz) {
         final Map<String,Property> properties = new HashMap<>();
         final Method[] methods = clazz.getDeclaredMethods();
         Arrays.stream(methods).forEach(m -> {
@@ -846,16 +812,6 @@ public class ModelConstructionTest extends Arquillian {
             }
         });
         return properties;
-    }
-    
-    private <T extends Parameter<T>> void checkParameterCommon(Parameter<T> p, Parameter.In expectedIn, String name) {
-        final String exampleKey = "myExample";
-        final Example exampleValue = createConstructibleInstance(Example.class);
-        checkSameObject(p, p.addExample(exampleKey, exampleValue));
-        checkMapEntry(p.getExamples(), exampleKey, exampleValue);
-        
-        // Check value of read-only 'in' property.
-        assertEquals(p.getIn(), expectedIn, "The value of the 'in' property is expected to be '" + name + "'.");
     }
     
     private <T> void checkMapEntry(Map<String,T> map, String key, T value) {

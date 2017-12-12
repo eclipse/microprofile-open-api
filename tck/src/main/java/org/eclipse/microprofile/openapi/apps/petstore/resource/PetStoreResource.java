@@ -20,6 +20,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
+import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.annotations.security.SecuritySchemes;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
@@ -71,6 +72,8 @@ import javax.ws.rs.Produces;
         )
     }
 )
+@Extension(name = "x-mp-type1", value = "true")
+@Extension(name = "x-mp-type2", value = "false")
 public class PetStoreResource {
     static StoreData storeData = new StoreData();
     static PetData petData = new PetData();
