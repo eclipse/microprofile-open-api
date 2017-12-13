@@ -678,8 +678,8 @@ a `Content-Type` header with a value of `application/json`.
 === Query parameters
 No query parameters are required for the `/openapi` endpoint.  However, one
 suggested but optional query parameter for vendors to support is `format`,
-where the value can be either `json` or `yaml`, to facilitate the toggle between
-the default `yaml` format and `json` format.
+where the value can be either `JSON` or `YAML`, to facilitate the toggle between
+the default `YAML` format and `JSON` format.
 
 === Context root behavior
 Vendors are required to ensure that the combination of each global https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#serverObject[server]
