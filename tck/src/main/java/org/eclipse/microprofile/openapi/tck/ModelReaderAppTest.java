@@ -43,7 +43,7 @@ public class ModelReaderAppTest extends AppTestBase {
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "airlinesReader.war")
                 .addPackages(true, "org.eclipse.microprofile.openapi.apps.airlines")
-                .addAsManifestResource("microprofile-reader.properties", "microprofile-reader.properties");
+                .addAsManifestResource("microprofile-reader.properties", "microprofile-config.properties");
     }
 
     @RunAsClient
@@ -125,7 +125,7 @@ public class ModelReaderAppTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testOperationAvailabilityResource(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        vr.body("paths.'/availability'.get.summary", equalTo("TEST SUMMARY"));
+        vr.body("paths.'/availability'.get.summary", equalTo("Retrieve all available flights"));
         vr.body("paths.'/availability'.get.operationId", equalTo("getFlights"));
     }
 
@@ -211,14 +211,14 @@ public class ModelReaderAppTest extends AppTestBase {
 
     @RunAsClient
     @Test(dataProvider = "formatProvider")
-    public void testSchema(String type) {
+    public void testSchema(String type) throws InterruptedException {
         ValidatableResponse vr = callEndpoint(type);
         // Basic properties
-        vr.body("components.schemas.AirlinesRef.ref", equalTo("#/components/schemas/Airlines"));
+        vr.body("components.schemas.AirlinesRef.$ref", equalTo("#/components/schemas/Airlines"));
         vr.body("components.schemas.Airlines.title", equalTo("Airlines"));
-        vr.body("paths.‘/modelReader/bookings’.post.responses.‘201’.content.'text/plain’.schema.type", equalTo("String"));
+        vr.body("paths.'/modelReader/bookings'.post.responses.'201'.content.'text/plain'.schema.type", equalTo("string"));
         vr.body("components.schemas.id.format", equalTo("int32"));
-        vr.body("paths.‘/modelReader/bookings’.post.responses.‘201’.content.‘text/plain’.schema.description", equalTo("id of the new booking"));
+        vr.body("paths.'/modelReader/bookings'.post.responses.'201'.content.'text/plain'.schema.description", equalTo("id of the new booking"));
     }
 
     @RunAsClient
@@ -253,7 +253,7 @@ public class ModelReaderAppTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testTagsInOperations(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        vr.body("paths.'/availability'.get.tags", contains("Availability"));
+        vr.body("paths.'/availability'.get.tags", containsInAnyOrder("Get Flights", "Availability"));
         vr.body("paths.'/modelReader/bookings'.get.tags", containsInAnyOrder("bookings"));
     }
 
@@ -301,6 +301,6 @@ public class ModelReaderAppTest extends AppTestBase {
         String content1 = "paths.'/availability'.get.responses.'200'.content.'application/json'";
         vr.body(content1, notNullValue());
         vr.body(content1 + ".schema.type", equalTo("array"));
-        vr.body(content1 + ".schema.ref", equalTo("org.eclipse.microprofile.openapi.apps.airlines.model.Flight"));
+        vr.body(content1 + ".schema.items.$ref", equalTo("#/components/schemas/Flight"));
     }
 }
