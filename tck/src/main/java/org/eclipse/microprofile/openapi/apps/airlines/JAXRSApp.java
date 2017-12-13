@@ -50,8 +50,8 @@ import org.eclipse.microprofile.openapi.apps.airlines.model.Booking;
 import org.eclipse.microprofile.openapi.apps.airlines.model.Review;
 import org.eclipse.microprofile.openapi.apps.airlines.resources.AirlinesResource;
 import org.eclipse.microprofile.openapi.apps.airlines.resources.AvailabilityResource;
-import org.eclipse.microprofile.openapi.apps.airlines.resources.BookingResource;
 import org.eclipse.microprofile.openapi.apps.airlines.resources.ReviewResource;
+import org.eclipse.microprofile.openapi.apps.airlines.resources.bookings.BookingResource;
 
 @ApplicationPath("/")
 @OpenAPIDefinition(

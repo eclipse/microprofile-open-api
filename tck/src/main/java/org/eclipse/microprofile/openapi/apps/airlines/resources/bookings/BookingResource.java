@@ -11,7 +11,7 @@
  * under the License.
  */
 
-package org.eclipse.microprofile.openapi.apps.airlines.resources;
+package org.eclipse.microprofile.openapi.apps.airlines.resources.bookings;
 
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
