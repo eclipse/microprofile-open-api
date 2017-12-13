@@ -642,7 +642,7 @@ are required to process these different sources in the following order:
 * A vendor starts by fetching all available <<Configuration>>.  If
 an `OASModelReader` was specified in that configuration list, its `buildModel`
 method is called to form the starting OpenAPI model tree for this application.
-* Any <<Vendor specific configuration>> are added on top of that starting model (overriding
+* Any <<Vendor extensions>> are added on top of that starting model (overriding
 conflicts), or create a new model if an `OASModelReader` was not registered.
 * The vendor searches for a file as defined in the section <<Static OpenAPI files>>.
 If found, it will read that document and merge with the model produced by previous
