@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.eclipse.microprofile.openapi.apps.airlines;
+package org.eclipse.microprofile.openapi.reader;
 
 import java.util.HashMap;
 import java.util.ArrayList;
