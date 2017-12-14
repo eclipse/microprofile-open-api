@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2016-2017 Contributors to the Eclipse Foundation
+// Copyright (c) 2017 Contributors to the Eclipse Foundation
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,6 +14,93 @@
 // limitations under the License.
 //
 
-= Running the Microprofile OpenAPI TCK
+= Running the MicroProfile OpenAPI TCK
 
-Any Microprofile 1.3 and higher release must pass this test suite.
+Any MicroProfile 1.3 and higher release must pass this test suite. The TCK uses `TestNG` and `Arquillian`.
+
+== Dependencies
+
+To enable the tests in your project you need to add the following dependencies to your build:
+
+[source, xml]
+----
+<properties>
+    <microprofile.openapi.version>1.0</microprofile.openapi.version>
+    <arquillian.version>1.1.14.Final</arquillian.version>
+    <arquillian-wlp.version>1.0.0.Beta2</arquillian-wlp.version>
+    <testng.version>6.9.9</testng.version>
+</properties>
+
+<dependency>
+    <groupId>org.eclipse.microprofile.openapi</groupId>
+    <artifactId>microprofile-openapi-api</artifactId>
+    <version>${microprofile.openapi.version}</version>
+</dependency>
+
+<dependency>
+    <groupId>org.eclipse.microprofile.openapi</groupId>
+    <artifactId>microprofile-openapi-tck</artifactId>
+    <version>${microprofile.openapi.version}</version>
+</dependency>
+
+<dependency>
+    <groupId>org.testng</groupId>
+    <artifactId>testng</artifactId>
+    <version>${testng.version}</version>
+    <scope>test</scope>
+</dependency>
+
+<dependency>
+    <groupId>org.jboss.arquillian.testng</groupId>
+    <artifactId>arquillian-testng-container</artifactId>
+    <version>${arquillian.version}</version>
+    <scope>test</scope>
+</dependency>
+
+<!-- You can replace this with your choice of container -->
+<dependency>
+    <groupId>org.jboss.arquillian.container</groupId>
+    <artifactId>arquillian-wlp-managed-8.5</artifactId>
+    <version>${arquillian-wlp.version}</version>
+    <scope>test</scope>
+</dependency>
+----
+
+== Declaring the Tests to run in Apache Maven pom.xml
+
+If you use Apache Maven, then the tests are run via the `maven-surefire-plugin` by adding the following in your pom.xml.
+[source, xml]
+----
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>2.19.1</version>
+    <configuration>
+        <dependenciesToScan>
+            <dependency>org.eclipse.microprofile.openapi:microprofile-openapi-tck</dependency>
+        </dependenciesToScan>
+    </configuration>
+</plugin>
+----
+Note: Be sure to set up your Arquillian.xml as required for your server under test.
+
+== Deploying Additional Implementation Artifacts
+TCK tests need some additional `jar` files to be located in `/lib` in the TCK runner project. The files are as follows: `commons-lang3-3.4.jar`, `commons-logging-1.2.jar`, `httpclient-4.5.2.jar`, `httpcore-4.4.4.jar`, `jackson-annotations-2.8.0.jar`, `jackson-core-2.8.6.jar`, `jackson-databind-2.8.6.jar`, `jackson-dataformat-yaml-2.8.6.jar` and `snakeyaml-1.17.jar`. These libraries are used by applications deployed to the server when running the TCK tests.
+
+== Example Implementation Using the TCK
+An example of how an implementation might go about integrating the MicroProfile OpenAPI TCK into a build
+can be found https://github.com/microservices-api/mp-openapi-tck-runner/[here].
+
+== Running the TCK
+
+To run the TCK, ensure that the above dependencies are installed, and run the following command:
+----
+# Modify the test.url variable to point to your server under test
+mvn test -Dtest.url=http://localhost:9080
+----
+
+If your server under test has basic authentication enabled, run the following command:
+----
+# Modify the test.url variable to point to your server under test.  Modify the test.user and test.pwd variables to appropriate values for your server under test.
+mvn test -Dtest.url=https://localhost:9443 -Dtest.user=someUser -Dtest.pwd=somePassword 
+----
