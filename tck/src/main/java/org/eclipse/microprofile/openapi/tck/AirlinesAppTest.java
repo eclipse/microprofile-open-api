@@ -626,28 +626,27 @@ public class AirlinesAppTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testSchema(String type) {
         ValidatableResponse vr = callEndpoint(type);
+        String createSchema = "paths.'/user/createWithArray'.post.parameters.find{ it.name == 'userArray' }.content.'application/json'.schema";
+
         // Basic properties
-        vr.body("components.schemas.AirlinesRef.ref", equalTo("#/components/schemas/Airlines"));
+        vr.body("components.schemas.AirlinesRef.$ref", equalTo("#/components/schemas/Airlines"));
         vr.body("components.schemas.Airlines.title", equalTo("Airlines"));
-        vr.body("paths.‘/bookings’.post.responses.‘201’.content.‘application/json’.schema.type", equalTo("string"));
+        vr.body("paths.'/bookings'.post.responses.'201'.content.'application/json'.schema.type", equalTo("string"));
         vr.body("components.schemas.id.format", equalTo("int32"));
-        vr.body("paths.‘/user’.post.requestBody.content.‘application/json’.schema.required", hasItem("password"));
-        vr.body("paths.‘/bookings’.post.responses.‘201’.content.‘application/json’.schema.description", equalTo("id of the new booking"));
-        vr.body("paths.‘/user’.post.requestBody.content.‘application/json’.schema.properties.password.example", hasItem("bobSm37"));
-        vr.body("paths.‘/user/createWithArray’.post.parameters.find{ it.name == ‘userArray’ }.content.‘application/json’.schema.nullable",
-                equalTo(true));
-        vr.body("paths.‘/user/createWithArray’.post.parameters.find{ it.name == ‘userArray’ }.content.‘application/json’.schema.writeOnly",
-                equalTo(true));
+        vr.body("paths.'/bookings'.post.responses.'201'.content.'application/json'.schema.description", equalTo("id of the new booking"));
+        vr.body("components.schemas.User.properties.password.example", equalTo("bobSm37"));
+        vr.body(createSchema + ".nullable", equalTo(true));
+        vr.body(createSchema + ".writeOnly", equalTo(true));
 
         // Object properties
-        vr.body("paths.‘/user’.post.requestBody.content.‘application/json’.schema.maxproperties", equalTo(1024));
-        vr.body("paths.‘/user’.post.requestBody.content.‘application/json’.schema.minproperties", equalTo(1));
-        vr.body("paths.‘/user’.post.requestBody.content.‘application/json’.schema.requiredProperties", hasItems("id", "username", "password"));
+        vr.body("paths.'/user'.post.requestBody.content.'application/json'.schema.maxProperties", equalTo(1024));
+        vr.body("paths.'/user'.post.requestBody.content.'application/json'.schema.minProperties", equalTo(1));
+        vr.body("components.schemas.User.required", hasItems("id", "username", "password")); // requiredProperties
 
         // Array properties
-        vr.body("paths.‘/user/createWithArray’.post.parameters.‘userArray’.content.schema.maxItems", equalTo(20));
-        vr.body("paths.‘/user/createWithArray’.post.parameters.‘userArray’.content.schema.minItems", equalTo(2));
-        vr.body("paths.‘/user/createWithArray’.post.parameters.‘userArray’.content.schema.uniqueItems", equalTo(true));
+        vr.body(createSchema + ".maxItems", equalTo(20));
+        vr.body(createSchema + ".minItems", equalTo(2));
+        vr.body(createSchema + ".uniqueItems", equalTo(true));
     }
 
     @RunAsClient
