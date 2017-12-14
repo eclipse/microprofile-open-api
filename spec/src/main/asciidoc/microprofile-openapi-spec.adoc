@@ -614,10 +614,10 @@ key, where the value is the fully qualified name of the filter class.
 mp.openapi.filter=com.mypackage.MyFilter
 ----
 
-Vendors are required to call all registered filters in the application (0..N) once
-for each filtered element.  For example, the method `filterPathItem` is
-called *for each* corresponding `PathItem` element in the model tree.  This allows
-application developers to filter the element and any of its descendants.
+Vendors are required to call the registered filter once for each filtered element.
+For example, the method `filterPathItem` is called *for each* corresponding `PathItem`
+element in the model tree.  This allows application developers to filter the element
+and any of its descendants.
 
 The order of filter methods called is undefined, with two exceptions:
 
