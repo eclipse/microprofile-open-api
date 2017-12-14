@@ -18,8 +18,6 @@ import java.util.Set;
 
 import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
 import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
-import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
-import org.eclipse.microprofile.openapi.annotations.extensions.Extensions;
 import org.eclipse.microprofile.openapi.annotations.info.Contact;
 import org.eclipse.microprofile.openapi.annotations.info.Info;
 import org.eclipse.microprofile.openapi.annotations.info.License;
@@ -59,8 +57,6 @@ import javax.ws.rs.core.Application;
                 description="Find out more about our store"))
     }
 )
-@Extension(name = "x-mp-openapi1", value = "true")
-@Extensions( { @Extension(name = "x-mp-openapi2", value = "true"), @Extension(value = "false", name = "x-mp-openapi3") } )
 @Schema(
     externalDocs = @ExternalDocumentation(
         url = "http://swagger.io", 

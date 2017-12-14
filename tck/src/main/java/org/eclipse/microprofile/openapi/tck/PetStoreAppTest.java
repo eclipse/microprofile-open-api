@@ -65,52 +65,6 @@ public class PetStoreAppTest extends AppTestBase {
 
     @RunAsClient
     @Test(dataProvider = "formatProvider")
-    public void testExtension(String type) {
-        // Extension annotation tests
-        ValidatableResponse vr = callEndpoint(type);
-
-        // extension on field
-        String componentExt = "components.schemas.User.extensions";
-        vr.body(componentExt, hasSize(3));
-        vr.body(componentExt + ".find{ it.name == 'x-mp-field1'}", equalTo(true));
-        vr.body(componentExt + ".find{ it.name == 'x-mp-field2'}", equalTo(true));
-        vr.body(componentExt + ".find{ it.name == 'x-mp-field3'}", equalTo(false));
-
-        // extension on method
-        String pathExt = "paths.'/pet/findByStatus'.get.extensions";
-        vr.body(pathExt, hasSize(3));
-        vr.body(pathExt + ".find{ it.name == 'x-mp-method1'}", equalTo(true));
-        vr.body(pathExt + ".find{ it.name == 'x-mp-method2'}", equalTo(true));
-        vr.body(pathExt + ".find{ it.name == 'x-mp-method3'}", equalTo(false));
-
-        // extension on parameter
-        String parmExt = "paths.'/pet/findByStatus'.parameters.find{ it.name == 'status' }.extensions";
-        vr.body(parmExt, hasSize(1));
-        vr.body(parmExt + ".find{ it.name == 'x-mp-parm1'}", equalTo(true));
-
-        // extension on type: app class
-        vr.body("extensions", hasSize(3));
-        vr.body("extensions.find{ it.name == 'x-mp-openapi1'}", equalTo(true));
-        vr.body("extensions.find{ it.name == 'x-mp-openapi2'}", equalTo(true));
-        vr.body("extensions.find{ it.name == 'x-mp-openapi3'}", equalTo(false));
-
-        // extension on type: resource class
-        endpointExtension(vr, "'/store/inventory'.get");
-        endpointExtension(vr, "'/store/order/{orderId}'.get");
-        endpointExtension(vr, "'/store/order'.post");
-        endpointExtension(vr, "'/store/order/{orderId}'.delete");
-    }
-
-    private void endpointExtension(ValidatableResponse vr, String endpoint) {
-        String ext1 = ".find{ it.name == 'x-mp-type1' }";
-        String ext2 = ".find{ it.name == 'x-mp-type2' }";
-        vr.body("paths." + endpoint + ".extensions", hasSize(2));
-        vr.body("paths." + endpoint + ".extensions" + ext1, equalTo(true));
-        vr.body("paths." + endpoint + ".extensions" + ext2, equalTo(false));
-    }
-
-    @RunAsClient
-    @Test(dataProvider = "formatProvider")
     public void testSecurityRequirement(String type) {
         ValidatableResponse vr = callEndpoint(type);
 
