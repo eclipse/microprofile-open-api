@@ -35,10 +35,15 @@ public class AirlinesOASFilter implements OASFilter {
     @Override
     public PathItem filterPathItem(PathItem pathItem){
         if(pathItem.getGET() != null && "Retrieve all available flights".equals(pathItem.getGET().getSummary())){
+            //Add new operation
             pathItem.PUT(OASFactory.createObject(Operation.class).
                     summary("filterPathItem - added put operation")
                     .responses(OASFactory.createObject(APIResponses.class).addApiResponse("200", 
-                            OASFactory.createObject(APIResponse.class).description("successfully put airlines"))));
+                            OASFactory.createObject(APIResponse.class).description("filterPathItem - successfully put airlines"))));
+            
+            //Spec states : All filterable descendant elements of a filtered element must be called before its ancestor
+            //Override the operatioId value that was previously overridden by the filterOperation method
+            pathItem.getGET().setOperationId("filterPathItemGetFlights");
         }
         return pathItem;
     }
@@ -51,6 +56,9 @@ public class AirlinesOASFilter implements OASFilter {
         else if("Update a booking with ID".equals(operation.getSummary())){
             operation.setSummary("filterOperation - Update a booking with ID");  
         }
+        else if("Retrieve all available flights".equals(operation.getSummary())){
+            operation.setOperationId("filterOperationGetFlights");
+        }
         return operation;
     }
     
@@ -58,6 +66,9 @@ public class AirlinesOASFilter implements OASFilter {
     public Parameter filterParameter(Parameter parameter) {
         if("The user name for login".equals(parameter.getDescription())){
             parameter.setDescription("filterParameter - The user name for login");
+        }
+        else if("The password for login in clear text".equals(parameter.getDescription())){
+            return null; //remove parameter
         }
         return parameter;
     }
@@ -104,28 +115,40 @@ public class AirlinesOASFilter implements OASFilter {
     
     @Override
     public Server filterServer(Server server) {
+        if("The production API server".equals(server.getDescription())){
+            server.description("filterServer - The production API server");
+        }
         return server;
     }
     
     @Override
     public Tag filterTag(Tag tag) {
+        if("Operations about user".equals(tag.getDescription())){
+            tag.setDescription("filterTag - Operations about user");
+        }
         return tag;
     }
     
     @Override
     public Link filterLink(Link link) {
+        if("The username corresponding to provided user id".equals(link.getDescription())){
+            link.setDescription("filterLink - The username corresponding to provided user id");
+        }
         return link;
     }
 
     @Override
     public Callback filterCallback(Callback callback) {
+        if(callback.containsKey("{$request.query.callbackUrl}/data") && callback.get("{$request.query.callbackUrl}/data").getPOST() != null){
+            callback.get("{$request.query.callbackUrl}/data").getPOST().setDescription("filterCallback - callback post operation");
+        }
         return callback;
     }
 
     @Override
     public void filterOpenAPI(OpenAPI openAPI) {
-        //Change to ensure that this method is called last
-        //override the operation summary that was previously overridden in filterOperation method
+        //Spec states : The filterOpenAPI method must be the last method called on a filter (which is just a specialization of the first exception).
+        //To ensure that this method is called last, override the operation summary that was previously overridden in filterOperation method
         openAPI.getPaths().get("/bookings/{id}").getPUT().setSummary("filterOpenAPI - Update a booking with ID");
     }
 }

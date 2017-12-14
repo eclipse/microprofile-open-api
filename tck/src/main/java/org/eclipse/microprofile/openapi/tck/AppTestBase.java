@@ -55,11 +55,11 @@ public abstract class AppTestBase extends Arquillian {
                 .addClass(YamlToJsonConverterServlet.class)
                 .addAsLibraries(new File("./lib/httpclient-4.5.2.jar"))
                 .addAsLibraries(new File("./lib/httpcore-4.4.4.jar"))
-                .addAsLibraries(new File("./lib/jackson-core-2.9.2.jar"))
-                .addAsLibraries(new File("./lib/jackson-dataformat-yaml-2.9.2.jar"))
-                .addAsLibraries(new File("./lib/jackson-databind-2.9.2.jar"))
-                .addAsLibraries(new File("./lib/jackson-annotations-2.9.1.jar"))
-                .addAsLibraries(new File("./lib/snakeyaml-1.18.jar"))
+                .addAsLibraries(new File("./lib/jackson-core-2.8.6.jar"))
+                .addAsLibraries(new File("./lib/jackson-dataformat-yaml-2.8.6.jar"))
+                .addAsLibraries(new File("./lib/jackson-databind-2.8.6.jar"))
+                .addAsLibraries(new File("./lib/jackson-annotations-2.8.0.jar"))
+                .addAsLibraries(new File("./lib/snakeyaml-1.17.jar"))
                 .addAsLibraries(new File("./lib/commons-logging-1.2.jar"))
                 .addAsLibraries(new File("./lib/commons-lang3-3.4.jar"));
     }
