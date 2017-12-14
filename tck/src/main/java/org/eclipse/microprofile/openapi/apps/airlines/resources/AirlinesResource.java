@@ -46,7 +46,7 @@ import org.eclipse.microprofile.openapi.apps.airlines.model.Flight;
     callbackUrlExpression="http://localhost:9080/oas3-airlines/availability",
     operations = @CallbackOperation(
         method = "get",
-        summary = "Retrieve all available flights",
+        summary = "Retrieve available flights.",
         responses = {
             @APIResponse(
                 responseCode = "200",
