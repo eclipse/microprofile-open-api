@@ -102,7 +102,7 @@ public class FilterTest extends AppTestBase {
 
         String url = "https://{username}.gigantic-server.com:{port}/{basePath}";
         String serverPath = "servers.find { it.url == '" + url + "' }";
-        vr.body(serverPath + ".description", equalTo("The production API server"));
+        vr.body(serverPath + ".description", equalTo("filterServer - The production API server"));
         vr.body(serverPath + ".variables", aMapWithSize(4));
         vr.body(serverPath + ".variables.username.description", equalTo("Reviews of the app by users"));
         vr.body(serverPath + ".variables.username.default", equalTo("user1"));
@@ -134,7 +134,7 @@ public class FilterTest extends AppTestBase {
 
         url = "{protocol}://test-server.com";
         serverPath = "paths.'/reviews/{id}'.delete.servers.find { it.url == '" + url + "' }";
-        vr.body(serverPath + ".description", equalTo("The production API server"));
+        vr.body(serverPath + ".description", equalTo("filterServer - The production API server"));
         vr.body(serverPath + ".variables", aMapWithSize(1));
         vr.body(serverPath + ".variables.protocol.default", equalTo("https"));
         vr.body(serverPath + ".variables.protocol.enum", containsInAnyOrder("http", "https"));
@@ -182,10 +182,10 @@ public class FilterTest extends AppTestBase {
     public void testOperationAvailabilityResource(String type) {
         ValidatableResponse vr = callEndpoint(type);
         vr.body("paths.'/availability'.get.summary", equalTo("Retrieve all available flights"));
-        vr.body("paths.'/availability'.get.operationId", equalTo("getFlights"));
+        vr.body("paths.'/availability'.get.operationId", equalTo("filterPathItemGetFlights"));
         
         vr.body("paths.'/availability'.put.summary", equalTo("filterPathItem - added put operation"));
-        vr.body("paths.'/availability'.put.responses.'200'.description", equalTo("successfully put airlines"));
+        vr.body("paths.'/availability'.put.responses.'200'.description", equalTo("filterPathItem - successfully put airlines"));
     }
 
     @RunAsClient
@@ -319,21 +319,14 @@ public class FilterTest extends AppTestBase {
 
     private void testUserLoginMethods(ValidatableResponse vr) {
         String reviewParameters = "paths.'/user/login'.get.parameters";
-        vr.body(reviewParameters, hasSize(2));
-        vr.body(reviewParameters + ".findAll { it }.name", hasItems("username", "password"));
-        List<String[]> list = new ArrayList<String[]>();
-        list.add(new String[] { "username", "filterParameter - The user name for login" });
-        list.add(new String[] { "password", "The password for login in clear text" });
-
-        for (int i = 0; i < list.size(); i++) {
-            String currentParam = list.get(i)[0];
-            String query = reviewParameters + ".findAll { it.name == '" + currentParam + "' }";
-
-            vr.body(query + ".in", both(hasSize(1)).and(contains("query")));
-            vr.body(query + ".description", both(hasSize(1)).and(contains(list.get(i)[1])));
-            vr.body(query + ".required", both(hasSize(1)).and(contains(true)));
-            vr.body(query + ".schema.type", both(hasSize(1)).and(contains("string")));
-        }
+        String query = reviewParameters + ".findAll { it.name == 'username' }";
+        vr.body(query + ".in", both(hasSize(1)).and(contains("query")));
+        vr.body(query + ".description", both(hasSize(1)).and(contains("filterParameter - The user name for login")));
+        vr.body(query + ".required", both(hasSize(1)).and(contains(true)));
+        vr.body(query + ".schema.type", both(hasSize(1)).and(contains("string")));
+        
+        //Parameter named 'password' should have been removed by filter
+        vr.body(reviewParameters, hasSize(1));
     }
 
     private void testReviewIdMethods(ValidatableResponse vr) {
@@ -599,7 +592,7 @@ public class FilterTest extends AppTestBase {
         ValidatableResponse vr = callEndpoint(type);
         String s = "paths.'/user/{id}'.get.responses.'200'.links.'User name'.";
         vr.body(s + "operationId", equalTo("getUserByName"));
-        vr.body(s + "description", equalTo("The username corresponding to provided user id"));
+        vr.body(s + "description", equalTo("filterLink - The username corresponding to provided user id"));
 
         String t = "paths.'/user/{id}'.get.responses.'200'.links.Review.";
         vr.body(t + "operationRef", equalTo("/db/reviews/{userName}"));
@@ -674,7 +667,7 @@ public class FilterTest extends AppTestBase {
         ValidatableResponse vr = callEndpoint(type);
         String tagsPath = "tags.find { it.name == '";
         String desc = "' }.description";
-        vr.body(tagsPath + "user" + desc, equalTo("Operations about user"));
+        vr.body(tagsPath + "user" + desc, equalTo("filterTag - Operations about user"));
         vr.body(tagsPath + "create" + desc, equalTo("Operations about create"));
         vr.body(tagsPath + "Airlines" + desc, equalTo("All the airlines methods"));
         vr.body(tagsPath + "Availability" + desc, equalTo("All the availability methods"));
@@ -895,6 +888,7 @@ public class FilterTest extends AppTestBase {
                 equalTo("2531329f-fb09-4ef7-887e-84e648214436"));
         
         final String callbacksPath = "paths.'/streams'.post.callbacks.onData.'{$request.query.callbackUrl}/data'.post";
+        vr.body(callbacksPath + ".description", equalTo("filterCallback - callback post operation"));
         vr.body(callbacksPath + ".requestBody.description", equalTo("subscription payload"));
         vr.body(callbacksPath + ".requestBody.content.'application/json'.schema.properties.timestamp.type", equalTo("string"));
         vr.body(callbacksPath + ".requestBody.content.'application/json'.schema.properties.timestamp.format",equalTo("date-time"));
