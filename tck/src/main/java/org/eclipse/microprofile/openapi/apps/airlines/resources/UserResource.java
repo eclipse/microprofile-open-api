@@ -184,9 +184,9 @@ public class UserResource {
                             type = SchemaType.OBJECT,
                             maxProperties = 1024,
                             minProperties = 1,
-                            requiredProperties = { "id", "username", "password" },
-                            required = true, 
+                            required = true,
                             implementation = User.class),
+                                
                         examples = @ExampleObject(
                             name = "user",
                             summary = "External user example",
