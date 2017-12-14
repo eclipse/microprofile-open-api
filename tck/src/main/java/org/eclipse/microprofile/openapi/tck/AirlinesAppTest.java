@@ -343,20 +343,18 @@ public class AirlinesAppTest extends AppTestBase {
 
     private void testBookingIdMethods(ValidatableResponse vr) {
         String bookingParameters = "paths.'/bookings/{id}'.%s.parameters";
-
-        for (String method : new String[] { "get", "put", "delete" }) {
+        
+        for (String method : new String[] { "put", "delete", "get" }) {
             bookingParameters = String.format(bookingParameters, method);
 
             vr.body(bookingParameters, hasSize(1));
             vr.body(bookingParameters + ".findAll { it }.name", contains("id"));
-            vr.body(bookingParameters + ".findAll { it.name == 'id' }.in", both(hasSize(1)).and(contains("path")));
-            vr.body(bookingParameters + ".findAll { it.name == 'id' }.description", both(hasSize(1)).and(contains("ID of the booking")));
             vr.body(bookingParameters + ".findAll { it.name == 'id' }.required", both(hasSize(1)).and(contains(true)));
             vr.body(bookingParameters + ".findAll { it.name == 'id' }.schema.type", both(hasSize(1)).and(contains("integer")));
         }
 
         bookingParameters = "paths.'/bookings/{id}'.get.parameters";
-        vr.body(bookingParameters + ".findAll { it.name == 'id }.style", both(hasSize(1)).and(contains("simple")));
+        vr.body(bookingParameters + ".findAll { it.name == 'id' }.style", both(hasSize(1)).and(contains("simple")));
         
     }
 
@@ -365,7 +363,7 @@ public class AirlinesAppTest extends AppTestBase {
 
         vr.body(availabilityParameters, hasSize(6));
         vr.body(availabilityParameters + ".findAll { it }.name",
-                hasItems("departureDate", "airportFrom", "returningDate", "airportTo", "numberOfAdults", "numberOfChildren"));
+                hasItems("airportFrom", "returningDate", "airportTo", "numberOfAdults", "numberOfChildren"));
 
         List<String[]> list = new ArrayList<String[]>();
         list.add(new String[] { "airportFrom", "Airport the customer departs from" });
@@ -387,7 +385,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(availabilityParameters + ".findAll { it.name == 'numberOfAdults' }.schema.minimum", both(hasSize(1)).and(contains(0)));
         vr.body(availabilityParameters + ".findAll { it.name == 'numberOfChildren' }.schema.minimum", both(hasSize(1)).and(contains(0)));
         
-        vr.body(availabilityParameters + "findAll { it.name == 'departureDate'}.$ref", equalTo("#/components/parameters/departureDate"));
+        vr.body(availabilityParameters + ".findAll { it.$ref == '#/components/parameters/departureDate'}", notNullValue());
     }
 
     @RunAsClient
@@ -431,7 +429,6 @@ public class AirlinesAppTest extends AppTestBase {
 
         endpoint = "paths.'/reviews'.post.callbacks.testCallback.'http://localhost:9080/oas3-airlines/reviews'";
         vr.body(endpoint, hasKey("get"));
-
         vr.body(endpoint + ".get.summary", equalTo("Get all reviews"));
         vr.body(endpoint + ".get.responses.'200'.description", equalTo("successful operation"));
         vr.body(endpoint + ".get.responses.'200'.content.'application/json'.schema.ref", equalTo("#/components/schemas/Review"));
