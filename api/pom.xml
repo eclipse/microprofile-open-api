@@ -31,7 +31,7 @@
         <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.annotation.versioning</artifactId>
-            <version>1.0.0</version>
+            <version>${osgi-annotation.version}</version>
         </dependency>
     </dependencies>
 
@@ -64,7 +64,7 @@
             <plugin>
                 <groupId>biz.aQute.bnd</groupId>
                 <artifactId>bnd-maven-plugin</artifactId>
-                <version>3.4.0</version>
+                <version>${bnd.version}</version>
 
                 <executions>
                     <execution>

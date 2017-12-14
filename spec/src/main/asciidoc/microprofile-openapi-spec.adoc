@@ -578,7 +578,7 @@ this interface and register it using the `mp.openapi.model.reader` configuration
 key, where the value is the fully qualified name of the reader class.
 
 .Sample META-INF/microprofile-config.properties
-[code,property]
+[source,property]
 ----
 mp.openapi.model.reader=com.mypackage.MyModelReader
 ----
@@ -609,7 +609,7 @@ this interface and register it using the `mp.openapi.filter` configuration
 key, where the value is the fully qualified name of the filter class.
 
 .Sample META-INF/microprofile-config.properties
-[code,property]
+[source,property]
 ----
 mp.openapi.filter=com.mypackage.MyFilter
 ----

@@ -27,9 +27,8 @@
     <packaging>pom</packaging>
     <name>MicroProfile OpenAPI Specification</name>
     <description>MicroProfile OpenAPI :: Specification</description>
+
     <properties>
-        <asciidoctor-maven.version>1.5.5</asciidoctor-maven.version>
-        <asciidoctorj-pdf.version>1.5.0-alpha.15</asciidoctorj-pdf.version>
         <license>Apache License v 2.0</license>
         <maven.build.timestamp.format>MMMM dd, yyyy</maven.build.timestamp.format>
         <revisiondate>${maven.build.timestamp}</revisiondate>
@@ -86,7 +85,7 @@
                     <sourceDocumentName>microprofile-openapi-spec.adoc</sourceDocumentName>
                     <sourceHighlighter>coderay</sourceHighlighter>
                     <attributes>
-                        <license>Apache License v2.0</license>
+                        <license>${license}</license>
                     </attributes>
                 </configuration>
             </plugin>

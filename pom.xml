@@ -32,8 +32,27 @@
 
         <checkstyle.version>2.17</checkstyle.version>
         <checkstyle.methodNameFormat>^_?[a-z][a-zA-Z0-9]*$|DELETE|GET|HEAD|OPTIONS|PATCH|POST|PUT|TRACE</checkstyle.methodNameFormat>
-        <cdi-version>1.2</cdi-version>
         <autorelease>false</autorelease>
+
+        <!-- Versions of API dependencies -->
+        <osgi-annotation.version>1.0.0</osgi-annotation.version>
+        <bnd.version>3.4.0</bnd.version>
+
+        <!-- Versions of TCK dependencies -->
+        <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
+        <arquillian.version>1.1.13.Final</arquillian.version>
+        <testng.version>6.10</testng.version>
+        <jaxrs.version>2.0</jaxrs.version>
+        <rest-assured.version>3.0.6</rest-assured.version>
+        <hamcrest-all.version>1.3</hamcrest-all.version>
+        <java-hamcrest.version>2.0.0.0</java-hamcrest.version>
+        <servlet.version>3.1.0</servlet.version>
+        <httpclient.version>4.5.2</httpclient.version>
+        <jackson.version>2.8.6</jackson.version>
+
+        <!-- Versions of SPEC dependencies  -->
+        <asciidoctor-maven.version>1.5.5</asciidoctor-maven.version>
+        <asciidoctorj-pdf.version>1.5.0-alpha.15</asciidoctorj-pdf.version>
     </properties>
 
     <licenses>
@@ -89,14 +108,9 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>javax.enterprise</groupId>
-                <artifactId>cdi-api</artifactId>
-                <version>${cdi-version}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.jboss.arquillian</groupId>
                 <artifactId>arquillian-bom</artifactId>
-                <version>1.1.13.Final</version>
+                <version>${arquillian.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
