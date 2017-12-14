@@ -119,7 +119,7 @@ public class PetResource {
                     responseCode = "200",
                     content = @Content(
                         mediaType = "application/json",
-                        schema = @Schema(type = SchemaType.ARRAY, implementation = Pet.class, 
+                        schema = @Schema(type = SchemaType.OBJECT, implementation = Pet.class, 
                           oneOf = { Cat.class, Dog.class, Lizard.class }, 
                           readOnly = true))
                 )
