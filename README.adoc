@@ -17,14 +17,14 @@
 // limitations under the License.
 //
 
-= Eclipse Microprofile OpenAPI
+= Eclipse MicroProfile OpenAPI
 
-This Microprofile specification aims at providing a unified Java API for the link:++https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md++[OpenAPI v3 specification],
+This MicroProfile specification aims at providing a unified Java API for the link:++https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md++[OpenAPI v3 specification],
 that all application developers can use to expose their API documentation.
 
 * The link:++https://github.com/eclipse/microprofile-open-api/tree/master/api/src/main/java/org/eclipse/microprofile/openapi++[spec APIs] are composed of annotations, models, and programming interfaces.
 * The link:++https://github.com/eclipse/microprofile-open-api/blob/master/spec/src/main/asciidoc/microprofile-openapi-spec.adoc++[spec documentation] outlines the rules and boundaries of the spec.
 * To chat or ask questions about the spec, join the discussion on Gitter: image:https://badges.gitter.im/eclipse/microprofile-open-api.svg[link=https://gitter.im/eclipse/microprofile-open-api]
-* For announcements, visit the link:++https://groups.google.com/forum/#!forum/microprofile++[Microprofile Google Group].
+* For announcements, visit the link:++https://groups.google.com/forum/#!forum/microprofile++[MicroProfile Google Group].
 * Extended examples that supplement the spec can be found link:++https://github.com/eclipse/microprofile-open-api/wiki++[here].
 * Eclipse release information and further logistics about the project can be found link:++https://wiki.eclipse.org/MicroProfile/OpenAPI++[here].
