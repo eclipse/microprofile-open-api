@@ -100,7 +100,7 @@ public class BookingResource {
         name = "bookingCallback",
         callbackUrlExpression = "http://localhost:9080/airlines/bookings",
         operations = @CallbackOperation(
-            method ="GET",
+            method ="get",
             summary="Retrieve all bookings for current user",
             responses={
                 @APIResponse(
