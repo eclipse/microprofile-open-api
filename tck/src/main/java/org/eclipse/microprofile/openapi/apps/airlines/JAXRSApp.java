@@ -37,6 +37,7 @@ import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement
 import org.eclipse.microprofile.openapi.annotations.servers.Server;
 import org.eclipse.microprofile.openapi.annotations.servers.ServerVariable;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeIn;
+import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import org.eclipse.microprofile.openapi.annotations.headers.Header;
@@ -97,9 +98,9 @@ import org.eclipse.microprofile.openapi.apps.airlines.resources.bookings.Booking
                         @APIResponse(name = "FoundBookings", responseCode = "200", description = "Bookings retrieved", 
                                 content = @Content(schema = @Schema(type = SchemaType.ARRAY, implementation = Booking.class))) }, 
                 parameters = {
-                        @Parameter(name = "departureDate", required = true, description = "Customer departure date", 
+                        @Parameter(name = "departureDate", in = ParameterIn.QUERY, required = true, description = "Customer departure date", 
                                 schema = @Schema(implementation = String.class)),
-                        @Parameter(name = "username", description = "The name that needs to be deleted", 
+                        @Parameter(name = "username", in = ParameterIn.QUERY, description = "The name that needs to be deleted", 
                         schema = @Schema(type = SchemaType.STRING), required = true) }, 
                 examples = {
                         @ExampleObject(name = "review", summary = "External review example", 

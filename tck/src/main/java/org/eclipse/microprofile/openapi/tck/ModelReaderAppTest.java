@@ -212,7 +212,7 @@ public class ModelReaderAppTest extends AppTestBase {
 
     @RunAsClient
     @Test(dataProvider = "formatProvider")
-    public void testSchema(String type) throws InterruptedException {
+    public void testSchema(String type) {
         ValidatableResponse vr = callEndpoint(type);
         // Basic properties
         vr.body("components.schemas.AirlinesRef.$ref", equalTo("#/components/schemas/Airlines"));
