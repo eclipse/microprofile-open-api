@@ -349,12 +349,15 @@ public class AirlinesAppTest extends AppTestBase {
 
             vr.body(bookingParameters, hasSize(1));
             vr.body(bookingParameters + ".findAll { it }.name", contains("id"));
-
             vr.body(bookingParameters + ".findAll { it.name == 'id' }.in", both(hasSize(1)).and(contains("path")));
             vr.body(bookingParameters + ".findAll { it.name == 'id' }.description", both(hasSize(1)).and(contains("ID of the booking")));
             vr.body(bookingParameters + ".findAll { it.name == 'id' }.required", both(hasSize(1)).and(contains(true)));
             vr.body(bookingParameters + ".findAll { it.name == 'id' }.schema.type", both(hasSize(1)).and(contains("integer")));
         }
+
+        bookingParameters = "paths.'/bookings/{id}'.get.parameters";
+        vr.body(bookingParameters + ".findAll { it.name == 'id }.style", both(hasSize(1)).and(contains("simple")));
+        
     }
 
     private void testAvailabilityGetParamater(ValidatableResponse vr) {
@@ -365,7 +368,6 @@ public class AirlinesAppTest extends AppTestBase {
                 hasItems("departureDate", "airportFrom", "returningDate", "airportTo", "numberOfAdults", "numberOfChildren"));
 
         List<String[]> list = new ArrayList<String[]>();
-        list.add(new String[] { "departureDate", "Customer departure date" });
         list.add(new String[] { "airportFrom", "Airport the customer departs from" });
         list.add(new String[] { "returningDate", "Customer return date" });
         list.add(new String[] { "airportTo", "Airport the customer returns to" });
@@ -384,6 +386,8 @@ public class AirlinesAppTest extends AppTestBase {
 
         vr.body(availabilityParameters + ".findAll { it.name == 'numberOfAdults' }.schema.minimum", both(hasSize(1)).and(contains(0)));
         vr.body(availabilityParameters + ".findAll { it.name == 'numberOfChildren' }.schema.minimum", both(hasSize(1)).and(contains(0)));
+        
+        vr.body(availabilityParameters + "findAll { it.name == 'departureDate'}.$ref", equalTo("#/components/parameters/departureDate"));
     }
 
     @RunAsClient
@@ -409,8 +413,8 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(endpoint + ".testCallback", hasKey("http://localhost:9080/oas3-airlines/reviews"));
 
         endpoint = "paths.'/bookings'.post.callbacks";
-        vr.body(endpoint, hasKey("get all the bookings"));
-        vr.body(endpoint + ".'get all the bookings'", hasKey("http://localhost:9080/airlines/bookings"));
+        vr.body(endpoint, hasKey("bookingCallback"));
+        vr.body(endpoint + ".'bookingCallback'", hasKey("http://localhost:9080/airlines/bookings"));
     }
 
     @RunAsClient
@@ -419,19 +423,18 @@ public class AirlinesAppTest extends AppTestBase {
         ValidatableResponse vr = callEndpoint(type);
 
         // TODO: cover /streams endpoint
-        String endpoint = "paths.'/bookings'.post.callbacks.'get all the bookings'.'http://localhost:9080/airlines/bookings'";
+        String endpoint = "paths.'/bookings'.post.callbacks.'bookingCallback'.'http://localhost:9080/airlines/bookings'";
         vr.body(endpoint, hasKey("get"));
-        vr.body(endpoint + ".get.summary", hasKey("Retrieve all bookings for current user"));
+        vr.body(endpoint + ".get.summary", equalTo("Retrieve all bookings for current user"));
         vr.body(endpoint + ".get.responses.'200'.description", equalTo("Bookings retrieved"));
-        vr.body(endpoint + "get.responses.'200'.content.'application/json'.type", equalTo("array"));
-
+//        vr.body(endpoint + "get.responses.'200'.content.'application/json'.type", equalTo("array"));
+////        .'http://localhost:9080/oas3-airlines/reviews'
         endpoint = "paths.'/reviews'.post.callbacks.testCallback.'http://localhost:9080/oas3-airlines/reviews'";
         vr.body(endpoint, hasKey("get"));
 
         vr.body(endpoint + ".get.summary", equalTo("Get all reviews"));
-        vr.body(endpoint + ".get.operationId", equalTo("getAllReviews_1"));
-        vr.body(endpoint + "responses.'200'.description", equalTo("successful operation"));
-        vr.body(endpoint + "responses.'200'.content.'application/json'.schema.ref", equalTo("#/components/schemas/Review"));
+        vr.body(endpoint + ".get.responses.'200'.description", equalTo("successful operation"));
+        vr.body(endpoint + ".get.responses.'200'.content.'application/json'.schema.ref", equalTo("#/components/schemas/Review"));
     }
 
     @RunAsClient

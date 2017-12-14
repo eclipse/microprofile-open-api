@@ -97,9 +97,10 @@ public class BookingResource {
             scopes = {"write:bookings", "read:bookings"}
         )
     @Callback(
-        name = "get all the bookings",
+        name = "bookingCallback",
         callbackUrlExpression = "http://localhost:9080/airlines/bookings",
         operations = @CallbackOperation(
+            method ="GET",
             summary="Retrieve all bookings for current user",
             responses={
                 @APIResponse(
