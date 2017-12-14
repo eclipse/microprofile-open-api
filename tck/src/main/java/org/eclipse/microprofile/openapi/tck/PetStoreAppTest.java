@@ -62,19 +62,6 @@ public class PetStoreAppTest extends AppTestBase {
         vr.body("paths.'/pet/{petId}'.delete.parameters.find{ it.name == 'apiKey' }.schema.maxLength", equalTo(256));
         vr.body("paths.'/pet/{petId}'.delete.parameters.find{ it.name == 'apiKey' }.schema.minLength", equalTo(32));
 
-        // Other properties
-        String storeOrderResponses = "paths.'/store/order/{orderId}'.get.responses";
-        vr.body("paths.'/pet/{petId}'.get.responses.'200'.content.'application/json'.schema.readonly", equalTo(true));
-        vr.body(storeOrderResponses + ".'404'.content.'application/json'.schema.anyOf",
-                hasItems("#/components/schemas/Order", "#/components/schemas/BadOrder"));
-        vr.body(storeOrderResponses + ".'200'.content.'application/json'.schema.allOf",
-                hasItems("#/components/schemas/Order", "#/components/schemas/Pet"));
-        vr.body("paths.'/pet/{petId}'.get.responses.'200'.content.'application/json'.schema.oneOf",
-                hasItems("#/components/schemas/Cat", "#/components/schemas/Dog", "#/components/schemas/Lizard"));
-        vr.body(storeOrderResponses + ".'200'.content.'application/json'.schema.not", equalTo("#/components/schemas/BadOrder"));
-        vr.body(storeOrderResponses + ".'404'.content.'application/json'.schema.discriminatorProperty", equalTo("id"));
-        vr.body(storeOrderResponses + ".'404'.content.'application/json'.schema.discriminatorMapping",
-                hasEntry("0", "#/components/schemas/BadOrder"));
     }
 
     @RunAsClient
