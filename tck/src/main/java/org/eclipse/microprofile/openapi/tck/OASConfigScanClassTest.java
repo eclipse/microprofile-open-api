@@ -43,8 +43,6 @@ public class OASConfigScanClassTest extends AppTestBase {
     public void testScanClass(String type) throws InterruptedException {
         vr = callEndpoint(type);
         vr.body("openapi", equalTo("3.0.0"));
-        vr.body("info.title", equalTo("AirlinesRatingApp API"));
-        vr.body("info.version", equalTo("1.0"));
         vr.body("paths", aMapWithSize(5));
         vr.body("paths", hasKey("/reviews"));
         vr.body("paths", hasKey("/reviews/{id}"));
