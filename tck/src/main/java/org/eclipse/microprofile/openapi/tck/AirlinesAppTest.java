@@ -425,7 +425,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(endpoint, hasKey("get"));
         vr.body(endpoint + ".get.summary", equalTo("Retrieve all bookings for current user"));
         vr.body(endpoint + ".get.responses.'200'.description", equalTo("Bookings retrieved"));
-        vr.body(endpoint + ".get.responses.'200'.content.'application/json'.type", equalTo("array"));
+        vr.body(endpoint + ".get.responses.'200'.content.'application/json'.schema.type", equalTo("array"));
 
         endpoint = "paths.'/reviews'.post.callbacks.testCallback.'http://localhost:9080/oas3-airlines/reviews'";
         vr.body(endpoint, hasKey("get"));
