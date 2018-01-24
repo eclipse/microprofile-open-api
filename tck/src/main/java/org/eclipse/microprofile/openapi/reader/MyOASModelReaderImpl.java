@@ -166,7 +166,7 @@ public class MyOASModelReaderImpl implements OASModelReader {
                             .description("The username corresponding to provided user id")
                             .operationId("getUserByName")
                             .parameters(new HashMap<String, Object>())
-                                .addParameter("userId", OASFactory.createObject(Parameter.class))))
+                                .addParameter("userId", "$request.link-path.userId")))
                 .tags(new ArrayList<Tag>())
                     .addTag(OASFactory.createObject(Tag.class)
                         .name("Get Airlines")

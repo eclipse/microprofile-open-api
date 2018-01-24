@@ -332,7 +332,7 @@ public class ModelConstructionTest extends Arquillian {
         final Link l = processConstructible(Link.class);
         
         final String parameterKey = "myParameter";
-        final Parameter parameterValue = createConstructibleInstance(Parameter.class);
+        final String parameterValue = "$request.parameter.id";
         checkSameObject(l, l.addParameter(parameterKey, parameterValue));
         checkMapEntry(l.getParameters(), parameterKey, parameterValue);
     }
