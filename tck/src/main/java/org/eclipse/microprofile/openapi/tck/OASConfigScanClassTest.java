@@ -16,8 +16,8 @@
 
 package org.eclipse.microprofile.openapi.tck;
 
-import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasKey;
+import static org.hamcrest.Matchers.startsWith;
 import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -42,7 +42,7 @@ public class OASConfigScanClassTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testScanClass(String type) throws InterruptedException {
         vr = callEndpoint(type);
-        vr.body("openapi", equalTo("3.0.0"));
+        vr.body("openapi", startsWith("3.0."));
         vr.body("paths", aMapWithSize(5));
         vr.body("paths", hasKey("/reviews"));
         vr.body("paths", hasKey("/reviews/{id}"));

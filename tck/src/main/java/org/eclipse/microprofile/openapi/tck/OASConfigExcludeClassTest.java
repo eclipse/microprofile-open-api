@@ -19,6 +19,7 @@ package org.eclipse.microprofile.openapi.tck;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
 import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.startsWith;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
@@ -42,7 +43,7 @@ public class OASConfigExcludeClassTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testExcludedClass(String type) throws InterruptedException {
         vr = callEndpoint(type);
-        vr.body("openapi", equalTo("3.0.0"));
+        vr.body("openapi", startsWith("3.0."));
         vr.body("info.title", equalTo("AirlinesRatingApp API"));
         vr.body("info.version", equalTo("1.0"));
         vr.body("paths.", aMapWithSize(11));

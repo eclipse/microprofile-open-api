@@ -25,6 +25,7 @@ import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.startsWith;
 import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
 
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class ModelReaderAppTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testVersion(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        vr.body("openapi", equalTo("3.0.0"));
+        vr.body("openapi", startsWith("3.0."));
     }
 
     @RunAsClient
