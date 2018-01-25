@@ -43,9 +43,12 @@ public class OASConfigScanDisableTest extends AppTestBase {
     public void testScanDisable(String type) throws InterruptedException {
         vr = callEndpoint(type);
         vr.body("openapi", equalTo("3.0.0"));
-        vr.body("info.title", equalTo("Liberty APIs"));
-        vr.body("info.version", equalTo("1.0"));
         vr.body("paths", aMapWithSize(0));
-        
+        vr.body("info", equalTo(null));
+        vr.body("externalDocs", equalTo(null));
+        vr.body("servers", equalTo(null));
+        vr.body("security", equalTo(null));
+        vr.body("tags", equalTo(null));
+        vr.body("components", equalTo(null));
     }
 }
