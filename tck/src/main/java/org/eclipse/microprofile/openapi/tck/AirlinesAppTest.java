@@ -22,15 +22,14 @@ import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.startsWith;
-import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
+import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -656,11 +655,12 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("components.examples.review.description", equalTo("This example exemplifies the content on our site."));
         vr.body("components.examples.review.externalValue", equalTo("http://foo.bar/examples/review-example.json"));
 
-        // Example in Content
-        vr.body("paths.'/reviews/{user}'.parameters.find{ it.name=='user'}.content.examples.value", hasItem("bsmith"));
+        // Example in Parameter Content
+        vr.body("paths.'/reviews/{user}'.get.parameters.find{ it.name=='user'}.content.'*/*'.examples.example.value", equalTo("bsmith"));
 
         // Example in Parameter
-        vr.body("paths.'/reviews/{user}'.parameters.find{ it.name=='user'}.examples.value", hasItems("bsmith", "pat@example.com"));
+        vr.body("paths.'/reviews/{user}'.get.parameters.find{ it.name=='user'}.examples.example1.value", equalTo("bsmith"));
+        vr.body("paths.'/reviews/{user}'.get.parameters.find{ it.name=='user'}.examples.example2.value", equalTo("pat@example.com"));
     }
 
     @RunAsClient

@@ -189,6 +189,7 @@ public class ReviewResource {
                 in = ParameterIn.PATH,
                 content = @Content(
                     examples = @ExampleObject(
+                        name = "example",
                         value = "1")))
             @PathParam("id") int id){
         Review review = reviews.get(id);
@@ -225,8 +226,9 @@ public class ReviewResource {
             in = ParameterIn.PATH,
             content = @Content(
                 examples = @ExampleObject(
+                    name = "example",
                     value = "bsmith")),
-            examples = { @ExampleObject("bsmith"), @ExampleObject("pat@example.com")})
+            examples = { @ExampleObject(name="example1", value="bsmith"), @ExampleObject(name="example2", value="pat@example.com")})
         @PathParam("user") String user){
 
             List<Review> reviewsByUser = new ArrayList<Review>();
@@ -256,6 +258,7 @@ public class ReviewResource {
             in = ParameterIn.PATH,
             content = @Content(
                 examples = @ExampleObject(
+                    name = "example",
                     value = "Acme Air")),
             example = "Acme Air")
     @APIResponse(
@@ -319,6 +322,7 @@ public class ReviewResource {
                     in = ParameterIn.PATH,
                     content = @Content(
                         examples = @ExampleObject(
+                            name = "example",
                             value = "Acme Air"))),
                 @Parameter(
                     name = "user",
@@ -327,6 +331,7 @@ public class ReviewResource {
                     in = ParameterIn.PATH,
                     content = @Content(
                         examples = @ExampleObject(
+                            name = "example",
                             value = "bsmith")))
                 })
         @PathParam("user") String user,
