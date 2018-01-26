@@ -21,6 +21,7 @@ import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.startsWith;
 import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -49,7 +50,7 @@ public class StaticDocumentTest extends AppTestBase {
     public void testStaticDocument(String type) {
         ValidatableResponse vr = callEndpoint(type);
         
-        vr.body("openapi", equalTo("3.0.0"));
+        vr.body("openapi", startsWith("3.0."));
         
         vr.body("servers", hasSize(1));
         vr.body("servers.find{ it.description == 'MySimpleAPI' }.url",
