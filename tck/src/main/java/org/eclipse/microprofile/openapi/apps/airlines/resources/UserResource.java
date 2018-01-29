@@ -13,45 +13,43 @@
 
 package org.eclipse.microprofile.openapi.apps.airlines.resources;
 
-import org.eclipse.microprofile.openapi.annotations.Operation;
-import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
-import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
-import org.eclipse.microprofile.openapi.annotations.headers.Header;
-import org.eclipse.microprofile.openapi.annotations.links.Link;
-import org.eclipse.microprofile.openapi.annotations.links.LinkParameter;
-import org.eclipse.microprofile.openapi.annotations.media.Schema;
-import org.eclipse.microprofile.openapi.annotations.media.ExampleObject;
-import org.eclipse.microprofile.openapi.annotations.media.Encoding;
-import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
-import org.eclipse.microprofile.openapi.annotations.parameters.Parameters;
-import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
-import org.eclipse.microprofile.openapi.annotations.enums.ParameterStyle;
-import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
-import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
-import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
-import org.eclipse.microprofile.openapi.annotations.servers.Server;
-import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-import org.eclipse.microprofile.openapi.annotations.tags.Tags;
-import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
-import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
-import org.eclipse.microprofile.openapi.annotations.enums.Explode;
-import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
-import org.eclipse.microprofile.openapi.annotations.media.Content;
-
-import org.eclipse.microprofile.openapi.apps.airlines.data.UserData;
-import org.eclipse.microprofile.openapi.apps.airlines.model.User;
-import org.eclipse.microprofile.openapi.apps.airlines.exception.ApiException;
-import org.eclipse.microprofile.openapi.apps.airlines.exception.NotFoundException;
-
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
+
+import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
+import org.eclipse.microprofile.openapi.annotations.enums.ParameterStyle;
+import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
+import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
+import org.eclipse.microprofile.openapi.annotations.headers.Header;
+import org.eclipse.microprofile.openapi.annotations.links.Link;
+import org.eclipse.microprofile.openapi.annotations.links.LinkParameter;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Encoding;
+import org.eclipse.microprofile.openapi.annotations.media.ExampleObject;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
+import org.eclipse.microprofile.openapi.annotations.parameters.Parameters;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
+import org.eclipse.microprofile.openapi.annotations.servers.Server;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import org.eclipse.microprofile.openapi.annotations.tags.Tags;
+import org.eclipse.microprofile.openapi.apps.airlines.data.UserData;
+import org.eclipse.microprofile.openapi.apps.airlines.exception.ApiException;
+import org.eclipse.microprofile.openapi.apps.airlines.exception.NotFoundException;
+import org.eclipse.microprofile.openapi.apps.airlines.model.User;
 
 @Path("/user")
 @Produces({"application/json", "application/xml"})
@@ -217,12 +215,23 @@ public class UserResource {
     @Path("/createWithArray")
     @Tag(ref="user")
     @Tag(ref="create")
-    @Parameter(
-            name = "userArray",
-            in = ParameterIn.QUERY,
-            description = "An array of User objects to create records.",
+    @APIResponse(
+            responseCode = "200",
+            description = "Successfully created list of users."
+        )
+    @APIResponse(
+            responseCode = "400",
+            description = "Unable to create list of users."
+        )
+    @Operation(
+        summary = "Creates list of users with given input array", //Array of User objects
+        operationId = "createUsersFromArray"
+        /* tags = {"user"}, //this operation intentionally doesn't have tags attribute, since above Tag ref should apply */
+        )
+    public Response createUsersWithArrayInput(
+        @RequestBody(
+            description = "Array of user object",
             required = true,
-            explode = Explode.FALSE,
             content = @Content(
                 mediaType = "application/json",
                 schema = @Schema(
@@ -242,24 +251,6 @@ public class UserResource {
                     explode = true
                 )
             )
-        )
-    @APIResponse(
-            responseCode = "200",
-            description = "Successfully created list of users."
-        )
-    @APIResponse(
-            responseCode = "400",
-            description = "Unable to create list of users."
-        )
-    @Operation(
-        summary = "Creates list of users with given input array", //Array of User objects
-        operationId = "createUsersFromArray"
-        /* tags = {"user"}, //this operation intentionally doesn't have tags attribute, since above Tag ref should apply */
-        )
-    public Response createUsersWithArrayInput(
-        @Parameter(
-            description = "Array of user object",
-            required = true
         ) User[] users) {
             for (User user : users) {
                 userData.addUser(user);
@@ -284,7 +275,7 @@ public class UserResource {
         operationId = "createUsersFromList"
         )
       public Response createUsersWithListInput(
-            @Parameter(
+            @RequestBody(
                 description = "List of user object",
                 required = true
             )
