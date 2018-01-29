@@ -17,7 +17,7 @@
 package org.eclipse.microprofile.openapi.tck;
 
 
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.startsWith;
 import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
 
@@ -44,14 +44,9 @@ public class OASConfigScanDisableTest extends AppTestBase {
     public void testScanDisable(String type) throws InterruptedException {
         vr = callEndpoint(type);
         vr.body("openapi", startsWith("3.0."));
-        vr.body("info.title", equalTo("Liberty APIs"));
-        vr.body("info.version", equalTo("1.0"));
+        vr.body("info", notNullValue());
+        vr.body("info.title", notNullValue());
+        vr.body("info.version", notNullValue());
         vr.body("paths", aMapWithSize(0));
-        vr.body("info", equalTo(null));
-        vr.body("externalDocs", equalTo(null));
-        vr.body("servers", equalTo(null));
-        vr.body("security", equalTo(null));
-        vr.body("tags", equalTo(null));
-        vr.body("components", equalTo(null));
     }
 }
