@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017 Contributors to the Eclipse Foundation
+ * Copyright (c) 2017, 2018 Contributors to the Eclipse Foundation
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a
  * copy of the License at
@@ -14,6 +14,7 @@
 package org.eclipse.microprofile.openapi.tck;
 
 import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.hasSize;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -38,17 +39,22 @@ public class OASConfigServersTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testServer(String type) throws InterruptedException {
         vr = callEndpoint(type);
+        
         vr.body("servers.findAll { it }.url", hasSize(2));
-        vr.body("servers.findAll { it }.url", contains("https://xyz.com/v1"));
-        vr.body("servers.findAll { it }.url", contains("https://abc.com/v1"));   
+        vr.body("servers.findAll { it }.url", containsInAnyOrder("https://xyz.com/v1", "https://abc.com/v1"));
         
-        vr.body("paths.'bookings/{id}'.servers.findAll { it }.url", hasSize(1));
-        vr.body("paths.'bookings/{id}'.servers.findAll { it }.url", contains("https://xyz.io/v1"));
+        vr.body("paths.'/bookings/{id}'.servers.findAll { it }.url", hasSize(2));
+        vr.body("paths.'/bookings/{id}'.servers.findAll { it }.url", containsInAnyOrder("https://xyz.io/v1", "https://xyz.io/v2"));
         
-        vr.body("paths.'/reviews'.post.servers.findAll { it }.url", hasSize(1));
-        vr.body("paths.'/reviews'.post.servers.findAll { it }.url", contains("https://newreviewserver.io/v1"));
+        vr.body("paths.'/user/createWithArray'.servers.findAll { it }.url", hasSize(1));
+        vr.body("paths.'/user/createWithArray'.servers.findAll { it }.url", contains("https://xyz.io/v3"));
         
+        vr.body("paths.'/bookings/{id}'.get.servers.findAll { it }.url", hasSize(1));
+        vr.body("paths.'/bookings/{id}'.get.servers.findAll { it }.url", contains("https://abc.io/v1"));
         
+        vr.body("paths.'/reviews'.post.servers.findAll { it }.url", hasSize(2));
+        vr.body("paths.'/reviews'.post.servers.findAll { it }.url", 
+                containsInAnyOrder("https://newreviewserver.io/v1","https://newreviewserver.io/v2"));
         
     }
 }
