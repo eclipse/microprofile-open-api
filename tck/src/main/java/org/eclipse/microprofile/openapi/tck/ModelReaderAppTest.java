@@ -157,11 +157,11 @@ public class ModelReaderAppTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testAvailabilityGetParameter(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        String availabilityParameters = "paths.'/availability'.get.parameters";
+        String availabilityParameters = "paths.'/availabilityModel'.get.parameters";
 
         vr.body(availabilityParameters, hasSize(6));
         vr.body(availabilityParameters + ".findAll { it }.name",
-                hasItems("departureDate", "airportFrom", "returningDate", "airportTo", "numberOfAdults", "numberOfChildren"));
+                hasItems("airportFrom", "returningDate", "airportTo", "numberOfAdults", "numberOfChildren"));
         
         vr.body(availabilityParameters + ".findAll { it.$ref == '#/components/parameters/departureDate'}", notNullValue());
 
