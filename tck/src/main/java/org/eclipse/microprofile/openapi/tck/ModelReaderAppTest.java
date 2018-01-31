@@ -162,6 +162,8 @@ public class ModelReaderAppTest extends AppTestBase {
         vr.body(availabilityParameters, hasSize(6));
         vr.body(availabilityParameters + ".findAll { it }.name",
                 hasItems("departureDate", "airportFrom", "returningDate", "airportTo", "numberOfAdults", "numberOfChildren"));
+        
+        vr.body(availabilityParameters + ".findAll { it.ref == '#/components/parameters/departureDate'}", notNullValue());
 
         List<String[]> list = new ArrayList<String[]>();
         list.add(new String[] { "airportFrom", "Airport the customer departs from" });
