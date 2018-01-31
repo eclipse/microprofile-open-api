@@ -303,6 +303,6 @@ public class ModelReaderAppTest extends AppTestBase {
         String content1 = "paths.'/availability'.get.responses.'200'.content.'application/json'";
         vr.body(content1, notNullValue());
         vr.body(content1 + ".schema.type", equalTo("array"));
-        vr.body(content1 + ".schema.items.$ref", equalTo("#/components/schemas/Flight"));
+        vr.body(content1 + ".schema.items", notNullValue());
     }
 }
