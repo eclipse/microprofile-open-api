@@ -208,7 +208,7 @@ public class MyOASModelReaderImpl implements OASModelReader {
                                     .description("No airlines found")
                                     .content(OASFactory.createObject(Content.class)
                                         .addMediaType("n/a", OASFactory.createObject(MediaType.class)))))))
-                    .addPathItem("/availability", OASFactory.createObject(PathItem.class)
+                    .addPathItem("/availabilityModel", OASFactory.createObject(PathItem.class)
                         .GET(OASFactory.createObject(Operation.class)
                             .tags(new ArrayList<String>())
                                 .addTag("Availability")
