@@ -153,15 +153,19 @@ public class ModelReaderAppTest extends AppTestBase {
         vr.body("paths.'/availability'.get.responses.'404'.description", equalTo("No available flights found"));
     }
 
-    private void testAvailabilityGetParamater(ValidatableResponse vr) {
-        String availabilityParameters = "paths.'/availability'.get.parameters";
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testAvailabilityGetParameter(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+        String availabilityParameters = "paths.'/availabilityModel'.get.parameters";
 
         vr.body(availabilityParameters, hasSize(6));
         vr.body(availabilityParameters + ".findAll { it }.name",
-                hasItems("departureDate", "airportFrom", "returningDate", "airportTo", "numberOfAdults", "numberOfChildren"));
+                hasItems("airportFrom", "returningDate", "airportTo", "numberOfAdults", "numberOfChildren"));
+        
+        vr.body(availabilityParameters + ".findAll { it.$ref == '#/components/parameters/departureDate'}", notNullValue());
 
         List<String[]> list = new ArrayList<String[]>();
-        list.add(new String[] { "departureDate", "Customer departure date" });
         list.add(new String[] { "airportFrom", "Airport the customer departs from" });
         list.add(new String[] { "returningDate", "Customer return date" });
         list.add(new String[] { "airportTo", "Airport the customer returns to" });
