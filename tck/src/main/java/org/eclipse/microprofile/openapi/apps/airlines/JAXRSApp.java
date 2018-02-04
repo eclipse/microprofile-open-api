@@ -20,6 +20,16 @@ import java.util.Set;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
+import org.eclipse.microprofile.openapi.annotations.Components;
+import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
+import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
+import org.eclipse.microprofile.openapi.annotations.callbacks.Callback;
+import org.eclipse.microprofile.openapi.annotations.callbacks.CallbackOperation;
+import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
+import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
+import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeIn;
+import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
+import org.eclipse.microprofile.openapi.annotations.headers.Header;
 import org.eclipse.microprofile.openapi.annotations.info.Contact;
 import org.eclipse.microprofile.openapi.annotations.info.Info;
 import org.eclipse.microprofile.openapi.annotations.info.License;
@@ -31,24 +41,15 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
-import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.annotations.servers.Server;
 import org.eclipse.microprofile.openapi.annotations.servers.ServerVariable;
-import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeIn;
-import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
-import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
-import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
-import org.eclipse.microprofile.openapi.annotations.headers.Header;
-import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
-import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
-import org.eclipse.microprofile.openapi.annotations.callbacks.Callback;
-import org.eclipse.microprofile.openapi.annotations.callbacks.CallbackOperation;
-import org.eclipse.microprofile.openapi.annotations.Components;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.eclipse.microprofile.openapi.apps.airlines.model.Airline;
 import org.eclipse.microprofile.openapi.apps.airlines.model.Booking;
 import org.eclipse.microprofile.openapi.apps.airlines.model.Review;
+import org.eclipse.microprofile.openapi.apps.airlines.model.User;
 import org.eclipse.microprofile.openapi.apps.airlines.resources.AirlinesResource;
 import org.eclipse.microprofile.openapi.apps.airlines.resources.AvailabilityResource;
 import org.eclipse.microprofile.openapi.apps.airlines.resources.ReviewResource;
@@ -90,7 +91,8 @@ import org.eclipse.microprofile.openapi.apps.airlines.resources.bookings.Booking
                         @Schema(name = "Bookings", title = "Bookings", type = SchemaType.ARRAY, implementation = Booking.class),
                         @Schema(name = "Airlines", title = "Airlines", type = SchemaType.ARRAY, implementation = Airline.class),
                         @Schema(name = "id", type = SchemaType.INTEGER, format="int32"),
-                        @Schema(name = "AirlinesRef", ref = "#/components/schemas/Airlines") }, 
+                        @Schema(name = "AirlinesRef", ref = "#/components/schemas/Airlines"),
+                        @Schema(name = "User", implementation = User.class)}, 
                 responses = {
                         @APIResponse(name = "FoundAirlines", responseCode = "200", description = "successfully found airlines", 
                                 content = @Content(mediaType = "application/json", schema = @Schema(type = SchemaType.ARRAY, 

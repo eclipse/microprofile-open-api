@@ -310,10 +310,7 @@ public class UserResource {
                     responseCode = "200",
                     description = "User updated successfully",
                     content = @Content(
-                        schema = @Schema(
-                            name = "updatedUser",
-                            implementation = User.class
-                            ),
+                        schema = @Schema(ref="User"),
                         encoding = @Encoding(
                             name = "password",
                             contentType = "text/plain",
