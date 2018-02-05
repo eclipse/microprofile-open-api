@@ -107,6 +107,7 @@ public class BookingResource {
                     responseCode="200",
                     description="Bookings retrieved",
                     content=@Content(
+                        mediaType="application/json",
                         schema=@Schema(
                             type = SchemaType.ARRAY,
                             implementation=Booking.class))
