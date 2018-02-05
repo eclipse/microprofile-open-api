@@ -86,13 +86,17 @@
             <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
-
+        <dependency>
+      		<groupId>org.jboss.shrinkwrap.resolver</groupId>
+      		<artifactId>shrinkwrap-resolver-depchain</artifactId>
+      		<version>${version.shrinkwrap.resolvers}</version>
+     		<type>pom</type>
+    	</dependency>
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>${testng.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.jboss.arquillian.testng</groupId>
             <artifactId>arquillian-testng-container</artifactId>
