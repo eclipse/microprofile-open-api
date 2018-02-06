@@ -29,6 +29,8 @@ import org.eclipse.microprofile.openapi.tck.utils.YamlToJsonConverterServlet;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.resolver.api.maven.MavenResolverSystem; //maven.MavenDependencyResolver;
+import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
@@ -48,20 +50,24 @@ public abstract class AppTestBase extends Arquillian {
     private static String username;
     private static String password;
     private static Map<String, String> headers = new HashMap<>();
-
+        
     @Deployment(name = "proxy")
     public static WebArchive createProxy() {
+        
+        MavenResolverSystem resolver = Maven.resolver();  
+        resolver.loadPomFromFile("pom.xml");  
+        File[] files = resolver.resolve("org.apache.httpcomponents:httpcore:4.4.4",
+                "com.fasterxml.jackson.core:jackson-core:2.8.6",
+                "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.8.6",
+                "com.fasterxml.jackson.core:jackson-databind-2.8.6",
+                "com.fasterxml.jackson.core:jackson-annotations:2.8.0",
+                "org.yaml:snakeyaml:1.17",
+                "commons-logging:commons-logging:1.2",
+                "org.apache.commonscommons-lang3:3.4").withTransitivity().asFile();
+        
         return ShrinkWrap.create(WebArchive.class, "proxy.war")
                 .addClass(YamlToJsonConverterServlet.class)
-                .addAsLibraries(new File("./lib/httpclient-4.5.2.jar"))
-                .addAsLibraries(new File("./lib/httpcore-4.4.4.jar"))
-                .addAsLibraries(new File("./lib/jackson-core-2.8.6.jar"))
-                .addAsLibraries(new File("./lib/jackson-dataformat-yaml-2.8.6.jar"))
-                .addAsLibraries(new File("./lib/jackson-databind-2.8.6.jar"))
-                .addAsLibraries(new File("./lib/jackson-annotations-2.8.0.jar"))
-                .addAsLibraries(new File("./lib/snakeyaml-1.17.jar"))
-                .addAsLibraries(new File("./lib/commons-logging-1.2.jar"))
-                .addAsLibraries(new File("./lib/commons-lang3-3.4.jar"));
+                .addAsLibraries(files);
     }
 
     @BeforeClass
