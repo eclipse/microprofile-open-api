@@ -431,7 +431,8 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(endpoint, hasKey("get"));
         vr.body(endpoint + ".get.summary", equalTo("Get all reviews"));
         vr.body(endpoint + ".get.responses.'200'.description", equalTo("successful operation"));
-        vr.body(endpoint + ".get.responses.'200'.content.'application/json'.schema.ref", equalTo("#/components/schemas/Review"));
+        vr.body(endpoint + ".get.responses.'200'.content.'application/json'.schema.type", equalTo("array"));
+        vr.body(endpoint + ".get.responses.'200'.content.'application/json'.schema.items", notNullValue());
     }
 
     @RunAsClient
@@ -623,7 +624,6 @@ public class AirlinesAppTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testSchema(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        String createSchema = "paths.'/user/createWithArray'.post.parameters.find{ it.name == 'userArray' }.content.'application/json'.schema";
 
         // Basic properties
         vr.body("components.schemas.AirlinesRef.$ref", equalTo("#/components/schemas/Airlines"));
@@ -632,8 +632,6 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("components.schemas.id.format", equalTo("int32"));
         vr.body("paths.'/bookings'.post.responses.'201'.content.'application/json'.schema.description", equalTo("id of the new booking"));
         vr.body("components.schemas.User.properties.password.example", equalTo("bobSm37"));
-        vr.body(createSchema + ".nullable", equalTo(true));
-        vr.body(createSchema + ".writeOnly", equalTo(true));
 
         // Object properties
         vr.body("paths.'/user'.post.requestBody.content.'application/json'.schema.maxProperties", equalTo(1024));
@@ -641,6 +639,9 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("components.schemas.User.required", hasItems("id", "username", "password")); // requiredProperties
 
         // Array properties
+        String createSchema = "paths.'/user/createWithArray'.post.requestBody.content.'application/json'.schema";
+        vr.body(createSchema + ".nullable", equalTo(true));
+        vr.body(createSchema + ".writeOnly", equalTo(true));
         vr.body(createSchema + ".maxItems", equalTo(20));
         vr.body(createSchema + ".minItems", equalTo(2));
         vr.body(createSchema + ".uniqueItems", equalTo(true));
@@ -824,7 +825,7 @@ public class AirlinesAppTest extends AppTestBase {
         String content1 = "paths.'/availability'.get.responses.'200'.content.'application/json'";
         vr.body(content1, notNullValue());
         vr.body(content1 + ".schema.type", equalTo("array"));
-        vr.body(content1 + ".schema.items.$ref", equalTo("#/components/schemas/Flight"));
+        vr.body(content1 + ".schema.items", notNullValue());
 
         String content2 = "paths.'/user/{username}'.put.responses.'200'.content";
         vr.body(content2, notNullValue());

@@ -18,27 +18,21 @@ package org.eclipse.microprofile.openapi.tck;
 
 import static io.restassured.RestAssured.given;
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.microprofile.openapi.tck.utils.YamlToJsonConverterServlet;
-import org.jboss.arquillian.container.test.api.Deployment;
+import org.eclipse.microprofile.openapi.tck.utils.YamlToJsonFilter;
 import org.jboss.arquillian.testng.Arquillian;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
 import io.restassured.response.ValidatableResponse;
 
 public abstract class AppTestBase extends Arquillian {
-    private static final String APPLICATION_JSON = "application/json";
 
     private static final String DEFAULT_PROTOCOL = "http";
     private static final String DEFAULT_HOST = "localhost";
@@ -47,24 +41,8 @@ public abstract class AppTestBase extends Arquillian {
     private static String serverUrl;
     private static String username;
     private static String password;
-    private static Map<String, String> headers = new HashMap<>();
 
-    @Deployment(name = "proxy")
-    public static WebArchive createProxy() {
-        return ShrinkWrap.create(WebArchive.class, "proxy.war")
-                .addClass(YamlToJsonConverterServlet.class)
-                .addAsLibraries(new File("./lib/httpclient-4.5.2.jar"))
-                .addAsLibraries(new File("./lib/httpcore-4.4.4.jar"))
-                .addAsLibraries(new File("./lib/jackson-core-2.8.6.jar"))
-                .addAsLibraries(new File("./lib/jackson-dataformat-yaml-2.8.6.jar"))
-                .addAsLibraries(new File("./lib/jackson-databind-2.8.6.jar"))
-                .addAsLibraries(new File("./lib/jackson-annotations-2.8.0.jar"))
-                .addAsLibraries(new File("./lib/snakeyaml-1.17.jar"))
-                .addAsLibraries(new File("./lib/commons-logging-1.2.jar"))
-                .addAsLibraries(new File("./lib/commons-lang3-3.4.jar"));
-    }
-
-    @BeforeClass
+    @BeforeSuite
     public static void setUp() throws MalformedURLException {
         // set base URI and port number to use for all requests
         serverUrl = System.getProperty("test.url");
@@ -94,22 +72,19 @@ public abstract class AppTestBase extends Arquillian {
         if (StringUtils.isBlank(serverUrl)) {
             serverUrl = DEFAULT_PROTOCOL + "://" + DEFAULT_HOST + ":" + DEFAULT_PORT;
         }
-        headers.put(YamlToJsonConverterServlet.TCK_HEADER_SERVERURL, serverUrl);
-        if (StringUtils.isNotBlank(username)) {
-            headers.put(YamlToJsonConverterServlet.TCK_HEADER_USERNAME, username);
-        }
-        if (StringUtils.isNotBlank(password)) {
-            headers.put(YamlToJsonConverterServlet.TCK_HEADER_PASSWORD, password);
-        }
+
+        // Register a filter that performs YAML to JSON conversion
+        RestAssured.filters(new YamlToJsonFilter());
     }
 
     public ValidatableResponse callEndpoint(String type) {
         ValidatableResponse vr;
         if ("JSON".equals(type)) {
-            vr = given().accept(APPLICATION_JSON).when().get("/openapi").then().statusCode(200);
+            vr = given().accept(ContentType.JSON).when().get("/openapi").then().statusCode(200);
         }
         else {
-            vr = given().headers(headers).when().get("/proxy").then().statusCode(200);
+            // It seems there is no standard for YAML
+            vr = given().accept(ContentType.ANY).when().get("/openapi").then().statusCode(200);
         }
         return vr;
     }

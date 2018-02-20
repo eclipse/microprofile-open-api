@@ -107,6 +107,7 @@ public class BookingResource {
                     responseCode="200",
                     description="Bookings retrieved",
                     content=@Content(
+                        mediaType="application/json",
                         schema=@Schema(
                             type = SchemaType.ARRAY,
                             implementation=Booking.class))
@@ -137,7 +138,7 @@ public class BookingResource {
             description = "Create a new booking with the provided information.",
             content = @Content(
                 mediaType = "application/json",
-                schema = @Schema(implementation = Booking.class),
+                schema = @Schema(ref="Booking"),
                 examples = @ExampleObject(
                     name = "booking",
                     summary = "External booking example",
