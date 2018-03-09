@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2017 Contributors to the Eclipse Foundation
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
