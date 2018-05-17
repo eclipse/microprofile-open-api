@@ -202,7 +202,7 @@ public class ReviewResource {
     }
 
     @GET
-    @Path("{user}")
+    @Path("users/{user}")
     @Operation(
         operationId = "getReviewByUser",
         summary="Get all reviews by user")

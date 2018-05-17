@@ -50,7 +50,7 @@ public class OASConfigExcludeClassesTest extends AppTestBase {
         vr.body("paths.", aMapWithSize(10));
         vr.body("paths.'/reviews'", nullValue());
         vr.body("paths.'/reviews/{id}'", nullValue());
-        vr.body("paths.'/reviews/{user}'", nullValue());
+        vr.body("paths.'/reviews/users/{user}'", nullValue());
         vr.body("paths.'/reviews/{airline}'", nullValue());
         vr.body("paths.'/reviews/{user}/{airlines}'", nullValue());
         
