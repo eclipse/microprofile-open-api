@@ -247,7 +247,7 @@ public class ReviewResource {
     }
 
     @GET
-    @Path("{airline}")
+    @Path("airlines/{airline}")
     @Operation(
         operationId = "getReviewByAirline",
         summary="Get all reviews by airlines")

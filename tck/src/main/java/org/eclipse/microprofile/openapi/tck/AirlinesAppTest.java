@@ -223,8 +223,8 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/reviews/users/{user}'.get.summary", equalTo("Get all reviews by user"));
         vr.body("paths.'/reviews/users/{user}'.get.operationId", equalTo("getReviewByUser"));
 
-        vr.body("paths.'/reviews/{airline}'.get.summary", equalTo("Get all reviews by airlines"));
-        vr.body("paths.'/reviews/{airline}'.get.operationId", equalTo("getReviewByAirline"));
+        vr.body("paths.'/reviews/airlines/{airline}'.get.summary", equalTo("Get all reviews by airlines"));
+        vr.body("paths.'/reviews/airlines/{airline}'.get.operationId", equalTo("getReviewByAirline"));
 
         vr.body("paths.'/reviews/{user}/{airlines}'.get.summary", equalTo("Get all reviews for an airline by User"));
         vr.body("paths.'/reviews/{user}/{airlines}'.get.operationId", equalTo("getReviewByAirlineAndUser"));
@@ -699,7 +699,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/reviews/{id}'.get.tags", containsInAnyOrder("Reviews", "Ratings"));
         vr.body("paths.'/reviews/{id}'.delete.tags", containsInAnyOrder("Reviews", "Ratings"));
         vr.body("paths.'/reviews/users/{user}'.get.tags", containsInAnyOrder("Reviews", "Ratings"));
-        vr.body("paths.'/reviews/{airline}'.get.tags", containsInAnyOrder("Reviews", "Ratings"));
+        vr.body("paths.'/reviews/airlines/{airline}'.get.tags", containsInAnyOrder("Reviews", "Ratings"));
         vr.body("paths.'/reviews/{user}/{airlines}'.get.tags", containsInAnyOrder("Reviews", "Ratings"));
         vr.body("paths.'/user'.post.tags", containsInAnyOrder("user", "create"));
         vr.body("paths.'/user/createWithArray'.post.tags", containsInAnyOrder("user", "create"));
