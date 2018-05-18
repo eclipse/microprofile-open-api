@@ -28,10 +28,10 @@ import org.eclipse.microprofile.openapi.apps.petstore.resource.PetResource;
 import org.eclipse.microprofile.openapi.apps.petstore.resource.PetStoreResource;
 import org.eclipse.microprofile.openapi.apps.petstore.resource.UserResource;
 
-import javax.ws.rs.Path;
+import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
-@Path("/")
+@ApplicationPath("/")
 @OpenAPIDefinition(
     info = @Info(
         title = "Pet Store App",
