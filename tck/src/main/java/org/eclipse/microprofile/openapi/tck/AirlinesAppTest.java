@@ -220,11 +220,11 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/reviews/{id}'.delete.summary", equalTo("Delete a Review with ID"));
         vr.body("paths.'/reviews/{id}'.delete.operationId", equalTo("deleteReview"));
 
-        vr.body("paths.'/reviews/{user}'.get.summary", equalTo("Get all reviews by user"));
-        vr.body("paths.'/reviews/{user}'.get.operationId", equalTo("getReviewByUser"));
+        vr.body("paths.'/reviews/users/{user}'.get.summary", equalTo("Get all reviews by user"));
+        vr.body("paths.'/reviews/users/{user}'.get.operationId", equalTo("getReviewByUser"));
 
-        vr.body("paths.'/reviews/{airline}'.get.summary", equalTo("Get all reviews by airlines"));
-        vr.body("paths.'/reviews/{airline}'.get.operationId", equalTo("getReviewByAirline"));
+        vr.body("paths.'/reviews/airlines/{airline}'.get.summary", equalTo("Get all reviews by airlines"));
+        vr.body("paths.'/reviews/airlines/{airline}'.get.operationId", equalTo("getReviewByAirline"));
 
         vr.body("paths.'/reviews/{user}/{airlines}'.get.summary", equalTo("Get all reviews for an airline by User"));
         vr.body("paths.'/reviews/{user}/{airlines}'.get.operationId", equalTo("getReviewByAirlineAndUser"));
@@ -292,9 +292,9 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/bookings/{id}'.get.responses.'200'.description", equalTo("Booking retrieved"));
         vr.body("paths.'/bookings/{id}'.get.responses.'404'.description", equalTo("Booking not found"));
 
-        vr.body("paths.'/reviews/{user}'.get.responses", aMapWithSize(2));
-        vr.body("paths.'/reviews/{user}'.get.responses.'200'.description", equalTo("Review(s) retrieved"));
-        vr.body("paths.'/reviews/{user}'.get.responses.'404'.description", equalTo("Review(s) not found"));
+        vr.body("paths.'/reviews/users/{user}'.get.responses", aMapWithSize(2));
+        vr.body("paths.'/reviews/users/{user}'.get.responses.'200'.description", equalTo("Review(s) retrieved"));
+        vr.body("paths.'/reviews/users/{user}'.get.responses.'404'.description", equalTo("Review(s) not found"));
 
         vr.body("paths.'/user/{username}'.put.responses", aMapWithSize(3));
         vr.body("paths.'/user/{username}'.put.responses.'200'.description", equalTo("User updated successfully"));
@@ -657,11 +657,11 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("components.examples.review.externalValue", equalTo("http://foo.bar/examples/review-example.json"));
 
         // Example in Parameter Content
-        vr.body("paths.'/reviews/{user}'.get.parameters.find{ it.name=='user'}.content.'*/*'.examples.example.value", equalTo("bsmith"));
+        vr.body("paths.'/reviews/users/{user}'.get.parameters.find{ it.name=='user'}.content.'*/*'.examples.example.value", equalTo("bsmith"));
 
         // Example in Parameter
-        vr.body("paths.'/reviews/{user}'.get.parameters.find{ it.name=='user'}.examples.example1.value", equalTo("bsmith"));
-        vr.body("paths.'/reviews/{user}'.get.parameters.find{ it.name=='user'}.examples.example2.value", equalTo("pat@example.com"));
+        vr.body("paths.'/reviews/users/{user}'.get.parameters.find{ it.name=='user'}.examples.example1.value", equalTo("bsmith"));
+        vr.body("paths.'/reviews/users/{user}'.get.parameters.find{ it.name=='user'}.examples.example2.value", equalTo("pat@example.com"));
     }
 
     @RunAsClient
@@ -698,8 +698,8 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/reviews'.post.tags", containsInAnyOrder("Reviews"));
         vr.body("paths.'/reviews/{id}'.get.tags", containsInAnyOrder("Reviews", "Ratings"));
         vr.body("paths.'/reviews/{id}'.delete.tags", containsInAnyOrder("Reviews", "Ratings"));
-        vr.body("paths.'/reviews/{user}'.get.tags", containsInAnyOrder("Reviews", "Ratings"));
-        vr.body("paths.'/reviews/{airline}'.get.tags", containsInAnyOrder("Reviews", "Ratings"));
+        vr.body("paths.'/reviews/users/{user}'.get.tags", containsInAnyOrder("Reviews", "Ratings"));
+        vr.body("paths.'/reviews/airlines/{airline}'.get.tags", containsInAnyOrder("Reviews", "Ratings"));
         vr.body("paths.'/reviews/{user}/{airlines}'.get.tags", containsInAnyOrder("Reviews", "Ratings"));
         vr.body("paths.'/user'.post.tags", containsInAnyOrder("user", "create"));
         vr.body("paths.'/user/createWithArray'.post.tags", containsInAnyOrder("user", "create"));
@@ -855,7 +855,7 @@ public class AirlinesAppTest extends AppTestBase {
     public void testContentInParameter(String type) {
         ValidatableResponse vr = callEndpoint(type);
 
-        String content = "paths.'/reviews/{user}'.get.parameters.find{ it.name == 'user' }.content";
+        String content = "paths.'/reviews/users/{user}'.get.parameters.find{ it.name == 'user' }.content";
         vr.body(content, notNullValue());
         vr.body(content + ".'*/*'", notNullValue());
         vr.body(content + ".'*/*'.schema.type", equalTo("string"));
