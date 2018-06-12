@@ -20,7 +20,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 
-public class OASConfigWebInf extends OASConfigScanClassTest {
+public class OASConfigWebInfTest extends OASConfigScanClassTest {
 
     @Deployment(name = "airlinesWebInf", order = 2)
     public static WebArchive createDeployment() {
