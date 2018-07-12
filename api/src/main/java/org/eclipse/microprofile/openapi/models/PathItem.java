@@ -266,16 +266,27 @@ public interface PathItem extends Constructible, Extensible, Reference<PathItem>
     /**
      * Returns a list of all the operations for this path item.
      * 
+     * @deprecated since 1.1, use @link {@link Map#values()} on {@link #getOperations()} instead
      * @return a list of all the operations for this path item
      **/
+    @Deprecated
     List<Operation> readOperations();
 
     /**
      * Returns a map with all the operations for this path where the keys are HttpMethods.
      * 
+     * @deprecated since 1.1, use {@link #getOperations()} instead
      * @return a map with all the operations for this path where the keys are HttpMethods
      **/
+    @Deprecated
     Map<PathItem.HttpMethod, Operation> readOperationsMap();
+    
+    /**
+     * Returns a map with all the operations for this path where the keys are {@link PathItem.HttpMethod} items
+     * 
+     * @return a map with all the operations for this path where the keys are HttpMethods
+     **/
+    Map<PathItem.HttpMethod, Operation> getOperations();
 
     /**
      * Returns the servers property from a PathItem instance.
