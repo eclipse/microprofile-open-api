@@ -225,6 +225,7 @@ public class ReviewResource {
             required = true,
             in = ParameterIn.PATH,
             content = @Content(
+                example = "bsmith",
                 examples = @ExampleObject(
                     name = "example",
                     value = "bsmith")),
