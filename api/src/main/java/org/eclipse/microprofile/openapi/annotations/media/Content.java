@@ -46,6 +46,14 @@ public @interface Content {
      **/
     ExampleObject[] examples() default {};
 
+
+    /**
+     * A free-form property to include an example of an instance for this content.
+     *
+     * @return an example of this content
+     **/
+    String example() default "";
+
     /**
      * The schema defining the type used for the request body.
      *
