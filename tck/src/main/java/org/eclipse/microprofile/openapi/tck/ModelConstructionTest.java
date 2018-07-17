@@ -261,6 +261,47 @@ public class ModelConstructionTest extends Arquillian {
         final Server s = createConstructibleInstance(Server.class);
         checkSameObject(pi, pi.addServer(s));
         checkListEntry(pi.getServers(), s);
+        
+        final Operation o1 = createConstructibleInstance(Operation.class);
+        checkSameObject(pi, pi.GET(o1));
+        checkSameObject(o1, pi.getGET());
+        
+        final Operation o2 = createConstructibleInstance(Operation.class);
+        checkSameObject(pi, pi.PUT(o2));
+        checkSameObject(o2, pi.getPUT());
+        
+        final Operation o3 = createConstructibleInstance(Operation.class);
+        checkSameObject(pi, pi.POST(o3));
+        checkSameObject(o3, pi.getPOST());
+        
+        final Operation o4 = createConstructibleInstance(Operation.class);
+        checkSameObject(pi, pi.DELETE(o4));
+        checkSameObject(o4, pi.getDELETE());
+        
+        final Operation o5 = createConstructibleInstance(Operation.class);
+        checkSameObject(pi, pi.OPTIONS(o5));
+        checkSameObject(o5, pi.getOPTIONS());
+        
+        final Operation o6 = createConstructibleInstance(Operation.class);
+        checkSameObject(pi, pi.HEAD(o6));
+        checkSameObject(o6, pi.getHEAD());
+        
+        final Operation o7 = createConstructibleInstance(Operation.class);
+        checkSameObject(pi, pi.PATCH(o7));
+        checkSameObject(o7, pi.getPATCH());
+        
+        final Operation o8 = createConstructibleInstance(Operation.class);
+        checkSameObject(pi, pi.TRACE(o8));
+        checkSameObject(o8, pi.getTRACE());
+        
+        checkMapEntry(pi.getOperations(), PathItem.HttpMethod.GET, o1);
+        checkMapEntry(pi.getOperations(), PathItem.HttpMethod.PUT, o2);
+        checkMapEntry(pi.getOperations(), PathItem.HttpMethod.POST, o3);
+        checkMapEntry(pi.getOperations(), PathItem.HttpMethod.DELETE, o4);
+        checkMapEntry(pi.getOperations(), PathItem.HttpMethod.OPTIONS, o5);
+        checkMapEntry(pi.getOperations(), PathItem.HttpMethod.HEAD, o6);
+        checkMapEntry(pi.getOperations(), PathItem.HttpMethod.PATCH, o7);
+        checkMapEntry(pi.getOperations(), PathItem.HttpMethod.TRACE, o8);
     }
     
     @Test
@@ -814,7 +855,7 @@ public class ModelConstructionTest extends Arquillian {
         return properties;
     }
     
-    private <T> void checkMapEntry(Map<String,T> map, String key, T value) {
+    private <K, T> void checkMapEntry(Map<K,T> map, K key, T value) {
         assertNotNull(map, "The map must not be null.");
         assertTrue(map.containsKey(key), "The map is expected to contain the key: " + key);
         assertSame(map.get(key), value, "The value associated with the key: " + key + " is expected to be the same one that was added.");
