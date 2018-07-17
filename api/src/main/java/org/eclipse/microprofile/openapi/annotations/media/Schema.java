@@ -111,8 +111,8 @@ public @interface Schema {
     double multipleOf() default 0;
 
     /**
-     * Sets the maximum numeric value for a property. 
-     * Ignored if the value is an empty string.
+     * Sets the maximum numeric value for a property.  Value must be a valid number. 
+     * Ignored if the value is an empty string or not a number.
      * 
      * @return the maximum value for this schema
      **/
@@ -126,7 +126,7 @@ public @interface Schema {
     boolean exclusiveMaximum() default false;
 
     /**
-     * Sets the minimum numeric value for a property. 
+     * Sets the minimum numeric value for a property. Value must be a valid number.
      * Ignored if the value is an empty string or not a number.
      * 
      * @return the minimum value for this schema
