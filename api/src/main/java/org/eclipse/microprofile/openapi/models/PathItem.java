@@ -64,7 +64,10 @@ public interface PathItem extends Constructible, Extensible, Reference<PathItem>
      * @param summary short summary of what the path item represents
      * @return the current PathItem instance
      **/
-    PathItem summary(String summary);
+    default PathItem summary(String summary) {
+        setSummary(summary);
+        return this;
+    }
 
     /**
      * Returns the description property from a PathItem instance.
@@ -86,7 +89,10 @@ public interface PathItem extends Constructible, Extensible, Reference<PathItem>
      * @param description detailed description of what the path item represents
      * @return the current PathItem instance
      **/
-    PathItem description(String description);
+    default PathItem description(String description) {
+        setDescription(description);
+        return this;
+    }
 
     /**
      * Returns the get property from a PathItem instance.
@@ -108,7 +114,10 @@ public interface PathItem extends Constructible, Extensible, Reference<PathItem>
      * @param get definition of a GET operation
      * @return the current PathItem instance
      **/
-    PathItem GET(Operation get);
+    default PathItem GET(Operation get) {
+        setGET(get);
+        return this;
+    }
 
     /**
      * Returns the put property from a PathItem instance.
@@ -130,7 +139,10 @@ public interface PathItem extends Constructible, Extensible, Reference<PathItem>
      * @param put definition of a PUT operation
      * @return the current PathItem instance
      **/
-    PathItem PUT(Operation put);
+    default PathItem PUT(Operation put) {
+        setPUT(put);
+        return this;
+    }
 
     /**
      * Returns the post property from a PathItem instance.
@@ -152,7 +164,10 @@ public interface PathItem extends Constructible, Extensible, Reference<PathItem>
      * @param post definition of a PUT operation
      * @return the current PathItem instance
      **/
-    PathItem POST(Operation post);
+    default PathItem POST(Operation post) {
+        setPOST(post);
+        return this;
+    }
 
     /**
      * Returns the delete property from a PathItem instance.
@@ -174,7 +189,10 @@ public interface PathItem extends Constructible, Extensible, Reference<PathItem>
      * @param delete definition of a DELETE operation
      * @return the current PathItem instance
      **/
-    PathItem DELETE(Operation delete);
+    default PathItem DELETE(Operation delete) {
+        setDELETE(delete);
+        return this;
+    }
 
     /**
      * Returns the options property from a PathItem instance.
@@ -196,7 +214,10 @@ public interface PathItem extends Constructible, Extensible, Reference<PathItem>
      * @param options definition of an OPTIONS operation
      * @return the current PathItem instance
      **/
-    PathItem OPTIONS(Operation options);
+    default PathItem OPTIONS(Operation options) {
+        setOPTIONS(options);
+        return this;
+    }
 
     /**
      * Returns the head property from a PathItem instance.
@@ -218,7 +239,10 @@ public interface PathItem extends Constructible, Extensible, Reference<PathItem>
      * @param head definition of a HEAD operation
      * @return the current PathItem instance
      **/
-    PathItem HEAD(Operation head);
+    default PathItem HEAD(Operation head) {
+        setHEAD(head);
+        return this;
+    }
 
     /**
      * Returns the patch property from a PathItem instance.
@@ -240,7 +264,10 @@ public interface PathItem extends Constructible, Extensible, Reference<PathItem>
      * @param patch definition of a PATCH operation
      * @return the current PathItem instance
      **/
-    PathItem PATCH(Operation patch);
+    default PathItem PATCH(Operation patch) {
+        setPATCH(patch);
+        return this;
+    }
 
     /**
      * Returns the trace property from a PathItem instance.
@@ -262,7 +289,10 @@ public interface PathItem extends Constructible, Extensible, Reference<PathItem>
      * @param trace definition of a TRACE operation
      * @return the current PathItem instance
      **/
-    PathItem TRACE(Operation trace);
+    default PathItem TRACE(Operation trace) {
+        setTRACE(trace);
+        return this;
+    }
 
     /**
      * Returns a list of all the operations for this path item.
@@ -313,7 +343,10 @@ public interface PathItem extends Constructible, Extensible, Reference<PathItem>
      * @param servers a list of the servers to service operations in this path item
      * @return the current PathItem instance
      **/
-    PathItem servers(List<Server> servers);
+    default PathItem servers(List<Server> servers) {
+        setServers(servers);
+        return this;
+    }
 
     /**
      * Adds the given server to this PathItem's list of servers.
@@ -343,7 +376,10 @@ public interface PathItem extends Constructible, Extensible, Reference<PathItem>
      * @param parameters a list of parameters that are applicable to all the operations described under this path
      * @return the current PathItem instance
      **/
-    PathItem parameters(List<Parameter> parameters);
+    default PathItem parameters(List<Parameter> parameters) {
+        setParameters(parameters);
+        return this;
+    }
 
     /**
      * Adds the given parameter to this PathItem's list of parameters.

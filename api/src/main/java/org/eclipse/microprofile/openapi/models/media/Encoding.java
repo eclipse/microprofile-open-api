@@ -54,7 +54,10 @@ public interface Encoding extends Constructible, Extensible {
      * @param contentType a string that describes the type of content of the encoding
      * @return Encoding
      */
-    Encoding contentType(String contentType);
+    default Encoding contentType(String contentType) {
+        setContentType(contentType);
+        return this;
+    }
 
     /**
      * The Content-Type for encoding a specific property. Default value depends on the property type: i.e. for binary string - contentType is
@@ -84,7 +87,10 @@ public interface Encoding extends Constructible, Extensible {
      * @param headers a map of name to corresponding header object
      * @return Encoding
      */
-    Encoding headers(Map<String, Header> headers);
+    default Encoding headers(Map<String, Header> headers) {
+        setHeaders(headers);
+        return this;
+    }
 
     /**
      * Headers property of an Encoding is a map that allows additional information to be provided as headers
@@ -112,7 +118,10 @@ public interface Encoding extends Constructible, Extensible {
      * @param style a string that descibes how encoding value will be serialized
      * @return Encoding
      */
-    Encoding style(Style style);
+    default Encoding style(Style style) {
+        setStyle(style);
+        return this;
+    }
 
     /**
      * Style describes how the encoding value will be serialized depending on the type of the parameter value.
@@ -142,7 +151,10 @@ public interface Encoding extends Constructible, Extensible {
      * @param explode a boolean that indicates whether the property values of array or object will generate separate parameters
      * @return Encoding
      */
-    Encoding explode(Boolean explode);
+    default Encoding explode(Boolean explode) {
+        setExplode(explode);
+        return this;
+    }
 
     /**
      * When this is true, property values of type array or object generate separate parameters for each value of the array, or key-value-pair of the
@@ -174,7 +186,10 @@ public interface Encoding extends Constructible, Extensible {
      * @param allowReserved a boolean that determines whether the parameter value SHOULD allow reserved characters
      * @return Encoding
      */
-    Encoding allowReserved(Boolean allowReserved);
+    default Encoding allowReserved(Boolean allowReserved) {
+        setAllowReserved(allowReserved);
+        return this;
+    }
 
     /**
      * AllowReserved determines whether the parameter value SHOULD allow reserved characters to be encoded without percent-encoding.

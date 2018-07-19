@@ -64,6 +64,9 @@ public interface APIResponses extends Constructible, Map<String, APIResponse> {
      * @return this ApiResponses instance
      */
 
-    APIResponses defaultValue(APIResponse defaultValue);
+    default APIResponses defaultValue(APIResponse defaultValue) {
+        setDefaultValue(defaultValue);
+        return this;
+    }
 
 }

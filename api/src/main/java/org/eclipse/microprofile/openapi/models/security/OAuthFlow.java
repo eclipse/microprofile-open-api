@@ -59,7 +59,10 @@ public interface OAuthFlow extends Constructible, Extensible {
      * @param authorizationUrl the authorization URL used for this flow
      * @return OAuthFlow instance with the set authorizationUrl property
      */
-    OAuthFlow authorizationUrl(String authorizationUrl);
+    default OAuthFlow authorizationUrl(String authorizationUrl) {
+        setAuthorizationUrl(authorizationUrl);
+        return this;
+    }
 
     /**
      * The token URL to be used for this flow. This MUST be in the form of a URL. This is a REQUIRED property.
@@ -93,7 +96,10 @@ public interface OAuthFlow extends Constructible, Extensible {
      * @param tokenUrl the token URL to be used for this flow
      * @return OAuthFlow instance with the set tokenUrl property
      */
-    OAuthFlow tokenUrl(String tokenUrl);
+    default OAuthFlow tokenUrl(String tokenUrl) {
+        setTokenUrl(tokenUrl);
+        return this;
+    }
 
     /**
      * The URL to be used for obtaining refresh tokens. This MUST be in the form of a URL.
@@ -127,7 +133,10 @@ public interface OAuthFlow extends Constructible, Extensible {
      * @param refreshUrl the URL to be used for obtaining refresh tokens
      * @return OAuthFlow instance with the set refreshUrl property
      */
-    OAuthFlow refreshUrl(String refreshUrl);
+    default OAuthFlow refreshUrl(String refreshUrl) {
+        setRefreshUrl(refreshUrl);
+        return this;
+    }
 
     /**
      * The available scopes for the OAuth2 security scheme. A map between the scope name and a short description for it. This is a REQUIRED property.
@@ -161,6 +170,9 @@ public interface OAuthFlow extends Constructible, Extensible {
      * @param scopes the available scopes for the OAuth2 security scheme
      * @return OAuthFlow instance with the set scopes property
      */
-    OAuthFlow scopes(Scopes scopes);
+    default OAuthFlow scopes(Scopes scopes) {
+        setScopes(scopes);
+        return this;
+    }
 
 }

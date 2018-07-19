@@ -48,7 +48,10 @@ public interface ExternalDocumentation extends Constructible, Extensible {
      * @param description a short description of the target documentation
      * @return the current ExternalDocumentation instance
      */
-    ExternalDocumentation description(String description);
+    default ExternalDocumentation description(String description) {
+        setDescription(description);
+        return this;
+    }
 
     /**
      * Returns the url property from an ExternalDocumentation instance.
@@ -70,6 +73,9 @@ public interface ExternalDocumentation extends Constructible, Extensible {
      * @param url the URL for the target documentation
      * @return the current ExternalDocumentation instance
      */
-    ExternalDocumentation url(String url);
+    default ExternalDocumentation url(String url) {
+        setUrl(url);
+        return this;
+    }
 
 }

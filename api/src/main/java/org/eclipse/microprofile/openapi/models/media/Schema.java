@@ -81,7 +81,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param discriminator the object that is used to differentiate between the schemas which may satisfy the payload description
      * @return the current Schema instance
      */
-    Schema discriminator(Discriminator discriminator);
+    default Schema discriminator(Discriminator discriminator) {
+        setDiscriminator(discriminator);
+        return this;
+    }
 
     /**
      * Returns the title property from this Schema instance.
@@ -103,7 +106,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param title a title to assign to this Schema
      * @return the current Schema instance
      */
-    Schema title(String title);
+    default Schema title(String title) {
+        setTitle(title);
+        return this;
+    }
 
     /**
      * Returns the default value property from this Schema instance.
@@ -125,7 +131,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param defaultValue a value to use as the default
      * @return the current Schema instance
      */
-    Schema defaultValue(Object defaultValue);
+    default Schema defaultValue(Object defaultValue) {
+        setDefaultValue(defaultValue);
+        return this;
+    }
 
     /**
      * Returns the enumerated list of values allowed for objects defined by this Schema.
@@ -141,7 +150,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      */
     void setEnumeration(List<Object> enumeration);
 
-    Schema enumeration(List<Object> enumeration);
+    default Schema enumeration(List<Object> enumeration) {
+        setEnumeration(enumeration);
+        return this;
+    }
 
     /**
      * Adds an item of the appropriate type to the enumerated list of values allowed.
@@ -173,7 +185,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param multipleOf a positive number that restricts the value of objects described by this Schema
      * @return the current Schema instance
      */
-    Schema multipleOf(BigDecimal multipleOf);
+    default Schema multipleOf(BigDecimal multipleOf) {
+        setMultipleOf(multipleOf);
+        return this;
+    }
 
     /**
      * Returns the maximum property from this Schema instance.
@@ -195,7 +210,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param maximum specifies the maximum numeric value of objects defined by this Schema
      * @return the current Schema instance
      */
-    Schema maximum(BigDecimal maximum);
+    default Schema maximum(BigDecimal maximum) {
+        setMaximum(maximum);
+        return this;
+    }
 
     /**
      * Returns the exclusiveMaximum property from this Schema instance.
@@ -217,7 +235,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param exclusiveMaximum when true the numeric value of objects defined by this Schema must be less than indicated by the maximum property
      * @return the current Schema instance
      */
-    Schema exclusiveMaximum(Boolean exclusiveMaximum);
+    default Schema exclusiveMaximum(Boolean exclusiveMaximum) {
+        setExclusiveMaximum(exclusiveMaximum);
+        return this;
+    }
 
     /**
      * Returns the minimum property from this Schema instance.
@@ -239,7 +260,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param minimum specifies the minimum numeric value of objects defined by this Schema
      * @return the current Schema instance
      */
-    Schema minimum(BigDecimal minimum);
+    default Schema minimum(BigDecimal minimum) {
+        setMinimum(minimum);
+        return this;
+    }
 
     /**
      * Returns the exclusiveMinimum property from this Schema instance.
@@ -261,7 +285,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param exclusiveMinimum when true the numeric value of objects defined by this Schema must be greater than indicated by the minimum property
      * @return the current Schema instance
      */
-    Schema exclusiveMinimum(Boolean exclusiveMinimum);
+    default Schema exclusiveMinimum(Boolean exclusiveMinimum) {
+        setExclusiveMinimum(exclusiveMinimum);
+        return this;
+    }
 
     /**
      * Returns the maxLength property from this Schema instance.
@@ -285,7 +312,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param maxLength the maximum length of objects defined by this Schema
      * @return the current Schema instance
      */
-    Schema maxLength(Integer maxLength);
+    default Schema maxLength(Integer maxLength) {
+        setMaxLength(maxLength);
+        return this;
+    }
 
     /**
      * Returns the minLength property from this Schema instance.
@@ -309,7 +339,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param minLength the minimum length of objects defined by this Schema
      * @return the current Schema instance
      */
-    Schema minLength(Integer minLength);
+    default Schema minLength(Integer minLength) {
+        setMinLength(minLength);
+        return this;
+    }
 
     /**
      * Returns the pattern property from this Schema instance.
@@ -331,7 +364,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param pattern the regular expression which restricts objects defined by this Schema
      * @return the current Schema instance
      */
-    Schema pattern(String pattern);
+    default Schema pattern(String pattern) {
+        setPattern(pattern);
+        return this;
+    }
 
     /**
      * Returns the maxItems property from this Schema instance.
@@ -355,7 +391,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param maxItems the maximum number of elements in objects defined by this Schema e.g. array elements
      * @return the current Schema instance
      */
-    Schema maxItems(Integer maxItems);
+    default Schema maxItems(Integer maxItems) {
+        setMaxItems(maxItems);
+        return this;
+    }
 
     /**
      * Returns the minItems property from this Schema instance.
@@ -379,7 +418,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param minItems the minimum number of elements in objects defined by this Schema e.g. array elements
      * @return the current Schema instance
      */
-    Schema minItems(Integer minItems);
+    default Schema minItems(Integer minItems) {
+        setMinItems(minItems);
+        return this;
+    }
 
     /**
      * Returns the uniqueItems property from this Schema instance.
@@ -401,7 +443,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param uniqueItems ensure the items (e.g. array elements) are unique in objects defined by this Schema
      * @return the current Schema instance
      */
-    Schema uniqueItems(Boolean uniqueItems);
+    default Schema uniqueItems(Boolean uniqueItems) {
+        setUniqueItems(uniqueItems);
+        return this;
+    }
 
     /**
      * Returns the maxProperties property from this Schema instance.
@@ -425,7 +470,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param maxProperties limit the number of properties in objects defined by this Schema
      * @return the current Schema instance
      */
-    Schema maxProperties(Integer maxProperties);
+    default Schema maxProperties(Integer maxProperties) {
+        setMaxProperties(maxProperties);
+        return this;
+    }
 
     /**
      * Returns the minProperties property from this Schema instance.
@@ -449,7 +497,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param minProperties limit the number of properties in objects defined by this Schema
      * @return the current Schema instance
      */
-    Schema minProperties(Integer minProperties);
+    default Schema minProperties(Integer minProperties) {
+        setMinProperties(minProperties);
+        return this;
+    }
 
     /**
      * Returns the required property from this Schema instance.
@@ -471,7 +522,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param required the list of fields required in objects defined by this Schema
      * @return the current Schema instance
      */
-    Schema required(List<String> required);
+    default Schema required(List<String> required) {
+        setRequired(required);
+        return this;
+    }
 
     /**
      * Adds the name of an item to the list of fields required in objects defined by this Schema.
@@ -503,7 +557,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * reference schemas
      * @return the current Schema instance
      */
-    Schema type(SchemaType type);
+    default Schema type(SchemaType type) {
+        setType(type);
+        return this;
+    }
 
     /**
      * Returns a Schema which describes properties not allowed in objects defined by the current schema.
@@ -525,7 +582,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param not the Schema which describes properties not allowed
      * @return the current Schema instance
      */
-    Schema not(Schema not);
+    default Schema not(Schema not) {
+        setNot(not);
+        return this;
+    }
 
     /**
      * Returns the properties defined in this Schema.
@@ -547,7 +607,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param properties a map which associates property names with the schemas that describe their contents
      * @return the current Schema instance
      */
-    Schema properties(Map<String, Schema> properties);
+    default Schema properties(Map<String, Schema> properties) {
+        setProperties(properties);
+        return this;
+    }
 
     /**
      * Adds a Schema property of the provided name using the given schema.
@@ -635,7 +698,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param description a string containing a description of the purpose of this Schema
      * @return the current Schema instance
      */
-    Schema description(String description);
+    default Schema description(String description) {
+        setDescription(description);
+        return this;
+    }
 
     /**
      * Returns the format property from this Schema instance. This property clarifies the data type specified in the type property.
@@ -659,7 +725,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param format the string specifying the data format
      * @return the current Schema instance
      */
-    Schema format(String format);
+    default Schema format(String format) {
+        setFormat(format);
+        return this;
+    }
 
     /**
      * Returns the nullable property from this Schema instance which indicates whether null is a valid value.
@@ -681,7 +750,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param nullable a boolean value indicating this Schema allows a null value.
      * @return the current Schema instance
      */
-    Schema nullable(Boolean nullable);
+    default Schema nullable(Boolean nullable) {
+        setNullable(nullable);
+        return this;
+    }
 
     /**
      * Returns the readOnly property from this Schema instance.
@@ -703,7 +775,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param readOnly true indicates the Schema should not be sent as part of a request message
      * @return the current Schema instance
      */
-    Schema readOnly(Boolean readOnly);
+    default Schema readOnly(Boolean readOnly) {
+        setReadOnly(readOnly);
+        return this;
+    }
 
     /**
      * Returns the writeOnly property from this Schema instance.
@@ -725,7 +800,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param writeOnly true indicates the Schema should not be sent as part of a response message
      * @return the current Schema instance
      */
-    Schema writeOnly(Boolean writeOnly);
+    default Schema writeOnly(Boolean writeOnly) {
+        setWriteOnly(writeOnly);
+        return this;
+    }
 
     /**
      * Returns the example property from this Schema instance.
@@ -749,7 +827,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param example an object which is an instance of this Schema
      * @return the current Schema instance
      */
-    Schema example(Object example);
+    default Schema example(Object example) {
+        setExample(example);
+        return this;
+    }
 
     /**
      * Returns the externalDocs property from this Schema instance.
@@ -771,7 +852,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param externalDocs an additional external documentation object
      * @return the current Schema instance
      */
-    Schema externalDocs(ExternalDocumentation externalDocs);
+    default Schema externalDocs(ExternalDocumentation externalDocs) {
+        setExternalDocs(externalDocs);
+        return this;
+    }
 
     /**
      * Returns the deprecated property from this Schema instance.
@@ -793,7 +877,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param deprecated true to indicate this Schema is deprecated
      * @return the current Schema instance
      */
-    Schema deprecated(Boolean deprecated);
+    default Schema deprecated(Boolean deprecated) {
+        setDeprecated(deprecated);
+        return this;
+    }
 
     /**
      * Returns the xml property from this Schema instance.
@@ -817,7 +904,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param xml a metadata object to describe the XML representation of this property
      * @return the current Schema instance
      */
-    Schema xml(XML xml);
+    default Schema xml(XML xml) {
+        setXml(xml);
+        return this;
+    }
     
     
     /**
@@ -840,7 +930,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param items the Schema used by this array
      * @return the current Schema instance
      */
-    Schema items(Schema items);
+    default Schema items(Schema items) {
+        setItems(items);
+        return this;
+    }
     
     /**
      * Returns the schemas used by the allOf property.
@@ -862,7 +955,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param allOf the list of schemas used by the allOf property
      * @return the current Schema instance
      */
-    Schema allOf(List<Schema> allOf);
+    default Schema allOf(List<Schema> allOf) {
+        setAllOf(allOf);
+        return this;
+    }
 
     /**
      * Adds the given Schema to the list of schemas used by the allOf property.
@@ -892,7 +988,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param anyOf the list of schemas used by the anyOf property
      * @return the current Schema instance
      */
-    Schema anyOf(List<Schema> anyOf);
+    default Schema anyOf(List<Schema> anyOf) {
+        setAnyOf(anyOf);
+        return this;
+    }
 
     /**
      * Adds the given Schema to the list of schemas used by the anyOf property.
@@ -922,7 +1021,10 @@ public interface Schema extends Extensible, Constructible, Reference<Schema> {
      * @param oneOf the list of schemas used by the oneOf property
      * @return the current Schema instance
      */
-    Schema oneOf(List<Schema> oneOf);
+    default Schema oneOf(List<Schema> oneOf) {
+        setOneOf(oneOf);
+        return this;
+    }
 
     /**
      * Adds the given Schema to the list of schemas used by the oneOf property.

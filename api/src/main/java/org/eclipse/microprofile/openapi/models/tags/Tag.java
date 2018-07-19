@@ -50,7 +50,10 @@ public interface Tag extends Constructible, Extensible {
      * @param name the name property for this tag
      * @return the current Tag instance
      */
-    Tag name(String name);
+    default Tag name(String name) {
+        setName(name);
+        return this;
+    }
 
     /**
      * Returns the description property from a Tag instance.
@@ -72,7 +75,10 @@ public interface Tag extends Constructible, Extensible {
      * @param description the description property for this tag
      * @return the current Tag instance
      */
-    Tag description(String description);
+    default Tag description(String description) {
+        setDescription(description);
+        return this;
+    }
 
     /**
      * Returns the externalDocs property from a Tag instance.
@@ -94,6 +100,9 @@ public interface Tag extends Constructible, Extensible {
      * @param externalDocs additional external documentation for this tag
      * @return the current Tag instance
      */
-    Tag externalDocs(ExternalDocumentation externalDocs);
+    default Tag externalDocs(ExternalDocumentation externalDocs) {
+        setExternalDocs(externalDocs);
+        return this;
+    }
 
 }

@@ -71,7 +71,10 @@ public interface Components extends Constructible, Extensible {
      * @param schemas a Map containing keys and reusable schemas
      * @return the current Components object
      */
-    Components schemas(Map<String, Schema> schemas);
+    default Components schemas(Map<String, Schema> schemas) {
+        setSchemas(schemas);
+        return this;
+    }
 
     /**
      * Adds the given schema to this Components' list of schemas with the given string as its key.
@@ -102,7 +105,10 @@ public interface Components extends Constructible, Extensible {
      * @param responses a Map containing keys and reusable response objects
      * @return the current Components object
      */
-    Components responses(Map<String, APIResponse> responses);
+    default Components responses(Map<String, APIResponse> responses) {
+        setResponses(responses);
+        return this;
+    }
 
     /**
      * Adds the given response to this Components' map of responses with the given string as its key.
@@ -133,7 +139,10 @@ public interface Components extends Constructible, Extensible {
      * @param parameters a Map containing keys and reusable parameter objects
      * @return the current Components object
      */
-    Components parameters(Map<String, Parameter> parameters);
+    default Components parameters(Map<String, Parameter> parameters) {
+        setParameters(parameters);
+        return this;
+    }
 
     /**
      * Adds the given parameter to this Components' map of parameters with the given string as its key.
@@ -164,7 +173,10 @@ public interface Components extends Constructible, Extensible {
      * @param examples a Map containing keys and reusable example objects
      * @return the current Components object
      */
-    Components examples(Map<String, Example> examples);
+    default Components examples(Map<String, Example> examples) {
+        setExamples(examples);
+        return this;
+    }
 
     /**
      * Adds the given example to this Components' map of examples with the given string as its key.
@@ -195,7 +207,10 @@ public interface Components extends Constructible, Extensible {
      * @param requestBodies a Map containing the keys and reusable request body objects
      * @return the current Components object
      */
-    Components requestBodies(Map<String, RequestBody> requestBodies);
+    default Components requestBodies(Map<String, RequestBody> requestBodies) {
+        setRequestBodies(requestBodies);
+        return this;
+    }
 
     /**
      * Adds the given request body to this Components' map of request bodies with the given string as its key.
@@ -226,7 +241,10 @@ public interface Components extends Constructible, Extensible {
      * @param headers a Map containing the keys and reusable header objects
      * @return the current Components object
      */
-    Components headers(Map<String, Header> headers);
+    default Components headers(Map<String, Header> headers) {
+        setHeaders(headers);
+        return this;
+    }
 
     /**
      * Adds the given header to this Components' map of headers with the given string as its key.
@@ -257,7 +275,10 @@ public interface Components extends Constructible, Extensible {
      * @param securitySchemes a Map containing the keys and reusable security scheme objects
      * @return the current Components object
      */
-    Components securitySchemes(Map<String, SecurityScheme> securitySchemes);
+    default Components securitySchemes(Map<String, SecurityScheme> securitySchemes) {
+        setSecuritySchemes(securitySchemes);
+        return this;
+    }
 
     /**
      * Adds the given security scheme to this Components' map of security schemes with the given string as its key.
@@ -288,7 +309,10 @@ public interface Components extends Constructible, Extensible {
      * @param links a Map containing the keys and reusable link objects
      * @return the current Components object
      */
-    Components links(Map<String, Link> links);
+    default Components links(Map<String, Link> links) {
+        setLinks(links);
+        return this;
+    }
 
     /**
      * Adds the given link to this Components' map of links with the given string as its key.
@@ -319,7 +343,10 @@ public interface Components extends Constructible, Extensible {
      * @param callbacks a Map containing the keys and reusable callback objects
      * @return the current Components object
      */
-    Components callbacks(Map<String, Callback> callbacks);
+    default Components callbacks(Map<String, Callback> callbacks) {
+        setCallbacks(callbacks);
+        return this;
+    }
 
     /**
      * Adds the given callback to this Components' map of callbacks with the given string as its key.

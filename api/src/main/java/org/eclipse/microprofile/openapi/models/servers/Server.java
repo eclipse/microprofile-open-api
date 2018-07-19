@@ -66,7 +66,10 @@ public interface Server extends Constructible, Extensible {
      * @param url a URL to the target host
      * @return Server instance with the set url property.
      */
-    Server url(String url);
+    default Server url(String url) {
+        setUrl(url);
+        return this;
+    }
 
     /**
      * This method returns the description property of Server instance. The decsription property is an optional string describing the host designated
@@ -94,7 +97,10 @@ public interface Server extends Constructible, Extensible {
      * @param description an optional string describing the host designated by the URL
      * @return Server instance with the set description property.
      */
-    Server description(String description);
+    default Server description(String description) {
+        setDescription(description);
+        return this;
+    }
 
     /**
      * This method returns the variables property of Server instance.
@@ -122,6 +128,9 @@ public interface Server extends Constructible, Extensible {
      * @param variables a map between variable name and its value
      * @return Server instance with the set variables property.
      */
-    Server variables(ServerVariables variables);
+    default Server variables(ServerVariables variables) {
+        setVariables(variables);
+        return this;
+    }
 
 }

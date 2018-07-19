@@ -54,7 +54,10 @@ public interface MediaType extends Constructible, Extensible {
      * @param schema the schema defining the type used for the request body
      * @return the current MediaType instance
      */
-    MediaType schema(Schema schema);
+    default MediaType schema(Schema schema) {
+        setSchema(schema);
+        return this;
+    }
 
     /**
      * Returns the collection of examples from a MediaType instance.
@@ -78,7 +81,10 @@ public interface MediaType extends Constructible, Extensible {
      * @param examples examples of the media type
      * @return the current MediaType instance
      */
-    MediaType examples(Map<String, Example> examples);
+    default MediaType examples(Map<String, Example> examples) {
+        setExamples(examples);
+        return this;
+    }
 
     /**
      * Adds an example item to the examples map of a MediaType instance. The example object should match the media type and specified schema if
@@ -112,7 +118,10 @@ public interface MediaType extends Constructible, Extensible {
      * @param example an example of the media type
      * @return the current MediaType instance
      */
-    MediaType example(Object example);
+    default MediaType example(Object example) {
+        setExample(example);
+        return this;
+    }
 
     /**
      * Returns the encoding property from a MediaType instance.
@@ -134,7 +143,10 @@ public interface MediaType extends Constructible, Extensible {
      * @param encoding a map between property names and their encoding information
      * @return the current MediaType instance
      */
-    MediaType encoding(Map<String, Encoding> encoding);
+    default MediaType encoding(Map<String, Encoding> encoding) {
+        setEncoding(encoding);
+        return this;
+    }
 
     /**
      * Adds an Encoding item to the encoding property of a MediaType instance.

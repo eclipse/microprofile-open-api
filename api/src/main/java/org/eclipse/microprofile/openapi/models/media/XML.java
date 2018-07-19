@@ -55,7 +55,10 @@ public interface XML extends Constructible, Extensible {
      * @param name the name of this XML instance
      * @return XML instance with the set name property
      */
-    XML name(String name);
+    default XML name(String name) {
+        setName(name);
+        return this;
+    }
 
     /**
      * This method returns the namespace property of XML instance.
@@ -83,7 +86,10 @@ public interface XML extends Constructible, Extensible {
      * @param namespace the URI of the namespace definition
      * @return XML instance with the set namespace property
      */
-    XML namespace(String namespace);
+    default XML namespace(String namespace) {
+        setNamespace(namespace);
+        return this;
+    }
 
     /**
      * This method returns the prefix property of XML instance.
@@ -111,7 +117,10 @@ public interface XML extends Constructible, Extensible {
      * @param prefix string prefix to be used with the name
      * @return XML instance with the set prefix property
      */
-    XML prefix(String prefix);
+    default XML prefix(String prefix) {
+        setPrefix(prefix);
+        return this;
+    }
 
     /**
      * This method returns the attribute property of XML instance.
@@ -139,7 +148,10 @@ public interface XML extends Constructible, Extensible {
      * @param attribute a boolean that declares whether the property definition translates to an attribute instead of an element
      * @return XML instance with the set attribute property
      */
-    XML attribute(Boolean attribute);
+    default XML attribute(Boolean attribute) {
+        setAttribute(attribute);
+        return this;
+    }
 
     /**
      * This method returns the wrapped property of XML instance.
@@ -170,6 +182,9 @@ public interface XML extends Constructible, Extensible {
      * @param wrapped a boolean that signifies whether the array is wrapped
      * @return XML instance with the set wrapped property
      */
-    XML wrapped(Boolean wrapped);
+    default XML wrapped(Boolean wrapped) {
+        setWrapped(wrapped);
+        return this;
+    }
 
 }

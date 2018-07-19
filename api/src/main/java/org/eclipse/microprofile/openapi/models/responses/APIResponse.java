@@ -56,7 +56,10 @@ public interface APIResponse extends Constructible, Extensible, Reference<APIRes
      * @return this ApiResponse instance
      */
 
-    APIResponse description(String description);
+    default APIResponse description(String description) {
+        setDescription(description);
+        return this;
+    }
 
     /**
      * Returns the map of Headers in this instance of ApiResponse.
@@ -83,7 +86,10 @@ public interface APIResponse extends Constructible, Extensible, Reference<APIRes
      * @return this ApiResponse instance
      */
 
-    APIResponse headers(Map<String, Header> headers);
+    default APIResponse headers(Map<String, Header> headers) {
+        setHeaders(headers);
+        return this;
+    }
 
     /**
      * Adds the given Header to this ApiResponse instance's map of Headers with the given name and return this instance of ApiResponse. If this
@@ -119,7 +125,10 @@ public interface APIResponse extends Constructible, Extensible, Reference<APIRes
      * @return this ApiResponse instance
      */
 
-    APIResponse content(Content content);
+    default APIResponse content(Content content) {
+        setContent(content);
+        return this;
+    }
 
     /**
      * Returns the operations links that can be followed from tis instance of ApiResponse.
@@ -144,7 +153,10 @@ public interface APIResponse extends Constructible, Extensible, Reference<APIRes
      * @return current APIResponse instance
      */
 
-    APIResponse links(Map<String, Link> links);
+    default APIResponse links(Map<String, Link> links) {
+        setLinks(links);
+        return this;
+    }
 
     /**
      * Adds a link to this instance of ApiResponse using the given name and Link, and returns this ApiResponse instance.

@@ -53,7 +53,10 @@ public interface OpenAPI extends Constructible, Extensible {
      * @param openapi the semantic version number of the OpenAPI Specification version that the OpenAPI document uses
      * @return the current OpenAPI object
      */
-    OpenAPI openapi(String openapi);
+    default OpenAPI openapi(String openapi) {
+        setOpenapi(openapi);
+        return this;
+    }
 
     /**
      * Returns the info property from an OpenAPI instance.
@@ -75,7 +78,10 @@ public interface OpenAPI extends Constructible, Extensible {
      * @param info metadata about the API
      * @return the current OpenAPI object
      */
-    OpenAPI info(Info info);
+    default OpenAPI info(Info info) {
+        setInfo(info);
+        return this;
+    }
 
     /**
      * Returns the externalDocs property from an OpenAPI instance.
@@ -97,7 +103,10 @@ public interface OpenAPI extends Constructible, Extensible {
      * @param externalDocs additional external documentation
      * @return the current OpenAPI object
      */
-    OpenAPI externalDocs(ExternalDocumentation externalDocs);
+    default OpenAPI externalDocs(ExternalDocumentation externalDocs) {
+        setExternalDocs(externalDocs);
+        return this;
+    }
 
     /**
      * Returns the Servers defined in the API
@@ -119,7 +128,10 @@ public interface OpenAPI extends Constructible, Extensible {
      * @param servers Server objects which provide connectivity information to target servers
      * @return the current OpenAPI object
      */
-    OpenAPI servers(List<Server> servers);
+    default OpenAPI servers(List<Server> servers) {
+        setServers(servers);
+        return this;
+    }
 
     /**
      * Adds the given server to this OpenAPI instance's list of servers.
@@ -149,7 +161,10 @@ public interface OpenAPI extends Constructible, Extensible {
      * @param security which security mechanisms can be used across the API
      * @return the current OpenAPI object
      */
-    OpenAPI security(List<SecurityRequirement> security);
+    default OpenAPI security(List<SecurityRequirement> security) {
+        setSecurity(security);
+        return this;
+    }
 
     /**
      * Adds the given security requirement to this OpenAPI instance's list of security requirements.
@@ -180,7 +195,10 @@ public interface OpenAPI extends Constructible, Extensible {
      * @param tags tags used by the specification with additional metadata
      * @return the current OpenAPI object
      */
-    OpenAPI tags(List<Tag> tags);
+    default OpenAPI tags(List<Tag> tags) {
+        setTags(tags);
+        return this;
+    }
 
     /**
      * Adds the given tag to this OpenAPI instance's list of tags.
@@ -210,7 +228,10 @@ public interface OpenAPI extends Constructible, Extensible {
      * @param paths the available paths and operations for the API
      * @return the current OpenAPI object
      */
-    OpenAPI paths(Paths paths);
+    default OpenAPI paths(Paths paths) {
+        setPaths(paths);
+        return this;
+    }
 
     /**
      * Adds the given path item to this OpenAPI instance's list of paths
@@ -241,6 +262,9 @@ public interface OpenAPI extends Constructible, Extensible {
      * @param components a set of reusable objects used in the API specification
      * @return the current OpenAPI object
      */
-    OpenAPI components(Components components);
+    default OpenAPI components(Components components) {
+        setComponents(components);
+        return this;
+    }
 
 }

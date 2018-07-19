@@ -47,7 +47,10 @@ public interface OAuthFlows extends Constructible, Extensible {
      * @param implicit the OauthFlow instance
      * @return OAuthFlows instance with the set implicit property
      */
-    OAuthFlows implicit(OAuthFlow implicit);
+    default OAuthFlows implicit(OAuthFlow implicit) {
+        setImplicit(implicit);
+        return this;
+    }
 
     /**
      * OAuth Resource Owner Password flow
@@ -75,7 +78,10 @@ public interface OAuthFlows extends Constructible, Extensible {
      * @param password the OauthFlow instance
      * @return OAuthFlows instance with the set password property
      */
-    OAuthFlows password(OAuthFlow password);
+    default OAuthFlows password(OAuthFlow password) {
+        setPassword(password);
+        return this;
+    }
 
     /**
      * OAuth Client Credential flow; previously called application in OpenAPI 2.0
@@ -104,7 +110,10 @@ public interface OAuthFlows extends Constructible, Extensible {
      * @param clientCredentials the OauthFlow instance
      * @return OAuthFlows instance with the set clientCredentials property
      */
-    OAuthFlows clientCredentials(OAuthFlow clientCredentials);
+    default OAuthFlows clientCredentials(OAuthFlow clientCredentials) {
+        setClientCredentials(clientCredentials);
+        return this;
+    }
 
     /**
      * OAuth Authorization Code flow; previously called accessCode in OpenAPI 2.0
@@ -133,6 +142,9 @@ public interface OAuthFlows extends Constructible, Extensible {
      * @param authorizationCode the OauthFlow instance
      * @return OAuthFlows instance with the set authorizationCode property
      */
-    OAuthFlows authorizationCode(OAuthFlow authorizationCode);
+    default OAuthFlows authorizationCode(OAuthFlow authorizationCode) {
+        setAuthorizationCode(authorizationCode);
+        return this;
+    }
 
 }
