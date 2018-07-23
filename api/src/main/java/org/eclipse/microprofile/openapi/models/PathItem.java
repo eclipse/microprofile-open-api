@@ -19,6 +19,7 @@ package org.eclipse.microprofile.openapi.models;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.eclipse.microprofile.openapi.models.parameters.Parameter;
 import org.eclipse.microprofile.openapi.models.servers.Server;
@@ -270,7 +271,9 @@ public interface PathItem extends Constructible, Extensible, Reference<PathItem>
      * @return a list of all the operations for this path item
      **/
     @Deprecated
-    List<Operation> readOperations();
+    default List<Operation> readOperations() {
+        return getOperations().values().stream().collect(Collectors.toList());
+    }
 
     /**
      * Returns a map with all the operations for this path where the keys are HttpMethods.
@@ -279,8 +282,10 @@ public interface PathItem extends Constructible, Extensible, Reference<PathItem>
      * @return a map with all the operations for this path where the keys are HttpMethods
      **/
     @Deprecated
-    Map<PathItem.HttpMethod, Operation> readOperationsMap();
-    
+    default Map<PathItem.HttpMethod, Operation> readOperationsMap() {
+        return getOperations();
+    }
+
     /**
      * Returns a map with all the operations for this path where the keys are {@link PathItem.HttpMethod} items
      * 
