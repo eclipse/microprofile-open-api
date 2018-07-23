@@ -53,7 +53,10 @@ public interface Example extends Constructible, Extensible, Reference<Example> {
      * @param summary short description of the example
      * @return the current Example object
      */
-    Example summary(String summary);
+    default Example summary(String summary) {
+        setSummary(summary);
+        return this;
+    }
 
     /**
      * Returns the description property from an Example instance.
@@ -75,7 +78,10 @@ public interface Example extends Constructible, Extensible, Reference<Example> {
      * @param description long description of the example
      * @return the current Example object
      */
-    Example description(String description);
+    default Example description(String description) {
+        setDescription(description);
+        return this;
+    }
 
     /**
      * Returns the value property from an Example instance.
@@ -97,7 +103,10 @@ public interface Example extends Constructible, Extensible, Reference<Example> {
      * @param value a literal example object
      * @return the current Example object
      */
-    Example value(Object value);
+    default Example value(Object value) {
+        setValue(value);
+        return this;
+    }
 
     /**
      * Returns the externalValue property from an Example instance.
@@ -119,6 +128,9 @@ public interface Example extends Constructible, Extensible, Reference<Example> {
      * @param externalValue URL that points to the literal example
      * @return the current Example object
      */
-    Example externalValue(String externalValue);
+    default Example externalValue(String externalValue) {
+        setExternalValue(externalValue);
+        return this;
+    }
 
 }

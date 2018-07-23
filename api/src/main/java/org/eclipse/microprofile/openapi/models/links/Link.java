@@ -62,7 +62,10 @@ public interface Link extends Constructible, Extensible, Reference<Link> {
      * @param server a server object to be used by the target operation
      * @return the current Link instance
      */
-    Link server(Server server);
+    default Link server(Server server) {
+        setServer(server);
+        return this;
+    }
 
     /**
      * Returns the operationRef property from a Link instance.
@@ -84,7 +87,10 @@ public interface Link extends Constructible, Extensible, Reference<Link> {
      * @param operationRef a relative or absolute reference to an OAS operation
      * @return the current Link instance
      */
-    Link operationRef(String operationRef);
+    default Link operationRef(String operationRef) {
+        setOperationRef(operationRef);
+        return this;
+    }
 
     /**
      * Returns the requestBody property from a Link instance.
@@ -106,7 +112,10 @@ public interface Link extends Constructible, Extensible, Reference<Link> {
      * @param requestBody a literal value or runtime expression to use as a request body when calling the target operation
      * @return the current Link instance
      */
-    Link requestBody(Object requestBody);
+    default Link requestBody(Object requestBody) {
+        setRequestBody(requestBody);
+        return this;
+    }
 
     /**
      * Returns the operationId property for this instance of Link.
@@ -128,7 +137,10 @@ public interface Link extends Constructible, Extensible, Reference<Link> {
      * @param operationId the name of an existing, resolvable OAS operation
      * @return the current Link instance
      */
-    Link operationId(String operationId);
+    default Link operationId(String operationId) {
+        setOperationId(operationId);
+        return this;
+    }
 
     /**
      * Returns the parameters property from this instance of Link. The key is the parameter name and the value is a constant or a runtime expression
@@ -151,7 +163,10 @@ public interface Link extends Constructible, Extensible, Reference<Link> {
      * @param parameters a map representing parameters to pass to this link's operation as specified with operationId or identified via operationRef
      * @return current link instance
      */
-    Link parameters(Map<String, Object> parameters);
+    default Link parameters(Map<String, Object> parameters) {
+        setParameters(parameters);
+        return this;
+    }
 
     /**
      * Add a new parameter to the parameters property of this instance of Link.
@@ -183,6 +198,9 @@ public interface Link extends Constructible, Extensible, Reference<Link> {
      * @param description a description of the link
      * @return the current Link instance
      */
-    Link description(String description);
+    default Link description(String description) {
+        setDescription(description);
+        return this;
+    }
 
 }

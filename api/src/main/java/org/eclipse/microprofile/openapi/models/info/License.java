@@ -47,7 +47,10 @@ public interface License extends Constructible, Extensible {
      * @param name the license name used for the API
      * @return this License instance
      */
-    License name(String name);
+    default License name(String name) {
+        setName(name);
+        return this;
+    }
 
     /**
      * Returns the URL for this License instance that is used for the API.
@@ -70,6 +73,9 @@ public interface License extends Constructible, Extensible {
      * @param url the URL to the license used for the API
      * @return this License instance
      */
-    License url(String url);
+    default License url(String url) {
+        setUrl(url);
+        return this;
+    }
 
 }

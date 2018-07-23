@@ -52,7 +52,10 @@ public interface RequestBody extends Constructible, Extensible, Reference<Reques
      * @return this RequestBody instance
      */
 
-    RequestBody description(String description);
+    default RequestBody description(String description) {
+        setDescription(description);
+        return this;
+    }
 
     /**
      * Returns the content of this instance of RequestBody, where the keys in content are media type names and the values describe it.
@@ -77,7 +80,10 @@ public interface RequestBody extends Constructible, Extensible, Reference<Reques
      * @return RequestBody instance with the modified content property
      */
 
-    RequestBody content(Content content);
+    default RequestBody content(Content content) {
+        setContent(content);
+        return this;
+    }
 
     /**
      * Returns whether this instance of RequestBody is required for the operation.
@@ -102,6 +108,9 @@ public interface RequestBody extends Constructible, Extensible, Reference<Reques
      * @return this RequestBody instance
      */
 
-    RequestBody required(Boolean required);
+    default RequestBody required(Boolean required) {
+        setRequired(required);
+        return this;
+    }
 
 }

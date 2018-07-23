@@ -64,6 +64,11 @@ public interface Reference<T extends Reference<T>> {
      * @param ref a reference to a T object in the components in this OpenAPI document
      * @return the current instance
      **/
-    T ref(String ref);
+    default T ref(String ref) {
+        setRef(ref);
+        @SuppressWarnings("unchecked")
+        T t = (T) this;
+        return t;
+    }
 
 }

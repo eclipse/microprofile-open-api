@@ -109,7 +109,10 @@ public interface Parameter extends Constructible, Extensible, Reference<Paramete
      * @param name the name of the parameter
      * @return the current Parameter instance
      */
-    Parameter name(String name);
+    default Parameter name(String name) {
+        setName(name);
+        return this;
+    }
 
     /**
      * Returns the in property from a Parameter instance.
@@ -131,7 +134,10 @@ public interface Parameter extends Constructible, Extensible, Reference<Paramete
      * @param in the value of the in property
      * @return the current Parameter instance
      */
-    Parameter in(In in);
+    default Parameter in(In in) {
+        setIn(in);
+        return this;
+    }
 
     /**
      * Returns the description property from a Parameter instance.
@@ -153,7 +159,10 @@ public interface Parameter extends Constructible, Extensible, Reference<Paramete
      * @param description a brief description of the parameter
      * @return the current Parameter instance
      */
-    Parameter description(String description);
+    default Parameter description(String description) {
+        setDescription(description);
+        return this;
+    }
 
     /**
      * Returns the required property from a Parameter instance.
@@ -175,7 +184,10 @@ public interface Parameter extends Constructible, Extensible, Reference<Paramete
      * @param required indicates whether this parameter is mandatory
      * @return the current Parameter instance
      */
-    Parameter required(Boolean required);
+    default Parameter required(Boolean required) {
+        setRequired(required);
+        return this;
+    }
 
     /**
      * Returns the deprecated property from a Parameter instance.
@@ -197,7 +209,10 @@ public interface Parameter extends Constructible, Extensible, Reference<Paramete
      * @param deprecated specifies that a parameter is deprecated
      * @return the current Parameter instance
      */
-    Parameter deprecated(Boolean deprecated);
+    default Parameter deprecated(Boolean deprecated) {
+        setDeprecated(deprecated);
+        return this;
+    }
 
     /**
      * Returns the allowEmptyValue property from a Parameter instance.
@@ -219,7 +234,10 @@ public interface Parameter extends Constructible, Extensible, Reference<Paramete
      * @param allowEmptyValue specify the ability to pass empty-valued parameters
      * @return the current Parameter instance
      */
-    Parameter allowEmptyValue(Boolean allowEmptyValue);
+    default Parameter allowEmptyValue(Boolean allowEmptyValue) {
+        setAllowEmptyValue(allowEmptyValue);
+        return this;
+    }
 
     /**
      * Returns the style property from a Parameter instance.
@@ -241,7 +259,10 @@ public interface Parameter extends Constructible, Extensible, Reference<Paramete
      * @param style describes how the parameter value will be serialized
      * @return the current Parameter instance
      */
-    Parameter style(Parameter.Style style);
+    default Parameter style(Parameter.Style style) {
+        setStyle(style);
+        return this;
+    }
 
     /**
      * Returns the explode property from a Parameter instance.
@@ -263,7 +284,10 @@ public interface Parameter extends Constructible, Extensible, Reference<Paramete
      * @param explode whether parameter values of type "array" or "object" generate separate parameters for each value
      * @return the current Parameter instance
      */
-    Parameter explode(Boolean explode);
+    default Parameter explode(Boolean explode) {
+        setExplode(explode);
+        return this;
+    }
 
     /**
      * Returns the allowReserved property from a Parameter instance.
@@ -285,7 +309,10 @@ public interface Parameter extends Constructible, Extensible, Reference<Paramete
      * @param allowReserved specifies whether the parameter value should allow reserved characters
      * @return the current Parameter instance
      */
-    Parameter allowReserved(Boolean allowReserved);
+    default Parameter allowReserved(Boolean allowReserved) {
+        setAllowReserved(allowReserved);
+        return this;
+    }
 
     /**
      * Returns the schema property from a Parameter instance.
@@ -307,7 +334,10 @@ public interface Parameter extends Constructible, Extensible, Reference<Paramete
      * @param schema schema defining the type used for the parameter
      * @return the current Parameter instance
      */
-    Parameter schema(Schema schema);
+    default Parameter schema(Schema schema) {
+        setSchema(schema);
+        return this;
+    }
 
     /**
      * Returns the examples property from a Parameter instance.
@@ -331,7 +361,10 @@ public interface Parameter extends Constructible, Extensible, Reference<Paramete
      * @param examples examples of the media type
      * @return the current Parameter instance
      */
-    Parameter examples(Map<String, Example> examples);
+    default Parameter examples(Map<String, Example> examples) {
+        setExamples(examples);
+        return this;
+    }
 
     /**
      * Adds an example of the media type using the specified key. The example should contain a value in the correct format as specified in the
@@ -365,7 +398,10 @@ public interface Parameter extends Constructible, Extensible, Reference<Paramete
      * @param example example of the media type
      * @return the current Parameter instance
      */
-    Parameter example(Object example);
+    default Parameter example(Object example) {
+        setExample(example);
+        return this;
+    }
 
     /**
      * Returns the content property from a Parameter instance.
@@ -387,6 +423,9 @@ public interface Parameter extends Constructible, Extensible, Reference<Paramete
      * @param content a map containing the media representations for the parameter
      * @return the current Parameter instance
      */
-    Parameter content(Content content);
+    default Parameter content(Content content) {
+        setContent(content);
+        return this;
+    }
 
 }

@@ -40,7 +40,10 @@ public interface Discriminator extends Constructible {
      * @param propertyName the name of the property in the payload that will hold the discriminator value
      * @return the current Discriminator instance
      */
-    Discriminator propertyName(String propertyName);
+    default Discriminator propertyName(String propertyName) {
+        setPropertyName(propertyName);
+        return this;
+    }
 
     /**
      * Returns the propertyName property from a Discriminator instance.
@@ -71,7 +74,10 @@ public interface Discriminator extends Constructible {
      * @param mapping a map containing keys and schema names or references
      * @return the current Discriminator instance
      */
-    Discriminator mapping(Map<String, String> mapping);
+    default Discriminator mapping(Map<String, String> mapping) {
+        setMapping(mapping);
+        return this;
+    }
 
     /**
      * Returns the mapping property from a Discriminator instance.

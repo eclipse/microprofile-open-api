@@ -47,7 +47,10 @@ public interface Contact extends Constructible, Extensible {
      * @param name the name of the contact person/organization
      * @return this Contact instance
      */
-    Contact name(String name);
+    default Contact name(String name) {
+        setName(name);
+        return this;
+    }
 
     /**
      * Returns the URL pointing to the contact information for this Contact instance.
@@ -71,7 +74,10 @@ public interface Contact extends Constructible, Extensible {
      * @param url the url pointing to the contact information
      * @return this Contact instance
      */
-    Contact url(String url);
+    default Contact url(String url) {
+        setUrl(url);
+        return this;
+    }
 
     /**
      * Returns the contact email of this Contact instance.
@@ -94,6 +100,9 @@ public interface Contact extends Constructible, Extensible {
      * @param email the email of the contact person/organization
      * @return this Contact instance
      */
-    Contact email(String email);
+    default Contact email(String email) {
+        setEmail(email);
+        return this;
+    }
 
 }

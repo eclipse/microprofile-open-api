@@ -74,7 +74,10 @@ public interface Header extends Constructible, Extensible, Reference<Header> {
      * @param description a brief description of the header parameter
      * @return the current Header instance
      */
-    Header description(String description);
+    default Header description(String description) {
+        setDescription(description);
+        return this;
+    }
 
     /**
      * Returns the required property from a Header instance.
@@ -96,7 +99,10 @@ public interface Header extends Constructible, Extensible, Reference<Header> {
      * @param required whether this parameter is mandatory
      * @return the current Header instance
      */
-    Header required(Boolean required);
+    default Header required(Boolean required) {
+        setRequired(required);
+        return this;
+    }
 
     /**
      * Returns the deprecated property from a Header instance.
@@ -118,7 +124,10 @@ public interface Header extends Constructible, Extensible, Reference<Header> {
      * @param deprecated whether the header parameter is deprecated
      * @return the current Header instance
      */
-    Header deprecated(Boolean deprecated);
+    default Header deprecated(Boolean deprecated) {
+        setDeprecated(deprecated);
+        return this;
+    }
 
     /**
      * Returns the allowEmptyValue property from a Header instance.
@@ -140,7 +149,10 @@ public interface Header extends Constructible, Extensible, Reference<Header> {
      * @param allowEmptyValue specify the ability to pass empty-valued parameters
      * @return the current Header instance
      */
-    Header allowEmptyValue(Boolean allowEmptyValue);
+    default Header allowEmptyValue(Boolean allowEmptyValue) {
+        setAllowEmptyValue(allowEmptyValue);
+        return this;
+    }
 
     /**
      * Returns the style property from a Header instance.
@@ -162,7 +174,10 @@ public interface Header extends Constructible, Extensible, Reference<Header> {
      * @param style how the parameter value will be serialized
      * @return the current Header instance
      */
-    Header style(Style style);
+    default Header style(Style style) {
+        setStyle(style);
+        return this;
+    }
 
     /**
      * Returns the explode property from a Header instance.
@@ -184,7 +199,10 @@ public interface Header extends Constructible, Extensible, Reference<Header> {
      * @param explode whether parameter values of type "array" or "object" generate separate parameters for each value
      * @return the current Header instance
      */
-    Header explode(Boolean explode);
+    default Header explode(Boolean explode) {
+        setExplode(explode);
+        return this;
+    }
 
     /**
      * Returns the schema property from a Header instance.
@@ -206,7 +224,10 @@ public interface Header extends Constructible, Extensible, Reference<Header> {
      * @param schema schema defining the type used for the header parameter
      * @return the current Header instance
      */
-    Header schema(Schema schema);
+    default Header schema(Schema schema) {
+        setSchema(schema);
+        return this;
+    }
 
     /**
      * Returns the examples property from a Header instance.
@@ -230,7 +251,10 @@ public interface Header extends Constructible, Extensible, Reference<Header> {
      * @param examples examples of the media type
      * @return the current Header instance
      */
-    Header examples(Map<String, Example> examples);
+    default Header examples(Map<String, Example> examples) {
+        setExamples(examples);
+        return this;
+    }
 
     /**
      * Adds an example of the media type using the specified key to this Header instance. The example should contain a value in the correct format as
@@ -264,7 +288,10 @@ public interface Header extends Constructible, Extensible, Reference<Header> {
      * @param example example of the media type
      * @return the current Header instance
      */
-    Header example(Object example);
+    default Header example(Object example) {
+        setExample(example);
+        return this;
+    }
 
     /**
      * Returns the content property from a Header instance.
@@ -286,6 +313,9 @@ public interface Header extends Constructible, Extensible, Reference<Header> {
      * @param content a map containing the media representations for the parameter
      * @return the current Header instance
      */
-    Header content(Content content);
+    default Header content(Content content) {
+        setContent(content);
+        return this;
+    }
 
 }

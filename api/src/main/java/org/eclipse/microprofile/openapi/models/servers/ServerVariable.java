@@ -55,7 +55,10 @@ public interface ServerVariable extends Constructible, Extensible {
      * @param enumeration an list of string values to be used if the substitution options are from a limited set
      * @return ServerVariable instance with the set enumeration property
      */
-    ServerVariable enumeration(List<String> enumeration);
+    default ServerVariable enumeration(List<String> enumeration) {
+        setEnumeration(enumeration);
+        return this;
+    }
 
     /**
      * This method adds a string item to enumeration list of a ServerVariable instance and returns the instance.
@@ -97,7 +100,10 @@ public interface ServerVariable extends Constructible, Extensible {
      * @return ServerVariable instance with the set defaultValue property
      */
 
-    ServerVariable defaultValue(String defaultValue);
+    default ServerVariable defaultValue(String defaultValue) {
+        setDefaultValue(defaultValue);
+        return this;
+    }
 
     /**
      * This method returns the description property of ServerVariable instance. Description property is optional for server variable.
@@ -122,6 +128,9 @@ public interface ServerVariable extends Constructible, Extensible {
      * @param description a short description of the server variable
      * @return ServerVariable instance with the set description property
      */
-    ServerVariable description(String description);
+    default ServerVariable description(String description) {
+        setDescription(description);
+        return this;
+    }
 
 }

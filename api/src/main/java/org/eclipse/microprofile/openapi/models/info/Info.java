@@ -49,7 +49,10 @@ public interface Info extends Constructible, Extensible {
      * @param title the title of the application
      * @return this Info instance
      */
-    Info title(String title);
+    default Info title(String title) {
+        setTitle(title);
+        return this;
+    }
 
     /**
      * Returns a short description for the application for this Info instance.
@@ -72,7 +75,10 @@ public interface Info extends Constructible, Extensible {
      * @param description a short description for the application
      * @return this Info instance
      */
-    Info description(String description);
+    default Info description(String description) {
+        setDescription(description);
+        return this;
+    }
 
     /**
      * Returns the URL to the Terms of Service for the API for this instance of Info.
@@ -96,7 +102,10 @@ public interface Info extends Constructible, Extensible {
      * @param termsOfService the URL to the Terms of Service for the API
      * @return this Info instance
      */
-    Info termsOfService(String termsOfService);
+    default Info termsOfService(String termsOfService) {
+        setTermsOfService(termsOfService);
+        return this;
+    }
 
     /**
      * Returns the contact information for the exposed API from this Info instance.
@@ -119,7 +128,10 @@ public interface Info extends Constructible, Extensible {
      * @param contact the contact information for the exposed API
      * @return this Info instance
      */
-    Info contact(Contact contact);
+    default Info contact(Contact contact) {
+        setContact(contact);
+        return this;
+    }
 
     /**
      * Returns the license information for the exposed API from this Info instance.
@@ -142,7 +154,10 @@ public interface Info extends Constructible, Extensible {
      * @param license the license information for the exposed API
      * @return this Info instance
      */
-    Info license(License license);
+    default Info license(License license) {
+        setLicense(license);
+        return this;
+    }
 
     /**
      * Returns the version of the OpenAPI document for this Info instance.
@@ -165,6 +180,9 @@ public interface Info extends Constructible, Extensible {
      * @param version the version of the OpenAPI document
      * @return this Info instance
      */
-    Info version(String version);
+    default Info version(String version) {
+        setVersion(version);
+        return this;
+    }
 
 }

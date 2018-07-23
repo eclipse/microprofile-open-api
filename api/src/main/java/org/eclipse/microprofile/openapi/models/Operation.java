@@ -58,7 +58,10 @@ public interface Operation extends Constructible, Extensible {
      * @param tags a list of tags for API documentation control
      * @return the current Operation object
      **/
-    Operation tags(List<String> tags);
+    default Operation tags(List<String> tags) {
+        setTags(tags);
+        return this;
+    }
 
     /**
      * Adds the given tag to this Operation's list of tags.
@@ -88,7 +91,10 @@ public interface Operation extends Constructible, Extensible {
      * @param summary a short summary of what the operation does
      * @return the current Operation object
      **/
-    Operation summary(String summary);
+    default Operation summary(String summary) {
+        setSummary(summary);
+        return this;
+    }
 
     /**
      * Returns the description property from an Operation instance.
@@ -110,7 +116,10 @@ public interface Operation extends Constructible, Extensible {
      * @param description a verbose explanation of the operation behavior
      * @return the current Operation object
      **/
-    Operation description(String description);
+    default Operation description(String description) {
+        setDescription(description);
+        return this;
+    }
 
     /**
      * Returns the externalDocs property from an Operation instance.
@@ -132,7 +141,10 @@ public interface Operation extends Constructible, Extensible {
      * @param externalDocs additional external documentation for this operation
      * @return the current Operation object
      **/
-    Operation externalDocs(ExternalDocumentation externalDocs);
+    default Operation externalDocs(ExternalDocumentation externalDocs) {
+        setExternalDocs(externalDocs);
+        return this;
+    }
 
     /**
      * Returns the operationId property from an Operation instance.
@@ -154,7 +166,10 @@ public interface Operation extends Constructible, Extensible {
      * @param operationId unique string used to identify the operation
      * @return the current Operation object
      **/
-    Operation operationId(String operationId);
+    default Operation operationId(String operationId) {
+        setOperationId(operationId);
+        return this;
+    }
 
     /**
      * Returns the parameters property from an Operation instance.
@@ -176,7 +191,10 @@ public interface Operation extends Constructible, Extensible {
      * @param parameters a list of parameters that are applicable for this operation
      * @return the current Operation object
      **/
-    Operation parameters(List<Parameter> parameters);
+    default Operation parameters(List<Parameter> parameters) {
+        setParameters(parameters);
+        return this;
+    }
 
     /**
      * Adds the given parameter item to this Operation's list of parameters.
@@ -206,7 +224,10 @@ public interface Operation extends Constructible, Extensible {
      * @param requestBody the request body applicable for this operation
      * @return the current Operation object
      **/
-    Operation requestBody(RequestBody requestBody);
+    default Operation requestBody(RequestBody requestBody) {
+        setRequestBody(requestBody);
+        return this;
+    }
 
     /**
      * Returns the responses property from an Operation instance.
@@ -228,7 +249,10 @@ public interface Operation extends Constructible, Extensible {
      * @param responses collection of possible responses from executing this operation
      * @return the current Operation object
      **/
-    Operation responses(APIResponses responses);
+    default Operation responses(APIResponses responses) {
+        setResponses(responses);
+        return this;
+    }
 
     /**
      * Returns the callbacks property from an Operation instance.
@@ -250,7 +274,10 @@ public interface Operation extends Constructible, Extensible {
      * @param callbacks map of possible out-of-band callbacks related to the operation. The key value must be the correct format for this field.
      * @return the current Operation object
      **/
-    Operation callbacks(Map<String, Callback> callbacks);
+    default Operation callbacks(Map<String, Callback> callbacks) {
+        setCallbacks(callbacks);
+        return this;
+    }
 
     /**
      * Returns the deprecated property from an Operation instance.
@@ -272,7 +299,10 @@ public interface Operation extends Constructible, Extensible {
      * @param deprecated declaration whether this operation is deprecated
      * @return the current Operation object
      **/
-    Operation deprecated(Boolean deprecated);
+    default Operation deprecated(Boolean deprecated) {
+        setDeprecated(deprecated);
+        return this;
+    }
 
     /**
      * Returns the security property from an Operation instance.
@@ -294,7 +324,10 @@ public interface Operation extends Constructible, Extensible {
      * @param security list of which security mechanisms can be used for this operation
      * @return the current Operation object
      **/
-    Operation security(List<SecurityRequirement> security);
+    default Operation security(List<SecurityRequirement> security) {
+        setSecurity(security);
+        return this;
+    }
 
     /**
      * Adds the given security requirement item to this Operation's list of security mechanisms.
@@ -324,7 +357,10 @@ public interface Operation extends Constructible, Extensible {
      * @param servers list of servers to service this operation
      * @return the current Operation object
      **/
-    Operation servers(List<Server> servers);
+    default Operation servers(List<Server> servers) {
+        setServers(servers);
+        return this;
+    }
 
     /**
      * Adds the given server to this Operation's list of servers.
