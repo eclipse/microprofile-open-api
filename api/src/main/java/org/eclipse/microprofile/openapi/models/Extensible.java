@@ -35,6 +35,19 @@ public interface Extensible<T extends Extensible<T>> {
     Map<String, Object> getExtensions();
 
     /**
+     * Sets this Extensible's extensions property to the given map of extensions.
+     * 
+     * @param extensions map containing keys which start with "x-" and values which provide additional information
+     * @return the current instance
+     */
+    default T extensions(Map<String, Object> extensions) {
+        setExtensions(extensions);
+        @SuppressWarnings("unchecked")
+        T t = (T) this;
+        return t;
+    }
+
+    /**
      * Adds the given object to this Extensible's map of extensions, with the given name as its key.
      *
      * @param name the key used to access the extension object. Always prefixed by "x-".
