@@ -40,7 +40,7 @@ import org.eclipse.microprofile.openapi.models.servers.Server;
  * 
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#linkObject"> OpenAPI Specification Link Object</a>
  */
-public interface Link extends Constructible, Extensible, Reference<Link> {
+public interface Link extends Constructible, Extensible<Link>, Reference<Link> {
 
     /**
      * Returns the server property from a Link instance.

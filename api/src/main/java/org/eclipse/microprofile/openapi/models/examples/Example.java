@@ -31,7 +31,7 @@ import org.eclipse.microprofile.openapi.models.Reference;
  * 
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#exampleObject">OpenAPI Specification Example Object</a>
  */
-public interface Example extends Constructible, Extensible, Reference<Example> {
+public interface Example extends Constructible, Extensible<Example>, Reference<Example> {
 
     /**
      * Returns the summary property from an Example instance.

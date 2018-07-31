@@ -27,7 +27,7 @@ import org.eclipse.microprofile.openapi.models.media.Content;
  *
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#requestBodyObject">requestBody Object</a>
  */
-public interface RequestBody extends Constructible, Extensible, Reference<RequestBody> {
+public interface RequestBody extends Constructible, Extensible<RequestBody>, Reference<RequestBody> {
 
     /**
      * Returns the description of this instance of RequestBody.

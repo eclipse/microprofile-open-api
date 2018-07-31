@@ -28,7 +28,7 @@ import org.eclipse.microprofile.openapi.models.headers.Header;
  *
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#encodingObject">Encoding Object</a>
  */
-public interface Encoding extends Constructible, Extensible {
+public interface Encoding extends Constructible, Extensible<Encoding> {
 
     enum Style {
         FORM("form"), SPACE_DELIMITED("spaceDelimited"), PIPE_DELIMITED("pipeDelimited"), DEEP_OBJECT("deepObject");

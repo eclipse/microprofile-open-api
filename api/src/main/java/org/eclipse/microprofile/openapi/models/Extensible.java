@@ -25,7 +25,7 @@ import java.util.Map;
  * <p>
  * The extensions property names are always prefixed by "x-".
  */
-public interface Extensible {
+public interface Extensible<T extends Extensible<T>> {
 
     /**
      * Returns the extensions property from an Extensible instance.
@@ -40,7 +40,7 @@ public interface Extensible {
      * @param name the key used to access the extension object. Always prefixed by "x-".
      * @param value data not required by the specification
      */
-    void addExtension(String name, Object value);
+    T addExtension(String name, Object value);
 
     /**
      * Sets this Extensible's extensions property to the given map of extensions.

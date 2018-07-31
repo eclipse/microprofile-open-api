@@ -31,7 +31,7 @@ import org.eclipse.microprofile.openapi.models.media.Content;
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responseObject"
  */
-public interface APIResponse extends Constructible, Extensible, Reference<APIResponse> {
+public interface APIResponse extends Constructible, Extensible<APIResponse>, Reference<APIResponse> {
 
     /**
      * Returns a short description of this instance of ApiResponse.
