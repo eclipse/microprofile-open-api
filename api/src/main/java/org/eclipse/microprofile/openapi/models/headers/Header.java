@@ -34,7 +34,7 @@ import org.eclipse.microprofile.openapi.models.media.Schema;
  * 
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#header-object">OpenAPI Specification Header Object</a>
  */
-public interface Header extends Constructible, Extensible, Reference<Header> {
+public interface Header extends Constructible, Extensible<Header>, Reference<Header> {
 
     /**
      * Controls the style of serialization. Only one style is supported for headers.

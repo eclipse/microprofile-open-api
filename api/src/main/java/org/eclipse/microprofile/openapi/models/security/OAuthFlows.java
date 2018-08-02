@@ -25,7 +25,7 @@ import org.eclipse.microprofile.openapi.models.Extensible;
  *
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#oauthFlowsObject">OAuthFlows Object</a>
  */
-public interface OAuthFlows extends Constructible, Extensible {
+public interface OAuthFlows extends Constructible, Extensible<OAuthFlows> {
 
     /**
      * This method returns the implicit property from OAuthFlows instance.

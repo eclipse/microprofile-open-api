@@ -28,7 +28,7 @@ import org.eclipse.microprofile.openapi.models.ExternalDocumentation;
  * 
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#tagObject">OpenAPI Specification Tag Object</a>
  */
-public interface Tag extends Constructible, Extensible {
+public interface Tag extends Constructible, Extensible<Tag> {
 
     /**
      * Returns the name property from a Tag instance.

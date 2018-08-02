@@ -28,7 +28,7 @@ import org.eclipse.microprofile.openapi.models.Extensible;
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#oauthFlowObject">OAuthFlow Object</a>
  **/
 
-public interface Scopes extends Constructible, Extensible, Map<String, String> {
+public interface Scopes extends Constructible, Extensible<Scopes>, Map<String, String> {
 
     /**
      * Adds name of an existing scope object and item parameters to a Scopes instance as a key-value pair in a map.

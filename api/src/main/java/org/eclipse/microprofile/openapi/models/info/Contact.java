@@ -25,7 +25,7 @@ import org.eclipse.microprofile.openapi.models.Extensible;
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#contactObject"
  */
-public interface Contact extends Constructible, Extensible {
+public interface Contact extends Constructible, Extensible<Contact> {
 
     /**
      * Returns the identifying name of this Contact instance.

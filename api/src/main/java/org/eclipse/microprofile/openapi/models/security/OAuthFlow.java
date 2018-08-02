@@ -25,7 +25,7 @@ import org.eclipse.microprofile.openapi.models.Extensible;
  *
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#oauthFlowObject">OAuth Flow Object</a>
  */
-public interface OAuthFlow extends Constructible, Extensible {
+public interface OAuthFlow extends Constructible, Extensible<OAuthFlow> {
 
     /**
      * The authorization URL to be used for this flow. This MUST be in the form of a URL. This is a REQUIRED property.

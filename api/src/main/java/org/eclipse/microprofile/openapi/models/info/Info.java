@@ -26,7 +26,7 @@ import org.eclipse.microprofile.openapi.models.Extensible;
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#infoObject"
  */
-public interface Info extends Constructible, Extensible {
+public interface Info extends Constructible, Extensible<Info> {
 
     /**
      * Returns the title for the application for this instance of Info

@@ -27,7 +27,7 @@ import org.eclipse.microprofile.openapi.models.Extensible;
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#xmlObject">XML Object</a>
  * </p>
  */
-public interface XML extends Constructible, Extensible {
+public interface XML extends Constructible, Extensible<XML> {
 
     /**
      * This method returns the name property from XML instance.

@@ -29,7 +29,7 @@ import java.util.Map;
  * 
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#pathsObject"> OpenAPI Specification Paths Object</a>
  */
-public interface Paths extends Constructible, Extensible, Map<String, PathItem> {
+public interface Paths extends Constructible, Extensible<Paths>, Map<String, PathItem> {
 
     /**
      * Adds the given path item to this Paths and return this instance of Paths

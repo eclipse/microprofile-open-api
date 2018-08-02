@@ -50,7 +50,7 @@ import org.eclipse.microprofile.openapi.models.media.Schema;
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject">OpenAPI Specification Parameter
  *      Object</a>
  */
-public interface Parameter extends Constructible, Extensible, Reference<Parameter> {
+public interface Parameter extends Constructible, Extensible<Parameter>, Reference<Parameter> {
 
     /**
      * The values allowed for the style field.

@@ -32,7 +32,7 @@ import org.eclipse.microprofile.openapi.models.examples.Example;
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#mediaTypeObject">OpenAPI Specification Media Type
  *      Object</a>
  */
-public interface MediaType extends Constructible, Extensible {
+public interface MediaType extends Constructible, Extensible<MediaType> {
 
     /**
      * Returns the schema property from a MediaType instance.

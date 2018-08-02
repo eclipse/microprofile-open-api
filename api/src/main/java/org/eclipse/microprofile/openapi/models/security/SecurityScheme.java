@@ -26,7 +26,7 @@ import org.eclipse.microprofile.openapi.models.Reference;
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-scheme-object"
  */
-public interface SecurityScheme extends Constructible, Extensible, Reference<SecurityScheme> {
+public interface SecurityScheme extends Constructible, Extensible<SecurityScheme>, Reference<SecurityScheme> {
 
     /**
      * Type is a REQUIRED property that specifies the type of SecurityScheme instance.
