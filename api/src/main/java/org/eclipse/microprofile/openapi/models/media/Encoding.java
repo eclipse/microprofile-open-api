@@ -111,6 +111,15 @@ public interface Encoding extends Constructible, Extensible<Encoding> {
     void setHeaders(Map<String, Header> headers);
 
     /**
+     * Adds the given header to this Encoding' list of headers with the given string as its key.
+     *
+     * @param key a key conforming to the format required for this object
+     * @param header the header object
+     * @return the current Encoding object
+     */
+    Encoding addHeader(String key, Header header);
+
+    /**
      * Style describes how the encoding value will be serialized depending on the type of the parameter value.
      * <p>
      * This method sets the style property of Encoding instance to the passed style argument and returns the modified instance
