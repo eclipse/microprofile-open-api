@@ -657,12 +657,18 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("components.examples.review.externalValue", equalTo("http://foo.bar/examples/review-example.json"));
 
         // Example in Parameter Content
-        vr.body("paths.'/reviews/users/{user}'.get.parameters.find{ it.name=='user'}.content.'*/*'.example", equalTo("bsmith"));
         vr.body("paths.'/reviews/users/{user}'.get.parameters.find{ it.name=='user'}.content.'*/*'.examples.example.value", equalTo("bsmith"));
 
         // Example in Parameter
         vr.body("paths.'/reviews/users/{user}'.get.parameters.find{ it.name=='user'}.examples.example1.value", equalTo("bsmith"));
         vr.body("paths.'/reviews/users/{user}'.get.parameters.find{ it.name=='user'}.examples.example2.value", equalTo("pat@example.com"));
+    }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testContentExampleAttribute(String type){
+        ValidatableResponse vr = callEndpoint(type);
+        vr.body("paths.'/reviews/{user}/{airlines}'.get.parameters.find{it.name=='airlines'}.content.'*/*'.example", equalTo("Acme Air"));
     }
 
     @RunAsClient
