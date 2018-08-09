@@ -666,6 +666,13 @@ public class AirlinesAppTest extends AppTestBase {
 
     @RunAsClient
     @Test(dataProvider = "formatProvider")
+    public void testContentExampleAttribute(String type){
+        ValidatableResponse vr = callEndpoint(type);
+        vr.body("paths.'/reviews/{user}/{airlines}'.get.parameters.find{it.name=='airlines'}.content.'*/*'.example", equalTo("Acme Air"));
+    }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
     public void testTagDeclarations(String type) {
         ValidatableResponse vr = callEndpoint(type);
         String tagsPath = "tags.find { it.name == '";

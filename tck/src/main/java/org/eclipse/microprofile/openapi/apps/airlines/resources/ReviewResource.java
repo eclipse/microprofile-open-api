@@ -321,9 +321,7 @@ public class ReviewResource {
                     required = true,
                     in = ParameterIn.PATH,
                     content = @Content(
-                        examples = @ExampleObject(
-                            name = "example",
-                            value = "Acme Air"))),
+                        example = "Acme Air")),
                 @Parameter(
                     name = "user",
                     description = "sername of the user for the reviews",
