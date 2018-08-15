@@ -19,7 +19,6 @@ package org.eclipse.microprofile.openapi.models;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.eclipse.microprofile.openapi.models.parameters.Parameter;
 import org.eclipse.microprofile.openapi.models.servers.Server;
@@ -292,28 +291,6 @@ public interface PathItem extends Constructible, Extensible<PathItem>, Reference
     default PathItem TRACE(Operation trace) {
         setTRACE(trace);
         return this;
-    }
-
-    /**
-     * Returns a list of all the operations for this path item.
-     * 
-     * @deprecated since 1.1, use @link {@link Map#values()} on {@link #getOperations()} instead
-     * @return a list of all the operations for this path item
-     **/
-    @Deprecated
-    default List<Operation> readOperations() {
-        return getOperations().values().stream().collect(Collectors.toList());
-    }
-
-    /**
-     * Returns a map with all the operations for this path where the keys are HttpMethods.
-     * 
-     * @deprecated since 1.1, use {@link #getOperations()} instead
-     * @return a map with all the operations for this path where the keys are HttpMethods
-     **/
-    @Deprecated
-    default Map<PathItem.HttpMethod, Operation> readOperationsMap() {
-        return getOperations();
     }
 
     /**
