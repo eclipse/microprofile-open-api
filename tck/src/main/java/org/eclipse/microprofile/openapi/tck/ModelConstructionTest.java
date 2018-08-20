@@ -496,7 +496,7 @@ public class ModelConstructionTest extends Arquillian {
         
         final String responseKey = "myResponse";
         final APIResponse responseValue = createConstructibleInstance(APIResponse.class);
-        checkSameObject(responses, responses.addApiResponse(responseKey, responseValue));
+        checkSameObject(responses, responses.addAPIResponse(responseKey, responseValue));
         checkMapEntry(responses, responseKey, responseValue);
         
         final String responseKey2 = "myResponse2";

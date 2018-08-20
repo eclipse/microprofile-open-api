@@ -15,7 +15,6 @@ package org.eclipse.microprofile.openapi.filter;
 
 import org.eclipse.microprofile.openapi.OASFactory;
 import org.eclipse.microprofile.openapi.OASFilter;
-import org.eclipse.microprofile.openapi.models.responses.APIResponses;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.eclipse.microprofile.openapi.models.Operation;
 import org.eclipse.microprofile.openapi.models.PathItem;
@@ -26,6 +25,7 @@ import org.eclipse.microprofile.openapi.models.media.Schema;
 import org.eclipse.microprofile.openapi.models.parameters.Parameter;
 import org.eclipse.microprofile.openapi.models.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.models.responses.APIResponse;
+import org.eclipse.microprofile.openapi.models.responses.APIResponses;
 import org.eclipse.microprofile.openapi.models.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.models.servers.Server;
 import org.eclipse.microprofile.openapi.models.tags.Tag;
@@ -38,7 +38,7 @@ public class AirlinesOASFilter implements OASFilter {
             //Add new operation
             pathItem.PUT(OASFactory.createObject(Operation.class).
                     summary("filterPathItem - added put operation")
-                    .responses(OASFactory.createObject(APIResponses.class).addApiResponse("200", 
+                    .responses(OASFactory.createObject(APIResponses.class).addAPIResponse("200", 
                             OASFactory.createObject(APIResponse.class).description("filterPathItem - successfully put airlines"))));
             
             //Spec states : All filterable descendant elements of a filtered element must be called before its ancestor

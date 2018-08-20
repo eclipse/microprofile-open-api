@@ -15,39 +15,38 @@
  */
 package org.eclipse.microprofile.openapi.reader;
 
-import java.util.HashMap;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.math.BigDecimal;
+import java.util.HashMap;
 
 import org.eclipse.microprofile.openapi.OASFactory;
 import org.eclipse.microprofile.openapi.OASModelReader;
-
+import org.eclipse.microprofile.openapi.models.Components;
+import org.eclipse.microprofile.openapi.models.ExternalDocumentation;
+import org.eclipse.microprofile.openapi.models.OpenAPI;
+import org.eclipse.microprofile.openapi.models.Operation;
+import org.eclipse.microprofile.openapi.models.PathItem;
+import org.eclipse.microprofile.openapi.models.Paths;
 import org.eclipse.microprofile.openapi.models.examples.Example;
 import org.eclipse.microprofile.openapi.models.headers.Header;
 import org.eclipse.microprofile.openapi.models.info.Contact;
+import org.eclipse.microprofile.openapi.models.info.Info;
 import org.eclipse.microprofile.openapi.models.info.License;
 import org.eclipse.microprofile.openapi.models.links.Link;
-import org.eclipse.microprofile.openapi.models.parameters.RequestBody;
-import org.eclipse.microprofile.openapi.models.security.SecurityScheme;
-import org.eclipse.microprofile.openapi.models.tags.Tag;
-import org.eclipse.microprofile.openapi.models.Components;
-import org.eclipse.microprofile.openapi.models.OpenAPI;
-import org.eclipse.microprofile.openapi.models.ExternalDocumentation;
-import org.eclipse.microprofile.openapi.models.Paths;
-import org.eclipse.microprofile.openapi.models.Operation;
-import org.eclipse.microprofile.openapi.models.PathItem;
-import org.eclipse.microprofile.openapi.models.info.Info;
 import org.eclipse.microprofile.openapi.models.media.Content;
 import org.eclipse.microprofile.openapi.models.media.MediaType;
 import org.eclipse.microprofile.openapi.models.media.Schema;
-import org.eclipse.microprofile.openapi.models.servers.Server;
-import org.eclipse.microprofile.openapi.models.servers.ServerVariables;
-import org.eclipse.microprofile.openapi.models.servers.ServerVariable;
 import org.eclipse.microprofile.openapi.models.parameters.Parameter;
+import org.eclipse.microprofile.openapi.models.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.models.responses.APIResponse;
 import org.eclipse.microprofile.openapi.models.responses.APIResponses;
 import org.eclipse.microprofile.openapi.models.security.SecurityRequirement;
+import org.eclipse.microprofile.openapi.models.security.SecurityScheme;
+import org.eclipse.microprofile.openapi.models.servers.Server;
+import org.eclipse.microprofile.openapi.models.servers.ServerVariable;
+import org.eclipse.microprofile.openapi.models.servers.ServerVariables;
+import org.eclipse.microprofile.openapi.models.tags.Tag;
 
 
 public class MyOASModelReaderImpl implements OASModelReader {
@@ -204,7 +203,7 @@ public class MyOASModelReaderImpl implements OASModelReader {
                             .summary("Retrieve all available airlines")
                             .operationId("getAirlines")
                             .responses(OASFactory.createObject(APIResponses.class)
-                                .addApiResponse("404", OASFactory.createObject(APIResponse.class)
+                                .addAPIResponse("404", OASFactory.createObject(APIResponse.class)
                                     .description("No airlines found")
                                     .content(OASFactory.createObject(Content.class)
                                         .addMediaType("n/a", OASFactory.createObject(MediaType.class)))))))
@@ -215,14 +214,14 @@ public class MyOASModelReaderImpl implements OASModelReader {
                             .summary("TEST SUMMARY")
                             .operationId("getTestFlights")
                             .responses(OASFactory.createObject(APIResponses.class)
-                                .addApiResponse("200", OASFactory.createObject(APIResponse.class)
+                                .addAPIResponse("200", OASFactory.createObject(APIResponse.class)
                                     .description("successful operation")
                                     .content(OASFactory.createObject(Content.class)
                                         .addMediaType("application/json", OASFactory.createObject(MediaType.class)
                                             .schema(OASFactory.createObject(Schema.class)
                                                 .type(Schema.SchemaType.ARRAY)
                                                 .ref("#/components.schemas.Flight")))))
-                                .addApiResponse("404", OASFactory.createObject(APIResponse.class)
+                                .addAPIResponse("404", OASFactory.createObject(APIResponse.class)
                                     .description("No available flights found")
                                     .content(OASFactory.createObject(Content.class)
                                         .addMediaType("n/a", OASFactory.createObject(MediaType.class)))))
@@ -276,14 +275,14 @@ public class MyOASModelReaderImpl implements OASModelReader {
                             .summary("Retrieve all bookings for current user")
                             .operationId("getAllBookings")
                             .responses(OASFactory.createObject(APIResponses.class)
-                                .addApiResponse("200", OASFactory.createObject(APIResponse.class)
+                                .addAPIResponse("200", OASFactory.createObject(APIResponse.class)
                                     .description("Bookings retrieved")
                                     .content(OASFactory.createObject(Content.class)
                                         .addMediaType("applictaion/json", OASFactory.createObject(MediaType.class)
                                             .schema(OASFactory.createObject(Schema.class)
                                                 .type(Schema.SchemaType.ARRAY)
                                                 .ref("#/components.schemas.Booking")))))
-                                .addApiResponse("404", OASFactory.createObject(APIResponse.class)
+                                .addAPIResponse("404", OASFactory.createObject(APIResponse.class)
                                     .description("No bookings found for the user"))))
                         .POST(OASFactory.createObject(Operation.class)
                             .security(new ArrayList<SecurityRequirement>())
@@ -293,7 +292,7 @@ public class MyOASModelReaderImpl implements OASModelReader {
                             .description("Create a new booking record with the booking information provided.")
                             .operationId("createBooking")
                             .responses(OASFactory.createObject(APIResponses.class)
-                                .addApiResponse("201", OASFactory.createObject(APIResponse.class)
+                                .addAPIResponse("201", OASFactory.createObject(APIResponse.class)
                                     .description("Bookings created")
                                     .content(OASFactory.createObject(Content.class)
                                         .addMediaType("text/plain", OASFactory.createObject(MediaType.class)

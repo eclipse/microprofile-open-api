@@ -33,13 +33,26 @@ public interface APIResponses extends Constructible, Extensible<APIResponses>, M
     public static final String DEFAULT = "default";
 
     /**
-     * Adds an ApiResponse in the format of the name as a key and the item as the value to ApiResponses map
+     * Adds an APIResponse in the format of the name as a key and the item as the value to APIResponses map
      * 
-     * @param name the name of ApiResponse 
-     * @param apiResponse the ApiResponse object to be added to ApiResponses map
-     * @return ApiResponses map with the added ApiResponse instance
+     * @param name the name of APIResponse 
+     * @param apiResponse the APIResponse object to be added to APIResponses map
+     * @return APIResponses map with the added ApiResponse instance
+     * @deprecated since 1.1, use {@link #addAPIResponse(String, APIResponse)} instead
      **/
-    APIResponses addApiResponse(String name, APIResponse apiResponse);
+    @Deprecated
+    default APIResponses addApiResponse(String name, APIResponse apiResponse) {
+        return addAPIResponse(name, apiResponse);
+    }
+
+    /**
+     * Adds an APIResponse in the format of the name as a key and the item as the value to APIResponses map
+     * 
+     * @param name the name of APIResponse 
+     * @param apiResponse the APIResponse object to be added to APIResponses map
+     * @return APIResponses map with the added ApiResponse instance
+     **/
+    APIResponses addAPIResponse(String name, APIResponse apiResponse);
 
     /**
      * Returns the default documentation of responses other than the ones declared for specific HTTP response codes in this instance of ApiResponses.
