@@ -38,19 +38,6 @@ public interface APIResponses extends Constructible, Extensible<APIResponses>, M
      * @param name the name of APIResponse 
      * @param apiResponse the APIResponse object to be added to APIResponses map
      * @return APIResponses map with the added ApiResponse instance
-     * @deprecated since 1.1, use {@link #addAPIResponse(String, APIResponse)} instead
-     **/
-    @Deprecated
-    default APIResponses addApiResponse(String name, APIResponse apiResponse) {
-        return addAPIResponse(name, apiResponse);
-    }
-
-    /**
-     * Adds an APIResponse in the format of the name as a key and the item as the value to APIResponses map
-     * 
-     * @param name the name of APIResponse 
-     * @param apiResponse the APIResponse object to be added to APIResponses map
-     * @return APIResponses map with the added ApiResponse instance
      **/
     APIResponses addAPIResponse(String name, APIResponse apiResponse);
 
