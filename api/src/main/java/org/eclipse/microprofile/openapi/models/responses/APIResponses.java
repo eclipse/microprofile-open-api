@@ -20,6 +20,7 @@ package org.eclipse.microprofile.openapi.models.responses;
 import java.util.Map;
 
 import org.eclipse.microprofile.openapi.models.Constructible;
+import org.eclipse.microprofile.openapi.models.Extensible;
 
 /**
  * This interface represents the container for the expected responses of an operation. The container maps a HTTP response code to the expected
@@ -27,18 +28,18 @@ import org.eclipse.microprofile.openapi.models.Constructible;
  *
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responses-object">Responses Object</a>
  */
-public interface APIResponses extends Constructible, Map<String, APIResponse> {
+public interface APIResponses extends Constructible, Extensible<APIResponses>, Map<String, APIResponse> {
 
     public static final String DEFAULT = "default";
 
     /**
-     * Adds an ApiResponse in the format of the name as a key and the item as the value to ApiResponses map
+     * Adds an APIResponse in the format of the name as a key and the item as the value to APIResponses map
      * 
-     * @param name the name of ApiResponse 
-     * @param apiResponse the ApiResponse object to be added to ApiResponses map
-     * @return ApiResponses map with the added ApiResponse instance
+     * @param name the name of APIResponse 
+     * @param apiResponse the APIResponse object to be added to APIResponses map
+     * @return APIResponses map with the added ApiResponse instance
      **/
-    APIResponses addApiResponse(String name, APIResponse apiResponse);
+    APIResponses addAPIResponse(String name, APIResponse apiResponse);
 
     /**
      * Returns the default documentation of responses other than the ones declared for specific HTTP response codes in this instance of ApiResponses.
