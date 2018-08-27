@@ -78,6 +78,8 @@ public class FilterTest extends AppTestBase {
         //specification states that ancestors must be invoked last.
         vr.body("paths.'/availability'.get.summary", equalTo("Retrieve all available flights"));
         vr.body("paths.'/availability'.get.operationId", equalTo("filterPathItemGetFlights"));
+        vr.body("paths.'/bookings'.post.callbacks.'bookingCallback'.'http://localhost:9080/airlines/bookings'.get.description",
+                equalTo("parent - Retrieve all bookings for current user"));
     }
     
     @RunAsClient
@@ -94,6 +96,8 @@ public class FilterTest extends AppTestBase {
         ValidatableResponse vr = callEndpoint(type);
         vr.body("paths.'/bookings/{id}'.get.summary", equalTo("filterOperation - Get a booking with ID"));
         vr.body("paths.'/bookings/{id}'.get.operationId", equalTo("getBookingById"));
+        
+        vr.body("paths.'/bookings/{id}'.get.tags", containsInAnyOrder("Reservations", "parent - Bookings"));
     }
     
     @RunAsClient
@@ -176,6 +180,8 @@ public class FilterTest extends AppTestBase {
         ValidatableResponse vr = callEndpoint(type);
         final String response201Path = "paths.'/streams'.post.responses.'201'";
         vr.body(response201Path + ".description", equalTo("filterAPIResponse - subscription successfully created"));
+        String parentChild = "paths.'/reviews'.post.responses.'201'.content.'application/json'.schema.description";
+        vr.body(parentChild, equalTo("parent - id of the new review"));
     }
     
     @RunAsClient
@@ -184,6 +190,7 @@ public class FilterTest extends AppTestBase {
         ValidatableResponse vr = callEndpoint(type);
         final String response201Path = "paths.'/streams'.post.responses.'201'";
         vr.body(response201Path + ".content.'application/json'.schema.description", equalTo("filterSchema - subscription information"));
+    
     }
     
     @RunAsClient
