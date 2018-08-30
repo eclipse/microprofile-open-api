@@ -1,5 +1,13 @@
 -exportcontents: \
     org.eclipse.microprofile.*
+
+Require-Capability: \
+    osgi.serviceloader;\
+        filter:="(osgi.serviceloader=org.eclipse.microprofile.openapi.spi.OASFactoryResolver)";\
+        cardinality:=multiple,\
+    osgi.extender;\
+        filter:="(osgi.extender=osgi.serviceloader.processor)"
+
 Bundle-SymbolicName: org.eclipse.microprofile.openapi
 Bundle-Name: MicroProfile OpenAPI Bundle
 Bundle-License: Apache License, Version 2.0
