@@ -238,8 +238,10 @@ public interface OpenAPI extends Constructible, Extensible<OpenAPI> {
      * 
      * @param name a path name in the format valid for a Paths object
      * @param path the path item added to the list of paths
+     * @deprecated since 1.1, use @link {@link Paths#addPathItem(String, PathItem)} on {@link #getPaths()} instead
      * @return the current OpenAPI object
      */
+    @Deprecated
     OpenAPI path(String name, PathItem path);
 
     /**
