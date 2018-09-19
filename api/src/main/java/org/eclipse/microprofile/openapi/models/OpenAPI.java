@@ -142,6 +142,13 @@ public interface OpenAPI extends Constructible, Extensible<OpenAPI> {
     OpenAPI addServer(Server server);
 
     /**
+     * Removes the given server to this OpenAPI instance's list of servers.
+     *
+     * @param server Server object which provides connectivity information to a target server
+     */
+    void removeServer(Server server);
+
+    /**
      * Returns the security property from an OpenAPI instance.
      *
      * @return which security mechanisms can be used across the API
@@ -173,6 +180,13 @@ public interface OpenAPI extends Constructible, Extensible<OpenAPI> {
      * @return the current OpenAPI object
      */
     OpenAPI addSecurityRequirement(SecurityRequirement securityRequirement);
+
+    /**
+     * Removes the given security requirement to this OpenAPI instance's list of security requirements.
+     *
+     * @param securityRequirement security mechanism which can be used across the API
+     */
+    void removeSecurityRequirement(SecurityRequirement securityRequirement);
 
     /**
      * Returns the tags property from an OpenAPI instance.
@@ -207,6 +221,13 @@ public interface OpenAPI extends Constructible, Extensible<OpenAPI> {
      * @return the current OpenAPI object
      */
     OpenAPI addTag(Tag tag);
+
+    /**
+     * Removes the given tag to this OpenAPI instance's list of tags.
+     *
+     * @param tag a tag used by the specification with additional metadata
+     */
+    void removeTag(Tag tag);
 
     /**
      * Returns the paths property from an OpenAPI instance.

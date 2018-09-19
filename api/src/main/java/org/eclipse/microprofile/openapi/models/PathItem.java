@@ -357,6 +357,13 @@ public interface PathItem extends Constructible, Extensible<PathItem>, Reference
     PathItem addServer(Server server);
 
     /**
+     * Removes the given server to this PathItem's list of servers.
+     *
+     * @param server a server to service operations in this path item
+     **/
+    void removeServer(Server server);
+
+    /**
      * Returns the parameters property from this PathItem instance.
      *
      * @return a list of parameters that are applicable to all the operations described under this path
@@ -388,5 +395,12 @@ public interface PathItem extends Constructible, Extensible<PathItem>, Reference
      * @return the current PathItem instance
      **/
     PathItem addParameter(Parameter parameter);
+
+    /**
+     * Removes the given parameter to this PathItem's list of parameters.
+     *
+     * @param parameter a parameter that is applicable to all the operations described under this path
+     **/
+    void removeParameter(Parameter parameter);
 
 }
