@@ -72,6 +72,13 @@ public interface Operation extends Constructible, Extensible<Operation> {
     Operation addTag(String tag);
 
     /**
+     * Removes the given tag to this Operation's list of tags.
+     *
+     * @param tag a tag for API documentation control
+     **/
+    void removeTag(String tag);
+
+    /**
      * Returns the summary property from an Operation instance.
      *
      * @return a short summary of what the operation does
@@ -203,6 +210,13 @@ public interface Operation extends Constructible, Extensible<Operation> {
      * @return the current Operation object
      **/
     Operation addParameter(Parameter parameter);
+
+    /**
+     * Removes the given parameter item to this Operation's list of parameters.
+     *
+     * @param parameter a parameter that is applicable for this operation
+     **/
+    void removeParameter(Parameter parameter);
 
     /**
      * Returns the requestBody property from an Operation instance.
@@ -346,6 +360,13 @@ public interface Operation extends Constructible, Extensible<Operation> {
     Operation addSecurityRequirement(SecurityRequirement securityRequirement);
 
     /**
+     * Removes the given security requirement item to this Operation's list of security mechanisms.
+     *
+     * @param securityRequirement security mechanism which can be used for this operation
+     **/
+    void removeSecurityRequirement(SecurityRequirement securityRequirement);
+
+    /**
      * Returns the servers property from an Operation instance.
      *
      * @return a list of servers to service this operation
@@ -377,5 +398,12 @@ public interface Operation extends Constructible, Extensible<Operation> {
      * @return the current Operation object
      **/
     Operation addServer(Server server);
+
+    /**
+     * Removes the given server to this Operation's list of servers.
+     *
+     * @param server server which can service this operation
+     **/
+    void removeServer(Server server);
 
 }

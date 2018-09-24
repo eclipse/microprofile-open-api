@@ -219,14 +219,23 @@ public class ModelConstructionTest extends Arquillian {
         final SecurityRequirement sr = createConstructibleInstance(SecurityRequirement.class);
         checkSameObject(o, o.addSecurityRequirement(sr));
         checkListEntry(o.getSecurity(), sr);
+        assertEquals(o.getSecurity().size(), 1, "The list is expected to contain one entry.");
+        o.removeSecurityRequirement(sr);
+        assertEquals(o.getSecurity().size(), 0, "The list is expected to be empty.");
         
         final Server s = createConstructibleInstance(Server.class);
         checkSameObject(o, o.addServer(s));
         checkListEntry(o.getServers(), s);
+        assertEquals(o.getServers().size(), 1, "The list is expected to contain one entry.");
+        o.removeServer(s);
+        assertEquals(o.getServers().size(), 0, "The list is expected to be empty.");
         
         final Tag t = createConstructibleInstance(Tag.class);
         checkSameObject(o, o.addTag(t));
         checkListEntry(o.getTags(), t);
+        assertEquals(o.getTags().size(), 1, "The list is expected to contain one entry.");
+        o.removeTag(t);
+        assertEquals(o.getTags().size(), 0, "The list is expected to be empty.");
     }
     
     @Test
@@ -236,18 +245,30 @@ public class ModelConstructionTest extends Arquillian {
         final Parameter p = createConstructibleInstance(Parameter.class);
         checkSameObject(o, o.addParameter(p));
         checkListEntry(o.getParameters(), p);
+        assertEquals(o.getParameters().size(), 1, "The list is expected to contain one entry.");
+        o.removeParameter(p);
+        assertEquals(o.getParameters().size(), 0, "The list is expected to be empty.");
         
         final SecurityRequirement sr = createConstructibleInstance(SecurityRequirement.class);
         checkSameObject(o, o.addSecurityRequirement(sr));
         checkListEntry(o.getSecurity(), sr);
+        assertEquals(o.getSecurity().size(), 1, "The list is expected to contain one entry.");
+        o.removeSecurityRequirement(sr);
+        assertEquals(o.getSecurity().size(), 0, "The list is expected to be empty.");
         
         final Server s = createConstructibleInstance(Server.class);
         checkSameObject(o, o.addServer(s));
         checkListEntry(o.getServers(), s);
+        assertEquals(o.getServers().size(), 1, "The list is expected to contain one entry.");
+        o.removeServer(s);
+        assertEquals(o.getServers().size(), 0, "The list is expected to be empty.");
         
         final String tag = new String("myTag");
         checkSameObject(o, o.addTag(tag));
         checkListEntry(o.getTags(), tag);
+        assertEquals(o.getTags().size(), 1, "The list is expected to contain one entry.");
+        o.removeTag(tag);
+        assertEquals(o.getTags().size(), 0, "The list is expected to be empty.");
     }
     
     @Test
@@ -257,10 +278,16 @@ public class ModelConstructionTest extends Arquillian {
         final Parameter p = createConstructibleInstance(Parameter.class);
         checkSameObject(pi, pi.addParameter(p));
         checkListEntry(pi.getParameters(), p);
+        assertEquals(pi.getParameters().size(), 1, "The list is expected to contain one entry.");
+        pi.removeParameter(p);
+        assertEquals(pi.getParameters().size(), 0, "The list is expected to be empty.");
         
         final Server s = createConstructibleInstance(Server.class);
         checkSameObject(pi, pi.addServer(s));
         checkListEntry(pi.getServers(), s);
+        assertEquals(pi.getServers().size(), 1, "The list is expected to contain one entry.");
+        pi.removeServer(s);
+        assertEquals(pi.getServers().size(), 0, "The list is expected to be empty.");
         
         final Operation o1 = createConstructibleInstance(Operation.class);
         checkSameObject(pi, pi.GET(o1));
@@ -432,18 +459,30 @@ public class ModelConstructionTest extends Arquillian {
         final Schema allOf = createConstructibleInstance(Schema.class);
         checkSameObject(s, s.addAllOf(allOf));
         checkListEntry(s.getAllOf(), allOf);
+        assertEquals(s.getAllOf().size(), 1, "The list is expected to contain one entry.");
+        s.removeAllOf(allOf);
+        assertEquals(s.getAllOf().size(), 0, "The list is expected to be empty.");
         
         final Schema anyOf = createConstructibleInstance(Schema.class);
         checkSameObject(s, s.addAnyOf(anyOf));
         checkListEntry(s.getAnyOf(), anyOf);
+        assertEquals(s.getAnyOf().size(), 1, "The list is expected to contain one entry.");
+        s.removeAnyOf(anyOf);
+        assertEquals(s.getAnyOf().size(), 0, "The list is expected to be empty.");
         
         final String enumeration = new String("enumValue");
         checkSameObject(s, s.addEnumeration(enumeration));
         checkListEntry(s.getEnumeration(), enumeration);
+        assertEquals(s.getEnumeration().size(), 1, "The list is expected to contain one entry.");
+        s.removeEnumeration(enumeration);
+        assertEquals(s.getEnumeration().size(), 0, "The list is expected to be empty.");
         
         final Schema oneOf = createConstructibleInstance(Schema.class);
         checkSameObject(s, s.addOneOf(oneOf));
         checkListEntry(s.getOneOf(), oneOf);
+        assertEquals(s.getOneOf().size(), 1, "The list is expected to contain one entry.");
+        s.removeOneOf(oneOf);
+        assertEquals(s.getOneOf().size(), 0, "The list is expected to be empty.");
         
         final String propertySchemaKey = "myPropertySchemaKey";
         final Schema propertySchemaValue = createConstructibleInstance(Schema.class);
@@ -453,6 +492,9 @@ public class ModelConstructionTest extends Arquillian {
         final String required = new String("required");
         checkSameObject(s, s.addRequired(required));
         checkListEntry(s.getRequired(), required);
+        assertEquals(s.getRequired().size(), 1, "The list is expected to contain one entry.");
+        s.removeRequired(required);
+        assertEquals(s.getRequired().size(), 0, "The list is expected to be empty.");
     }
     
     @Test
@@ -568,6 +610,9 @@ public class ModelConstructionTest extends Arquillian {
         final String enumeration = new String("enumValue");
         checkSameObject(sv, sv.addEnumeration(enumeration));
         checkListEntry(sv.getEnumeration(), enumeration);
+        assertEquals(sv.getEnumeration().size(), 1, "The list is expected to contain one entry.");
+        sv.removeEnumeration(enumeration);
+        assertEquals(sv.getEnumeration().size(), 0, "The list is expected to be empty.");
     }
     
     @Test
