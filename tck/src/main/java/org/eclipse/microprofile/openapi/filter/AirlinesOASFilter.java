@@ -13,6 +13,10 @@
 
 package org.eclipse.microprofile.openapi.filter;
 
+
+import java.util.List;
+import java.util.Map;
+
 import org.eclipse.microprofile.openapi.OASFactory;
 import org.eclipse.microprofile.openapi.OASFilter;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
@@ -21,6 +25,7 @@ import org.eclipse.microprofile.openapi.models.PathItem;
 import org.eclipse.microprofile.openapi.models.callbacks.Callback;
 import org.eclipse.microprofile.openapi.models.headers.Header;
 import org.eclipse.microprofile.openapi.models.links.Link;
+import org.eclipse.microprofile.openapi.models.media.Content;
 import org.eclipse.microprofile.openapi.models.media.Schema;
 import org.eclipse.microprofile.openapi.models.parameters.Parameter;
 import org.eclipse.microprofile.openapi.models.parameters.RequestBody;
@@ -45,6 +50,22 @@ public class AirlinesOASFilter implements OASFilter {
             //Override the operatioId value that was previously overridden by the filterOperation method
             pathItem.getGET().setOperationId("filterPathItemGetFlights");
         }
+        
+        if (pathItem.getPOST() != null && "createBooking".equals(pathItem.getPOST().getOperationId())) {
+            Map<String, Callback> callbacks = pathItem.getPOST().getCallbacks();
+            if (callbacks.containsKey("bookingCallback")) {
+                Callback callback = callbacks.get("bookingCallback");
+                if (callback.containsKey("http://localhost:9080/airlines/bookings")
+                        && callback.get("http://localhost:9080/airlines/bookings").getGET() != null) {
+                    if ("child - Retrieve all bookings for current user".equals(callback.get("http://localhost:9080/airlines/bookings")
+                            .getGET().getDescription())) {   
+                        callback.get("http://localhost:9080/airlines/bookings").getGET()
+                        .setDescription("parent - Retrieve all bookings for current user"); 
+                    }
+                }
+            }   
+        }
+        
         return pathItem;
     }
     
@@ -58,6 +79,14 @@ public class AirlinesOASFilter implements OASFilter {
         }
         else if("Retrieve all available flights".equals(operation.getSummary())){
             operation.setOperationId("filterOperationGetFlights");
+        }
+        
+        List<String> tags = operation.getTags();
+        if (tags != null) {
+            if (tags.contains("Bookings")) {
+                tags.set(tags.indexOf("Bookings"), "parent - Bookings");
+                operation.setTags(tags);
+            }
         }
         return operation;
     }
@@ -94,6 +123,18 @@ public class AirlinesOASFilter implements OASFilter {
         if("subscription successfully created".equals(apiResponse.getDescription())){
             apiResponse.setDescription("filterAPIResponse - subscription successfully created");
         }
+        
+        // testing child before parent filtering
+        Content content = apiResponse.getContent();
+        if (content != null) {
+            if (content.containsKey("application/json")) {
+                Schema schema = content.get("application/json").getSchema();
+                if ("child - id of the new review".equals(schema.getDescription())) {
+                    schema.setDescription("parent - id of the new review");
+                }
+            }
+        }
+        
         return apiResponse;
     }
     
@@ -102,6 +143,12 @@ public class AirlinesOASFilter implements OASFilter {
         if("subscription information".equals(schema.getDescription())){
             schema.setDescription("filterSchema - subscription information");
         }
+        
+        // testing child before parent filtering
+        if ("id of the new review".equals(schema.getDescription())) {
+            schema.setDescription("child - id of the new review");
+        }
+        
         return schema;
     }
     
@@ -126,6 +173,10 @@ public class AirlinesOASFilter implements OASFilter {
         if("Operations about user".equals(tag.getDescription())){
             tag.setDescription("filterTag - Operations about user");
         }
+        
+        if ("Bookings".equals(tag.getName())) {
+            tag.setName("child - Bookings");
+        }
         return tag;
     }
     
@@ -141,6 +192,11 @@ public class AirlinesOASFilter implements OASFilter {
     public Callback filterCallback(Callback callback) {
         if(callback.containsKey("{$request.query.callbackUrl}/data") && callback.get("{$request.query.callbackUrl}/data").getPOST() != null){
             callback.get("{$request.query.callbackUrl}/data").getPOST().setDescription("filterCallback - callback post operation");
+        }
+        
+        if (callback.containsKey("http://localhost:9080/airlines/bookings") 
+                && callback.get("http://localhost:9080/airlines/bookings").getGET() != null) {
+            callback.get("http://localhost:9080/airlines/bookings").getGET().setDescription("child - Retrieve all bookings for current user");
         }
         return callback;
     }
