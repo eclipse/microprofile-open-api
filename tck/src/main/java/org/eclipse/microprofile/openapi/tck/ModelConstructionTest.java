@@ -640,7 +640,7 @@ public class ModelConstructionTest extends Arquillian {
     private <T extends Constructible> T processConstructible(Class<T> clazz) {
         final T o = createConstructibleInstance(clazz);
         if (o instanceof Extensible && Extensible.class.isAssignableFrom(clazz)) {
-            processExtensible((Extensible) o);
+            processExtensible((Extensible<?>) o);
         }
         if (o instanceof Reference && Reference.class.isAssignableFrom(clazz)) {
             processReference((Reference<?>) o);
@@ -664,7 +664,7 @@ public class ModelConstructionTest extends Arquillian {
         return o1;
     }
     
-    private void processExtensible(Extensible e) {
+    private void processExtensible(Extensible<?> e) {
         final String extensionName1 = "x-" + e.getClass().getName() + "-1";
         final Object obj1 = new Object();
         final String extensionName2 = "x-" + e.getClass().getName() + "-2";
@@ -686,6 +686,13 @@ public class ModelConstructionTest extends Arquillian {
         final Map<String, Object> map2 = e.getExtensions();
         assertEquals(map2.size(), 0, "The extensions map is expected to contain no entries.");
         assertSame(map2, newMap, "The return value of getExtensions() is expected to be the same value that was set.");
+        // Check that the extension map can be replaced with the builder method and that it is returned by the getter.
+        final Map<String, Object> newOtherMap = new HashMap<>();
+        newOtherMap.put("x-test", 42);
+        e.setExtensions(newOtherMap);
+        final Map<String, Object> map3 = e.getExtensions();
+        assertEquals(map3.size(), 1, "The extensions map is expected to contain one entry.");
+        assertSame(map3, newOtherMap, "The return value of getExtensions() is expected to be the same value that was set.");
     }
     
     private void processReference(Reference<?> r) {
