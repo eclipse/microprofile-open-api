@@ -536,17 +536,38 @@ public class ModelConstructionTest extends Arquillian {
     public void apiResponsesTest() {
         final APIResponses responses = processConstructible(APIResponses.class);
         
-        final String responseKey = "myResponse";
+        responses.remove(APIResponses.DEFAULT);
+        assertEquals(responses.size(), 0, "The map is expected to contain two entries.");
+        
+        final String responseKey = "200";
         final APIResponse responseValue = createConstructibleInstance(APIResponse.class);
         checkSameObject(responses, responses.addAPIResponse(responseKey, responseValue));
         checkMapEntry(responses, responseKey, responseValue);
         
-        final String responseKey2 = "myResponse2";
+        final String responseKey2 = "4XX";
         final APIResponse responseValue2 = createConstructibleInstance(APIResponse.class);
         assertNull(responses.put(responseKey2, responseValue2), "No previous mapping expected.");
         checkMapEntry(responses, responseKey2, responseValue2);
         
         assertEquals(responses.size(), 2, "The map is expected to contain two entries.");
+        
+        assertNull(responses.getDefaultValue(), "No default value expected.");
+        final String responseKey3 = APIResponses.DEFAULT;
+        final APIResponse responseValue3 = createConstructibleInstance(APIResponse.class);
+        assertNull(responses.put(responseKey3, responseValue3), "No previous mapping expected.");
+        checkMapEntry(responses, responseKey3, responseValue3);
+        checkSameObject(responseValue3, responses.getDefaultValue());
+        
+        assertEquals(responses.size(), 3, "The map is expected to contain two entries.");
+        
+        responses.setDefaultValue(null);
+        assertNull(responses.get(APIResponses.DEFAULT), "No default value expected.");
+        assertNull(responses.getDefaultValue(), "No default value expected.");
+        
+        final APIResponse responseValue4 = createConstructibleInstance(APIResponse.class);
+        responses.setDefaultValue(responseValue4);
+        checkMapEntry(responses, APIResponses.DEFAULT, responseValue4);
+        checkSameObject(responseValue4, responses.getDefaultValue());
     }
     
     @Test

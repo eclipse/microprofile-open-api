@@ -56,24 +56,41 @@ public interface APIResponses extends Constructible, Extensible<APIResponses>, M
 
     /**
      * Returns the default documentation of responses other than the ones declared for specific HTTP response codes in this instance of ApiResponses.
-     *
+     * <p>
+     * Convenience method that is the same as calling {@link #get(Object)} on the map with {@value #DEFAULT} as value for the key.
+     * 
+     * @deprecated since 1.1, use @link {@link #getDefaultValue()} instead
      * @return the default documentation of responses
      **/
+    @Deprecated 
+    default APIResponse getDefault() {
+        return getDefaultValue();
+    }
 
-    APIResponse getDefault();
+    /**
+     * Returns the default documentation of responses other than the ones declared for specific HTTP response codes in this instance of ApiResponses.
+     * <p>
+     * Convenience method that is the same as calling {@link #get(Object)} on the map with {@value #DEFAULT} as value for the key.
+     * 
+     * @return the default documentation of responses
+     **/
+    APIResponse getDefaultValue();
 
     /**
      * Sets the default documentation of responses for this instance of ApiResponses. This will cover all the undeclared responses.
-     *
+     * <p>
+     * Convenience method that is the same as calling {@link #addAPIResponse(String, APIResponse)} with {@value #DEFAULT} as value for the key.
+     * 
      * @param defaultValue the default documentation of responses
      */
-
     void setDefaultValue(APIResponse defaultValue);
 
     /**
      * Sets the default documentation of responses for this instance of ApiResponses and return this instance of ApiResponses. This will cover all the
      * undeclared responses.
-     *
+     * <p>
+     * Convenience method that is the same as calling {@link #addAPIResponse(String, APIResponse)} with {@value #DEFAULT} as value for the key.
+     * 
      * @param defaultValue the default documentation of responses
      * @return this ApiResponses instance
      */
