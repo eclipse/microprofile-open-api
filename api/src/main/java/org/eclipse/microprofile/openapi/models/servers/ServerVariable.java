@@ -71,6 +71,13 @@ public interface ServerVariable extends Constructible, Extensible<ServerVariable
     ServerVariable addEnumeration(String enumeration);
 
     /**
+     * This method removes a string item to enumeration list of a ServerVariable instance.
+     * 
+     * @param enumeration an item to be removed to enum list
+     */
+    void removeEnumeration(String enumeration);
+
+    /**
      * The default value to use for substitution, and to send, if an alternate value is not supplied. This value MUST be provided by the consumer and
      * is REQUIRED.
      * <p>
