@@ -72,10 +72,6 @@ import org.eclipse.microprofile.openapi.models.servers.Server;
 import org.eclipse.microprofile.openapi.models.servers.ServerVariable;
 import org.eclipse.microprofile.openapi.models.servers.ServerVariables;
 import org.eclipse.microprofile.openapi.models.tags.Tag;
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.testng.Arquillian;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.testng.annotations.Test;
 
 /**
@@ -83,7 +79,7 @@ import org.testng.annotations.Test;
  * create instances of all of the Constructible interfaces and then invokes methods (including
  * getters, setters and builders) on those instances to verify that they behave correctly.
  */
-public class ModelConstructionTest extends Arquillian {
+public class ModelConstructionTest {
     
     // Container for matched getter, setter and builder methods
     static final class Property {
@@ -151,11 +147,6 @@ public class ModelConstructionTest extends Arquillian {
         public boolean isComplete() {
             return getter != null && setter != null;
         }
-    }
-
-    @Deployment
-    public static WebArchive createDeployment() {
-        return ShrinkWrap.create(WebArchive.class);
     }
 
     @Test
