@@ -269,6 +269,11 @@ public class ModelConstructionTest extends Arquillian {
         assertEquals(o.getTags().size(), 1, "The list is expected to contain one entry.");
         o.removeTag(tag);
         assertEquals(o.getTags().size(), 0, "The list is expected to be empty.");
+        
+        final String callbackKey = "myCallback";
+        final Callback callbackValue = createConstructibleInstance(Callback.class);
+        checkSameObject(o, o.addCallback(callbackKey, callbackValue));
+        checkMapEntry(o.getCallbacks(), callbackKey, callbackValue);
     }
     
     @Test
