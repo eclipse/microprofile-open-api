@@ -636,6 +636,13 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
     Schema addProperty(String key, Schema propertySchema);
 
     /**
+     * Removes a Schema property of the provided name using the given schema.
+     *
+     * @param key the name of a new Schema property
+     */
+    void removeProperty(String key);
+
+    /**
      * Returns the value of the "additionalProperties" setting, which indicates whether 
      * properties not otherwise defined are allowed.  This setting MUST either be a {@link Boolean}
      * or {@link Schema}.
