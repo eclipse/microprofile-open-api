@@ -17,6 +17,7 @@
 package org.eclipse.microprofile.openapi.tck;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNotSame;
 import static org.testng.Assert.assertNull;
@@ -340,17 +341,38 @@ public class ModelConstructionTest extends Arquillian {
     public void pathsTest() {
         final Paths p = processConstructible(Paths.class);
         
-        final String pathItemKey = "myPathItem";
+        final String pathItemKey = "/myPathItem";
+        assertFalse(p.hasPathItem(pathItemKey), pathItemKey + " is absent in the map");
         final PathItem pathItemValue = createConstructibleInstance(PathItem.class);
         checkSameObject(p, p.addPathItem(pathItemKey, pathItemValue));
+        assertTrue(p.hasPathItem(pathItemKey), pathItemKey + " is present in the map");
+        assertSame(p.getPathItem(pathItemKey), pathItemValue, 
+                "The value associated with the key: " + pathItemKey + " is expected to be the same one that was added.");
         checkMapEntry(p, pathItemKey, pathItemValue);
+        checkMapEntry(p.getPathItems(), pathItemKey, pathItemValue);
         
-        final String pathItemKey2 = "myPathItem2";
+        final String pathItemKey2 = "/myPathItem2";
+        assertFalse(p.hasPathItem(pathItemKey2), pathItemKey2 + " is absent in the map");
         final PathItem pathItemValue2 = createConstructibleInstance(PathItem.class);
         assertNull(p.put(pathItemKey2, pathItemValue2), "No previous mapping expected.");
+        assertTrue(p.hasPathItem(pathItemKey2), pathItemKey2 + " is present in the map");
+        assertSame(p.getPathItem(pathItemKey2), pathItemValue2, 
+                "The value associated with the key: " + pathItemKey2 + " is expected to be the same one that was added.");
         checkMapEntry(p, pathItemKey2, pathItemValue2);
+        checkMapEntry(p.getPathItems(), pathItemKey2, pathItemValue2);
         
         assertEquals(p.size(), 2, "The map is expected to contain two entries.");
+        assertEquals(p.getPathItems().size(), 2, "The map is expected to contain two entries.");
+        
+        p.removePathItem(pathItemKey);
+        assertFalse(p.hasPathItem(pathItemKey), pathItemKey + " is absent in the map");
+        assertEquals(p.size(), 1, "The map is expected to contain two entries.");
+        assertEquals(p.getPathItems().size(), 1, "The map is expected to contain two entries.");
+        
+        p.remove(pathItemKey2);
+        assertFalse(p.hasPathItem(pathItemKey2), pathItemKey + " is absent in the map");
+        assertEquals(p.size(), 0, "The map is expected to contain 0 entries.");
+        assertEquals(p.getPathItems().size(), 0, "The map is expected to contain 0 entries.");
     }
     
     @Test
