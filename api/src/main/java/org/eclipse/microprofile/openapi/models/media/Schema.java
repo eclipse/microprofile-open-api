@@ -164,6 +164,13 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
     Schema addEnumeration(Object enumeration);
 
     /**
+     * Removes an item of the appropriate type to the enumerated list of values allowed.
+     *
+     * @param enumeration an object to add to the enumerated values
+     */
+    void removeEnumeration(Object enumeration);
+
+    /**
      * Returns the multipleOf property from this Schema instance.
      * <p>
      * minimum: 0
@@ -534,6 +541,13 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      * @return the current Schema instance
      */
     Schema addRequired(String required);
+
+    /**
+     * Removes the name of an item to the list of fields required in objects defined by this Schema.
+     *
+     * @param required the name of an item required in objects defined by this Schema instance
+     */
+    void removeRequired(String required);
 
     /**
      * Returns the type property from this Schema.
@@ -967,6 +981,13 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      * @return the current Schema instance
      */
     Schema addAllOf(Schema allOf);
+    
+    /**
+     * Removes the given Schema to the list of schemas used by the allOf property.
+     * 
+     * @param allOf a Schema to use with the allOf property
+     */
+    void removeAllOf(Schema allOf);
 
     /**
      * Returns the schemas used by the anyOf property.
@@ -1002,6 +1023,13 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
     Schema addAnyOf(Schema anyOf);
 
     /**
+     * Removes the given Schema to the list of schemas used by the anyOf property.
+     * 
+     * @param anyOf a Schema to use with the anyOf property
+     */
+    void removeAnyOf(Schema anyOf);
+
+    /**
      * Returns the schemas used by the oneOf property.
      *
      * @return the list of schemas used by the oneOf property
@@ -1033,5 +1061,12 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      * @return the current Schema instance
      */
     Schema addOneOf(Schema oneOf);
+
+    /**
+     * Removes the given Schema to the list of schemas used by the oneOf property.
+     * 
+     * @param oneOf a Schema to use with the oneOf property
+     */
+    void removeOneOf(Schema oneOf);
 
 }

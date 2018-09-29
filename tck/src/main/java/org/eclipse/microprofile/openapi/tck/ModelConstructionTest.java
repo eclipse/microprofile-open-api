@@ -17,6 +17,7 @@
 package org.eclipse.microprofile.openapi.tck;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNotSame;
 import static org.testng.Assert.assertNull;
@@ -71,10 +72,6 @@ import org.eclipse.microprofile.openapi.models.servers.Server;
 import org.eclipse.microprofile.openapi.models.servers.ServerVariable;
 import org.eclipse.microprofile.openapi.models.servers.ServerVariables;
 import org.eclipse.microprofile.openapi.models.tags.Tag;
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.testng.Arquillian;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.testng.annotations.Test;
 
 /**
@@ -82,7 +79,7 @@ import org.testng.annotations.Test;
  * create instances of all of the Constructible interfaces and then invokes methods (including
  * getters, setters and builders) on those instances to verify that they behave correctly.
  */
-public class ModelConstructionTest extends Arquillian {
+public class ModelConstructionTest {
     
     // Container for matched getter, setter and builder methods
     static final class Property {
@@ -152,11 +149,6 @@ public class ModelConstructionTest extends Arquillian {
         }
     }
 
-    @Deployment
-    public static WebArchive createDeployment() {
-        return ShrinkWrap.create(WebArchive.class);
-    }
-
     @Test
     public void componentsTest() {
         final Components c = processConstructible(Components.class);
@@ -219,14 +211,23 @@ public class ModelConstructionTest extends Arquillian {
         final SecurityRequirement sr = createConstructibleInstance(SecurityRequirement.class);
         checkSameObject(o, o.addSecurityRequirement(sr));
         checkListEntry(o.getSecurity(), sr);
+        assertEquals(o.getSecurity().size(), 1, "The list is expected to contain one entry.");
+        o.removeSecurityRequirement(sr);
+        assertEquals(o.getSecurity().size(), 0, "The list is expected to be empty.");
         
         final Server s = createConstructibleInstance(Server.class);
         checkSameObject(o, o.addServer(s));
         checkListEntry(o.getServers(), s);
+        assertEquals(o.getServers().size(), 1, "The list is expected to contain one entry.");
+        o.removeServer(s);
+        assertEquals(o.getServers().size(), 0, "The list is expected to be empty.");
         
         final Tag t = createConstructibleInstance(Tag.class);
         checkSameObject(o, o.addTag(t));
         checkListEntry(o.getTags(), t);
+        assertEquals(o.getTags().size(), 1, "The list is expected to contain one entry.");
+        o.removeTag(t);
+        assertEquals(o.getTags().size(), 0, "The list is expected to be empty.");
     }
     
     @Test
@@ -236,18 +237,35 @@ public class ModelConstructionTest extends Arquillian {
         final Parameter p = createConstructibleInstance(Parameter.class);
         checkSameObject(o, o.addParameter(p));
         checkListEntry(o.getParameters(), p);
+        assertEquals(o.getParameters().size(), 1, "The list is expected to contain one entry.");
+        o.removeParameter(p);
+        assertEquals(o.getParameters().size(), 0, "The list is expected to be empty.");
         
         final SecurityRequirement sr = createConstructibleInstance(SecurityRequirement.class);
         checkSameObject(o, o.addSecurityRequirement(sr));
         checkListEntry(o.getSecurity(), sr);
+        assertEquals(o.getSecurity().size(), 1, "The list is expected to contain one entry.");
+        o.removeSecurityRequirement(sr);
+        assertEquals(o.getSecurity().size(), 0, "The list is expected to be empty.");
         
         final Server s = createConstructibleInstance(Server.class);
         checkSameObject(o, o.addServer(s));
         checkListEntry(o.getServers(), s);
+        assertEquals(o.getServers().size(), 1, "The list is expected to contain one entry.");
+        o.removeServer(s);
+        assertEquals(o.getServers().size(), 0, "The list is expected to be empty.");
         
         final String tag = new String("myTag");
         checkSameObject(o, o.addTag(tag));
         checkListEntry(o.getTags(), tag);
+        assertEquals(o.getTags().size(), 1, "The list is expected to contain one entry.");
+        o.removeTag(tag);
+        assertEquals(o.getTags().size(), 0, "The list is expected to be empty.");
+        
+        final String callbackKey = "myCallback";
+        final Callback callbackValue = createConstructibleInstance(Callback.class);
+        checkSameObject(o, o.addCallback(callbackKey, callbackValue));
+        checkMapEntry(o.getCallbacks(), callbackKey, callbackValue);
     }
     
     @Test
@@ -257,10 +275,16 @@ public class ModelConstructionTest extends Arquillian {
         final Parameter p = createConstructibleInstance(Parameter.class);
         checkSameObject(pi, pi.addParameter(p));
         checkListEntry(pi.getParameters(), p);
+        assertEquals(pi.getParameters().size(), 1, "The list is expected to contain one entry.");
+        pi.removeParameter(p);
+        assertEquals(pi.getParameters().size(), 0, "The list is expected to be empty.");
         
         final Server s = createConstructibleInstance(Server.class);
         checkSameObject(pi, pi.addServer(s));
         checkListEntry(pi.getServers(), s);
+        assertEquals(pi.getServers().size(), 1, "The list is expected to contain one entry.");
+        pi.removeServer(s);
+        assertEquals(pi.getServers().size(), 0, "The list is expected to be empty.");
         
         final Operation o1 = createConstructibleInstance(Operation.class);
         checkSameObject(pi, pi.GET(o1));
@@ -308,17 +332,38 @@ public class ModelConstructionTest extends Arquillian {
     public void pathsTest() {
         final Paths p = processConstructible(Paths.class);
         
-        final String pathItemKey = "myPathItem";
+        final String pathItemKey = "/myPathItem";
+        assertFalse(p.hasPathItem(pathItemKey), pathItemKey + " is absent in the map");
         final PathItem pathItemValue = createConstructibleInstance(PathItem.class);
         checkSameObject(p, p.addPathItem(pathItemKey, pathItemValue));
+        assertTrue(p.hasPathItem(pathItemKey), pathItemKey + " is present in the map");
+        assertSame(p.getPathItem(pathItemKey), pathItemValue, 
+                "The value associated with the key: " + pathItemKey + " is expected to be the same one that was added.");
         checkMapEntry(p, pathItemKey, pathItemValue);
+        checkMapEntry(p.getPathItems(), pathItemKey, pathItemValue);
         
-        final String pathItemKey2 = "myPathItem2";
+        final String pathItemKey2 = "/myPathItem2";
+        assertFalse(p.hasPathItem(pathItemKey2), pathItemKey2 + " is absent in the map");
         final PathItem pathItemValue2 = createConstructibleInstance(PathItem.class);
         assertNull(p.put(pathItemKey2, pathItemValue2), "No previous mapping expected.");
+        assertTrue(p.hasPathItem(pathItemKey2), pathItemKey2 + " is present in the map");
+        assertSame(p.getPathItem(pathItemKey2), pathItemValue2, 
+                "The value associated with the key: " + pathItemKey2 + " is expected to be the same one that was added.");
         checkMapEntry(p, pathItemKey2, pathItemValue2);
+        checkMapEntry(p.getPathItems(), pathItemKey2, pathItemValue2);
         
         assertEquals(p.size(), 2, "The map is expected to contain two entries.");
+        assertEquals(p.getPathItems().size(), 2, "The map is expected to contain two entries.");
+        
+        p.removePathItem(pathItemKey);
+        assertFalse(p.hasPathItem(pathItemKey), pathItemKey + " is absent in the map");
+        assertEquals(p.size(), 1, "The map is expected to contain two entries.");
+        assertEquals(p.getPathItems().size(), 1, "The map is expected to contain two entries.");
+        
+        p.remove(pathItemKey2);
+        assertFalse(p.hasPathItem(pathItemKey2), pathItemKey + " is absent in the map");
+        assertEquals(p.size(), 0, "The map is expected to contain 0 entries.");
+        assertEquals(p.getPathItems().size(), 0, "The map is expected to contain 0 entries.");
     }
     
     @Test
@@ -432,18 +477,30 @@ public class ModelConstructionTest extends Arquillian {
         final Schema allOf = createConstructibleInstance(Schema.class);
         checkSameObject(s, s.addAllOf(allOf));
         checkListEntry(s.getAllOf(), allOf);
+        assertEquals(s.getAllOf().size(), 1, "The list is expected to contain one entry.");
+        s.removeAllOf(allOf);
+        assertEquals(s.getAllOf().size(), 0, "The list is expected to be empty.");
         
         final Schema anyOf = createConstructibleInstance(Schema.class);
         checkSameObject(s, s.addAnyOf(anyOf));
         checkListEntry(s.getAnyOf(), anyOf);
+        assertEquals(s.getAnyOf().size(), 1, "The list is expected to contain one entry.");
+        s.removeAnyOf(anyOf);
+        assertEquals(s.getAnyOf().size(), 0, "The list is expected to be empty.");
         
         final String enumeration = new String("enumValue");
         checkSameObject(s, s.addEnumeration(enumeration));
         checkListEntry(s.getEnumeration(), enumeration);
+        assertEquals(s.getEnumeration().size(), 1, "The list is expected to contain one entry.");
+        s.removeEnumeration(enumeration);
+        assertEquals(s.getEnumeration().size(), 0, "The list is expected to be empty.");
         
         final Schema oneOf = createConstructibleInstance(Schema.class);
         checkSameObject(s, s.addOneOf(oneOf));
         checkListEntry(s.getOneOf(), oneOf);
+        assertEquals(s.getOneOf().size(), 1, "The list is expected to contain one entry.");
+        s.removeOneOf(oneOf);
+        assertEquals(s.getOneOf().size(), 0, "The list is expected to be empty.");
         
         final String propertySchemaKey = "myPropertySchemaKey";
         final Schema propertySchemaValue = createConstructibleInstance(Schema.class);
@@ -453,6 +510,9 @@ public class ModelConstructionTest extends Arquillian {
         final String required = new String("required");
         checkSameObject(s, s.addRequired(required));
         checkListEntry(s.getRequired(), required);
+        assertEquals(s.getRequired().size(), 1, "The list is expected to contain one entry.");
+        s.removeRequired(required);
+        assertEquals(s.getRequired().size(), 0, "The list is expected to be empty.");
     }
     
     @Test
@@ -494,17 +554,38 @@ public class ModelConstructionTest extends Arquillian {
     public void apiResponsesTest() {
         final APIResponses responses = processConstructible(APIResponses.class);
         
-        final String responseKey = "myResponse";
+        responses.remove(APIResponses.DEFAULT);
+        assertEquals(responses.size(), 0, "The map is expected to contain two entries.");
+        
+        final String responseKey = "200";
         final APIResponse responseValue = createConstructibleInstance(APIResponse.class);
         checkSameObject(responses, responses.addAPIResponse(responseKey, responseValue));
         checkMapEntry(responses, responseKey, responseValue);
         
-        final String responseKey2 = "myResponse2";
+        final String responseKey2 = "4XX";
         final APIResponse responseValue2 = createConstructibleInstance(APIResponse.class);
         assertNull(responses.put(responseKey2, responseValue2), "No previous mapping expected.");
         checkMapEntry(responses, responseKey2, responseValue2);
         
         assertEquals(responses.size(), 2, "The map is expected to contain two entries.");
+        
+        assertNull(responses.getDefaultValue(), "No default value expected.");
+        final String responseKey3 = APIResponses.DEFAULT;
+        final APIResponse responseValue3 = createConstructibleInstance(APIResponse.class);
+        assertNull(responses.put(responseKey3, responseValue3), "No previous mapping expected.");
+        checkMapEntry(responses, responseKey3, responseValue3);
+        checkSameObject(responseValue3, responses.getDefaultValue());
+        
+        assertEquals(responses.size(), 3, "The map is expected to contain two entries.");
+        
+        responses.setDefaultValue(null);
+        assertNull(responses.get(APIResponses.DEFAULT), "No default value expected.");
+        assertNull(responses.getDefaultValue(), "No default value expected.");
+        
+        final APIResponse responseValue4 = createConstructibleInstance(APIResponse.class);
+        responses.setDefaultValue(responseValue4);
+        checkMapEntry(responses, APIResponses.DEFAULT, responseValue4);
+        checkSameObject(responseValue4, responses.getDefaultValue());
     }
     
     @Test
@@ -568,6 +649,9 @@ public class ModelConstructionTest extends Arquillian {
         final String enumeration = new String("enumValue");
         checkSameObject(sv, sv.addEnumeration(enumeration));
         checkListEntry(sv.getEnumeration(), enumeration);
+        assertEquals(sv.getEnumeration().size(), 1, "The list is expected to contain one entry.");
+        sv.removeEnumeration(enumeration);
+        assertEquals(sv.getEnumeration().size(), 0, "The list is expected to be empty.");
     }
     
     @Test
@@ -595,7 +679,7 @@ public class ModelConstructionTest extends Arquillian {
     private <T extends Constructible> T processConstructible(Class<T> clazz) {
         final T o = createConstructibleInstance(clazz);
         if (o instanceof Extensible && Extensible.class.isAssignableFrom(clazz)) {
-            processExtensible((Extensible) o);
+            processExtensible((Extensible<?>) o);
         }
         if (o instanceof Reference && Reference.class.isAssignableFrom(clazz)) {
             processReference((Reference<?>) o);
@@ -619,7 +703,7 @@ public class ModelConstructionTest extends Arquillian {
         return o1;
     }
     
-    private void processExtensible(Extensible e) {
+    private void processExtensible(Extensible<?> e) {
         final String extensionName1 = "x-" + e.getClass().getName() + "-1";
         final Object obj1 = new Object();
         final String extensionName2 = "x-" + e.getClass().getName() + "-2";
@@ -641,6 +725,13 @@ public class ModelConstructionTest extends Arquillian {
         final Map<String, Object> map2 = e.getExtensions();
         assertEquals(map2.size(), 0, "The extensions map is expected to contain no entries.");
         assertSame(map2, newMap, "The return value of getExtensions() is expected to be the same value that was set.");
+        // Check that the extension map can be replaced with the builder method and that it is returned by the getter.
+        final Map<String, Object> newOtherMap = new HashMap<>();
+        newOtherMap.put("x-test", 42);
+        e.setExtensions(newOtherMap);
+        final Map<String, Object> map3 = e.getExtensions();
+        assertEquals(map3.size(), 1, "The extensions map is expected to contain one entry.");
+        assertSame(map3, newOtherMap, "The return value of getExtensions() is expected to be the same value that was set.");
     }
     
     private void processReference(Reference<?> r) {
