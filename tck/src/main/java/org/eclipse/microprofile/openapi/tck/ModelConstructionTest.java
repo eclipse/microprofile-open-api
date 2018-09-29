@@ -474,6 +474,20 @@ public class ModelConstructionTest {
     public void schemaTest() {
         final Schema s = processConstructible(Schema.class);
         
+        final Schema ap = createConstructibleInstance(Schema.class);
+        checkSameObject(s, s.additionalPropertiesSchema(ap));
+        checkSameObject(ap, s.getAdditionalPropertiesSchema());
+        assertEquals(s.getAdditionalPropertiesBoolean(), null, "AdditionalProperties (Boolean type) is expected to be null");
+        checkSameObject(s, s.additionalPropertiesBoolean(Boolean.TRUE));
+        assertEquals(s.getAdditionalPropertiesBoolean(), Boolean.TRUE, "AdditionalProperties (Boolean type) is expected to be true");
+        assertEquals(s.getAdditionalPropertiesSchema(), null, "AdditionalProperties (Schema type) is expected to be null");
+        s.setAdditionalPropertiesBoolean(Boolean.FALSE);
+        assertEquals(s.getAdditionalPropertiesBoolean(), Boolean.FALSE, "AdditionalProperties (Boolean type) is expected to be false");
+        assertEquals(s.getAdditionalPropertiesSchema(), null, "AdditionalProperties (Schema type) is expected to be null");
+        s.setAdditionalPropertiesSchema(null);
+        assertEquals(s.getAdditionalPropertiesBoolean(), null, "AdditionalProperties (Boolean type) is expected to be null");
+        assertEquals(s.getAdditionalPropertiesSchema(), null, "AdditionalProperties (Schema type) is expected to be null");
+        
         final Schema allOf = createConstructibleInstance(Schema.class);
         checkSameObject(s, s.addAllOf(allOf));
         checkListEntry(s.getAllOf(), allOf);
