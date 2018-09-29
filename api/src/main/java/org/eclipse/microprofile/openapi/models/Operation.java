@@ -303,6 +303,13 @@ public interface Operation extends Constructible, Extensible<Operation> {
     Operation addCallback(String key, Callback callback);
 
     /**
+     * Removes the given callback item to this Operation's map of callbacks.
+     *
+     * @param key a key conforming to the format required for this object
+     **/
+    void removeCallback(String key);
+
+    /**
      * Returns the deprecated property from an Operation instance.
      *
      * @return declaration whether this operation is deprecated

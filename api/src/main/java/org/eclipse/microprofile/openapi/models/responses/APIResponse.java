@@ -103,6 +103,15 @@ public interface APIResponse extends Constructible, Extensible<APIResponse>, Ref
     APIResponse addHeader(String name, Header header);
 
     /**
+     * Removes the given Header to this ApiResponse instance's map of Headers with the given name and return this instance of ApiResponse. If this
+     * ApiResponse instance does not have any headers, a new map is created and the given header is added.
+     *
+     * @param name the unique name of the header
+     */
+
+    void removeHeader(String name);
+
+    /**
      * Returns the map containing descriptions of potential response payload for this instance of ApiResponse.
      *
      * @return the potential content of the response
@@ -167,5 +176,13 @@ public interface APIResponse extends Constructible, Extensible<APIResponse>, Ref
      */
 
     APIResponse addLink(String name, Link link);
+
+    /**
+     * Removes a link to this instance of ApiResponse using the given name and Link.
+     *
+     * @param name the short name of the link
+     */
+    
+    void removeLink(String name);
 
 }

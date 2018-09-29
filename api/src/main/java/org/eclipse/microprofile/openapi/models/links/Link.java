@@ -179,6 +179,14 @@ public interface Link extends Constructible, Extensible<Link>, Reference<Link> {
     Link addParameter(String name, Object parameter);
 
     /**
+     * Remove a new parameter to the parameters property of this instance of Link.
+     *
+     * @param name The name of the parameter. Can be qualified using the parameter location [{in}.]{name} for operations that use the same parameter
+     *            name in different locations (e.g. path.id).
+     */
+    void removeParameter(String name);
+
+    /**
      * Returns the description property from a Link instance.
      *
      * @return a description of the link

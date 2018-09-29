@@ -69,6 +69,13 @@ public interface Discriminator extends Constructible {
     Discriminator addMapping(String name, String value);
 
     /**
+     * Remove the given name to the given value and stores it in this Discriminator's mapping property.
+     * 
+     * @param name a key which will be compared to information from a request body or response payload.
+     */
+    void removeMapping(String name);
+
+    /**
      * Sets this Discriminator's mapping property to the given map object.
      *
      * @param mapping a map containing keys and schema names or references

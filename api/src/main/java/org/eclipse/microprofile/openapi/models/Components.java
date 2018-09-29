@@ -86,6 +86,13 @@ public interface Components extends Constructible, Extensible<Components> {
     Components addSchema(String key, Schema schema);
 
     /**
+     * Removes the given schema to this Components' list of schemas with the given string as its key.
+     *
+     * @param key a key conforming to the format required for this object
+     */
+    void removeSchema(String key);
+
+    /**
      * Returns the responses property from a Components instance.
      *
      * @return a Map containing the keys and the reusable responses from API operations for this OpenAPI document
@@ -118,6 +125,13 @@ public interface Components extends Constructible, Extensible<Components> {
      * @return the current Components object
      */
     Components addResponse(String key, APIResponse response);
+
+    /**
+     * Removes the given response to this Components' map of responses with the given string as its key.
+     *
+     * @param key a key conforming to the format required for this object
+     */
+    void removeResponse(String key);
 
     /**
      * Returns the parameters property from a Components instance.
@@ -154,6 +168,13 @@ public interface Components extends Constructible, Extensible<Components> {
     Components addParameter(String key, Parameter parameter);
 
     /**
+     * Removes the given parameter to this Components' map of parameters with the given string as its key.
+     *
+     * @param key a key conforming to the format required for this object
+     */
+    void removeParameter(String key);
+
+    /**
      * Returns the examples property from a Components instance.
      *
      * @return a Map containing the keys and the reusable examples for this OpenAPI document
@@ -186,6 +207,13 @@ public interface Components extends Constructible, Extensible<Components> {
      * @return the current Components object
      */
     Components addExample(String key, Example example);
+
+    /**
+     * Removes the given example to this Components' map of examples with the given string as its key.
+     *
+     * @param key a key conforming to the format required for this object
+     */
+    void removeExample(String key);
 
     /**
      * Returns the requestBodies property from a Components instance.
@@ -222,6 +250,13 @@ public interface Components extends Constructible, Extensible<Components> {
     Components addRequestBody(String key, RequestBody requestBody);
 
     /**
+     * Removes the given request body to this Components' map of request bodies with the given string as its key.
+     *
+     * @param key a key conforming to the format required for this object
+     */
+    void removeRequestBody(String key);
+
+    /**
      * Returns the headers property from a Components instance.
      *
      * @return a Map containing the keys and the reusable headers for this OpenAPI document
@@ -254,6 +289,13 @@ public interface Components extends Constructible, Extensible<Components> {
      * @return the current Components object
      */
     Components addHeader(String key, Header header);
+
+    /**
+     * Removes the given header to this Components' map of headers with the given string as its key.
+     *
+     * @param key a key conforming to the format required for this object
+     */
+    void removeHeader(String key);
 
     /**
      * Returns the securitySchemes property from a Components instance.
@@ -290,6 +332,13 @@ public interface Components extends Constructible, Extensible<Components> {
     Components addSecurityScheme(String key, SecurityScheme securityScheme);
 
     /**
+     * Removes the given security scheme to this Components' map of security schemes with the given string as its key.
+     *
+     * @param key a key conforming to the format required for this object
+     */
+    void removeSecurityScheme(String key);
+
+    /**
      * Returns the links property from a Components instance.
      *
      * @return a Map containing the keys and the reusable links for this OpenAPI document
@@ -324,6 +373,13 @@ public interface Components extends Constructible, Extensible<Components> {
     Components addLink(String key, Link link);
 
     /**
+     * Removes the given link to this Components' map of links with the given string as its key.
+     *
+     * @param key a key conforming to the format required for this object
+     */
+    void removeLink(String key);
+
+    /**
      * Returns the callbacks property from a Components instance.
      *
      * @return a Map containing the keys and the reusable callbacks for this OpenAPI document
@@ -356,5 +412,12 @@ public interface Components extends Constructible, Extensible<Components> {
      * @return the current Components object
      */
     Components addCallback(String key, Callback callback);
+
+    /**
+     * Removes the given callback to this Components' map of callbacks with the given string as its key.
+     *
+     * @param key a key conforming to the format required for this object
+     */
+    void removeCallback(String key);
 
 }

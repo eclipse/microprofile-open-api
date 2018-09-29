@@ -267,6 +267,13 @@ public interface Header extends Constructible, Extensible<Header>, Reference<Hea
     Header addExample(String key, Example example);
 
     /**
+     * Removes an example of the media type using the specified key to this Header instance.
+     *
+     * @param key string to represent the example
+     */
+    void removeExample(String key);
+
+    /**
      * Returns the example property from a Header instance.
      *
      * @return example of the media type
