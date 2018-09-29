@@ -157,46 +157,73 @@ public class ModelConstructionTest {
         final Callback callbackValue = createConstructibleInstance(Callback.class);
         checkSameObject(c, c.addCallback(callbackKey, callbackValue));
         checkMapEntry(c.getCallbacks(), callbackKey, callbackValue);
+        assertEquals(c.getCallbacks().size(), 1, "The list is expected to contain one entry.");
+        c.removeCallback(callbackKey);
+        assertEquals(c.getCallbacks().size(), 0, "The list is expected to be empty.");
         
         final String exampleKey = "myExample";
         final Example exampleValue = createConstructibleInstance(Example.class);
         checkSameObject(c, c.addExample(exampleKey, exampleValue));
         checkMapEntry(c.getExamples(), exampleKey, exampleValue);
+        assertEquals(c.getExamples().size(), 1, "The list is expected to contain one entry.");
+        c.removeExample(exampleKey);
+        assertEquals(c.getExamples().size(), 0, "The list is expected to be empty.");
         
         final String headerKey = "myHeader";
         final Header headerValue = createConstructibleInstance(Header.class);
         checkSameObject(c, c.addHeader(headerKey, headerValue));
         checkMapEntry(c.getHeaders(), headerKey, headerValue);
+        assertEquals(c.getHeaders().size(), 1, "The list is expected to contain one entry.");
+        c.removeHeader(headerKey);
+        assertEquals(c.getHeaders().size(), 0, "The list is expected to be empty.");
         
         final String linkKey = "myLink";
         final Link linkValue = createConstructibleInstance(Link.class);
         checkSameObject(c, c.addLink(linkKey, linkValue));
         checkMapEntry(c.getLinks(), linkKey, linkValue);
+        assertEquals(c.getLinks().size(), 1, "The list is expected to contain one entry.");
+        c.removeLink(linkKey);
+        assertEquals(c.getLinks().size(), 0, "The list is expected to be empty.");
         
         final String parameterKey = "myParameter";
         final Parameter parameterValue = createConstructibleInstance(Parameter.class);
         checkSameObject(c, c.addParameter(parameterKey, parameterValue));
         checkMapEntry(c.getParameters(), parameterKey, parameterValue);
+        assertEquals(c.getParameters().size(), 1, "The list is expected to contain one entry.");
+        c.removeParameter(parameterKey);
+        assertEquals(c.getParameters().size(), 0, "The list is expected to be empty.");
         
         final String requestBodyKey = "myRequestBody";
         final RequestBody requestBodyValue = createConstructibleInstance(RequestBody.class);
         checkSameObject(c, c.addRequestBody(requestBodyKey, requestBodyValue));
         checkMapEntry(c.getRequestBodies(), requestBodyKey, requestBodyValue);
+        assertEquals(c.getRequestBodies().size(), 1, "The list is expected to contain one entry.");
+        c.removeRequestBody(requestBodyKey);
+        assertEquals(c.getRequestBodies().size(), 0, "The list is expected to be empty.");
         
         final String responseKey = "myResponse";
         final APIResponse responseValue = createConstructibleInstance(APIResponse.class);
         checkSameObject(c, c.addResponse(responseKey, responseValue));
         checkMapEntry(c.getResponses(), responseKey, responseValue);
+        assertEquals(c.getResponses().size(), 1, "The list is expected to contain one entry.");
+        c.removeResponse(responseKey);
+        assertEquals(c.getResponses().size(), 0, "The list is expected to be empty.");
         
         final String schemaKey = "mySchema";
         final Schema schemaValue = createConstructibleInstance(Schema.class);
         checkSameObject(c, c.addSchema(schemaKey, schemaValue));
         checkMapEntry(c.getSchemas(), schemaKey, schemaValue);
+        assertEquals(c.getSchemas().size(), 1, "The list is expected to contain one entry.");
+        c.removeSchema(schemaKey);
+        assertEquals(c.getSchemas().size(), 0, "The list is expected to be empty.");
         
         final String securitySchemeKey = "mySecurityScheme";
         final SecurityScheme securitySchemeValue = createConstructibleInstance(SecurityScheme.class);
         checkSameObject(c, c.addSecurityScheme(securitySchemeKey, securitySchemeValue));
         checkMapEntry(c.getSecuritySchemes(), securitySchemeKey, securitySchemeValue);
+        assertEquals(c.getSecuritySchemes().size(), 1, "The list is expected to contain one entry.");
+        c.removeSecurityScheme(securitySchemeKey);
+        assertEquals(c.getSecuritySchemes().size(), 0, "The list is expected to be empty.");
     }
     
     @Test
@@ -266,6 +293,9 @@ public class ModelConstructionTest {
         final Callback callbackValue = createConstructibleInstance(Callback.class);
         checkSameObject(o, o.addCallback(callbackKey, callbackValue));
         checkMapEntry(o.getCallbacks(), callbackKey, callbackValue);
+        assertEquals(o.getCallbacks().size(), 1, "The list is expected to contain one entry.");
+        o.removeCallback(callbackKey);
+        assertEquals(o.getCallbacks().size(), 0, "The list is expected to be empty.");
     }
     
     @Test
@@ -396,6 +426,9 @@ public class ModelConstructionTest {
         final Example exampleValue = createConstructibleInstance(Example.class);
         checkSameObject(h, h.addExample(exampleKey, exampleValue));
         checkMapEntry(h.getExamples(), exampleKey, exampleValue);
+        assertEquals(h.getExamples().size(), 1, "The list is expected to contain one entry.");
+        h.removeExample(exampleKey);
+        assertEquals(h.getExamples().size(), 0, "The list is expected to be empty.");
     }
     
     @Test
@@ -421,6 +454,9 @@ public class ModelConstructionTest {
         final String parameterValue = "$request.parameter.id";
         checkSameObject(l, l.addParameter(parameterKey, parameterValue));
         checkMapEntry(l.getParameters(), parameterKey, parameterValue);
+        assertEquals(l.getParameters().size(), 1, "The list is expected to contain one entry.");
+        l.removeParameter(parameterKey);
+        assertEquals(l.getParameters().size(), 0, "The list is expected to be empty.");
     }
     
     @Test
@@ -448,11 +484,22 @@ public class ModelConstructionTest {
         final String value = new String("myValue");
         checkSameObject(d, d.addMapping(key, value));
         checkMapEntry(d.getMapping(), key, value);
+        assertEquals(d.getMapping().size(), 1, "The list is expected to contain one entry.");
+        d.removeMapping(key);
+        assertEquals(d.getMapping().size(), 0, "The list is expected to be empty.");
     }
     
     @Test
     public void encodingTest() {
-        processConstructible(Encoding.class);
+        Encoding e = processConstructible(Encoding.class);
+        
+        final String headerKey = "myHeaderKey";
+        final Header headerValue = createConstructibleInstance(Header.class);
+        checkSameObject(e, e.addHeader(headerKey, headerValue));
+        checkMapEntry(e.getHeaders(), headerKey, headerValue);
+        assertEquals(e.getHeaders().size(), 1, "The list is expected to contain one entry.");
+        e.removeHeader(headerKey);
+        assertEquals(e.getHeaders().size(), 0, "The list is expected to be empty.");
     }
     
     @Test
@@ -463,11 +510,17 @@ public class ModelConstructionTest {
         final Encoding encodingValue = createConstructibleInstance(Encoding.class);
         checkSameObject(mt, mt.addEncoding(encodingKey, encodingValue));
         checkMapEntry(mt.getEncoding(), encodingKey, encodingValue);
+        assertEquals(mt.getEncoding().size(), 1, "The list is expected to contain one entry.");
+        mt.removeEncoding(encodingKey);
+        assertEquals(mt.getEncoding().size(), 0, "The list is expected to be empty.");
         
         final String exampleKey = "myExample";
         final Example exampleValue = createConstructibleInstance(Example.class);
         checkSameObject(mt, mt.addExample(exampleKey, exampleValue));
         checkMapEntry(mt.getExamples(), exampleKey, exampleValue);
+        assertEquals(mt.getExamples().size(), 1, "The list is expected to contain one entry.");
+        mt.removeExample(exampleKey);
+        assertEquals(mt.getExamples().size(), 0, "The list is expected to be empty.");
     }
     
     @Test
@@ -520,6 +573,9 @@ public class ModelConstructionTest {
         final Schema propertySchemaValue = createConstructibleInstance(Schema.class);
         checkSameObject(s, s.addProperty(propertySchemaKey, propertySchemaValue));
         checkMapEntry(s.getProperties(), propertySchemaKey, propertySchemaValue);
+        assertEquals(s.getProperties().size(), 1, "The list is expected to contain one entry.");
+        s.removeProperty(propertySchemaKey);
+        assertEquals(s.getProperties().size(), 0, "The list is expected to be empty.");
         
         final String required = new String("required");
         checkSameObject(s, s.addRequired(required));
@@ -542,6 +598,9 @@ public class ModelConstructionTest {
         final Example exampleValue = createConstructibleInstance(Example.class);
         checkSameObject(p, p.addExample(exampleKey, exampleValue));
         checkMapEntry(p.getExamples(), exampleKey, exampleValue);
+        assertEquals(p.getExamples().size(), 1, "The list is expected to contain one entry.");
+        p.removeExample(exampleKey);
+        assertEquals(p.getExamples().size(), 0, "The list is expected to be empty.");
     }
     
     @Test
@@ -557,11 +616,17 @@ public class ModelConstructionTest {
         final Header headerValue = createConstructibleInstance(Header.class);
         checkSameObject(response, response.addHeader(headerKey, headerValue));
         checkMapEntry(response.getHeaders(), headerKey, headerValue);
+        assertEquals(response.getHeaders().size(), 1, "The list is expected to contain one entry.");
+        response.removeHeader(headerKey);
+        assertEquals(response.getHeaders().size(), 0, "The list is expected to be empty.");
         
         final String linkKey = "myLinkKey";
         final Link linkValue = createConstructibleInstance(Link.class);
         checkSameObject(response, response.addLink(linkKey, linkValue));
         checkMapEntry(response.getLinks(), linkKey, linkValue);
+        assertEquals(response.getLinks().size(), 1, "The list is expected to contain one entry.");
+        response.removeLink(linkKey);
+        assertEquals(response.getLinks().size(), 0, "The list is expected to be empty.");
     }
     
     @Test
@@ -733,6 +798,8 @@ public class ModelConstructionTest {
                 "The value associated with the key: " + extensionName1 + " is expected to be the same one that was added.");
         assertSame(map.get(extensionName2), obj2,
                 "The value associated with the key: " + extensionName2 + " is expected to be the same one that was added.");
+        e.removeExtension(extensionName1);
+        assertEquals(e.getExtensions().size(), 1, "The extensions map is expected to contain one entry.");
         // Check that the extension map can be replaced with the setter and that it is returned by the getter.
         final Map<String, Object> newMap = new HashMap<>();
         e.setExtensions(newMap);

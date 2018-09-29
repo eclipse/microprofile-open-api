@@ -120,6 +120,13 @@ public interface Encoding extends Constructible, Extensible<Encoding> {
     Encoding addHeader(String key, Header header);
 
     /**
+     * Removes the given header to this Encoding' list of headers with the given string as its key.
+     *
+     * @param key a key conforming to the format required for this object
+     */
+    void removeHeader(String key);
+
+    /**
      * Style describes how the encoding value will be serialized depending on the type of the parameter value.
      * <p>
      * This method sets the style property of Encoding instance to the passed style argument and returns the modified instance

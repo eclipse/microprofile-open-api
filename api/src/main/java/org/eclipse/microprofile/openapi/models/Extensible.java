@@ -52,8 +52,16 @@ public interface Extensible<T extends Extensible<T>> {
      *
      * @param name the key used to access the extension object. Always prefixed by "x-".
      * @param value data not required by the specification
+     * @return the current instance
      */
     T addExtension(String name, Object value);
+
+    /**
+     * Removes the given object to this Extensible's map of extensions, with the given name as its key.
+     *
+     * @param name the key used to access the extension object. Always prefixed by "x-".
+     */
+    void removeExtension(String name);
 
     /**
      * Sets this Extensible's extensions property to the given map of extensions.

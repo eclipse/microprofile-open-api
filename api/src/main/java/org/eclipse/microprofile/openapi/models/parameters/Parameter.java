@@ -377,6 +377,14 @@ public interface Parameter extends Constructible, Extensible<Parameter>, Referen
     Parameter addExample(String key, Example example);
 
     /**
+     * Removes an example of the media type using the specified key. The example should contain a value in the correct format as specified in the
+     * parameter encoding.
+     *
+     * @param key string to represent the example
+     */
+    void removeExample(String key);
+
+    /**
      * Returns the example property from a Parameter instance.
      *
      * @return example of the media type
