@@ -42,6 +42,8 @@ public class OASFactoryErrorTest extends Arquillian {
             return null;
         }
         @Override
+        public void removeExtension(String name) {}
+        @Override
         public void setExtensions(Map<String, Object> extensions) {}
         @Override
         public String getName() {

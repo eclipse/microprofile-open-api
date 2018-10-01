@@ -97,6 +97,14 @@ public interface MediaType extends Constructible, Extensible<MediaType> {
     MediaType addExample(String key, Example example);
 
     /**
+     * Removes an example item to the examples map of a MediaType instance. The example object should match the media type and specified schema if
+     * present.
+     *
+     * @param key any unique name to identify the example object
+     */
+    void removeExample(String key);
+
+    /**
      * Returns the example property from a MediaType instance.
      *
      * @return an example of the media type
@@ -156,5 +164,12 @@ public interface MediaType extends Constructible, Extensible<MediaType> {
      * @return the current MediaType instance
      */
     MediaType addEncoding(String key, Encoding encodingItem);
+
+    /**
+     * Removes an Encoding item to the encoding property of a MediaType instance.
+     *
+     * @param key a property name in the schema
+     */
+    void removeEncoding(String key);
 
 }
