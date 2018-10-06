@@ -38,4 +38,98 @@ public interface ServerVariables extends Constructible, Extensible<ServerVariabl
      */
     ServerVariables addServerVariable(String name, ServerVariable serverVariable);
 
+    /**
+     * Removes the given server variables.
+     * 
+     * @param name the name of ServerVariable instance
+     */
+    void removeServerVariable(String name);
+
+    /**
+     * Returns a copy map (potentially immutable) of the server variables.
+     * 
+     * @return all items
+     */
+    Map<String, ServerVariable> getServerVariables();
+
+    /**
+     * Set the server variables map to this ServerVariables object.
+     * 
+     * @param items a map containing key-value item.
+     */
+    void setServerVariables(Map<String, ServerVariable> items);
+
+    /**
+     * Check whether a server variable is present in the map. This is a convenience method for <code>getServerVariables().containsKey(name)</code>
+     * 
+     * @param name the name of ServerVariable instance
+     * @return a boolean to indicate if the server variable is present or not.
+     */
+    default boolean hasServerVariable(String name) {
+        Map<String, ServerVariable> map = getServerVariables();
+        if (map == null) {
+            return false;
+        }
+        return map.containsKey(name);
+    }
+
+    /**
+     * Returns a server variable for a given name. This is a convenience method for <code>getServerVariables().get(name)</code>
+     * 
+     * @param name the name of ServerVariable instance
+     * @return the corresponding server variable or null.
+     */
+    default ServerVariable getServerVariable(String name) {
+        Map<String, ServerVariable> map = getServerVariables();
+        if (map == null) {
+            return null;
+        }
+        return map.get(name);
+    }
+
+    /**
+     * In the next version, {@link ServerVariables} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #getServerVariable(String)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    ServerVariable get(Object key);
+
+    /**
+     * In the next version, {@link ServerVariables} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #hasServerVariable(String)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    boolean containsKey(Object key);
+    
+    /**
+     * In the next version, {@link ServerVariables} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #addServerVariable(String, ServerVariable)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    ServerVariable put(String key, ServerVariable value);
+
+    /**
+     * In the next version, {@link ServerVariables} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #setServerVariables(Map)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    void putAll(Map<? extends String, ? extends ServerVariable> m);
+
+    /**
+     * In the next version, {@link ServerVariables} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #removeServerVariable(String)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    ServerVariable remove(Object key);
+
 }

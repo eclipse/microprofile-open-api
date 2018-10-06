@@ -48,4 +48,99 @@ public interface Callback extends Constructible, Extensible<Callback>, Reference
      */
     Callback addPathItem(String name, PathItem pathItem);
 
+    /**
+     * Removes the given path item of the Callback PathItems.
+     * 
+     * @param name a path name that will be removed.
+     */
+    void removePathItem(String name);
+
+    /**
+     * Returns a copy map (potentially immutable) of the path items.
+     * 
+     * @return all items
+     */
+    Map<String, PathItem> getPathItems();
+
+    /**
+     * Set the path items map to this Callback.
+     * 
+     * @param items a map containing the list of paths.
+     */
+    void setPathItems(Map<String, PathItem> items);
+
+    /**
+     * Check whether a path item is present to the map. This is a convenience method for <code>getPathItems().containsKey(name)</code>
+     * 
+     * @param name a path name in the format valid for a Paths object.
+     * @return a boolean to indicate if the path item is present or not.
+     */
+    default boolean hasPathItem(String name) {
+        Map<String, PathItem> map = getPathItems();
+        if (map == null) {
+            return false;
+        }
+        return map.containsKey(name);
+    }
+
+    /**
+     * Returns a path item for a given name. This is a convenience method for <code>getPathItems().get(name)</code>
+     * 
+     * @param name a path name in the format valid for a Paths object.
+     * @return the corresponding path item or null.
+     */
+    default PathItem getPathItem(String name) {
+        Map<String, PathItem> map = getPathItems();
+        if (map == null) {
+            return null;
+        }
+        return map.get(name);
+    }
+
+    /**
+     * In the next version, {@link Callback} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #getPathItem(String)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    PathItem get(Object key);
+
+    /**
+     * In the next version, {@link Callback} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #hasPathItem(String)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    boolean containsKey(Object key);
+    
+    /**
+     * In the next version, {@link Callback} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #addPathItem(String, PathItem)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    PathItem put(String key, PathItem value);
+
+    /**
+     * In the next version, {@link Callback} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #setPathItems(Map)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    void putAll(Map<? extends String, ? extends PathItem> m);
+
+    /**
+     * In the next version, {@link Callback} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #removePathItem(String)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    PathItem remove(Object key);
+
+
 }

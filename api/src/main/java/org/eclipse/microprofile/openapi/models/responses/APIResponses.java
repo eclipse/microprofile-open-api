@@ -35,7 +35,7 @@ public interface APIResponses extends Constructible, Extensible<APIResponses>, M
     /**
      * Adds an APIResponse in the format of the name as a key and the item as the value to APIResponses map
      * 
-     * @param name the name of APIResponse 
+     * @param name the name of APIResponse (http status code eventually with wildcard or {@value #DEFAULT})
      * @param apiResponse the APIResponse object to be added to APIResponses map
      * @return APIResponses map with the added ApiResponse instance
      * @deprecated since 1.1, use {@link #addAPIResponse(String, APIResponse)} instead
@@ -48,11 +48,106 @@ public interface APIResponses extends Constructible, Extensible<APIResponses>, M
     /**
      * Adds an APIResponse in the format of the name as a key and the item as the value to APIResponses map
      * 
-     * @param name the name of APIResponse 
+     * @param name the name of APIResponse (http status code eventually with wildcard or {@value #DEFAULT})
      * @param apiResponse the APIResponse object to be added to APIResponses map
      * @return APIResponses map with the added ApiResponse instance
      **/
     APIResponses addAPIResponse(String name, APIResponse apiResponse);
+
+
+    /**
+     * Removes the given APIResponse to this APIResponses.
+     * 
+     * @param name the name of APIResponse that will be removed (http status code eventually with wildcard or {@value #DEFAULT})
+     */
+    void removeAPIResponse(String name);
+
+    /**
+     * Returns a copy map (potentially immutable) of the APIResponses.
+     * 
+     * @return all responses
+     */
+    Map<String, APIResponse> getAPIResponses();
+
+    /**
+     * Set the APIResponses map to this APIResponses
+     * 
+     * @param items a map containing all responses. Keys are http statuses code eventually with wildcard or {@value #DEFAULT}.
+     */
+    void setAPIResponses(Map<String, APIResponse> items);
+
+    /**
+     * Check whether a APIResponse is present in the map. This is a convenience method for <code>getAPIResponses().containsKey(name)</code>
+     * 
+     * @param name the name of APIResponse (http status code eventually with wildcard or {@value #DEFAULT})
+     * @return a boolean to indicate if the APIResponse is present or not.
+     */
+    default boolean hasAPIResponse(String name) {
+        Map<String, APIResponse> map = getAPIResponses();
+        if (map == null) {
+            return false;
+        }
+        return map.containsKey(name);
+    }
+
+    /**
+     * Returns a APIResponse for a given name. This is a convenience method for <code>getAPIResponses().get(name)</code>
+     * 
+     * @param name the name of APIResponse (http status code eventually with wildcard or {@value #DEFAULT})
+     * @return the corresponding APIResponse or null.
+     */
+    default APIResponse getAPIResponse(String name) {
+        Map<String, APIResponse> map = getAPIResponses();
+        if (map == null) {
+            return null;
+        }
+        return map.get(name);
+    }
+
+    /**
+     * In the next version, {@link APIResponses} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #getAPIResponse(String)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    APIResponse get(Object key);
+
+    /**
+     * In the next version, {@link APIResponses} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #hasAPIResponse(String)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    boolean containsKey(Object key);
+    
+    /**
+     * In the next version, {@link APIResponses} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #addAPIResponse(String, APIResponse)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    APIResponse put(String key, APIResponse value);
+
+    /**
+     * In the next version, {@link APIResponses} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #setAPIResponses(Map)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    void putAll(Map<? extends String, ? extends APIResponse> m);
+
+    /**
+     * In the next version, {@link APIResponses} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #removeAPIResponse(String)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    APIResponse remove(Object key);
 
     /**
      * Returns the default documentation of responses other than the ones declared for specific HTTP response codes in this instance of ApiResponses.
