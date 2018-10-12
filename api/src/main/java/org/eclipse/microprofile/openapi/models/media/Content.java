@@ -39,4 +39,98 @@ public interface Content extends Constructible, Map<String, MediaType> {
      */
     Content addMediaType(String name, MediaType mediaType);
 
+    /**
+     * Removes the given MediaType for this Content by its name.
+     * 
+     * @param name a path name that will be removed.
+     */
+    void removeMediaType(String name);
+
+    /**
+     * Returns a copy map (potentially immutable) of media types.
+     * 
+     * @return all items
+     */
+    Map<String, MediaType> getMediaTypes();
+
+    /**
+     * Set the media types map to this Content
+     * 
+     * @param mediaTypes a map containing the list of media types. Keys are name of a media type e.g. application/json.
+     */
+    void setMediaTypes(Map<String, MediaType> mediaTypes);
+
+    /**
+     * Check whether a media type is present in the map. This is a convenience method for <code>getMediaTypes().containsKey(name)</code>
+     * 
+     * @param name the name of a media type e.g. application/json.
+     * @return a boolean to indicate if the media type is present or not.
+     */
+    default boolean hasMediaType(String name) {
+        Map<String, MediaType> map = getMediaTypes();
+        if (map == null) {
+            return false;
+        }
+        return map.containsKey(name);
+    }
+
+    /**
+     * Returns a media type for a given name. This is a convenience method for <code>getMediaTypes().get(name)</code>
+     * 
+     * @param name the name of a media type e.g. application/json.
+     * @return the corresponding media type or null.
+     */
+    default MediaType getMediaType(String name) {
+        Map<String, MediaType> map = getMediaTypes();
+        if (map == null) {
+            return null;
+        }
+        return map.get(name);
+    }
+
+    /**
+     * In the next version, {@link Content} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #getMediaType(String)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    MediaType get(Object key);
+
+    /**
+     * In the next version, {@link Content} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #hasMediaType(String)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    boolean containsKey(Object key);
+    
+    /**
+     * In the next version, {@link Content} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #addMediaType(String, MediaType)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    MediaType put(String key, MediaType value);
+
+    /**
+     * In the next version, {@link Content} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #setMediaTypes(Map)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    void putAll(Map<? extends String, ? extends MediaType> m);
+
+    /**
+     * In the next version, {@link Content} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #removeMediaType(String)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    MediaType remove(Object key);
+
 }
