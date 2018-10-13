@@ -59,4 +59,99 @@ public interface SecurityRequirement extends Constructible, Map<String, List<Str
      */
     SecurityRequirement addScheme(String securitySchemeName);
 
+    /**
+     * Removes a security scheme to the SecurityRequirement instance based on the scheme name.
+     * 
+     * @param securitySchemeName the name of security scheme
+     */
+    void removeScheme(String securitySchemeName);
+
+    /**
+     * Returns a copy map (potentially immutable) of the schemes.
+     * 
+     * @return all items
+     */
+    Map<String, List<String>> getSchemes();
+
+    /**
+     * Set all security schemes to the SecurityRequirement instance. Keys are the name of security scheme declared in the Components 
+     * section of the OpenAPI document, values are a list of required scope - only valid when the defined scheme is 'oauth2' or 'openIdConnect'
+     * 
+     * @param items a map containing the security schemes.
+     */
+    void setSchemes(Map<String, List<String>> items);
+
+    /**
+     * Check whether a scheme is present in the map. This is a convenience method for <code>getSchemes().containsKey(name)</code>
+     * 
+     * @param securitySchemeName the name of security scheme
+     * @return a boolean to indicate if the scheme is present or not.
+     */
+    default boolean hasScheme(String securitySchemeName) {
+        Map<String, List<String>> map = getSchemes();
+        if (map == null) {
+            return false;
+        }
+        return map.containsKey(securitySchemeName);
+    }
+
+    /**
+     * Returns a path item for a given name. This is a convenience method for <code>getSchemes().get(name)</code>
+     * 
+     * @param securitySchemeName the name of security scheme
+     * @return the corresponding path item or null.
+     */
+    default List<String> getScheme(String securitySchemeName) {
+        Map<String, List<String>> map = getSchemes();
+        if (map == null) {
+            return null;
+        }
+        return map.get(securitySchemeName);
+    }
+
+    /**
+     * In the next version, {@link SecurityRequirement} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #getScheme(String)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    List<String> get(Object key);
+
+    /**
+     * In the next version, {@link SecurityRequirement} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #hasScheme(String)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    boolean containsKey(Object key);
+    
+    /**
+     * In the next version, {@link SecurityRequirement} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #addScheme(String, List)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    List<String> put(String key, List<String> value);
+
+    /**
+     * In the next version, {@link SecurityRequirement} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #setSchemes(Map)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    void putAll(Map<? extends String, ? extends List<String>> m);
+
+    /**
+     * In the next version, {@link SecurityRequirement} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #removeScheme(String)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    List<String> remove(Object key);
+
 }

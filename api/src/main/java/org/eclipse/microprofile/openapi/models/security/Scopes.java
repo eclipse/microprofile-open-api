@@ -39,4 +39,98 @@ public interface Scopes extends Constructible, Extensible<Scopes>, Map<String, S
      */
     Scopes addScope(String scope, String description);
 
+    /**
+     * Removes the given scope item to this Scopes.
+     * 
+     * @param scope the name of a scope
+     */
+    void removeScope(String scope);
+
+    /**
+     * Returns a copy map (potentially immutable) of scopes.
+     * 
+     * @return all items
+     */
+    Map<String, String> getScopes();
+
+    /**
+     * Set the scope items map to this Scopes
+     * 
+     * @param items key-value pair in a map.
+     */
+    void setScopes(Map<String, String> items);
+
+    /**
+     * Check whether a scope item is present in the map. This is a convenience method for <code>getScopes().containsKey(name)</code>
+     * 
+     * @param scope the name of a scope.
+     * @return a boolean to indicate if the scope item is present or not.
+     */
+    default boolean hasScope(String scope) {
+        Map<String, String> map = getScopes();
+        if (map == null) {
+            return false;
+        }
+        return map.containsKey(scope);
+    }
+
+    /**
+     * Returns a scope description for a given scope name. This is a convenience method for <code>getScopes().get(name)</code>
+     * 
+     * @param scope the name of a scope.
+     * @return the corresponding description or null.
+     */
+    default String getScope(String scope) {
+        Map<String, String> map = getScopes();
+        if (map == null) {
+            return null;
+        }
+        return map.get(scope);
+    }
+
+    /**
+     * In the next version, {@link Scopes} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #getScope(String)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    String get(Object key);
+
+    /**
+     * In the next version, {@link Scopes} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #hasScope(String)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    boolean containsKey(Object key);
+    
+    /**
+     * In the next version, {@link Scopes} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #addScope(String, String)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    String put(String key, String value);
+
+    /**
+     * In the next version, {@link Scopes} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #setScopes(Map)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    void putAll(Map<? extends String, ? extends String> m);
+
+    /**
+     * In the next version, {@link Scopes} will no longer extends {@link Map}, this method will no longer be present.
+     * Use {@link #removeScope(String)} instead.
+     * @deprecated since 1.1
+     */
+    @Deprecated
+    @Override
+    String remove(Object key);
+
 }
