@@ -33,7 +33,7 @@ import org.eclipse.microprofile.openapi.models.Reference;
  * 
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#callbackObject">OpenAPI Specification Callback Object</a>
  */
-public interface Callback extends Constructible, Extensible<Callback>, Reference<Callback>, Map<String, PathItem> {
+public interface Callback extends Constructible, Extensible<Callback>, Reference<Callback> {
 
     /**
      * Adds the given PathItem to this Callback's list of PathItems using the string as its key.
@@ -96,51 +96,5 @@ public interface Callback extends Constructible, Extensible<Callback>, Reference
         }
         return map.get(name);
     }
-
-    /**
-     * In the next version, {@link Callback} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #getPathItem(String)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    PathItem get(Object key);
-
-    /**
-     * In the next version, {@link Callback} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #hasPathItem(String)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    boolean containsKey(Object key);
-    
-    /**
-     * In the next version, {@link Callback} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #addPathItem(String, PathItem)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    PathItem put(String key, PathItem value);
-
-    /**
-     * In the next version, {@link Callback} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #setPathItems(Map)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    void putAll(Map<? extends String, ? extends PathItem> m);
-
-    /**
-     * In the next version, {@link Callback} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #removePathItem(String)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    PathItem remove(Object key);
-
 
 }

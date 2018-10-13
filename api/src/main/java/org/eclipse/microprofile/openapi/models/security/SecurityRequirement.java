@@ -27,7 +27,7 @@ import org.eclipse.microprofile.openapi.models.Constructible;
  *
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-requirement-object">SecurityRequirement Object</a>
  */
-public interface SecurityRequirement extends Constructible, Map<String, List<String>> {
+public interface SecurityRequirement extends Constructible {
 
     /**
      * Adds a security scheme to the SecurityRequirement instance based on the scheme name and 
@@ -108,50 +108,5 @@ public interface SecurityRequirement extends Constructible, Map<String, List<Str
         }
         return map.get(securitySchemeName);
     }
-
-    /**
-     * In the next version, {@link SecurityRequirement} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #getScheme(String)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    List<String> get(Object key);
-
-    /**
-     * In the next version, {@link SecurityRequirement} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #hasScheme(String)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    boolean containsKey(Object key);
-    
-    /**
-     * In the next version, {@link SecurityRequirement} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #addScheme(String, List)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    List<String> put(String key, List<String> value);
-
-    /**
-     * In the next version, {@link SecurityRequirement} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #setSchemes(Map)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    void putAll(Map<? extends String, ? extends List<String>> m);
-
-    /**
-     * In the next version, {@link SecurityRequirement} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #removeScheme(String)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    List<String> remove(Object key);
 
 }
