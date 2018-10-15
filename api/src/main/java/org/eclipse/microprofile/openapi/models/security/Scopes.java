@@ -28,7 +28,7 @@ import org.eclipse.microprofile.openapi.models.Extensible;
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#oauthFlowObject">OAuthFlow Object</a>
  **/
 
-public interface Scopes extends Constructible, Extensible<Scopes>, Map<String, String> {
+public interface Scopes extends Constructible, Extensible<Scopes> {
 
     /**
      * Adds name of an existing scope object and item parameters to a Scopes instance as a key-value pair in a map.
@@ -38,5 +38,54 @@ public interface Scopes extends Constructible, Extensible<Scopes>, Map<String, S
      * @return Scopes instance with the added key-value pair
      */
     Scopes addScope(String scope, String description);
+
+    /**
+     * Removes the given scope item to this Scopes.
+     * 
+     * @param scope the name of a scope
+     */
+    void removeScope(String scope);
+
+    /**
+     * Returns a copy map (potentially immutable) of scopes.
+     * 
+     * @return all items
+     */
+    Map<String, String> getScopes();
+
+    /**
+     * Set the scope items map to this Scopes
+     * 
+     * @param items key-value pair in a map.
+     */
+    void setScopes(Map<String, String> items);
+
+    /**
+     * Check whether a scope item is present in the map. This is a convenience method for <code>getScopes().containsKey(name)</code>
+     * 
+     * @param scope the name of a scope.
+     * @return a boolean to indicate if the scope item is present or not.
+     */
+    default boolean hasScope(String scope) {
+        Map<String, String> map = getScopes();
+        if (map == null) {
+            return false;
+        }
+        return map.containsKey(scope);
+    }
+
+    /**
+     * Returns a scope description for a given scope name. This is a convenience method for <code>getScopes().get(name)</code>
+     * 
+     * @param scope the name of a scope.
+     * @return the corresponding description or null.
+     */
+    default String getScope(String scope) {
+        Map<String, String> map = getScopes();
+        if (map == null) {
+            return null;
+        }
+        return map.get(scope);
+    }
 
 }

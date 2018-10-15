@@ -27,7 +27,7 @@ import org.eclipse.microprofile.openapi.models.Extensible;
  *
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#server-variable-object">ServerVariable Object</a>
  */
-public interface ServerVariables extends Constructible, Extensible<ServerVariables>, Map<String, ServerVariable> {
+public interface ServerVariables extends Constructible, Extensible<ServerVariables> {
 
     /**
      * This method adds a key-value item to a ServerVariables instance from the name-item parameter pair and returns the modified instance.
@@ -37,5 +37,54 @@ public interface ServerVariables extends Constructible, Extensible<ServerVariabl
      * @return ServerVariables instance with the added name-item pair.
      */
     ServerVariables addServerVariable(String name, ServerVariable serverVariable);
+
+    /**
+     * Removes the given server variables.
+     * 
+     * @param name the name of ServerVariable instance
+     */
+    void removeServerVariable(String name);
+
+    /**
+     * Returns a copy map (potentially immutable) of the server variables.
+     * 
+     * @return all items
+     */
+    Map<String, ServerVariable> getServerVariables();
+
+    /**
+     * Set the server variables map to this ServerVariables object.
+     * 
+     * @param items a map containing key-value item.
+     */
+    void setServerVariables(Map<String, ServerVariable> items);
+
+    /**
+     * Check whether a server variable is present in the map. This is a convenience method for <code>getServerVariables().containsKey(name)</code>
+     * 
+     * @param name the name of ServerVariable instance
+     * @return a boolean to indicate if the server variable is present or not.
+     */
+    default boolean hasServerVariable(String name) {
+        Map<String, ServerVariable> map = getServerVariables();
+        if (map == null) {
+            return false;
+        }
+        return map.containsKey(name);
+    }
+
+    /**
+     * Returns a server variable for a given name. This is a convenience method for <code>getServerVariables().get(name)</code>
+     * 
+     * @param name the name of ServerVariable instance
+     * @return the corresponding server variable or null.
+     */
+    default ServerVariable getServerVariable(String name) {
+        Map<String, ServerVariable> map = getServerVariables();
+        if (map == null) {
+            return null;
+        }
+        return map.get(name);
+    }
 
 }

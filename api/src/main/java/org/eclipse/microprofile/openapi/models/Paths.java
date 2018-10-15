@@ -29,7 +29,7 @@ import java.util.Map;
  * 
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#pathsObject"> OpenAPI Specification Paths Object</a>
  */
-public interface Paths extends Constructible, Extensible<Paths>, Map<String, PathItem> {
+public interface Paths extends Constructible, Extensible<Paths> {
 
     /**
      * Adds the given path item to this Paths and return this instance of Paths
@@ -41,14 +41,6 @@ public interface Paths extends Constructible, Extensible<Paths>, Map<String, Pat
     Paths addPathItem(String name, PathItem item);
 
     /**
-     * Adds all the path items to this Paths and return this instance of Paths
-     * 
-     * @param items a map containing the list of paths. Keys MUST begin with a slash.
-     * @return the current Paths instance
-     */
-    Paths addPathItems(Map<String, PathItem> items);
-
-    /**
      * Removes the given path item to this Paths.
      * 
      * @param name a path name that will be removed.
@@ -56,19 +48,32 @@ public interface Paths extends Constructible, Extensible<Paths>, Map<String, Pat
     void removePathItem(String name);
 
     /**
-     * Returns an immutable map of the path items.
+     * Returns a copy map (potentially immutable) of the path items.
      * 
      * @return all items
      */
     Map<String, PathItem> getPathItems();
 
     /**
-     * Check whether a path item is present to the map. This is a convenience method for <code>getPathItems().containsKey(name)</code>
+     * Set the path items map to this Paths
+     * 
+     * @param items a map containing the list of paths. Keys MUST begin with a slash.
+     */
+    void setPathItems(Map<String, PathItem> items);
+
+    /**
+     * Check whether a path item is present in the map. This is a convenience method for <code>getPathItems().containsKey(name)</code>
      * 
      * @param name a path name in the format valid for a Paths object.
      * @return a boolean to indicate if the path item is present or not.
      */
-    boolean hasPathItem(String name);
+    default boolean hasPathItem(String name) {
+        Map<String, PathItem> map = getPathItems();
+        if (map == null) {
+            return false;
+        }
+        return map.containsKey(name);
+    }
 
     /**
      * Returns a path item for a given name. This is a convenience method for <code>getPathItems().get(name)</code>
@@ -76,51 +81,12 @@ public interface Paths extends Constructible, Extensible<Paths>, Map<String, Pat
      * @param name a path name in the format valid for a Paths object.
      * @return the corresponding path item or null.
      */
-    PathItem getPathItem(String name);
-
-    /**
-     * In the next version, {@link Paths} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #getPathItem(String)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    PathItem get(Object key);
-
-    /**
-     * In the next version, {@link Paths} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #hasPathItem(String)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    boolean containsKey(Object key);
-    
-    /**
-     * In the next version, {@link Paths} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #addPathItem(String, PathItem)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    PathItem put(String key, PathItem value);
-
-    /**
-     * In the next version, {@link Paths} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #addPathItems(Map)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    void putAll(Map<? extends String, ? extends PathItem> m);
-
-    /**
-     * In the next version, {@link Paths} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #removePathItem(String)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    PathItem remove(Object key);
+    default PathItem getPathItem(String name) {
+        Map<String, PathItem> map = getPathItems();
+        if (map == null) {
+            return null;
+        }
+        return map.get(name);
+    }
 
 }

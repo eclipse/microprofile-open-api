@@ -33,7 +33,7 @@ import org.eclipse.microprofile.openapi.models.Reference;
  * 
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#callbackObject">OpenAPI Specification Callback Object</a>
  */
-public interface Callback extends Constructible, Extensible<Callback>, Reference<Callback>, Map<String, PathItem> {
+public interface Callback extends Constructible, Extensible<Callback>, Reference<Callback> {
 
     /**
      * Adds the given PathItem to this Callback's list of PathItems using the string as its key.
@@ -47,5 +47,54 @@ public interface Callback extends Constructible, Extensible<Callback>, Reference
      * @return the current Callback instance
      */
     Callback addPathItem(String name, PathItem pathItem);
+
+    /**
+     * Removes the given path item of the Callback PathItems.
+     * 
+     * @param name a path name that will be removed.
+     */
+    void removePathItem(String name);
+
+    /**
+     * Returns a copy map (potentially immutable) of the path items.
+     * 
+     * @return all items
+     */
+    Map<String, PathItem> getPathItems();
+
+    /**
+     * Set the path items map to this Callback.
+     * 
+     * @param items a map containing the list of paths.
+     */
+    void setPathItems(Map<String, PathItem> items);
+
+    /**
+     * Check whether a path item is present to the map. This is a convenience method for <code>getPathItems().containsKey(name)</code>
+     * 
+     * @param name a path name in the format valid for a Paths object.
+     * @return a boolean to indicate if the path item is present or not.
+     */
+    default boolean hasPathItem(String name) {
+        Map<String, PathItem> map = getPathItems();
+        if (map == null) {
+            return false;
+        }
+        return map.containsKey(name);
+    }
+
+    /**
+     * Returns a path item for a given name. This is a convenience method for <code>getPathItems().get(name)</code>
+     * 
+     * @param name a path name in the format valid for a Paths object.
+     * @return the corresponding path item or null.
+     */
+    default PathItem getPathItem(String name) {
+        Map<String, PathItem> map = getPathItems();
+        if (map == null) {
+            return null;
+        }
+        return map.get(name);
+    }
 
 }

@@ -35,6 +35,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 import org.eclipse.microprofile.openapi.OASFactory;
 import org.eclipse.microprofile.openapi.models.Components;
@@ -369,31 +370,29 @@ public class ModelConstructionTest {
         assertTrue(p.hasPathItem(pathItemKey), pathItemKey + " is present in the map");
         assertSame(p.getPathItem(pathItemKey), pathItemValue, 
                 "The value associated with the key: " + pathItemKey + " is expected to be the same one that was added.");
-        checkMapEntry(p, pathItemKey, pathItemValue);
         checkMapEntry(p.getPathItems(), pathItemKey, pathItemValue);
         
         final String pathItemKey2 = "/myPathItem2";
         assertFalse(p.hasPathItem(pathItemKey2), pathItemKey2 + " is absent in the map");
         final PathItem pathItemValue2 = createConstructibleInstance(PathItem.class);
-        assertNull(p.put(pathItemKey2, pathItemValue2), "No previous mapping expected.");
+        checkSameObject(p, p.addPathItem(pathItemKey2, pathItemValue2));
         assertTrue(p.hasPathItem(pathItemKey2), pathItemKey2 + " is present in the map");
         assertSame(p.getPathItem(pathItemKey2), pathItemValue2, 
                 "The value associated with the key: " + pathItemKey2 + " is expected to be the same one that was added.");
-        checkMapEntry(p, pathItemKey2, pathItemValue2);
         checkMapEntry(p.getPathItems(), pathItemKey2, pathItemValue2);
         
-        assertEquals(p.size(), 2, "The map is expected to contain two entries.");
         assertEquals(p.getPathItems().size(), 2, "The map is expected to contain two entries.");
         
         p.removePathItem(pathItemKey);
         assertFalse(p.hasPathItem(pathItemKey), pathItemKey + " is absent in the map");
-        assertEquals(p.size(), 1, "The map is expected to contain two entries.");
-        assertEquals(p.getPathItems().size(), 1, "The map is expected to contain two entries.");
+        assertEquals(p.getPathItems().size(), 1, "The map is expected to contain one entry.");
         
-        p.remove(pathItemKey2);
+        p.removePathItem(pathItemKey2);
         assertFalse(p.hasPathItem(pathItemKey2), pathItemKey + " is absent in the map");
-        assertEquals(p.size(), 0, "The map is expected to contain 0 entries.");
         assertEquals(p.getPathItems().size(), 0, "The map is expected to contain 0 entries.");
+        
+        final PathItem otherValue = createConstructibleInstance(PathItem.class);
+        checkMapImmutable(p, Paths::getPathItems, "/otherPathItem", otherValue);
     }
     
     @Test
@@ -401,16 +400,35 @@ public class ModelConstructionTest {
         final Callback c = processConstructible(Callback.class);
         
         final String pathItemKey = "myPathItem";
+        assertFalse(c.hasPathItem(pathItemKey), pathItemKey + " is absent in the map");
         final PathItem pathItemValue = createConstructibleInstance(PathItem.class);
         checkSameObject(c, c.addPathItem(pathItemKey, pathItemValue));
-        checkMapEntry(c, pathItemKey, pathItemValue);
+        assertTrue(c.hasPathItem(pathItemKey), pathItemKey + " is present in the map");
+        assertSame(c.getPathItem(pathItemKey), pathItemValue, 
+                "The value associated with the key: " + pathItemKey + " is expected to be the same one that was added.");
+        checkMapEntry(c.getPathItems(), pathItemKey, pathItemValue);
         
         final String pathItemKey2 = "myPathItem2";
+        assertFalse(c.hasPathItem(pathItemKey2), pathItemKey2 + " is absent in the map");
         final PathItem pathItemValue2 = createConstructibleInstance(PathItem.class);
-        assertNull(c.put(pathItemKey2, pathItemValue2), "No previous mapping expected.");
-        checkMapEntry(c, pathItemKey2, pathItemValue2);
+        checkSameObject(c, c.addPathItem(pathItemKey2, pathItemValue2));
+        assertTrue(c.hasPathItem(pathItemKey2), pathItemKey2 + " is present in the map");
+        assertSame(c.getPathItem(pathItemKey2), pathItemValue2, 
+                "The value associated with the key: " + pathItemKey2 + " is expected to be the same one that was added.");
+        checkMapEntry(c.getPathItems(), pathItemKey2, pathItemValue2);
         
-        assertEquals(c.size(), 2, "The map is expected to contain two entries.");
+        assertEquals(c.getPathItems().size(), 2, "The map is expected to contain two entries.");
+        
+        c.removePathItem(pathItemKey);
+        assertFalse(c.hasPathItem(pathItemKey), pathItemKey + " is absent in the map");
+        assertEquals(c.getPathItems().size(), 1, "The map is expected to contain one entry.");
+        
+        c.removePathItem(pathItemKey2);
+        assertFalse(c.hasPathItem(pathItemKey2), pathItemKey + " is absent in the map");
+        assertEquals(c.getPathItems().size(), 0, "The map is expected to contain 0 entries.");
+        
+        final PathItem otherValue = createConstructibleInstance(PathItem.class);
+        checkMapImmutable(c, Callback::getPathItems, "otherPathItem", otherValue);
     }
     
     @Test
@@ -463,17 +481,36 @@ public class ModelConstructionTest {
     public void contentTest() {
         final Content c = processConstructible(Content.class);
         
-        final String mediaTypeKey = "myPathItem";
+        final String mediaTypeKey = "application/json";
+        assertFalse(c.hasMediaType(mediaTypeKey), mediaTypeKey + " is absent in the map");
         final MediaType mediaTypeValue = createConstructibleInstance(MediaType.class);
         checkSameObject(c, c.addMediaType(mediaTypeKey, mediaTypeValue));
-        checkMapEntry(c, mediaTypeKey, mediaTypeValue);
+        assertTrue(c.hasMediaType(mediaTypeKey), mediaTypeKey + " is present in the map");
+        assertSame(c.getMediaType(mediaTypeKey), mediaTypeValue, 
+                "The value associated with the key: " + mediaTypeKey + " is expected to be the same one that was added.");
+        checkMapEntry(c.getMediaTypes(), mediaTypeKey, mediaTypeValue);
         
-        final String mediaTypeKey2 = "myPathItem2";
+        final String mediaTypeKey2 = "*/*";
+        assertFalse(c.hasMediaType(mediaTypeKey2), mediaTypeKey2 + " is absent in the map");
         final MediaType mediaTypeValue2 = createConstructibleInstance(MediaType.class);
-        assertNull(c.put(mediaTypeKey2, mediaTypeValue2), "No previous mapping expected.");
-        checkMapEntry(c, mediaTypeKey2, mediaTypeValue2);
+        checkSameObject(c, c.addMediaType(mediaTypeKey2, mediaTypeValue2));
+        assertTrue(c.hasMediaType(mediaTypeKey2), mediaTypeKey2 + " is present in the map");
+        assertSame(c.getMediaType(mediaTypeKey2), mediaTypeValue2, 
+                "The value associated with the key: " + mediaTypeKey2 + " is expected to be the same one that was added.");
+        checkMapEntry(c.getMediaTypes(), mediaTypeKey2, mediaTypeValue2);
         
-        assertEquals(c.size(), 2, "The map is expected to contain two entries.");
+        assertEquals(c.getMediaTypes().size(), 2, "The map is expected to contain two entries.");
+        
+        c.removeMediaType(mediaTypeKey);
+        assertFalse(c.hasMediaType(mediaTypeKey), mediaTypeKey + " is absent in the map");
+        assertEquals(c.getMediaTypes().size(), 1, "The map is expected to contain one entry.");
+        
+        c.removeMediaType(mediaTypeKey2);
+        assertFalse(c.hasMediaType(mediaTypeKey2), mediaTypeKey + " is absent in the map");
+        assertEquals(c.getMediaTypes().size(), 0, "The map is expected to contain 0 entries.");
+        
+        final MediaType otherValue = createConstructibleInstance(MediaType.class);
+        checkMapImmutable(c, Content::getMediaTypes, "application/txt", otherValue);
     }
     
     @Test
@@ -633,37 +670,58 @@ public class ModelConstructionTest {
     public void apiResponsesTest() {
         final APIResponses responses = processConstructible(APIResponses.class);
         
-        responses.remove(APIResponses.DEFAULT);
-        assertEquals(responses.size(), 0, "The map is expected to contain two entries.");
+        responses.removeAPIResponse(APIResponses.DEFAULT);
+        if(responses.getAPIResponses() != null) {
+            assertEquals(responses.getAPIResponses().size(), 0, "The map is expected to contain two entries.");
+        }
         
         final String responseKey = "200";
-        final APIResponse responseValue = createConstructibleInstance(APIResponse.class);
-        checkSameObject(responses, responses.addAPIResponse(responseKey, responseValue));
-        checkMapEntry(responses, responseKey, responseValue);
+        assertFalse(responses.hasAPIResponse(responseKey), responseKey + " is absent in the map");
+        final APIResponse pathItemValue = createConstructibleInstance(APIResponse.class);
+        checkSameObject(responses, responses.addAPIResponse(responseKey, pathItemValue));
+        assertTrue(responses.hasAPIResponse(responseKey), responseKey + " is present in the map");
+        assertSame(responses.getAPIResponse(responseKey), pathItemValue, 
+                "The value associated with the key: " + responseKey + " is expected to be the same one that was added.");
+        checkMapEntry(responses.getAPIResponses(), responseKey, pathItemValue);
         
         final String responseKey2 = "4XX";
-        final APIResponse responseValue2 = createConstructibleInstance(APIResponse.class);
-        assertNull(responses.put(responseKey2, responseValue2), "No previous mapping expected.");
-        checkMapEntry(responses, responseKey2, responseValue2);
+        assertFalse(responses.hasAPIResponse(responseKey2), responseKey2 + " is absent in the map");
+        final APIResponse pathItemValue2 = createConstructibleInstance(APIResponse.class);
+        checkSameObject(responses, responses.addAPIResponse(responseKey2, pathItemValue2));
+        assertTrue(responses.hasAPIResponse(responseKey2), responseKey2 + " is present in the map");
+        assertSame(responses.getAPIResponse(responseKey2), pathItemValue2, 
+                "The value associated with the key: " + responseKey2 + " is expected to be the same one that was added.");
+        checkMapEntry(responses.getAPIResponses(), responseKey2, pathItemValue2);
         
-        assertEquals(responses.size(), 2, "The map is expected to contain two entries.");
+        assertEquals(responses.getAPIResponses().size(), 2, "The map is expected to contain two entries.");
+        
+        responses.removeAPIResponse(responseKey);
+        assertFalse(responses.hasAPIResponse(responseKey), responseKey + " is absent in the map");
+        assertEquals(responses.getAPIResponses().size(), 1, "The map is expected to contain one entry.");
+        
+        responses.removeAPIResponse(responseKey2);
+        assertFalse(responses.hasAPIResponse(responseKey2), responseKey + " is absent in the map");
+        assertEquals(responses.getAPIResponses().size(), 0, "The map is expected to contain 0 entries.");
+        
+        final APIResponse otherValue = createConstructibleInstance(APIResponse.class);
+        checkMapImmutable(responses, APIResponses::getAPIResponses, "500", otherValue);
         
         assertNull(responses.getDefaultValue(), "No default value expected.");
         final String responseKey3 = APIResponses.DEFAULT;
         final APIResponse responseValue3 = createConstructibleInstance(APIResponse.class);
-        assertNull(responses.put(responseKey3, responseValue3), "No previous mapping expected.");
-        checkMapEntry(responses, responseKey3, responseValue3);
+        checkSameObject(responses, responses.addAPIResponse(responseKey3, responseValue3));
+        checkMapEntry(responses.getAPIResponses(), responseKey3, responseValue3);
         checkSameObject(responseValue3, responses.getDefaultValue());
         
-        assertEquals(responses.size(), 3, "The map is expected to contain two entries.");
+        assertEquals(responses.getAPIResponses().size(), 1, "The map is expected to contain one entry.");
         
         responses.setDefaultValue(null);
-        assertNull(responses.get(APIResponses.DEFAULT), "No default value expected.");
+        assertNull(responses.getAPIResponse(APIResponses.DEFAULT), "No default value expected.");
         assertNull(responses.getDefaultValue(), "No default value expected.");
         
         final APIResponse responseValue4 = createConstructibleInstance(APIResponse.class);
         responses.setDefaultValue(responseValue4);
-        checkMapEntry(responses, APIResponses.DEFAULT, responseValue4);
+        checkMapEntry(responses.getAPIResponses(), APIResponses.DEFAULT, responseValue4);
         checkSameObject(responseValue4, responses.getDefaultValue());
     }
     
@@ -682,33 +740,71 @@ public class ModelConstructionTest {
         final Scopes s = processConstructible(Scopes.class);
         
         final String scopeKey = "myScope";
+        assertFalse(s.hasScope(scopeKey), scopeKey + " is absent in the map");
         final String scopeValue = new String("myDescription");
         checkSameObject(s, s.addScope(scopeKey, scopeValue));
-        checkMapEntry(s, scopeKey, scopeValue);
+        assertTrue(s.hasScope(scopeKey), scopeKey + " is present in the map");
+        assertSame(s.getScope(scopeKey), scopeValue, 
+                "The value associated with the key: " + scopeKey + " is expected to be the same one that was added.");
+        checkMapEntry(s.getScopes(), scopeKey, scopeValue);
         
         final String scopeKey2 = "myScope2";
+        assertFalse(s.hasScope(scopeKey2), scopeKey2 + " is absent in the map");
         final String scopeValue2 = new String("myDescription2");
-        assertNull(s.put(scopeKey2, scopeValue2), "No previous mapping expected.");
-        checkMapEntry(s, scopeKey2, scopeValue2);
+        checkSameObject(s, s.addScope(scopeKey2, scopeValue2));
+        assertTrue(s.hasScope(scopeKey2), scopeKey2 + " is present in the map");
+        assertSame(s.getScope(scopeKey2), scopeValue2, 
+                "The value associated with the key: " + scopeKey2 + " is expected to be the same one that was added.");
+        checkMapEntry(s.getScopes(), scopeKey2, scopeValue2);
         
-        assertEquals(s.size(), 2, "The map is expected to contain two entries.");
+        assertEquals(s.getScopes().size(), 2, "The map is expected to contain two entries.");
+        
+        s.removeScope(scopeKey);
+        assertFalse(s.hasScope(scopeKey), scopeKey + " is absent in the map");
+        assertEquals(s.getScopes().size(), 1, "The map is expected to contain one entry.");
+        
+        s.removeScope(scopeKey2);
+        assertFalse(s.hasScope(scopeKey2), scopeKey + " is absent in the map");
+        assertEquals(s.getScopes().size(), 0, "The map is expected to contain 0 entries.");
+        
+        final String otherValue = new String("otherDescription");
+        checkMapImmutable(s, Scopes::getScopes, "otherScope", otherValue);
     }
     
     @Test
     public void securityRequirementTest() {
         final SecurityRequirement sr = processConstructible(SecurityRequirement.class);
         
-        final String schemeKey = "myResponse";
+        final String schemeKey = "myScheme";
+        assertFalse(sr.hasScheme(schemeKey), schemeKey + " is absent in the map");
         final List<String> schemeValue = new ArrayList<String>();
         checkSameObject(sr, sr.addScheme(schemeKey, schemeValue));
-        checkMapEntry(sr, schemeKey, schemeValue);
+        assertTrue(sr.hasScheme(schemeKey), schemeKey + " is present in the map");
+        assertSame(sr.getScheme(schemeKey), schemeValue, 
+                "The value associated with the key: " + schemeKey + " is expected to be the same one that was added.");
+        checkMapEntry(sr.getSchemes(), schemeKey, schemeValue);
         
-        final String schemeKey2 = "myResponse2";
+        final String schemeKey2 = "myScheme2";
+        assertFalse(sr.hasScheme(schemeKey2), schemeKey2 + " is absent in the map");
         final List<String> schemeValue2 = new ArrayList<String>();
-        assertNull(sr.put(schemeKey2, schemeValue2), "No previous mapping expected.");
-        checkMapEntry(sr, schemeKey2, schemeValue2);
+        checkSameObject(sr, sr.addScheme(schemeKey2, schemeValue2));
+        assertTrue(sr.hasScheme(schemeKey2), schemeKey2 + " is present in the map");
+        assertSame(sr.getScheme(schemeKey2), schemeValue2, 
+                "The value associated with the key: " + schemeKey2 + " is expected to be the same one that was added.");
+        checkMapEntry(sr.getSchemes(), schemeKey2, schemeValue2);
         
-        assertEquals(sr.size(), 2, "The map is expected to contain two entries.");
+        assertEquals(sr.getSchemes().size(), 2, "The map is expected to contain two entries.");
+        
+        sr.removeScheme(schemeKey);
+        assertFalse(sr.hasScheme(schemeKey), schemeKey + " is absent in the map");
+        assertEquals(sr.getSchemes().size(), 1, "The map is expected to contain one entry.");
+        
+        sr.removeScheme(schemeKey2);
+        assertFalse(sr.hasScheme(schemeKey2), schemeKey + " is absent in the map");
+        assertEquals(sr.getSchemes().size(), 0, "The map is expected to contain 0 entries.");
+        
+        final List<String> otherValue = new ArrayList<String>();
+        checkMapImmutable(sr, SecurityRequirement::getSchemes, "otherScheme", otherValue);
     }
     
     @Test
@@ -738,16 +834,35 @@ public class ModelConstructionTest {
         final ServerVariables svs = processConstructible(ServerVariables.class);
         
         final String varKey = "myServerVariable";
+        assertFalse(svs.hasServerVariable(varKey), varKey + " is absent in the map");
         final ServerVariable varValue = createConstructibleInstance(ServerVariable.class);
         checkSameObject(svs, svs.addServerVariable(varKey, varValue));
-        checkMapEntry(svs, varKey, varValue);
+        assertTrue(svs.hasServerVariable(varKey), varKey + " is present in the map");
+        assertSame(svs.getServerVariable(varKey), varValue, 
+                "The value associated with the key: " + varKey + " is expected to be the same one that was added.");
+        checkMapEntry(svs.getServerVariables(), varKey, varValue);
         
         final String varKey2 = "myServerVariable2";
+        assertFalse(svs.hasServerVariable(varKey2), varKey2 + " is absent in the map");
         final ServerVariable varValue2 = createConstructibleInstance(ServerVariable.class);
-        assertNull(svs.put(varKey2, varValue2), "No previous mapping expected.");
-        checkMapEntry(svs, varKey2, varValue2);
+        checkSameObject(svs, svs.addServerVariable(varKey2, varValue2));
+        assertTrue(svs.hasServerVariable(varKey2), varKey2 + " is present in the map");
+        assertSame(svs.getServerVariable(varKey2), varValue2, 
+                "The value associated with the key: " + varKey2 + " is expected to be the same one that was added.");
+        checkMapEntry(svs.getServerVariables(), varKey2, varValue2);
         
-        assertEquals(svs.size(), 2, "The map is expected to contain two entries.");
+        assertEquals(svs.getServerVariables().size(), 2, "The map is expected to contain two entries.");
+        
+        svs.removeServerVariable(varKey);
+        assertFalse(svs.hasServerVariable(varKey), varKey + " is absent in the map");
+        assertEquals(svs.getServerVariables().size(), 1, "The map is expected to contain one entry.");
+        
+        svs.removeServerVariable(varKey2);
+        assertFalse(svs.hasServerVariable(varKey2), varKey + " is absent in the map");
+        assertEquals(svs.getServerVariables().size(), 0, "The map is expected to contain 0 entries.");
+        
+        final ServerVariable otherValue = createConstructibleInstance(ServerVariable.class);
+        checkMapImmutable(svs, ServerVariables::getServerVariables, "otherServerVariable", otherValue);
     }
     
     @Test
@@ -845,7 +960,7 @@ public class ModelConstructionTest {
     private void processConstructibleProperty(Constructible o, Property p, Class<?> enclosingInterface) {
         final Object value1 = getInstanceOf(p.getType(), false);
         p.invokeSetter(o, value1);
-        if (!p.isPrimitive()) {
+        if (!p.isPrimitive() && !p.isCompatible(Map.class)) {
             assertSame(p.invokeGetter(o), value1, "The return value of the getter method for property \"" + 
                     p.getName() + "\" of interface \"" + enclosingInterface.getName() +
                     "\" is expected to be the same as the value that was set.");
@@ -1031,6 +1146,23 @@ public class ModelConstructionTest {
         assertNotNull(map, "The map must not be null.");
         assertTrue(map.containsKey(key), "The map is expected to contain the key: " + key);
         assertSame(map.get(key), value, "The value associated with the key: " + key + " is expected to be the same one that was added.");
+    }
+
+    private <O, K, T> void checkMapImmutable(O container, Function<O, Map<K,T>> mapGetter, K key, T otherValue) {
+        Map<K,T> map = mapGetter.apply(container);
+        assertNotNull(map, "The map must not be null.");
+        assertFalse(map.containsKey(key), "The map is expected to not contain the key: " + key);
+        int originalSize = map.size();
+        try {
+            map.put(key, otherValue);
+        }
+        catch (Exception e) {
+            //It is allowed to throw an exception
+        }
+        Map<K,T> map2 = mapGetter.apply(container);
+        assertNotNull(map2, "The map must not be null.");
+        assertFalse(map2.containsKey(key), "The map is expected to not contain the key: " + key);
+        assertEquals(map2.size(), originalSize, "The map is expected to have a size of " + originalSize);
     }
     
     private <T> void checkListEntry(List<T> list, T value) {

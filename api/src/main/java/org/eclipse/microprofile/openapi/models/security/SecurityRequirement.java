@@ -27,7 +27,7 @@ import org.eclipse.microprofile.openapi.models.Constructible;
  *
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-requirement-object">SecurityRequirement Object</a>
  */
-public interface SecurityRequirement extends Constructible, Map<String, List<String>> {
+public interface SecurityRequirement extends Constructible {
 
     /**
      * Adds a security scheme to the SecurityRequirement instance based on the scheme name and 
@@ -58,5 +58,55 @@ public interface SecurityRequirement extends Constructible, Map<String, List<Str
      * @return Updated SecurityRequirement instance
      */
     SecurityRequirement addScheme(String securitySchemeName);
+
+    /**
+     * Removes a security scheme to the SecurityRequirement instance based on the scheme name.
+     * 
+     * @param securitySchemeName the name of security scheme
+     */
+    void removeScheme(String securitySchemeName);
+
+    /**
+     * Returns a copy map (potentially immutable) of the schemes.
+     * 
+     * @return all items
+     */
+    Map<String, List<String>> getSchemes();
+
+    /**
+     * Set all security schemes to the SecurityRequirement instance. Keys are the name of security scheme declared in the Components 
+     * section of the OpenAPI document, values are a list of required scope - only valid when the defined scheme is 'oauth2' or 'openIdConnect'
+     * 
+     * @param items a map containing the security schemes.
+     */
+    void setSchemes(Map<String, List<String>> items);
+
+    /**
+     * Check whether a scheme is present in the map. This is a convenience method for <code>getSchemes().containsKey(name)</code>
+     * 
+     * @param securitySchemeName the name of security scheme
+     * @return a boolean to indicate if the scheme is present or not.
+     */
+    default boolean hasScheme(String securitySchemeName) {
+        Map<String, List<String>> map = getSchemes();
+        if (map == null) {
+            return false;
+        }
+        return map.containsKey(securitySchemeName);
+    }
+
+    /**
+     * Returns a path item for a given name. This is a convenience method for <code>getSchemes().get(name)</code>
+     * 
+     * @param securitySchemeName the name of security scheme
+     * @return the corresponding path item or null.
+     */
+    default List<String> getScheme(String securitySchemeName) {
+        Map<String, List<String>> map = getSchemes();
+        if (map == null) {
+            return null;
+        }
+        return map.get(securitySchemeName);
+    }
 
 }
