@@ -953,14 +953,14 @@ public class ModelConstructionTest {
         e.setExtensions(newMap);
         final Map<String, Object> map2 = e.getExtensions();
         assertEquals(map2.size(), 0, "The extensions map is expected to contain no entries.");
-        assertSame(map2, newMap, "The return value of getExtensions() is expected to be the same value that was set.");
+        assertEquals(map2, newMap, "The return value of getExtensions() is expected to be the same value that was set.");
         // Check that the extension map can be replaced with the builder method and that it is returned by the getter.
         final Map<String, Object> newOtherMap = new HashMap<>();
         newOtherMap.put("x-test", 42);
         e.setExtensions(newOtherMap);
         final Map<String, Object> map3 = e.getExtensions();
         assertEquals(map3.size(), 1, "The extensions map is expected to contain one entry.");
-        assertSame(map3, newOtherMap, "The return value of getExtensions() is expected to be the same value that was set.");
+        assertEquals(map3, newOtherMap, "The return value of getExtensions() is expected to be the same value that was set.");
     }
     
     private void processReference(Reference<?> r) {
@@ -993,7 +993,7 @@ public class ModelConstructionTest {
     private void processConstructibleProperty(Constructible o, Property p, Class<?> enclosingInterface) {
         final Object value1 = getInstanceOf(p.getType(), false);
         p.invokeSetter(o, value1);
-        if (!p.isPrimitive() && !p.isCompatible(Map.class)) {
+        if (!p.isPrimitive() && !p.isCompatible(Map.class) && !p.isCompatible(List.class)) {
             assertSame(p.invokeGetter(o), value1, "The return value of the getter method for property \"" + 
                     p.getName() + "\" of interface \"" + enclosingInterface.getName() +
                     "\" is expected to be the same as the value that was set.");
@@ -1009,7 +1009,7 @@ public class ModelConstructionTest {
             assertSame(self, o, "The return value of the builder method for property \"" + 
                     p.getName() + "\" of interface \"" + enclosingInterface.getName() +
                     "\" is expected to be the same as the value that was set.");
-            if (!p.isPrimitive()) {
+            if (!p.isPrimitive() && !p.isCompatible(Map.class) && !p.isCompatible(List.class)) {
                 assertSame(p.invokeGetter(o), value2, "The return value of the getter method for property \"" + 
                         p.getName() + "\" of interface \"" + enclosingInterface.getName() +
                         "\" is expected to be the same as the value that was set.");
