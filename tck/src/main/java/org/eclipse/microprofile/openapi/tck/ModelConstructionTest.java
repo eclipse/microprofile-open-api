@@ -161,6 +161,8 @@ public class ModelConstructionTest {
         assertEquals(c.getCallbacks().size(), 1, "The list is expected to contain one entry.");
         c.removeCallback(callbackKey);
         assertEquals(c.getCallbacks().size(), 0, "The list is expected to be empty.");
+        Callback otherCallbackValue  = createConstructibleInstance(Callback.class);
+        checkMapImmutable(c, Components::getCallbacks, "otherCallback", otherCallbackValue);
         
         final String exampleKey = "myExample";
         final Example exampleValue = createConstructibleInstance(Example.class);
@@ -169,6 +171,8 @@ public class ModelConstructionTest {
         assertEquals(c.getExamples().size(), 1, "The list is expected to contain one entry.");
         c.removeExample(exampleKey);
         assertEquals(c.getExamples().size(), 0, "The list is expected to be empty.");
+        Example otherExampleValue  = createConstructibleInstance(Example.class);
+        checkMapImmutable(c, Components::getExamples, "otherExample", otherExampleValue);
         
         final String headerKey = "myHeader";
         final Header headerValue = createConstructibleInstance(Header.class);
@@ -177,6 +181,8 @@ public class ModelConstructionTest {
         assertEquals(c.getHeaders().size(), 1, "The list is expected to contain one entry.");
         c.removeHeader(headerKey);
         assertEquals(c.getHeaders().size(), 0, "The list is expected to be empty.");
+        Header otherHeaderValue  = createConstructibleInstance(Header.class);
+        checkMapImmutable(c, Components::getHeaders, "otherHeader", otherHeaderValue);
         
         final String linkKey = "myLink";
         final Link linkValue = createConstructibleInstance(Link.class);
@@ -185,6 +191,8 @@ public class ModelConstructionTest {
         assertEquals(c.getLinks().size(), 1, "The list is expected to contain one entry.");
         c.removeLink(linkKey);
         assertEquals(c.getLinks().size(), 0, "The list is expected to be empty.");
+        Link otherLinkValue  = createConstructibleInstance(Link.class);
+        checkMapImmutable(c, Components::getLinks, "otherLink", otherLinkValue);
         
         final String parameterKey = "myParameter";
         final Parameter parameterValue = createConstructibleInstance(Parameter.class);
@@ -193,6 +201,8 @@ public class ModelConstructionTest {
         assertEquals(c.getParameters().size(), 1, "The list is expected to contain one entry.");
         c.removeParameter(parameterKey);
         assertEquals(c.getParameters().size(), 0, "The list is expected to be empty.");
+        Parameter otherParameterValue  = createConstructibleInstance(Parameter.class);
+        checkMapImmutable(c, Components::getParameters, "otherParameter", otherParameterValue);
         
         final String requestBodyKey = "myRequestBody";
         final RequestBody requestBodyValue = createConstructibleInstance(RequestBody.class);
@@ -201,6 +211,8 @@ public class ModelConstructionTest {
         assertEquals(c.getRequestBodies().size(), 1, "The list is expected to contain one entry.");
         c.removeRequestBody(requestBodyKey);
         assertEquals(c.getRequestBodies().size(), 0, "The list is expected to be empty.");
+        RequestBody otherRequestBodyValue  = createConstructibleInstance(RequestBody.class);
+        checkMapImmutable(c, Components::getRequestBodies, "otherRequestBody", otherRequestBodyValue);
         
         final String responseKey = "myResponse";
         final APIResponse responseValue = createConstructibleInstance(APIResponse.class);
@@ -209,6 +221,8 @@ public class ModelConstructionTest {
         assertEquals(c.getResponses().size(), 1, "The list is expected to contain one entry.");
         c.removeResponse(responseKey);
         assertEquals(c.getResponses().size(), 0, "The list is expected to be empty.");
+        APIResponse otherAPIResponseValue  = createConstructibleInstance(APIResponse.class);
+        checkMapImmutable(c, Components::getResponses, "otherAPIResponse", otherAPIResponseValue);
         
         final String schemaKey = "mySchema";
         final Schema schemaValue = createConstructibleInstance(Schema.class);
@@ -217,6 +231,8 @@ public class ModelConstructionTest {
         assertEquals(c.getSchemas().size(), 1, "The list is expected to contain one entry.");
         c.removeSchema(schemaKey);
         assertEquals(c.getSchemas().size(), 0, "The list is expected to be empty.");
+        Schema otherSchemaValue  = createConstructibleInstance(Schema.class);
+        checkMapImmutable(c, Components::getSchemas, "otherSchema", otherSchemaValue);
         
         final String securitySchemeKey = "mySecurityScheme";
         final SecurityScheme securitySchemeValue = createConstructibleInstance(SecurityScheme.class);
@@ -225,6 +241,8 @@ public class ModelConstructionTest {
         assertEquals(c.getSecuritySchemes().size(), 1, "The list is expected to contain one entry.");
         c.removeSecurityScheme(securitySchemeKey);
         assertEquals(c.getSecuritySchemes().size(), 0, "The list is expected to be empty.");
+        SecurityScheme otherSecuritySchemeValue  = createConstructibleInstance(SecurityScheme.class);
+        checkMapImmutable(c, Components::getSecuritySchemes, "otherSecurityScheme", otherSecuritySchemeValue);
     }
     
     @Test
@@ -242,6 +260,8 @@ public class ModelConstructionTest {
         assertEquals(o.getSecurity().size(), 1, "The list is expected to contain one entry.");
         o.removeSecurityRequirement(sr);
         assertEquals(o.getSecurity().size(), 0, "The list is expected to be empty.");
+        SecurityRequirement otherSecurityRequirementValue  = createConstructibleInstance(SecurityRequirement.class);
+        checkListImmutable(o, OpenAPI::getSecurity, otherSecurityRequirementValue);
         
         final Server s = createConstructibleInstance(Server.class);
         checkSameObject(o, o.addServer(s));
@@ -249,6 +269,8 @@ public class ModelConstructionTest {
         assertEquals(o.getServers().size(), 1, "The list is expected to contain one entry.");
         o.removeServer(s);
         assertEquals(o.getServers().size(), 0, "The list is expected to be empty.");
+        Server otherServer  = createConstructibleInstance(Server.class);
+        checkListImmutable(o, OpenAPI::getServers, otherServer);
         
         final Tag t = createConstructibleInstance(Tag.class);
         checkSameObject(o, o.addTag(t));
@@ -256,6 +278,8 @@ public class ModelConstructionTest {
         assertEquals(o.getTags().size(), 1, "The list is expected to contain one entry.");
         o.removeTag(t);
         assertEquals(o.getTags().size(), 0, "The list is expected to be empty.");
+        Tag otherTag  = createConstructibleInstance(Tag.class);
+        checkListImmutable(o, OpenAPI::getTags, otherTag);
     }
     
     @Test
@@ -268,6 +292,8 @@ public class ModelConstructionTest {
         assertEquals(o.getParameters().size(), 1, "The list is expected to contain one entry.");
         o.removeParameter(p);
         assertEquals(o.getParameters().size(), 0, "The list is expected to be empty.");
+        Parameter otherParameter  = createConstructibleInstance(Parameter.class);
+        checkListImmutable(o, Operation::getParameters, otherParameter);
         
         final SecurityRequirement sr = createConstructibleInstance(SecurityRequirement.class);
         checkSameObject(o, o.addSecurityRequirement(sr));
@@ -275,6 +301,8 @@ public class ModelConstructionTest {
         assertEquals(o.getSecurity().size(), 1, "The list is expected to contain one entry.");
         o.removeSecurityRequirement(sr);
         assertEquals(o.getSecurity().size(), 0, "The list is expected to be empty.");
+        SecurityRequirement otherSecurityRequirement  = createConstructibleInstance(SecurityRequirement.class);
+        checkListImmutable(o, Operation::getSecurity, otherSecurityRequirement);
         
         final Server s = createConstructibleInstance(Server.class);
         checkSameObject(o, o.addServer(s));
@@ -282,6 +310,8 @@ public class ModelConstructionTest {
         assertEquals(o.getServers().size(), 1, "The list is expected to contain one entry.");
         o.removeServer(s);
         assertEquals(o.getServers().size(), 0, "The list is expected to be empty.");
+        Server otherServer  = createConstructibleInstance(Server.class);
+        checkListImmutable(o, Operation::getServers, otherServer);
         
         final String tag = new String("myTag");
         checkSameObject(o, o.addTag(tag));
@@ -289,6 +319,8 @@ public class ModelConstructionTest {
         assertEquals(o.getTags().size(), 1, "The list is expected to contain one entry.");
         o.removeTag(tag);
         assertEquals(o.getTags().size(), 0, "The list is expected to be empty.");
+        String otherTag  = new String("otherTag");
+        checkListImmutable(o, Operation::getTags, otherTag);
         
         final String callbackKey = "myCallback";
         final Callback callbackValue = createConstructibleInstance(Callback.class);
@@ -297,6 +329,8 @@ public class ModelConstructionTest {
         assertEquals(o.getCallbacks().size(), 1, "The list is expected to contain one entry.");
         o.removeCallback(callbackKey);
         assertEquals(o.getCallbacks().size(), 0, "The list is expected to be empty.");
+        Callback otherCallback  = createConstructibleInstance(Callback.class);
+        checkMapImmutable(o, Operation::getCallbacks, "otherCallback", otherCallback);
     }
     
     @Test
@@ -309,6 +343,8 @@ public class ModelConstructionTest {
         assertEquals(pi.getParameters().size(), 1, "The list is expected to contain one entry.");
         pi.removeParameter(p);
         assertEquals(pi.getParameters().size(), 0, "The list is expected to be empty.");
+        Parameter otherParameter  = createConstructibleInstance(Parameter.class);
+        checkListImmutable(pi, PathItem::getParameters, otherParameter);
         
         final Server s = createConstructibleInstance(Server.class);
         checkSameObject(pi, pi.addServer(s));
@@ -316,6 +352,8 @@ public class ModelConstructionTest {
         assertEquals(pi.getServers().size(), 1, "The list is expected to contain one entry.");
         pi.removeServer(s);
         assertEquals(pi.getServers().size(), 0, "The list is expected to be empty.");
+        Server otherServer  = createConstructibleInstance(Server.class);
+        checkListImmutable(pi, PathItem::getServers, otherServer);
         
         final Operation o1 = createConstructibleInstance(Operation.class);
         checkSameObject(pi, pi.GET(o1));
@@ -447,6 +485,8 @@ public class ModelConstructionTest {
         assertEquals(h.getExamples().size(), 1, "The list is expected to contain one entry.");
         h.removeExample(exampleKey);
         assertEquals(h.getExamples().size(), 0, "The list is expected to be empty.");
+        Example otherExampleValue = createConstructibleInstance(Example.class);
+        checkMapImmutable(h, Header::getExamples, "otherExample", otherExampleValue);
     }
     
     @Test
@@ -475,6 +515,8 @@ public class ModelConstructionTest {
         assertEquals(l.getParameters().size(), 1, "The list is expected to contain one entry.");
         l.removeParameter(parameterKey);
         assertEquals(l.getParameters().size(), 0, "The list is expected to be empty.");
+        Object otherExampleValue = new Object();
+        checkMapImmutable(l, Link::getParameters, "otherParameter", otherExampleValue);
     }
     
     @Test
@@ -524,6 +566,8 @@ public class ModelConstructionTest {
         assertEquals(d.getMapping().size(), 1, "The list is expected to contain one entry.");
         d.removeMapping(key);
         assertEquals(d.getMapping().size(), 0, "The list is expected to be empty.");
+        final String otherValue = new String("otherValue");
+        checkMapImmutable(d, Discriminator::getMapping, "otherValue", otherValue);
     }
     
     @Test
@@ -537,6 +581,8 @@ public class ModelConstructionTest {
         assertEquals(e.getHeaders().size(), 1, "The list is expected to contain one entry.");
         e.removeHeader(headerKey);
         assertEquals(e.getHeaders().size(), 0, "The list is expected to be empty.");
+        final Header otherHeaderValue = createConstructibleInstance(Header.class);
+        checkMapImmutable(e, Encoding::getHeaders, "otherHeader", otherHeaderValue);
     }
     
     @Test
@@ -550,6 +596,8 @@ public class ModelConstructionTest {
         assertEquals(mt.getEncoding().size(), 1, "The list is expected to contain one entry.");
         mt.removeEncoding(encodingKey);
         assertEquals(mt.getEncoding().size(), 0, "The list is expected to be empty.");
+        Encoding otherEncodingValue = createConstructibleInstance(Encoding.class);
+        checkMapImmutable(mt, MediaType::getEncoding, "otherEncoding", otherEncodingValue);
         
         final String exampleKey = "myExample";
         final Example exampleValue = createConstructibleInstance(Example.class);
@@ -558,6 +606,8 @@ public class ModelConstructionTest {
         assertEquals(mt.getExamples().size(), 1, "The list is expected to contain one entry.");
         mt.removeExample(exampleKey);
         assertEquals(mt.getExamples().size(), 0, "The list is expected to be empty.");
+        Example otherExampleValue = createConstructibleInstance(Example.class);
+        checkMapImmutable(mt, MediaType::getExamples, "otherExample", otherExampleValue);
     }
     
     @Test
@@ -584,6 +634,8 @@ public class ModelConstructionTest {
         assertEquals(s.getAllOf().size(), 1, "The list is expected to contain one entry.");
         s.removeAllOf(allOf);
         assertEquals(s.getAllOf().size(), 0, "The list is expected to be empty.");
+        final Schema otherAllOfValue = createConstructibleInstance(Schema.class);
+        checkListImmutable(s, Schema::getAllOf, otherAllOfValue);
         
         final Schema anyOf = createConstructibleInstance(Schema.class);
         checkSameObject(s, s.addAnyOf(anyOf));
@@ -591,6 +643,8 @@ public class ModelConstructionTest {
         assertEquals(s.getAnyOf().size(), 1, "The list is expected to contain one entry.");
         s.removeAnyOf(anyOf);
         assertEquals(s.getAnyOf().size(), 0, "The list is expected to be empty.");
+        final Schema otherAnyOfValue = createConstructibleInstance(Schema.class);
+        checkListImmutable(s, Schema::getAnyOf, otherAnyOfValue);
         
         final String enumeration = new String("enumValue");
         checkSameObject(s, s.addEnumeration(enumeration));
@@ -598,6 +652,8 @@ public class ModelConstructionTest {
         assertEquals(s.getEnumeration().size(), 1, "The list is expected to contain one entry.");
         s.removeEnumeration(enumeration);
         assertEquals(s.getEnumeration().size(), 0, "The list is expected to be empty.");
+        final String otherEnumerationValue = new String("otherValue");
+        checkListImmutable(s, Schema::getEnumeration , otherEnumerationValue);
         
         final Schema oneOf = createConstructibleInstance(Schema.class);
         checkSameObject(s, s.addOneOf(oneOf));
@@ -605,6 +661,8 @@ public class ModelConstructionTest {
         assertEquals(s.getOneOf().size(), 1, "The list is expected to contain one entry.");
         s.removeOneOf(oneOf);
         assertEquals(s.getOneOf().size(), 0, "The list is expected to be empty.");
+        final Schema otherOneOfValue = createConstructibleInstance(Schema.class);
+        checkListImmutable(s, Schema::getOneOf, otherOneOfValue);
         
         final String propertySchemaKey = "myPropertySchemaKey";
         final Schema propertySchemaValue = createConstructibleInstance(Schema.class);
@@ -613,6 +671,8 @@ public class ModelConstructionTest {
         assertEquals(s.getProperties().size(), 1, "The list is expected to contain one entry.");
         s.removeProperty(propertySchemaKey);
         assertEquals(s.getProperties().size(), 0, "The list is expected to be empty.");
+        final Schema otherPropertyValue = createConstructibleInstance(Schema.class);
+        checkMapImmutable(s, Schema::getProperties, "otherPropertyKey", otherPropertyValue);
         
         final String required = new String("required");
         checkSameObject(s, s.addRequired(required));
@@ -620,6 +680,8 @@ public class ModelConstructionTest {
         assertEquals(s.getRequired().size(), 1, "The list is expected to contain one entry.");
         s.removeRequired(required);
         assertEquals(s.getRequired().size(), 0, "The list is expected to be empty.");
+        final String otherRequiredValue = new String("otherRequired");
+        checkListImmutable(s, Schema::getEnumeration, otherRequiredValue);
     }
     
     @Test
@@ -638,6 +700,8 @@ public class ModelConstructionTest {
         assertEquals(p.getExamples().size(), 1, "The list is expected to contain one entry.");
         p.removeExample(exampleKey);
         assertEquals(p.getExamples().size(), 0, "The list is expected to be empty.");
+        Example otherExampleValue = createConstructibleInstance(Example.class);
+        checkMapImmutable(p, Parameter::getExamples, "otherExample", otherExampleValue);
     }
     
     @Test
@@ -656,6 +720,8 @@ public class ModelConstructionTest {
         assertEquals(response.getHeaders().size(), 1, "The list is expected to contain one entry.");
         response.removeHeader(headerKey);
         assertEquals(response.getHeaders().size(), 0, "The list is expected to be empty.");
+        Header otherHeaderValue  = createConstructibleInstance(Header.class);
+        checkMapImmutable(response, APIResponse::getHeaders, "otherHeader", otherHeaderValue);
         
         final String linkKey = "myLinkKey";
         final Link linkValue = createConstructibleInstance(Link.class);
@@ -664,6 +730,8 @@ public class ModelConstructionTest {
         assertEquals(response.getLinks().size(), 1, "The list is expected to contain one entry.");
         response.removeLink(linkKey);
         assertEquals(response.getLinks().size(), 0, "The list is expected to be empty.");
+        Link otherLinkValue  = createConstructibleInstance(Link.class);
+        checkMapImmutable(response, APIResponse::getLinks, "otherLink", otherLinkValue);
     }
     
     @Test
@@ -827,6 +895,8 @@ public class ModelConstructionTest {
         assertEquals(sv.getEnumeration().size(), 1, "The list is expected to contain one entry.");
         sv.removeEnumeration(enumeration);
         assertEquals(sv.getEnumeration().size(), 0, "The list is expected to be empty.");
+        final String otherEnumerationValue = new String("otherValue");
+        checkListImmutable(sv, ServerVariable::getEnumeration , otherEnumerationValue);
     }
     
     @Test
@@ -928,6 +998,8 @@ public class ModelConstructionTest {
         final Map<String, Object> map3 = e.getExtensions();
         assertEquals(map3.size(), 1, "The extensions map is expected to contain one entry.");
         assertEquals(map3, newOtherMap, "The return value of getExtensions() is expected to be the same value that was set.");
+        
+        checkMapImmutable(e, Extensible::getExtensions, "x-other", new Object());
     }
     
     private void processReference(Reference<?> r) {
@@ -1168,6 +1240,23 @@ public class ModelConstructionTest {
     private <T> void checkListEntry(List<T> list, T value) {
         assertNotNull(list, "The list must not be null.");
         assertTrue(list.stream().anyMatch((v) -> v == value), "The list is expected to contain the value: " + value);
+    }
+    
+    private <O, V> void checkListImmutable(O container, Function<O, List<V>> listGetter, V otherValue) {
+        List<V> list = listGetter.apply(container);
+        assertNotNull(list, "The list must not be null.");
+        assertFalse(list.contains(otherValue), "The list is expected to not contain the value: " + otherValue);
+        int originalSize = list.size();
+        try {
+            list.add(otherValue);
+        }
+        catch (Exception e) {
+            //It is allowed to throw an exception
+        }
+        List<V>  map2 = listGetter.apply(container);
+        assertNotNull(map2, "The list must not be null.");
+        assertFalse(map2.contains(otherValue), "The list is expected to not contain the key: " + otherValue);
+        assertEquals(map2.size(), originalSize, "The list is expected to have a size of " + originalSize);
     }
     
     private <T> void checkSameObject(T expected, T actual) {

@@ -232,7 +232,7 @@ public interface Header extends Constructible, Extensible<Header>, Reference<Hea
     /**
      * Returns the examples property from a Header instance.
      *
-     * @return examples of the media type
+     * @return a copy Map (potentially immutable) of examples of the header
      **/
     Map<String, Example> getExamples();
 
@@ -240,7 +240,7 @@ public interface Header extends Constructible, Extensible<Header>, Reference<Hea
      * Sets the examples property of this Header instance to the given map. Each example should contain a value in the correct format as specified in
      * the parameter encoding. The examples object is mutually exclusive of the example object.
      *
-     * @param examples examples of the media type
+     * @param examples examples of the header
      */
     void setExamples(Map<String, Example> examples);
 
@@ -248,7 +248,7 @@ public interface Header extends Constructible, Extensible<Header>, Reference<Hea
      * Sets the examples property of this Header instance to the given map. Each example should contain a value in the correct format as specified in
      * the parameter encoding. The examples object is mutually exclusive of the example object.
      *
-     * @param examples examples of the media type
+     * @param examples examples of the header
      * @return the current Header instance
      */
     default Header examples(Map<String, Example> examples) {
@@ -257,17 +257,17 @@ public interface Header extends Constructible, Extensible<Header>, Reference<Hea
     }
 
     /**
-     * Adds an example of the media type using the specified key to this Header instance. The example should contain a value in the correct format as
+     * Adds an example of the header using the specified key to this Header instance. The example should contain a value in the correct format as
      * specified in the parameter encoding.
      *
      * @param key string to represent the example
-     * @param example example of the media type
+     * @param example example of the header
      * @return the current Header instance
      */
     Header addExample(String key, Example example);
 
     /**
-     * Removes an example of the media type using the specified key to this Header instance.
+     * Removes an example of the header using the specified key to this Header instance.
      *
      * @param key string to represent the example
      */
@@ -276,7 +276,7 @@ public interface Header extends Constructible, Extensible<Header>, Reference<Hea
     /**
      * Returns the example property from a Header instance.
      *
-     * @return example of the media type
+     * @return example of the header
      **/
     Object getExample();
 
@@ -284,7 +284,7 @@ public interface Header extends Constructible, Extensible<Header>, Reference<Hea
      * Sets this Header's example property to the given object. The example should match the specified schema and encoding properties if present. The
      * examples object is mutually exclusive of the example object.
      *
-     * @param example example of the media type
+     * @param example example of the header
      */
     void setExample(Object example);
 
@@ -292,7 +292,7 @@ public interface Header extends Constructible, Extensible<Header>, Reference<Hea
      * Sets this Header's example property to the given object. The example should match the specified schema and encoding properties if present. The
      * examples object is mutually exclusive of the example object.
      *
-     * @param example example of the media type
+     * @param example example of the header
      * @return the current Header instance
      */
     default Header example(Object example) {

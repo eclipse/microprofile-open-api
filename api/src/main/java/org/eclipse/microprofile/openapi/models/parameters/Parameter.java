@@ -342,7 +342,7 @@ public interface Parameter extends Constructible, Extensible<Parameter>, Referen
     /**
      * Returns the examples property from a Parameter instance.
      *
-     * @return examples of the media type
+     * @return a copy Map (potentially immutable) of examples of the parameter
      **/
     Map<String, Example> getExamples();
 
@@ -350,7 +350,7 @@ public interface Parameter extends Constructible, Extensible<Parameter>, Referen
      * Sets the examples property of a Parameter instance to the given value. Each example should contain a value in the correct format as specified
      * in the parameter encoding. The examples object is mutually exclusive of the example object.
      *
-     * @param examples examples of the media type
+     * @param examples examples of the parameter
      */
     void setExamples(Map<String, Example> examples);
 
@@ -358,7 +358,7 @@ public interface Parameter extends Constructible, Extensible<Parameter>, Referen
      * Sets the examples property of a Parameter instance to the given value. Each example should contain a value in the correct format as specified
      * in the parameter encoding. The examples object is mutually exclusive of the example object.
      *
-     * @param examples examples of the media type
+     * @param examples examples of the parameter
      * @return the current Parameter instance
      */
     default Parameter examples(Map<String, Example> examples) {
@@ -367,17 +367,17 @@ public interface Parameter extends Constructible, Extensible<Parameter>, Referen
     }
 
     /**
-     * Adds an example of the media type using the specified key. The example should contain a value in the correct format as specified in the
+     * Adds an example of the parameter using the specified key. The example should contain a value in the correct format as specified in the
      * parameter encoding.
      *
      * @param key string to represent the example
-     * @param example example of the media type
+     * @param example example of the parameter
      * @return the current Parameter instance
      */
     Parameter addExample(String key, Example example);
 
     /**
-     * Removes an example of the media type using the specified key. The example should contain a value in the correct format as specified in the
+     * Removes an example of the parameter using the specified key. The example should contain a value in the correct format as specified in the
      * parameter encoding.
      *
      * @param key string to represent the example
@@ -387,7 +387,7 @@ public interface Parameter extends Constructible, Extensible<Parameter>, Referen
     /**
      * Returns the example property from a Parameter instance.
      *
-     * @return example of the media type
+     * @return example of the parameter
      **/
     Object getExample();
 
@@ -395,7 +395,7 @@ public interface Parameter extends Constructible, Extensible<Parameter>, Referen
      * Sets the example property of a Parameter instance to the given object. The example should match the specified schema and encoding properties if
      * present. The examples object is mutually exclusive of the example object.
      *
-     * @param example example of the media type
+     * @param example example of the parameter
      */
     void setExample(Object example);
 
@@ -403,7 +403,7 @@ public interface Parameter extends Constructible, Extensible<Parameter>, Referen
      * Sets the example property of a Parameter instance to the given object. The example should match the specified schema and encoding properties if
      * present. The examples object is mutually exclusive of the example object.
      *
-     * @param example example of the media type
+     * @param example example of the parameter
      * @return the current Parameter instance
      */
     default Parameter example(Object example) {

@@ -303,7 +303,7 @@ public interface PathItem extends Constructible, Extensible<PathItem>, Reference
     /**
      * Returns the servers property from a PathItem instance.
      *
-     * @return a list of all the servers defined in this path item
+     * @return a copy List (potentially immutable) of all the servers defined in this path item
      **/
     List<Server> getServers();
 
@@ -343,7 +343,7 @@ public interface PathItem extends Constructible, Extensible<PathItem>, Reference
     /**
      * Returns the parameters property from this PathItem instance.
      *
-     * @return a list of parameters that are applicable to all the operations described under this path
+     * @return a copy List (potentially immutable) of parameters that are applicable to all the operations described under this path
      **/
     List<Parameter> getParameters();
 
