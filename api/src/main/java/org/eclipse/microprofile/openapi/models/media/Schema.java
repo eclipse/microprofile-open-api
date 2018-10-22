@@ -139,7 +139,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
     /**
      * Returns the enumerated list of values allowed for objects defined by this Schema.
      *
-     * @return the list of values allowed for objects defined by this Schema
+     * @return a copy List (potentially immutable) of values allowed for objects defined by this Schema
      */
     List<Object> getEnumeration();
 
@@ -512,7 +512,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
     /**
      * Returns the required property from this Schema instance.
      *
-     * @return the list of fields required in objects defined by this Schema
+     * @return a copy List (potentially immutable) of fields required in objects defined by this Schema
      **/
     List<String> getRequired();
 
@@ -604,7 +604,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
     /**
      * Returns the properties defined in this Schema.
      *
-     * @return a map which associates property names with the schemas that describe their contents
+     * @return a copy Map (potentially immutable) which associates property names with the schemas that describe their contents
      **/
     Map<String, Schema> getProperties();
 
@@ -980,7 +980,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
     /**
      * Returns the schemas used by the allOf property.
      *
-     * @return the list of schemas used by the allOf property
+     * @return a copy List (potentially immutable) of schemas used by the allOf property
      **/
     List<Schema> getAllOf();
 
@@ -1020,7 +1020,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
     /**
      * Returns the schemas used by the anyOf property.
      *
-     * @return the list of schemas used by the anyOf property
+     * @return a copy List (potentially immutable) of schemas used by the anyOf property
      **/
     List<Schema> getAnyOf();
 
@@ -1060,7 +1060,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
     /**
      * Returns the schemas used by the oneOf property.
      *
-     * @return the list of schemas used by the oneOf property
+     * @return a copy List (potentially immutable) of schemas used by the oneOf property
      **/
     List<Schema> getOneOf();
 
