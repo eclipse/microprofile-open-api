@@ -351,6 +351,15 @@ public class ModelConstructionTest {
         assertEquals(o.getSecurity().size(), 1, "The list is expected to contain one entry.");
         o.removeSecurityRequirement(sr);
         assertEquals(o.getSecurity().size(), 0, "The list is expected to be empty.");
+        
+        final SecurityRequirement sr2 = createConstructibleInstance(SecurityRequirement.class);
+        o.setSecurity(Collections.singletonList(sr2));
+        assertEquals(o.getSecurity().size(), 1, "The list is expected to contain one entry.");
+        checkListEntry(o.getSecurity(), sr2);
+        checkSameObject(o, o.addSecurityRequirement(sr));
+        assertEquals(o.getSecurity().size(), 2, "The list is expected to contain two entries.");
+        checkListEntry(o.getSecurity(), sr);
+        
         SecurityRequirement otherSecurityRequirementValue  = createConstructibleInstance(SecurityRequirement.class);
         checkListImmutable(o, OpenAPI::getSecurity, otherSecurityRequirementValue);
         
@@ -360,6 +369,15 @@ public class ModelConstructionTest {
         assertEquals(o.getServers().size(), 1, "The list is expected to contain one entry.");
         o.removeServer(s);
         assertEquals(o.getServers().size(), 0, "The list is expected to be empty.");
+        
+        final Server s2 = createConstructibleInstance(Server.class);
+        o.setServers(Collections.singletonList(s2));
+        assertEquals(o.getServers().size(), 1, "The list is expected to contain one entry.");
+        checkListEntry(o.getServers(), s2);
+        checkSameObject(o, o.addServer(s));
+        assertEquals(o.getSecurity().size(), 2, "The list is expected to contain two entries.");
+        checkListEntry(o.getServers(), s);
+        
         Server otherServer  = createConstructibleInstance(Server.class);
         checkListImmutable(o, OpenAPI::getServers, otherServer);
         
@@ -369,6 +387,15 @@ public class ModelConstructionTest {
         assertEquals(o.getTags().size(), 1, "The list is expected to contain one entry.");
         o.removeTag(t);
         assertEquals(o.getTags().size(), 0, "The list is expected to be empty.");
+        
+        final Tag t2 = createConstructibleInstance(Tag.class);
+        o.setTags(Collections.singletonList(t2));
+        assertEquals(o.getTags().size(), 1, "The list is expected to contain one entry.");
+        checkListEntry(o.getTags(), t2);
+        checkSameObject(o, o.addTag(t));
+        assertEquals(o.getSecurity().size(), 2, "The list is expected to contain two entries.");
+        checkListEntry(o.getTags(), t);
+        
         Tag otherTag  = createConstructibleInstance(Tag.class);
         checkListImmutable(o, OpenAPI::getTags, otherTag);
     }
@@ -383,6 +410,15 @@ public class ModelConstructionTest {
         assertEquals(o.getParameters().size(), 1, "The list is expected to contain one entry.");
         o.removeParameter(p);
         assertEquals(o.getParameters().size(), 0, "The list is expected to be empty.");
+        
+        final Parameter p2 = createConstructibleInstance(Parameter.class);
+        o.setParameters(Collections.singletonList(p2));
+        assertEquals(o.getParameters().size(), 1, "The list is expected to contain one entry.");
+        checkListEntry(o.getParameters(), p2);
+        checkSameObject(o, o.addParameter(p));
+        assertEquals(o.getParameters().size(), 2, "The list is expected to contain two entries.");
+        checkListEntry(o.getParameters(), p);
+        
         Parameter otherParameter  = createConstructibleInstance(Parameter.class);
         checkListImmutable(o, Operation::getParameters, otherParameter);
         
@@ -392,6 +428,15 @@ public class ModelConstructionTest {
         assertEquals(o.getSecurity().size(), 1, "The list is expected to contain one entry.");
         o.removeSecurityRequirement(sr);
         assertEquals(o.getSecurity().size(), 0, "The list is expected to be empty.");
+        
+        final SecurityRequirement sr2 = createConstructibleInstance(SecurityRequirement.class);
+        o.setSecurity(Collections.singletonList(sr2));
+        assertEquals(o.getSecurity().size(), 1, "The list is expected to contain one entry.");
+        checkListEntry(o.getSecurity(), sr2);
+        checkSameObject(o, o.addSecurityRequirement(sr));
+        assertEquals(o.getSecurity().size(), 2, "The list is expected to contain two entries.");
+        checkListEntry(o.getSecurity(), sr);
+        
         SecurityRequirement otherSecurityRequirement  = createConstructibleInstance(SecurityRequirement.class);
         checkListImmutable(o, Operation::getSecurity, otherSecurityRequirement);
         
@@ -401,6 +446,15 @@ public class ModelConstructionTest {
         assertEquals(o.getServers().size(), 1, "The list is expected to contain one entry.");
         o.removeServer(s);
         assertEquals(o.getServers().size(), 0, "The list is expected to be empty.");
+        
+        final Server s2 = createConstructibleInstance(Server.class);
+        o.setServers(Collections.singletonList(s2));
+        assertEquals(o.getServers().size(), 1, "The list is expected to contain one entry.");
+        checkListEntry(o.getServers(), s2);
+        checkSameObject(o, o.addServer(s));
+        assertEquals(o.getServers().size(), 2, "The list is expected to contain two entries.");
+        checkListEntry(o.getServers(), s);
+        
         Server otherServer  = createConstructibleInstance(Server.class);
         checkListImmutable(o, Operation::getServers, otherServer);
         
@@ -410,6 +464,15 @@ public class ModelConstructionTest {
         assertEquals(o.getTags().size(), 1, "The list is expected to contain one entry.");
         o.removeTag(tag);
         assertEquals(o.getTags().size(), 0, "The list is expected to be empty.");
+        
+        final String tag2 = new String("myTag2");
+        o.setTags(Collections.singletonList(tag2));
+        assertEquals(o.getTags().size(), 1, "The list is expected to contain one entry.");
+        checkListEntry(o.getTags(), tag2);
+        checkSameObject(o, o.addTag(tag));
+        assertEquals(o.getTags().size(), 2, "The list is expected to contain two entries.");
+        checkListEntry(o.getTags(), tag);
+        
         String otherTag  = new String("otherTag");
         checkListImmutable(o, Operation::getTags, otherTag);
         
@@ -444,6 +507,15 @@ public class ModelConstructionTest {
         assertEquals(pi.getParameters().size(), 1, "The list is expected to contain one entry.");
         pi.removeParameter(p);
         assertEquals(pi.getParameters().size(), 0, "The list is expected to be empty.");
+        
+        final Parameter p2 = createConstructibleInstance(Parameter.class);
+        pi.setParameters(Collections.singletonList(p2));
+        assertEquals(pi.getParameters().size(), 1, "The list is expected to contain one entry.");
+        checkListEntry(pi.getParameters(), p2);
+        checkSameObject(pi, pi.addParameter(p));
+        assertEquals(pi.getParameters().size(), 2, "The list is expected to contain two entries.");
+        checkListEntry(pi.getParameters(), p);
+        
         Parameter otherParameter  = createConstructibleInstance(Parameter.class);
         checkListImmutable(pi, PathItem::getParameters, otherParameter);
         
@@ -453,6 +525,15 @@ public class ModelConstructionTest {
         assertEquals(pi.getServers().size(), 1, "The list is expected to contain one entry.");
         pi.removeServer(s);
         assertEquals(pi.getServers().size(), 0, "The list is expected to be empty.");
+        
+        final Server s2 = createConstructibleInstance(Server.class);
+        pi.setServers(Collections.singletonList(s2));
+        assertEquals(pi.getServers().size(), 1, "The list is expected to contain one entry.");
+        checkListEntry(pi.getServers(), s2);
+        checkSameObject(pi, pi.addServer(s));
+        assertEquals(pi.getServers().size(), 2, "The list is expected to contain two entries.");
+        checkListEntry(pi.getServers(), s);
+        
         Server otherServer  = createConstructibleInstance(Server.class);
         checkListImmutable(pi, PathItem::getServers, otherServer);
         
@@ -792,6 +873,15 @@ public class ModelConstructionTest {
         assertEquals(s.getAllOf().size(), 1, "The list is expected to contain one entry.");
         s.removeAllOf(allOf);
         assertEquals(s.getAllOf().size(), 0, "The list is expected to be empty.");
+        
+        final Schema allOf2 = createConstructibleInstance(Schema.class);
+        s.setAllOf(Collections.singletonList(allOf2));
+        assertEquals(s.getAllOf().size(), 1, "The list is expected to contain one entry.");
+        checkListEntry(s.getAllOf(), allOf2);
+        checkSameObject(s, s.addAllOf(allOf));
+        assertEquals(s.getAllOf().size(), 2, "The list is expected to contain two entries.");
+        checkListEntry(s.getAllOf(), allOf);
+        
         final Schema otherAllOfValue = createConstructibleInstance(Schema.class);
         checkListImmutable(s, Schema::getAllOf, otherAllOfValue);
         
@@ -801,6 +891,15 @@ public class ModelConstructionTest {
         assertEquals(s.getAnyOf().size(), 1, "The list is expected to contain one entry.");
         s.removeAnyOf(anyOf);
         assertEquals(s.getAnyOf().size(), 0, "The list is expected to be empty.");
+        
+        final Schema anyOf2 = createConstructibleInstance(Schema.class);
+        s.setAnyOf(Collections.singletonList(anyOf2));
+        assertEquals(s.getAnyOf().size(), 1, "The list is expected to contain one entry.");
+        checkListEntry(s.getAnyOf(), anyOf2);
+        checkSameObject(s, s.addAnyOf(anyOf));
+        assertEquals(s.getAnyOf().size(), 2, "The list is expected to contain two entries.");
+        checkListEntry(s.getAnyOf(), anyOf);
+        
         final Schema otherAnyOfValue = createConstructibleInstance(Schema.class);
         checkListImmutable(s, Schema::getAnyOf, otherAnyOfValue);
         
@@ -810,6 +909,15 @@ public class ModelConstructionTest {
         assertEquals(s.getEnumeration().size(), 1, "The list is expected to contain one entry.");
         s.removeEnumeration(enumeration);
         assertEquals(s.getEnumeration().size(), 0, "The list is expected to be empty.");
+        
+        final String enumeration2 = new String("enumValue2");
+        s.setEnumeration(Collections.singletonList(enumeration2));
+        assertEquals(s.getEnumeration().size(), 1, "The list is expected to contain one entry.");
+        checkListEntry(s.getEnumeration(), enumeration2);
+        checkSameObject(s, s.addEnumeration(enumeration));
+        assertEquals(s.getEnumeration().size(), 2, "The list is expected to contain two entries.");
+        checkListEntry(s.getEnumeration(), enumeration);
+        
         final String otherEnumerationValue = new String("otherValue");
         checkListImmutable(s, Schema::getEnumeration , otherEnumerationValue);
         
@@ -819,6 +927,15 @@ public class ModelConstructionTest {
         assertEquals(s.getOneOf().size(), 1, "The list is expected to contain one entry.");
         s.removeOneOf(oneOf);
         assertEquals(s.getOneOf().size(), 0, "The list is expected to be empty.");
+        
+        final Schema oneOf2 = createConstructibleInstance(Schema.class);
+        s.setOneOf(Collections.singletonList(oneOf2));
+        assertEquals(s.getOneOf().size(), 1, "The list is expected to contain one entry.");
+        checkListEntry(s.getOneOf(), oneOf2);
+        checkSameObject(s, s.addOneOf(oneOf));
+        assertEquals(s.getOneOf().size(), 2, "The list is expected to contain two entries.");
+        checkListEntry(s.getOneOf(), oneOf);
+        
         final Schema otherOneOfValue = createConstructibleInstance(Schema.class);
         checkListImmutable(s, Schema::getOneOf, otherOneOfValue);
         
@@ -848,6 +965,15 @@ public class ModelConstructionTest {
         assertEquals(s.getRequired().size(), 1, "The list is expected to contain one entry.");
         s.removeRequired(required);
         assertEquals(s.getRequired().size(), 0, "The list is expected to be empty.");
+        
+        final String required2 = new String("required2");;
+        s.setRequired(Collections.singletonList(required2));
+        assertEquals(s.getRequired().size(), 1, "The list is expected to contain one entry.");
+        checkListEntry(s.getRequired(), required2);
+        checkSameObject(s, s.addRequired(required));
+        assertEquals(s.getRequired().size(), 2, "The list is expected to contain two entries.");
+        checkListEntry(s.getRequired(), required);
+        
         final String otherRequiredValue = new String("otherRequired");
         checkListImmutable(s, Schema::getEnumeration, otherRequiredValue);
     }
@@ -1085,6 +1211,15 @@ public class ModelConstructionTest {
         assertEquals(sv.getEnumeration().size(), 1, "The list is expected to contain one entry.");
         sv.removeEnumeration(enumeration);
         assertEquals(sv.getEnumeration().size(), 0, "The list is expected to be empty.");
+        
+        final String enumeration2 = new String("enumValue2");
+        sv.setEnumeration(Collections.singletonList(enumeration2));
+        assertEquals(sv.getEnumeration().size(), 1, "The list is expected to contain one entry.");
+        checkListEntry(sv.getEnumeration(), enumeration2);
+        checkSameObject(sv, sv.addEnumeration(enumeration));
+        assertEquals(sv.getEnumeration().size(), 2, "The list is expected to contain two entries.");
+        checkListEntry(sv.getEnumeration(), enumeration);
+        
         final String otherEnumerationValue = new String("otherValue");
         checkListImmutable(sv, ServerVariable::getEnumeration , otherEnumerationValue);
     }
