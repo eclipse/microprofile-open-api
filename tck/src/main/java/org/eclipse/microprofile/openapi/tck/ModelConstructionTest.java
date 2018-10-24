@@ -32,6 +32,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -158,9 +159,19 @@ public class ModelConstructionTest {
         final Callback callbackValue = createConstructibleInstance(Callback.class);
         checkSameObject(c, c.addCallback(callbackKey, callbackValue));
         checkMapEntry(c.getCallbacks(), callbackKey, callbackValue);
-        assertEquals(c.getCallbacks().size(), 1, "The list is expected to contain one entry.");
+        assertEquals(c.getCallbacks().size(), 1, "The map is expected to contain one entry.");
         c.removeCallback(callbackKey);
-        assertEquals(c.getCallbacks().size(), 0, "The list is expected to be empty.");
+        assertEquals(c.getCallbacks().size(), 0, "The map is expected to be empty.");
+        
+        final String callbackKey2 = "myCallbackKey2";
+        final Callback callbackValue2 = createConstructibleInstance(Callback.class);
+        c.setCallbacks(Collections.singletonMap(callbackKey2, callbackValue2));
+        checkMapEntry(c.getCallbacks(), callbackKey2, callbackValue2);
+        assertEquals(c.getCallbacks().size(), 1, "The map is expected to contain one entry.");
+        checkSameObject(c, c.addCallback(callbackKey, callbackValue));
+        checkMapEntry(c.getCallbacks(), callbackKey, callbackValue);
+        assertEquals(c.getCallbacks().size(), 2, "The map is expected to contain two entries.");
+        
         Callback otherCallbackValue  = createConstructibleInstance(Callback.class);
         checkMapImmutable(c, Components::getCallbacks, "otherCallback", otherCallbackValue);
         
@@ -168,30 +179,60 @@ public class ModelConstructionTest {
         final Example exampleValue = createConstructibleInstance(Example.class);
         checkSameObject(c, c.addExample(exampleKey, exampleValue));
         checkMapEntry(c.getExamples(), exampleKey, exampleValue);
-        assertEquals(c.getExamples().size(), 1, "The list is expected to contain one entry.");
+        assertEquals(c.getExamples().size(), 1, "The map is expected to contain one entry.");
         c.removeExample(exampleKey);
-        assertEquals(c.getExamples().size(), 0, "The list is expected to be empty.");
+        assertEquals(c.getExamples().size(), 0, "The map is expected to be empty.");
         Example otherExampleValue  = createConstructibleInstance(Example.class);
+        
+        final String exampleKey2 = "myExampleKey2";
+        final Example exampleValue2 = createConstructibleInstance(Example.class);
+        c.setExamples(Collections.singletonMap(exampleKey2, exampleValue2));
+        checkMapEntry(c.getExamples(), exampleKey2, exampleValue2);
+        assertEquals(c.getExamples().size(), 1, "The map is expected to contain one entry.");
+        checkSameObject(c, c.addExample(exampleKey, exampleValue));
+        checkMapEntry(c.getExamples(), exampleKey, exampleValue);
+        assertEquals(c.getExamples().size(), 2, "The map is expected to contain two entries.");
+        
         checkMapImmutable(c, Components::getExamples, "otherExample", otherExampleValue);
         
         final String headerKey = "myHeader";
         final Header headerValue = createConstructibleInstance(Header.class);
         checkSameObject(c, c.addHeader(headerKey, headerValue));
         checkMapEntry(c.getHeaders(), headerKey, headerValue);
-        assertEquals(c.getHeaders().size(), 1, "The list is expected to contain one entry.");
+        assertEquals(c.getHeaders().size(), 1, "The map is expected to contain one entry.");
         c.removeHeader(headerKey);
-        assertEquals(c.getHeaders().size(), 0, "The list is expected to be empty.");
+        assertEquals(c.getHeaders().size(), 0, "The map is expected to be empty.");
         Header otherHeaderValue  = createConstructibleInstance(Header.class);
+        
+        final String headerKey2 = "myHeaderKey2";
+        final Header headerValue2 = createConstructibleInstance(Header.class);
+        c.setHeaders(Collections.singletonMap(headerKey2, headerValue2));
+        checkMapEntry(c.getHeaders(), headerKey2, headerValue2);
+        assertEquals(c.getHeaders().size(), 1, "The map is expected to contain one entry.");
+        checkSameObject(c, c.addHeader(headerKey, headerValue));
+        checkMapEntry(c.getHeaders(), headerKey, headerValue);
+        assertEquals(c.getHeaders().size(), 2, "The map is expected to contain two entries.");
+        
         checkMapImmutable(c, Components::getHeaders, "otherHeader", otherHeaderValue);
         
         final String linkKey = "myLink";
         final Link linkValue = createConstructibleInstance(Link.class);
         checkSameObject(c, c.addLink(linkKey, linkValue));
         checkMapEntry(c.getLinks(), linkKey, linkValue);
-        assertEquals(c.getLinks().size(), 1, "The list is expected to contain one entry.");
+        assertEquals(c.getLinks().size(), 1, "The map is expected to contain one entry.");
         c.removeLink(linkKey);
-        assertEquals(c.getLinks().size(), 0, "The list is expected to be empty.");
+        assertEquals(c.getLinks().size(), 0, "The map is expected to be empty.");
         Link otherLinkValue  = createConstructibleInstance(Link.class);
+        
+        final String linkKey2 = "myLinkKey2";
+        final Link linkValue2 = createConstructibleInstance(Link.class);
+        c.setLinks(Collections.singletonMap(linkKey2, linkValue2));
+        checkMapEntry(c.getLinks(), linkKey2, linkValue2);
+        assertEquals(c.getLinks().size(), 1, "The map is expected to contain one entry.");
+        checkSameObject(c, c.addLink(linkKey, linkValue));
+        checkMapEntry(c.getLinks(), linkKey, linkValue);
+        assertEquals(c.getLinks().size(), 2, "The map is expected to contain two entries.");
+        
         checkMapImmutable(c, Components::getLinks, "otherLink", otherLinkValue);
         
         final String parameterKey = "myParameter";
@@ -201,6 +242,16 @@ public class ModelConstructionTest {
         assertEquals(c.getParameters().size(), 1, "The list is expected to contain one entry.");
         c.removeParameter(parameterKey);
         assertEquals(c.getParameters().size(), 0, "The list is expected to be empty.");
+        
+        final String parameterKey2 = "myParameterKey2";
+        final Parameter parameterValue2 = createConstructibleInstance(Parameter.class);
+        c.setParameters(Collections.singletonMap(parameterKey2, parameterValue2));
+        checkMapEntry(c.getParameters(), parameterKey2, parameterValue2);
+        assertEquals(c.getParameters().size(), 1, "The map is expected to contain one entry.");
+        checkSameObject(c, c.addParameter(parameterKey, parameterValue));
+        checkMapEntry(c.getParameters(), parameterKey, parameterValue);
+        assertEquals(c.getParameters().size(), 2, "The map is expected to contain two entries.");
+        
         Parameter otherParameterValue  = createConstructibleInstance(Parameter.class);
         checkMapImmutable(c, Components::getParameters, "otherParameter", otherParameterValue);
         
@@ -208,9 +259,19 @@ public class ModelConstructionTest {
         final RequestBody requestBodyValue = createConstructibleInstance(RequestBody.class);
         checkSameObject(c, c.addRequestBody(requestBodyKey, requestBodyValue));
         checkMapEntry(c.getRequestBodies(), requestBodyKey, requestBodyValue);
-        assertEquals(c.getRequestBodies().size(), 1, "The list is expected to contain one entry.");
+        assertEquals(c.getRequestBodies().size(), 1, "The map is expected to contain one entry.");
         c.removeRequestBody(requestBodyKey);
-        assertEquals(c.getRequestBodies().size(), 0, "The list is expected to be empty.");
+        assertEquals(c.getRequestBodies().size(), 0, "The map is expected to be empty.");
+        
+        final String requestBodyKey2 = "myRequestBodyKey2";
+        final RequestBody requestBodyValue2 = createConstructibleInstance(RequestBody.class);
+        c.setRequestBodies(Collections.singletonMap(requestBodyKey2, requestBodyValue2));
+        checkMapEntry(c.getRequestBodies(), requestBodyKey2, requestBodyValue2);
+        assertEquals(c.getRequestBodies().size(), 1, "The map is expected to contain one entry.");
+        checkSameObject(c, c.addRequestBody(requestBodyKey, requestBodyValue));
+        checkMapEntry(c.getRequestBodies(), requestBodyKey, requestBodyValue);
+        assertEquals(c.getRequestBodies().size(), 2, "The map is expected to contain two entries.");
+        
         RequestBody otherRequestBodyValue  = createConstructibleInstance(RequestBody.class);
         checkMapImmutable(c, Components::getRequestBodies, "otherRequestBody", otherRequestBodyValue);
         
@@ -218,9 +279,19 @@ public class ModelConstructionTest {
         final APIResponse responseValue = createConstructibleInstance(APIResponse.class);
         checkSameObject(c, c.addResponse(responseKey, responseValue));
         checkMapEntry(c.getResponses(), responseKey, responseValue);
-        assertEquals(c.getResponses().size(), 1, "The list is expected to contain one entry.");
+        assertEquals(c.getResponses().size(), 1, "The map is expected to contain one entry.");
         c.removeResponse(responseKey);
-        assertEquals(c.getResponses().size(), 0, "The list is expected to be empty.");
+        assertEquals(c.getResponses().size(), 0, "The map is expected to be empty.");
+        
+        final String responseKey2 = "myResponseKey2";
+        final APIResponse responseValue2 = createConstructibleInstance(APIResponse.class);
+        c.setResponses(Collections.singletonMap(responseKey2, responseValue2));
+        checkMapEntry(c.getResponses(), responseKey2, responseValue2);
+        assertEquals(c.getResponses().size(), 1, "The map is expected to contain one entry.");
+        checkSameObject(c, c.addResponse(responseKey, responseValue));
+        checkMapEntry(c.getResponses(), responseKey, responseValue);
+        assertEquals(c.getResponses().size(), 2, "The map is expected to contain two entries.");
+        
         APIResponse otherAPIResponseValue  = createConstructibleInstance(APIResponse.class);
         checkMapImmutable(c, Components::getResponses, "otherAPIResponse", otherAPIResponseValue);
         
@@ -228,9 +299,19 @@ public class ModelConstructionTest {
         final Schema schemaValue = createConstructibleInstance(Schema.class);
         checkSameObject(c, c.addSchema(schemaKey, schemaValue));
         checkMapEntry(c.getSchemas(), schemaKey, schemaValue);
-        assertEquals(c.getSchemas().size(), 1, "The list is expected to contain one entry.");
+        assertEquals(c.getSchemas().size(), 1, "The map is expected to contain one entry.");
         c.removeSchema(schemaKey);
-        assertEquals(c.getSchemas().size(), 0, "The list is expected to be empty.");
+        assertEquals(c.getSchemas().size(), 0, "The map is expected to be empty.");
+        
+        final String schemaKey2 = "mySchemaKey2";
+        final Schema schemaValue2 = createConstructibleInstance(Schema.class);
+        c.setSchemas(Collections.singletonMap(schemaKey2, schemaValue2));
+        checkMapEntry(c.getSchemas(), schemaKey2, schemaValue2);
+        assertEquals(c.getSchemas().size(), 1, "The map is expected to contain one entry.");
+        checkSameObject(c, c.addSchema(schemaKey, schemaValue));
+        checkMapEntry(c.getSchemas(), schemaKey, schemaValue);
+        assertEquals(c.getSchemas().size(), 2, "The map is expected to contain two entries.");
+        
         Schema otherSchemaValue  = createConstructibleInstance(Schema.class);
         checkMapImmutable(c, Components::getSchemas, "otherSchema", otherSchemaValue);
         
@@ -238,9 +319,19 @@ public class ModelConstructionTest {
         final SecurityScheme securitySchemeValue = createConstructibleInstance(SecurityScheme.class);
         checkSameObject(c, c.addSecurityScheme(securitySchemeKey, securitySchemeValue));
         checkMapEntry(c.getSecuritySchemes(), securitySchemeKey, securitySchemeValue);
-        assertEquals(c.getSecuritySchemes().size(), 1, "The list is expected to contain one entry.");
+        assertEquals(c.getSecuritySchemes().size(), 1, "The map is expected to contain one entry.");
         c.removeSecurityScheme(securitySchemeKey);
-        assertEquals(c.getSecuritySchemes().size(), 0, "The list is expected to be empty.");
+        assertEquals(c.getSecuritySchemes().size(), 0, "The map is expected to be empty.");
+        
+        final String securitySchemeKey2 = "mySecuritySchemeKey2";
+        final SecurityScheme securitySchemeValue2 = createConstructibleInstance(SecurityScheme.class);
+        c.setSecuritySchemes(Collections.singletonMap(securitySchemeKey2, securitySchemeValue2));
+        checkMapEntry(c.getSecuritySchemes(), securitySchemeKey2, securitySchemeValue2);
+        assertEquals(c.getSecuritySchemes().size(), 1, "The map is expected to contain one entry.");
+        checkSameObject(c, c.addSecurityScheme(securitySchemeKey, securitySchemeValue));
+        checkMapEntry(c.getSecuritySchemes(), securitySchemeKey, securitySchemeValue);
+        assertEquals(c.getSecuritySchemes().size(), 2, "The map is expected to contain two entries.");
+        
         SecurityScheme otherSecuritySchemeValue  = createConstructibleInstance(SecurityScheme.class);
         checkMapImmutable(c, Components::getSecuritySchemes, "otherSecurityScheme", otherSecuritySchemeValue);
     }
@@ -326,9 +417,19 @@ public class ModelConstructionTest {
         final Callback callbackValue = createConstructibleInstance(Callback.class);
         checkSameObject(o, o.addCallback(callbackKey, callbackValue));
         checkMapEntry(o.getCallbacks(), callbackKey, callbackValue);
-        assertEquals(o.getCallbacks().size(), 1, "The list is expected to contain one entry.");
+        assertEquals(o.getCallbacks().size(), 1, "The map is expected to contain one entry.");
         o.removeCallback(callbackKey);
-        assertEquals(o.getCallbacks().size(), 0, "The list is expected to be empty.");
+        assertEquals(o.getCallbacks().size(), 0, "The map is expected to be empty.");
+        
+        final String callbackKey2 = "myCallbackKey2";
+        final Callback callbackValue2 = createConstructibleInstance(Callback.class);
+        o.setCallbacks(Collections.singletonMap(callbackKey2, callbackValue2));
+        checkMapEntry(o.getCallbacks(), callbackKey2, callbackValue2);
+        assertEquals(o.getCallbacks().size(), 1, "The map is expected to contain one entry.");
+        checkSameObject(o, o.addCallback(callbackKey, callbackValue));
+        checkMapEntry(o.getCallbacks(), callbackKey, callbackValue);
+        assertEquals(o.getCallbacks().size(), 2, "The map is expected to contain two entries.");
+        
         Callback otherCallback  = createConstructibleInstance(Callback.class);
         checkMapImmutable(o, Operation::getCallbacks, "otherCallback", otherCallback);
     }
@@ -402,10 +503,10 @@ public class ModelConstructionTest {
         final Paths p = processConstructible(Paths.class);
         
         final String pathItemKey = "/myPathItem";
-        assertFalse(p.hasPathItem(pathItemKey), pathItemKey + " is absent in the map");
         final PathItem pathItemValue = createConstructibleInstance(PathItem.class);
-        checkSameObject(p, p.addPathItem(pathItemKey, pathItemValue));
+        p.setPathItems(Collections.singletonMap(pathItemKey, pathItemValue));
         assertTrue(p.hasPathItem(pathItemKey), pathItemKey + " is present in the map");
+        assertEquals(p.getPathItems().size(), 1, "The map is expected to contain one entry.");
         assertSame(p.getPathItem(pathItemKey), pathItemValue, 
                 "The value associated with the key: " + pathItemKey + " is expected to be the same one that was added.");
         checkMapEntry(p.getPathItems(), pathItemKey, pathItemValue);
@@ -415,11 +516,10 @@ public class ModelConstructionTest {
         final PathItem pathItemValue2 = createConstructibleInstance(PathItem.class);
         checkSameObject(p, p.addPathItem(pathItemKey2, pathItemValue2));
         assertTrue(p.hasPathItem(pathItemKey2), pathItemKey2 + " is present in the map");
+        assertEquals(p.getPathItems().size(), 2, "The map is expected to contain two entries.");
         assertSame(p.getPathItem(pathItemKey2), pathItemValue2, 
                 "The value associated with the key: " + pathItemKey2 + " is expected to be the same one that was added.");
         checkMapEntry(p.getPathItems(), pathItemKey2, pathItemValue2);
-        
-        assertEquals(p.getPathItems().size(), 2, "The map is expected to contain two entries.");
         
         p.removePathItem(pathItemKey);
         assertFalse(p.hasPathItem(pathItemKey), pathItemKey + " is absent in the map");
@@ -438,10 +538,10 @@ public class ModelConstructionTest {
         final Callback c = processConstructible(Callback.class);
         
         final String pathItemKey = "myPathItem";
-        assertFalse(c.hasPathItem(pathItemKey), pathItemKey + " is absent in the map");
         final PathItem pathItemValue = createConstructibleInstance(PathItem.class);
-        checkSameObject(c, c.addPathItem(pathItemKey, pathItemValue));
+        c.setPathItems(Collections.singletonMap(pathItemKey, pathItemValue));
         assertTrue(c.hasPathItem(pathItemKey), pathItemKey + " is present in the map");
+        assertEquals(c.getPathItems().size(), 1, "The map is expected to contain one entry.");
         assertSame(c.getPathItem(pathItemKey), pathItemValue, 
                 "The value associated with the key: " + pathItemKey + " is expected to be the same one that was added.");
         checkMapEntry(c.getPathItems(), pathItemKey, pathItemValue);
@@ -451,11 +551,10 @@ public class ModelConstructionTest {
         final PathItem pathItemValue2 = createConstructibleInstance(PathItem.class);
         checkSameObject(c, c.addPathItem(pathItemKey2, pathItemValue2));
         assertTrue(c.hasPathItem(pathItemKey2), pathItemKey2 + " is present in the map");
+        assertEquals(c.getPathItems().size(), 2, "The map is expected to contain two entries.");
         assertSame(c.getPathItem(pathItemKey2), pathItemValue2, 
                 "The value associated with the key: " + pathItemKey2 + " is expected to be the same one that was added.");
         checkMapEntry(c.getPathItems(), pathItemKey2, pathItemValue2);
-        
-        assertEquals(c.getPathItems().size(), 2, "The map is expected to contain two entries.");
         
         c.removePathItem(pathItemKey);
         assertFalse(c.hasPathItem(pathItemKey), pathItemKey + " is absent in the map");
@@ -482,9 +581,19 @@ public class ModelConstructionTest {
         final Example exampleValue = createConstructibleInstance(Example.class);
         checkSameObject(h, h.addExample(exampleKey, exampleValue));
         checkMapEntry(h.getExamples(), exampleKey, exampleValue);
-        assertEquals(h.getExamples().size(), 1, "The list is expected to contain one entry.");
+        assertEquals(h.getExamples().size(), 1, "The map is expected to contain one entry.");
         h.removeExample(exampleKey);
-        assertEquals(h.getExamples().size(), 0, "The list is expected to be empty.");
+        assertEquals(h.getExamples().size(), 0, "The map is expected to be empty.");
+        
+        final String exampleKey2 = "myExampleKey2";
+        final Example exampleValue2 = createConstructibleInstance(Example.class);
+        h.setExamples(Collections.singletonMap(exampleKey2, exampleValue2));
+        checkMapEntry(h.getExamples(), exampleKey2, exampleValue2);
+        assertEquals(h.getExamples().size(), 1, "The map is expected to contain one entry.");
+        checkSameObject(h, h.addExample(exampleKey, exampleValue));
+        checkMapEntry(h.getExamples(), exampleKey, exampleValue);
+        assertEquals(h.getExamples().size(), 2, "The map is expected to contain two entries.");
+        
         Example otherExampleValue = createConstructibleInstance(Example.class);
         checkMapImmutable(h, Header::getExamples, "otherExample", otherExampleValue);
     }
@@ -512,9 +621,19 @@ public class ModelConstructionTest {
         final String parameterValue = "$request.parameter.id";
         checkSameObject(l, l.addParameter(parameterKey, parameterValue));
         checkMapEntry(l.getParameters(), parameterKey, parameterValue);
-        assertEquals(l.getParameters().size(), 1, "The list is expected to contain one entry.");
+        assertEquals(l.getParameters().size(), 1, "The map is expected to contain one entry.");
         l.removeParameter(parameterKey);
-        assertEquals(l.getParameters().size(), 0, "The list is expected to be empty.");
+        assertEquals(l.getParameters().size(), 0, "The map is expected to be empty.");
+        
+        final String parameterKey2 = "myParameterKey2";
+        final String parameterValue2 = "$request.parameter2.id";
+        l.setParameters(Collections.singletonMap(parameterKey2, parameterValue2));
+        checkMapEntry(l.getParameters(), parameterKey2, parameterValue2);
+        assertEquals(l.getParameters().size(), 1, "The map is expected to contain one entry.");
+        checkSameObject(l, l.addParameter(parameterKey, parameterValue));
+        checkMapEntry(l.getParameters(), parameterKey, parameterValue);
+        assertEquals(l.getParameters().size(), 2, "The map is expected to contain two entries.");
+        
         Object otherExampleValue = new Object();
         checkMapImmutable(l, Link::getParameters, "otherParameter", otherExampleValue);
     }
@@ -524,10 +643,10 @@ public class ModelConstructionTest {
         final Content c = processConstructible(Content.class);
         
         final String mediaTypeKey = "application/json";
-        assertFalse(c.hasMediaType(mediaTypeKey), mediaTypeKey + " is absent in the map");
         final MediaType mediaTypeValue = createConstructibleInstance(MediaType.class);
-        checkSameObject(c, c.addMediaType(mediaTypeKey, mediaTypeValue));
+        c.setMediaTypes(Collections.singletonMap(mediaTypeKey, mediaTypeValue));
         assertTrue(c.hasMediaType(mediaTypeKey), mediaTypeKey + " is present in the map");
+        assertEquals(c.getMediaTypes().size(), 1, "The map is expected to contain one entry.");
         assertSame(c.getMediaType(mediaTypeKey), mediaTypeValue, 
                 "The value associated with the key: " + mediaTypeKey + " is expected to be the same one that was added.");
         checkMapEntry(c.getMediaTypes(), mediaTypeKey, mediaTypeValue);
@@ -537,11 +656,10 @@ public class ModelConstructionTest {
         final MediaType mediaTypeValue2 = createConstructibleInstance(MediaType.class);
         checkSameObject(c, c.addMediaType(mediaTypeKey2, mediaTypeValue2));
         assertTrue(c.hasMediaType(mediaTypeKey2), mediaTypeKey2 + " is present in the map");
+        assertEquals(c.getMediaTypes().size(), 2, "The map is expected to contain two entries.");
         assertSame(c.getMediaType(mediaTypeKey2), mediaTypeValue2, 
                 "The value associated with the key: " + mediaTypeKey2 + " is expected to be the same one that was added.");
         checkMapEntry(c.getMediaTypes(), mediaTypeKey2, mediaTypeValue2);
-        
-        assertEquals(c.getMediaTypes().size(), 2, "The map is expected to contain two entries.");
         
         c.removeMediaType(mediaTypeKey);
         assertFalse(c.hasMediaType(mediaTypeKey), mediaTypeKey + " is absent in the map");
@@ -563,9 +681,19 @@ public class ModelConstructionTest {
         final String value = new String("myValue");
         checkSameObject(d, d.addMapping(key, value));
         checkMapEntry(d.getMapping(), key, value);
-        assertEquals(d.getMapping().size(), 1, "The list is expected to contain one entry.");
+        assertEquals(d.getMapping().size(), 1, "The map is expected to contain one entry.");
         d.removeMapping(key);
-        assertEquals(d.getMapping().size(), 0, "The list is expected to be empty.");
+        assertEquals(d.getMapping().size(), 0, "The map is expected to be empty.");
+        
+        final String key2 = "myCallbackKey2";
+        final String value2 = new String("myValue2");
+        d.setMapping(Collections.singletonMap(key2, value2));
+        checkMapEntry(d.getMapping(), key2, value2);
+        assertEquals(d.getMapping().size(), 1, "The map is expected to contain one entry.");
+        checkSameObject(d, d.addMapping(key, value));
+        checkMapEntry(d.getMapping(), key, value);
+        assertEquals(d.getMapping().size(), 2, "The map is expected to contain two entries.");
+        
         final String otherValue = new String("otherValue");
         checkMapImmutable(d, Discriminator::getMapping, "otherValue", otherValue);
     }
@@ -578,9 +706,19 @@ public class ModelConstructionTest {
         final Header headerValue = createConstructibleInstance(Header.class);
         checkSameObject(e, e.addHeader(headerKey, headerValue));
         checkMapEntry(e.getHeaders(), headerKey, headerValue);
-        assertEquals(e.getHeaders().size(), 1, "The list is expected to contain one entry.");
+        assertEquals(e.getHeaders().size(), 1, "The map is expected to contain one entry.");
         e.removeHeader(headerKey);
-        assertEquals(e.getHeaders().size(), 0, "The list is expected to be empty.");
+        assertEquals(e.getHeaders().size(), 0, "The map is expected to be empty.");
+        
+        final String headerKey2 = "myHeaderKey2";
+        final Header headerValue2 = createConstructibleInstance(Header.class);
+        e.setHeaders(Collections.singletonMap(headerKey2, headerValue2));
+        checkMapEntry(e.getHeaders(), headerKey2, headerValue2);
+        assertEquals(e.getHeaders().size(), 1, "The map is expected to contain one entry.");
+        checkSameObject(e, e.addHeader(headerKey, headerValue));
+        checkMapEntry(e.getHeaders(), headerKey, headerValue);
+        assertEquals(e.getHeaders().size(), 2, "The map is expected to contain two entries.");
+        
         final Header otherHeaderValue = createConstructibleInstance(Header.class);
         checkMapImmutable(e, Encoding::getHeaders, "otherHeader", otherHeaderValue);
     }
@@ -593,9 +731,19 @@ public class ModelConstructionTest {
         final Encoding encodingValue = createConstructibleInstance(Encoding.class);
         checkSameObject(mt, mt.addEncoding(encodingKey, encodingValue));
         checkMapEntry(mt.getEncoding(), encodingKey, encodingValue);
-        assertEquals(mt.getEncoding().size(), 1, "The list is expected to contain one entry.");
+        assertEquals(mt.getEncoding().size(), 1, "The map is expected to contain one entry.");
         mt.removeEncoding(encodingKey);
-        assertEquals(mt.getEncoding().size(), 0, "The list is expected to be empty.");
+        assertEquals(mt.getEncoding().size(), 0, "The map is expected to be empty.");
+        
+        final String encodingKey2 = "myEncodingKey2";
+        final Encoding encodingValue2 = createConstructibleInstance(Encoding.class);
+        mt.setEncoding(Collections.singletonMap(encodingKey2, encodingValue2));
+        checkMapEntry(mt.getEncoding(), encodingKey2, encodingValue2);
+        assertEquals(mt.getEncoding().size(), 1, "The map is expected to contain one entry.");
+        checkSameObject(mt, mt.addEncoding(encodingKey, encodingValue));
+        checkMapEntry(mt.getEncoding(), encodingKey, encodingValue);
+        assertEquals(mt.getEncoding().size(), 2, "The map is expected to contain two entries.");
+        
         Encoding otherEncodingValue = createConstructibleInstance(Encoding.class);
         checkMapImmutable(mt, MediaType::getEncoding, "otherEncoding", otherEncodingValue);
         
@@ -603,9 +751,19 @@ public class ModelConstructionTest {
         final Example exampleValue = createConstructibleInstance(Example.class);
         checkSameObject(mt, mt.addExample(exampleKey, exampleValue));
         checkMapEntry(mt.getExamples(), exampleKey, exampleValue);
-        assertEquals(mt.getExamples().size(), 1, "The list is expected to contain one entry.");
+        assertEquals(mt.getExamples().size(), 1, "The map is expected to contain one entry.");
         mt.removeExample(exampleKey);
-        assertEquals(mt.getExamples().size(), 0, "The list is expected to be empty.");
+        assertEquals(mt.getExamples().size(), 0, "The map is expected to be empty.");
+        
+        final String exampleKey2 = "myExampleKey2";
+        final Example exampleValue2 = createConstructibleInstance(Example.class);
+        mt.setExamples(Collections.singletonMap(exampleKey2, exampleValue2));
+        checkMapEntry(mt.getExamples(), exampleKey2, exampleValue2);
+        assertEquals(mt.getExamples().size(), 1, "The map is expected to contain one entry.");
+        checkSameObject(mt, mt.addExample(exampleKey, exampleValue));
+        checkMapEntry(mt.getExamples(), exampleKey, exampleValue);
+        assertEquals(mt.getExamples().size(), 2, "The map is expected to contain two entries.");
+        
         Example otherExampleValue = createConstructibleInstance(Example.class);
         checkMapImmutable(mt, MediaType::getExamples, "otherExample", otherExampleValue);
     }
@@ -668,9 +826,19 @@ public class ModelConstructionTest {
         final Schema propertySchemaValue = createConstructibleInstance(Schema.class);
         checkSameObject(s, s.addProperty(propertySchemaKey, propertySchemaValue));
         checkMapEntry(s.getProperties(), propertySchemaKey, propertySchemaValue);
-        assertEquals(s.getProperties().size(), 1, "The list is expected to contain one entry.");
+        assertEquals(s.getProperties().size(), 1, "The map is expected to contain one entry.");
         s.removeProperty(propertySchemaKey);
-        assertEquals(s.getProperties().size(), 0, "The list is expected to be empty.");
+        assertEquals(s.getProperties().size(), 0, "The map is expected to be empty.");
+        
+        final String propertySchemaKey2 = "myPropertySchemaKey2";
+        final Schema propertySchemaValue2 = createConstructibleInstance(Schema.class);
+        s.setProperties(Collections.singletonMap(propertySchemaKey2, propertySchemaValue2));
+        checkMapEntry(s.getProperties(), propertySchemaKey2, propertySchemaValue2);
+        assertEquals(s.getProperties().size(), 1, "The map is expected to contain one entry.");
+        checkSameObject(s, s.addProperty(propertySchemaKey, propertySchemaValue));
+        checkMapEntry(s.getProperties(), propertySchemaKey, propertySchemaValue);
+        assertEquals(s.getProperties().size(), 2, "The map is expected to contain two entries.");
+        
         final Schema otherPropertyValue = createConstructibleInstance(Schema.class);
         checkMapImmutable(s, Schema::getProperties, "otherPropertyKey", otherPropertyValue);
         
@@ -697,9 +865,19 @@ public class ModelConstructionTest {
         final Example exampleValue = createConstructibleInstance(Example.class);
         checkSameObject(p, p.addExample(exampleKey, exampleValue));
         checkMapEntry(p.getExamples(), exampleKey, exampleValue);
-        assertEquals(p.getExamples().size(), 1, "The list is expected to contain one entry.");
+        assertEquals(p.getExamples().size(), 1, "The map is expected to contain one entry.");
         p.removeExample(exampleKey);
-        assertEquals(p.getExamples().size(), 0, "The list is expected to be empty.");
+        assertEquals(p.getExamples().size(), 0, "The map is expected to be empty.");
+        
+        final String exampleKey2 = "myExampleKey2";
+        final Example exampleValue2 = createConstructibleInstance(Example.class);
+        p.setExamples(Collections.singletonMap(exampleKey2, exampleValue2));
+        checkMapEntry(p.getExamples(), exampleKey2, exampleValue2);
+        assertEquals(p.getExamples().size(), 1, "The map is expected to contain one entry.");
+        checkSameObject(p, p.addExample(exampleKey, exampleValue));
+        checkMapEntry(p.getExamples(), exampleKey, exampleValue);
+        assertEquals(p.getExamples().size(), 2, "The map is expected to contain two entries.");
+        
         Example otherExampleValue = createConstructibleInstance(Example.class);
         checkMapImmutable(p, Parameter::getExamples, "otherExample", otherExampleValue);
     }
@@ -717,9 +895,19 @@ public class ModelConstructionTest {
         final Header headerValue = createConstructibleInstance(Header.class);
         checkSameObject(response, response.addHeader(headerKey, headerValue));
         checkMapEntry(response.getHeaders(), headerKey, headerValue);
-        assertEquals(response.getHeaders().size(), 1, "The list is expected to contain one entry.");
+        assertEquals(response.getHeaders().size(), 1, "The map is expected to contain one entry.");
         response.removeHeader(headerKey);
-        assertEquals(response.getHeaders().size(), 0, "The list is expected to be empty.");
+        assertEquals(response.getHeaders().size(), 0, "The map is expected to be empty.");
+        
+        final String headerKey2 = "myHeaderKey2";
+        final Header headerValue2 = createConstructibleInstance(Header.class);
+        response.setHeaders(Collections.singletonMap(headerKey2, headerValue2));
+        checkMapEntry(response.getHeaders(), headerKey2, headerValue2);
+        assertEquals(response.getHeaders().size(), 1, "The map is expected to contain one entry.");
+        checkSameObject(response, response.addHeader(headerKey, headerValue));
+        checkMapEntry(response.getHeaders(), headerKey, headerValue);
+        assertEquals(response.getHeaders().size(), 2, "The map is expected to contain two entries.");
+        
         Header otherHeaderValue  = createConstructibleInstance(Header.class);
         checkMapImmutable(response, APIResponse::getHeaders, "otherHeader", otherHeaderValue);
         
@@ -727,10 +915,20 @@ public class ModelConstructionTest {
         final Link linkValue = createConstructibleInstance(Link.class);
         checkSameObject(response, response.addLink(linkKey, linkValue));
         checkMapEntry(response.getLinks(), linkKey, linkValue);
-        assertEquals(response.getLinks().size(), 1, "The list is expected to contain one entry.");
+        assertEquals(response.getLinks().size(), 1, "The map is expected to contain one entry.");
         response.removeLink(linkKey);
-        assertEquals(response.getLinks().size(), 0, "The list is expected to be empty.");
+        assertEquals(response.getLinks().size(), 0, "The map is expected to be empty.");
         Link otherLinkValue  = createConstructibleInstance(Link.class);
+        
+        final String linkKey2 = "myLinkKey2";
+        final Link linkValue2 = createConstructibleInstance(Link.class);
+        response.setLinks(Collections.singletonMap(linkKey2, linkValue2));
+        checkMapEntry(response.getLinks(), linkKey2, linkValue2);
+        assertEquals(response.getLinks().size(), 1, "The map is expected to contain one entry.");
+        checkSameObject(response, response.addLink(linkKey, linkValue));
+        checkMapEntry(response.getLinks(), linkKey, linkValue);
+        assertEquals(response.getLinks().size(), 2, "The map is expected to contain two entries.");
+        
         checkMapImmutable(response, APIResponse::getLinks, "otherLink", otherLinkValue);
     }
     
@@ -738,16 +936,11 @@ public class ModelConstructionTest {
     public void apiResponsesTest() {
         final APIResponses responses = processConstructible(APIResponses.class);
         
-        responses.removeAPIResponse(APIResponses.DEFAULT);
-        if(responses.getAPIResponses() != null) {
-            assertEquals(responses.getAPIResponses().size(), 0, "The map is expected to contain two entries.");
-        }
-        
         final String responseKey = "200";
-        assertFalse(responses.hasAPIResponse(responseKey), responseKey + " is absent in the map");
         final APIResponse pathItemValue = createConstructibleInstance(APIResponse.class);
-        checkSameObject(responses, responses.addAPIResponse(responseKey, pathItemValue));
+        responses.setAPIResponses(Collections.singletonMap(responseKey, pathItemValue));
         assertTrue(responses.hasAPIResponse(responseKey), responseKey + " is present in the map");
+        assertEquals(responses.getAPIResponses().size(), 1, "The map is expected to contain one entry.");
         assertSame(responses.getAPIResponse(responseKey), pathItemValue, 
                 "The value associated with the key: " + responseKey + " is expected to be the same one that was added.");
         checkMapEntry(responses.getAPIResponses(), responseKey, pathItemValue);
@@ -757,11 +950,10 @@ public class ModelConstructionTest {
         final APIResponse pathItemValue2 = createConstructibleInstance(APIResponse.class);
         checkSameObject(responses, responses.addAPIResponse(responseKey2, pathItemValue2));
         assertTrue(responses.hasAPIResponse(responseKey2), responseKey2 + " is present in the map");
+        assertEquals(responses.getAPIResponses().size(), 2, "The map is expected to contain two entries.");
         assertSame(responses.getAPIResponse(responseKey2), pathItemValue2, 
                 "The value associated with the key: " + responseKey2 + " is expected to be the same one that was added.");
         checkMapEntry(responses.getAPIResponses(), responseKey2, pathItemValue2);
-        
-        assertEquals(responses.getAPIResponses().size(), 2, "The map is expected to contain two entries.");
         
         responses.removeAPIResponse(responseKey);
         assertFalse(responses.hasAPIResponse(responseKey), responseKey + " is absent in the map");
@@ -808,10 +1000,10 @@ public class ModelConstructionTest {
         final Scopes s = processConstructible(Scopes.class);
         
         final String scopeKey = "myScope";
-        assertFalse(s.hasScope(scopeKey), scopeKey + " is absent in the map");
         final String scopeValue = new String("myDescription");
-        checkSameObject(s, s.addScope(scopeKey, scopeValue));
+        s.setScopes(Collections.singletonMap(scopeKey, scopeValue));
         assertTrue(s.hasScope(scopeKey), scopeKey + " is present in the map");
+        assertEquals(s.getScopes().size(), 1, "The map is expected to contain one entry.");
         assertSame(s.getScope(scopeKey), scopeValue, 
                 "The value associated with the key: " + scopeKey + " is expected to be the same one that was added.");
         checkMapEntry(s.getScopes(), scopeKey, scopeValue);
@@ -821,11 +1013,10 @@ public class ModelConstructionTest {
         final String scopeValue2 = new String("myDescription2");
         checkSameObject(s, s.addScope(scopeKey2, scopeValue2));
         assertTrue(s.hasScope(scopeKey2), scopeKey2 + " is present in the map");
+        assertEquals(s.getScopes().size(), 2, "The map is expected to contain two entries.");
         assertSame(s.getScope(scopeKey2), scopeValue2, 
                 "The value associated with the key: " + scopeKey2 + " is expected to be the same one that was added.");
         checkMapEntry(s.getScopes(), scopeKey2, scopeValue2);
-        
-        assertEquals(s.getScopes().size(), 2, "The map is expected to contain two entries.");
         
         s.removeScope(scopeKey);
         assertFalse(s.hasScope(scopeKey), scopeKey + " is absent in the map");
@@ -844,10 +1035,10 @@ public class ModelConstructionTest {
         final SecurityRequirement sr = processConstructible(SecurityRequirement.class);
         
         final String schemeKey = "myScheme";
-        assertFalse(sr.hasScheme(schemeKey), schemeKey + " is absent in the map");
         final List<String> schemeValue = new ArrayList<String>();
-        checkSameObject(sr, sr.addScheme(schemeKey, schemeValue));
+        sr.setSchemes(Collections.singletonMap(schemeKey, schemeValue));
         assertTrue(sr.hasScheme(schemeKey), schemeKey + " is present in the map");
+        assertEquals(sr.getSchemes().size(), 1, "The map is expected to contain one entry.");
         assertSame(sr.getScheme(schemeKey), schemeValue, 
                 "The value associated with the key: " + schemeKey + " is expected to be the same one that was added.");
         checkMapEntry(sr.getSchemes(), schemeKey, schemeValue);
@@ -857,11 +1048,10 @@ public class ModelConstructionTest {
         final List<String> schemeValue2 = new ArrayList<String>();
         checkSameObject(sr, sr.addScheme(schemeKey2, schemeValue2));
         assertTrue(sr.hasScheme(schemeKey2), schemeKey2 + " is present in the map");
+        assertEquals(sr.getSchemes().size(), 2, "The map is expected to contain two entries.");
         assertSame(sr.getScheme(schemeKey2), schemeValue2, 
                 "The value associated with the key: " + schemeKey2 + " is expected to be the same one that was added.");
         checkMapEntry(sr.getSchemes(), schemeKey2, schemeValue2);
-        
-        assertEquals(sr.getSchemes().size(), 2, "The map is expected to contain two entries.");
         
         sr.removeScheme(schemeKey);
         assertFalse(sr.hasScheme(schemeKey), schemeKey + " is absent in the map");
@@ -904,10 +1094,10 @@ public class ModelConstructionTest {
         final ServerVariables svs = processConstructible(ServerVariables.class);
         
         final String varKey = "myServerVariable";
-        assertFalse(svs.hasServerVariable(varKey), varKey + " is absent in the map");
         final ServerVariable varValue = createConstructibleInstance(ServerVariable.class);
-        checkSameObject(svs, svs.addServerVariable(varKey, varValue));
+        svs.setServerVariables(Collections.singletonMap(varKey, varValue));
         assertTrue(svs.hasServerVariable(varKey), varKey + " is present in the map");
+        assertEquals(svs.getServerVariables().size(), 1, "The map is expected to contain one entry.");
         assertSame(svs.getServerVariable(varKey), varValue, 
                 "The value associated with the key: " + varKey + " is expected to be the same one that was added.");
         checkMapEntry(svs.getServerVariables(), varKey, varValue);
@@ -917,11 +1107,10 @@ public class ModelConstructionTest {
         final ServerVariable varValue2 = createConstructibleInstance(ServerVariable.class);
         checkSameObject(svs, svs.addServerVariable(varKey2, varValue2));
         assertTrue(svs.hasServerVariable(varKey2), varKey2 + " is present in the map");
+        assertEquals(svs.getServerVariables().size(), 2, "The map is expected to contain two entries.");
         assertSame(svs.getServerVariable(varKey2), varValue2, 
                 "The value associated with the key: " + varKey2 + " is expected to be the same one that was added.");
         checkMapEntry(svs.getServerVariables(), varKey2, varValue2);
-        
-        assertEquals(svs.getServerVariables().size(), 2, "The map is expected to contain two entries.");
         
         svs.removeServerVariable(varKey);
         assertFalse(svs.hasServerVariable(varKey), varKey + " is absent in the map");
@@ -992,13 +1181,15 @@ public class ModelConstructionTest {
         assertEquals(map2.size(), 0, "The extensions map is expected to contain no entries.");
         assertEquals(map2, newMap, "The return value of getExtensions() is expected to be the same value that was set.");
         // Check that the extension map can be replaced with the builder method and that it is returned by the getter.
-        final Map<String, Object> newOtherMap = new HashMap<>();
-        newOtherMap.put("x-test", 42);
+        final Map<String, Object> newOtherMap = Collections.singletonMap("x-test", 42);
         e.setExtensions(newOtherMap);
         final Map<String, Object> map3 = e.getExtensions();
         assertEquals(map3.size(), 1, "The extensions map is expected to contain one entry.");
         assertEquals(map3, newOtherMap, "The return value of getExtensions() is expected to be the same value that was set.");
-        
+        // Check that a value can be added, even if the map was immutable
+        e.addExtension(extensionName1, obj1);
+        assertEquals(e.getExtensions().size(), 2, "The extensions map is expected to contain two entries.");
+
         checkMapImmutable(e, Extensible::getExtensions, "x-other", new Object());
     }
     
@@ -1219,7 +1410,7 @@ public class ModelConstructionTest {
         assertTrue(map.containsKey(key), "The map is expected to contain the key: " + key);
         assertSame(map.get(key), value, "The value associated with the key: " + key + " is expected to be the same one that was added.");
     }
-
+    
     private <O, K, T> void checkMapImmutable(O container, Function<O, Map<K,T>> mapGetter, K key, T otherValue) {
         Map<K,T> map = mapGetter.apply(container);
         assertNotNull(map, "The map must not be null.");
