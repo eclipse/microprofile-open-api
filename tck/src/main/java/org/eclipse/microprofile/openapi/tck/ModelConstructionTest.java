@@ -966,7 +966,7 @@ public class ModelConstructionTest {
         s.removeRequired(required);
         assertEquals(s.getRequired().size(), 0, "The list is expected to be empty.");
         
-        final String required2 = new String("required2");;
+        final String required2 = new String("required2");
         s.setRequired(Collections.singletonList(required2));
         assertEquals(s.getRequired().size(), 1, "The list is expected to contain one entry.");
         checkListEntry(s.getRequired(), required2);
