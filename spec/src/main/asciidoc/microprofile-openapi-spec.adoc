@@ -409,7 +409,7 @@ public class ServersResource {
 .Output for Sample 1
 [source, yaml]
 ----
-openapi: 3.0.0
+openapi: 3.0.2
 servers:
 - url: http://{var1}.definition1/{var2}
   description: definition server 1
