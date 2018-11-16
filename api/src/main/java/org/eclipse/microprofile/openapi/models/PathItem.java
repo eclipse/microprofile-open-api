@@ -50,13 +50,7 @@ public interface PathItem extends Constructible, Extensible<PathItem>, Reference
      * @return a short summary of what the path item represents
      **/
     String getSummary();
-    
-    /**
-     * @param pathString a path name in the format valid for a Paths object.
-     * @return returns the path name
-     */
-    String getPathString(String pathString);
-    
+
     /**
      * Sets this PathItem's summary property to the given string.
      *
