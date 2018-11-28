@@ -711,18 +711,18 @@ valid document (handling conflicting IDs and unique names).
 == Exposing platform OpenAPIs
 
 Vendors are required to support a mechanism to expose `platform` OpenAPIs to consumers. 
-These are RESTful APIs implemented by the vendor framework itself, including MicroProfile Metrics,
-MicroProfile Health Check, JMX-REST connectors, OpenID Connect Providers and any other API
-the framework may be exposing.  
+These are RESTful APIs implemented by the vendor framework itself, which may include 
+MicroProfile Metrics, MicroProfile Health Check, JMX-REST connectors, OpenID Connect Providers
+or any other API the framework may be exposing.  
 
 The exposure of these platform OpenAPIs allows for:
 
 *  discovery of available platform endpoints
 *  generation of clients to consume the API (OAS3 -> client_language)
 
-=== Contributing a platform OpenAPI
+=== Registrying a platform OpenAPI
 
-The components within a vendor's framework will contribute their platform OpenAPI by using the 
+The components within a vendor's framework will register their platform OpenAPI by using the 
 following patttern:
 
 `mp.openapi.spi.platform.<component>=<path_to_OAS3>`
@@ -736,6 +736,11 @@ user applications.
 
 This pattern takes advantage of MicroProfile Config to inject the location of the component's OAS3 doc,
 which creates dynamic and composed deployments, only exposing the platform APIs that are currently enabled.
+
+For dynamic frameworks (e.g. loading and unloading OSGi bundles), components can be unregistered by setting
+their OAS3 path to empty:
+
+`mp.openapi.spi.platform.jmx=`
 
 
 === Exposing platform OpenAPIs
