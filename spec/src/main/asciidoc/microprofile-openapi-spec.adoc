@@ -733,9 +733,7 @@ following patttern:
 
 `mp.openapi.spi.platform.<component>=<path_to_OAS3>`
 
-A sample can be:
-
-`mp.openapi.spi.platform.jmx=${server_install_dir}/oas/jmx/openapi.yaml`
+Example:  `mp.openapi.spi.platform.jmx=${server_install_dir}/oas/jmx/openapi.yaml`
 
 Please note that this is an `SPI`, which means it is intended to be set only by the vendor framework, not by
 user applications.
@@ -759,14 +757,15 @@ are currently available:
 OAS3 docs.  
 ** the component name used matches the `<component>` string used during registration inside the key `mp.openapi.spi.platform.<component>`.
 
-*  A sample returning payload:
+**  A sample returning payload:
 
-```
+[source, yaml]
+----
 'components':
 - metrics
 - jmx
 - oidc
-```
+----
   
 *  `GET openapi/platform/<component>` 
 **  returns the actual OAS3 doc for that component.
