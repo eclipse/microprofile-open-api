@@ -717,12 +717,13 @@ or any other API the framework may be exposing.
 
 The exposure of these platform OpenAPIs allows for:
 
-*  discovery of available platform endpoints
-*  generation of clients to consume the API (OAS3 -> client_language)
-*  a standard way to document non-application APIs: this is probably the most significant reason 
-for this new SPI, as the number of APIs exposed by frameworks continues to grow and they all need
-to be documented in some way.  We certainly don't want RESTful APIs being documented in HTML tables,
-proprietary / custom formats, etc - if it's a REST API it should be documented using OpenAPI.
+  *  discovery of available platform endpoints
+  *  generation of clients to consume the API (OAS3 -> client_language)
+  *  a standard way to document non-application APIs
+    **  this is probably the most significant reason for this new SPI, as the number of APIs exposed by 
+  frameworks continues to grow and they all need to be documented in some way.  We certainly don't want 
+  RESTful APIs being documented in HTML tables, proprietary / custom formats, etc - if it's a REST API 
+  it should be documented using OpenAPI.
 
 
 === Registrying a platform OpenAPI
