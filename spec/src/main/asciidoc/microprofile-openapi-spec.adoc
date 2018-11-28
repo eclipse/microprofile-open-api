@@ -754,10 +754,12 @@ their OAS3 path to empty:
 There are two new RESTful endpoints that vendors must expose.  The first is to query which platform OpenAPIs
 are currently available:
 
-1. `GET openapi/platform`  - returns a list (following the <<Content format>> rules) of available components exposing
-OAS3 docs.  The component name used matches the `<component>` string used during registration inside the key `mp.openapi.spi.platform.<component>`.
+*  `GET openapi/platform`  
+** returns a list (following the <<Content format>> rules) of available components exposing
+OAS3 docs.  
+** the component name used matches the `<component>` string used during registration inside the key `mp.openapi.spi.platform.<component>`.
 
-A sample returning payload can be:
+*  A sample returning payload:
 
 ```
 'components':
@@ -766,7 +768,8 @@ A sample returning payload can be:
 - oidc
 ```
   
-2. `GET openapi/platform/<component>` - return the actual OAS3 doc for that component.
+*  `GET openapi/platform/<component>` 
+**  returns the actual OAS3 doc for that component.
 
 These APIs are public and meant to be used by application developers or anyone that needs to interact with these endpoints.
 
