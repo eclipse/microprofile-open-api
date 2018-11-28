@@ -708,6 +708,20 @@ the `/openapi` endpoint are expected to be the logical union of all the applicat
 in the runtime, which would imply merging multiple OpenAPI documents into a single
 valid document (handling conflicting IDs and unique names).
 
+== Exposing platform OpenAPIs
+
+Vendors are required to support a mechanism to expose `platform` OpenAPIs to consumers. 
+These are RESTful APIs implemented by the vendor framework itself, and are set using any of the
+support MicroProfile Config routes, via the key `mp.openapi.platform` with a value that refers to
+the location (within the classpath) of the OAS3 document representing these APIs.
+
+Some examples of `platform` OpenAPIs include:
+APIs from MicroProfile Health Check,  MicroProfile Metrics, a custom JMX RESTful
+bridge, OpenID Connect Providers, etc.
+
+This platform OpenAPI must be exposed via a single `GET` to `openapi/platform`, following the
+same format rules as <<Content format>>.  This OAS3 document can be very useful for users
+to discovery and consume (i.e. via generated clients) APIs from the platform.  
 
 == Limitations
 
