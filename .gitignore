@@ -5,5 +5,6 @@
 .classpath
 .project
 .factorypath
+.externalToolBuilders/
 bin/
 target/

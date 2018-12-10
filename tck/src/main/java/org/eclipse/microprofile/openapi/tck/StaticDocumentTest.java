@@ -96,5 +96,35 @@ public class StaticDocumentTest extends AppTestBase {
         vr.body(inventoryPathPost + ".responses.'201'.description", equalTo("item created"));
         vr.body(inventoryPathPost + ".responses.'400'.description", equalTo("invalid input, object invalid"));
         vr.body(inventoryPathPost + ".responses.'409'.description", equalTo("an existing item already exists"));
+
+        final String inventoryPathPut = "paths.'/inventory'.put";
+        vr.body(inventoryPathPut + ".summary", equalTo("put operation"));
+        vr.body(inventoryPathPut + ".operationId", equalTo("putInventory"));
+        vr.body(inventoryPathPut + ".description", equalTo("tests the put operation"));
+
+        final String inventoryPathDelete = "paths.'/inventory'.delete";
+        vr.body(inventoryPathDelete + ".summary", equalTo("delete operation"));
+        vr.body(inventoryPathDelete + ".operationId", equalTo("deleteInventory"));
+        vr.body(inventoryPathDelete + ".description", equalTo("tests the delete operation"));
+
+        final String inventoryPathOptions = "paths.'/inventory'.options";
+        vr.body(inventoryPathOptions + ".summary", equalTo("options operation"));
+        vr.body(inventoryPathOptions + ".operationId", equalTo("optionsInventory"));
+        vr.body(inventoryPathOptions + ".description", equalTo("tests the options operation"));
+
+        final String inventoryPathHead = "paths.'/inventory'.head";
+        vr.body(inventoryPathHead + ".summary", equalTo("head operation"));
+        vr.body(inventoryPathHead + ".operationId", equalTo("headInventory"));
+        vr.body(inventoryPathHead + ".description", equalTo("tests the head operation"));
+
+        final String inventoryPathPatch = "paths.'/inventory'.patch";
+        vr.body(inventoryPathPatch + ".summary", equalTo("patch operation"));
+        vr.body(inventoryPathPatch + ".operationId", equalTo("patchInventory"));
+        vr.body(inventoryPathPatch + ".description", equalTo("tests the patch operation"));
+
+        final String inventoryPathTrace = "paths.'/inventory'.trace";
+        vr.body(inventoryPathTrace + ".summary", equalTo("trace operation"));
+        vr.body(inventoryPathTrace + ".operationId", equalTo("traceInventory"));
+        vr.body(inventoryPathTrace + ".description", equalTo("tests the trace operation"));
     }
 }
