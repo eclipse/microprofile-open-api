@@ -78,6 +78,48 @@ paths:
             schema:
               $ref: '#/components/schemas/InventoryItem'
         description: Inventory item to add
+    put:
+      summary: put operation
+      operationId: putInventory
+      description: tests the put operation
+      responses:
+        '200':
+          description: put operation tested
+    delete:
+      summary: delete operation
+      operationId: deleteInventory
+      description: tests the delete operation
+      responses:
+        '200':
+          description: delete operation tested
+    options:
+      summary: options operation
+      operationId: optionsInventory
+      description: tests the options operation
+      responses:
+        '200':
+          description: options operation tested
+    head:
+      summary: head operation
+      operationId: headInventory
+      description: tests the head operation
+      responses:
+        '200':
+          description: head operation tested
+    patch:
+      summary: patch operation
+      operationId: patchInventory
+      description: tests the patch operation
+      responses:
+        '200':
+          description: patch operation tested
+    trace:
+      summary: trace operation
+      operationId: traceInventory
+      description: tests the trace operation
+      responses:
+        '200':
+          description: trace operation tested
 components:
   schemas:
     InventoryItem:

@@ -263,6 +263,11 @@ public class AirlinesAppTest extends AppTestBase {
 
         vr.body("paths.'/user/logout'.get.summary", equalTo("Logs out current logged in user session"));
         vr.body("paths.'/user/logout'.get.operationId", equalTo("logOutUser"));
+
+        vr.body("paths.'/user/{username}'.patch.summary", equalTo("Change user password"));
+        vr.body("paths.'/user/{username}'.patch.description", equalTo("This changes the password for the logged in user."));
+        vr.body("paths.'/user/{username}'.patch.operationId", equalTo("changePassword"));
+        vr.body("paths.'/user/{username}'.patch.parameters", hasSize(3));
     }
 
     @RunAsClient
