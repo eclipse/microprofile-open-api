@@ -749,7 +749,7 @@ their OAS3 path to empty:
 
 === Exposing platform OpenAPIs
 
-There are two new RESTful endpoints that vendors must expose.  The first is to query which platform OpenAPIs
+There are two new RESTful endpoints that vendors must expose.  The first queries which platform OpenAPIs
 are currently available:
 
 *  `GET openapi/platform`  
@@ -768,7 +768,9 @@ OAS3 docs.
 ----
   
 *  `GET openapi/platform/<component>` 
-**  returns the actual OAS3 doc for that component.
+**  returns the actual OAS3 doc for that component (following the <<Content format>> rules).
+**  the `servers` element of the OAS3 doc for each component may be omitted, in which case
+the vendor framework must insert an appropriate `servers` value.  
 
 These APIs are public and meant to be used by application developers or anyone that needs to interact with these endpoints.
 
