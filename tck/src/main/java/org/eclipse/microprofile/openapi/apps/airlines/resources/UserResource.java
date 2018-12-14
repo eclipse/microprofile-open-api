@@ -15,6 +15,7 @@ package org.eclipse.microprofile.openapi.apps.airlines.resources;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.PATCH;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -42,6 +43,7 @@ import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirementsSet;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.annotations.servers.Server;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
@@ -66,12 +68,13 @@ public class UserResource {
     private static UserData userData = new UserData();
 
     public UserData getUserData() {
-        return this.userData;
+        return UserResource.userData;
     }
 
     public void setUserData(UserData userData) {
-        this.userData = userData;
+        UserResource.userData = userData;
     }
+    
     @POST
     @Tags(refs={"user","create"})
     @APIResponses(value={
@@ -344,6 +347,49 @@ public class UserResource {
                 return Response.ok().entity("").build();
             }
 
+    @PATCH
+    @Path("/{username}")
+    @APIResponse(
+            responseCode = "200",
+            description = "Password was changed successfully"
+        )
+    @Operation(
+        summary = "Change user password",
+        description = "This changes the password for the logged in user.",
+        operationId = "changePassword"
+    )
+    @SecurityRequirementsSet(
+        value = {
+            @SecurityRequirement(
+                name = "userApiKey"
+            ),
+            @SecurityRequirement(
+                name = "userBearerHttp"
+            )
+        }
+    )
+    public void changePassword(
+        @Parameter(
+            name = "username",
+            description = "name that need to be deleted",
+            schema = @Schema(type = SchemaType.STRING),
+            required = true)
+        @PathParam("username") String username,
+        @Parameter(
+            name = "currentPassword",
+            description = "the user's current password",
+            schema = @Schema(type = SchemaType.STRING),
+            required = true)
+        @QueryParam("currentPassword") String currentPassword,
+        @Parameter(
+            name = "newPassword",
+            description = "the user's desired new password",
+            schema = @Schema(type = SchemaType.STRING),
+            required = true)
+        @QueryParam("newPassword") String newPassword) {
+            // don't do anything - this is just a TCK test
+    }
+    
       @DELETE
       @Path("/{username}")
       @Tag(ref="user")
