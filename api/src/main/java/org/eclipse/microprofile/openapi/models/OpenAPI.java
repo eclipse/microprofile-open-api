@@ -111,7 +111,7 @@ public interface OpenAPI extends Constructible, Extensible<OpenAPI> {
     /**
      * Returns the Servers defined in the API
      *
-     * @return Server objects which provide connectivity information to target servers
+     * @return a copy List (potentially immutable) of Server objects which provide connectivity information to target servers
      **/
     List<Server> getServers();
 
@@ -151,7 +151,7 @@ public interface OpenAPI extends Constructible, Extensible<OpenAPI> {
     /**
      * Returns the security property from an OpenAPI instance.
      *
-     * @return which security mechanisms can be used across the API
+     * @return a copy List (potentially immutable) containing the security mechanisms that can be used across the API
      **/
     List<SecurityRequirement> getSecurity();
 
@@ -191,7 +191,7 @@ public interface OpenAPI extends Constructible, Extensible<OpenAPI> {
     /**
      * Returns the tags property from an OpenAPI instance.
      *
-     * @return tags used by the specification
+     * @return a copy List (potentially immutable) of tags defined in this the specification
      **/
 
     List<Tag> getTags();
@@ -253,17 +253,6 @@ public interface OpenAPI extends Constructible, Extensible<OpenAPI> {
         setPaths(paths);
         return this;
     }
-
-    /**
-     * Adds the given path item to this OpenAPI instance's list of paths
-     * 
-     * @param name a path name in the format valid for a Paths object
-     * @param path the path item added to the list of paths
-     * @deprecated since 1.1, use @link {@link Paths#addPathItem(String, PathItem)} on {@link #getPaths()} instead
-     * @return the current OpenAPI object
-     */
-    @Deprecated
-    OpenAPI path(String name, PathItem path);
 
     /**
      * Returns the components property from an OpenAPI instance.

@@ -55,11 +55,11 @@ public class AirlinesOASFilter implements OASFilter {
             Map<String, Callback> callbacks = pathItem.getPOST().getCallbacks();
             if (callbacks.containsKey("bookingCallback")) {
                 Callback callback = callbacks.get("bookingCallback");
-                if (callback.containsKey("http://localhost:9080/airlines/bookings")
-                        && callback.get("http://localhost:9080/airlines/bookings").getGET() != null) {
-                    if ("child - Retrieve all bookings for current user".equals(callback.get("http://localhost:9080/airlines/bookings")
+                if (callback.hasPathItem("http://localhost:9080/airlines/bookings")
+                        && callback.getPathItem("http://localhost:9080/airlines/bookings").getGET() != null) {
+                    if ("child - Retrieve all bookings for current user".equals(callback.getPathItem("http://localhost:9080/airlines/bookings")
                             .getGET().getDescription())) {   
-                        callback.get("http://localhost:9080/airlines/bookings").getGET()
+                        callback.getPathItem("http://localhost:9080/airlines/bookings").getGET()
                         .setDescription("parent - Retrieve all bookings for current user"); 
                     }
                 }
@@ -127,8 +127,8 @@ public class AirlinesOASFilter implements OASFilter {
         // testing child before parent filtering
         Content content = apiResponse.getContent();
         if (content != null) {
-            if (content.containsKey("application/json")) {
-                Schema schema = content.get("application/json").getSchema();
+            if (content.hasMediaType("application/json")) {
+                Schema schema = content.getMediaType("application/json").getSchema();
                 if ("child - id of the new review".equals(schema.getDescription())) {
                     schema.setDescription("parent - id of the new review");
                 }
@@ -190,13 +190,13 @@ public class AirlinesOASFilter implements OASFilter {
 
     @Override
     public Callback filterCallback(Callback callback) {
-        if(callback.containsKey("{$request.query.callbackUrl}/data") && callback.get("{$request.query.callbackUrl}/data").getPOST() != null){
-            callback.get("{$request.query.callbackUrl}/data").getPOST().setDescription("filterCallback - callback post operation");
+        if(callback.hasPathItem("{$request.query.callbackUrl}/data") && callback.getPathItem("{$request.query.callbackUrl}/data").getPOST() != null){
+            callback.getPathItem("{$request.query.callbackUrl}/data").getPOST().setDescription("filterCallback - callback post operation");
         }
         
-        if (callback.containsKey("http://localhost:9080/airlines/bookings") 
-                && callback.get("http://localhost:9080/airlines/bookings").getGET() != null) {
-            callback.get("http://localhost:9080/airlines/bookings").getGET().setDescription("child - Retrieve all bookings for current user");
+        if (callback.hasPathItem("http://localhost:9080/airlines/bookings") 
+                && callback.getPathItem("http://localhost:9080/airlines/bookings").getGET() != null) {
+            callback.getPathItem("http://localhost:9080/airlines/bookings").getGET().setDescription("child - Retrieve all bookings for current user");
         }
         return callback;
     }
@@ -205,6 +205,6 @@ public class AirlinesOASFilter implements OASFilter {
     public void filterOpenAPI(OpenAPI openAPI) {
         //Spec states : The filterOpenAPI method must be the last method called on a filter (which is just a specialization of the first exception).
         //To ensure that this method is called last, override the operation summary that was previously overridden in filterOperation method
-        openAPI.getPaths().get("/bookings/{id}").getPUT().setSummary("filterOpenAPI - Update a booking with ID");
+        openAPI.getPaths().getPathItem("/bookings/{id}").getPUT().setSummary("filterOpenAPI - Update a booking with ID");
     }
 }

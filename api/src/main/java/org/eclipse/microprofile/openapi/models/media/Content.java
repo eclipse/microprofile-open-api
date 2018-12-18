@@ -27,7 +27,7 @@ import org.eclipse.microprofile.openapi.models.Constructible;
  * A map to assist describing the media types for an operation's parameter or response.
  * 
  */
-public interface Content extends Constructible, Map<String, MediaType> {
+public interface Content extends Constructible {
 
     /**
      * Adds the MediaType for this Content, where the key is the name of the MediaType and the value is the object that describes the content passed
@@ -87,50 +87,5 @@ public interface Content extends Constructible, Map<String, MediaType> {
         }
         return map.get(name);
     }
-
-    /**
-     * In the next version, {@link Content} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #getMediaType(String)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    MediaType get(Object key);
-
-    /**
-     * In the next version, {@link Content} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #hasMediaType(String)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    boolean containsKey(Object key);
-    
-    /**
-     * In the next version, {@link Content} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #addMediaType(String, MediaType)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    MediaType put(String key, MediaType value);
-
-    /**
-     * In the next version, {@link Content} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #setMediaTypes(Map)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    void putAll(Map<? extends String, ? extends MediaType> m);
-
-    /**
-     * In the next version, {@link Content} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #removeMediaType(String)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    MediaType remove(Object key);
 
 }

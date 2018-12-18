@@ -29,7 +29,7 @@ import java.util.Map;
  * 
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#pathsObject"> OpenAPI Specification Paths Object</a>
  */
-public interface Paths extends Constructible, Extensible<Paths>, Map<String, PathItem> {
+public interface Paths extends Constructible, Extensible<Paths> {
 
     /**
      * Adds the given path item to this Paths and return this instance of Paths
@@ -88,50 +88,5 @@ public interface Paths extends Constructible, Extensible<Paths>, Map<String, Pat
         }
         return map.get(name);
     }
-
-    /**
-     * In the next version, {@link Paths} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #getPathItem(String)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    PathItem get(Object key);
-
-    /**
-     * In the next version, {@link Paths} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #hasPathItem(String)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    boolean containsKey(Object key);
-    
-    /**
-     * In the next version, {@link Paths} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #addPathItem(String, PathItem)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    PathItem put(String key, PathItem value);
-
-    /**
-     * In the next version, {@link Paths} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #setPathItems(Map)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    void putAll(Map<? extends String, ? extends PathItem> m);
-
-    /**
-     * In the next version, {@link Paths} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #removePathItem(String)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    PathItem remove(Object key);
 
 }

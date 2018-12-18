@@ -34,7 +34,7 @@ public interface ServerVariable extends Constructible, Extensible<ServerVariable
      * <p>
      * This property represents an enumeration of string values to be used if the substitution options are from a limited set
      * </p> 
-     * @return List&lt;String&gt; enumeration
+     * @return a copy List (potentially immutable) of possible values for this variable
      **/
     List<String> getEnumeration();
 

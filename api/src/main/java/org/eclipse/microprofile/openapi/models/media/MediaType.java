@@ -62,7 +62,7 @@ public interface MediaType extends Constructible, Extensible<MediaType> {
     /**
      * Returns the collection of examples from a MediaType instance.
      *
-     * @return examples of the media type
+     * @return a copy Map (potentially immutable) of examples of the media type
      **/
     Map<String, Example> getExamples();
 
@@ -134,7 +134,7 @@ public interface MediaType extends Constructible, Extensible<MediaType> {
     /**
      * Returns the encoding property from a MediaType instance.
      *
-     * @return a map between a property name and its encoding information
+     * @return  a copy Map (potentially immutable) between a property name and its encoding information
      **/
     Map<String, Encoding> getEncoding();
 

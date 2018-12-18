@@ -64,7 +64,7 @@ public interface APIResponse extends Constructible, Extensible<APIResponse>, Ref
     /**
      * Returns the map of Headers in this instance of ApiResponse.
      *
-     * @return the headers of this response
+     * @return a copy Map (potentially immutable) of the headers of this response
      **/
 
     Map<String, Header> getHeaders();
@@ -140,9 +140,9 @@ public interface APIResponse extends Constructible, Extensible<APIResponse>, Ref
     }
 
     /**
-     * Returns the operations links that can be followed from tis instance of ApiResponse.
+     * Returns the operations links that can be followed from this instance of ApiResponse.
      *
-     * @return operation links that can be followed from the response
+     * @return a copy Map (potentially immutable) of links that can be followed from the response
      **/
 
     Map<String, Link> getLinks();

@@ -28,22 +28,9 @@ import org.eclipse.microprofile.openapi.models.Extensible;
  *
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responses-object">Responses Object</a>
  */
-public interface APIResponses extends Constructible, Extensible<APIResponses>, Map<String, APIResponse> {
+public interface APIResponses extends Constructible, Extensible<APIResponses> {
 
     public static final String DEFAULT = "default";
-
-    /**
-     * Adds an APIResponse in the format of the name as a key and the item as the value to APIResponses map
-     * 
-     * @param name the name of APIResponse (http status code eventually with wildcard or {@value #DEFAULT})
-     * @param apiResponse the APIResponse object to be added to APIResponses map
-     * @return APIResponses map with the added ApiResponse instance
-     * @deprecated since 1.1, use {@link #addAPIResponse(String, APIResponse)} instead
-     **/
-    @Deprecated
-    default APIResponses addApiResponse(String name, APIResponse apiResponse) {
-        return addAPIResponse(name, apiResponse);
-    }
 
     /**
      * Adds an APIResponse in the format of the name as a key and the item as the value to APIResponses map
@@ -105,67 +92,9 @@ public interface APIResponses extends Constructible, Extensible<APIResponses>, M
     }
 
     /**
-     * In the next version, {@link APIResponses} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #getAPIResponse(String)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    APIResponse get(Object key);
-
-    /**
-     * In the next version, {@link APIResponses} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #hasAPIResponse(String)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    boolean containsKey(Object key);
-    
-    /**
-     * In the next version, {@link APIResponses} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #addAPIResponse(String, APIResponse)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    APIResponse put(String key, APIResponse value);
-
-    /**
-     * In the next version, {@link APIResponses} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #setAPIResponses(Map)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    void putAll(Map<? extends String, ? extends APIResponse> m);
-
-    /**
-     * In the next version, {@link APIResponses} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #removeAPIResponse(String)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    APIResponse remove(Object key);
-
-    /**
      * Returns the default documentation of responses other than the ones declared for specific HTTP response codes in this instance of ApiResponses.
      * <p>
-     * Convenience method that is the same as calling {@link #get(Object)} on the map with {@value #DEFAULT} as value for the key.
-     * 
-     * @deprecated since 1.1, use @link {@link #getDefaultValue()} instead
-     * @return the default documentation of responses
-     **/
-    @Deprecated 
-    default APIResponse getDefault() {
-        return getDefaultValue();
-    }
-
-    /**
-     * Returns the default documentation of responses other than the ones declared for specific HTTP response codes in this instance of ApiResponses.
-     * <p>
-     * Convenience method that is the same as calling {@link #get(Object)} on the map with {@value #DEFAULT} as value for the key.
+     * Convenience method that is the same as calling {@link #getAPIResponse(String)} on the map with {@value #DEFAULT} as value for the key.
      * 
      * @return the default documentation of responses
      **/
