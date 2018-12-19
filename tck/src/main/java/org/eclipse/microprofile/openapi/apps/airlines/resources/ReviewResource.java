@@ -84,11 +84,19 @@ import org.eclipse.microprofile.openapi.apps.airlines.model.User;
         ),
         authorizationCode = @OAuthFlow(
             authorizationUrl = "https://example.com/api/oauth/dialog",
-            tokenUrl = "https://example.com/api/oauth/token"
+            tokenUrl = "https://example.com/api/oauth/token",
+            scopes = @OAuthScope(
+                name = "read:reviews",
+                description = "search for a review"
+            )
         ),
         password = @OAuthFlow(
             refreshUrl = "https://example.com/api/oauth/refresh",
-            tokenUrl = "https://example.com/api/oauth/token"
+            tokenUrl = "https://example.com/api/oauth/token",
+            scopes = @OAuthScope(
+                name = "write:reviews",
+                description = "create a review"
+            )
         ),
         clientCredentials = @OAuthFlow(
             tokenUrl = "https://example.com/api/oauth/token",
