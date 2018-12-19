@@ -346,6 +346,7 @@ public class ModelConstructionTest {
         final OpenAPI o = processConstructible(OpenAPI.class);
         
         final SecurityRequirement sr = createConstructibleInstance(SecurityRequirement.class);
+        sr.addScheme("BasicAuth");
         checkSameObject(o, o.addSecurityRequirement(sr));
         checkListEntry(o.getSecurity(), sr);
         assertEquals(o.getSecurity().size(), 1, "The list is expected to contain one entry.");
@@ -353,6 +354,7 @@ public class ModelConstructionTest {
         assertEquals(o.getSecurity().size(), 0, "The list is expected to be empty.");
         
         final SecurityRequirement sr2 = createConstructibleInstance(SecurityRequirement.class);
+        sr2.addScheme("OAuth2", "read");
         o.setSecurity(Collections.singletonList(sr2));
         assertEquals(o.getSecurity().size(), 1, "The list is expected to contain one entry.");
         checkListEntry(o.getSecurity(), sr2);
@@ -361,6 +363,7 @@ public class ModelConstructionTest {
         checkListEntry(o.getSecurity(), sr);
         
         SecurityRequirement otherSecurityRequirementValue  = createConstructibleInstance(SecurityRequirement.class);
+        otherSecurityRequirementValue.addScheme("OAuth2", "admin");
         checkListImmutable(o, OpenAPI::getSecurity, otherSecurityRequirementValue);
         
         final Server s = createConstructibleInstance(Server.class);
@@ -423,6 +426,7 @@ public class ModelConstructionTest {
         checkListImmutable(o, Operation::getParameters, otherParameter);
         
         final SecurityRequirement sr = createConstructibleInstance(SecurityRequirement.class);
+        sr.addScheme("OAuth2", Arrays.asList("read", "write"));
         checkSameObject(o, o.addSecurityRequirement(sr));
         checkListEntry(o.getSecurity(), sr);
         assertEquals(o.getSecurity().size(), 1, "The list is expected to contain one entry.");
@@ -430,6 +434,7 @@ public class ModelConstructionTest {
         assertEquals(o.getSecurity().size(), 0, "The list is expected to be empty.");
         
         final SecurityRequirement sr2 = createConstructibleInstance(SecurityRequirement.class);
+        sr2.addScheme("ApiKey");
         o.setSecurity(Collections.singletonList(sr2));
         assertEquals(o.getSecurity().size(), 1, "The list is expected to contain one entry.");
         checkListEntry(o.getSecurity(), sr2);
@@ -438,6 +443,7 @@ public class ModelConstructionTest {
         checkListEntry(o.getSecurity(), sr);
         
         SecurityRequirement otherSecurityRequirement  = createConstructibleInstance(SecurityRequirement.class);
+        otherSecurityRequirement.addScheme("BasicAuth");
         checkListImmutable(o, Operation::getSecurity, otherSecurityRequirement);
         
         final Server s = createConstructibleInstance(Server.class);
