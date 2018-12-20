@@ -24,8 +24,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * An optionally named list of extension properties.
- *
+ * A named extension that should be added to the OpenAPI definition.
  */
 @Target({ ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
@@ -33,7 +32,7 @@ import java.lang.annotation.Target;
 public @interface Extension {
 
     /**
-     * An option name for these extensions.
+     * A name for the extension.
      *
      * @return an option name for these extensions - will be prefixed with "x-"
      */
@@ -41,8 +40,23 @@ public @interface Extension {
 
     /**
      * The extension value.
-     * If the value allows parsing into an object or array, it should be converted from a string
+     * If the value should be parsed into an object or array, then the value should be stringified JSON
+     * suitable for parsing by a standard JSON parser.
      * @return the actual extension value
      */
     String value();
+
+    /**
+     * Should the value be parsed into an object/array or other simple type (number, boolean, etc) or
+     * left as a simple String.  If this is true, then the value must be parseable as one of:
+     * <ul>
+     *   <li>JSON object</li>
+     *   <li>JSON array</li>
+     *   <li>number</li>
+     *   <li>boolean</li>
+     * </ul>
+     * 
+     * @return true if the value should be parsed
+     */
+    boolean parseValue() default false;
 }

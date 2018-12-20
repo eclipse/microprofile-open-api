@@ -916,4 +916,19 @@ public class AirlinesAppTest extends AppTestBase {
                 both(containsString("Your server should return this HTTP status code if no longer interested")).
                 and(containsString("in further updates")));
     }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testExtensionParsing(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+
+        vr.body("paths.'/'.get.'x-string-property'", equalTo("string-value"));
+        vr.body("paths.'/'.get.'x-boolean-property'", equalTo(Boolean.TRUE));
+        vr.body("paths.'/'.get.'x-number-property'", equalTo(117));
+        vr.body("paths.'/'.get.'x-object-property'.'property-1'", equalTo("value-1"));
+        vr.body("paths.'/'.get.'x-object-property'.'property-3'.'prop-3-1'", equalTo(17));
+        vr.body("paths.'/'.get.'x-string-array-property'[1]", equalTo("two"));
+        vr.body("paths.'/'.get.'x-object-array-property'[1].name", equalTo("item-2"));
+    }
+
 }
