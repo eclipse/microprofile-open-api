@@ -30,6 +30,7 @@ import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
+import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
@@ -95,6 +96,8 @@ public class UserResource {
     )
     public Response createUser(
         @Parameter(
+            name = "createUser",
+            in = ParameterIn.QUERY,
             description = "Created user object",
             schema = @Schema(ref = "#/components/schemas/User"),
             required = true
@@ -113,6 +116,8 @@ public class UserResource {
     )
     public Response createUsersWithArrayInput(
         @Parameter(
+            name = "createUsers",
+            in = ParameterIn.QUERY,
             description = "List of user object",
             required = true
             ) User[] users) {
@@ -132,6 +137,8 @@ public class UserResource {
     )
     public Response createUsersWithListInput(
         @Parameter(
+            name = "createUsersUsingList",
+            in = ParameterIn.QUERY,
             description = "List of user object",
             required = true) java.util.List<User> users) {
                 for (User user : users) {
@@ -167,12 +174,15 @@ public class UserResource {
     public Response updateUser(
         @Parameter(
             name = "username",
+            in = ParameterIn.PATH,
             description = "name that need to be deleted",
             schema = @Schema(type = SchemaType.STRING),
             required = true
         )
         @PathParam("username") String username,
         @Parameter(
+            name = "user",
+            in = ParameterIn.QUERY,
             description = "Updated user object",
             required = true) User user) {
                 userData.addUser(user);

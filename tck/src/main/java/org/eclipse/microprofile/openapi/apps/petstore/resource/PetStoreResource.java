@@ -18,6 +18,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.DiscriminatorMapping;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
+import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
@@ -168,6 +169,8 @@ public class PetStoreResource {
             ) 
     public Order placeOrder(
         @Parameter(
+            name = "placeOrder",
+            in = ParameterIn.QUERY,
             description = "order placed for purchasing the pet",
             required = true
         ) 
