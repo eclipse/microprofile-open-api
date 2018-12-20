@@ -237,6 +237,7 @@ public class ModelConstructionTest {
         final OpenAPI o = processConstructible(OpenAPI.class);
         
         final SecurityRequirement sr = createConstructibleInstance(SecurityRequirement.class);
+        sr.addScheme("BasicAuth");
         checkSameObject(o, o.addSecurityRequirement(sr));
         checkListEntry(o.getSecurity(), sr);
         assertEquals(o.getSecurity().size(), 1, "The list is expected to contain one entry.");
@@ -270,6 +271,7 @@ public class ModelConstructionTest {
         assertEquals(o.getParameters().size(), 0, "The list is expected to be empty.");
         
         final SecurityRequirement sr = createConstructibleInstance(SecurityRequirement.class);
+        sr.addScheme("OAuth2", Arrays.asList("read", "write"));
         checkSameObject(o, o.addSecurityRequirement(sr));
         checkListEntry(o.getSecurity(), sr);
         assertEquals(o.getSecurity().size(), 1, "The list is expected to contain one entry.");
