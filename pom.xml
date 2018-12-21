@@ -50,7 +50,6 @@
         <httpclient.version>4.5.2</httpclient.version>
         <jackson.version>2.9.3</jackson.version>
         <restclient.version>1.1</restclient.version>
-        <cdi.version>2.0</cdi.version>
 
         <!-- Versions of SPEC dependencies  -->
         <asciidoctor-maven.version>1.5.5</asciidoctor-maven.version>
