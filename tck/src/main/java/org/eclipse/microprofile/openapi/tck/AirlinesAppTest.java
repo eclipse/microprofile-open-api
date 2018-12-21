@@ -182,6 +182,14 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/availability'.get.summary", equalTo("Retrieve all available flights"));
         vr.body("paths.'/availability'.get.operationId", equalTo("getFlights"));
     }
+    
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testRestClientNotPickedUp(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+        //We should not be picking up interfaces annotated with @RegisterRestClient
+        vr.body("paths.'/player/{playerId}'", equalTo(null));
+    }
 
     @RunAsClient
     @Test(dataProvider = "formatProvider")
