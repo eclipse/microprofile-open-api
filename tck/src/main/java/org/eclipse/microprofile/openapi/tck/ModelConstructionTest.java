@@ -860,6 +860,7 @@ public class ModelConstructionTest {
     }
     
     @Test
+    @Deprecated
     public void serverVariablesTest() {
         final ServerVariables svs = processConstructible(ServerVariables.class);
         

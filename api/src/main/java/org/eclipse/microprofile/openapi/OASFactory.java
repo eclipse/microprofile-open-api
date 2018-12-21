@@ -355,7 +355,9 @@ public final class OASFactory {
      * This method creates a new {@link org.eclipse.microprofile.openapi.models.servers.ServerVariables} instance.
      *
      * @return a new ServerVariables instance
+     * @deprecated since 1.1, use Map<String, ServerVariable> for server variables instead
      */
+    @Deprecated
     public static ServerVariables createServerVariables() {
         return createObject(ServerVariables.class);
     }
