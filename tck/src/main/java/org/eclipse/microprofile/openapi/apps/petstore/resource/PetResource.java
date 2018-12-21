@@ -16,7 +16,6 @@ package org.eclipse.microprofile.openapi.apps.petstore.resource;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
-import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeIn;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
@@ -25,7 +24,6 @@ import org.eclipse.microprofile.openapi.annotations.security.SecuritySchemes;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.annotations.security.OAuthFlow;
 import org.eclipse.microprofile.openapi.annotations.security.OAuthFlows;
-import org.eclipse.microprofile.openapi.annotations.security.OAuthScope;
 import org.eclipse.microprofile.openapi.annotations.callbacks.Callback;
 import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 import org.eclipse.microprofile.openapi.annotations.extensions.Extensions;
@@ -81,19 +79,11 @@ import javax.ws.rs.Consumes;
             description = "authentication needed to delete a pet profile", 
             flows = @OAuthFlows(
                 implicit = @OAuthFlow(
-                    authorizationUrl = "https://example.com/api/oauth/dialog",
-                    scopes = @OAuthScope(
-                        name = "write:delete",
-                        description = "delete a pet profile"
-                    )
+                    authorizationUrl = "https://example.com/api/oauth/dialog"
                 ),
                 authorizationCode = @OAuthFlow(
                     authorizationUrl = "https://example.com/api/oauth/dialog",
-                    tokenUrl = "https://example.com/api/oauth/token",
-                    scopes = @OAuthScope(
-                        name = "write:delete",
-                        description = "delete a pet profile"
-                    )
+                    tokenUrl = "https://example.com/api/oauth/token"
                 )
             )
         ),
@@ -127,7 +117,6 @@ public class PetResource {
                 ),
                 @APIResponse(
                     responseCode = "200",
-                    description = "Pet found",
                     content = @Content(
                         mediaType = "application/json",
                         schema = @Schema(type = SchemaType.OBJECT, implementation = Pet.class, 
@@ -239,7 +228,6 @@ public class PetResource {
         @HeaderParam("api_key") String apiKey,
         @Parameter(
             name = "petId",
-            in = ParameterIn.PATH,
             description = "ID of pet that needs to be fetched",
             required = true,
             schema = @Schema(
@@ -273,7 +261,7 @@ public class PetResource {
             content = @Content(
                 mediaType = "application/json",
                 schema = @Schema(implementation = Pet.class), 
-                examples = @ExampleObject(name = "Toothless") ),
+                examples = @ExampleObject(ref = "http://example.org/petapi-examples/openapi.json#/components/examples/pet-example") ),
             required = true,
             description = "example of a new pet to add"
         )
@@ -315,7 +303,6 @@ public class PetResource {
     public Response updatePet(
         @Parameter(
             name ="petAttribute",
-            in = ParameterIn.QUERY,
             description = "Attribute to update existing pet record",
             required = true,
             schema = @Schema(implementation = Pet.class)) Pet pet) {
@@ -332,7 +319,6 @@ public class PetResource {
         )
     @APIResponse(
             responseCode = "200",
-            description = "Valid status value",
             content = @Content(
                 mediaType = "application/json",
                 schema = @Schema(type = SchemaType.ARRAY, implementation = Pet.class))
@@ -346,7 +332,6 @@ public class PetResource {
     public Response findPetsByStatus(
         @Parameter(
             name = "status",
-            in = ParameterIn.QUERY,
             description = "Status values that need to be considered for filter",
             required = true,
             schema = @Schema(implementation = String.class),
@@ -427,18 +412,15 @@ public class PetResource {
     public Response updatePetWithForm (
         @Parameter(
             name = "petId",
-            in = ParameterIn.PATH,
             description = "ID of pet that needs to be updated",
             required = true)
         @PathParam("petId") Long petId,
         @Parameter(
             name = "name",
-            in = ParameterIn.QUERY,
             description = "Updated name of the pet")
         @FormParam("name") String name,
         @Parameter(
             name = "status",
-            in = ParameterIn.QUERY,
             description = "Updated status of the pet")
         @FormParam("status") String status) {
             Pet pet = petData.getPetById(petId);
