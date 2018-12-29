@@ -109,25 +109,9 @@ public interface Server extends Constructible, Extensible<Server> {
      * <p>
      * Variables are represented as a map between variable name and its value. The value is used for substitution in the server's URL template.
      * </p> 
-     * @return ServerVariables variables
-     * @deprecated since 1.1, use <code>getServerVariables()</code> instead.  In the future this method will instead return a <code>Map<String, ServerVariable></code>.
+     * @return ServerVariables variables (in the future this method will instead return a <code>Map&lt;String, ServerVariable&gt;</code>).
      **/
-    @Deprecated
     ServerVariables getVariables();
-    
-    /**
-     * This method returns the variables property of the Server instance.
-     * <p>
-     * Variables are represented as a map between variable name and its value. The value is used for substitution in the server's URL template.
-     * </p>
-     * <p>
-     * This method replaces <code>getVariables()</code> (which is deprecated) as part of an effort to eventually remove 
-     * the {@link ServerVariables} class.  A future version of this class will likely transition this method back to 
-     * being named <code>getVariables()</code> once the current method with that name is removed.
-     * </p>
-     * @return ServerVariables variables
-     */
-    Map<String, ServerVariable> getServerVariables();
 
     /**
      * This method sets the variables property of Server instance to the given variables argument.
@@ -135,7 +119,7 @@ public interface Server extends Constructible, Extensible<Server> {
      * Variables property is a map between variable name and its value. The value is used for substitution in the server's URL template.
      * </p>
      * @param variables a map between variable name and its value
-     * @deprecated since 1.1, use <code>setVariables(Map<String, ServerVariable>)</code> instead
+     * @deprecated since 1.1, use {@link #setVariables(Map)} instead
      */
     @Deprecated
     void setVariables(ServerVariables variables);
@@ -156,7 +140,7 @@ public interface Server extends Constructible, Extensible<Server> {
      * </p>
      * @param variables a map between variable name and its value
      * @return Server instance with the set variables property.
-     * @deprecated since 1.1, use <code>setVariables(Map<String, ServerVariable>)</code> instead
+     * @deprecated since 1.1, use {@link #variables(Map)} instead
      */
     @Deprecated
     default Server variables(ServerVariables variables) {
