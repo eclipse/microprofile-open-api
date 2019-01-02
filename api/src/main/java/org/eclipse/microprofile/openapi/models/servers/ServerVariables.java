@@ -26,7 +26,8 @@ import org.eclipse.microprofile.openapi.models.Extensible;
  * ServerVariables
  *
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#server-variable-object">ServerVariable Object</a>
- * @deprecated since 1.1
+ * @deprecated since 1.1, a future version will remove this and replace it with a <code>Map&lt;String, ServerVariable&gt;</code>, because it does not
+ * need to be extensible
  */
 @Deprecated
 public interface ServerVariables extends Constructible, Extensible<ServerVariables>, Map<String, ServerVariable> {
