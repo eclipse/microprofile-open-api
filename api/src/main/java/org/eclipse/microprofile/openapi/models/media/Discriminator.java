@@ -63,7 +63,7 @@ public interface Discriminator extends Constructible {
      * Maps the given name to the given value and stores it in this Discriminator's mapping property.
      * 
      * @param name a key which will be compared to information from a request body or response payload.
-     * @param value a schema name or reference
+     * @param value a schema name or reference. null values will be rejected (implementation will throw an exception) or ignored.
      * @return the current Discriminator instance
      */
     Discriminator addMapping(String name, String value);

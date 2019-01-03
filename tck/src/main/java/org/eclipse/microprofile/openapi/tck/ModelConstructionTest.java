@@ -35,7 +35,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import org.eclipse.microprofile.openapi.OASFactory;
 import org.eclipse.microprofile.openapi.models.Components;
@@ -161,6 +163,7 @@ public class ModelConstructionTest {
         assertEquals(c.getCallbacks().size(), 1, "The list is expected to contain one entry.");
         c.removeCallback(callbackKey);
         assertEquals(c.getCallbacks().size(), 0, "The list is expected to be empty.");
+        checkNullValueInAdd(c::getCallbacks, c::addCallback, "someCallback", callbackValue);
         
         final String exampleKey = "myExample";
         final Example exampleValue = createConstructibleInstance(Example.class);
@@ -169,6 +172,7 @@ public class ModelConstructionTest {
         assertEquals(c.getExamples().size(), 1, "The list is expected to contain one entry.");
         c.removeExample(exampleKey);
         assertEquals(c.getExamples().size(), 0, "The list is expected to be empty.");
+        checkNullValueInAdd(c::getExamples, c::addExample, "someExample", exampleValue);
         
         final String headerKey = "myHeader";
         final Header headerValue = createConstructibleInstance(Header.class);
@@ -177,6 +181,7 @@ public class ModelConstructionTest {
         assertEquals(c.getHeaders().size(), 1, "The list is expected to contain one entry.");
         c.removeHeader(headerKey);
         assertEquals(c.getHeaders().size(), 0, "The list is expected to be empty.");
+        checkNullValueInAdd(c::getHeaders, c::addHeader, "some-header", headerValue);
         
         final String linkKey = "myLink";
         final Link linkValue = createConstructibleInstance(Link.class);
@@ -185,6 +190,7 @@ public class ModelConstructionTest {
         assertEquals(c.getLinks().size(), 1, "The list is expected to contain one entry.");
         c.removeLink(linkKey);
         assertEquals(c.getLinks().size(), 0, "The list is expected to be empty.");
+        checkNullValueInAdd(c::getLinks, c::addLink, "someLink", linkValue);
         
         final String parameterKey = "myParameter";
         final Parameter parameterValue = createConstructibleInstance(Parameter.class);
@@ -193,6 +199,7 @@ public class ModelConstructionTest {
         assertEquals(c.getParameters().size(), 1, "The list is expected to contain one entry.");
         c.removeParameter(parameterKey);
         assertEquals(c.getParameters().size(), 0, "The list is expected to be empty.");
+        checkNullValueInAdd(c::getParameters, c::addParameter, "someParameter", parameterValue);
         
         final String requestBodyKey = "myRequestBody";
         final RequestBody requestBodyValue = createConstructibleInstance(RequestBody.class);
@@ -201,6 +208,7 @@ public class ModelConstructionTest {
         assertEquals(c.getRequestBodies().size(), 1, "The list is expected to contain one entry.");
         c.removeRequestBody(requestBodyKey);
         assertEquals(c.getRequestBodies().size(), 0, "The list is expected to be empty.");
+        checkNullValueInAdd(c::getRequestBodies, c::addRequestBody, "someRequestBody", requestBodyValue);
         
         final String responseKey = "myResponse";
         final APIResponse responseValue = createConstructibleInstance(APIResponse.class);
@@ -209,6 +217,7 @@ public class ModelConstructionTest {
         assertEquals(c.getResponses().size(), 1, "The list is expected to contain one entry.");
         c.removeResponse(responseKey);
         assertEquals(c.getResponses().size(), 0, "The list is expected to be empty.");
+        checkNullValueInAdd(c::getResponses, c::addResponse, "someResponse", responseValue);
         
         final String schemaKey = "mySchema";
         final Schema schemaValue = createConstructibleInstance(Schema.class);
@@ -217,6 +226,7 @@ public class ModelConstructionTest {
         assertEquals(c.getSchemas().size(), 1, "The list is expected to contain one entry.");
         c.removeSchema(schemaKey);
         assertEquals(c.getSchemas().size(), 0, "The list is expected to be empty.");
+        checkNullValueInAdd(c::getSchemas, c::addSchema, "someSchema", schemaValue);
         
         final String securitySchemeKey = "mySecurityScheme";
         final SecurityScheme securitySchemeValue = createConstructibleInstance(SecurityScheme.class);
@@ -225,6 +235,7 @@ public class ModelConstructionTest {
         assertEquals(c.getSecuritySchemes().size(), 1, "The list is expected to contain one entry.");
         c.removeSecurityScheme(securitySchemeKey);
         assertEquals(c.getSecuritySchemes().size(), 0, "The list is expected to be empty.");
+        checkNullValueInAdd(c::getSecuritySchemes, c::addSecurityScheme, "someSecurityScheme", securitySchemeValue);
     }
     
     @Test
@@ -299,6 +310,7 @@ public class ModelConstructionTest {
         assertEquals(o.getCallbacks().size(), 1, "The list is expected to contain one entry.");
         o.removeCallback(callbackKey);
         assertEquals(o.getCallbacks().size(), 0, "The list is expected to be empty.");
+        checkNullValueInAdd(o::getCallbacks, o::addCallback, "someCallback", callbackValue);
     }
     
     @Test
@@ -400,6 +412,7 @@ public class ModelConstructionTest {
         
         final PathItem otherValue = createConstructibleInstance(PathItem.class);
         checkMapImmutable(p, Paths::getPathItems, "/otherPathItem", otherValue);
+        checkNullValueInAdd(p::getPathItems, p::addPathItem, "/other", otherValue);
     }
     
     @Test
@@ -441,6 +454,7 @@ public class ModelConstructionTest {
         
         final PathItem otherValue = createConstructibleInstance(PathItem.class);
         checkMapImmutable(c, Callback::getPathItems, "otherPathItem", otherValue);
+        checkNullValueInAdd(c::getPathItems, c::addPathItem, "other", otherValue);
     }
     
     @Test
@@ -459,6 +473,7 @@ public class ModelConstructionTest {
         assertEquals(h.getExamples().size(), 1, "The list is expected to contain one entry.");
         h.removeExample(exampleKey);
         assertEquals(h.getExamples().size(), 0, "The list is expected to be empty.");
+        checkNullValueInAdd(h::getExamples, h::addExample, "otherExample", exampleValue);
     }
     
     @Test
@@ -487,6 +502,7 @@ public class ModelConstructionTest {
         assertEquals(l.getParameters().size(), 1, "The list is expected to contain one entry.");
         l.removeParameter(parameterKey);
         assertEquals(l.getParameters().size(), 0, "The list is expected to be empty.");
+        checkNullValueInAdd(l::getParameters, l::addParameter, "otherParameter", parameterValue);
     }
     
     @Test
@@ -541,6 +557,7 @@ public class ModelConstructionTest {
         assertEquals(d.getMapping().size(), 1, "The list is expected to contain one entry.");
         d.removeMapping(key);
         assertEquals(d.getMapping().size(), 0, "The list is expected to be empty.");
+        checkNullValueInAdd(d::getMapping, d::addMapping, "otherKey", value);
     }
     
     @Test
@@ -554,6 +571,7 @@ public class ModelConstructionTest {
         assertEquals(e.getHeaders().size(), 1, "The list is expected to contain one entry.");
         e.removeHeader(headerKey);
         assertEquals(e.getHeaders().size(), 0, "The list is expected to be empty.");
+        checkNullValueInAdd(e::getHeaders, e::addHeader, "otherHeaderKey", headerValue);
     }
     
     @Test
@@ -567,6 +585,7 @@ public class ModelConstructionTest {
         assertEquals(mt.getEncoding().size(), 1, "The list is expected to contain one entry.");
         mt.removeEncoding(encodingKey);
         assertEquals(mt.getEncoding().size(), 0, "The list is expected to be empty.");
+        checkNullValueInAdd(mt::getEncoding, mt::addEncoding, "otherEncoding", encodingValue);
         
         final String exampleKey = "myExample";
         final Example exampleValue = createConstructibleInstance(Example.class);
@@ -575,6 +594,7 @@ public class ModelConstructionTest {
         assertEquals(mt.getExamples().size(), 1, "The list is expected to contain one entry.");
         mt.removeExample(exampleKey);
         assertEquals(mt.getExamples().size(), 0, "The list is expected to be empty.");
+        checkNullValueInAdd(mt::getExamples, mt::addExample, "otherExample", exampleValue);
     }
     
     @Test
@@ -630,6 +650,7 @@ public class ModelConstructionTest {
         assertEquals(s.getProperties().size(), 1, "The list is expected to contain one entry.");
         s.removeProperty(propertySchemaKey);
         assertEquals(s.getProperties().size(), 0, "The list is expected to be empty.");
+        checkNullValueInAdd(s::getProperties, s::addProperty, "otherProperty", propertySchemaValue);
         
         final String required = new String("required");
         checkSameObject(s, s.addRequired(required));
@@ -655,6 +676,7 @@ public class ModelConstructionTest {
         assertEquals(p.getExamples().size(), 1, "The list is expected to contain one entry.");
         p.removeExample(exampleKey);
         assertEquals(p.getExamples().size(), 0, "The list is expected to be empty.");
+        checkNullValueInAdd(p::getExamples, p::addExample, "otherExample", exampleValue);
     }
     
     @Test
@@ -673,6 +695,7 @@ public class ModelConstructionTest {
         assertEquals(response.getHeaders().size(), 1, "The list is expected to contain one entry.");
         response.removeHeader(headerKey);
         assertEquals(response.getHeaders().size(), 0, "The list is expected to be empty.");
+        checkNullValueInAdd(response::getHeaders, response::addHeader, "some-header", headerValue);
         
         final String linkKey = "myLinkKey";
         final Link linkValue = createConstructibleInstance(Link.class);
@@ -681,6 +704,7 @@ public class ModelConstructionTest {
         assertEquals(response.getLinks().size(), 1, "The list is expected to contain one entry.");
         response.removeLink(linkKey);
         assertEquals(response.getLinks().size(), 0, "The list is expected to be empty.");
+        checkNullValueInAdd(response::getLinks, response::addLink, "someLinkKey", linkValue);
     }
     
     @Test
@@ -743,6 +767,8 @@ public class ModelConstructionTest {
         responses.setDefaultValue(responseValue4);
         checkMapEntry(responses, APIResponses.DEFAULT, responseValue4);
         checkSameObject(responseValue4, responses.getDefaultValue());
+        
+        checkNullValueInAdd(responses::getAPIResponses, responses::addAPIResponse, "4XX", otherValue);
     }
     
     @Test
@@ -794,6 +820,7 @@ public class ModelConstructionTest {
         
         final String otherValue = new String("otherDescription");
         checkMapImmutable(s, Scopes::getScopes, "otherScope", otherValue);
+        checkNullValueInAdd(s::getScopes, s::addScope, "other", otherValue);
     }
     
     @Test
@@ -835,6 +862,7 @@ public class ModelConstructionTest {
         
         final List<String> otherValue = new ArrayList<String>();
         checkMapImmutable(sr, SecurityRequirement::getSchemes, "otherScheme", otherValue);
+        checkNullValueInAdd(sr::getSchemes, sr::addScheme, "other", otherValue);
     }
     
     @Test
@@ -899,6 +927,7 @@ public class ModelConstructionTest {
         
         final ServerVariable otherValue = createConstructibleInstance(ServerVariable.class);
         checkMapImmutable(svs, ServerVariables::getServerVariables, "otherServerVariable", otherValue);
+        checkNullValueInAdd(svs::getServerVariables, svs::addServerVariable, "other", otherValue);
     }
     
     @Test
@@ -1199,6 +1228,30 @@ public class ModelConstructionTest {
         assertNotNull(map2, "The map must not be null.");
         assertFalse(map2.containsKey(key), "The map is expected to not contain the key: " + key);
         assertEquals(map2.size(), originalSize, "The map is expected to have a size of " + originalSize);
+    }
+    
+    private <O, T> void checkNullValueInAdd(Supplier<Map<String, T>> mapGetter, BiFunction<String, T, O> mapAdd, String key, T value) {
+        // add null as value for 'key'
+        try {
+            mapAdd.apply(key, null);
+        }
+        catch (Exception e) {
+            //It is allowed to throw an exception
+        }
+        assertFalse(mapGetter.get().containsKey(key), "The map is expected to not contain the key: " + key);
+        
+        // add value as value for 'key'
+        mapAdd.apply(key, value);
+        assertTrue(mapGetter.get().containsKey(key), "The map is expected to contain the key: " + key);
+        
+        // add null again as value for 'key'
+        try {
+            mapAdd.apply(key, null);
+        }
+        catch (Exception e) {
+            //It is allowed to throw an exception
+        }
+        assertTrue(mapGetter.get().containsKey(key), "The map is expected to contain the key: " + key);
     }
     
     private <T> void checkListEntry(List<T> list, T value) {

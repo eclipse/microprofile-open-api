@@ -51,7 +51,7 @@ public interface Extensible<T extends Extensible<T>> {
      * Adds the given object to this Extensible's map of extensions, with the given name as its key.
      *
      * @param name the key used to access the extension object. Always prefixed by "x-".
-     * @param value data not required by the specification
+     * @param value data not required by the specification. null values will be rejected (implementation will throw an exception) or ignored.
      * @return the current instance
      */
     T addExtension(String name, Object value);
