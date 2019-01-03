@@ -297,7 +297,8 @@ public interface Operation extends Constructible, Extensible<Operation> {
      * Adds the given callback item to this Operation's map of callbacks.
      *
      * @param key a key conforming to the format required for this object
-     * @param callback a callback that is applicable for this operation
+     * @param callback a callback that is applicable for this operation. null values will be rejected (implementation will throw an exception) or
+     *                 ignored.
      * @return the current Operation object
      **/
     Operation addCallback(String key, Callback callback);

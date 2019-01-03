@@ -36,7 +36,8 @@ public interface APIResponses extends Constructible, Extensible<APIResponses>, M
      * Adds an APIResponse in the format of the name as a key and the item as the value to APIResponses map
      * 
      * @param name the name of APIResponse (http status code eventually with wildcard or {@value #DEFAULT})
-     * @param apiResponse the APIResponse object to be added to APIResponses map
+     * @param apiResponse the APIResponse object to be added to APIResponses map. null values will be rejected (implementation will throw an
+     *                    exception) or ignored.
      * @return APIResponses map with the added ApiResponse instance
      * @deprecated since 1.1, use {@link #addAPIResponse(String, APIResponse)} instead
      **/
@@ -49,7 +50,8 @@ public interface APIResponses extends Constructible, Extensible<APIResponses>, M
      * Adds an APIResponse in the format of the name as a key and the item as the value to APIResponses map
      * 
      * @param name the name of APIResponse (http status code eventually with wildcard or {@value #DEFAULT})
-     * @param apiResponse the APIResponse object to be added to APIResponses map
+     * @param apiResponse the APIResponse object to be added to APIResponses map. null values will be rejected (implementation will throw an
+     *                    exception) or ignored.
      * @return APIResponses map with the added ApiResponse instance
      **/
     APIResponses addAPIResponse(String name, APIResponse apiResponse);

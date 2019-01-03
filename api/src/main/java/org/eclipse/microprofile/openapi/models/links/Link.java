@@ -173,7 +173,8 @@ public interface Link extends Constructible, Extensible<Link>, Reference<Link> {
      *
      * @param name The name of the parameter. Can be qualified using the parameter location [{in}.]{name} for operations that use the same parameter
      *            name in different locations (e.g. path.id).
-     * @param parameter a constant or an expression to be evaluated at runtime and passed to the linked operation
+     * @param parameter a constant or an expression to be evaluated at runtime and passed to the linked operation. null values will be rejected
+     *                  (implementation will throw an exception) or ignored.
      * @return the current Link instance
      */
     Link addParameter(String name, Object parameter);
