@@ -32,6 +32,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -820,7 +821,11 @@ public class ModelConstructionTest {
         
         final String otherValue = new String("otherDescription");
         checkMapImmutable(s, Scopes::getScopes, "otherScope", otherValue);
-        checkNullValueInAdd(s::getScopes, s::addScope, "other", otherValue);
+        
+        String scopeKey3 = "myScope3";
+        s.addScope(scopeKey3, null);
+        assertTrue(s.hasScope(scopeKey3), "Expected " + scopeKey3 + " to be present in the map");
+        assertNull(s.getScope(scopeKey3), "Expected the value of " + scopeKey3 + " to be null.");
     }
     
     @Test
@@ -862,7 +867,13 @@ public class ModelConstructionTest {
         
         final List<String> otherValue = new ArrayList<String>();
         checkMapImmutable(sr, SecurityRequirement::getSchemes, "otherScheme", otherValue);
-        checkNullValueInAdd(sr::getSchemes, sr::addScheme, "other", otherValue);
+        
+        final String schemeKey3 = "myScheme3";
+        sr.addScheme(schemeKey3, (String) null);
+        assertTrue(sr.hasScheme(schemeKey3), "Expected " + schemeKey3 + " to be present");
+        final List<String> schemeValue3 = Collections.emptyList();
+        assertSame(sr.getScheme(schemeKey3), schemeValue3, 
+                "The value associated with the key: " + schemeKey3 + " is expected to be an empty list.");
     }
     
     @Test

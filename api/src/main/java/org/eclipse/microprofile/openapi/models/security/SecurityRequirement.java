@@ -34,8 +34,8 @@ public interface SecurityRequirement extends Constructible, Map<String, List<Str
      * required scope (optional) provided.
      * 
      * @param securitySchemeName the name of security scheme declared in the Components section of the OpenAPI document
-     * @param scope a required scope - only valid when the defined scheme is 'oauth2' or 'openIdConnect'. null values will be rejected
-     *              (implementation will throw an exception) or ignored.
+     * @param scope a required scope - only valid when the defined scheme is 'oauth2' or 'openIdConnect'. passing null will
+     *              result in an empty list of scopes
      * @return Updated SecurityRequirement instance
      */
     SecurityRequirement addScheme(String securitySchemeName, String scope);
@@ -45,8 +45,8 @@ public interface SecurityRequirement extends Constructible, Map<String, List<Str
      * required scopes (optional) provided.
      * 
      * @param securitySchemeName the name of security scheme declared in the Components section of the OpenAPI document
-     * @param scopes the scopes required - only valid when the defined scheme is 'oauth2' or 'openIdConnect'. null values will be rejected
-     *               (implementation will throw an exception) or ignored.
+     * @param scopes the scopes required - only valid when the defined scheme is 'oauth2' or 'openIdConnect'. passing null
+     *               will result in an empty list of scopes
      * @return Updated SecurityRequirement instance
      */
     SecurityRequirement addScheme(String securitySchemeName, List<String> scopes);
@@ -98,10 +98,10 @@ public interface SecurityRequirement extends Constructible, Map<String, List<Str
     }
 
     /**
-     * Returns a path item for a given name. This is a convenience method for <code>getSchemes().get(name)</code>
+     * Returns a list of scopes for a given scheme name. This is a convenience method for <code>getSchemes().get(name)</code>
      * 
      * @param securitySchemeName the name of security scheme
-     * @return the corresponding path item or null.
+     * @return a list of scopes or null.
      */
     default List<String> getScheme(String securitySchemeName) {
         Map<String, List<String>> map = getSchemes();
