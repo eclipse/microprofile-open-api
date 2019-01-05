@@ -872,7 +872,7 @@ public class ModelConstructionTest {
         sr.addScheme(schemeKey3, (String) null);
         assertTrue(sr.hasScheme(schemeKey3), "Expected " + schemeKey3 + " to be present");
         final List<String> schemeValue3 = Collections.emptyList();
-        assertSame(sr.getScheme(schemeKey3), schemeValue3, 
+        assertEquals(sr.getScheme(schemeKey3), schemeValue3, 
                 "The value associated with the key: " + schemeKey3 + " is expected to be an empty list.");
     }
     

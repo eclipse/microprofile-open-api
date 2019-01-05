@@ -34,7 +34,7 @@ public interface SecurityRequirement extends Constructible, Map<String, List<Str
      * required scope (optional) provided.
      * 
      * @param securitySchemeName the name of security scheme declared in the Components section of the OpenAPI document
-     * @param scope a required scope - only valid when the defined scheme is 'oauth2' or 'openIdConnect'. passing null will
+     * @param scope a required scope - only valid when the defined scheme's type is 'oauth2' or 'openIdConnect'. passing null will
      *              result in an empty list of scopes
      * @return Updated SecurityRequirement instance
      */
