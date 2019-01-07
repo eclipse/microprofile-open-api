@@ -261,7 +261,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/user/{username}'.delete.operationId", equalTo("deleteUser"));
 
         vr.body("paths.'/user/{username}'.get.summary", equalTo("Get user by user name"));
-        vr.body("paths.'/user/{username}'.get.operationId", equalTo("getUserByUserName"));
+        vr.body("paths.'/user/{username}'.get.operationId", equalTo("getUserByName"));
 
         vr.body("paths.'/user/{id}'.get.summary", equalTo("Get user by id"));
         vr.body("paths.'/user/{id}'.get.operationId", equalTo("getUserById"));
