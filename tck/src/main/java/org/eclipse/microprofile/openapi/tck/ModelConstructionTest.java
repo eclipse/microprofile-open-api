@@ -32,6 +32,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -872,7 +873,17 @@ public class ModelConstructionTest {
     
     @Test
     public void serverTest() {
-        processConstructible(Server.class);
+        Server server = processConstructible(Server.class);
+        
+        final ServerVariable sv1 = createConstructibleInstance(ServerVariable.class);
+        server.setVariables(Collections.singletonMap("var1", sv1));
+        Map<String,ServerVariable> variables = server.getVariables();
+        assertEquals(variables.size(), 1, "The map is expected to contain one entry.");
+        assertTrue(variables.containsKey("var1"), "The map is expected to contain a 'var1' entry.");
+        assertEquals(variables.get("var1"), sv1, "The value corresponding to the 'var1' is wrong.");
+        
+        server.setVariables((Map<String, ServerVariable>) null);
+        assertNull(server.getVariables(), "The value is expected to be null.");
     }
     
     @Test
