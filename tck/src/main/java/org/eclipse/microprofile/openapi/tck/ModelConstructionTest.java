@@ -874,6 +874,13 @@ public class ModelConstructionTest {
         final List<String> schemeValue3 = Collections.emptyList();
         assertEquals(sr.getScheme(schemeKey3), schemeValue3, 
                 "The value associated with the key: " + schemeKey3 + " is expected to be an empty list.");
+
+        final String schemeKey4 = "myScheme3";
+        sr.addScheme(schemeKey4, (List<String>) null);
+        assertTrue(sr.hasScheme(schemeKey4), "Expected " + schemeKey4 + " to be present");
+        final List<String> schemeValue4 = Collections.emptyList();
+        assertEquals(sr.getScheme(schemeKey4), schemeValue4, 
+                "The value associated with the key: " + schemeKey4 + " is expected to be an empty list.");
     }
     
     @Test
