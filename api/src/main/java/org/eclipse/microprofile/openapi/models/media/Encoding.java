@@ -114,7 +114,7 @@ public interface Encoding extends Constructible, Extensible<Encoding> {
      * Adds the given header to this Encoding' list of headers with the given string as its key.
      *
      * @param key a key conforming to the format required for this object
-     * @param header the header object
+     * @param header the header object. null values will be rejected (implementation will throw an exception) or ignored.
      * @return the current Encoding object
      */
     Encoding addHeader(String key, Header header);

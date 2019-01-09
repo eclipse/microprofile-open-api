@@ -630,7 +630,8 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      * Adds a Schema property of the provided name using the given schema.
      *
      * @param key the name of a new Schema property
-     * @param propertySchema the Schema which describes the properties of the named property
+     * @param propertySchema the Schema which describes the properties of the named property. null values will be rejected (implementation will throw
+     *                       an exception) or ignored.
      * @return the current Schema instance
      */
     Schema addProperty(String key, Schema propertySchema);

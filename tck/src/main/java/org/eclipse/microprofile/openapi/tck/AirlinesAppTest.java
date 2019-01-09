@@ -182,6 +182,14 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/availability'.get.summary", equalTo("Retrieve all available flights"));
         vr.body("paths.'/availability'.get.operationId", equalTo("getFlights"));
     }
+    
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testRestClientNotPickedUp(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+        //We should not be picking up interfaces annotated with @RegisterRestClient
+        vr.body("paths.'/player/{playerId}'", equalTo(null));
+    }
 
     @RunAsClient
     @Test(dataProvider = "formatProvider")
@@ -253,7 +261,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/user/{username}'.delete.operationId", equalTo("deleteUser"));
 
         vr.body("paths.'/user/{username}'.get.summary", equalTo("Get user by user name"));
-        vr.body("paths.'/user/{username}'.get.operationId", equalTo("getUserByUserName"));
+        vr.body("paths.'/user/{username}'.get.operationId", equalTo("getUserByName"));
 
         vr.body("paths.'/user/{id}'.get.summary", equalTo("Get user by id"));
         vr.body("paths.'/user/{id}'.get.operationId", equalTo("getUserById"));
@@ -916,4 +924,19 @@ public class AirlinesAppTest extends AppTestBase {
                 both(containsString("Your server should return this HTTP status code if no longer interested")).
                 and(containsString("in further updates")));
     }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testExtensionParsing(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+
+        vr.body("paths.'/'.get.'x-string-property'", equalTo("string-value"));
+        vr.body("paths.'/'.get.'x-boolean-property'", equalTo(Boolean.TRUE));
+        vr.body("paths.'/'.get.'x-number-property'", equalTo(117));
+        vr.body("paths.'/'.get.'x-object-property'.'property-1'", equalTo("value-1"));
+        vr.body("paths.'/'.get.'x-object-property'.'property-3'.'prop-3-1'", equalTo(17));
+        vr.body("paths.'/'.get.'x-string-array-property'[1]", equalTo("two"));
+        vr.body("paths.'/'.get.'x-object-array-property'[1].name", equalTo("item-2"));
+    }
+
 }

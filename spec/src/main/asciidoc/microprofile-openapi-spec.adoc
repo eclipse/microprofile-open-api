@@ -708,6 +708,18 @@ the `/openapi` endpoint are expected to be the logical union of all the applicat
 in the runtime, which would imply merging multiple OpenAPI documents into a single
 valid document (handling conflicting IDs and unique names).
 
+== Integration with other MicroProfile specifications
+
+This section will outline specific integrations between MicroProfile OpenAPI and other MicroProfile specifications.
+
+=== MicroProfile Rest Client
+
+It is common that a microservice (A) using MicroProfile OpenAPI will also use https://github.com/eclipse/microprofile-rest-client[MicroProfile Rest Client]
+to make outbound calls into another microservice (B).  In this case, we do not want
+the interface for microservice (B) to appear in microservice (A)'s OAS3 document.
+
+Therefore, vendors are required to exclude from the final OAS3 document any interface annotated with https://github.com/eclipse/microprofile-rest-client/blob/master/api/src/main/java/org/eclipse/microprofile/rest/client/inject/RegisterRestClient.java[org.eclipse.microprofile.rest.client.inject.RegisterRestClient].
+
 == Exposing platform OpenAPIs
 
 Vendors are required to support a mechanism to expose `platform` OpenAPIs to consumers. 

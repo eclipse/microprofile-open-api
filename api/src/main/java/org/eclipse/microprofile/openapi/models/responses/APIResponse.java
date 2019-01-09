@@ -96,7 +96,7 @@ public interface APIResponse extends Constructible, Extensible<APIResponse>, Ref
      * ApiResponse instance does not have any headers, a new map is created and the given header is added.
      *
      * @param name the unique name of the header
-     * @param header a header for the response
+     * @param header a header for the response. null values will be rejected (implementation will throw an exception) or ignored.
      * @return this ApiResponse instance
      */
 
@@ -171,7 +171,8 @@ public interface APIResponse extends Constructible, Extensible<APIResponse>, Ref
      * Adds a link to this instance of ApiResponse using the given name and Link, and returns this ApiResponse instance.
      *
      * @param name the short name of the link
-     * @param link the operation link that can be followed from the response
+     * @param link the operation link that can be followed from the response. null values will be rejected (implementation will throw an exception)
+     *             or ignored.
      * @return this ApiResponse instance
      */
 

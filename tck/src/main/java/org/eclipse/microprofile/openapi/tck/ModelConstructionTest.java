@@ -36,7 +36,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import org.eclipse.microprofile.openapi.OASFactory;
 import org.eclipse.microprofile.openapi.models.Components;
@@ -174,6 +176,7 @@ public class ModelConstructionTest {
         
         Callback otherCallbackValue  = createConstructibleInstance(Callback.class);
         checkMapImmutable(c, Components::getCallbacks, "otherCallback", otherCallbackValue);
+        checkNullValueInAdd(c::getCallbacks, c::addCallback, "someCallback", callbackValue);
         
         final String exampleKey = "myExample";
         final Example exampleValue = createConstructibleInstance(Example.class);
@@ -194,6 +197,7 @@ public class ModelConstructionTest {
         assertEquals(c.getExamples().size(), 2, "The map is expected to contain two entries.");
         
         checkMapImmutable(c, Components::getExamples, "otherExample", otherExampleValue);
+        checkNullValueInAdd(c::getExamples, c::addExample, "someExample", exampleValue);
         
         final String headerKey = "myHeader";
         final Header headerValue = createConstructibleInstance(Header.class);
@@ -214,6 +218,7 @@ public class ModelConstructionTest {
         assertEquals(c.getHeaders().size(), 2, "The map is expected to contain two entries.");
         
         checkMapImmutable(c, Components::getHeaders, "otherHeader", otherHeaderValue);
+        checkNullValueInAdd(c::getHeaders, c::addHeader, "some-header", headerValue);
         
         final String linkKey = "myLink";
         final Link linkValue = createConstructibleInstance(Link.class);
@@ -234,6 +239,7 @@ public class ModelConstructionTest {
         assertEquals(c.getLinks().size(), 2, "The map is expected to contain two entries.");
         
         checkMapImmutable(c, Components::getLinks, "otherLink", otherLinkValue);
+        checkNullValueInAdd(c::getLinks, c::addLink, "someLink", linkValue);
         
         final String parameterKey = "myParameter";
         final Parameter parameterValue = createConstructibleInstance(Parameter.class);
@@ -242,6 +248,7 @@ public class ModelConstructionTest {
         assertEquals(c.getParameters().size(), 1, "The list is expected to contain one entry.");
         c.removeParameter(parameterKey);
         assertEquals(c.getParameters().size(), 0, "The list is expected to be empty.");
+        checkNullValueInAdd(c::getParameters, c::addParameter, "someParameter", parameterValue);
         
         final String parameterKey2 = "myParameterKey2";
         final Parameter parameterValue2 = createConstructibleInstance(Parameter.class);
@@ -274,6 +281,7 @@ public class ModelConstructionTest {
         
         RequestBody otherRequestBodyValue  = createConstructibleInstance(RequestBody.class);
         checkMapImmutable(c, Components::getRequestBodies, "otherRequestBody", otherRequestBodyValue);
+        checkNullValueInAdd(c::getRequestBodies, c::addRequestBody, "someRequestBody", requestBodyValue);
         
         final String responseKey = "myResponse";
         final APIResponse responseValue = createConstructibleInstance(APIResponse.class);
@@ -294,6 +302,7 @@ public class ModelConstructionTest {
         
         APIResponse otherAPIResponseValue  = createConstructibleInstance(APIResponse.class);
         checkMapImmutable(c, Components::getResponses, "otherAPIResponse", otherAPIResponseValue);
+        checkNullValueInAdd(c::getResponses, c::addResponse, "someResponse", responseValue);
         
         final String schemaKey = "mySchema";
         final Schema schemaValue = createConstructibleInstance(Schema.class);
@@ -314,6 +323,7 @@ public class ModelConstructionTest {
         
         Schema otherSchemaValue  = createConstructibleInstance(Schema.class);
         checkMapImmutable(c, Components::getSchemas, "otherSchema", otherSchemaValue);
+        checkNullValueInAdd(c::getSchemas, c::addSchema, "someSchema", schemaValue);
         
         final String securitySchemeKey = "mySecurityScheme";
         final SecurityScheme securitySchemeValue = createConstructibleInstance(SecurityScheme.class);
@@ -334,6 +344,7 @@ public class ModelConstructionTest {
         
         SecurityScheme otherSecuritySchemeValue  = createConstructibleInstance(SecurityScheme.class);
         checkMapImmutable(c, Components::getSecuritySchemes, "otherSecurityScheme", otherSecuritySchemeValue);
+        checkNullValueInAdd(c::getSecuritySchemes, c::addSecurityScheme, "someSecurityScheme", securitySchemeValue);
     }
     
     @Test
@@ -501,6 +512,7 @@ public class ModelConstructionTest {
         
         Callback otherCallback  = createConstructibleInstance(Callback.class);
         checkMapImmutable(o, Operation::getCallbacks, "otherCallback", otherCallback);
+        checkNullValueInAdd(o::getCallbacks, o::addCallback, "someCallback", callbackValue);
     }
     
     @Test
@@ -618,6 +630,7 @@ public class ModelConstructionTest {
         
         final PathItem otherValue = createConstructibleInstance(PathItem.class);
         checkMapImmutable(p, Paths::getPathItems, "/otherPathItem", otherValue);
+        checkNullValueInAdd(p::getPathItems, p::addPathItem, "/other", otherValue);
     }
     
     @Test
@@ -653,6 +666,7 @@ public class ModelConstructionTest {
         
         final PathItem otherValue = createConstructibleInstance(PathItem.class);
         checkMapImmutable(c, Callback::getPathItems, "otherPathItem", otherValue);
+        checkNullValueInAdd(c::getPathItems, c::addPathItem, "other", otherValue);
     }
     
     @Test
@@ -683,6 +697,7 @@ public class ModelConstructionTest {
         
         Example otherExampleValue = createConstructibleInstance(Example.class);
         checkMapImmutable(h, Header::getExamples, "otherExample", otherExampleValue);
+        checkNullValueInAdd(h::getExamples, h::addExample, "otherExample", exampleValue);
     }
     
     @Test
@@ -723,6 +738,7 @@ public class ModelConstructionTest {
         
         Object otherExampleValue = new Object();
         checkMapImmutable(l, Link::getParameters, "otherParameter", otherExampleValue);
+        checkNullValueInAdd(l::getParameters, l::addParameter, "otherParameter", parameterValue);
     }
     
     @Test
@@ -783,6 +799,7 @@ public class ModelConstructionTest {
         
         final String otherValue = new String("otherValue");
         checkMapImmutable(d, Discriminator::getMapping, "otherValue", otherValue);
+        checkNullValueInAdd(d::getMapping, d::addMapping, "otherKey", value);
     }
     
     @Test
@@ -808,6 +825,7 @@ public class ModelConstructionTest {
         
         final Header otherHeaderValue = createConstructibleInstance(Header.class);
         checkMapImmutable(e, Encoding::getHeaders, "otherHeader", otherHeaderValue);
+        checkNullValueInAdd(e::getHeaders, e::addHeader, "otherHeaderKey", headerValue);
     }
     
     @Test
@@ -833,6 +851,7 @@ public class ModelConstructionTest {
         
         Encoding otherEncodingValue = createConstructibleInstance(Encoding.class);
         checkMapImmutable(mt, MediaType::getEncoding, "otherEncoding", otherEncodingValue);
+        checkNullValueInAdd(mt::getEncoding, mt::addEncoding, "otherEncoding", encodingValue);
         
         final String exampleKey = "myExample";
         final Example exampleValue = createConstructibleInstance(Example.class);
@@ -853,6 +872,7 @@ public class ModelConstructionTest {
         
         Example otherExampleValue = createConstructibleInstance(Example.class);
         checkMapImmutable(mt, MediaType::getExamples, "otherExample", otherExampleValue);
+        checkNullValueInAdd(mt::getExamples, mt::addExample, "otherExample", exampleValue);
     }
     
     @Test
@@ -964,6 +984,7 @@ public class ModelConstructionTest {
         
         final Schema otherPropertyValue = createConstructibleInstance(Schema.class);
         checkMapImmutable(s, Schema::getProperties, "otherPropertyKey", otherPropertyValue);
+        checkNullValueInAdd(s::getProperties, s::addProperty, "otherProperty", propertySchemaValue);
         
         final String required = new String("required");
         checkSameObject(s, s.addRequired(required));
@@ -1012,6 +1033,7 @@ public class ModelConstructionTest {
         
         Example otherExampleValue = createConstructibleInstance(Example.class);
         checkMapImmutable(p, Parameter::getExamples, "otherExample", otherExampleValue);
+        checkNullValueInAdd(p::getExamples, p::addExample, "otherExample", exampleValue);
     }
     
     @Test
@@ -1042,6 +1064,7 @@ public class ModelConstructionTest {
         
         Header otherHeaderValue  = createConstructibleInstance(Header.class);
         checkMapImmutable(response, APIResponse::getHeaders, "otherHeader", otherHeaderValue);
+        checkNullValueInAdd(response::getHeaders, response::addHeader, "some-header", headerValue);
         
         final String linkKey = "myLinkKey";
         final Link linkValue = createConstructibleInstance(Link.class);
@@ -1062,6 +1085,7 @@ public class ModelConstructionTest {
         assertEquals(response.getLinks().size(), 2, "The map is expected to contain two entries.");
         
         checkMapImmutable(response, APIResponse::getLinks, "otherLink", otherLinkValue);
+        checkNullValueInAdd(response::getLinks, response::addLink, "someLinkKey", linkValue);
     }
     
     @Test
@@ -1115,6 +1139,8 @@ public class ModelConstructionTest {
         responses.setDefaultValue(responseValue4);
         checkMapEntry(responses.getAPIResponses(), APIResponses.DEFAULT, responseValue4);
         checkSameObject(responseValue4, responses.getDefaultValue());
+        
+        checkNullValueInAdd(responses::getAPIResponses, responses::addAPIResponse, "4XX", otherValue);
     }
     
     @Test
@@ -1160,6 +1186,11 @@ public class ModelConstructionTest {
         
         final String otherValue = new String("otherDescription");
         checkMapImmutable(s, Scopes::getScopes, "otherScope", otherValue);
+        
+        String scopeKey3 = "myScope3";
+        s.addScope(scopeKey3, null);
+        assertTrue(s.hasScope(scopeKey3), "Expected " + scopeKey3 + " to be present in the map");
+        assertNull(s.getScope(scopeKey3), "Expected the value of " + scopeKey3 + " to be null.");
     }
     
     @Test
@@ -1195,6 +1226,20 @@ public class ModelConstructionTest {
         
         final List<String> otherValue = new ArrayList<String>();
         checkMapImmutable(sr, SecurityRequirement::getSchemes, "otherScheme", otherValue);
+        
+        final String schemeKey3 = "myScheme3";
+        sr.addScheme(schemeKey3, (String) null);
+        assertTrue(sr.hasScheme(schemeKey3), "Expected " + schemeKey3 + " to be present");
+        final List<String> schemeValue3 = Collections.emptyList();
+        assertEquals(sr.getScheme(schemeKey3), schemeValue3, 
+                "The value associated with the key: " + schemeKey3 + " is expected to be an empty list.");
+
+        final String schemeKey4 = "myScheme3";
+        sr.addScheme(schemeKey4, (List<String>) null);
+        assertTrue(sr.hasScheme(schemeKey4), "Expected " + schemeKey4 + " to be present");
+        final List<String> schemeValue4 = Collections.emptyList();
+        assertEquals(sr.getScheme(schemeKey4), schemeValue4, 
+                "The value associated with the key: " + schemeKey4 + " is expected to be an empty list.");
     }
     
     @Test
@@ -1204,7 +1249,17 @@ public class ModelConstructionTest {
     
     @Test
     public void serverTest() {
-        processConstructible(Server.class);
+        Server server = processConstructible(Server.class);
+        
+        final ServerVariable sv1 = createConstructibleInstance(ServerVariable.class);
+        server.setVariables(Collections.singletonMap("var1", sv1));
+        Map<String,ServerVariable> variables = server.getVariables().getServerVariables();
+        assertEquals(variables.size(), 1, "The map is expected to contain one entry.");
+        assertTrue(variables.containsKey("var1"), "The map is expected to contain a 'var1' entry.");
+        assertEquals(variables.get("var1"), sv1, "The value corresponding to the 'var1' is wrong.");
+        
+        server.setVariables((Map<String, ServerVariable>) null);
+        assertNull(server.getVariables(), "The value is expected to be null.");
     }
     
     @Test
@@ -1231,6 +1286,7 @@ public class ModelConstructionTest {
     }
     
     @Test
+    @Deprecated
     public void serverVariablesTest() {
         final ServerVariables svs = processConstructible(ServerVariables.class);
         
@@ -1263,6 +1319,7 @@ public class ModelConstructionTest {
         
         final ServerVariable otherValue = createConstructibleInstance(ServerVariable.class);
         checkMapImmutable(svs, ServerVariables::getServerVariables, "otherServerVariable", otherValue);
+        checkNullValueInAdd(svs::getServerVariables, svs::addServerVariable, "other", otherValue);
     }
     
     @Test
@@ -1567,6 +1624,30 @@ public class ModelConstructionTest {
         assertNotNull(map2, "The map must not be null.");
         assertFalse(map2.containsKey(key), "The map is expected to not contain the key: " + key);
         assertEquals(map2.size(), originalSize, "The map is expected to have a size of " + originalSize);
+    }
+    
+    private <O, T> void checkNullValueInAdd(Supplier<Map<String, T>> mapGetter, BiFunction<String, T, O> mapAdd, String key, T value) {
+        // add null as value for 'key'
+        try {
+            mapAdd.apply(key, null);
+        }
+        catch (Exception e) {
+            //It is allowed to throw an exception
+        }
+        assertFalse(mapGetter.get().containsKey(key), "The map is expected to not contain the key: " + key);
+        
+        // add value as value for 'key'
+        mapAdd.apply(key, value);
+        assertTrue(mapGetter.get().containsKey(key), "The map is expected to contain the key: " + key);
+        
+        // add null again as value for 'key'
+        try {
+            mapAdd.apply(key, null);
+        }
+        catch (Exception e) {
+            //It is allowed to throw an exception
+        }
+        assertTrue(mapGetter.get().containsKey(key), "The map is expected to contain the key: " + key);
     }
     
     private <T> void checkListEntry(List<T> list, T value) {

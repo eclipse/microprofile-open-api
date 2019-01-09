@@ -371,7 +371,7 @@ public interface Parameter extends Constructible, Extensible<Parameter>, Referen
      * parameter encoding.
      *
      * @param key string to represent the example
-     * @param example example of the parameter
+     * @param example example of the parameter. null values will be rejected (implementation will throw an exception) or ignored.
      * @return the current Parameter instance
      */
     Parameter addExample(String key, Example example);
