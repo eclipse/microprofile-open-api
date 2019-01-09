@@ -80,7 +80,7 @@ public interface Components extends Constructible, Extensible<Components> {
      * Adds the given schema to this Components' list of schemas with the given string as its key.
      *
      * @param key a key conforming to the format required for this object
-     * @param schema a reusable schema object
+     * @param schema a reusable schema object. null values will be rejected (implementation will throw an exception) or ignored.
      * @return the current Components object
      */
     Components addSchema(String key, Schema schema);
@@ -121,7 +121,7 @@ public interface Components extends Constructible, Extensible<Components> {
      * Adds the given response to this Components' map of responses with the given string as its key.
      *
      * @param key a key conforming to the format required for this object
-     * @param response a reusable response object
+     * @param response a reusable response object. null values will be rejected (implementation will throw an exception) or ignored.
      * @return the current Components object
      */
     Components addResponse(String key, APIResponse response);
@@ -162,7 +162,7 @@ public interface Components extends Constructible, Extensible<Components> {
      * Adds the given parameter to this Components' map of parameters with the given string as its key.
      *
      * @param key a key conforming to the format required for this object
-     * @param parameter a reusable parameter object
+     * @param parameter a reusable parameter object. null values will be rejected (implementation will throw an exception) or ignored.
      * @return the current Components object
      */
     Components addParameter(String key, Parameter parameter);
@@ -203,7 +203,7 @@ public interface Components extends Constructible, Extensible<Components> {
      * Adds the given example to this Components' map of examples with the given string as its key.
      *
      * @param key a key conforming to the format required for this object
-     * @param example a reusable example object
+     * @param example a reusable example object. null values will be rejected (implementation will throw an exception) or ignored.
      * @return the current Components object
      */
     Components addExample(String key, Example example);
@@ -244,7 +244,7 @@ public interface Components extends Constructible, Extensible<Components> {
      * Adds the given request body to this Components' map of request bodies with the given string as its key.
      *
      * @param key a key conforming to the format required for this object
-     * @param requestBody a reusable request body object
+     * @param requestBody a reusable request body object. null values will be rejected (implementation will throw an exception) or ignored.
      * @return the current Components object
      */
     Components addRequestBody(String key, RequestBody requestBody);
@@ -285,7 +285,7 @@ public interface Components extends Constructible, Extensible<Components> {
      * Adds the given header to this Components' map of headers with the given string as its key.
      *
      * @param key a key conforming to the format required for this object
-     * @param header a reusable header object
+     * @param header a reusable header object. null values will be rejected (implementation will throw an exception) or ignored.
      * @return the current Components object
      */
     Components addHeader(String key, Header header);
@@ -326,7 +326,7 @@ public interface Components extends Constructible, Extensible<Components> {
      * Adds the given security scheme to this Components' map of security schemes with the given string as its key.
      *
      * @param key a key conforming to the format required for this object
-     * @param securityScheme a reusable security scheme object
+     * @param securityScheme a reusable security scheme object. null values will be rejected (implementation will throw an exception) or ignored.
      * @return the current Components object
      */
     Components addSecurityScheme(String key, SecurityScheme securityScheme);
@@ -367,7 +367,7 @@ public interface Components extends Constructible, Extensible<Components> {
      * Adds the given link to this Components' map of links with the given string as its key.
      *
      * @param key a key conforming to the format required for this object
-     * @param link a reusable link object
+     * @param link a reusable link object. null values will be rejected (implementation will throw an exception) or ignored.
      * @return the current Components object
      */
     Components addLink(String key, Link link);
@@ -408,7 +408,7 @@ public interface Components extends Constructible, Extensible<Components> {
      * Adds the given callback to this Components' map of callbacks with the given string as its key.
      *
      * @param key a key conforming to the format required for this object
-     * @param callback a reusable callback object
+     * @param callback a reusable callback object. null values will be rejected (implementation will throw an exception) or ignored.
      * @return the current Components object
      */
     Components addCallback(String key, Callback callback);

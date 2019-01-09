@@ -261,7 +261,7 @@ public interface Header extends Constructible, Extensible<Header>, Reference<Hea
      * specified in the parameter encoding.
      *
      * @param key string to represent the example
-     * @param example example of the header
+     * @param example example of the header. null values will be rejected (implementation will throw an exception) or ignored.
      * @return the current Header instance
      */
     Header addExample(String key, Example example);

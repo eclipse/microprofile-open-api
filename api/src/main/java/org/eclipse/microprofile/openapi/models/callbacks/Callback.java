@@ -43,7 +43,8 @@ public interface Callback extends Constructible, Extensible<Callback>, Reference
      * complete HTTP message can be accessed. This includes accessing any part of a body that a JSON Pointer RFC6901 can reference.
      * 
      * @param name a runtime expression that can be evaluated in the context of a runtime HTTP request/response
-     * @param pathItem a path to add to this Callback's list of PathItems
+     * @param pathItem a path to add to this Callback's list of PathItems. null values will be rejected (implementation will throw an exception) or
+     *                 ignored.
      * @return the current Callback instance
      */
     Callback addPathItem(String name, PathItem pathItem);

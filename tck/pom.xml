@@ -86,7 +86,14 @@
             <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
-
+        
+        <dependency>
+            <groupId>org.eclipse.microprofile.rest.client</groupId>
+            <artifactId>microprofile-rest-client-api</artifactId>
+            <version>${restclient.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -96,7 +103,6 @@
         <dependency>
             <groupId>org.jboss.arquillian.testng</groupId>
             <artifactId>arquillian-testng-container</artifactId>
-            <version>${arquillian.version}</version>
         </dependency>
 
         <dependency>

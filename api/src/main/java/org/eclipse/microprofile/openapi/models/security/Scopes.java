@@ -34,7 +34,7 @@ public interface Scopes extends Constructible, Extensible<Scopes> {
      * Adds name of an existing scope object and item parameters to a Scopes instance as a key-value pair in a map.
      *
      * @param scope the name of a scope
-     * @param description description of the scope
+     * @param description description of the scope.
      * @return Scopes instance with the added key-value pair
      */
     Scopes addScope(String scope, String description);

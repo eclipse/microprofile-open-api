@@ -451,10 +451,12 @@ public class UserResource {
     })
     @Operation(
         summary = "Get user by user name",
-        operationId = "getUserByUserName")
+        operationId = "getUserByName")
     public Response getUserByName(
         @Parameter(
-            ref= "username"
+            name = "username",
+            schema = @Schema(type = SchemaType.STRING),
+            required = true
             )
         @PathParam("username") String userName) throws ApiException {
             User user = userData.findUserByName(userName);

@@ -91,7 +91,7 @@ public interface MediaType extends Constructible, Extensible<MediaType> {
      * present.
      *
      * @param key any unique name to identify the example object
-     * @param example an example of a media type
+     * @param example an example of a media type. null values will be rejected (implementation will throw an exception) or ignored.
      * @return the current MediaType instance
      */
     MediaType addExample(String key, Example example);
@@ -160,7 +160,8 @@ public interface MediaType extends Constructible, Extensible<MediaType> {
      * Adds an Encoding item to the encoding property of a MediaType instance.
      *
      * @param key a property name in the schema
-     * @param encodingItem an encoding definition to apply to the schema property.
+     * @param encodingItem an encoding definition to apply to the schema property. null values will be rejected (implementation will throw an
+     *                     exception) or ignored.
      * @return the current MediaType instance
      */
     MediaType addEncoding(String key, Encoding encodingItem);

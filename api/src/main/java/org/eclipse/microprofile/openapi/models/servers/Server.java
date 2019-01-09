@@ -17,6 +17,8 @@
 
 package org.eclipse.microprofile.openapi.models.servers;
 
+import java.util.Map;
+
 import org.eclipse.microprofile.openapi.models.Constructible;
 import org.eclipse.microprofile.openapi.models.Extensible;
 
@@ -107,7 +109,7 @@ public interface Server extends Constructible, Extensible<Server> {
      * <p>
      * Variables are represented as a map between variable name and its value. The value is used for substitution in the server's URL template.
      * </p> 
-     * @return ServerVariables variables
+     * @return ServerVariables variables (in the future this method will instead return a <code>Map&lt;String, ServerVariable&gt;</code>).
      **/
     ServerVariables getVariables();
 
@@ -117,8 +119,34 @@ public interface Server extends Constructible, Extensible<Server> {
      * Variables property is a map between variable name and its value. The value is used for substitution in the server's URL template.
      * </p>
      * @param variables a map between variable name and its value
+     * @deprecated since 1.1, use {@link #setVariables(Map)} instead
      */
+    @Deprecated
     void setVariables(ServerVariables variables);
+    
+    /**
+     * This method sets the variables property of Server instance to the given variables argument.
+     * <p>
+     * Variables property is a map between variable name and its value. The value is used for substitution in the server's URL template.
+     * </p>
+     * @param variables a map between variable name and its value
+     */
+    void setVariables(Map<String, ServerVariable> variables);
+    
+    /**
+     * This method sets the variables property of Server instance to the given variables argument and returns the modified instance.
+     * <p>
+     * Variables property is a map between variable name and its value. The value is used for substitution in the server's URL template.
+     * </p>
+     * @param variables a map between variable name and its value
+     * @return Server instance with the set variables property.
+     * @deprecated since 1.1, use {@link #variables(Map)} instead
+     */
+    @Deprecated
+    default Server variables(ServerVariables variables) {
+        setVariables(variables);
+        return this;
+    }
 
     /**
      * This method sets the variables property of Server instance to the given variables argument and returns the modified instance.
@@ -128,9 +156,8 @@ public interface Server extends Constructible, Extensible<Server> {
      * @param variables a map between variable name and its value
      * @return Server instance with the set variables property.
      */
-    default Server variables(ServerVariables variables) {
+    default Server variables(Map<String, ServerVariable> variables) {
         setVariables(variables);
         return this;
     }
-
 }

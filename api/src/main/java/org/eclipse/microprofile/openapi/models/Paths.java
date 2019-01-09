@@ -35,7 +35,7 @@ public interface Paths extends Constructible, Extensible<Paths> {
      * Adds the given path item to this Paths and return this instance of Paths
      * 
      * @param name a path name in the format valid for a Paths object. The field name MUST begin with a slash.
-     * @param item the path item added to the list of paths
+     * @param item the path item added to the list of paths. null values will be rejected (implementation will throw an exception) or ignored.
      * @return the current Paths instance
      */
     Paths addPathItem(String name, PathItem item);
