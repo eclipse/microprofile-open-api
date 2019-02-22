@@ -19,24 +19,6 @@
 
 = Eclipse MicroProfile OpenAPI
 
-'''
-== How to contribute
-
-Do you want to contribute to this project? Here is what you can do:
-
-* Fork the repository, make changes, then do a pull request.
-** Remember to https://help.github.com/articles/signing-commits/[sign your commits]
-** Make sure you have signed the https://www.eclipse.org/legal/ECA.php[Eclipse Contributor Agreement]
-* https://github.com/eclipse/microprofile-open-api/issues[Create or fix an issue].
-* https://gitter.im/eclipse/microprofile-open-api[Join us on Gitter to discuss this project].
-* Join our https://calendar.google.com/calendar/embed?src=gbnbc373ga40n0tvbl88nkc3r4%40group.calendar.google.com[bi-weekly meeting] every second Monday at https://www.timeanddate.com/time/map/[15h00 GMT]. 
-** https://docs.google.com/document/d/1opa5lz5m1IctTWNm09YWTb5qwg3r8zF9a0sPcOHCbt0/edit?usp=sharing[Minutes and Agenda].
-** https://bluejeans.com/166335599[Meeting room].
-* Join the discussions on the https://groups.google.com/forum/#!forum/microprofile[MicroProfile Google Group]
-* https://microprofile.io/blog/[Contribute a blog post].
-
-'''
-
 This MicroProfile specification aims at providing a unified Java API for the link:++https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md++[OpenAPI v3 specification],
 that all application developers can use to expose their API documentation.
 
@@ -46,3 +28,7 @@ that all application developers can use to expose their API documentation.
 * For announcements, visit the link:++https://groups.google.com/forum/#!forum/microprofile++[MicroProfile Google Group].
 * Extended examples that supplement the spec can be found link:++https://github.com/eclipse/microprofile-open-api/wiki++[here].
 * Eclipse release information and further logistics about the project can be found link:++https://wiki.eclipse.org/MicroProfile/OpenAPI++[here].
+
+== Contributing
+
+Do you want to contribute to this project? link:CONTRIBUTING.adoc[Find out how you can help here].
