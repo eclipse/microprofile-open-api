@@ -39,7 +39,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
  * 
  * <pre>
  * &#64;ApiResponse(responseCode="200", description="Calculate load size", content=
- *     [ &#64;Content(mediaType="application/json", Schema=&#64;Schema(type="integer")) ] )
+ *     { &#64;Content(mediaType="application/json", Schema=&#64;Schema(type="integer")) } )
  * &#64;GET
  * public getLuggageWeight(Flight id) {
  *     return getBagWeight(id) + getCargoWeight(id);
