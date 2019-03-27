@@ -16,20 +16,11 @@
 
 package org.eclipse.microprofile.openapi.tck;
 
-import static org.hamcrest.Matchers.hasKey;
-import static org.hamcrest.Matchers.startsWith;
-import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
-
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.testng.annotations.Test;
 
-import io.restassured.response.ValidatableResponse;
-
-public class OASConfigScanClassTest extends AppTestBase {
-    private ValidatableResponse vr;
+public class OASConfigScanClassTest extends OASConfigScanClassBase {
     
     @Deployment(name = "airlines")
     public static WebArchive createDeployment() {
@@ -37,25 +28,5 @@ public class OASConfigScanClassTest extends AppTestBase {
                 .addPackages(true, "org.eclipse.microprofile.openapi.apps.airlines")
                 .addAsManifestResource("class-microprofile-config.properties", "microprofile-config.properties");
     }
-    
-    @RunAsClient
-    @Test(dataProvider = "formatProvider")
-    public void testScanClass(String type) throws InterruptedException {
-        vr = callEndpoint(type);
-        vr.body("openapi", startsWith("3.0."));
-        vr.body("paths", aMapWithSize(5));
-        vr.body("paths", hasKey("/reviews"));
-        vr.body("paths", hasKey("/reviews/{id}"));
-        vr.body("paths", hasKey("/reviews/users/{user}"));
-        vr.body("paths", hasKey("/reviews/airlines/{airline}"));
-        vr.body("paths", hasKey("/reviews/{user}/{airlines}"));
-        
-        vr.body("paths.'/reviews'", aMapWithSize(2));
-        vr.body("paths.'/reviews/{id}'", aMapWithSize(2)); 
-        vr.body("paths.'/reviews/users/{user}'", aMapWithSize(1));
-        vr.body("paths.'/reviews/airlines/{airline}'", aMapWithSize(1)); 
-        vr.body("paths.'/reviews/{user}/{airlines}'", aMapWithSize(1)); 
-        
-        
-    }
+
 }

@@ -20,9 +20,9 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 
-public class OASConfigWebInfTest extends OASConfigScanClassTest {
+public class OASConfigWebInfTest extends OASConfigScanClassBase {
 
-    @Deployment(name = "airlinesWebInf", order = 2)
+    @Deployment(name = "airlinesWebInf")
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "airlinesWebInf.war")
                 .addPackages(true, "org.eclipse.microprofile.openapi.apps.airlines")

@@ -77,14 +77,23 @@ import org.eclipse.microprofile.openapi.models.servers.ServerVariable;
 import org.eclipse.microprofile.openapi.models.servers.ServerVariables;
 import org.eclipse.microprofile.openapi.models.tags.Tag;
 import org.testng.annotations.Test;
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.testng.Arquillian;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 
 /**
  * This test covers construction of the OpenAPI model. It verifies that the implementation can
  * create instances of all of the Constructible interfaces and then invokes methods (including
  * getters, setters and builders) on those instances to verify that they behave correctly.
  */
-public class ModelConstructionTest {
+public class ModelConstructionTest extends Arquillian {
     
+    @Deployment
+    public static WebArchive createDeployment() {
+        return ShrinkWrap.create(WebArchive.class);
+    }
+
     // Container for matched getter, setter and builder methods
     static final class Property {
         private final String name;
