@@ -146,7 +146,7 @@ public interface Link extends Constructible, Extensible<Link>, Reference<Link> {
      * Returns the parameters property from this instance of Link. The key is the parameter name and the value is a constant or a runtime expression
      * to be passed to the linked operation.
      *
-     * @return a map representing parameters to pass to this link's operation
+     * @return a copy Map (potentially immutable) representing parameters to pass to this link's operation
      **/
     Map<String, Object> getParameters();
 

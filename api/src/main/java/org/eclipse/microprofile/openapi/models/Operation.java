@@ -41,7 +41,7 @@ public interface Operation extends Constructible, Extensible<Operation> {
     /**
      * Returns the tags property from an Operation instance.
      *
-     * @return a list of the operation's tags
+     * @return a copy List (potentially immutable) of the operation's tags
      **/
     List<String> getTags();
 
@@ -181,7 +181,7 @@ public interface Operation extends Constructible, Extensible<Operation> {
     /**
      * Returns the parameters property from an Operation instance.
      *
-     * @return a list of parameters that are applicable for this operation
+     * @return a copy List (potentially immutable) of parameters that are applicable for this operation
      **/
     List<Parameter> getParameters();
 
@@ -271,7 +271,7 @@ public interface Operation extends Constructible, Extensible<Operation> {
     /**
      * Returns the callbacks property from an Operation instance.
      *
-     * @return map of possible out-of-band callbacks related to the operation
+     * @return a copy Map (potentially immutable) of possible out-of-band callbacks related to the operation
      **/
     Map<String, Callback> getCallbacks();
 
@@ -338,7 +338,7 @@ public interface Operation extends Constructible, Extensible<Operation> {
     /**
      * Returns the security property from an Operation instance.
      *
-     * @return a list of which security mechanisms can be used for this operation
+     * @return a copy List (potentially immutable) of which security mechanisms can be used for this operation
      **/
     List<SecurityRequirement> getSecurity();
 
@@ -378,7 +378,7 @@ public interface Operation extends Constructible, Extensible<Operation> {
     /**
      * Returns the servers property from an Operation instance.
      *
-     * @return a list of servers to service this operation
+     * @return a copy List (potentially immutable) of servers to service this operation
      **/
     List<Server> getServers();
 

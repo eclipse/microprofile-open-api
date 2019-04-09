@@ -17,7 +17,8 @@
 // limitations under the License.
 //
 
-:authors: Arthur De Magalhaes (Spec Lead), Eric Wittmann, Anna Safonov, Matt Gill, Ivan Junckes Filho, Jérémie Bresson, Jana Manoharan, Rui Qi Wang,Tommy Wojtczak
+:authors: Arthur De Magalhaes (Spec Lead), Leo Christy Jesuraj, Eric Wittmann, Michael Glavassevich, Artur Dzmitryieu, Navid Shakibapour, Anna Safonov, Jana Manoharan, Paul Gooderham
+:email: ademagalhaes@gmail.com, leo.jesuraj@gmail.com, eric.wittmann@gmail.com, mrglavas@ca.ibm.com, dzmitry@ca.ibm.com, navid.shakibapour@gmail.com, anna.safonov@uoit.net, jana.manoharan96@gmail.com, turkeyonmarblerye@gmail.com
 :version-label!:
 :sectanchors:
 :doctype: book
@@ -718,6 +719,72 @@ to make outbound calls into another microservice (B).  In this case, we do not w
 the interface for microservice (B) to appear in microservice (A)'s OAS3 document.
 
 Therefore, vendors are required to exclude from the final OAS3 document any interface annotated with https://github.com/eclipse/microprofile-rest-client/blob/master/api/src/main/java/org/eclipse/microprofile/rest/client/inject/RegisterRestClient.java[org.eclipse.microprofile.rest.client.inject.RegisterRestClient].
+
+== Exposing platform OpenAPIs
+
+Vendors are required to support a mechanism to expose `platform` OpenAPIs to consumers. 
+These are RESTful APIs implemented by the vendor framework itself, which may include 
+MicroProfile Metrics, MicroProfile Health Check, JMX-REST connectors, OpenID Connect Providers
+or any other API the framework may be exposing.  
+
+The exposure of these platform OpenAPIs allows for:
+
+  *  discovery of available platform endpoints
+  *  generation of clients to consume the API (OAS3 -> client_language)
+  *  a standard way to document non-application APIs
+    **  this is probably the most significant reason for this new SPI, as the number of APIs exposed by 
+  frameworks continues to grow and they all need to be documented in some way.  We certainly don't want 
+  RESTful APIs being documented in HTML tables, proprietary / custom formats, etc - if it's a REST API 
+  it should be documented using OpenAPI.
+
+
+=== Registrying a platform OpenAPI
+
+The components within a vendor's framework will register their platform OpenAPI by using the 
+following patttern:
+
+`mp.openapi.spi.platform.<component>=<path_to_OAS3>`
+
+Example:  `mp.openapi.spi.platform.jmx=${server_install_dir}/oas/jmx/openapi.yaml`
+
+Please note that this is an `SPI`, which means it is intended to be set only by the vendor framework, not by
+user applications.
+
+This pattern takes advantage of MicroProfile Config to inject the location of the component's OAS3 doc,
+which creates dynamic and composed deployments, only exposing the platform APIs that are currently enabled.
+
+For dynamic frameworks (e.g. loading and unloading OSGi bundles), components can be unregistered by setting
+their OAS3 path to empty:
+
+`mp.openapi.spi.platform.jmx=`
+
+
+=== Exposing platform OpenAPIs
+
+There are two new RESTful endpoints that vendors must expose.  The first queries which platform OpenAPIs
+are currently available:
+
+*  `GET openapi/platform`  
+** returns a list (following the <<Content format>> rules) of available components exposing
+OAS3 docs.  
+** the component name used matches the `<component>` string used during registration inside the key `mp.openapi.spi.platform.<component>`.
+
+**  A sample returning payload:
+
+[source, yaml]
+----
+'components':
+- metrics
+- jmx
+- oidc
+----
+  
+*  `GET openapi/platform/<component>` 
+**  returns the actual OAS3 doc for that component (following the <<Content format>> rules).
+**  the `servers` element of the OAS3 doc for each component may be omitted, in which case
+the vendor framework must insert an appropriate `servers` value.  
+
+These APIs are public and meant to be used by application developers or anyone that needs to interact with these endpoints.
 
 == Limitations
 

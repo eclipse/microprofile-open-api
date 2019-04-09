@@ -19,7 +19,6 @@ package org.eclipse.microprofile.openapi.models;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.eclipse.microprofile.openapi.models.parameters.Parameter;
 import org.eclipse.microprofile.openapi.models.servers.Server;
@@ -295,28 +294,6 @@ public interface PathItem extends Constructible, Extensible<PathItem>, Reference
     }
 
     /**
-     * Returns a list of all the operations for this path item.
-     * 
-     * @deprecated since 1.1, use @link {@link Map#values()} on {@link #getOperations()} instead
-     * @return a list of all the operations for this path item
-     **/
-    @Deprecated
-    default List<Operation> readOperations() {
-        return getOperations().values().stream().collect(Collectors.toList());
-    }
-
-    /**
-     * Returns a map with all the operations for this path where the keys are HttpMethods.
-     * 
-     * @deprecated since 1.1, use {@link #getOperations()} instead
-     * @return a map with all the operations for this path where the keys are HttpMethods
-     **/
-    @Deprecated
-    default Map<PathItem.HttpMethod, Operation> readOperationsMap() {
-        return getOperations();
-    }
-
-    /**
      * Returns a map with all the operations for this path where the keys are {@link PathItem.HttpMethod} items
      * 
      * @return a map with all the operations for this path where the keys are HttpMethods
@@ -326,7 +303,7 @@ public interface PathItem extends Constructible, Extensible<PathItem>, Reference
     /**
      * Returns the servers property from a PathItem instance.
      *
-     * @return a list of all the servers defined in this path item
+     * @return a copy List (potentially immutable) of all the servers defined in this path item
      **/
     List<Server> getServers();
 
@@ -366,7 +343,7 @@ public interface PathItem extends Constructible, Extensible<PathItem>, Reference
     /**
      * Returns the parameters property from this PathItem instance.
      *
-     * @return a list of parameters that are applicable to all the operations described under this path
+     * @return a copy List (potentially immutable) of parameters that are applicable to all the operations described under this path
      **/
     List<Parameter> getParameters();
 

@@ -97,7 +97,7 @@ public interface Encoding extends Constructible, Extensible<Encoding> {
      * <p>
      * This method returns the headers property from a Encoding instance.
      * </p>
-     * @return Map&lt;String, Header&gt; headers
+     * @return a copy Map (potentially immutable) containing headers
      **/
     Map<String, Header> getHeaders();
 

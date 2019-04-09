@@ -89,7 +89,7 @@ public interface Discriminator extends Constructible {
     /**
      * Returns the mapping property from a Discriminator instance.
      *
-     * @return a map containing keys and schema names or references
+     * @return a copy Map (potentially immutable) containing keys and schema names or references
      **/
     Map<String, String> getMapping();
 

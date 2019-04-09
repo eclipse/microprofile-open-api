@@ -28,7 +28,7 @@ import org.eclipse.microprofile.openapi.models.Extensible;
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#oauthFlowObject">OAuthFlow Object</a>
  **/
 
-public interface Scopes extends Constructible, Extensible<Scopes>, Map<String, String> {
+public interface Scopes extends Constructible, Extensible<Scopes> {
 
     /**
      * Adds name of an existing scope object and item parameters to a Scopes instance as a key-value pair in a map.
@@ -87,50 +87,5 @@ public interface Scopes extends Constructible, Extensible<Scopes>, Map<String, S
         }
         return map.get(scope);
     }
-
-    /**
-     * In the next version, {@link Scopes} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #getScope(String)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    String get(Object key);
-
-    /**
-     * In the next version, {@link Scopes} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #hasScope(String)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    boolean containsKey(Object key);
-    
-    /**
-     * In the next version, {@link Scopes} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #addScope(String, String)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    String put(String key, String value);
-
-    /**
-     * In the next version, {@link Scopes} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #setScopes(Map)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    void putAll(Map<? extends String, ? extends String> m);
-
-    /**
-     * In the next version, {@link Scopes} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #removeScope(String)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    String remove(Object key);
 
 }

@@ -232,7 +232,7 @@ public interface Header extends Constructible, Extensible<Header>, Reference<Hea
     /**
      * Returns the examples property from a Header instance.
      *
-     * @return examples of the header
+     * @return a copy Map (potentially immutable) of examples of the header
      **/
     Map<String, Example> getExamples();
 

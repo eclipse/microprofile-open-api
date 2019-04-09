@@ -54,7 +54,7 @@ public interface Components extends Constructible, Extensible<Components> {
     /**
      * Returns the schemas property from a Components instance.
      *
-     * @return a Map containing the keys and the reusable schemas for this OpenAPI document
+     * @return a copy Map (potentially immutable) containing the keys and the reusable schemas for this OpenAPI document
      **/
     Map<String, Schema> getSchemas();
 
@@ -95,7 +95,7 @@ public interface Components extends Constructible, Extensible<Components> {
     /**
      * Returns the responses property from a Components instance.
      *
-     * @return a Map containing the keys and the reusable responses from API operations for this OpenAPI document
+     * @return a copy Map (potentially immutable) containing the keys and the reusable responses from API operations for this OpenAPI document
      **/
     Map<String, APIResponse> getResponses();
 
@@ -136,7 +136,7 @@ public interface Components extends Constructible, Extensible<Components> {
     /**
      * Returns the parameters property from a Components instance.
      *
-     * @return a Map containing the keys and the reusable parameters of API operations for this OpenAPI document
+     * @return a copy Map (potentially immutable) containing the keys and the reusable parameters of API operations for this OpenAPI document
      **/
     Map<String, Parameter> getParameters();
 
@@ -177,7 +177,7 @@ public interface Components extends Constructible, Extensible<Components> {
     /**
      * Returns the examples property from a Components instance.
      *
-     * @return a Map containing the keys and the reusable examples for this OpenAPI document
+     * @return a copy Map (potentially immutable) containing the keys and the reusable examples for this OpenAPI document
      **/
     Map<String, Example> getExamples();
 
@@ -218,7 +218,7 @@ public interface Components extends Constructible, Extensible<Components> {
     /**
      * Returns the requestBodies property from a Components instance.
      *
-     * @return a Map containing the keys and the reusable request bodies for this OpenAPI document
+     * @return a copy Map (potentially immutable) containing the keys and the reusable request bodies for this OpenAPI document
      **/
     Map<String, RequestBody> getRequestBodies();
 
@@ -259,7 +259,7 @@ public interface Components extends Constructible, Extensible<Components> {
     /**
      * Returns the headers property from a Components instance.
      *
-     * @return a Map containing the keys and the reusable headers for this OpenAPI document
+     * @return a copy Map (potentially immutable) containing the keys and the reusable headers for this OpenAPI document
      **/
     Map<String, Header> getHeaders();
 
@@ -300,7 +300,7 @@ public interface Components extends Constructible, Extensible<Components> {
     /**
      * Returns the securitySchemes property from a Components instance.
      *
-     * @return a Map containing the keys and the reusable security schemes for this OpenAPI document
+     * @return a copy Map (potentially immutable) containing the keys and the reusable security schemes for this OpenAPI document
      **/
     Map<String, SecurityScheme> getSecuritySchemes();
 
@@ -341,7 +341,7 @@ public interface Components extends Constructible, Extensible<Components> {
     /**
      * Returns the links property from a Components instance.
      *
-     * @return a Map containing the keys and the reusable links for this OpenAPI document
+     * @return a copy Map (potentially immutable) containing the keys and the reusable links for this OpenAPI document
      **/
     Map<String, Link> getLinks();
 
@@ -382,7 +382,7 @@ public interface Components extends Constructible, Extensible<Components> {
     /**
      * Returns the callbacks property from a Components instance.
      *
-     * @return a Map containing the keys and the reusable callbacks for this OpenAPI document
+     * @return a copy Map (potentially immutable) containing the keys and the reusable callbacks for this OpenAPI document
      **/
     Map<String, Callback> getCallbacks();
 

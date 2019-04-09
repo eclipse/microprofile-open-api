@@ -30,7 +30,7 @@ import org.eclipse.microprofile.openapi.models.Extensible;
  * need to be extensible
  */
 @Deprecated
-public interface ServerVariables extends Constructible, Extensible<ServerVariables>, Map<String, ServerVariable> {
+public interface ServerVariables extends Constructible, Extensible<ServerVariables> {
 
     /**
      * This method adds a key-value item to a ServerVariables instance from the name-item parameter pair and returns the modified instance.
@@ -89,50 +89,5 @@ public interface ServerVariables extends Constructible, Extensible<ServerVariabl
         }
         return map.get(name);
     }
-
-    /**
-     * In the next version, {@link ServerVariables} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #getServerVariable(String)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    ServerVariable get(Object key);
-
-    /**
-     * In the next version, {@link ServerVariables} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #hasServerVariable(String)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    boolean containsKey(Object key);
-    
-    /**
-     * In the next version, {@link ServerVariables} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #addServerVariable(String, ServerVariable)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    ServerVariable put(String key, ServerVariable value);
-
-    /**
-     * In the next version, {@link ServerVariables} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #setServerVariables(Map)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    void putAll(Map<? extends String, ? extends ServerVariable> m);
-
-    /**
-     * In the next version, {@link ServerVariables} will no longer extends {@link Map}, this method will no longer be present.
-     * Use {@link #removeServerVariable(String)} instead.
-     * @deprecated since 1.1
-     */
-    @Deprecated
-    @Override
-    ServerVariable remove(Object key);
 
 }

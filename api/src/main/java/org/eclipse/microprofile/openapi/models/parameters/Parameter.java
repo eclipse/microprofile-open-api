@@ -342,7 +342,7 @@ public interface Parameter extends Constructible, Extensible<Parameter>, Referen
     /**
      * Returns the examples property from a Parameter instance.
      *
-     * @return examples of the parameter
+     * @return a copy Map (potentially immutable) of examples of the parameter
      **/
     Map<String, Example> getExamples();
 
