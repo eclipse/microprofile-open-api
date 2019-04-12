@@ -1154,15 +1154,23 @@ public class ModelConstructionTest extends Arquillian {
     
     @Test
     public void oAuthFlowTest() {
-        processConstructible(OAuthFlow.class);
+        final OAuthFlow o = processConstructible(OAuthFlow.class);
+        final String key = "myKey";
+        final String value = new String("myValue");
+        checkSameObject(o, o.addScope(key, value));
+        checkMapEntry(o.getScopes(), key, value);
+        assertEquals(o.getScopes().size(), 1, "The list is expected to contain one entry.");
+        o.removeScope(key);
+        assertEquals(o.getScopes().size(), 0, "The list is expected to be empty.");
     }
     
     @Test
     public void oAuthFlowsTest() {
         processConstructible(OAuthFlows.class);
     }
-    
+
     @Test
+    @Deprecated
     public void scopesTest() {
         final Scopes s = processConstructible(Scopes.class);
         
@@ -1176,7 +1184,6 @@ public class ModelConstructionTest extends Arquillian {
         checkMapEntry(s.getScopes(), scopeKey, scopeValue);
         
         final String scopeKey2 = "myScope2";
-        assertFalse(s.hasScope(scopeKey2), scopeKey2 + " is absent in the map");
         final String scopeValue2 = new String("myDescription2");
         checkSameObject(s, s.addScope(scopeKey2, scopeValue2));
         assertTrue(s.hasScope(scopeKey2), scopeKey2 + " is present in the map");

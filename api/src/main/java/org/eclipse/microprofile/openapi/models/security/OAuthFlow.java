@@ -17,6 +17,8 @@
 
 package org.eclipse.microprofile.openapi.models.security;
 
+import java.util.Map;
+
 import org.eclipse.microprofile.openapi.models.Constructible;
 import org.eclipse.microprofile.openapi.models.Extensible;
 
@@ -139,13 +141,29 @@ public interface OAuthFlow extends Constructible, Extensible<OAuthFlow> {
     }
 
     /**
+     * Adds name of an existing scope object and item parameters to scopes as a key-value pair in a map.
+     *
+     * @param scope the name of a scope
+     * @param description description of the scope.
+     * @return the current OAuthFlow instance
+     */
+    OAuthFlow addScope(String scope, String description);
+
+    /**
+     * Removes the given scope item to this scope mapping.
+     * 
+     * @param scope the name of a scope
+     */
+    void removeScope(String scope);
+
+    /**
      * The available scopes for the OAuth2 security scheme. A map between the scope name and a short description for it. This is a REQUIRED property.
      * <p>
      * This method returns the scopes property from OAuthFlow instance.
      * </p> 
-     * @return Scopes scopes
+     * @return a copy Map (potentially immutable) containing scopes and their descriptions
      **/
-    Scopes getScopes();
+    Map<String, String> getScopes();
 
     /**
      * The available scopes for the OAuth2 security scheme. A map between the scope name and a short description for it. This is a REQUIRED property.
@@ -157,7 +175,7 @@ public interface OAuthFlow extends Constructible, Extensible<OAuthFlow> {
      * </p>
      * @param scopes the available scopes for the OAuth2 security scheme
      */
-    void setScopes(Scopes scopes);
+    void setScopes(Map<String, String> scopes);
 
     /**
      * The available scopes for the OAuth2 security scheme. A map between the scope name and a short description for it. This is a REQUIRED property.
@@ -170,7 +188,7 @@ public interface OAuthFlow extends Constructible, Extensible<OAuthFlow> {
      * @param scopes the available scopes for the OAuth2 security scheme
      * @return OAuthFlow instance with the set scopes property
      */
-    default OAuthFlow scopes(Scopes scopes) {
+    default OAuthFlow scopes(Map<String, String> scopes) {
         setScopes(scopes);
         return this;
     }
