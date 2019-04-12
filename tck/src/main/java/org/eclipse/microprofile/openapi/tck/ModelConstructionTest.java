@@ -1184,6 +1184,7 @@ public class ModelConstructionTest extends Arquillian {
         checkMapEntry(s.getScopes(), scopeKey, scopeValue);
         
         final String scopeKey2 = "myScope2";
+        assertFalse(s.hasScope(scopeKey2), scopeKey2 + " is absent in the map");
         final String scopeValue2 = new String("myDescription2");
         checkSameObject(s, s.addScope(scopeKey2, scopeValue2));
         assertTrue(s.hasScope(scopeKey2), scopeKey2 + " is present in the map");
