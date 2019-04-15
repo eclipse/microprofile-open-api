@@ -310,6 +310,7 @@ public final class OASFactory {
      * This method creates a new {@link org.eclipse.microprofile.openapi.models.security.Scopes} instance.
      *
      * @return a new Scopes instance
+     * @deprecated since 1.1 use <code>Map&lt;String, String&gt;</code> for scopes instead
      */
     public static Scopes createScopes() {
         return createObject(Scopes.class);

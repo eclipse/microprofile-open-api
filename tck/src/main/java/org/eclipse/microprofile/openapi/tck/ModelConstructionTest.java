@@ -1157,11 +1157,14 @@ public class ModelConstructionTest extends Arquillian {
         final OAuthFlow o = processConstructible(OAuthFlow.class);
         final String key = "myKey";
         final String value = new String("myValue");
-        checkSameObject(o, o.addScope(key, value));
-        checkMapEntry(o.getScopes(), key, value);
-        assertEquals(o.getScopes().size(), 1, "The list is expected to contain one entry.");
-        o.removeScope(key);
-        assertEquals(o.getScopes().size(), 0, "The list is expected to be empty.");
+        o.setScopes(Collections.singletonMap(key, value));
+        Map<String,String> scopes = o.getScopes().getScopes();
+        assertEquals(scopes.size(), 1, "The list is expected to contain one entry.");
+        assertTrue(scopes.containsKey("myKey"), "The map is expected to contain a 'myKey' entry.");
+        assertEquals(scopes.get(key), value, "The value corresponding to the 'myKey' is wrong.");
+        
+        o.setScopes((Map<String, String>) null);
+        assertNull(o.getScopes(), "The value is expected to be null.");
     }
     
     @Test
