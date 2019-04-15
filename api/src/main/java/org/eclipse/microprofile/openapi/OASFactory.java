@@ -312,6 +312,7 @@ public final class OASFactory {
      * @return a new Scopes instance
      * @deprecated since 1.1 use <code>Map&lt;String, String&gt;</code> for scopes instead
      */
+    @Deprecated
     public static Scopes createScopes() {
         return createObject(Scopes.class);
     }
