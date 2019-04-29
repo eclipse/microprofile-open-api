@@ -69,7 +69,6 @@ import org.eclipse.microprofile.openapi.models.responses.APIResponse;
 import org.eclipse.microprofile.openapi.models.responses.APIResponses;
 import org.eclipse.microprofile.openapi.models.security.OAuthFlow;
 import org.eclipse.microprofile.openapi.models.security.OAuthFlows;
-import org.eclipse.microprofile.openapi.models.security.Scopes;
 import org.eclipse.microprofile.openapi.models.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.models.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.models.servers.Server;
@@ -1158,7 +1157,7 @@ public class ModelConstructionTest extends Arquillian {
         final String key = "myKey";
         final String value = new String("myValue");
         o.setScopes(Collections.singletonMap(key, value));
-        Map<String,String> scopes = o.getScopes().getScopes();
+        Map<String,String> scopes = o.getScopes();
         assertEquals(scopes.size(), 1, "The list is expected to contain one entry.");
         assertTrue(scopes.containsKey("myKey"), "The map is expected to contain a 'myKey' entry.");
         assertEquals(scopes.get(key), value, "The value corresponding to the 'myKey' is wrong.");
@@ -1170,47 +1169,6 @@ public class ModelConstructionTest extends Arquillian {
     @Test
     public void oAuthFlowsTest() {
         processConstructible(OAuthFlows.class);
-    }
-
-    @Test
-    @Deprecated
-    public void scopesTest() {
-        final Scopes s = processConstructible(Scopes.class);
-        
-        final String scopeKey = "myScope";
-        final String scopeValue = new String("myDescription");
-        s.setScopes(Collections.singletonMap(scopeKey, scopeValue));
-        assertTrue(s.hasScope(scopeKey), scopeKey + " is present in the map");
-        assertEquals(s.getScopes().size(), 1, "The map is expected to contain one entry.");
-        assertSame(s.getScope(scopeKey), scopeValue, 
-                "The value associated with the key: " + scopeKey + " is expected to be the same one that was added.");
-        checkMapEntry(s.getScopes(), scopeKey, scopeValue);
-        
-        final String scopeKey2 = "myScope2";
-        assertFalse(s.hasScope(scopeKey2), scopeKey2 + " is absent in the map");
-        final String scopeValue2 = new String("myDescription2");
-        checkSameObject(s, s.addScope(scopeKey2, scopeValue2));
-        assertTrue(s.hasScope(scopeKey2), scopeKey2 + " is present in the map");
-        assertEquals(s.getScopes().size(), 2, "The map is expected to contain two entries.");
-        assertSame(s.getScope(scopeKey2), scopeValue2, 
-                "The value associated with the key: " + scopeKey2 + " is expected to be the same one that was added.");
-        checkMapEntry(s.getScopes(), scopeKey2, scopeValue2);
-        
-        s.removeScope(scopeKey);
-        assertFalse(s.hasScope(scopeKey), scopeKey + " is absent in the map");
-        assertEquals(s.getScopes().size(), 1, "The map is expected to contain one entry.");
-        
-        s.removeScope(scopeKey2);
-        assertFalse(s.hasScope(scopeKey2), scopeKey + " is absent in the map");
-        assertEquals(s.getScopes().size(), 0, "The map is expected to contain 0 entries.");
-        
-        final String otherValue = new String("otherDescription");
-        checkMapImmutable(s, Scopes::getScopes, "otherScope", otherValue);
-        
-        String scopeKey3 = "myScope3";
-        s.addScope(scopeKey3, null);
-        assertTrue(s.hasScope(scopeKey3), "Expected " + scopeKey3 + " to be present in the map");
-        assertNull(s.getScope(scopeKey3), "Expected the value of " + scopeKey3 + " to be null.");
     }
     
     @Test
