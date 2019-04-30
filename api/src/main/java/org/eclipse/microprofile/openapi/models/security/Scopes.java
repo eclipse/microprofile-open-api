@@ -29,7 +29,7 @@ import org.eclipse.microprofile.openapi.models.Extensible;
  * @deprecated a future version will remove this and replace it with a <code>Map&lt;String, String&gt;</code>, because it does not
  * need to be extensibles
  **/
-
+@Deprecated
 public interface Scopes extends Constructible, Extensible<Scopes>, Map<String, String> {
 
     /**

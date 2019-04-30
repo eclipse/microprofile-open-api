@@ -186,7 +186,7 @@ public interface OAuthFlow extends Constructible, Extensible<OAuthFlow> {
      * This method sets the scopes property of OAuthFlow instance to the given argument.
      * </p>
      * @param scopes the available scopes for the OAuth2 security scheme
-     * @deprecated since 1.1 use {@link #setScopes(Map)} instead
+     * @deprecated since 1.2 use {@link #setScopes(Map)} instead
      */
     @Deprecated
     void setScopes(Scopes scopes);
@@ -201,7 +201,7 @@ public interface OAuthFlow extends Constructible, Extensible<OAuthFlow> {
      * </p>
      * @param scopes the available scopes for the OAuth2 security scheme
      * @return OAuthFlow instance with the set scopes property
-     * @deprecated since 1.1, use {@link #scopes(Map)} instead
+     * @deprecated since 1.2, use {@link #scopes(Map)} instead
      */
     @Deprecated
     default OAuthFlow scopes(Scopes scopes) {
