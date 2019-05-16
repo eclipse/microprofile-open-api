@@ -17,6 +17,8 @@
 
 package org.eclipse.microprofile.openapi.models.security;
 
+import java.util.Map;
+
 import org.eclipse.microprofile.openapi.models.Constructible;
 import org.eclipse.microprofile.openapi.models.Extensible;
 
@@ -143,7 +145,7 @@ public interface OAuthFlow extends Constructible, Extensible<OAuthFlow> {
      * <p>
      * This method returns the scopes property from OAuthFlow instance.
      * </p> 
-     * @return Scopes scopes
+     * @return Scopes scopes (in the future this method will instead return a <code>Map&lt;String, String&gt;</code>).
      **/
     Scopes getScopes();
 
@@ -157,7 +159,7 @@ public interface OAuthFlow extends Constructible, Extensible<OAuthFlow> {
      * </p>
      * @param scopes the available scopes for the OAuth2 security scheme
      */
-    void setScopes(Scopes scopes);
+    void setScopes(Map<String, String> scopes);
 
     /**
      * The available scopes for the OAuth2 security scheme. A map between the scope name and a short description for it. This is a REQUIRED property.
@@ -170,6 +172,38 @@ public interface OAuthFlow extends Constructible, Extensible<OAuthFlow> {
      * @param scopes the available scopes for the OAuth2 security scheme
      * @return OAuthFlow instance with the set scopes property
      */
+    default OAuthFlow scopes(Map<String, String> scopes) {
+        setScopes(scopes);
+        return this;
+    }
+
+    /**
+     * The available scopes for the OAuth2 security scheme. A map between the scope name and a short description for it. This is a REQUIRED property.
+     * <p>
+     * Applies to oauth2.
+     * </p>
+     * <p>
+     * This method sets the scopes property of OAuthFlow instance to the given argument.
+     * </p>
+     * @param scopes the available scopes for the OAuth2 security scheme
+     * @deprecated since 1.2 use {@link #setScopes(Map)} instead
+     */
+    @Deprecated
+    void setScopes(Scopes scopes);
+
+    /**
+     * The available scopes for the OAuth2 security scheme. A map between the scope name and a short description for it. This is a REQUIRED property.
+     * <p>
+     * Applies to oauth2.
+     * </p>
+     * <p>
+     * This method sets the scopes property of OAuthFlow instance to the given argument and returns the modified instance.
+     * </p>
+     * @param scopes the available scopes for the OAuth2 security scheme
+     * @return OAuthFlow instance with the set scopes property
+     * @deprecated since 1.2, use {@link #scopes(Map)} instead
+     */
+    @Deprecated
     default OAuthFlow scopes(Scopes scopes) {
         setScopes(scopes);
         return this;

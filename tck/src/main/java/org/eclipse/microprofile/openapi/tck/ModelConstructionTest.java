@@ -783,7 +783,17 @@ public class ModelConstructionTest extends Arquillian {
     
     @Test
     public void oAuthFlowTest() {
-        processConstructible(OAuthFlow.class);
+        final OAuthFlow o = processConstructible(OAuthFlow.class);
+        final String key = "myKey";
+        final String value = new String("myValue");
+        o.setScopes(Collections.singletonMap(key, value));
+        Map<String,String> scopes = o.getScopes().getScopes();
+        assertEquals(scopes.size(), 1, "The list is expected to contain one entry.");
+        assertTrue(scopes.containsKey("myKey"), "The map is expected to contain a 'myKey' entry.");
+        assertEquals(scopes.get(key), value, "The value corresponding to the 'myKey' is wrong.");
+        
+        o.setScopes((Map<String, String>) null);
+        assertNull(o.getScopes(), "The value is expected to be null.");
     }
     
     @Test
@@ -791,6 +801,7 @@ public class ModelConstructionTest extends Arquillian {
         processConstructible(OAuthFlows.class);
     }
     
+    @Deprecated
     @Test
     public void scopesTest() {
         final Scopes s = processConstructible(Scopes.class);
