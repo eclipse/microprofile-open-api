@@ -45,7 +45,6 @@ import org.eclipse.microprofile.openapi.models.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.models.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.models.servers.Server;
 import org.eclipse.microprofile.openapi.models.servers.ServerVariable;
-import org.eclipse.microprofile.openapi.models.servers.ServerVariables;
 import org.eclipse.microprofile.openapi.models.tags.Tag;
 
 
@@ -72,21 +71,20 @@ public class MyOASModelReaderImpl implements OASModelReader {
                     .addServer(OASFactory.createObject(Server.class)
                         .url("https://{username}.gigantic-server.com:{port}/{basePath}")
                         .description("The production API server")
-                        .variables(OASFactory.createObject(ServerVariables.class)
-                            .addServerVariable("username", OASFactory.createObject(ServerVariable.class)
-                                .defaultValue("user1")
-                                .description("Reviews of the app by users")
-                                .enumeration(new ArrayList<String>())
-                                    .addEnumeration("user1")
-                                    .addEnumeration("user2"))
-                            .addServerVariable("port", OASFactory.createObject(ServerVariable.class)
-                                .defaultValue("8443")
-                                .description("Booking data"))
-                            .addServerVariable("user", OASFactory.createObject(ServerVariable.class)
-                                .defaultValue("user")
-                                .description("User data"))
-                            .addServerVariable("basePath", OASFactory.createObject(ServerVariable.class)
-                                .defaultValue("v2"))))
+                        .addVariable("username", OASFactory.createObject(ServerVariable.class)
+                            .defaultValue("user1")
+                            .description("Reviews of the app by users")
+                            .enumeration(new ArrayList<String>())
+                                .addEnumeration("user1")
+                                .addEnumeration("user2"))
+                        .addVariable("port", OASFactory.createObject(ServerVariable.class)
+                            .defaultValue("8443")
+                            .description("Booking data"))
+                        .addVariable("user", OASFactory.createObject(ServerVariable.class)
+                            .defaultValue("user")
+                            .description("User data"))
+                        .addVariable("basePath", OASFactory.createObject(ServerVariable.class)
+                            .defaultValue("v2")))
                     .addServer(OASFactory.createObject(Server.class)
                         .url("https://test-server.com:80/basePath")
                         .description("The test API server"))

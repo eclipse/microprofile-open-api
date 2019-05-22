@@ -73,13 +73,12 @@ import org.eclipse.microprofile.openapi.models.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.models.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.models.servers.Server;
 import org.eclipse.microprofile.openapi.models.servers.ServerVariable;
-import org.eclipse.microprofile.openapi.models.servers.ServerVariables;
 import org.eclipse.microprofile.openapi.models.tags.Tag;
-import org.testng.annotations.Test;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.testng.annotations.Test;
 
 /**
  * This test covers construction of the OpenAPI model. It verifies that the implementation can
@@ -1231,10 +1230,16 @@ public class ModelConstructionTest extends Arquillian {
         
         final ServerVariable sv1 = createConstructibleInstance(ServerVariable.class);
         server.setVariables(Collections.singletonMap("var1", sv1));
-        Map<String,ServerVariable> variables = server.getVariables().getServerVariables();
+        Map<String,ServerVariable> variables = server.getVariables();
         assertEquals(variables.size(), 1, "The map is expected to contain one entry.");
         assertTrue(variables.containsKey("var1"), "The map is expected to contain a 'var1' entry.");
         assertEquals(variables.get("var1"), sv1, "The value corresponding to the 'var1' is wrong.");
+        checkMapEntry(server.getVariables(), "var1", sv1);
+        
+        final ServerVariable sv2 = createConstructibleInstance(ServerVariable.class);
+        checkMapImmutable(server, Server::getVariables, "sv2", sv2);
+        final ServerVariable sv3 = createConstructibleInstance(ServerVariable.class);
+        checkNullValueInAdd(server::getVariables, server::addVariable, "sv3", sv3);
         
         server.setVariables((Map<String, ServerVariable>) null);
         assertNull(server.getVariables(), "The value is expected to be null.");
@@ -1261,43 +1266,6 @@ public class ModelConstructionTest extends Arquillian {
         
         final String otherEnumerationValue = new String("otherValue");
         checkListImmutable(sv, ServerVariable::getEnumeration , otherEnumerationValue);
-    }
-    
-    @Test
-    @Deprecated
-    public void serverVariablesTest() {
-        final ServerVariables svs = processConstructible(ServerVariables.class);
-        
-        final String varKey = "myServerVariable";
-        final ServerVariable varValue = createConstructibleInstance(ServerVariable.class);
-        svs.setServerVariables(Collections.singletonMap(varKey, varValue));
-        assertTrue(svs.hasServerVariable(varKey), varKey + " is present in the map");
-        assertEquals(svs.getServerVariables().size(), 1, "The map is expected to contain one entry.");
-        assertSame(svs.getServerVariable(varKey), varValue, 
-                "The value associated with the key: " + varKey + " is expected to be the same one that was added.");
-        checkMapEntry(svs.getServerVariables(), varKey, varValue);
-        
-        final String varKey2 = "myServerVariable2";
-        assertFalse(svs.hasServerVariable(varKey2), varKey2 + " is absent in the map");
-        final ServerVariable varValue2 = createConstructibleInstance(ServerVariable.class);
-        checkSameObject(svs, svs.addServerVariable(varKey2, varValue2));
-        assertTrue(svs.hasServerVariable(varKey2), varKey2 + " is present in the map");
-        assertEquals(svs.getServerVariables().size(), 2, "The map is expected to contain two entries.");
-        assertSame(svs.getServerVariable(varKey2), varValue2, 
-                "The value associated with the key: " + varKey2 + " is expected to be the same one that was added.");
-        checkMapEntry(svs.getServerVariables(), varKey2, varValue2);
-        
-        svs.removeServerVariable(varKey);
-        assertFalse(svs.hasServerVariable(varKey), varKey + " is absent in the map");
-        assertEquals(svs.getServerVariables().size(), 1, "The map is expected to contain one entry.");
-        
-        svs.removeServerVariable(varKey2);
-        assertFalse(svs.hasServerVariable(varKey2), varKey + " is absent in the map");
-        assertEquals(svs.getServerVariables().size(), 0, "The map is expected to contain 0 entries.");
-        
-        final ServerVariable otherValue = createConstructibleInstance(ServerVariable.class);
-        checkMapImmutable(svs, ServerVariables::getServerVariables, "otherServerVariable", otherValue);
-        checkNullValueInAdd(svs::getServerVariables, svs::addServerVariable, "other", otherValue);
     }
     
     @Test

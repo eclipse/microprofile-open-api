@@ -22,18 +22,16 @@
  * <pre>
  * {@literal}Override
  *  public OpenAPI buildModel() {
- *      return OASFactory.createObject(OpenAPI.class)
- *          .servers(new ArrayList&lt;Server&gt;())
- *              .addServer(OASFactory.createObject(Server.class)
- *                  .url("https://{username}.gigantic-server.com:{port}/{basePath}")
- *                  .description("The production API server")
- *                  .variables(OASFactory.createObject(ServerVariables.class)
- *                      .addServerVariable("username", OASFactory.createObject(ServerVariable.class)
- *                          .defaultValue("user1")
- *                          .description("Reviews of the app by users")
- *                          .enumeration(new ArrayList&lt;String&gt;())
+ *      return OASFactory.createOpenAPI()
+ *              .addServer(OASFactory.createServer()
+ *                      .url("https://{username}.example-server.com:8080/api")
+ *                      .description("The production API server")
+ *                      .addVariable("username", OASFactory.createServerVariable()
+ *                              .defaultValue("user1")
+ *                              .description("Reviews of the app by users")
  *                              .addEnumeration("user1")
- *                              .addEnumeration("user2")))
+ *                              .addEnumeration("user2")));
+ *  }
  * </pre>
  */
 
