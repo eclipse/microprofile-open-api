@@ -46,7 +46,6 @@ import org.eclipse.microprofile.openapi.models.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.models.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.models.servers.Server;
 import org.eclipse.microprofile.openapi.models.servers.ServerVariable;
-import org.eclipse.microprofile.openapi.models.servers.ServerVariables;
 import org.eclipse.microprofile.openapi.models.tags.Tag;
 import org.eclipse.microprofile.openapi.spi.OASFactoryResolver;
 
@@ -339,17 +338,6 @@ public final class OASFactory {
      */
     public static ServerVariable createServerVariable() {
         return createObject(ServerVariable.class);
-    }
-
-    /**
-     * This method creates a new {@link org.eclipse.microprofile.openapi.models.servers.ServerVariables} instance.
-     *
-     * @return a new ServerVariables instance
-     * @deprecated since 1.1, use <code>Map&lt;String, ServerVariable&gt;</code> for server variables instead
-     */
-    @Deprecated
-    public static ServerVariables createServerVariables() {
-        return createObject(ServerVariables.class);
     }
 
     /**

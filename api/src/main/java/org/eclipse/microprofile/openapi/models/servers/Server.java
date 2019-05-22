@@ -109,21 +109,26 @@ public interface Server extends Constructible, Extensible<Server> {
      * <p>
      * Variables are represented as a map between variable name and its value. The value is used for substitution in the server's URL template.
      * </p> 
-     * @return ServerVariables variables (in the future this method will instead return a <code>Map&lt;String, ServerVariable&gt;</code>).
+     * @return map of server variables (potentially immutable).
      **/
-    ServerVariables getVariables();
+    Map<String, ServerVariable> getVariables();
 
     /**
-     * This method sets the variables property of Server instance to the given variables argument.
-     * <p>
-     * Variables property is a map between variable name and its value. The value is used for substitution in the server's URL template.
-     * </p>
-     * @param variables a map between variable name and its value
-     * @deprecated since 1.1, use {@link #setVariables(Map)} instead
+     * Adds the given server variable item to the Server's map of variables.
+     *
+     * @param variableName the name the variable to add
+     * @param variable a server variable used for substitution in the server's URL template.
+     * @return the current Server object
+     **/
+    public Server addVariable(String variableName, ServerVariable variable);
+
+    /**
+     * Removes the given server variable item from the Server's map of variables
+     * 
+     * @param variableName the name the variable to remove
      */
-    @Deprecated
-    void setVariables(ServerVariables variables);
-    
+    public void removeVariable(String variableName);
+
     /**
      * This method sets the variables property of Server instance to the given variables argument.
      * <p>
@@ -132,21 +137,6 @@ public interface Server extends Constructible, Extensible<Server> {
      * @param variables a map between variable name and its value
      */
     void setVariables(Map<String, ServerVariable> variables);
-    
-    /**
-     * This method sets the variables property of Server instance to the given variables argument and returns the modified instance.
-     * <p>
-     * Variables property is a map between variable name and its value. The value is used for substitution in the server's URL template.
-     * </p>
-     * @param variables a map between variable name and its value
-     * @return Server instance with the set variables property.
-     * @deprecated since 1.1, use {@link #variables(Map)} instead
-     */
-    @Deprecated
-    default Server variables(ServerVariables variables) {
-        setVariables(variables);
-        return this;
-    }
 
     /**
      * This method sets the variables property of Server instance to the given variables argument and returns the modified instance.
