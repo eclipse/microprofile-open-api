@@ -30,7 +30,7 @@ import java.lang.annotation.Target;
  *      Object</a>
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.PARAMETER, ElementType.METHOD })
+@Target({ ElementType.METHOD })
 @Inherited
 public @interface Parameters {
     /**
