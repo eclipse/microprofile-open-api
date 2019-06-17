@@ -33,3 +33,27 @@ corresponding APIs to provide a bootstrap or complete model tree.
 
 * definition of an HTTP endpoint, `/openapi`, that provides YAML and JSON representations
 of the generated OpenAPI v3 document.
+
+== Release Notes for Microprofile OpenAPI 1.1
+
+Changes include:
+
+* the addition of the JAXRS 2.1 `PATCH` method
+
+* automatic hide MicroProfile Rest Client interfaces
+
+* `OASFactoryResolver` is now a proper `SPI` artifact
+
+* builder methods now have default implementations
+
+* `@Content` now supports a singular `example` field
+
+* `@Extension` now has a `parseValue` field for complex values
+
+* TCK updated to support newer `3.0.x` versions
+
+* overall Javadoc enhancements (classes and packages)
+
+* various other minor improvements to the annotations, models and TCK
+
+** bug fixes, documentation updates, more convenience methods, deprecations, etc.
