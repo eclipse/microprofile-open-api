@@ -320,26 +320,26 @@ public class ReviewResource {
         operationId = "getReviewByAirlineAndUser",
         summary="Get all reviews for an airline by User")
     @Produces("application/json")
+    @Parameters(
+        value = {
+            @Parameter(
+                name = "airlines",
+                description = "name of the airlines for the reviews",
+                required = true,
+                in = ParameterIn.PATH,
+                content = @Content(
+                    example = "Acme Air")),
+            @Parameter(
+                name = "user",
+                description = "sername of the user for the reviews",
+                required = true,
+                in = ParameterIn.PATH,
+                content = @Content(
+                    examples = @ExampleObject(
+                        name = "example",
+                        value = "bsmith")))
+            })
     public Response getReviewByAirlineAndUser(
-        @Parameters(
-            value = {
-                @Parameter(
-                    name = "airlines",
-                    description = "name of the airlines for the reviews",
-                    required = true,
-                    in = ParameterIn.PATH,
-                    content = @Content(
-                        example = "Acme Air")),
-                @Parameter(
-                    name = "user",
-                    description = "sername of the user for the reviews",
-                    required = true,
-                    in = ParameterIn.PATH,
-                    content = @Content(
-                        examples = @ExampleObject(
-                            name = "example",
-                            value = "bsmith")))
-                })
         @PathParam("user") String user,
         @PathParam("airlines") String airlines){
             List<Review> reviewsByAirlinesUser = new ArrayList<Review>();
