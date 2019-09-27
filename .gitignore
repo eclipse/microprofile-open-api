@@ -8,3 +8,7 @@
 .externalToolBuilders/
 bin/
 target/
+.idea
+*.iml
+*.ipr
+*.iws
