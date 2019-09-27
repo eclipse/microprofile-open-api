@@ -24,6 +24,7 @@ import java.net.URL;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.microprofile.openapi.tck.utils.YamlToJsonFilter;
 import org.jboss.arquillian.testng.Arquillian;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 
@@ -42,8 +43,8 @@ public abstract class AppTestBase extends Arquillian {
     private static String username;
     private static String password;
 
-    @BeforeSuite
-    public static void setUp() throws MalformedURLException {
+    @BeforeClass
+    public static void configureRestAssured() throws MalformedURLException {
         // set base URI and port number to use for all requests
         serverUrl = System.getProperty("test.url");
         String protocol = DEFAULT_PROTOCOL;
@@ -72,7 +73,10 @@ public abstract class AppTestBase extends Arquillian {
         if (StringUtils.isBlank(serverUrl)) {
             serverUrl = DEFAULT_PROTOCOL + "://" + DEFAULT_HOST + ":" + DEFAULT_PORT;
         }
+    }
 
+    @BeforeSuite
+    public static void beforeSuite() {
         // Register a filter that performs YAML to JSON conversion
         RestAssured.filters(new YamlToJsonFilter());
     }
