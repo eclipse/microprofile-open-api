@@ -16,6 +16,7 @@ package org.eclipse.microprofile.openapi.filter;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.eclipse.microprofile.openapi.OASFactory;
 import org.eclipse.microprofile.openapi.OASFilter;
@@ -37,9 +38,11 @@ import org.eclipse.microprofile.openapi.models.tags.Tag;
 
 public class AirlinesOASFilter implements OASFilter {
 
+    private final String URL_BOOKINGS ="http://localhost:9080/airlines/bookings";
+
     @Override
     public PathItem filterPathItem(PathItem pathItem){
-        if(pathItem.getGET() != null && "Retrieve all available flights".equals(pathItem.getGET().getSummary())){
+        if(Objects.nonNull(pathItem.getGET()) && "Retrieve all available flights".equals(pathItem.getGET().getSummary())){
             //Add new operation
             pathItem.PUT(OASFactory.createObject(Operation.class).
                     summary("filterPathItem - added put operation")
@@ -51,15 +54,15 @@ public class AirlinesOASFilter implements OASFilter {
             pathItem.getGET().setOperationId("filterPathItemGetFlights");
         }
         
-        if (pathItem.getPOST() != null && "createBooking".equals(pathItem.getPOST().getOperationId())) {
+        if (Objects.nonNull(pathItem.getPOST()) && "createBooking".equals(pathItem.getPOST().getOperationId())) {
             Map<String, Callback> callbacks = pathItem.getPOST().getCallbacks();
             if (callbacks.containsKey("bookingCallback")) {
                 Callback callback = callbacks.get("bookingCallback");
-                if (callback.hasPathItem("http://localhost:9080/airlines/bookings")
-                        && callback.getPathItem("http://localhost:9080/airlines/bookings").getGET() != null) {
-                    if ("child - Retrieve all bookings for current user".equals(callback.getPathItem("http://localhost:9080/airlines/bookings")
+                if (callback.hasPathItem(URL_BOOKINGS)
+                        && Objects.nonNull(callback.getPathItem(URL_BOOKINGS).getGET())) {
+                    if ("child - Retrieve all bookings for current user".equals(callback.getPathItem(URL_BOOKINGS)
                             .getGET().getDescription())) {   
-                        callback.getPathItem("http://localhost:9080/airlines/bookings").getGET()
+                        callback.getPathItem(URL_BOOKINGS).getGET()
                         .setDescription("parent - Retrieve all bookings for current user"); 
                     }
                 }
@@ -82,7 +85,7 @@ public class AirlinesOASFilter implements OASFilter {
         }
         
         List<String> tags = operation.getTags();
-        if (tags != null) {
+        if (Objects.nonNull(tags)) {
             if (tags.contains("Bookings")) {
                 tags.set(tags.indexOf("Bookings"), "parent - Bookings");
                 operation.setTags(tags);
@@ -126,7 +129,7 @@ public class AirlinesOASFilter implements OASFilter {
         
         // testing child before parent filtering
         Content content = apiResponse.getContent();
-        if (content != null) {
+        if (Objects.nonNull(content)) {
             if (content.hasMediaType("application/json")) {
                 Schema schema = content.getMediaType("application/json").getSchema();
                 if ("child - id of the new review".equals(schema.getDescription())) {
@@ -190,13 +193,13 @@ public class AirlinesOASFilter implements OASFilter {
 
     @Override
     public Callback filterCallback(Callback callback) {
-        if(callback.hasPathItem("{$request.query.callbackUrl}/data") && callback.getPathItem("{$request.query.callbackUrl}/data").getPOST() != null){
+        if(callback.hasPathItem("{$request.query.callbackUrl}/data") && Objects.nonNull(callback.getPathItem("{$request.query.callbackUrl}/data").getPOST())){
             callback.getPathItem("{$request.query.callbackUrl}/data").getPOST().setDescription("filterCallback - callback post operation");
         }
         
-        if (callback.hasPathItem("http://localhost:9080/airlines/bookings") 
-                && callback.getPathItem("http://localhost:9080/airlines/bookings").getGET() != null) {
-            callback.getPathItem("http://localhost:9080/airlines/bookings").getGET().setDescription("child - Retrieve all bookings for current user");
+        if (callback.hasPathItem(URL_BOOKINGS)
+                && Objects.nonNull(callback.getPathItem(URL_BOOKINGS).getGET())) {
+            callback.getPathItem(URL_BOOKINGS).getGET().setDescription("child - Retrieve all bookings for current user");
         }
         return callback;
     }

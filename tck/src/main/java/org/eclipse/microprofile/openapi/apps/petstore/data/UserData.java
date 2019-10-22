@@ -17,6 +17,7 @@ import org.eclipse.microprofile.openapi.apps.petstore.model.User;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class UserData {
     static List<User> users = new ArrayList<User>();
@@ -57,29 +58,18 @@ public class UserData {
     }
 
     public void addUser(User user) {
-        if(user.getUsername() == null){
+        if(Objects.isNull(user.getUsername())){
             return;
         }
-        if (users.size() > 0) {
-            for (int i = users.size() - 1; i >= 0; i--) {
-                if (users.get(i).getUsername().equals(user.getUsername())) {
-                    users.remove(i);
-                }
-            }
-        }
+
+        users.removeIf(user1 ->user1.getUsername().equals(user.getUsername()));
         users.add(user);
     }
 
     public boolean removeUser(String username) {
-        if (users.size() > 0) {
-            for (int i = users.size() - 1; i >= 0; i--) {
-                if (users.get(i).getUsername().equals(username)) {
-                    users.remove(i);
-                    return true;
-                }
-            }
-        }
-        return false;
+
+        return users.removeIf(user ->user.getUsername().equals(username));
+
     }
 
     private static User createUser(long id, String username, String firstName,
