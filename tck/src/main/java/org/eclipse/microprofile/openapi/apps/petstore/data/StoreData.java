@@ -36,36 +36,22 @@ public class StoreData {
     }
 
     public Order findOrderById(long orderId) {
-        for (Order order : orders) {
-            if (order.getId() == orderId) {
-                return order;
-            }
-        }
-        return null;
+        return orders.
+                stream()
+                .filter(order -> order.getId() == orderId)
+                .findFirst().orElse(null);
     }
 
     public Order placeOrder(Order order) {
-        if (orders.size() > 0) {
-            for (int i = orders.size() - 1; i >= 0; i--) {
-                if (orders.get(i).getId() == order.getId()) {
-                    orders.remove(i);
-                }
-            }
-        }
+        orders.removeIf(order1 -> order1.getId() == order.getId());
         orders.add(order);
         return order;
     }
 
     public boolean deleteOrder(long orderId) {
-        if (orders.size() > 0) {
-            for (int i = orders.size() - 1; i >= 0; i--) {
-                if (orders.get(i).getId() == orderId) {
-                    orders.remove(i);
-                    return true;
-                }
-            }
-        }
-        return false;
+
+        return orders.removeIf(order -> order.getId() == orderId);
+
     }
 
     private static Order createOrder(long id, long petId, int quantity,
