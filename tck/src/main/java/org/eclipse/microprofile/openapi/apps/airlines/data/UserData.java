@@ -15,6 +15,7 @@ package org.eclipse.microprofile.openapi.apps.airlines.data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.eclipse.microprofile.openapi.apps.airlines.model.User;
 
@@ -57,38 +58,26 @@ public class UserData {
     }
 
     public User findUserById(int id) {
-        for (User user : users) {
-          if (user.getId() == id) {
-            return user;
-          }
-        }
-        return null;
+
+        return users.stream()
+                .filter(user -> user.getId() == id )
+                .findFirst().orElse(null);
+
       }
 
     public void addUser(User user) {
-      if(user.getUsername() == null) {
+      if(Objects.isNull(user.getUsername())) {
         return;
       }
-      if (users.size() > 0) {
-        for (int i = users.size() - 1; i >= 0; i--) {
-          if (users.get(i).getUsername().equals(user.getUsername())) {
-            users.remove(i);
-          }
-        }
-      }
+
+      users.removeIf(user1 -> user1.getUsername().equals(user.getUsername()));
       users.add(user);
     }
 
     public boolean removeUser(String username) {
-      if (users.size() > 0) {
-        for (int i = users.size() - 1; i >= 0; i--) {
-          if (users.get(i).getUsername().equals(username)) {
-            users.remove(i);
-            return true;
-          }
-        }
-      }
-      return false;
+
+         return users.removeIf(user -> user.getUsername().equals(username));
+
     }
 
     private static User createUser(int id, String userName, String password, String firstName,

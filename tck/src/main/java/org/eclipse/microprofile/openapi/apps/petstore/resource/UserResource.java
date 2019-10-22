@@ -42,6 +42,8 @@ import org.eclipse.microprofile.openapi.apps.petstore.exception.ApiException;
 import org.eclipse.microprofile.openapi.apps.petstore.exception.NotFoundException;
 import org.eclipse.microprofile.openapi.apps.petstore.model.User;
 
+import java.util.Objects;
+
 @Path("/user")
 @Schema(name = "/user")
 @Produces({"application/json", "application/xml"})
@@ -248,7 +250,7 @@ public class UserResource {
         )
         @PathParam("username") String username) throws ApiException {
             User user = userData.findUserByName(username);
-            if (null != user) {
+            if (Objects.nonNull(user)) {
                 return Response.ok().entity(user).build();
             }
             else {

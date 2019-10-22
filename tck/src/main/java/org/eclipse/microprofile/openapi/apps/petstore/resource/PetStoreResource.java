@@ -41,6 +41,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import java.util.Objects;
 
 @Path("/store")
 @Schema(name="/store")
@@ -145,7 +146,7 @@ public class PetStoreResource {
         @PathParam("orderId") Long orderId)
     throws NotFoundException {
         Order order = storeData.findOrderById(orderId);
-        if (null != order) {
+        if (Objects.nonNull(order)) {
             return Response.ok().entity(order).build();
         } 
         else {
