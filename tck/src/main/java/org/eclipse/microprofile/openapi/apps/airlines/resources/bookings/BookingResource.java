@@ -35,7 +35,6 @@ import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.annotations.servers.Server;
 
 import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.ws.rs.Consumes;
@@ -182,7 +181,7 @@ public class BookingResource {
     public Response getBooking(
         @PathParam("id") int id){
             Booking booking = bookings.get(id);
-            if(Objects.nonNull(booking)){
+            if(booking!=null){
                 return Response.ok().entity(booking).build();
             }
             else{
@@ -207,7 +206,7 @@ public class BookingResource {
         operationId = "updateBookingId")
     public Response updateBooking(
         @PathParam("id") int id, Booking booking){
-            if(Objects.nonNull(bookings.get(id))){
+            if(bookings.get(id)!=null){
                 bookings.put(id, booking);
                 return Response.ok().build();
             }
@@ -233,7 +232,7 @@ public class BookingResource {
     @Produces("text/plain")
     public Response deleteBooking(
             @PathParam("id") int id){
-                if(Objects.nonNull(bookings.get(id))) {
+                if(bookings.get(id)!=null) {
                     bookings.remove(id);
                     return Response.ok().build();
                 }

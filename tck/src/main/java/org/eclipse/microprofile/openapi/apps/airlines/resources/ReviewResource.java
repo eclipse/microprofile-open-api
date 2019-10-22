@@ -16,7 +16,6 @@ package org.eclipse.microprofile.openapi.apps.airlines.resources;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.ws.rs.Consumes;
@@ -202,7 +201,7 @@ public class ReviewResource {
                         value = "1")))
             @PathParam("id") int id){
         Review review = reviews.get(id);
-        if(Objects.nonNull(review)){
+        if(review!=null){
             return Response.ok().entity(review).build();
         }
         else{
@@ -243,7 +242,7 @@ public class ReviewResource {
             List<Review> reviewsByUser = new ArrayList<Review>();
             for (Review review : reviews.values()) {
                 User currentUser = review.getUser();
-                if (currentUser.getUsername().equals(user)) {
+                if (currentUser.getUsername() == user) {
                     reviewsByUser.add(review);
                 }
             }
@@ -294,7 +293,7 @@ public class ReviewResource {
             List<Review> reviewsByAirlines = new ArrayList<Review>();
             for (Review review : reviews.values()) {
                 Airline currentAirline = review.getAirlines();
-                if (currentAirline.getName().equals(airlines)) {
+                if (currentAirline.getName() == airlines) {
                     reviewsByAirlines.add(review);
                 }
             }
@@ -348,7 +347,7 @@ public class ReviewResource {
                 Airline currentAirline = review.getAirlines();
                 User currentUser = review.getUser();
 
-                if (currentAirline.getName().equals(airlines) && currentUser.getUsername().equals(user)) {
+                if (currentAirline.getName() == airlines && currentUser.getUsername() == user) {
                     reviewsByAirlinesUser.add(review);
                 }
             }
@@ -446,7 +445,7 @@ public class ReviewResource {
     @Produces("text/plain")
     public Response deleteReview(
             @PathParam("id") int id){
-                if(Objects.nonNull(reviews.get(id))) {
+                if(reviews.get(id)!=null) {
                     reviews.remove(id);
                     return Response.ok().build();
                 }

@@ -53,8 +53,6 @@ import org.eclipse.microprofile.openapi.apps.airlines.exception.ApiException;
 import org.eclipse.microprofile.openapi.apps.airlines.exception.NotFoundException;
 import org.eclipse.microprofile.openapi.apps.airlines.model.User;
 
-import java.util.Objects;
-
 @Path("/user")
 @Produces({"application/json", "application/xml"})
 @SecurityScheme(
@@ -462,7 +460,7 @@ public class UserResource {
             )
         @PathParam("username") String userName) throws ApiException {
             User user = userData.findUserByName(userName);
-            if (Objects.nonNull(user)) {
+            if (null != user) {
                 return Response.ok().entity(user).build();
             }
             else {
@@ -522,7 +520,7 @@ public class UserResource {
         )
         @PathParam("id") int id) throws ApiException {
             User user = userData.findUserById(id);
-            if (Objects.nonNull(user)) {
+            if (null != user) {
             return Response.ok().entity(user).build();
             }
             else {

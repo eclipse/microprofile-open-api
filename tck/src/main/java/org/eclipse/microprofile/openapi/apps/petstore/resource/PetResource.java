@@ -13,7 +13,6 @@
 
 package org.eclipse.microprofile.openapi.apps.petstore.resource;
 
-import org.apache.commons.lang3.StringUtils;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
@@ -45,7 +44,6 @@ import org.eclipse.microprofile.openapi.apps.petstore.model.Lizard;
 import org.eclipse.microprofile.openapi.apps.petstore.exception.NotFoundException;
 
 import java.io.*;
-import java.util.Objects;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.MediaType;
@@ -146,7 +144,7 @@ public class PetResource {
         @PathParam("petId") Long petId)
     throws NotFoundException {
         Pet pet = petData.getPetById(petId);
-        if (Objects.nonNull(pet)) {
+        if (pet != null) {
             return Response.ok().entity(pet).build();
         }
         else {
@@ -426,11 +424,11 @@ public class PetResource {
             description = "Updated status of the pet")
         @FormParam("status") String status) {
             Pet pet = petData.getPetById(petId);
-            if(Objects.nonNull(pet)) {
-                if(StringUtils.isNotBlank(name)){
+            if(pet != null) {
+                if(name != null && !"".equals(name)){
                     pet.setName(name);
                 }
-                if(StringUtils.isNotBlank(status)){
+                if(status != null && !"".equals(status)){
                     pet.setStatus(status);
                 }
                 petData.addPet(pet);

@@ -13,12 +13,14 @@
 
 package org.eclipse.microprofile.openapi.apps.petstore.data;
 
-import org.apache.commons.lang3.StringUtils;
 import org.eclipse.microprofile.openapi.apps.petstore.model.Category;
 import org.eclipse.microprofile.openapi.apps.petstore.model.Pet;
 import org.eclipse.microprofile.openapi.apps.petstore.model.Tag;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 public class PetData {
   static List<Pet> pets = new ArrayList<Pet>();
@@ -65,14 +67,21 @@ public class PetData {
   }
 
   public boolean deletePet(long petId) {
-
-    return pets.removeIf(pet -> pet.getId() == petId );
-
+    if(pets.size() > 0) {
+        for (int i = pets.size() - 1; i >= 0; i--) {
+            Pet pet = pets.get(i);
+            if(pet.getId() == petId) {
+            pets.remove(i);
+            return true;
+            }
+        }
+    }
+    return false;
   }
 
   public List<Pet> findPetByStatus(String status) {
     List<Pet> result = new java.util.ArrayList<Pet>();
-    if(Objects.isNull(status)) {
+    if(status == null) {
       return result;
     }
     String[] statuses = status.split(",");
@@ -90,7 +99,7 @@ public class PetData {
     String[] tagList = tags.split(",");
     List<Pet> result = new java.util.ArrayList<Pet>();
     for (Pet pet : pets) {
-        if (Objects.nonNull(pet.getTags())) {
+        if (null != pet.getTags()) {
             for (Tag tag : pet.getTags()) {
                 for (String tagListString : tagList) {
                     if (tagListString.equals(tag.getName())){
@@ -128,10 +137,10 @@ public class PetData {
     Map<String, Integer> output = new HashMap<String, Integer>();
     for(Pet pet : pets) {
         String status = pet.getStatus();
-        if(StringUtils.isNotBlank(status)) {
+        if(status != null && !"".equals(status)) {
             Integer count = output.get(status);
-            if(Objects.isNull(count)){
-                count = 1;
+            if(count == null){
+                count = new Integer(1);
             }
             else{
                 count = count.intValue() + 1;
@@ -148,7 +157,7 @@ public class PetData {
     pet.setId(id);
     pet.setCategory(cat);
     pet.setName(name);
-    if (Objects.nonNull(urls)) {
+    if (null != urls) {
         List<String> urlObjs = new ArrayList<String>();
         for (String urlString : urls) {
             urlObjs.add(urlString);
@@ -157,7 +166,7 @@ public class PetData {
     }
     List<Tag> tagObjs = new java.util.ArrayList<Tag>();
     int i = 0;
-    if (Objects.nonNull(tags)) {
+    if (null != tags) {
         for (String tagString : tags) {
             i = i + 1;
             Tag tag = new Tag();
