@@ -40,7 +40,6 @@ public class StoreData {
                 stream()
                 .filter(order -> order.getId() == orderId)
                 .findFirst().orElse(null);
-
     }
 
     public Order placeOrder(Order order) {
