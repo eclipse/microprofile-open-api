@@ -49,7 +49,7 @@ public class UserData {
 
     public User findUserByName(String username) {
       for (User user : users) {
-        if (user.getUsername().equals(username)) {
+        if (user.getUserName().equals(username)) {
           return user;
         }
       }
@@ -66,12 +66,12 @@ public class UserData {
       }
 
     public void addUser(User user) {
-      if(user.getUsername() == null) {
+      if(user.getUserName() == null) {
         return;
       }
       if (users.size() > 0) {
         for (int i = users.size() - 1; i >= 0; i--) {
-          if (users.get(i).getUsername().equals(user.getUsername())) {
+          if (users.get(i).getUserName().equals(user.getUserName())) {
             users.remove(i);
           }
         }
@@ -82,7 +82,7 @@ public class UserData {
     public boolean removeUser(String username) {
       if (users.size() > 0) {
         for (int i = users.size() - 1; i >= 0; i--) {
-          if (users.get(i).getUsername().equals(username)) {
+          if (users.get(i).getUserName().equals(username)) {
             users.remove(i);
             return true;
           }

@@ -34,6 +34,7 @@ import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hamcrest.collection.IsMapWithSize;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -660,6 +661,15 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(createSchema + ".uniqueItems", equalTo(true));
     }
 
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testSchemaProperty(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+        vr.body("components.schemas.User.properties", IsMapWithSize.aMapWithSize(10));
+        vr.body("components.schemas.User.properties.phone.example", equalTo("123-456-7890"));
+        vr.body("components.schemas.User.properties.phone.description", equalTo("Telephone number to contact the user"));
+    }
+    
     @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testExampleObject(String type) {
