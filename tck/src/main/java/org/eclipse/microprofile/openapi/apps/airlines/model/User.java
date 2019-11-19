@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017 Contributors to the Eclipse Foundation
+ * Copyright (c) 2017-2019 Contributors to the Eclipse Foundation
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a
  * copy of the License at
@@ -34,7 +34,7 @@ public class User {
     private String lastName;
     
     @Schema(required = true, example = "M")
-    private String sex;
+    private Sex sex;
     
     @Schema(required = true, example = "37")
     private int age;
@@ -70,7 +70,7 @@ public class User {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.sex = sex;
+        this.sex = Sex.valueOf(sex.toUpperCase());
         this.age = age;
         this.email = email;
         this.phone = phone;
@@ -172,7 +172,7 @@ public class User {
      * 
      * @return String sex
      */    
-    public String getSex(){
+    public Sex getSex(){
         return sex;
     }
     
@@ -182,7 +182,7 @@ public class User {
      * @param sex the sex for this User instance
      */   
     public void setSex(String sex){
-        this.sex = sex;
+        this.sex = Sex.valueOf(sex.toUpperCase());
     }
     
     /**
