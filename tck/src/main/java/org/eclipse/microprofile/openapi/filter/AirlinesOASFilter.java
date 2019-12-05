@@ -14,6 +14,7 @@
 package org.eclipse.microprofile.openapi.filter;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -84,6 +85,7 @@ public class AirlinesOASFilter implements OASFilter {
         List<String> tags = operation.getTags();
         if (tags != null) {
             if (tags.contains("Bookings")) {
+                tags = new ArrayList<>(tags);
                 tags.set(tags.indexOf("Bookings"), "parent - Bookings");
                 operation.setTags(tags);
             }
