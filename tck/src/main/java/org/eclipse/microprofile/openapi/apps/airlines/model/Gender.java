@@ -21,7 +21,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
  *
  * @author jonathan coustick
  */
-@Schema(enumeration = {"MALE", "FEMALE", "OTHER"})
-public enum Sex {
+@Schema(enumeration = {"Male", "Female", "Other"})
+public enum Gender {
     MALE, FEMALE, OTHER
 }

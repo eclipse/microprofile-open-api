@@ -650,7 +650,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/user'.post.requestBody.content.'application/json'.schema.maxProperties", equalTo(1024));
         vr.body("paths.'/user'.post.requestBody.content.'application/json'.schema.minProperties", equalTo(1));
         vr.body("components.schemas.User.required", hasItems("id", "username", "password")); // requiredProperties
-        vr.body("components.schemas.Sex.enum", hasItems("MALE", "FEMALE", "OTHER"));
+        vr.body("components.schemas.Gender.enum", hasItems("Male", "Female", "Other"));
 
         // Array properties
         String createSchema = "paths.'/user/createWithArray'.post.requestBody.content.'application/json'.schema";

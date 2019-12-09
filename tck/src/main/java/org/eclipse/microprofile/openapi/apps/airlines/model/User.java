@@ -34,7 +34,7 @@ public class User {
     private String lastName;
     
     @Schema(required = true, example = "M")
-    private Sex sex;
+    private Gender gender;
     
     @Schema(required = true, example = "37")
     private int age;
@@ -56,21 +56,21 @@ public class User {
      * @param password the unique password for this User instance
      * @param firstName the first name for this User instance
      * @param lastName the last name for this User instance
-     * @param sex the sex for this User instance
+     * @param gender the gender for this User instance
      * @param age the age value for this User instance
      * @param email the email associated with this User instance
      * @param phone the phone number associated with this User instance
      * @param status the status associated with this User instance
      */   
     public User(int id, String userName, String password, String firstName, 
-    String lastName, String sex, int age, String email, String phone, int status){
+    String lastName, String gender, int age, String email, String phone, int status){
         super();
         this.id = id;
         this.userName = userName;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.sex = Sex.valueOf(sex.toUpperCase());
+        this.gender = Gender.valueOf(gender.toUpperCase());
         this.age = age;
         this.email = email;
         this.phone = phone;
@@ -168,21 +168,21 @@ public class User {
     }
     
     /**
-     * Returns the sex property of a User instance.
+     * Returns the gender property of a User instance.
      * 
-     * @return String sex
+     * @return the gender
      */    
-    public Sex getSex(){
-        return sex;
+    public Gender getGender(){
+        return gender;
     }
     
     /**
-     * Sets the sex property of a User instance to the parameter.
+     * Sets the gender property of a User instance to the parameter.
      * 
-     * @param sex the sex for this User instance
+     * @param gender the gender for this User instance
      */   
-    public void setSex(String sex){
-        this.sex = Sex.valueOf(sex.toUpperCase());
+    public void setGender(String gender) {
+        this.gender = Gender.valueOf(gender.toUpperCase());
     }
     
     /**
