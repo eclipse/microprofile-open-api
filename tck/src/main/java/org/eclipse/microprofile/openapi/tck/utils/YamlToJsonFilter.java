@@ -39,12 +39,6 @@ public class YamlToJsonFilter implements OrderedFilter {
 
     @Override
     public Response filter(FilterableRequestSpecification requestSpec, FilterableResponseSpecification responseSpec, FilterContext ctx) {
-
-        if (ContentType.JSON.matches(requestSpec.getContentType())) {
-            // Conversion is not needed
-            return ctx.next(requestSpec, responseSpec);
-        }
-
         try {
             Response response = ctx.next(requestSpec, responseSpec);
 

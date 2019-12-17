@@ -16,12 +16,16 @@
 
 package org.eclipse.microprofile.openapi.tck;
 
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.startsWith;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
+
+import javax.ws.rs.core.MediaType;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
@@ -171,5 +175,34 @@ public class PetStoreAppTest extends AppTestBase {
         String authCode = "components.securitySchemes.petsOAuth2.flows.authorizationCode.";
         vr.body(authCode + "authorizationUrl", equalTo("https://example.com/api/oauth/dialog"));
         vr.body(authCode + "tokenUrl", equalTo("https://example.com/api/oauth/token"));
+    }
+
+    @RunAsClient
+    @Test
+    public void testDefaultResponseType() {
+        given()
+            .filter(AppTestBase.yamlFilter)
+        .when().get("/openapi")
+        .then()
+            .assertThat()
+                .statusCode(200)
+            .and()
+                .body("openapi", startsWith("3.0."));
+    }
+
+    @RunAsClient
+    @Test
+    public void testJsonResponseTypeWithQueryParameter() {
+        given()
+            .noFilters()
+            .queryParam("format", "JSON")
+        .when().get("/openapi")
+        .then()
+            .assertThat()
+                .contentType(MediaType.APPLICATION_JSON)
+            .and()
+                .statusCode(200)
+            .and()
+                .body("openapi", startsWith("3.0."));
     }
 }

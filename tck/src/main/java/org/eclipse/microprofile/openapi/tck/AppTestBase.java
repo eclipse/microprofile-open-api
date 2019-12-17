@@ -25,10 +25,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.microprofile.openapi.tck.utils.YamlToJsonFilter;
 import org.jboss.arquillian.testng.Arquillian;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 
 import io.restassured.RestAssured;
+import io.restassured.filter.Filter;
 import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
 import io.restassured.response.ValidatableResponse;
@@ -42,6 +42,8 @@ public abstract class AppTestBase extends Arquillian {
     private static String serverUrl;
     private static String username;
     private static String password;
+
+    protected static final Filter yamlFilter = new YamlToJsonFilter();
 
     @BeforeClass
     public static void configureRestAssured() throws MalformedURLException {
@@ -75,12 +77,6 @@ public abstract class AppTestBase extends Arquillian {
         }
     }
 
-    @BeforeSuite
-    public static void beforeSuite() {
-        // Register a filter that performs YAML to JSON conversion
-        RestAssured.filters(new YamlToJsonFilter());
-    }
-
     public ValidatableResponse callEndpoint(String type) {
         ValidatableResponse vr;
         if ("JSON".equals(type)) {
@@ -88,13 +84,13 @@ public abstract class AppTestBase extends Arquillian {
         }
         else {
             // It seems there is no standard for YAML
-            vr = given().accept(ContentType.ANY).when().get("/openapi").then().statusCode(200);
+            vr = given().filter(yamlFilter).accept(ContentType.ANY).when().get("/openapi").then().statusCode(200);
         }
         return vr;
     }
 
     @DataProvider(name = "formatProvider")
-    public Object[][] provide() throws Exception {
+    public Object[][] provide() {
         return new Object[][] { { "JSON" }, { "YAML" } };
     }
 }
