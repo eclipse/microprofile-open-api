@@ -71,3 +71,5 @@ immutable copies of lists/maps
 
 * Delegate document / property location to MP Config
 
+* Add support for defining Schema properties using annotations
+

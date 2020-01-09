@@ -181,7 +181,7 @@ public class PetStoreAppTest extends AppTestBase {
     @Test
     public void testDefaultResponseType() {
         given()
-            .filter(AppTestBase.yamlFilter)
+            .filter(AppTestBase.YAML_FILTER)
         .when().get("/openapi")
         .then()
             .assertThat()

@@ -38,6 +38,7 @@ import org.eclipse.microprofile.openapi.annotations.links.LinkParameter;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.ExampleObject;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.media.SchemaProperty;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
@@ -87,12 +88,14 @@ import org.eclipse.microprofile.openapi.apps.airlines.resources.bookings.Booking
                                 @ServerVariable(name = "basePath", defaultValue = "v2") }),
                 @Server(url = "https://test-server.com:80/basePath", description = "The test API server") },
         components = @Components(
-                schemas = { 
+                schemas = {
                         @Schema(name = "Bookings", title = "Bookings", type = SchemaType.ARRAY, implementation = Booking.class),
                         @Schema(name = "Airlines", title = "Airlines", type = SchemaType.ARRAY, implementation = Airline.class),
                         @Schema(name = "id", type = SchemaType.INTEGER, format="int32"),
                         @Schema(name = "AirlinesRef", ref = "#/components/schemas/Airlines"),
-                        @Schema(name = "User", implementation = User.class)}, 
+                        @Schema(name = "User", implementation = User.class, properties = {
+                            @SchemaProperty(name = "phone", description = "Telephone number to contact the user")
+                        })},
                 responses = {
                         @APIResponse(name = "FoundAirlines", responseCode = "200", description = "successfully found airlines", 
                                 content = @Content(mediaType = "application/json", schema = @Schema(type = SchemaType.ARRAY, 

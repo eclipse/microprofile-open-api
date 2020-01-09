@@ -43,7 +43,7 @@ public abstract class AppTestBase extends Arquillian {
     private static String username;
     private static String password;
 
-    protected static final Filter yamlFilter = new YamlToJsonFilter();
+    protected static final Filter YAML_FILTER = new YamlToJsonFilter();
 
     @BeforeClass
     public static void configureRestAssured() throws MalformedURLException {
@@ -84,7 +84,7 @@ public abstract class AppTestBase extends Arquillian {
         }
         else {
             // It seems there is no standard for YAML
-            vr = given().filter(yamlFilter).accept(ContentType.ANY).when().get("/openapi").then().statusCode(200);
+            vr = given().filter(YAML_FILTER).accept(ContentType.ANY).when().get("/openapi").then().statusCode(200);
         }
         return vr;
     }

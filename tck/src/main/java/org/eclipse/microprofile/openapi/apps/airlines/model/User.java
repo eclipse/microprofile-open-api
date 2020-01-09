@@ -100,7 +100,7 @@ public class User {
      * 
      * @return String userName
      */   
-    public String getUsername() {
+    public String getUserName() {
         return userName;
     }
     
@@ -109,7 +109,7 @@ public class User {
      * 
      * @param userName the user name for this User instance
      */
-    public void setUsername(String userName) {
+    public void setUserName(String userName) {
         this.userName = userName;
     }
     
