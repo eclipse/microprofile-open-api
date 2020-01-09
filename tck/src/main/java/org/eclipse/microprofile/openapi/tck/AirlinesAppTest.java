@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017 Contributors to the Eclipse Foundation
+ * Copyright (c) 2017-2019 Contributors to the Eclipse Foundation
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -325,7 +325,7 @@ public class AirlinesAppTest extends AppTestBase {
         testReviewIdMethods(vr);
         testUserLoginMethods(vr);
     }
-
+    
     private void testUserLoginMethods(ValidatableResponse vr) {
         String reviewParameters = "paths.'/user/login'.get.parameters";
         vr.body(reviewParameters, hasSize(2));
@@ -651,6 +651,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/user'.post.requestBody.content.'application/json'.schema.maxProperties", equalTo(1024));
         vr.body("paths.'/user'.post.requestBody.content.'application/json'.schema.minProperties", equalTo(1));
         vr.body("components.schemas.User.required", hasItems("id", "username", "password")); // requiredProperties
+        vr.body("components.schemas.Gender.enum", hasItems("Male", "Female", "Other"));
 
         // Array properties
         String createSchema = "paths.'/user/createWithArray'.post.requestBody.content.'application/json'.schema";
