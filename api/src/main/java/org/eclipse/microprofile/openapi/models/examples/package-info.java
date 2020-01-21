@@ -32,4 +32,5 @@
  */
 
 @org.osgi.annotation.versioning.Version("1.0")
+@org.osgi.annotation.versioning.ProviderType
 package org.eclipse.microprofile.openapi.models.examples;
