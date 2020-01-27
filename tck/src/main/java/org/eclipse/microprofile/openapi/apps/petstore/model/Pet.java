@@ -16,6 +16,7 @@ package org.eclipse.microprofile.openapi.apps.petstore.model;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 import java.util.List;
+import java.time.Instant;
 import java.util.ArrayList;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -30,6 +31,7 @@ public class Pet {
     private List<String> photoUrls = new ArrayList<String>();
     private List<Tag> tags = new ArrayList<Tag>();
     private String status;
+    private Instant birthInstant;
 
     @XmlElement(name = "id")
     public long getId() {
@@ -91,5 +93,14 @@ public class Pet {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @XmlElement(name = "birthInstant")
+    public Instant getBirthInstant() {
+        return birthInstant;
+    }
+
+    public void setBirthInstant(Instant birthInstant) {
+        this.birthInstant = birthInstant;
     }
 }
