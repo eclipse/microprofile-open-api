@@ -49,7 +49,6 @@ import org.eclipse.microprofile.openapi.annotations.servers.Server;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.eclipse.microprofile.openapi.annotations.tags.Tags;
 import org.eclipse.microprofile.openapi.apps.airlines.data.UserData;
-import org.eclipse.microprofile.openapi.apps.airlines.exception.ApiException;
 import org.eclipse.microprofile.openapi.apps.airlines.exception.NotFoundException;
 import org.eclipse.microprofile.openapi.apps.airlines.model.User;
 
@@ -440,14 +439,7 @@ public class UserResource {
                     description = "Invalid username supplied",
                     content = @Content(
                             schema = @Schema(implementation = User.class)
-                    )),
-                @APIResponse(
-                    responseCode = "404",
-                    description = "User not found",
-                            content = @Content(
-                                    schema = @Schema(implementation = User.class)
-                            )
-                    )
+                    ))
     })
     @Operation(
         summary = "Get user by user name",
@@ -458,13 +450,13 @@ public class UserResource {
             schema = @Schema(type = SchemaType.STRING),
             required = true
             )
-        @PathParam("username") String userName) throws ApiException {
+        @PathParam("username") String userName) throws NotFoundException {
             User user = userData.findUserByName(userName);
             if (null != user) {
                 return Response.ok().entity(user).build();
             }
             else {
-                throw new NotFoundException(404, "User not found");
+                throw new NotFoundException("User not found");
             }
         }
 
@@ -501,13 +493,6 @@ public class UserResource {
             content = @Content(
                 schema = @Schema(implementation = User.class)
             ))
-    @APIResponse(
-            responseCode = "404",
-            description = "User not found",
-                content = @Content(
-                    schema = @Schema(implementation = User.class)
-                )
-            )
     @Operation(
         summary = "Get user by id",
         operationId = "getUserById")
@@ -518,13 +503,13 @@ public class UserResource {
             schema = @Schema(type = SchemaType.INTEGER),
             required = true
         )
-        @PathParam("id") int id) throws ApiException {
+        @PathParam("id") int id) throws NotFoundException {
             User user = userData.findUserById(id);
             if (null != user) {
             return Response.ok().entity(user).build();
             }
             else {
-            throw new NotFoundException(404, "User not found");
+            throw new NotFoundException("User not found");
             }
         }
 
