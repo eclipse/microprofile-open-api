@@ -106,7 +106,8 @@ public abstract class AppTestBase extends Arquillian {
 
         if (ref != null) {
             return ref.replaceFirst("^#/?", "").replace('/', '.');
-        } else {
+        }
+        else {
             return path;
         }
     }
