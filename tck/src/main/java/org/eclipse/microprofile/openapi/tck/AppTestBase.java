@@ -31,6 +31,8 @@ import io.restassured.RestAssured;
 import io.restassured.filter.Filter;
 import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
+import io.restassured.response.ExtractableResponse;
+import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 
 public abstract class AppTestBase extends Arquillian {
@@ -87,6 +89,27 @@ public abstract class AppTestBase extends Arquillian {
             vr = given().filter(YAML_FILTER).accept(ContentType.ANY).when().get("/openapi").then().statusCode(200);
         }
         return vr;
+    }
+
+    /**
+     * Lookup the object at the provided path in the response and if the object
+     * is a reference (contains a $ref property), return the reference path. If the
+     * object is not a reference, return the input path.
+     * 
+     * @param vr the response 
+     * @param path a path which may be a reference object (containing a $ref)
+     * @return the path the object references if present, else the input path
+     */
+    public static String dereference(ValidatableResponse vr, String path) {
+        ExtractableResponse<Response> response = vr.extract();
+        String ref = response.path(path + ".$ref");
+
+        if (ref != null) {
+            return ref.replaceFirst("^#/?", "").replace('/', '.');
+        }
+        else {
+            return path;
+        }
     }
 
     @DataProvider(name = "formatProvider")

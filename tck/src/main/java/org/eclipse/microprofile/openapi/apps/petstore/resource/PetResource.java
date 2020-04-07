@@ -30,8 +30,10 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extensions;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBodySchema;
 import org.eclipse.microprofile.openapi.annotations.media.ExampleObject;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponseSchema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.callbacks.CallbackOperation;
 
@@ -361,6 +363,7 @@ public class PetResource {
 
     @GET
     @Path("/findByTags")
+    @Produces("application/json")
     @Callback(
         name = "tagsCallback",
         callbackUrlExpression = "http://petstoreapp.com/pet",
@@ -383,6 +386,7 @@ public class PetResource {
             }
         )
     )
+    @APIResponseSchema(Pet[].class)
     @Deprecated
     public Response findPetsByTags(
         @HeaderParam("apiKey") String apiKey,
@@ -425,6 +429,41 @@ public class PetResource {
         @FormParam("status") String status) {
             Pet pet = petData.getPetById(petId);
             if(pet != null) {
+                if(name != null && !"".equals(name)){
+                    pet.setName(name);
+                }
+                if(status != null && !"".equals(status)){
+                    pet.setStatus(status);
+                }
+                petData.addPet(pet);
+                return Response.ok().build();
+            }
+            else{
+                return Response.status(404).build();
+            }
+        }
+
+    @POST
+    @Path("/{petId}")
+    @Consumes({ "text/csv" })
+    @Produces({ "text/csv" })
+    @APIResponseSchema(value = Pet.class, responseCode = "204")
+    @Operation(summary = "Updates a pet in the store with CSV data")
+    public Response updatePetWithCsv (
+        @Parameter(
+            name = "petId",
+            description = "ID of pet that needs to be updated",
+            required = true)
+        @PathParam("petId") Long petId,
+        @RequestBodySchema(Pet.class) 
+            String commaSeparatedValues
+        ) {
+            Pet pet = petData.getPetById(petId);
+            if(pet != null) {
+                String[] values = commaSeparatedValues.split(",");
+                String name = values[2];
+                String status = values[5];
+
                 if(name != null && !"".equals(name)){
                     pet.setName(name);
                 }

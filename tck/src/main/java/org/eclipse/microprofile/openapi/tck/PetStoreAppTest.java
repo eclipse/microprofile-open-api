@@ -17,13 +17,18 @@
 package org.eclipse.microprofile.openapi.tck;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.hasKey;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.Matchers.startsWith;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
+import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
+import static org.testng.Assert.assertNotNull;
 
 import javax.ws.rs.core.MediaType;
 
@@ -204,5 +209,85 @@ public class PetStoreAppTest extends AppTestBase {
                 .statusCode(200)
             .and()
                 .body("openapi", startsWith("3.0."));
+    }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testRequestBodySchema(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+        String path = dereference(vr, "paths.'/pet/{petId}'.post.requestBody");
+
+        // The requestBody is present (either embedded or a $ref)
+        vr.body(path, notNullValue());
+
+        String schemaPath = dereference(vr, path) + ".content.'text/csv'.schema";
+
+        // The schema is present (either embedded or a $ref)
+        vr.body(schemaPath, notNullValue());
+
+        String schemaObject = dereference(vr, schemaPath);
+
+        vr.body(schemaObject,
+                allOf(aMapWithSize(3),
+                      hasEntry(equalTo("required"), notNullValue()),
+                      hasEntry(equalTo("type"), equalTo("object")),
+                      hasEntry(equalTo("properties"), notNullValue())));
+    }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testAPIResponseSchema(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+        String path = dereference(vr, "paths.'/pet/{petId}'.post.responses.'204'");
+
+        // The response is present
+        vr.body(path, notNullValue());
+        vr.body(path, hasEntry("description", "No Content"));
+
+        String schemaPath = dereference(vr, path) + ".content.'text/csv'.schema";
+
+        // The schema is present
+        vr.body(schemaPath, notNullValue());
+
+        String schemaObject = dereference(vr, schemaPath);
+
+        vr.body(schemaObject,
+                allOf(aMapWithSize(3),
+                      hasEntry(equalTo("required"), notNullValue()),
+                      hasEntry(equalTo("type"), equalTo("object")),
+                      hasEntry(equalTo("properties"), notNullValue())));
+    }
+    
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testAPIResponseSchemaDefaultResponseCode(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+        String path = dereference(vr, "paths.'/pet/findByTags'.get.responses.'200'");
+
+        assertNotNull(path);
+
+        // The response is present
+        vr.body(path, notNullValue());
+        vr.body(path, hasEntry("description", "OK"));
+
+        String schemaPath = dereference(vr, path) + ".content.'application/json'.schema";
+
+        // The schema is present
+        vr.body(schemaPath, notNullValue());
+
+        String arraySchemaObject = dereference(vr, schemaPath);
+
+        vr.body(arraySchemaObject,
+                allOf(aMapWithSize(2),
+                      hasEntry(equalTo("type"), equalTo("array")),
+                      hasEntry(equalTo("items"), notNullValue())));
+
+        String schemaObject = dereference(vr, arraySchemaObject + ".items");
+
+        vr.body(schemaObject,
+                allOf(aMapWithSize(3),
+                      hasEntry(equalTo("required"), notNullValue()),
+                      hasEntry(equalTo("type"), equalTo("object")),
+                      hasEntry(equalTo("properties"), notNullValue())));
     }
 }

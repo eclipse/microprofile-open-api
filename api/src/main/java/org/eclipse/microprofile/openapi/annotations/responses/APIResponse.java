@@ -29,7 +29,7 @@ import org.eclipse.microprofile.openapi.annotations.links.Link;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 
 /**
- * The ApiResponse annotation corresponds to the OpenAPI Response model object which 
+ * The APIResponse annotation corresponds to the OpenAPI Response model object which 
  * describes a single response from an API Operation, including design-time,
  * static links to operations based on the response.
  * <p>
@@ -38,7 +38,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
  * response with the specified responseCode the annotation on the method is ignored. 
  * 
  * <pre>
- * &#64;ApiResponse(responseCode="200", description="Calculate load size", content=
+ * &#64;APIResponse(responseCode="200", description="Calculate load size", content=
  *     { &#64;Content(mediaType="application/json", Schema=&#64;Schema(type="integer")) } )
  * &#64;GET
  * public getLuggageWeight(Flight id) {
