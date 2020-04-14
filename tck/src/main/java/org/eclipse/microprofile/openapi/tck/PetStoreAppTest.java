@@ -17,12 +17,13 @@
 package org.eclipse.microprofile.openapi.tck;
 
 import static io.restassured.RestAssured.given;
+import static org.eclipse.microprofile.openapi.tck.utils.TCKMatchers.comparesEqualToNumber;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.hasKey;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.Matchers.startsWith;
@@ -60,11 +61,11 @@ public class PetStoreAppTest extends AppTestBase {
         vr.body("paths.'/store/order/{orderId}'.get.responses.'900'.schema", nullValue());
 
         // Numerical properties
-        vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.maximum", equalTo(101));
+        vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.maximum", comparesEqualToNumber(101.0));
         vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.exclusiveMaximum", equalTo(true));
-        vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.minimum", equalTo(9));
+        vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.minimum", comparesEqualToNumber(9));
         vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.exclusiveMinimum", equalTo(true));
-        vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.multipleOf", equalTo(10));
+        vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.multipleOf", comparesEqualToNumber(10));
 
         // String properties
         vr.body("paths.'/pet/{petId}'.delete.parameters.find{ it.name == 'apiKey' }.schema.maxLength", equalTo(256));
