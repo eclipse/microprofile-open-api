@@ -12,3 +12,4 @@ target/
 *.iml
 *.ipr
 *.iws
+/**/nbactions.xml
