@@ -29,7 +29,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-
+        
         <checkstyle.version>2.17</checkstyle.version>
         <checkstyle.methodNameFormat>^_?[a-z][a-zA-Z0-9]*$|DELETE|GET|HEAD|OPTIONS|PATCH|POST|PUT|TRACE</checkstyle.methodNameFormat>
         <autorelease>false</autorelease>
@@ -39,7 +39,7 @@
         <bnd.version>3.4.0</bnd.version>
 
         <!-- Versions of TCK dependencies -->
-        <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <arquillian.version>1.1.13.Final</arquillian.version>
         <testng.version>7.0.0</testng.version>
         <jaxrs.version>2.1.6</jaxrs.version>
@@ -51,8 +51,8 @@
         <restclient.version>1.1</restclient.version>
 
         <!-- Versions of SPEC dependencies  -->
-        <asciidoctor-maven.version>1.5.5</asciidoctor-maven.version>
-        <asciidoctorj-pdf.version>1.5.0-alpha.15</asciidoctorj-pdf.version>
+        <asciidoctor-maven.version>1.6.0</asciidoctor-maven.version>
+        <asciidoctorj-pdf.version>1.5.3</asciidoctorj-pdf.version>
     </properties>
 
     <licenses>
@@ -145,17 +145,17 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.0.2</version>
+                    <version>3.2.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>3.0.1</version>
+                    <version>3.2.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>2.10.4</version>
+                    <version>3.2.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -283,6 +283,8 @@
                         <exclude>**/*.idea</exclude>
                         <exclude>**/*.ipr</exclude>
                         <exclude>**/.externalToolBuilders/*</exclude>
+                        <exclude>nb**.xml</exclude>
+                        <exclude>.github/**/*.*</exclude>
                     </excludes>
                 </configuration>
             </plugin>
@@ -346,6 +348,20 @@
                     </plugin>
                 </plugins>
             </build>
+        </profile>
+        <profile>
+            <id>jdk11plus</id>
+            <activation>
+                <jdk>[11,)</jdk>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>javax.xml.bind</groupId>
+                    <artifactId>jaxb-api</artifactId>
+                    <version>2.3.1</version>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
         </profile>
     </profiles>
 
