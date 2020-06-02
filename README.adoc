@@ -19,7 +19,7 @@
 
 = Eclipse MicroProfile OpenAPI
 
-image:https://github.com/eclipse/microprofile-open-api/workflows/Build/badge.svg?branch=master[link:++https://github.com/eclipse/microprofile-open-api/actions]
+image:https://github.com/eclipse/microprofile-open-api/workflows/Build/badge.svg?branch=master
 
 This MicroProfile specification aims at providing a unified Java API for the link:++https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md++[OpenAPI v3 specification],
 that all application developers can use to expose their API documentation.
