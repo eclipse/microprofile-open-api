@@ -301,6 +301,14 @@ public interface PathItem extends Constructible, Extensible<PathItem>, Reference
     Map<PathItem.HttpMethod, Operation> getOperations();
 
     /**
+     * Sets an operation for a given http method.
+     * 
+     * @param httpMethod the http method
+     * @param operation the definition of an operation for the given http method.
+     */
+    void setOperation(PathItem.HttpMethod httpMethod, Operation operation);
+
+    /**
      * Returns the servers property from a PathItem instance.
      *
      * @return a copy List (potentially immutable) of all the servers defined in this path item
