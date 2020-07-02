@@ -85,6 +85,12 @@ public final class OASConfig {
     public static final String SERVERS_OPERATION_PREFIX = "mp.openapi.servers.operation.";
 
     /**
+     * Prefix of the configuration property to specify a schema for a specific class, in JSON format.
+     * 
+     */
+    public static final String SCHEMA_PREFIX = "mp.openapi.schema.";
+
+    /**
      * Recommended prefix for vendor specific configuration properties.
      * 
      */

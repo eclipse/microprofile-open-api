@@ -93,29 +93,64 @@ https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/o
 
 The following is a list of configuration values that every vendor must support.
 
-[cols="1,4"]
-|===
-| Config key | Value description
+`mp.openapi.model.reader`::
+Configuration property to specify the fully qualified name of the <<OASModelReader>> implementation.
 
-| `mp.openapi.model.reader` | Configuration property to specify the fully qualified name of the <<OASModelReader>> implementation.
-| `mp.openapi.filter` | Configuration property to specify the fully qualified name of the <<OASFilter>> implementation.
-| `mp.openapi.scan.disable`  |  Configuration property to disable annotation scanning. Default value is `false`.
-| `mp.openapi.scan.packages`  |  Configuration property to specify the list of packages to scan. For example,
+`mp.openapi.filter`::
+Configuration property to specify the fully qualified name of the <<OASFilter>> implementation.
+
+`mp.openapi.scan.disable`::
+Configuration property to disable annotation scanning. Default value is `false`.
+
+`mp.openapi.scan.packages`:: 
+Configuration property to specify the list of packages to scan. For example,
 `mp.openapi.scan.packages=com.xyz.PackageA,com.xyz.PackageB`
-| `mp.openapi.scan.classes`  |  Configuration property to specify the list of classes to scan. For example,
+
+`mp.openapi.scan.classes`::
+Configuration property to specify the list of classes to scan. For example,
 `mp.openapi.scan.classes=com.xyz.MyClassA,com.xyz.MyClassB`
-| `mp.openapi.scan.exclude.packages`  |  Configuration property to specify the list of packages to exclude from scans. For example,
+
+`mp.openapi.scan.exclude.packages`::
+Configuration property to specify the list of packages to exclude from scans. For example,
 `mp.openapi.scan.exclude.packages=com.xyz.PackageC,com.xyz.PackageD`
-| `mp.openapi.scan.exclude.classes`  |  Configuration property to specify the list of classes to exclude from scans. For example,
+
+`mp.openapi.scan.exclude.classes`::
+Configuration property to specify the list of classes to exclude from scans. For example,
 `mp.openapi.scan.exclude.classes=com.xyz.MyClassC,com.xyz.MyClassD`
-| `mp.openapi.servers`  |  Configuration property to specify the list of global servers that provide connectivity information. For example,
+
+`mp.openapi.servers`::
+Configuration property to specify the list of global servers that provide connectivity information. For example,
 `mp.openapi.servers=https://xyz.com/v1,https://abc.com/v1`
-| `mp.openapi.servers.path.`   |  Prefix of the configuration property to specify an alternative list of servers to service all operations in a path. For example,
+
+`mp.openapi.servers.path.`::
+Prefix of the configuration property to specify an alternative list of servers to service all operations in a path. For example,
 `mp.openapi.servers.path./airlines/bookings/{id}=https://xyz.io/v1`
-| `mp.openapi.servers.operation.` | Prefix of the configuration property to specify an alternative list of servers to service an operation.
+
+`mp.openapi.servers.operation.`::
+Prefix of the configuration property to specify an alternative list of servers to service an operation.
 Operations that want to specify an alternative list of servers must define an `operationId`, a unique string used to identify the operation. For example,
 `mp.openapi.servers.operation.getBooking=https://abc.io/v1`
-|===
+
+`mp.openapi.schema.`::
+Prefix of the configuration property to specify a schema for a specific class, in JSON format.
+The remainder of the property key must be the fully-qualified class name. The value must be a valid OpenAPI schema object, 
+specified in the JSON format. The use of this property is functionally equivalent to the use of the `@Schema` annotation on
+a Java class, but may be used in cases where the application developer does not have access to the source code of a class. +
++
+When a `name` key is provided with a string value, the schema will be added to the `schemas` collection in the `components`
+object of the resulting OpenAPI document using ``name``'s value as the key.
++
+For example, in the case where an application wishes to represent Java ``Date``s in epoch milliseconds, the following configuration could be used (line 
+escapes and indentation added for readability):
+[source, json]
+----
+mp.openapi.schema.java.util.Date = { \
+  "name": "EpochMillis" \
+  "type": "number", \
+  "format": "int64", \
+  "description": "Milliseconds since January 1, 1970, 00:00:00 GMT" \
+}
+----
 
 ==== Vendor extensions
 
@@ -197,8 +232,10 @@ The following annotations are found in the https://github.com/eclipse/microprofi
 | https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/parameters/Parameter.java[@Parameter] | Describes a single operation parameter.
 | https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/parameters/Parameters.java[@Parameters] | Encapsulates input parameters.
 | https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/parameters/RequestBody.java[@RequestBody] | Describes a single request body.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/parameters/RequestBodySchema.java[@RequestBodySchema] | Describes a single request body with schema implementation class.
 | https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/responses/APIResponse.java[@APIResponse] | Describes a single response from an API operation.
 | https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/responses/APIResponses.java[@APIResponses] | A container for multiple responses from an API operation.
+| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/responses/APIResponseSchema.java[@APIResponseSchema] | Describes a single response with schema implementation class from an API operation.
 | https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/OAuthFlow.java[@OAuthFlow] | Configuration details for a supported OAuth Flow.
 | https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/OAuthFlows.java[@OAuthFlows] | Allows configuration of the supported OAuth Flows.
 | https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/OAuthScope.java[@OAuthScope] | Represents an OAuth scope.

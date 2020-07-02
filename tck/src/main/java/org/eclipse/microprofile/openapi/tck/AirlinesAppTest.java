@@ -950,4 +950,14 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/'.get.'x-object-array-property'[1].name", equalTo("item-2"));
     }
 
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testExceptionMappers(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+        vr.body("paths.'/user/{id}'.get.responses.'404'.description", equalTo("Not Found"));
+        vr.body("paths.'/user/{username}'.get.responses.'404'.description", equalTo("Not Found"));
+
+        vr.body("paths.'/user/{id}'.get.responses.'404'.content.'application/json'.schema", notNullValue());
+    }
+    
 }

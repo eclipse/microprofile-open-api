@@ -29,20 +29,39 @@ import org.eclipse.microprofile.openapi.annotations.links.Link;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 
 /**
- * The ApiResponse annotation corresponds to the OpenAPI Response model object which 
+ * The APIResponse annotation corresponds to the OpenAPI Response model object which 
  * describes a single response from an API Operation, including design-time,
  * static links to operations based on the response.
  * <p>
- * When this annotation is applied to a method the response is added to the responses
+ * When this annotation is applied to a JAX-RS method the response is added to the responses
  * defined in the corresponding OpenAPI operation. If the operation already has a 
  * response with the specified responseCode the annotation on the method is ignored. 
  * 
  * <pre>
- * &#64;ApiResponse(responseCode="200", description="Calculate load size", content=
+ * &#64;APIResponse(responseCode="200", description="Calculate load size", content=
  *     { &#64;Content(mediaType="application/json", Schema=&#64;Schema(type="integer")) } )
  * &#64;GET
  * public getLuggageWeight(Flight id) {
  *     return getBagWeight(id) + getCargoWeight(id);
+ * }
+ * </pre>
+ * <p>
+ * When this annotation is applied to an <code>ExceptionMapper</code>, it allows developers
+ * to describe the API response that will be added to a generated OpenAPI operation based
+ * on a JAX-RS method that declares an <code>Exception</code> of the type handled by the
+ * <code>ExceptionMapper</code>.
+ * 
+ * <pre>
+ * &#64;Provider
+ * public class NotFoundExceptionMapper implements ExceptionMapper&lt;NotFoundException&gt; {
+ *     &#64;Override
+ *     &#64;APIResponse(responseCode = "404", description = "Not Found")
+ *     public Response toResponse(NotFoundException t) {
+ *         return Response.status(404)
+ *                 .type(MediaType.TEXT_PLAIN)
+ *                 .entity("Not found")
+ *                 .build();
+ *     }
  * }
  * </pre>
  * 
