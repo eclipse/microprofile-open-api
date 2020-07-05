@@ -35,7 +35,7 @@
         <autorelease>false</autorelease>
 
         <!-- Versions of API dependencies -->
-        <osgi-annotation.version>1.0.0</osgi-annotation.version>
+        <osgi-annotation.version>1.1.0</osgi-annotation.version>
         <bnd.version>3.4.0</bnd.version>
 
         <!-- Versions of TCK dependencies -->
