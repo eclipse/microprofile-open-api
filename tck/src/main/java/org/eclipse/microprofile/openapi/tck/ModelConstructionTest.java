@@ -48,6 +48,7 @@ import org.eclipse.microprofile.openapi.models.ExternalDocumentation;
 import org.eclipse.microprofile.openapi.models.OpenAPI;
 import org.eclipse.microprofile.openapi.models.Operation;
 import org.eclipse.microprofile.openapi.models.PathItem;
+import org.eclipse.microprofile.openapi.models.PathItem.HttpMethod;
 import org.eclipse.microprofile.openapi.models.Paths;
 import org.eclipse.microprofile.openapi.models.Reference;
 import org.eclipse.microprofile.openapi.models.callbacks.Callback;
@@ -602,6 +603,70 @@ public class ModelConstructionTest extends Arquillian {
         checkMapEntry(pi.getOperations(), PathItem.HttpMethod.HEAD, o6);
         checkMapEntry(pi.getOperations(), PathItem.HttpMethod.PATCH, o7);
         checkMapEntry(pi.getOperations(), PathItem.HttpMethod.TRACE, o8);
+        
+        // test with GET:
+        PathItem pathItemGET = createConstructibleInstance(PathItem.class);
+        Operation operationGET = createConstructibleInstance(Operation.class).description("This is some GET op");
+        pathItemGET.setOperation(HttpMethod.GET, operationGET);
+        checkSameObject(pathItemGET.getGET(), operationGET);
+        pathItemGET.setOperation(HttpMethod.GET, null);
+        assertNull(pathItemGET.getGET());
+
+        // test with POST:
+        PathItem pathItemPOST = createConstructibleInstance(PathItem.class);
+        Operation operationPOST = createConstructibleInstance(Operation.class).description("This is some POST op");
+        pathItemPOST.setOperation(HttpMethod.POST, operationPOST);
+        checkSameObject(pathItemPOST.getPOST(), operationPOST);
+        pathItemPOST.setOperation(HttpMethod.POST, null);
+        assertNull(pathItemPOST.getPOST());
+
+        // test with PUT:
+        PathItem pathItemPUT = createConstructibleInstance(PathItem.class);
+        Operation operationPUT = createConstructibleInstance(Operation.class).description("This is some PUT op");
+        pathItemPUT.setOperation(HttpMethod.PUT, operationPUT);
+        checkSameObject(pathItemPUT.getPUT(), operationPUT);
+        pathItemPUT.setOperation(HttpMethod.PUT, null);
+        assertNull(pathItemPUT.getPUT());
+
+        // test with PATCH:
+        PathItem pathItemPATCH = createConstructibleInstance(PathItem.class);
+        Operation operationPATCH = createConstructibleInstance(Operation.class).description("This is some PATCH op");
+        pathItemPATCH.setOperation(HttpMethod.PATCH, operationPATCH);
+        checkSameObject(pathItemPATCH.getPATCH(), operationPATCH);
+        pathItemPATCH.setOperation(HttpMethod.PATCH, null);
+        assertNull(pathItemPATCH.getPATCH());
+
+        // test with DELETE:
+        PathItem pathItemDELETE = createConstructibleInstance(PathItem.class);
+        Operation operationDELETE = createConstructibleInstance(Operation.class).description("This is some DELETE op");
+        pathItemDELETE.setOperation(HttpMethod.DELETE, operationDELETE);
+        checkSameObject(pathItemDELETE.getDELETE(), operationDELETE);
+        pathItemDELETE.setOperation(HttpMethod.DELETE, null);
+        assertNull(pathItemDELETE.getDELETE());
+
+        // test with HEAD:
+        PathItem pathItemHEAD = createConstructibleInstance(PathItem.class);
+        Operation operationHEAD = createConstructibleInstance(Operation.class).description("This is some HEAD op");
+        pathItemHEAD.setOperation(HttpMethod.HEAD, operationHEAD);
+        checkSameObject(pathItemHEAD.getHEAD(), operationHEAD);
+        pathItemHEAD.setOperation(HttpMethod.HEAD, null);
+        assertNull(pathItemHEAD.getHEAD());
+
+        // test with OPTIONS:
+        PathItem pathItemOPTIONS = createConstructibleInstance(PathItem.class);
+        Operation operationOPTIONS = createConstructibleInstance(Operation.class).description("This is some OPTIONS op");
+        pathItemOPTIONS.setOperation(HttpMethod.OPTIONS, operationOPTIONS);
+        checkSameObject(pathItemOPTIONS.getOPTIONS(), operationOPTIONS);
+        pathItemOPTIONS.setOperation(HttpMethod.OPTIONS, null);
+        assertNull(pathItemOPTIONS.getOPTIONS());
+
+        // test with TRACE:
+        PathItem pathItemTRACE = createConstructibleInstance(PathItem.class);
+        Operation operationTRACE = createConstructibleInstance(Operation.class).description("This is some TRACE op");
+        pathItemTRACE.setOperation(HttpMethod.TRACE, operationTRACE);
+        checkSameObject(pathItemTRACE.getTRACE(), operationTRACE);
+        pathItemTRACE.setOperation(HttpMethod.TRACE, null);
+        assertNull(pathItemTRACE.getTRACE());
     }
     
     @Test
