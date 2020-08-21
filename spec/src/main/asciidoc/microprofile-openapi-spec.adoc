@@ -760,7 +760,7 @@ Therefore, vendors are required to exclude from the final OAS3 document any inte
 
 == Exposing platform OpenAPIs
 
-Vendors are required to support a mechanism to expose `platform` OpenAPIs to consumers. 
+Vendors may provide support for a mechanism to expose `platform` OpenAPIs to consumers. 
 These are RESTful APIs implemented by the vendor framework itself, which may include 
 MicroProfile Metrics, MicroProfile Health Check, JMX-REST connectors, OpenID Connect Providers
 or any other API the framework may be exposing.  
@@ -776,19 +776,23 @@ The exposure of these platform OpenAPIs allows for:
   it should be documented using OpenAPI.
 
 
-=== Registrying a platform OpenAPI
+=== Registering a platform OpenAPI
 
 The components within a vendor's framework will register their platform OpenAPI by using the 
-following patttern:
+following pattern:
 
 `mp.openapi.spi.platform.<component>=<path_to_OAS3>`
+
+or:
+
+`mp.openapi.spi.platform.<component>=<OAS3_yaml>`
 
 Example:  `mp.openapi.spi.platform.jmx=${server_install_dir}/oas/jmx/openapi.yaml`
 
 Please note that this is an `SPI`, which means it is intended to be set only by the vendor framework, not by
 user applications.
 
-This pattern takes advantage of MicroProfile Config to inject the location of the component's OAS3 doc,
+This pattern takes advantage of MicroProfile Config to inject the location, or content, of the component's OAS3 doc,
 which creates dynamic and composed deployments, only exposing the platform APIs that are currently enabled.
 
 For dynamic frameworks (e.g. loading and unloading OSGi bundles), components can be unregistered by setting
@@ -799,8 +803,8 @@ their OAS3 path to empty:
 
 === Exposing platform OpenAPIs
 
-There are two new RESTful endpoints that vendors must expose.  The first queries which platform OpenAPIs
-are currently available:
+There are two new RESTful endpoints that vendors must expose if they choose to provide support for this functionality.
+The first queries which platform OpenAPIs are currently available:
 
 *  `GET openapi/platform`  
 ** returns a list (following the <<Content format>> rules) of available components exposing
