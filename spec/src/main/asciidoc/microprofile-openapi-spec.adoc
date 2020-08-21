@@ -781,7 +781,7 @@ The exposure of these platform OpenAPIs allows for:
 The components within a vendor's framework will register their platform OpenAPI by using the 
 following pattern:
 
-`mp.openapi.spi.platform.<component>=<path_to_OAS3>`
+`mp.openapi.spi.platform.<component>=<url_to_OAS3>`
 
 or:
 
@@ -803,7 +803,7 @@ their OAS3 path to empty:
 
 === Exposing platform OpenAPIs
 
-There are two new RESTful endpoints that vendors must expose if they choose to provide support for this functionality.
+There are two RESTful endpoints that vendors must expose if they choose to provide support for this functionality.
 The first queries which platform OpenAPIs are currently available:
 
 *  `GET openapi/platform`  
