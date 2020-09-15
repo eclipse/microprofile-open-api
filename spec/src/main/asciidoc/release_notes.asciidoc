@@ -24,8 +24,8 @@ A full list of changes delivered in the 2.0 release can be found at link:https:/
 === Incompatible Changes
 
 * Model interfaces that were deprecated in 1.1 have been removed:
-  ** `Scopes` - this interface was replace with `Map<String, ServerVariable>` because it did not need to be extensible (link:https://github.com/eclipse/microprofile-open-api/issues/328[328])
-  ** `ServerVariables` - this interface was replace with `Map<String, ServerVariable>` because it did not need to be extensible (link:https://github.com/eclipse/microprofile-open-api/issues/245[245])
+  ** `Scopes` - this interface was replaced with `Map<String, ServerVariable>` because it did not need to be extensible (link:https://github.com/eclipse/microprofile-open-api/issues/328[328])
+  ** `ServerVariables` - this interface was replaced with `Map<String, ServerVariable>` because it did not need to be extensible (link:https://github.com/eclipse/microprofile-open-api/issues/245[245])
 
 * Model interfaces that are not extensible no longer extend `java.util.Map`:
   ** `APIResponses` (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
@@ -35,57 +35,57 @@ A full list of changes delivered in the 2.0 release can be found at link:https:/
   ** `SecurityRequirement` (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
 
 * Methods on model interfaces that were deprecated) in 1.1 have been removed:
-  ** APIResponses
-    *** `APIResponses#addApiResponse(String name, APIResponse apiResponse)` - use `APIResponses#addAPIResponse(String, APIResponse)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/229[229])
-    *** `APIResponses#get(Object key)` - use `APIResponses#getAPIResponse(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
-    *** `APIResponses#containsKey(Object key)` - use `APIResponses#hasAPIResponse(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
-    *** `APIResponses#put(String key, PathItem value)` - use `APIResponses#addAPIResponse(String, APIResponse)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
-    *** `APIResponses#putAll(Map<? extends String, ? extends PathItem> m)` - use `APIResponses#setAPIResponses(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
-    *** `APIResponses#remove(Object key)` - use `APIResponses#removeAPIResponse(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
-  ** Callback
-    *** `Callback#get(Object key)` - use `Callback#getPathItem(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
-    *** `Callback#containsKey(Object key)` - use `Callback#hasPathItem(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
-    *** `Callback#put(String key, PathItem value)` - use `Callback#addPathItem(String, PathItem)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
-    *** `Callback#putAll(Map<? extends String, ? extends PathItem> m)` - use `Callback#setPathItems(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
-    *** `Callback#remove(Object key)` - use `Callback#removePathItem(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
-  ** Content
-    *** `Content#get(Object key)` - use `Content#getMediaType(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
-    *** `Content#containsKey(Object key)` - use `Content#hasMediaType(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
-    *** `Content#put(String key, PathItem value)` - use `Content#addMediaType(String, MediaType)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
-    *** `Content#putAll(Map<? extends String, ? extends PathItem> m)` - use `Content#setMediaTypes(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
-    *** `Content#remove(Object key)` - use `Content#removeMediaType(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
-  ** OASFactory
-    *** `OASFactory#createScopes` - use `Map<String, String>` for scopes instead (link:https://github.com/eclipse/microprofile-open-api/issues/328[328])
-    *** `OASFactory#createServerVariables` - use use `Map<String, ServerVariable>` for server variables instead (link:https://github.com/eclipse/microprofile-open-api/issues/245[245])
-  ** OAuthFlow
-    *** `OAuthFlow#setScopes(Scopes scopes)` - use `OAuthFlow#setScopes(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/328[328])
-    *** `OAuthFlow#scopes(Scopes scopes)` - use `OAuthFlow#scopes(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/328[328])
-  ** OpenAPI
-    *** `OpenAPI#path(String name, PathItem path)` - use `Paths#addPathItem(String, PathItem)` on `OpenAPI#getPaths` instead (link:https://github.com/eclipse/microprofile-open-api/issues/247[247])
-  ** Path
-    *** `Path#get(Object key)` - use `Path#getPathItem(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
-    *** `Path#containsKey(Object key)` - use `Path#hasPathItem(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
-    *** `Path#put(String key, PathItem value)` - use `Path#addPathItem(String, PathItem)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
-    *** `Path#putAll(Map<? extends String, ? extends PathItem> m)` - use `Path#setPathItems(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
-    *** `Path#remove(Object key)` - use `Path#removePathItem(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
-  ** PathItem
-    *** `PathItem#readOperations` - use `Map#values()` on `PathItem#getOperations()` instead (link:https://github.com/eclipse/microprofile-open-api/pull/256[256])
-    *** `PathItem#readOperationsMap` - use `PathItem#getOperations()` instead (link:https://github.com/eclipse/microprofile-open-api/pull/256[256])
-  ** Schema
-    *** `Schema#getAdditionalProperties` - use `Schema#getAdditionalPropertiesSchema()` or `Schema#getAdditionalPropertiesBoolean()` instead (link:https://github.com/eclipse/microprofile-open-api/issues/257[257], link:https://github.com/eclipse/microprofile-open-api/pull/281[281])
-    *** `Schema#setAdditionalProperties(Schema additionalProperties)` - use `Schema#setAdditionalPropertiesSchema(Schema)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/257[257], link:https://github.com/eclipse/microprofile-open-api/pull/281[281])
-    *** `Schema#setAdditionalProperties(Boolean additionalProperties)` - use `Schema#setAdditionalPropertiesBoolean(Boolean)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/257[257], link:https://github.com/eclipse/microprofile-open-api/pull/281[281])
-    *** `Schema#additionalProperties(Schema additionalProperties)` - use `Schema#additionalPropertiesSchema(Schema)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/257[257], link:https://github.com/eclipse/microprofile-open-api/pull/281[281])
-    *** `Schema#additionalProperties(Boolean additionalProperties)` - use `Schema#additionalPropertiesBoolean(Boolean)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/257[257], link:https://github.com/eclipse/microprofile-open-api/pull/281[281])
-  ** SecurityRequirement
-    *** `SecurityRequirement#get(Object key)` - use `SecurityRequirement#getScheme(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
-    *** `SecurityRequirement#containsKey(Object key)` - use `SecurityRequirement#hasScheme(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
-    *** `SecurityRequirement#put(String key, PathItem value)` - use `SecurityRequirement#addScheme(String, List)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
-    *** `SecurityRequirement#putAll(Map<? extends String, ? extends PathItem> m)` - use `SecurityRequirement#setSchemes(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
-    *** `SecurityRequirement#remove(Object key)` - use `SecurityRequirement#removeScheme(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
-  ** Server
-    *** `Server#setVariables(ServerVariables variables)` - use `Server#setVariables(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/245[245])
-    *** `Server#variables(ServerVariables variables)` - use `Server#variables(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/245[245])
+  ** `APIResponses`
+    *** `addApiResponse(String name, APIResponse apiResponse)` - use `addAPIResponse(String, APIResponse)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/229[229])
+    *** `get(Object key)` - use `getAPIResponse(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `containsKey(Object key)` - use `hasAPIResponse(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `put(String key, PathItem value)` - use `addAPIResponse(String, APIResponse)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `putAll(Map<? extends String, ? extends PathItem> m)` - use `setAPIResponses(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `remove(Object key)` - use `removeAPIResponse(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+  ** `Callback`
+    *** `get(Object key)` - use `getPathItem(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `containsKey(Object key)` - use `hasPathItem(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `put(String key, PathItem value)` - use `addPathItem(String, PathItem)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `putAll(Map<? extends String, ? extends PathItem> m)` - use `setPathItems(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `remove(Object key)` - use `removePathItem(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+  ** `Content`
+    *** `get(Object key)` - use `getMediaType(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `containsKey(Object key)` - use `hasMediaType(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `put(String key, PathItem value)` - use `addMediaType(String, MediaType)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `putAll(Map<? extends String, ? extends PathItem> m)` - use `setMediaTypes(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `remove(Object key)` - use `removeMediaType(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+  ** `OASFactory`
+    *** `createScopes` - use `Map<String, String>` for scopes instead (link:https://github.com/eclipse/microprofile-open-api/issues/328[328])
+    *** `createServerVariables` - use use `Map<String, ServerVariable>` for server variables instead (link:https://github.com/eclipse/microprofile-open-api/issues/245[245])
+  ** `OAuthFlow`
+    *** `setScopes(Scopes scopes)` - use `setScopes(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/328[328])
+    *** `scopes(Scopes scopes)` - use `scopes(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/328[328])
+  ** `OpenAPI`
+    *** `path(String name, PathItem path)` - use `Paths#addPathItem(String, PathItem)` on `OpenAPI#getPaths` instead (link:https://github.com/eclipse/microprofile-open-api/issues/247[247])
+  ** `Path`
+    *** `get(Object key)` - use `getPathItem(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `containsKey(Object key)` - use `hasPathItem(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `put(String key, PathItem value)` - use `addPathItem(String, PathItem)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `putAll(Map<? extends String, ? extends PathItem> m)` - use `setPathItems(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `remove(Object key)` - use `removePathItem(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+  ** `PathItem`
+    *** `readOperations` - use `Map#values()` on `PathItem#getOperations()` instead (link:https://github.com/eclipse/microprofile-open-api/pull/256[256])
+    *** `readOperationsMap` - use `getOperations()` instead (link:https://github.com/eclipse/microprofile-open-api/pull/256[256])
+  ** `Schema`
+    *** `getAdditionalProperties` - use `getAdditionalPropertiesSchema()` or `getAdditionalPropertiesBoolean()` instead (link:https://github.com/eclipse/microprofile-open-api/issues/257[257], link:https://github.com/eclipse/microprofile-open-api/pull/281[281])
+    *** `setAdditionalProperties(Schema additionalProperties)` - use `setAdditionalPropertiesSchema(Schema)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/257[257], link:https://github.com/eclipse/microprofile-open-api/pull/281[281])
+    *** `setAdditionalProperties(Boolean additionalProperties)` - use `setAdditionalPropertiesBoolean(Boolean)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/257[257], link:https://github.com/eclipse/microprofile-open-api/pull/281[281])
+    *** `additionalProperties(Schema additionalProperties)` - use `additionalPropertiesSchema(Schema)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/257[257], link:https://github.com/eclipse/microprofile-open-api/pull/281[281])
+    *** `additionalProperties(Boolean additionalProperties)` - use `additionalPropertiesBoolean(Boolean)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/257[257], link:https://github.com/eclipse/microprofile-open-api/pull/281[281])
+  ** `SecurityRequirement`
+    *** `get(Object key)` - use `getScheme(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `containsKey(Object key)` - use `hasScheme(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `put(String key, PathItem value)` - use `addScheme(String, List)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `putAll(Map<? extends String, ? extends PathItem> m)` - use `setSchemes(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `remove(Object key)` - use `removeScheme(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+  ** `Server`
+    *** `setVariables(ServerVariables variables)` - use `setVariables(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/245[245])
+    *** `variables(ServerVariables variables)` - use `variables(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/245[245])
 
 === API/SPI Changes
 
