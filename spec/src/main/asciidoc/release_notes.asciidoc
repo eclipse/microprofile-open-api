@@ -16,24 +16,122 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-[[release_notes_10]]
-== Release Notes for MicroProfile OpenAPI 1.0
+[[release_notes_20]]
+== Release Notes for Microprofile OpenAPI 2.0
 
-First official release of MP OpenAPI.  Highlights of the release:
+A full list of changes delivered in the 2.0 release can be found at link:https://github.com/eclipse/microprofile-open-api/milestone/2?closed=1[MicroProfile OpenAPI 2.0 Milestone].
 
-* set of annotations that covers the entire OpenAPI v3 specification when combined
-with JAX-RS annotations.
+=== Incompatible Changes
 
-* set of OpenAPI v3 models covering the entire OpenAPI v3 specification, with
-corresponding APIs to provide a bootstrap or complete model tree.
+* Model interfaces that were deprecated in 1.1 have been removed:
+  ** `Scopes` - this interface was replaced with `Map<String, ServerVariable>` because it did not need to be extensible (link:https://github.com/eclipse/microprofile-open-api/issues/328[328])
+  ** `ServerVariables` - this interface was replaced with `Map<String, ServerVariable>` because it did not need to be extensible (link:https://github.com/eclipse/microprofile-open-api/issues/245[245])
 
-* configuration injected via MicroProfile Config specification.
+* Model interfaces that are not extensible no longer extend `java.util.Map`:
+  ** `APIResponses` (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+  ** `Callback` (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+  ** `Content` (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+  ** `Path` (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+  ** `SecurityRequirement` (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
 
-* ability to provide static (partial or complete) OpenAPI v3 files.
+* Methods on model interfaces that were deprecated) in 1.1 have been removed:
+  ** `APIResponses`
+    *** `addApiResponse(String name, APIResponse apiResponse)` - use `addAPIResponse(String, APIResponse)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/229[229])
+    *** `get(Object key)` - use `getAPIResponse(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `containsKey(Object key)` - use `hasAPIResponse(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `put(String key, PathItem value)` - use `addAPIResponse(String, APIResponse)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `putAll(Map<? extends String, ? extends PathItem> m)` - use `setAPIResponses(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `remove(Object key)` - use `removeAPIResponse(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+  ** `Callback`
+    *** `get(Object key)` - use `getPathItem(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `containsKey(Object key)` - use `hasPathItem(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `put(String key, PathItem value)` - use `addPathItem(String, PathItem)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `putAll(Map<? extends String, ? extends PathItem> m)` - use `setPathItems(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `remove(Object key)` - use `removePathItem(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+  ** `Content`
+    *** `get(Object key)` - use `getMediaType(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `containsKey(Object key)` - use `hasMediaType(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `put(String key, PathItem value)` - use `addMediaType(String, MediaType)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `putAll(Map<? extends String, ? extends PathItem> m)` - use `setMediaTypes(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `remove(Object key)` - use `removeMediaType(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+  ** `OASFactory`
+    *** `createScopes` - use `Map<String, String>` for scopes instead (link:https://github.com/eclipse/microprofile-open-api/issues/328[328])
+    *** `createServerVariables` - use use `Map<String, ServerVariable>` for server variables instead (link:https://github.com/eclipse/microprofile-open-api/issues/245[245])
+  ** `OAuthFlow`
+    *** `setScopes(Scopes scopes)` - use `setScopes(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/328[328])
+    *** `scopes(Scopes scopes)` - use `scopes(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/328[328])
+  ** `OpenAPI`
+    *** `path(String name, PathItem path)` - use `Paths#addPathItem(String, PathItem)` on `OpenAPI#getPaths` instead (link:https://github.com/eclipse/microprofile-open-api/issues/247[247])
+  ** `Path`
+    *** `get(Object key)` - use `getPathItem(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `containsKey(Object key)` - use `hasPathItem(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `put(String key, PathItem value)` - use `addPathItem(String, PathItem)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `putAll(Map<? extends String, ? extends PathItem> m)` - use `setPathItems(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `remove(Object key)` - use `removePathItem(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+  ** `PathItem`
+    *** `readOperations` - use `Map#values()` on `PathItem#getOperations()` instead (link:https://github.com/eclipse/microprofile-open-api/pull/256[256])
+    *** `readOperationsMap` - use `getOperations()` instead (link:https://github.com/eclipse/microprofile-open-api/pull/256[256])
+  ** `Schema`
+    *** `getAdditionalProperties` - use `getAdditionalPropertiesSchema()` or `getAdditionalPropertiesBoolean()` instead (link:https://github.com/eclipse/microprofile-open-api/issues/257[257], link:https://github.com/eclipse/microprofile-open-api/pull/281[281])
+    *** `setAdditionalProperties(Schema additionalProperties)` - use `setAdditionalPropertiesSchema(Schema)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/257[257], link:https://github.com/eclipse/microprofile-open-api/pull/281[281])
+    *** `setAdditionalProperties(Boolean additionalProperties)` - use `setAdditionalPropertiesBoolean(Boolean)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/257[257], link:https://github.com/eclipse/microprofile-open-api/pull/281[281])
+    *** `additionalProperties(Schema additionalProperties)` - use `additionalPropertiesSchema(Schema)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/257[257], link:https://github.com/eclipse/microprofile-open-api/pull/281[281])
+    *** `additionalProperties(Boolean additionalProperties)` - use `additionalPropertiesBoolean(Boolean)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/257[257], link:https://github.com/eclipse/microprofile-open-api/pull/281[281])
+  ** `SecurityRequirement`
+    *** `get(Object key)` - use `getScheme(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `containsKey(Object key)` - use `hasScheme(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `put(String key, PathItem value)` - use `addScheme(String, List)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `putAll(Map<? extends String, ? extends PathItem> m)` - use `setSchemes(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+    *** `remove(Object key)` - use `removeScheme(String)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/248[248])
+  ** `Server`
+    *** `setVariables(ServerVariables variables)` - use `setVariables(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/245[245])
+    *** `variables(ServerVariables variables)` - use `variables(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/245[245])
 
-* definition of an HTTP endpoint, `/openapi`, that provides YAML and JSON representations
-of the generated OpenAPI v3 document.
+=== API/SPI Changes
 
+* The `@SchemaProperty` annotation has been added to allow the properties for a schema to be defined inline. (link:https://github.com/eclipse/microprofile-open-api/issues/360[360]). For example:
+```
+    @Schema(properties={
+        @SchemaProperty(name="creditCard", required=true),
+        @SchemaProperty(name="departureFlight", description="The departure flight information."),
+        @SchemaProperty(name="returningFlight")
+    })
+```
+
+* The `@RequestBodySchema` annotation has been added to provide a shorthand mechanism to specify the schema for a request body (link:https://github.com/eclipse/microprofile-open-api/issues/363[363]). For example:
+```
+    @RequestBodySchema(MyRequestObject.class)
+```
+
+* The `@APIResponseSchema` annotation has been added to provide a shorthand mechanism to specify the schema for a response body (link:https://github.com/eclipse/microprofile-open-api/issues/363[363]). For example:
+```
+    @APIResponseSchema(MyResponseObject.class)
+```
+
+* The `mp.openapi.schema.*` MicroProfile Config property has been added to allow the schema for a specific class to be specified. This property would typically be used in cases where the application developer does not have access to the source code of a class (link:https://github.com/eclipse/microprofile-open-api/issues/364[364]). For example:
+```
+    mp.openapi.schema.java.time.Instant = { \
+        "name": "EpochSeconds", \
+        "type": "number", \
+        "format": "int64", \
+        "title": "Epoch Seconds", \
+        "description": "Number of seconds from the epoch of 1970-01-01T00:00:00Z" \
+    }
+```
+
+=== Functional Changes
+
+* Getter methods on model interfaces that return a list or map now return a copy of the list/map containing the same items. This list/map CAN be immutable. (link:https://github.com/eclipse/microprofile-open-api/issues/240[240])
+
+* Setter methods on model interfaces that take a list or a map as a parameter MUST not use the list/map instance directly (link:https://github.com/eclipse/microprofile-open-api/issues/284[284])
+
+=== Other Changes
+
+* JavaDoc updates to clarify the behaviour of getter methods on model interfaces that return a list or map ((link:https://github.com/eclipse/microprofile-open-api/issues/240[240]), link:https://github.com/eclipse/microprofile-open-api/pull/288[288])
+
+* TCK updates updates to verify that getter methods on model interfaces return a list or map, return a copy of underlying collection ((link:https://github.com/eclipse/microprofile-open-api/issues/240[240]), link:https://github.com/eclipse/microprofile-open-api/pull/288[288])
+
+[[release_notes_11]]
 == Release Notes for Microprofile OpenAPI 1.1
 
 Changes include:
@@ -58,18 +156,20 @@ Changes include:
 
 ** bug fixes, documentation updates, more convenience methods, deprecations, etc.
 
-== Release Notes for Microprofile OpenAPI 2.0
+[[release_notes_10]]
+== Release Notes for MicroProfile OpenAPI 1.0
 
-Changes introduced in this release:
+First official release of MP OpenAPI.  Highlights of the release:
 
-* Methods that were renamed (and deprecated) in 1.1 are removed
+* set of annotations that covers the entire OpenAPI v3 specification when combined
+with JAX-RS annotations.
 
-* Changes to model interfaces: interfaces no longer extend `java.util.Map`
+* set of OpenAPI v3 models covering the entire OpenAPI v3 specification, with
+corresponding APIs to provide a bootstrap or complete model tree.
 
-* Tck ensure that model interfaces are creating copy of lists/maps and are returning 
-immutable copies of lists/maps
+* configuration injected via MicroProfile Config specification.
 
-* Delegate document / property location to MP Config
+* ability to provide static (partial or complete) OpenAPI v3 files.
 
-* Add support for defining Schema properties using annotations
-
+* definition of an HTTP endpoint, `/openapi`, that provides YAML and JSON representations
+of the generated OpenAPI v3 document.
