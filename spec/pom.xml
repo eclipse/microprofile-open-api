@@ -29,10 +29,12 @@
     <description>MicroProfile OpenAPI :: Specification</description>
 
     <properties>
-        <license>Apache License v 2.0</license>
+        <asciidoctor-maven.version>1.5.6</asciidoctor-maven.version>
+        <asciidoctorj-pdf.version>1.5.0-alpha.15</asciidoctorj-pdf.version>
         <maven.build.timestamp.format>MMMM dd, yyyy</maven.build.timestamp.format>
         <revisiondate>${maven.build.timestamp}</revisiondate>
-        <revremark>Draft</revremark>
+        <spec.pdf>${project.build.directory}/generated-docs/${project.build.finalName}.pdf</spec.pdf>
+        <spec.html>${project.build.directory}/generated-docs/${project.build.finalName}.html</spec.html>
     </properties>
 
     <build>
@@ -57,12 +59,8 @@
                             <goal>process-asciidoc</goal>
                         </goals>
                         <configuration>
+                            <outputFile>${spec.pdf}</outputFile>
                             <backend>pdf</backend>
-                            <attributes>
-                                <revnumber>${project.version}</revnumber>
-                                <revremark>${revremark}</revremark>
-                                <revdate>${revisiondate}</revdate>
-                            </attributes>
                         </configuration>
                     </execution>
                     <execution>
@@ -72,12 +70,8 @@
                             <goal>process-asciidoc</goal>
                         </goals>
                         <configuration>
+                            <outputFile>${spec.html}</outputFile>
                             <backend>html5</backend>
-                            <attributes>
-                                <revnumber>${project.version}</revnumber>
-                                <revremark>${revremark}</revremark>
-                                <revdate>${revisiondate}</revdate>
-                            </attributes>
                         </configuration>
                     </execution>
                 </executions>
@@ -85,9 +79,38 @@
                     <sourceDocumentName>microprofile-openapi-spec.adoc</sourceDocumentName>
                     <sourceHighlighter>coderay</sourceHighlighter>
                     <attributes>
-                        <license>${license}</license>
+                        <revnumber>${project.version}</revnumber>
+                        <revremark>${revremark}</revremark>
+                        <revdate>${revisiondate}</revdate>
+                        <currentYear>${currentYear}</currentYear>
+                        <inceptionYear>${inceptionYear}</inceptionYear>
                     </attributes>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-artifacts</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>attach-artifact</goal>
+                        </goals>
+                        <configuration>
+                            <artifacts>
+                                <artifact>
+                                    <file>${spec.pdf}</file>
+                                    <type>pdf</type>
+                                </artifact>
+                                <artifact>
+                                    <file>${spec.html}</file>
+                                    <type>html</type>
+                                </artifact>
+                            </artifacts>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
