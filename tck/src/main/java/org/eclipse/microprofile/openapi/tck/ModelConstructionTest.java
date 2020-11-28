@@ -415,7 +415,7 @@ public class ModelConstructionTest extends Arquillian {
         assertEquals(o.getTags().size(), 1, "The list is expected to contain one entry.");
         checkListEntry(o.getTags(), t2);
         checkSameObject(o, o.addTag(t));
-        assertEquals(o.getSecurity().size(), 2, "The list is expected to contain two entries.");
+        assertEquals(o.getTags().size(), 2, "The list is expected to contain two entries.");
         checkListEntry(o.getTags(), t);
         
         Tag otherTag  = createConstructibleInstance(Tag.class);
@@ -1677,10 +1677,10 @@ public class ModelConstructionTest extends Arquillian {
         catch (Exception e) {
             //It is allowed to throw an exception
         }
-        List<V>  map2 = listGetter.apply(container);
-        assertNotNull(map2, "The list must not be null.");
-        assertFalse(map2.contains(otherValue), "The list is expected to not contain the key: " + otherValue);
-        assertEquals(map2.size(), originalSize, "The list is expected to have a size of " + originalSize);
+        List<V> list2 = listGetter.apply(container);
+        assertNotNull(list2, "The list must not be null.");
+        assertFalse(list2.contains(otherValue), "The list is expected to not contain the value: " + otherValue);
+        assertEquals(list2.size(), originalSize, "The list is expected to have a size of " + originalSize);
     }
     
     private <T> void checkSameObject(T expected, T actual) {
