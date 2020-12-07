@@ -29,8 +29,6 @@
     <description>MicroProfile OpenAPI :: Specification</description>
 
     <properties>
-        <asciidoctor-maven.version>1.5.6</asciidoctor-maven.version>
-        <asciidoctorj-pdf.version>1.5.0-alpha.15</asciidoctorj-pdf.version>
         <maven.build.timestamp.format>MMMM dd, yyyy</maven.build.timestamp.format>
         <revisiondate>${maven.build.timestamp}</revisiondate>
         <spec.pdf>${project.build.directory}/generated-docs/${project.build.finalName}.pdf</spec.pdf>
