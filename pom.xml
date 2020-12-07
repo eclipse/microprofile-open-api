@@ -48,7 +48,7 @@
         <java-hamcrest.version>2.0.0.0</java-hamcrest.version>
         <httpclient.version>4.5.2</httpclient.version>
         <jackson.version>2.10.1</jackson.version>
-        <restclient.version>2.0</restclient.version>
+        <restclient.version>2.0-RC3</restclient.version>
 
         <!-- Versions of SPEC dependencies  -->
         <asciidoctor-maven.version>1.6.0</asciidoctor-maven.version>
