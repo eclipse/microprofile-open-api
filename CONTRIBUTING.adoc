@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2019 Contributors to the Eclipse Foundation
+// Copyright (c) 2020 Contributors to the Eclipse Foundation
 //
 // See the NOTICE file(s) distributed with this work for additional
 // information regarding copyright ownership.
@@ -17,19 +17,84 @@
 // limitations under the License.
 //
 
-== How to contribute
+# Contributing to MicroProfile
 
-Do you want to contribute to this project? Here is what you can do:
+Thanks for your interest in this project.
 
-* Fork the repository, make changes, then do a pull request.
-** Remember to https://help.github.com/articles/signing-commits/[sign your commits]
-** Make sure you have signed the https://www.eclipse.org/legal/ECA.php[Eclipse Contributor Agreement]
-* https://github.com/eclipse/microprofile-open-api/issues[Create or fix an issue].
-* https://gitter.im/eclipse/microprofile-open-api[Join us on Gitter to discuss this project].
-* Join our https://calendar.google.com/calendar/embed?src=gbnbc373ga40n0tvbl88nkc3r4%40group.calendar.google.com[bi-weekly meeting] every second Monday at https://www.timeanddate.com/time/map/[15h00 GMT]. 
-** https://docs.google.com/document/d/1opa5lz5m1IctTWNm09YWTb5qwg3r8zF9a0sPcOHCbt0/edit?usp=sharing[Minutes and Agenda].
-** https://bluejeans.com/166335599[Meeting room].
-* Join the discussions on the https://groups.google.com/forum/#!forum/microprofile[MicroProfile Google Group]
-* https://microprofile.io/blog/[Contribute a blog post].
+## Project description
 
-Also see the https://wiki.eclipse.org/MicroProfile/ContributingGuidelines[MicroProfile Contributing Guidelines] on the https://wiki.eclipse.org/MicroProfile[Eclipse MicroProfile wiki page]
+The MicroProfile project is aimed at
+
+* https://projects.eclipse.org/projects/technology.microprofile
+
+## Developer resources
+
+Information regarding source code management, builds, coding standards, and
+more.
+
+* https://projects.eclipse.org/projects/technology.microprofile/developer
+
+The project maintains the following source code repositories
+
+* https://github.com/eclipse/microprofile
+* https://github.com/eclipse/microprofile-config
+* https://github.com/eclipse/microprofile-evolution-process
+* https://github.com/eclipse/microprofile-conference
+* https://github.com/eclipse/microprofile-samples
+* https://github.com/eclipse/microprofile-fault-tolerance
+* https://github.com/eclipse/microprofile-health
+* https://github.com/eclipse/microprofile-jwt-auth
+* https://github.com/eclipse/microprofile-sandbox
+* https://github.com/eclipse/microprofile-bom
+* https://github.com/eclipse/microprofile-rest-client
+* https://github.com/eclipse/microprofile-open-api
+* https://github.com/eclipse/microprofile-metrics
+* https://github.com/eclipse/microprofile-opentracing
+* https://github.com/eclipse/microprofile-parent
+* https://github.com/eclipse/microprofile-service-mesh
+* https://github.com/eclipse/microprofile-lra
+* https://github.com/eclipse/microprofile-service-mesh-service-a
+* https://github.com/eclipse/microprofile-service-mesh-service-b
+* https://github.com/eclipse/microprofile-reactive-streams-operators
+* https://github.com/eclipse/microprofile-reactive-messaging
+* https://github.com/eclipse/microprofile-context-propagation
+* https://github.com/eclipse/microprofile-starter
+* https://github.com/eclipse/microprofile-marketing
+* https://github.com/eclipse/microprofile-graphql
+
+## Eclipse Development Process
+
+This Eclipse Foundation open project is governed by the Eclipse Foundation
+Development Process and operates under the terms of the Eclipse IP Policy.
+
+## Specifications
+
+This specification project operates under the terms of the Eclipse Foundation
+Specification process.
+
+* https://eclipse.org/projects/dev_process
+* https://www.eclipse.org/org/documents/Eclipse_IP_Policy.pdf
+* https://www.eclipse.org/projects/efsp/
+* https://www.eclipse.org/legal/efsp_non_assert.php
+
+## Eclipse Contributor Agreement
+
+Before your contribution can be accepted by the project team contributors must
+electronically sign the Eclipse Contributor Agreement (ECA).
+
+* http://www.eclipse.org/legal/ECA.php
+
+Commits that are provided by non-committers must have a Signed-off-by field in
+the footer indicating that the author is aware of the terms by which the
+contribution has been provided to the project. The non-committer must
+additionally have an Eclipse Foundation account and must have a signed Eclipse
+Contributor Agreement (ECA) on file.
+
+For more information, please see the Eclipse Committer Handbook:
+https://www.eclipse.org/projects/handbook/#resources-commit
+
+## Contact
+
+Contact the project developers via the project's "dev" list.
+
+* https://dev.eclipse.org/mailman/listinfo/microprofile-dev
