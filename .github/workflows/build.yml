@@ -21,4 +21,4 @@ jobs:
           java-version: ${{matrix.java}}
 
       - name: build with maven
-        run: mvn -B verify javadoc:javadoc --file pom.xml
+        run: mvn -B --no-transfer-progress verify javadoc:javadoc --file pom.xml
