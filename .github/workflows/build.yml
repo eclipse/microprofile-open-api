@@ -1,7 +1,7 @@
 ## This allows Github actions to build this project
 name: Build
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
