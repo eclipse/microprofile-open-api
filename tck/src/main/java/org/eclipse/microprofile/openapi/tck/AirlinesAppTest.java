@@ -667,8 +667,17 @@ public class AirlinesAppTest extends AppTestBase {
     public void testSchemaProperty(String type) {
         ValidatableResponse vr = callEndpoint(type);
         vr.body("components.schemas.User.properties", IsMapWithSize.aMapWithSize(10));
-        vr.body("components.schemas.User.properties.phone.example", equalTo("123-456-7890"));
+        vr.body("components.schemas.User.properties.phone.example", equalTo("123-456-7891"));
         vr.body("components.schemas.User.properties.phone.description", equalTo("Telephone number to contact the user"));
+    }
+    
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testSchemaPropertyValuesOverrideClassPropertyValues(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+        vr.body("components.schemas.User.properties", IsMapWithSize.aMapWithSize(10));
+        vr.body("components.schemas.User.properties.phone.example", not("123-456-7890"));
+        vr.body("components.schemas.User.properties.phone.example", equalTo("123-456-7891"));
     }
     
     @RunAsClient
