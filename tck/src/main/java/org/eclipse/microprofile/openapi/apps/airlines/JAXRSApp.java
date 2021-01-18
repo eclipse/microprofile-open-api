@@ -94,7 +94,7 @@ import org.eclipse.microprofile.openapi.apps.airlines.resources.bookings.Booking
                         @Schema(name = "id", type = SchemaType.INTEGER, format="int32"),
                         @Schema(name = "AirlinesRef", ref = "#/components/schemas/Airlines"),
                         @Schema(name = "User", implementation = User.class, properties = {
-                            @SchemaProperty(name = "phone", description = "Telephone number to contact the user")
+                            @SchemaProperty(name = "phone", description = "Telephone number to contact the user", example = "123-456-7891")
                         })},
                 responses = {
                         @APIResponse(name = "FoundAirlines", responseCode = "200", description = "successfully found airlines", 
