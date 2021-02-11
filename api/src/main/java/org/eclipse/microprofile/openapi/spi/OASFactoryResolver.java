@@ -89,18 +89,16 @@ public abstract class OASFactoryResolver {
             return null;
         }
 
-        OASFactoryResolver instance = loadSpi(cl.getParent());
+        OASFactoryResolver instance = null;
 
-        if (instance == null) {
-            ServiceLoader<OASFactoryResolver> sl = ServiceLoader.load(OASFactoryResolver.class, cl);
-            for (OASFactoryResolver spi : sl) {
-                if (instance != null) {
-                    throw new IllegalStateException("Multiple OASFactoryResolver implementations found: " + spi.getClass().getName() + " and "
-                            + instance.getClass().getName());
-                }
-                else {
-                    instance = spi;
-                }
+        ServiceLoader<OASFactoryResolver> sl = ServiceLoader.load(OASFactoryResolver.class, cl);
+        for (OASFactoryResolver spi : sl) {
+            if (instance != null) {
+                throw new IllegalStateException("Multiple OASFactoryResolver implementations found: " + spi.getClass().getName() + " and "
+                        + instance.getClass().getName());
+            }
+            else {
+                instance = spi;
             }
         }
         return instance;
