@@ -19,6 +19,7 @@ import java.util.Set;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
+import javax.ws.rs.core.MediaType;
 
 import org.eclipse.microprofile.openapi.annotations.Components;
 import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
@@ -98,7 +99,7 @@ import org.eclipse.microprofile.openapi.apps.airlines.resources.bookings.Booking
                         })},
                 responses = {
                         @APIResponse(name = "FoundAirlines", responseCode = "200", description = "successfully found airlines", 
-                                content = @Content(mediaType = "application/json", schema = @Schema(type = SchemaType.ARRAY, 
+                                content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(type = SchemaType.ARRAY, 
                                 implementation = Airline.class))),
                         @APIResponse(name = "FoundBookings", responseCode = "200", description = "Bookings retrieved", 
                                 content = @Content(schema = @Schema(type = SchemaType.ARRAY, implementation = Booking.class))) }, 
@@ -114,7 +115,7 @@ import org.eclipse.microprofile.openapi.apps.airlines.resources.bookings.Booking
                         @ExampleObject(name = "user", summary = "External user example", 
                                 externalValue = "http://foo.bar/examples/user-example.json") }, 
                 requestBodies = {
-                        @RequestBody(name = "review", content = @Content(mediaType = "application/json", 
+                        @RequestBody(name = "review", content = @Content(mediaType = MediaType.APPLICATION_JSON, 
                                 schema = @Schema(implementation = Review.class)), required = true, description = "example review to add") }, 
                 headers = {
                         @Header(name = "Max-Rate", description = "Maximum rate", schema = @Schema(type = SchemaType.INTEGER), 
