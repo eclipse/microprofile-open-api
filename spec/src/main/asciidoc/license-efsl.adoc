@@ -1,3 +1,4 @@
+[subs="normal"]
 ....
 Specification: {doctitle}
 Version: {revnumber}
