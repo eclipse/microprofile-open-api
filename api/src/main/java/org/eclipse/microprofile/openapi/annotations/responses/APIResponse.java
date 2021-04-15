@@ -68,7 +68,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responseObject"
  * 
  **/
-@Target({ ElementType.METHOD })
+@Target({ ElementType.METHOD, ElementType.TYPE, ElementType.ANNOTATION_TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Repeatable(APIResponses.class)

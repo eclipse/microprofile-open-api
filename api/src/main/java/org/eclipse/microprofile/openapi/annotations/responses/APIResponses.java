@@ -28,7 +28,7 @@ import java.lang.annotation.Target;
  * 
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responses-object">Responses Object</a>
  **/
-@Target({ ElementType.METHOD })
+@Target({ ElementType.METHOD, ElementType.TYPE, ElementType.ANNOTATION_TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface APIResponses {
