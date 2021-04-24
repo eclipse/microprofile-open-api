@@ -629,7 +629,7 @@ mp.openapi.model.reader=com.mypackage.MyModelReader
 Similar to static files, the model reader can be used to provide either complete
 or partial model trees. If providing a complete OpenAPI model tree, application
 developers should set the `mp.openapi.scan.disable` configuration to `true`.
-Oherwise this partial model will be used as the base model during the processing
+Otherwise this partial model will be used as the base model during the processing
 of the other <<Documentation Mechanisms>>.
 
 Vendors are required to call the OASReader a single time, in the order defined by
