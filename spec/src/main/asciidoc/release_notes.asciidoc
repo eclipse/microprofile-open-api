@@ -129,7 +129,7 @@ A full list of changes delivered in the 2.0 release can be found at link:https:/
 
 * JavaDoc updates to clarify the behaviour of getter methods on model interfaces that return a list or map ((link:https://github.com/eclipse/microprofile-open-api/issues/240[240]), link:https://github.com/eclipse/microprofile-open-api/pull/288[288])
 
-* TCK updates updates to verify that getter methods on model interfaces return a list or map, return a copy of underlying collection ((link:https://github.com/eclipse/microprofile-open-api/issues/240[240]), link:https://github.com/eclipse/microprofile-open-api/pull/288[288])
+* TCK updates to verify that getter methods on model interfaces return a list or map, return a copy of underlying collection ((link:https://github.com/eclipse/microprofile-open-api/issues/240[240]), link:https://github.com/eclipse/microprofile-open-api/pull/288[288])
 
 [[release_notes_11]]
 == Release Notes for Microprofile OpenAPI 1.1
