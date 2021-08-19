@@ -15,6 +15,6 @@
  * Annotations to represent additional data to extend existing OpenAPI specifications.
  */
 
-@org.osgi.annotation.versioning.Version("1.0")
+@org.osgi.annotation.versioning.Version("1.1")
 @org.osgi.annotation.versioning.ProviderType
 package org.eclipse.microprofile.openapi.annotations.extensions;

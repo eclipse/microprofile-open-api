@@ -25,8 +25,8 @@ import java.lang.annotation.Target;
 /**
  * This object provides schema and examples for a particular media type.
  * 
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#mediaTypeObject">OpenAPI Specification Media Type
- *      Object</a>
+ * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#mediaTypeObject">OpenAPI
+ *      Specification Media Type Object</a>
  **/
 @Target({})
 @Retention(RetentionPolicy.RUNTIME)
@@ -46,7 +46,6 @@ public @interface Content {
      **/
     ExampleObject[] examples() default {};
 
-
     /**
      * A free-form property to include an example of an instance for this content.
      *
@@ -62,11 +61,13 @@ public @interface Content {
     Schema schema() default @Schema();
 
     /**
-     * An array of encoding corresponding to a map of property name and its encoding information in MediaType model. 
-     * The key, being the property name, MUST exist in the schema as a property.
-     * <p> 
-     * The encoding object SHALL only apply to requestBody objects when the media type is multipart or application/x-www-form-urlencoded.
+     * An array of encoding corresponding to a map of property name and its encoding information in MediaType model. The
+     * key, being the property name, MUST exist in the schema as a property.
+     * <p>
+     * The encoding object SHALL only apply to requestBody objects when the media type is multipart or
+     * application/x-www-form-urlencoded.
      * </p>
+     * 
      * @return the array of encodings
      */
     Encoding[] encoding() default {};

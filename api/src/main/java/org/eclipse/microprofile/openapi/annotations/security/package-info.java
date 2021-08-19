@@ -16,6 +16,7 @@
  * 
  * <p>
  * Example usage:
+ * 
  * <pre>
  * {@literal @}Path("/reviews")
  * {@literal @}SecurityScheme(

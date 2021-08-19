@@ -17,9 +17,9 @@
 package org.eclipse.microprofile.openapi.tck;
 
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.Matchers.startsWith;
+import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
@@ -29,16 +29,17 @@ import org.testng.annotations.Test;
 
 import io.restassured.response.ValidatableResponse;
 
-public class OASConfigExcludeClassTest extends AppTestBase { 
+public class OASConfigExcludeClassTest extends AppTestBase {
     private ValidatableResponse vr;
-    
+
     @Deployment(name = "airlines")
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "airlines.war")
                 .addPackages(true, "org.eclipse.microprofile.openapi.apps.airlines")
-                .addAsManifestResource("exclude-class-microprofile-config.properties", "microprofile-config.properties");
+                .addAsManifestResource("exclude-class-microprofile-config.properties",
+                        "microprofile-config.properties");
     }
-    
+
     @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testExcludedClass(String type) throws InterruptedException {
@@ -53,8 +54,6 @@ public class OASConfigExcludeClassTest extends AppTestBase {
         vr.body("paths.'/reviews/airlines/{airline}'", nullValue());
         vr.body("paths.'/reviews/{user}/{airlines}'", nullValue());
 
-        
-        
     }
-    
+
 }

@@ -17,6 +17,7 @@
  * The behaviour of methods inherited from java.lang.Object are undefined by the MicroProfile OpenAPI specification.
  * <p>
  * Example usage:
+ * 
  * <pre>
  *  .components(OASFactory.createObject(Components.class)
  *      .links(new HashMap&lt;String, Link&gt;())

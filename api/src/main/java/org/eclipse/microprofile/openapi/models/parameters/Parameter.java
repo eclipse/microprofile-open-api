@@ -34,21 +34,23 @@ import org.eclipse.microprofile.openapi.models.media.Schema;
  * A unique parameter is defined by a combination of a name and location. There are four possible parameter locations
  * specified by the <code>in</code> field:
  * <ul>
- * <li>path - Used together with Path Templating, where the parameter value is actually part of the operation's URL. This does not include the host or
- * base path of the API. For example, in /items/{itemId}, the path parameter is itemId.</li>
+ * <li>path - Used together with Path Templating, where the parameter value is actually part of the operation's URL.
+ * This does not include the host or base path of the API. For example, in /items/{itemId}, the path parameter is
+ * itemId.</li>
  * <li>query - Parameters that are appended to the URL. For example, in /items?id=###, the query parameter is id.</li>
- * <li>header - Custom headers that are expected as part of the request. Note that RFC7230 states header names are case insensitive.</li>
+ * <li>header - Custom headers that are expected as part of the request. Note that RFC7230 states header names are case
+ * insensitive.</li>
  * <li>cookie - Used to pass a specific cookie value to the API.</li>
  * </ul>
  * <p>
- * The rules for serialization of the parameter are specified in one of two ways. For simpler scenarios, a schema and style can describe the structure
- * and syntax of the parameter.
+ * The rules for serialization of the parameter are specified in one of two ways. For simpler scenarios, a schema and
+ * style can describe the structure and syntax of the parameter.
  * <p>
- * For more complex scenarios, the content property can define the media type and schema of the parameter. A parameter must contain either a schema
- * property, or a content property, but not both.
+ * For more complex scenarios, the content property can define the media type and schema of the parameter. A parameter
+ * must contain either a schema property, or a content property, but not both.
  * 
- * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject">OpenAPI Specification Parameter
- *      Object</a>
+ * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject">OpenAPI
+ *      Specification Parameter Object</a>
  */
 public interface Parameter extends Constructible, Extensible<Parameter>, Reference<Parameter> {
 
@@ -56,8 +58,9 @@ public interface Parameter extends Constructible, Extensible<Parameter>, Referen
      * The values allowed for the style field.
      */
     enum Style {
-        MATRIX("matrix"), LABEL("label"), FORM("form"), SIMPLE("simple"), SPACEDELIMITED("spaceDelimited"), PIPEDELIMITED(
-                "pipeDelimited"), DEEPOBJECT("deepObject");
+        MATRIX("matrix"), LABEL("label"), FORM("form"), SIMPLE("simple"), SPACEDELIMITED(
+                "spaceDelimited"), PIPEDELIMITED(
+                        "pipeDelimited"), DEEPOBJECT("deepObject");
 
         private final String value;
 
@@ -70,7 +73,7 @@ public interface Parameter extends Constructible, Extensible<Parameter>, Referen
             return String.valueOf(value);
         }
     }
-    
+
     /**
      * The values allowed for the in field.
      */
@@ -88,7 +91,7 @@ public interface Parameter extends Constructible, Extensible<Parameter>, Referen
             return String.valueOf(value);
         }
     }
-    
+
     /**
      * Returns the name property from a Parameter instance.
      *
@@ -99,14 +102,16 @@ public interface Parameter extends Constructible, Extensible<Parameter>, Referen
     /**
      * Sets the name property of a Parameter instance to the given string.
      *
-     * @param name the name of the parameter
+     * @param name
+     *            the name of the parameter
      */
     void setName(String name);
 
     /**
      * Sets the name property of a Parameter instance to the given string.
      *
-     * @param name the name of the parameter
+     * @param name
+     *            the name of the parameter
      * @return the current Parameter instance
      */
     default Parameter name(String name) {
@@ -120,18 +125,20 @@ public interface Parameter extends Constructible, Extensible<Parameter>, Referen
      * @return the location of the parameter
      **/
     In getIn();
-    
+
     /**
      * Sets the in property of a Parameter instance to the given value.
      *
-     * @param in the value of the in property
+     * @param in
+     *            the value of the in property
      */
     void setIn(In in);
-    
+
     /**
      * Sets the in property of a Parameter instance to the given value.
      *
-     * @param in the value of the in property
+     * @param in
+     *            the value of the in property
      * @return the current Parameter instance
      */
     default Parameter in(In in) {
@@ -149,14 +156,16 @@ public interface Parameter extends Constructible, Extensible<Parameter>, Referen
     /**
      * Sets the description property of a Parameter instance to the given string.
      *
-     * @param description a brief description of the parameter
+     * @param description
+     *            a brief description of the parameter
      */
     void setDescription(String description);
 
     /**
      * Sets the description property of a Parameter instance to the given string.
      *
-     * @param description a brief description of the parameter
+     * @param description
+     *            a brief description of the parameter
      * @return the current Parameter instance
      */
     default Parameter description(String description) {
@@ -174,14 +183,16 @@ public interface Parameter extends Constructible, Extensible<Parameter>, Referen
     /**
      * Sets the required property of a Parameter instance to the given value.
      *
-     * @param required indicates whether this parameter is mandatory
+     * @param required
+     *            indicates whether this parameter is mandatory
      */
     void setRequired(Boolean required);
 
     /**
      * Sets the required property of a Parameter instance to the given value.
      *
-     * @param required indicates whether this parameter is mandatory
+     * @param required
+     *            indicates whether this parameter is mandatory
      * @return the current Parameter instance
      */
     default Parameter required(Boolean required) {
@@ -199,14 +210,16 @@ public interface Parameter extends Constructible, Extensible<Parameter>, Referen
     /**
      * Sets the deprecated property of a Parameter instance to the given value.
      *
-     * @param deprecated specifies that a parameter is deprecated
+     * @param deprecated
+     *            specifies that a parameter is deprecated
      */
     void setDeprecated(Boolean deprecated);
 
     /**
      * Sets the deprecated property of a Parameter instance to the given value.
      *
-     * @param deprecated specifies that a parameter is deprecated
+     * @param deprecated
+     *            specifies that a parameter is deprecated
      * @return the current Parameter instance
      */
     default Parameter deprecated(Boolean deprecated) {
@@ -224,14 +237,16 @@ public interface Parameter extends Constructible, Extensible<Parameter>, Referen
     /**
      * Sets the allowEmptyValue property of a Parameter instance to the given value.
      *
-     * @param allowEmptyValue specify the ability to pass empty-valued parameters
+     * @param allowEmptyValue
+     *            specify the ability to pass empty-valued parameters
      */
     void setAllowEmptyValue(Boolean allowEmptyValue);
 
     /**
      * Sets the allowEmptyValue property of a Parameter instance to the given value.
      *
-     * @param allowEmptyValue specify the ability to pass empty-valued parameters
+     * @param allowEmptyValue
+     *            specify the ability to pass empty-valued parameters
      * @return the current Parameter instance
      */
     default Parameter allowEmptyValue(Boolean allowEmptyValue) {
@@ -249,14 +264,16 @@ public interface Parameter extends Constructible, Extensible<Parameter>, Referen
     /**
      * Sets the style property of a Parameter instance to the given value.
      *
-     * @param style describes how the parameter value will be serialized
+     * @param style
+     *            describes how the parameter value will be serialized
      */
     void setStyle(Parameter.Style style);
 
     /**
      * Sets the style property of a Parameter instance to the given value.
      *
-     * @param style describes how the parameter value will be serialized
+     * @param style
+     *            describes how the parameter value will be serialized
      * @return the current Parameter instance
      */
     default Parameter style(Parameter.Style style) {
@@ -274,14 +291,16 @@ public interface Parameter extends Constructible, Extensible<Parameter>, Referen
     /**
      * Sets the explode property of a Parameter instance to the given value.
      *
-     * @param explode whether parameter values of type "array" or "object" generate separate parameters for each value
+     * @param explode
+     *            whether parameter values of type "array" or "object" generate separate parameters for each value
      */
     void setExplode(Boolean explode);
 
     /**
      * Sets the explode property of a Parameter instance to the given value.
      *
-     * @param explode whether parameter values of type "array" or "object" generate separate parameters for each value
+     * @param explode
+     *            whether parameter values of type "array" or "object" generate separate parameters for each value
      * @return the current Parameter instance
      */
     default Parameter explode(Boolean explode) {
@@ -299,14 +318,16 @@ public interface Parameter extends Constructible, Extensible<Parameter>, Referen
     /**
      * Sets the allowReserved property of a Parameter instance to the given value.
      *
-     * @param allowReserved specifies whether the parameter value should allow reserved characters
+     * @param allowReserved
+     *            specifies whether the parameter value should allow reserved characters
      */
     void setAllowReserved(Boolean allowReserved);
 
     /**
      * Sets the allowReserved property of a Parameter instance to the given value.
      *
-     * @param allowReserved specifies whether the parameter value should allow reserved characters
+     * @param allowReserved
+     *            specifies whether the parameter value should allow reserved characters
      * @return the current Parameter instance
      */
     default Parameter allowReserved(Boolean allowReserved) {
@@ -324,14 +345,16 @@ public interface Parameter extends Constructible, Extensible<Parameter>, Referen
     /**
      * Sets the schema property of a Parameter instance to the given value.
      *
-     * @param schema schema defining the type used for the parameter
+     * @param schema
+     *            schema defining the type used for the parameter
      */
     void setSchema(Schema schema);
 
     /**
      * Sets the schema property of a Parameter instance to the given value.
      *
-     * @param schema schema defining the type used for the parameter
+     * @param schema
+     *            schema defining the type used for the parameter
      * @return the current Parameter instance
      */
     default Parameter schema(Schema schema) {
@@ -347,18 +370,22 @@ public interface Parameter extends Constructible, Extensible<Parameter>, Referen
     Map<String, Example> getExamples();
 
     /**
-     * Sets the examples property of a Parameter instance to the given value. Each example should contain a value in the correct format as specified
-     * in the parameter encoding. The examples object is mutually exclusive of the example object.
+     * Sets the examples property of a Parameter instance to the given value. Each example should contain a value in the
+     * correct format as specified in the parameter encoding. The examples object is mutually exclusive of the example
+     * object.
      *
-     * @param examples examples of the parameter
+     * @param examples
+     *            examples of the parameter
      */
     void setExamples(Map<String, Example> examples);
 
     /**
-     * Sets the examples property of a Parameter instance to the given value. Each example should contain a value in the correct format as specified
-     * in the parameter encoding. The examples object is mutually exclusive of the example object.
+     * Sets the examples property of a Parameter instance to the given value. Each example should contain a value in the
+     * correct format as specified in the parameter encoding. The examples object is mutually exclusive of the example
+     * object.
      *
-     * @param examples examples of the parameter
+     * @param examples
+     *            examples of the parameter
      * @return the current Parameter instance
      */
     default Parameter examples(Map<String, Example> examples) {
@@ -367,20 +394,24 @@ public interface Parameter extends Constructible, Extensible<Parameter>, Referen
     }
 
     /**
-     * Adds an example of the parameter using the specified key. The example should contain a value in the correct format as specified in the
-     * parameter encoding.
+     * Adds an example of the parameter using the specified key. The example should contain a value in the correct
+     * format as specified in the parameter encoding.
      *
-     * @param key string to represent the example
-     * @param example example of the parameter. null values will be rejected (implementation will throw an exception) or ignored.
+     * @param key
+     *            string to represent the example
+     * @param example
+     *            example of the parameter. null values will be rejected (implementation will throw an exception) or
+     *            ignored.
      * @return the current Parameter instance
      */
     Parameter addExample(String key, Example example);
 
     /**
-     * Removes an example of the parameter using the specified key. The example should contain a value in the correct format as specified in the
-     * parameter encoding.
+     * Removes an example of the parameter using the specified key. The example should contain a value in the correct
+     * format as specified in the parameter encoding.
      *
-     * @param key string to represent the example
+     * @param key
+     *            string to represent the example
      */
     void removeExample(String key);
 
@@ -392,18 +423,20 @@ public interface Parameter extends Constructible, Extensible<Parameter>, Referen
     Object getExample();
 
     /**
-     * Sets the example property of a Parameter instance to the given object. The example should match the specified schema and encoding properties if
-     * present. The examples object is mutually exclusive of the example object.
+     * Sets the example property of a Parameter instance to the given object. The example should match the specified
+     * schema and encoding properties if present. The examples object is mutually exclusive of the example object.
      *
-     * @param example example of the parameter
+     * @param example
+     *            example of the parameter
      */
     void setExample(Object example);
 
     /**
-     * Sets the example property of a Parameter instance to the given object. The example should match the specified schema and encoding properties if
-     * present. The examples object is mutually exclusive of the example object.
+     * Sets the example property of a Parameter instance to the given object. The example should match the specified
+     * schema and encoding properties if present. The examples object is mutually exclusive of the example object.
      *
-     * @param example example of the parameter
+     * @param example
+     *            example of the parameter
      * @return the current Parameter instance
      */
     default Parameter example(Object example) {
@@ -421,14 +454,16 @@ public interface Parameter extends Constructible, Extensible<Parameter>, Referen
     /**
      * Sets the content property of a Parameter instance to the given object.
      *
-     * @param content a map containing the media representations for the parameter
+     * @param content
+     *            a map containing the media representations for the parameter
      */
     void setContent(Content content);
 
     /**
      * Sets the content property of a Parameter instance to the given object.
      *
-     * @param content a map containing the media representations for the parameter
+     * @param content
+     *            a map containing the media representations for the parameter
      * @return the current Parameter instance
      */
     default Parameter content(Content content) {

@@ -83,8 +83,7 @@ public abstract class AppTestBase extends Arquillian {
         ValidatableResponse vr;
         if ("JSON".equals(type)) {
             vr = given().accept(ContentType.JSON).when().get("/openapi").then().statusCode(200);
-        }
-        else {
+        } else {
             // It seems there is no standard for YAML
             vr = given().filter(YAML_FILTER).accept(ContentType.ANY).when().get("/openapi").then().statusCode(200);
         }
@@ -92,12 +91,13 @@ public abstract class AppTestBase extends Arquillian {
     }
 
     /**
-     * Lookup the object at the provided path in the response and if the object
-     * is a reference (contains a $ref property), return the reference path. If the
-     * object is not a reference, return the input path.
+     * Lookup the object at the provided path in the response and if the object is a reference (contains a $ref
+     * property), return the reference path. If the object is not a reference, return the input path.
      * 
-     * @param vr the response 
-     * @param path a path which may be a reference object (containing a $ref)
+     * @param vr
+     *            the response
+     * @param path
+     *            a path which may be a reference object (containing a $ref)
      * @return the path the object references if present, else the input path
      */
     public static String dereference(ValidatableResponse vr, String path) {
@@ -106,14 +106,13 @@ public abstract class AppTestBase extends Arquillian {
 
         if (ref != null) {
             return ref.replaceFirst("^#/?", "").replace('/', '.');
-        }
-        else {
+        } else {
             return path;
         }
     }
 
     @DataProvider(name = "formatProvider")
     public Object[][] provide() {
-        return new Object[][] { { "JSON" }, { "YAML" } };
+        return new Object[][]{{"JSON"}, {"YAML"}};
     }
 }

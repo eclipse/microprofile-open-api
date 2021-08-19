@@ -12,12 +12,12 @@
  */
 
 /**
- * A set of interfaces for programmable models to represent input and output data types
- * and media types.
+ * A set of interfaces for programmable models to represent input and output data types and media types.
  * <p>
  * The behaviour of methods inherited from java.lang.Object are undefined by the MicroProfile OpenAPI specification.
  * <p>
  * Example usage:
+ * 
  * <pre>
  * .responses(OASFactory.createObject(APIResponses.class)
  *      .addApiResponse("200", OASFactory.createObject(APIResponse.class)

@@ -74,20 +74,21 @@ public class FilterTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testFilterPathItemEnsureOrder(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        //Ensure that the operationId set by filterOperation method was overridden by filterPathItem method, since 
-        //specification states that ancestors must be invoked last.
+        // Ensure that the operationId set by filterOperation method was overridden by filterPathItem method, since
+        // specification states that ancestors must be invoked last.
         vr.body("paths.'/availability'.get.summary", equalTo("Retrieve all available flights"));
         vr.body("paths.'/availability'.get.operationId", equalTo("filterPathItemGetFlights"));
         vr.body("paths.'/bookings'.post.callbacks.'bookingCallback'.'http://localhost:9080/airlines/bookings'.get.description",
                 equalTo("parent - Retrieve all bookings for current user"));
     }
-    
+
     @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testFilterPathItemAddOperation(String type) {
         ValidatableResponse vr = callEndpoint(type);
         vr.body("paths.'/availability'.put.summary", equalTo("filterPathItem - added put operation"));
-        vr.body("paths.'/availability'.put.responses.'200'.description", equalTo("filterPathItem - successfully put airlines"));
+        vr.body("paths.'/availability'.put.responses.'200'.description",
+                equalTo("filterPathItem - successfully put airlines"));
     }
 
     @RunAsClient
@@ -96,10 +97,10 @@ public class FilterTest extends AppTestBase {
         ValidatableResponse vr = callEndpoint(type);
         vr.body("paths.'/bookings/{id}'.get.summary", equalTo("filterOperation - Get a booking with ID"));
         vr.body("paths.'/bookings/{id}'.get.operationId", equalTo("getBookingById"));
-        
+
         vr.body("paths.'/bookings/{id}'.get.tags", containsInAnyOrder("Reservations", "parent - Bookings"));
     }
-    
+
     @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testFilterOpenAPI(String type) {
@@ -113,23 +114,24 @@ public class FilterTest extends AppTestBase {
     public void testFilterParameter(String type) {
         ValidatableResponse vr = callEndpoint(type);
         String reviewParameters = "paths.'/user/login'.get.parameters";
-        
+
         String username = reviewParameters + ".findAll { it.name == 'username' }";
         vr.body(username + ".in", both(hasSize(1)).and(contains("query")));
         vr.body(username + ".description", both(hasSize(1)).and(contains("filterParameter - The user name for login")));
         vr.body(username + ".required", both(hasSize(1)).and(contains(true)));
         vr.body(username + ".schema.type", both(hasSize(1)).and(contains("string")));
-        
-        //Parameter named 'password' should have been removed by filter
+
+        // Parameter named 'password' should have been removed by filter
         vr.body(reviewParameters, hasSize(1));
     }
-    
+
     @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testFilterRequestBody(String type) {
         ValidatableResponse vr = callEndpoint(type);
         String endpoint = "paths.'/bookings'.post.requestBody";
-        vr.body(endpoint + ".description", equalTo("filterRequestBody - Create a new booking with the provided information."));
+        vr.body(endpoint + ".description",
+                equalTo("filterRequestBody - Create a new booking with the provided information."));
         vr.body(endpoint + ".content", notNullValue());
     }
 
@@ -173,7 +175,7 @@ public class FilterTest extends AppTestBase {
         vr.body(maxRate + ".style", equalTo("simple"));
         vr.body(maxRate + ".schema.type", equalTo("integer"));
     }
-    
+
     @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testFilterAPIResponse(String type) {
@@ -183,16 +185,17 @@ public class FilterTest extends AppTestBase {
         String parentChild = "paths.'/reviews'.post.responses.'201'.content.'application/json'.schema.description";
         vr.body(parentChild, equalTo("parent - id of the new review"));
     }
-    
+
     @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testFilterSchema(String type) {
         ValidatableResponse vr = callEndpoint(type);
         final String response201Path = "paths.'/streams'.post.responses.'201'";
-        vr.body(response201Path + ".content.'application/json'.schema.description", equalTo("filterSchema - subscription information"));
-    
+        vr.body(response201Path + ".content.'application/json'.schema.description",
+                equalTo("filterSchema - subscription information"));
+
     }
-    
+
     @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testFilterCallback(String type) {

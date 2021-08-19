@@ -24,20 +24,23 @@ import org.eclipse.microprofile.openapi.models.Constructible;
 /**
  * Discriminator
  * <p>
- * When request bodies or response payloads may be one of a number of different schemas, a discriminator object can be used to aid in serialization,
- * deserialization, and validation. The discriminator is a specific object in a schema which is used to inform the consumer of the specification of an
- * alternative schema based on the value associated with it.
+ * When request bodies or response payloads may be one of a number of different schemas, a discriminator object can be
+ * used to aid in serialization, deserialization, and validation. The discriminator is a specific object in a schema
+ * which is used to inform the consumer of the specification of an alternative schema based on the value associated with
+ * it.
  * <p>
  * 
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#discriminator-object">OpenAPI Specification Discriminator
- *      Object</a>
+ * @see <a href=
+ *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#discriminator-object">OpenAPI
+ *      Specification Discriminator Object</a>
  */
 public interface Discriminator extends Constructible {
 
     /**
      * Sets this Discriminator's propertyName property to the given string.
      *
-     * @param propertyName the name of the property in the payload that will hold the discriminator value
+     * @param propertyName
+     *            the name of the property in the payload that will hold the discriminator value
      * @return the current Discriminator instance
      */
     default Discriminator propertyName(String propertyName) {
@@ -55,15 +58,19 @@ public interface Discriminator extends Constructible {
     /**
      * Sets this Discriminator's propertyName property to the given propertyName.
      *
-     * @param propertyName the name of the property in the payload that will hold the discriminator value
+     * @param propertyName
+     *            the name of the property in the payload that will hold the discriminator value
      */
     void setPropertyName(String propertyName);
 
     /**
      * Maps the given name to the given value and stores it in this Discriminator's mapping property.
      * 
-     * @param name a key which will be compared to information from a request body or response payload.
-     * @param value a schema name or reference. null values will be rejected (implementation will throw an exception) or ignored.
+     * @param name
+     *            a key which will be compared to information from a request body or response payload.
+     * @param value
+     *            a schema name or reference. null values will be rejected (implementation will throw an exception) or
+     *            ignored.
      * @return the current Discriminator instance
      */
     Discriminator addMapping(String name, String value);
@@ -71,14 +78,16 @@ public interface Discriminator extends Constructible {
     /**
      * Remove the given name to the given value and stores it in this Discriminator's mapping property.
      * 
-     * @param name a key which will be compared to information from a request body or response payload.
+     * @param name
+     *            a key which will be compared to information from a request body or response payload.
      */
     void removeMapping(String name);
 
     /**
      * Sets this Discriminator's mapping property to the given map object.
      *
-     * @param mapping a map containing keys and schema names or references
+     * @param mapping
+     *            a map containing keys and schema names or references
      * @return the current Discriminator instance
      */
     default Discriminator mapping(Map<String, String> mapping) {
@@ -96,7 +105,8 @@ public interface Discriminator extends Constructible {
     /**
      * Sets this Discriminator's mapping property to the given map object.
      *
-     * @param mapping a map containing keys and schema names or references
+     * @param mapping
+     *            a map containing keys and schema names or references
      */
     void setMapping(Map<String, String> mapping);
 

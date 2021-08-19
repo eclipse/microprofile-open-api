@@ -19,27 +19,32 @@ public class Review {
 
     @Schema(example = "0", required = true)
     private String id;
-    
+
     @Schema(required = true)
     private User user;
-    
+
     @Schema(required = true)
     private Airline airlines;
-    
+
     @Schema(example = "8", required = true)
     private int rating;
-    
+
     @Schema(example = "Great service!")
     private String comment;
-    
+
     /**
      * Creates an instance of the Review object with the given fields.
      * 
-     * @param id the unique id of this Review
-     * @param user the user associated with this Review
-     * @param airlines the Airline associated with this Review
-     * @param rating the rating for this Review
-     * @param comment the comments for this Review
+     * @param id
+     *            the unique id of this Review
+     * @param user
+     *            the user associated with this Review
+     * @param airlines
+     *            the Airline associated with this Review
+     * @param rating
+     *            the rating for this Review
+     * @param comment
+     *            the comments for this Review
      */
     public Review(String id, User user, Airline airlines, int rating, String comment) {
         super();
@@ -52,6 +57,7 @@ public class Review {
 
     /**
      * Returns the id of this Review
+     * 
      * @return id
      */
     public String getId() {
@@ -60,7 +66,9 @@ public class Review {
 
     /**
      * Sets the id for this Review
-     * @param id the unique id of this Review
+     * 
+     * @param id
+     *            the unique id of this Review
      */
     public void setId(String id) {
         this.id = id;
@@ -68,15 +76,18 @@ public class Review {
 
     /**
      * Returns the user of this Review
+     * 
      * @return user
      */
     public User getUser() {
         return user;
     }
-    
+
     /**
      * Sets the user for this Review
-     * @param user the user associated with this Review
+     * 
+     * @param user
+     *            the user associated with this Review
      */
     public void setUser(User user) {
         this.user = user;
@@ -84,6 +95,7 @@ public class Review {
 
     /**
      * Returns the Airlines of this Review
+     * 
      * @return airlines
      */
     public Airline getAirlines() {
@@ -92,7 +104,9 @@ public class Review {
 
     /**
      * Sets the airlines for this Review
-     * @param airlines the Airline associated with this Review
+     * 
+     * @param airlines
+     *            the Airline associated with this Review
      */
     public void setAirlinesID(Airline airlines) {
         this.airlines = airlines;
@@ -100,6 +114,7 @@ public class Review {
 
     /**
      * Returns the rating of this Review
+     * 
      * @return rating
      */
     public int getRating() {
@@ -108,7 +123,9 @@ public class Review {
 
     /**
      * Sets the rating for this Review
-     * @param rating the rating for this Review
+     * 
+     * @param rating
+     *            the rating for this Review
      */
     public void setRating(int rating) {
         this.rating = rating;
@@ -116,6 +133,7 @@ public class Review {
 
     /**
      * Returns the comments of this Review
+     * 
      * @return comment
      */
     public String getComment() {
@@ -124,7 +142,9 @@ public class Review {
 
     /**
      * Sets the comments for this Review
-     * @param comment the comments for this Review
+     * 
+     * @param comment
+     *            the comments for this Review
      */
     public void setComment(String comment) {
         this.comment = comment;
@@ -134,5 +154,5 @@ public class Review {
     public String toString() {
         return "Review [userID=" + user + ", airlinesID=" + airlines + ", rating=" + rating
                 + ", comment=" + comment + "]";
-    }    
+    }
 }

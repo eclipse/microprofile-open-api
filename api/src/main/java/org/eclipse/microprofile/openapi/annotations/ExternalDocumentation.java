@@ -26,18 +26,18 @@ import java.lang.annotation.Target;
 /**
  * This annotation allows referencing an external resource for extended documentation.
  * <p>
- * When it is applied to a method the value of the annotation is added to the corresponding 
- * OpenAPI operation definition.
+ * When it is applied to a method the value of the annotation is added to the corresponding OpenAPI operation
+ * definition.
  * <p>
- * When it is applied to a type and one or more of the fields are not empty strings the
- * annotation value is added to the OpenAPI document root. If more than one non-empty 
- * annotation is applied to a type in the application or if the externalDocs field of the 
- * OpenAPIDefinition annotation is supplied the results are not defined. 
+ * When it is applied to a type and one or more of the fields are not empty strings the annotation value is added to the
+ * OpenAPI document root. If more than one non-empty annotation is applied to a type in the application or if the
+ * externalDocs field of the OpenAPIDefinition annotation is supplied the results are not defined.
  * 
- * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#externalDocumentationObject">OpenAPI Specification
- *      External Documentation Object</a>
+ * @see <a href=
+ *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#externalDocumentationObject">OpenAPI
+ *      Specification External Documentation Object</a>
  **/
-@Target({ ElementType.METHOD, ElementType.TYPE })
+@Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface ExternalDocumentation {

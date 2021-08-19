@@ -13,17 +13,16 @@
 
 package org.eclipse.microprofile.openapi.apps.airlines.model;
 
-
 import java.util.List;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 public class Airport {
 
-    @Schema(required=true)
+    @Schema(required = true)
     private List<Flight> flights;
 
-    @Schema(required=true)
+    @Schema(required = true)
     private Weather weather;
 
     public Airport() {

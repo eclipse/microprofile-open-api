@@ -12,12 +12,12 @@
  */
 
 /**
- * A set of model interfaces to describe operation
- * parameters and operation's request body.
+ * A set of model interfaces to describe operation parameters and operation's request body.
  * <p>
  * The behaviour of methods inherited from java.lang.Object are undefined by the MicroProfile OpenAPI specification.
  * <p>
  * Example usage:
+ * 
  * <pre>
  * .components(OASFactory.createObject(Components.class)
  *      .parameters(new HashMap&lt;String, Parameter&gt;())

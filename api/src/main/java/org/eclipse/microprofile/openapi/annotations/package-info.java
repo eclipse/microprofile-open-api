@@ -12,19 +12,19 @@
  */
 
 /**
- * A set of annotations, many derived from Swagger Core library.
- * OpenAPI annotations can be augmented with existing JAX-RS annotations in an application
- * to produce a valid OpenAPI document.
+ * A set of annotations, many derived from Swagger Core library. OpenAPI annotations can be augmented with existing
+ * JAX-RS annotations in an application to produce a valid OpenAPI document.
  * 
  * Examples of annotations in this package include:
  * <ul>
- *  <li>Components</li>
- *  <li>ExternalDocumentation</li>
- *  <li>OpenAPIDefinition</li>
- *  <li>Operation</li>
+ * <li>Components</li>
+ * <li>ExternalDocumentation</li>
+ * <li>OpenAPIDefinition</li>
+ * <li>Operation</li>
  * </ul>
  * <p>
  * Example of usage:
+ * 
  * <pre>
  *  {@literal @}GET
  *  {@literal @}Path("/findByStatus")

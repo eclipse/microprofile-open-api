@@ -12,10 +12,11 @@
  */
 
 /**
- * Contains annotation to describe a single response from an API operation, 
- * and an annotation to encapsulate multiple responses from an API operation.
+ * Contains annotation to describe a single response from an API operation, and an annotation to encapsulate multiple
+ * responses from an API operation.
  * <p>
  * Example usage:
+ * 
  * <pre>
  * {@literal @}GET
  *  {@literal @}Path("{id}")

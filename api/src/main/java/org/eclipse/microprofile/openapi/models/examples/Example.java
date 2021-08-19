@@ -26,10 +26,11 @@ import org.eclipse.microprofile.openapi.models.Reference;
  * <p>
  * An object containing sample data for the related object.
  * <p>
- * In all cases, the example value is expected to be compatible with the type schema of its associated value. Tooling implementations MAY choose to
- * validate compatibility automatically, and reject the example value(s) if incompatible.
+ * In all cases, the example value is expected to be compatible with the type schema of its associated value. Tooling
+ * implementations MAY choose to validate compatibility automatically, and reject the example value(s) if incompatible.
  * 
- * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#exampleObject">OpenAPI Specification Example Object</a>
+ * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#exampleObject">OpenAPI
+ *      Specification Example Object</a>
  */
 public interface Example extends Constructible, Extensible<Example>, Reference<Example> {
 
@@ -43,14 +44,16 @@ public interface Example extends Constructible, Extensible<Example>, Reference<E
     /**
      * Sets this Example's summary property to the given string.
      *
-     * @param summary short description of the example
+     * @param summary
+     *            short description of the example
      */
     void setSummary(String summary);
 
     /**
      * Sets this Example's summary property to the given string.
      *
-     * @param summary short description of the example
+     * @param summary
+     *            short description of the example
      * @return the current Example object
      */
     default Example summary(String summary) {
@@ -68,14 +71,16 @@ public interface Example extends Constructible, Extensible<Example>, Reference<E
     /**
      * Sets this Example's description property to the given string.
      *
-     * @param description long description of the example
+     * @param description
+     *            long description of the example
      */
     void setDescription(String description);
 
     /**
      * Sets this Example's description property to the given string.
      *
-     * @param description long description of the example
+     * @param description
+     *            long description of the example
      * @return the current Example object
      */
     default Example description(String description) {
@@ -91,16 +96,20 @@ public interface Example extends Constructible, Extensible<Example>, Reference<E
     Object getValue();
 
     /**
-     * Sets this Example's value property to the given value. The value field and externalValue field are mutually exclusive.
+     * Sets this Example's value property to the given value. The value field and externalValue field are mutually
+     * exclusive.
      *
-     * @param value a literal example object
+     * @param value
+     *            a literal example object
      */
     void setValue(Object value);
 
     /**
-     * Sets this Example's value property to the given value. The value field and externalValue field are mutually exclusive.
+     * Sets this Example's value property to the given value. The value field and externalValue field are mutually
+     * exclusive.
      *
-     * @param value a literal example object
+     * @param value
+     *            a literal example object
      * @return the current Example object
      */
     default Example value(Object value) {
@@ -116,16 +125,20 @@ public interface Example extends Constructible, Extensible<Example>, Reference<E
     String getExternalValue();
 
     /**
-     * Sets this Example's externalValue property to the given string. The value field and externalValue field are mutually exclusive.
+     * Sets this Example's externalValue property to the given string. The value field and externalValue field are
+     * mutually exclusive.
      *
-     * @param externalValue URL that points to the literal example
+     * @param externalValue
+     *            URL that points to the literal example
      */
     void setExternalValue(String externalValue);
 
     /**
-     * Sets this Example's externalValue property to the given string. The value field and externalValue field are mutually exclusive.
+     * Sets this Example's externalValue property to the given string. The value field and externalValue field are
+     * mutually exclusive.
      *
-     * @param externalValue URL that points to the literal example
+     * @param externalValue
+     *            URL that points to the literal example
      * @return the current Example object
      */
     default Example externalValue(String externalValue) {

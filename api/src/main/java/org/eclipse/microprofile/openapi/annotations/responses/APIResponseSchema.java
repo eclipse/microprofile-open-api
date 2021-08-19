@@ -22,11 +22,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * The APIResponseSchema annotation corresponds to an individual schema in the OpenAPI
- * Response model object which describes a single response from an API Operation. This
- * annotation provides a short-hand way to specify a simple response that would otherwise
- * be specified using {@link APIResponse &#64;APIResponse} and that typically could not be determined by
- * scanning the resource method alone.
+ * The APIResponseSchema annotation corresponds to an individual schema in the OpenAPI Response model object which
+ * describes a single response from an API Operation. This annotation provides a short-hand way to specify a simple
+ * response that would otherwise be specified using {@link APIResponse &#64;APIResponse} and that typically could not be
+ * determined by scanning the resource method alone.
  *
  * <p>
  * The following annotation usages are equivalent to the OpenAPI annotation scanner runtime.
@@ -38,16 +37,14 @@ import java.lang.annotation.Target;
  * </pre>
  *
  * <p>
- * When this annotation is applied to a method the response is added to the responses
- * defined in the corresponding OpenAPI operation with a default response code and description
- * that correspond to the method's HTTP method annotation and return type. Any media types that
- * apply to the resource method from either a method-level or class-level <code>&#64;Produces</code>
- * annotation will result in those media types applying to the OpenAPI response model.
+ * When this annotation is applied to a method the response is added to the responses defined in the corresponding
+ * OpenAPI operation with a default response code and description that correspond to the method's HTTP method annotation
+ * and return type. Any media types that apply to the resource method from either a method-level or class-level
+ * <code>&#64;Produces</code> annotation will result in those media types applying to the OpenAPI response model.
  *
  * <p>
- * If not specified, default responseCode and responseDescription values shall be determined
- * according to the {@link #responseCode() responseCode} and {@link #responseDescription() responseDescription}
- * documentation.
+ * If not specified, default responseCode and responseDescription values shall be determined according to the
+ * {@link #responseCode() responseCode} and {@link #responseDescription() responseDescription} documentation.
  *
  * <pre>
  * &#64;GET
@@ -64,15 +61,14 @@ import java.lang.annotation.Target;
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responseObject"
  *
  **/
-@Target({ ElementType.METHOD })
+@Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface APIResponseSchema {
 
     /**
-     * Provides a Java class as implementation for this schema. The class will
-     * undergo introspection to determine any applicable Schema attributes to be
-     * applied to the OpenAPI response model.
+     * Provides a Java class as implementation for this schema. The class will undergo introspection to determine any
+     * applicable Schema attributes to be applied to the OpenAPI response model.
      *
      * @return a class that implements this schema
      **/
@@ -83,8 +79,8 @@ public @interface APIResponseSchema {
      *
      * <p>
      * If no value is specified, the default value will set to the description given by the
-     * <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10">HTTP/1.1 documentation</a>
-     * for the {@link #responseCode() responseCode} in use.
+     * <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10">HTTP/1.1 documentation</a> for the
+     * {@link #responseCode() responseCode} in use.
      * 
      * @return description of the response.
      **/
@@ -97,10 +93,10 @@ public @interface APIResponseSchema {
      * If no value is specified, a default shall be determined using REST conventions as follows:
      *
      * <ul>
-     * <li>If the method's return type is <code>void</code> and the HTTP method is <code>&#64;POST</code>,
-     *     the code will be <code>201</code>.
+     * <li>If the method's return type is <code>void</code> and the HTTP method is <code>&#64;POST</code>, the code will
+     * be <code>201</code>.
      * <li>Otherwise, if the method's return type is <code>void</code> the method does not list a JAX-RS
-     *     <code>AsyncResponse</code> parameter, the code will be <code>204</code>.
+     * <code>AsyncResponse</code> parameter, the code will be <code>204</code>.
      * <li>Otherwise, the code will be <code>200</code>.
      * </ul>
      *

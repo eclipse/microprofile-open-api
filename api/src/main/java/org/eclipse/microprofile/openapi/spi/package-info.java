@@ -12,8 +12,7 @@
  */
 
 /**
- * Service provider interface which allows vendors to set their implementations 
- * of OASFactoryResolver. 
+ * Service provider interface which allows vendors to set their implementations of OASFactoryResolver.
  */
 
 @org.osgi.annotation.versioning.Version("1.0")

@@ -26,7 +26,8 @@ import org.eclipse.microprofile.openapi.models.ExternalDocumentation;
  * <p>
  * An object to store metadata to be available in the OpenAPI document.
  * 
- * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#tagObject">OpenAPI Specification Tag Object</a>
+ * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#tagObject">OpenAPI
+ *      Specification Tag Object</a>
  */
 public interface Tag extends Constructible, Extensible<Tag> {
 
@@ -40,14 +41,16 @@ public interface Tag extends Constructible, Extensible<Tag> {
     /**
      * Sets the name property of a Tag instance to the given string.
      * 
-     * @param name the name property for this tag
+     * @param name
+     *            the name property for this tag
      */
     void setName(String name);
 
     /**
      * Sets the name property of a Tag instance to the given string.
      * 
-     * @param name the name property for this tag
+     * @param name
+     *            the name property for this tag
      * @return the current Tag instance
      */
     default Tag name(String name) {
@@ -65,14 +68,16 @@ public interface Tag extends Constructible, Extensible<Tag> {
     /**
      * Sets the description property of a Tag instance to the given string.
      * 
-     * @param description the description property for this tag
+     * @param description
+     *            the description property for this tag
      */
     void setDescription(String description);
 
     /**
      * Sets the description property of a Tag instance to the given string.
      * 
-     * @param description the description property for this tag
+     * @param description
+     *            the description property for this tag
      * @return the current Tag instance
      */
     default Tag description(String description) {
@@ -90,14 +95,16 @@ public interface Tag extends Constructible, Extensible<Tag> {
     /**
      * Sets the externalDocs property of a Tag instance to the given object.
      * 
-     * @param externalDocs additional external documentation for this tag
+     * @param externalDocs
+     *            additional external documentation for this tag
      */
     void setExternalDocs(ExternalDocumentation externalDocs);
 
     /**
      * Sets the externalDocs property of a Tag instance to the given object.
      * 
-     * @param externalDocs additional external documentation for this tag
+     * @param externalDocs
+     *            additional external documentation for this tag
      * @return the current Tag instance
      */
     default Tag externalDocs(ExternalDocumentation externalDocs) {

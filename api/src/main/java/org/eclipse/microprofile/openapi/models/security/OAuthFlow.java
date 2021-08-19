@@ -25,7 +25,8 @@ import org.eclipse.microprofile.openapi.models.Extensible;
 /**
  * Configuration details for a supportde OAuthFlow
  *
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#oauthFlowObject">OAuth Flow Object</a>
+ * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#oauthFlowObject">OAuth Flow
+ *      Object</a>
  */
 public interface OAuthFlow extends Constructible, Extensible<OAuthFlow> {
 
@@ -34,6 +35,7 @@ public interface OAuthFlow extends Constructible, Extensible<OAuthFlow> {
      * <p>
      * This method returns the authorizationUrl property from OAuthFlow instance.
      * </p>
+     * 
      * @return String authorizationUrl
      **/
     String getAuthorizationUrl();
@@ -46,7 +48,9 @@ public interface OAuthFlow extends Constructible, Extensible<OAuthFlow> {
      * <p>
      * This method sets the authorizationUrl property of an OAuthFlow instance to the given authorizationUrl argument.
      * </p>
-     * @param authorizationUrl the authorization URL used for this flow
+     * 
+     * @param authorizationUrl
+     *            the authorization URL used for this flow
      */
     void setAuthorizationUrl(String authorizationUrl);
 
@@ -56,9 +60,12 @@ public interface OAuthFlow extends Constructible, Extensible<OAuthFlow> {
      * Applies to oauth2 ("implicit", "authorizationCode").
      * </p>
      * <p>
-     * This method sets the authorizationUrl property of OAuthFlow instance to the given authorizationUrl argument and returns the modified instance.
+     * This method sets the authorizationUrl property of OAuthFlow instance to the given authorizationUrl argument and
+     * returns the modified instance.
      * </p>
-     * @param authorizationUrl the authorization URL used for this flow
+     * 
+     * @param authorizationUrl
+     *            the authorization URL used for this flow
      * @return OAuthFlow instance with the set authorizationUrl property
      */
     default OAuthFlow authorizationUrl(String authorizationUrl) {
@@ -70,7 +77,8 @@ public interface OAuthFlow extends Constructible, Extensible<OAuthFlow> {
      * The token URL to be used for this flow. This MUST be in the form of a URL. This is a REQUIRED property.
      * <p>
      * This method returns the tokenUrl property from OAuthFlow instance.
-     * </p> 
+     * </p>
+     * 
      * @return String tokenUrl
      **/
     String getTokenUrl();
@@ -83,7 +91,9 @@ public interface OAuthFlow extends Constructible, Extensible<OAuthFlow> {
      * <p>
      * This method sets the tokenUrl property of OAuthFlow instance to the given tokenUrl argument.
      * </p>
-     * @param tokenUrl the token URL to be used for this flow
+     * 
+     * @param tokenUrl
+     *            the token URL to be used for this flow
      */
     void setTokenUrl(String tokenUrl);
 
@@ -93,9 +103,12 @@ public interface OAuthFlow extends Constructible, Extensible<OAuthFlow> {
      * Applies to oauth2 ("password", "clientCredentials", "authorizationCode").
      * </p>
      * <p>
-     * This method sets the tokenUrl property of OAuthFlow instance to the given tokenUrl argument and returns the instance.
+     * This method sets the tokenUrl property of OAuthFlow instance to the given tokenUrl argument and returns the
+     * instance.
      * </p>
-     * @param tokenUrl the token URL to be used for this flow
+     * 
+     * @param tokenUrl
+     *            the token URL to be used for this flow
      * @return OAuthFlow instance with the set tokenUrl property
      */
     default OAuthFlow tokenUrl(String tokenUrl) {
@@ -107,7 +120,8 @@ public interface OAuthFlow extends Constructible, Extensible<OAuthFlow> {
      * The URL to be used for obtaining refresh tokens. This MUST be in the form of a URL.
      * <p>
      * This method returns the refreshUrl property from OAuthFlow instance.
-     * </p> 
+     * </p>
+     * 
      * @return String refreshUrl
      **/
     String getRefreshUrl();
@@ -120,7 +134,9 @@ public interface OAuthFlow extends Constructible, Extensible<OAuthFlow> {
      * <p>
      * This method sets the refreshUrl property of OAuthFlow instance to the given refreshUrl argument.
      * </p>
-     * @param refreshUrl the URL to be used for obtaining refresh tokens
+     * 
+     * @param refreshUrl
+     *            the URL to be used for obtaining refresh tokens
      */
     void setRefreshUrl(String refreshUrl);
 
@@ -130,9 +146,12 @@ public interface OAuthFlow extends Constructible, Extensible<OAuthFlow> {
      * Applies to oauth2.
      * </p>
      * <p>
-     * This method sets the refreshUrl property of OAuthFlow instance to the given refreshUrl argument and returns the modified instance.
+     * This method sets the refreshUrl property of OAuthFlow instance to the given refreshUrl argument and returns the
+     * modified instance.
      * </p>
-     * @param refreshUrl the URL to be used for obtaining refresh tokens
+     * 
+     * @param refreshUrl
+     *            the URL to be used for obtaining refresh tokens
      * @return OAuthFlow instance with the set refreshUrl property
      */
     default OAuthFlow refreshUrl(String refreshUrl) {
@@ -143,8 +162,10 @@ public interface OAuthFlow extends Constructible, Extensible<OAuthFlow> {
     /**
      * Adds name of an existing scope object and item parameters to scopes as a key-value pair in a map.
      *
-     * @param scope the name of a scope
-     * @param description description of the scope.
+     * @param scope
+     *            the name of a scope
+     * @param description
+     *            description of the scope.
      * @return the current OAuthFlow instance
      */
     OAuthFlow addScope(String scope, String description);
@@ -152,31 +173,39 @@ public interface OAuthFlow extends Constructible, Extensible<OAuthFlow> {
     /**
      * Removes the given scope item to this scope mapping.
      * 
-     * @param scope the name of a scope
+     * @param scope
+     *            the name of a scope
      */
     void removeScope(String scope);
 
     /**
-     * The available scopes for the OAuth2 security scheme. A map between the scope name and a short description for it. This is a REQUIRED property.
+     * The available scopes for the OAuth2 security scheme. A map between the scope name and a short description for it.
+     * This is a REQUIRED property.
      * <p>
      * Applies to oauth2.
      * </p>
      * <p>
      * This method sets the scopes property of OAuthFlow instance to the given argument.
      * </p>
-     * @param scopes the available scopes for the OAuth2 security scheme
+     * 
+     * @param scopes
+     *            the available scopes for the OAuth2 security scheme
      */
     void setScopes(Map<String, String> scopes);
 
     /**
-     * The available scopes for the OAuth2 security scheme. A map between the scope name and a short description for it. This is a REQUIRED property.
+     * The available scopes for the OAuth2 security scheme. A map between the scope name and a short description for it.
+     * This is a REQUIRED property.
      * <p>
      * Applies to oauth2.
      * </p>
      * <p>
-     * This method sets the scopes property of OAuthFlow instance to the given argument and returns the modified instance.
+     * This method sets the scopes property of OAuthFlow instance to the given argument and returns the modified
+     * instance.
      * </p>
-     * @param scopes the available scopes for the OAuth2 security scheme
+     * 
+     * @param scopes
+     *            the available scopes for the OAuth2 security scheme
      * @return OAuthFlow instance with the set scopes property
      */
     default OAuthFlow scopes(Map<String, String> scopes) {
@@ -185,10 +214,12 @@ public interface OAuthFlow extends Constructible, Extensible<OAuthFlow> {
     }
 
     /**
-     * The available scopes for the OAuth2 security scheme. A map between the scope name and a short description for it. This is a REQUIRED property.
+     * The available scopes for the OAuth2 security scheme. A map between the scope name and a short description for it.
+     * This is a REQUIRED property.
      * <p>
      * This method returns the scopes property from OAuthFlow instance.
-     * </p> 
+     * </p>
+     * 
      * @return a copy Map (potentially immutable) containing scopes and their descriptions
      **/
     Map<String, String> getScopes();

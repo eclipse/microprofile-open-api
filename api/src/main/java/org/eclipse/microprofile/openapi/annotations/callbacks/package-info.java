@@ -12,11 +12,11 @@
  */
 
 /**
- * A set of annotations to represent callback URL 
- * or an array of relevant callback URLs that can be invoked for a particular HTTP operation
- * as well as the HTTP operation that will be invoked with the callback.
+ * A set of annotations to represent callback URL or an array of relevant callback URLs that can be invoked for a
+ * particular HTTP operation as well as the HTTP operation that will be invoked with the callback.
  * <p>
  * Example annotation:
+ * 
  * <pre>
  * {@literal @}POST
     {@literal @}Callbacks(

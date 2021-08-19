@@ -32,7 +32,8 @@ import org.eclipse.microprofile.openapi.models.media.Schema;
  * Describes a single header parameter for an operation.
  * <p>
  * 
- * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#header-object">OpenAPI Specification Header Object</a>
+ * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#header-object">OpenAPI
+ *      Specification Header Object</a>
  */
 public interface Header extends Constructible, Extensible<Header>, Reference<Header> {
 
@@ -64,14 +65,16 @@ public interface Header extends Constructible, Extensible<Header>, Reference<Hea
     /**
      * Sets this Header's description property to the given string.
      *
-     * @param description a brief description of the header parameter
+     * @param description
+     *            a brief description of the header parameter
      */
     void setDescription(String description);
 
     /**
      * Sets this Header's description property to the given string.
      *
-     * @param description a brief description of the header parameter
+     * @param description
+     *            a brief description of the header parameter
      * @return the current Header instance
      */
     default Header description(String description) {
@@ -89,14 +92,16 @@ public interface Header extends Constructible, Extensible<Header>, Reference<Hea
     /**
      * Sets this Header's required property to the given value.
      *
-     * @param required whether this parameter is mandatory
+     * @param required
+     *            whether this parameter is mandatory
      */
     void setRequired(Boolean required);
 
     /**
      * Sets this Header's required property to the given value.
      *
-     * @param required whether this parameter is mandatory
+     * @param required
+     *            whether this parameter is mandatory
      * @return the current Header instance
      */
     default Header required(Boolean required) {
@@ -114,14 +119,16 @@ public interface Header extends Constructible, Extensible<Header>, Reference<Hea
     /**
      * Sets this Header's deprecated property to the given value.
      *
-     * @param deprecated whether the header parameter is deprecated
+     * @param deprecated
+     *            whether the header parameter is deprecated
      */
     void setDeprecated(Boolean deprecated);
 
     /**
      * Sets this Header's deprecated property to the given value.
      *
-     * @param deprecated whether the header parameter is deprecated
+     * @param deprecated
+     *            whether the header parameter is deprecated
      * @return the current Header instance
      */
     default Header deprecated(Boolean deprecated) {
@@ -139,14 +146,16 @@ public interface Header extends Constructible, Extensible<Header>, Reference<Hea
     /**
      * Sets this Header's allowEmptyValue property to the given value.
      *
-     * @param allowEmptyValue specify the ability to pass empty-valued parameters
+     * @param allowEmptyValue
+     *            specify the ability to pass empty-valued parameters
      */
     void setAllowEmptyValue(Boolean allowEmptyValue);
 
     /**
      * Sets this Header's allowEmptyValue property to the given value.
      *
-     * @param allowEmptyValue specify the ability to pass empty-valued parameters
+     * @param allowEmptyValue
+     *            specify the ability to pass empty-valued parameters
      * @return the current Header instance
      */
     default Header allowEmptyValue(Boolean allowEmptyValue) {
@@ -164,14 +173,16 @@ public interface Header extends Constructible, Extensible<Header>, Reference<Hea
     /**
      * Sets this Header's style property to the given style.
      *
-     * @param style how the parameter value will be serialized
+     * @param style
+     *            how the parameter value will be serialized
      */
     void setStyle(Style style);
 
     /**
      * Sets this Header's style property to the given style.
      *
-     * @param style how the parameter value will be serialized
+     * @param style
+     *            how the parameter value will be serialized
      * @return the current Header instance
      */
     default Header style(Style style) {
@@ -189,14 +200,16 @@ public interface Header extends Constructible, Extensible<Header>, Reference<Hea
     /**
      * Sets this Header's explode property to the given value.
      *
-     * @param explode whether parameter values of type "array" or "object" generate separate parameters for each value
+     * @param explode
+     *            whether parameter values of type "array" or "object" generate separate parameters for each value
      */
     void setExplode(Boolean explode);
 
     /**
      * Sets this Header's explode property to the given value.
      *
-     * @param explode whether parameter values of type "array" or "object" generate separate parameters for each value
+     * @param explode
+     *            whether parameter values of type "array" or "object" generate separate parameters for each value
      * @return the current Header instance
      */
     default Header explode(Boolean explode) {
@@ -214,14 +227,16 @@ public interface Header extends Constructible, Extensible<Header>, Reference<Hea
     /**
      * Sets this Header's schema property to the given object.
      *
-     * @param schema schema defining the type used for the header parameter
+     * @param schema
+     *            schema defining the type used for the header parameter
      */
     void setSchema(Schema schema);
 
     /**
      * Sets this Header's schema property to the given object.
      *
-     * @param schema schema defining the type used for the header parameter
+     * @param schema
+     *            schema defining the type used for the header parameter
      * @return the current Header instance
      */
     default Header schema(Schema schema) {
@@ -237,18 +252,22 @@ public interface Header extends Constructible, Extensible<Header>, Reference<Hea
     Map<String, Example> getExamples();
 
     /**
-     * Sets the examples property of this Header instance to the given map. Each example should contain a value in the correct format as specified in
-     * the parameter encoding. The examples object is mutually exclusive of the example object.
+     * Sets the examples property of this Header instance to the given map. Each example should contain a value in the
+     * correct format as specified in the parameter encoding. The examples object is mutually exclusive of the example
+     * object.
      *
-     * @param examples examples of the header
+     * @param examples
+     *            examples of the header
      */
     void setExamples(Map<String, Example> examples);
 
     /**
-     * Sets the examples property of this Header instance to the given map. Each example should contain a value in the correct format as specified in
-     * the parameter encoding. The examples object is mutually exclusive of the example object.
+     * Sets the examples property of this Header instance to the given map. Each example should contain a value in the
+     * correct format as specified in the parameter encoding. The examples object is mutually exclusive of the example
+     * object.
      *
-     * @param examples examples of the header
+     * @param examples
+     *            examples of the header
      * @return the current Header instance
      */
     default Header examples(Map<String, Example> examples) {
@@ -257,11 +276,14 @@ public interface Header extends Constructible, Extensible<Header>, Reference<Hea
     }
 
     /**
-     * Adds an example of the header using the specified key to this Header instance. The example should contain a value in the correct format as
-     * specified in the parameter encoding.
+     * Adds an example of the header using the specified key to this Header instance. The example should contain a value
+     * in the correct format as specified in the parameter encoding.
      *
-     * @param key string to represent the example
-     * @param example example of the header. null values will be rejected (implementation will throw an exception) or ignored.
+     * @param key
+     *            string to represent the example
+     * @param example
+     *            example of the header. null values will be rejected (implementation will throw an exception) or
+     *            ignored.
      * @return the current Header instance
      */
     Header addExample(String key, Example example);
@@ -269,7 +291,8 @@ public interface Header extends Constructible, Extensible<Header>, Reference<Hea
     /**
      * Removes an example of the header using the specified key to this Header instance.
      *
-     * @param key string to represent the example
+     * @param key
+     *            string to represent the example
      */
     void removeExample(String key);
 
@@ -281,18 +304,20 @@ public interface Header extends Constructible, Extensible<Header>, Reference<Hea
     Object getExample();
 
     /**
-     * Sets this Header's example property to the given object. The example should match the specified schema and encoding properties if present. The
-     * examples object is mutually exclusive of the example object.
+     * Sets this Header's example property to the given object. The example should match the specified schema and
+     * encoding properties if present. The examples object is mutually exclusive of the example object.
      *
-     * @param example example of the header
+     * @param example
+     *            example of the header
      */
     void setExample(Object example);
 
     /**
-     * Sets this Header's example property to the given object. The example should match the specified schema and encoding properties if present. The
-     * examples object is mutually exclusive of the example object.
+     * Sets this Header's example property to the given object. The example should match the specified schema and
+     * encoding properties if present. The examples object is mutually exclusive of the example object.
      *
-     * @param example example of the header
+     * @param example
+     *            example of the header
      * @return the current Header instance
      */
     default Header example(Object example) {
@@ -310,14 +335,16 @@ public interface Header extends Constructible, Extensible<Header>, Reference<Hea
     /**
      * Sets this Header's content property to the given object.
      *
-     * @param content a map containing the media representations for the parameter
+     * @param content
+     *            a map containing the media representations for the parameter
      */
     void setContent(Content content);
 
     /**
      * Sets this Header's content property to the given object.
      *
-     * @param content a map containing the media representations for the parameter
+     * @param content
+     *            a map containing the media representations for the parameter
      * @return the current Header instance
      */
     default Header content(Content content) {

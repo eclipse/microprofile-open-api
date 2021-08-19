@@ -13,7 +13,6 @@
 
 package org.eclipse.microprofile.openapi.filter;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -39,49 +38,48 @@ import org.eclipse.microprofile.openapi.models.tags.Tag;
 public class AirlinesOASFilter implements OASFilter {
 
     @Override
-    public PathItem filterPathItem(PathItem pathItem){
-        if(pathItem.getGET() != null && "Retrieve all available flights".equals(pathItem.getGET().getSummary())){
-            //Add new operation
-            pathItem.PUT(OASFactory.createObject(Operation.class).
-                    summary("filterPathItem - added put operation")
-                    .responses(OASFactory.createObject(APIResponses.class).addAPIResponse("200", 
-                            OASFactory.createObject(APIResponse.class).description("filterPathItem - successfully put airlines"))));
-            
-            //Spec states : All filterable descendant elements of a filtered element must be called before its ancestor
-            //Override the operatioId value that was previously overridden by the filterOperation method
+    public PathItem filterPathItem(PathItem pathItem) {
+        if (pathItem.getGET() != null && "Retrieve all available flights".equals(pathItem.getGET().getSummary())) {
+            // Add new operation
+            pathItem.PUT(OASFactory.createObject(Operation.class).summary("filterPathItem - added put operation")
+                    .responses(OASFactory.createObject(APIResponses.class).addAPIResponse("200",
+                            OASFactory.createObject(APIResponse.class)
+                                    .description("filterPathItem - successfully put airlines"))));
+
+            // Spec states : All filterable descendant elements of a filtered element must be called before its ancestor
+            // Override the operatioId value that was previously overridden by the filterOperation method
             pathItem.getGET().setOperationId("filterPathItemGetFlights");
         }
-        
+
         if (pathItem.getPOST() != null && "createBooking".equals(pathItem.getPOST().getOperationId())) {
             Map<String, Callback> callbacks = pathItem.getPOST().getCallbacks();
             if (callbacks.containsKey("bookingCallback")) {
                 Callback callback = callbacks.get("bookingCallback");
                 if (callback.hasPathItem("http://localhost:9080/airlines/bookings")
                         && callback.getPathItem("http://localhost:9080/airlines/bookings").getGET() != null) {
-                    if ("child - Retrieve all bookings for current user".equals(callback.getPathItem("http://localhost:9080/airlines/bookings")
-                            .getGET().getDescription())) {   
+                    if ("child - Retrieve all bookings for current user"
+                            .equals(callback.getPathItem("http://localhost:9080/airlines/bookings")
+                                    .getGET().getDescription())) {
                         callback.getPathItem("http://localhost:9080/airlines/bookings").getGET()
-                        .setDescription("parent - Retrieve all bookings for current user"); 
+                                .setDescription("parent - Retrieve all bookings for current user");
                     }
                 }
-            }   
+            }
         }
-        
+
         return pathItem;
     }
-    
+
     @Override
     public Operation filterOperation(Operation operation) {
-        if("Get a booking with ID".equals(operation.getSummary())){
-            operation.setSummary("filterOperation - Get a booking with ID");  
-        } 
-        else if("Update a booking with ID".equals(operation.getSummary())){
-            operation.setSummary("filterOperation - Update a booking with ID");  
-        }
-        else if("Retrieve all available flights".equals(operation.getSummary())){
+        if ("Get a booking with ID".equals(operation.getSummary())) {
+            operation.setSummary("filterOperation - Get a booking with ID");
+        } else if ("Update a booking with ID".equals(operation.getSummary())) {
+            operation.setSummary("filterOperation - Update a booking with ID");
+        } else if ("Retrieve all available flights".equals(operation.getSummary())) {
             operation.setOperationId("filterOperationGetFlights");
         }
-        
+
         List<String> tags = operation.getTags();
         if (tags != null) {
             if (tags.contains("Bookings")) {
@@ -92,40 +90,39 @@ public class AirlinesOASFilter implements OASFilter {
         }
         return operation;
     }
-    
+
     @Override
     public Parameter filterParameter(Parameter parameter) {
-        if("The user name for login".equals(parameter.getDescription())){
+        if ("The user name for login".equals(parameter.getDescription())) {
             parameter.setDescription("filterParameter - The user name for login");
-        }
-        else if("The password for login in clear text".equals(parameter.getDescription())){
-            return null; //remove parameter
+        } else if ("The password for login in clear text".equals(parameter.getDescription())) {
+            return null; // remove parameter
         }
         return parameter;
     }
-    
+
     @Override
     public Header filterHeader(Header header) {
-        if("Maximum rate".equals(header.getDescription())){
+        if ("Maximum rate".equals(header.getDescription())) {
             header.setDescription("filterHeader - Maximum rate");
         }
         return header;
     }
-    
+
     @Override
     public RequestBody filterRequestBody(RequestBody requestBody) {
-        if("Create a new booking with the provided information.".equals(requestBody.getDescription())){
+        if ("Create a new booking with the provided information.".equals(requestBody.getDescription())) {
             requestBody.setDescription("filterRequestBody - Create a new booking with the provided information.");
         }
         return requestBody;
     }
-    
+
     @Override
     public APIResponse filterAPIResponse(APIResponse apiResponse) {
-        if("subscription successfully created".equals(apiResponse.getDescription())){
+        if ("subscription successfully created".equals(apiResponse.getDescription())) {
             apiResponse.setDescription("filterAPIResponse - subscription successfully created");
         }
-        
+
         // testing child before parent filtering
         Content content = apiResponse.getContent();
         if (content != null) {
@@ -136,55 +133,55 @@ public class AirlinesOASFilter implements OASFilter {
                 }
             }
         }
-        
+
         return apiResponse;
     }
-    
+
     @Override
     public Schema filterSchema(Schema schema) {
-        if("subscription information".equals(schema.getDescription())){
+        if ("subscription information".equals(schema.getDescription())) {
             schema.setDescription("filterSchema - subscription information");
         }
-        
+
         // testing child before parent filtering
         if ("id of the new review".equals(schema.getDescription())) {
             schema.setDescription("child - id of the new review");
         }
-        
+
         return schema;
     }
-    
+
     @Override
     public SecurityScheme filterSecurityScheme(SecurityScheme securityScheme) {
-        if("Security Scheme for booking resource".equals(securityScheme.getDescription())){
+        if ("Security Scheme for booking resource".equals(securityScheme.getDescription())) {
             securityScheme.setDescription("filterSecurityScheme - Security Scheme for booking resource");
         }
         return securityScheme;
     }
-    
+
     @Override
     public Server filterServer(Server server) {
-        if("The production API server".equals(server.getDescription())){
+        if ("The production API server".equals(server.getDescription())) {
             server.description("filterServer - The production API server");
         }
         return server;
     }
-    
+
     @Override
     public Tag filterTag(Tag tag) {
-        if("Operations about user".equals(tag.getDescription())){
+        if ("Operations about user".equals(tag.getDescription())) {
             tag.setDescription("filterTag - Operations about user");
         }
-        
+
         if ("Bookings".equals(tag.getName())) {
             tag.setName("child - Bookings");
         }
         return tag;
     }
-    
+
     @Override
     public Link filterLink(Link link) {
-        if("The username corresponding to provided user id".equals(link.getDescription())){
+        if ("The username corresponding to provided user id".equals(link.getDescription())) {
             link.setDescription("filterLink - The username corresponding to provided user id");
         }
         return link;
@@ -192,21 +189,27 @@ public class AirlinesOASFilter implements OASFilter {
 
     @Override
     public Callback filterCallback(Callback callback) {
-        if(callback.hasPathItem("{$request.query.callbackUrl}/data") && callback.getPathItem("{$request.query.callbackUrl}/data").getPOST() != null){
-            callback.getPathItem("{$request.query.callbackUrl}/data").getPOST().setDescription("filterCallback - callback post operation");
+        if (callback.hasPathItem("{$request.query.callbackUrl}/data")
+                && callback.getPathItem("{$request.query.callbackUrl}/data").getPOST() != null) {
+            callback.getPathItem("{$request.query.callbackUrl}/data").getPOST()
+                    .setDescription("filterCallback - callback post operation");
         }
-        
-        if (callback.hasPathItem("http://localhost:9080/airlines/bookings") 
+
+        if (callback.hasPathItem("http://localhost:9080/airlines/bookings")
                 && callback.getPathItem("http://localhost:9080/airlines/bookings").getGET() != null) {
-            callback.getPathItem("http://localhost:9080/airlines/bookings").getGET().setDescription("child - Retrieve all bookings for current user");
+            callback.getPathItem("http://localhost:9080/airlines/bookings").getGET()
+                    .setDescription("child - Retrieve all bookings for current user");
         }
         return callback;
     }
 
     @Override
     public void filterOpenAPI(OpenAPI openAPI) {
-        //Spec states : The filterOpenAPI method must be the last method called on a filter (which is just a specialization of the first exception).
-        //To ensure that this method is called last, override the operation summary that was previously overridden in filterOperation method
-        openAPI.getPaths().getPathItem("/bookings/{id}").getPUT().setSummary("filterOpenAPI - Update a booking with ID");
+        // Spec states : The filterOpenAPI method must be the last method called on a filter (which is just a
+        // specialization of the first exception).
+        // To ensure that this method is called last, override the operation summary that was previously overridden in
+        // filterOperation method
+        openAPI.getPaths().getPathItem("/bookings/{id}").getPUT()
+                .setSummary("filterOpenAPI - Update a booking with ID");
     }
 }

@@ -13,9 +13,9 @@
 
 package org.eclipse.microprofile.openapi.apps.petstore.model;
 
-import javax.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.XmlTransient;
 
-@javax.xml.bind.annotation.XmlRootElement
+@jakarta.xml.bind.annotation.XmlRootElement
 public class ApiResponse {
     public static final int ERROR = 1;
     public static final int WARNING = 2;
@@ -26,28 +26,29 @@ public class ApiResponse {
     int code;
     String type;
     String message;
-    
-    public ApiResponse(){}
-    
-    public ApiResponse(int code, String message){
+
+    public ApiResponse() {
+    }
+
+    public ApiResponse(int code, String message) {
         this.code = code;
-        switch(code){
-            case ERROR:
+        switch (code) {
+            case ERROR :
                 setType("error");
                 break;
-            case WARNING:
+            case WARNING :
                 setType("warning");
                 break;
-            case INFO:
+            case INFO :
                 setType("info");
                 break;
-            case OK:
+            case OK :
                 setType("ok");
                 break;
-            case TOO_BUSY:
+            case TOO_BUSY :
                 setType("too busy");
                 break;
-            default:
+            default :
                 setType("unknown");
                 break;
         }

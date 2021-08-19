@@ -12,11 +12,11 @@
  */
 
 /**
- * Annotations to represent servers used for a single API operation
- * or for all operations in an OpenAPI document, as well as a way to represent
- * variables for server URL template substitution.
+ * Annotations to represent servers used for a single API operation or for all operations in an OpenAPI document, as
+ * well as a way to represent variables for server URL template substitution.
  * <p>
  * Example usage:
+ * 
  * <pre>
  * {@literal @}POST
  * {@literal @}Servers(value={

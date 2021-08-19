@@ -26,14 +26,16 @@ import java.lang.annotation.Target;
 /**
  * This object represents an array of Callback URLs that can be invoked.
  * 
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#callbackObject">OpenAPI Specification Callback Object</a>
+ * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#callbackObject">OpenAPI
+ *      Specification Callback Object</a>
  **/
-@Target({ ElementType.METHOD })
+@Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface Callbacks {
     /**
-     * An array of Callback annotations which are a map of possible out-of band callbacks related to the parent operation
+     * An array of Callback annotations which are a map of possible out-of band callbacks related to the parent
+     * operation
      *
      * @return the array of the callbacks
      **/

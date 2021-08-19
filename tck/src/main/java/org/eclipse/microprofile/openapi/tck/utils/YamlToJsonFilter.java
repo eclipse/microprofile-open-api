@@ -38,7 +38,8 @@ import io.restassured.specification.FilterableResponseSpecification;
 public class YamlToJsonFilter implements OrderedFilter {
 
     @Override
-    public Response filter(FilterableRequestSpecification requestSpec, FilterableResponseSpecification responseSpec, FilterContext ctx) {
+    public Response filter(FilterableRequestSpecification requestSpec, FilterableResponseSpecification responseSpec,
+            FilterContext ctx) {
         try {
             Response response = ctx.next(requestSpec, responseSpec);
 
@@ -54,8 +55,7 @@ public class YamlToJsonFilter implements OrderedFilter {
             builder.setContentType(ContentType.JSON);
 
             return builder.build();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new IllegalStateException("Failed to convert the request: " + ExceptionUtils.getMessage(e), e);
         }
     }

@@ -29,44 +29,18 @@ import org.eclipse.microprofile.openapi.apps.petstore.resource.PetResource;
 import org.eclipse.microprofile.openapi.apps.petstore.resource.PetStoreResource;
 import org.eclipse.microprofile.openapi.apps.petstore.resource.UserResource;
 
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
+import jakarta.ws.rs.ApplicationPath;
+import jakarta.ws.rs.core.Application;
 
 @ApplicationPath("/")
-@OpenAPIDefinition(
-    info = @Info(
-        title = "Pet Store App",
-        version = "2.0",
-        description = "Pet Store App API",
-        license = @License(
-            name = "Apache 2.0",
-            url = "http://www.apache.org/licenses/LICENSE-2.0.html"),
-        contact = @Contact(
-            name = "PetStore API Support",
-            url = "https://github.com/eclipse/microprofile-open-api",
-            email = "support@petstore.com")
-    ),
-    externalDocs = @ExternalDocumentation(
-        url = "http://swagger.io", 
-        description="Find out more about our store"),
-    tags={
-        @Tag(name="pet", description="Everything about your Pets"),
-        @Tag(name="store", description="Access to PetStore orders"),
-        @Tag(name="user", description="Operations about user",
-            externalDocs = @ExternalDocumentation(
-                url = "http://swagger.io", 
-                description="Find out more about our store"))
-    },
-    components = @Components(
-        schemas = { 
-            @Schema(name = "Lizard", implementation = Lizard.class)
-        })
-)
-@Schema(
-    externalDocs = @ExternalDocumentation(
-        url = "http://swagger.io", 
-        description="Find out more about our store")
-)
+@OpenAPIDefinition(info = @Info(title = "Pet Store App", version = "2.0", description = "Pet Store App API", license = @License(name = "Apache 2.0", url = "http://www.apache.org/licenses/LICENSE-2.0.html"), contact = @Contact(name = "PetStore API Support", url = "https://github.com/eclipse/microprofile-open-api", email = "support@petstore.com")), externalDocs = @ExternalDocumentation(url = "http://swagger.io", description = "Find out more about our store"), tags = {
+        @Tag(name = "pet", description = "Everything about your Pets"),
+        @Tag(name = "store", description = "Access to PetStore orders"),
+        @Tag(name = "user", description = "Operations about user", externalDocs = @ExternalDocumentation(url = "http://swagger.io", description = "Find out more about our store"))
+}, components = @Components(schemas = {
+        @Schema(name = "Lizard", implementation = Lizard.class)
+}))
+@Schema(externalDocs = @ExternalDocumentation(url = "http://swagger.io", description = "Find out more about our store"))
 public class PetStoreApp extends Application {
     @Override
     public Set<Object> getSingletons() {

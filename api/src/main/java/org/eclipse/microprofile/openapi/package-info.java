@@ -12,9 +12,8 @@
  */
 
 /**
- * A set of Java interfaces, annotations and programming models 
- * which allow Java developers to natively produce OpenAPI v3 documents 
- * from their JAX-RS applications.
+ * A set of Java interfaces, annotations and programming models which allow Java developers to natively produce OpenAPI
+ * v3 documents from their JAX-RS applications.
  */
 
 @org.osgi.annotation.versioning.Version("2.0")

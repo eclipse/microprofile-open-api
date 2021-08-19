@@ -12,12 +12,13 @@
  */
 
 /**
- * A set of interfaces of programmable models to represent metadata about the API, 
- * including license information and contact information of the exposed API.
+ * A set of interfaces of programmable models to represent metadata about the API, including license information and
+ * contact information of the exposed API.
  * <p>
  * The behaviour of methods inherited from java.lang.Object are undefined by the MicroProfile OpenAPI specification.
  * <p>
  * Example:
+ * 
  * <pre>
  * public class MyOASModelReaderImpl implements OASModelReader {
  *

@@ -34,28 +34,30 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 /**
  * Describes a single operation parameter
  * 
- * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject">OpenAPI Specification Parameter
- *      Object</a>
+ * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject">OpenAPI
+ *      Specification Parameter Object</a>
  **/
-@Target({ ElementType.PARAMETER, ElementType.METHOD, ElementType.FIELD })
+@Target({ElementType.PARAMETER, ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @Repeatable(Parameters.class)
 @Inherited
 public @interface Parameter {
     /**
-     * The name of the parameter. Parameter names are case sensitive.
-     * It is a REQUIRED property unless this is only a reference to a parameter instance.
+     * The name of the parameter. Parameter names are case sensitive. It is a REQUIRED property unless this is only a
+     * reference to a parameter instance.
      * <p>
-     * When the parameter is defined within {@link org.eclipse.microprofile.openapi.annotations.Components}, 
-     * the name will be used as the key to add this parameter to the 'parameters' map for reuse.
+     * When the parameter is defined within {@link org.eclipse.microprofile.openapi.annotations.Components}, the name
+     * will be used as the key to add this parameter to the 'parameters' map for reuse.
      * <p>
-     * If in is "path", the name field MUST correspond to the associated path segment from the path field in the Paths Object. 
-     * See Path Templating for further information.
+     * If in is "path", the name field MUST correspond to the associated path segment from the path field in the Paths
+     * Object. See Path Templating for further information.
      * </p>
-     * If in is "header" and the name field is "Accept", "Content-Type" or "Authorization", the parameter definition SHALL be ignored.
+     * If in is "header" and the name field is "Accept", "Content-Type" or "Authorization", the parameter definition
+     * SHALL be ignored.
      * <p>
      * For all other cases, the name corresponds to the parameter name used by the in property.
      * </p>
+     * 
      * @return this parameter's name
      **/
     String name() default "";
@@ -65,24 +67,26 @@ public @interface Parameter {
      * <p>
      * Possible values are specified in ParameterIn enum. Ignored when empty string.
      * </p>
+     * 
      * @return this parameter's location
      **/
     ParameterIn in() default ParameterIn.DEFAULT;
 
     /**
-     * A brief description of the parameter. This could contain examples of use. 
-     * CommonMark syntax MAY be used for rich text representation.
+     * A brief description of the parameter. This could contain examples of use. CommonMark syntax MAY be used for rich
+     * text representation.
      * 
      * @return this parameter's description
      **/
     String description() default "";
 
     /**
-     * Determines whether this parameter is mandatory. 
+     * Determines whether this parameter is mandatory.
      * <p>
-     * If the parameter location is "path", this property is REQUIRED and its value MUST be true.
-     * Otherwise, the property may be included and its default value is false.
+     * If the parameter location is "path", this property is REQUIRED and its value MUST be true. Otherwise, the
+     * property may be included and its default value is false.
      * </p>
+     * 
      * @return whether or not this parameter is required
      **/
     boolean required() default false;
@@ -95,10 +99,11 @@ public @interface Parameter {
     boolean deprecated() default false;
 
     /**
-     * When true, allows sending an empty value. If false, the parameter will be considered \&quot;null\&quot; if no value is present. 
+     * When true, allows sending an empty value. If false, the parameter will be considered \&quot;null\&quot; if no
+     * value is present.
      * <p>
-     * This may create validation errors when the parameter is required. 
-     * Valid only for query parameters and allows sending a parameter with an empty value. 
+     * This may create validation errors when the parameter is required. Valid only for query parameters and allows
+     * sending a parameter with an empty value.
      * </p>
      * If style is used, and if behavior is n/a (cannot be serialized), the value of allowEmptyValue SHALL be ignored.
      * 
@@ -108,9 +113,9 @@ public @interface Parameter {
 
     /**
      * Describes how the parameter value will be serialized depending on the type of the parameter value.
-     * <p> 
-     * Default values (based on value of in): 
-     * for query - form; for path - simple; for header - simple; for cookie - form. 
+     * <p>
+     * Default values (based on value of in): for query - form; for path - simple; for header - simple; for cookie -
+     * form.
      * </p>
      * Ignored if the properties content or array are specified.
      * 
@@ -119,12 +124,12 @@ public @interface Parameter {
     ParameterStyle style() default ParameterStyle.DEFAULT;
 
     /**
-     * When this is true, parameter values of type array or object generate separate parameters 
-     * for each value of the array or key-value pair of the map. 
+     * When this is true, parameter values of type array or object generate separate parameters for each value of the
+     * array or key-value pair of the map.
      * <p>
-     * For other types of parameters this property has no effect. 
-     * When style is form, the default value is true. For all other styles, the default value is false.
-     * </p> 
+     * For other types of parameters this property has no effect. When style is form, the default value is true. For all
+     * other styles, the default value is false.
+     * </p>
      * Ignored if the properties content or array are specified.
      * 
      * @return whether or not to expand individual array members
@@ -132,18 +137,18 @@ public @interface Parameter {
     Explode explode() default Explode.DEFAULT;
 
     /**
-     * Determines whether the parameter value SHOULD allow reserved characters, as defined by RFC3986. 
+     * Determines whether the parameter value SHOULD allow reserved characters, as defined by RFC3986.
      * <p>
-     * This property only applies to parameters with an in value of query.  
-     * Ignored if the properties content or array are specified.
+     * This property only applies to parameters with an in value of query. Ignored if the properties content or array
+     * are specified.
      * </p>
+     * 
      * @return whether or not this parameter allows reserved characters
      **/
     boolean allowReserved() default false;
 
     /**
-     * The schema defining the type used for the parameter. 
-     * Ignored if the properties content or array are specified.
+     * The schema defining the type used for the parameter. Ignored if the properties content or array are specified.
      * 
      * @return the schema of this parameter
      **/
@@ -164,13 +169,13 @@ public @interface Parameter {
     boolean hidden() default false;
 
     /**
-     * Provides an array examples of the schema.
-     * Each example SHOULD contain a value in the correct format as specified in the parameter encoding.
-     * Furthermore, if referencing a schema which contains an example, the examples value SHALL override the example provided by the schema. 
+     * Provides an array examples of the schema. Each example SHOULD contain a value in the correct format as specified
+     * in the parameter encoding. Furthermore, if referencing a schema which contains an example, the examples value
+     * SHALL override the example provided by the schema.
      * <p>
-     * When associated with a specific media type, the example string shall be parsed by the consumer to be
-     * treated as an object or an array.
-     * </p> 
+     * When associated with a specific media type, the example string shall be parsed by the consumer to be treated as
+     * an object or an array.
+     * </p>
      * Ignored if the properties content or array are specified.
      * 
      * @return the list of examples for this parameter
@@ -178,14 +183,13 @@ public @interface Parameter {
     ExampleObject[] examples() default {};
 
     /**
-     * Provides an example of the schema. 
-     * The example SHOULD match the specified schema and encoding properties if present. 
-     * Furthermore, if referencing a schema which contains an example, the example value SHALL override the example provided by the schema. 
-     * To represent examples of media types that cannot naturally be represented in JSON or YAML, 
-     * a string value can contain the example with escaping where necessary.
+     * Provides an example of the schema. The example SHOULD match the specified schema and encoding properties if
+     * present. Furthermore, if referencing a schema which contains an example, the example value SHALL override the
+     * example provided by the schema. To represent examples of media types that cannot naturally be represented in JSON
+     * or YAML, a string value can contain the example with escaping where necessary.
      * <p>
-     * When associated with a specific media type, the example string SHALL be parsed by the consumer to be treated
-     * as an object or an array. 
+     * When associated with a specific media type, the example string SHALL be parsed by the consumer to be treated as
+     * an object or an array.
      * </p>
      * Ignored if the properties examples, content or array are specified.
      * 
@@ -196,9 +200,8 @@ public @interface Parameter {
     /**
      * Reference value to a Parameter object.
      * <p>
-     * This property provides a reference to an object defined elsewhere. This property and
-     * all other properties are mutually exclusive. If other properties are defined in addition
-     * to the ref property then the result is undefined.
+     * This property provides a reference to an object defined elsewhere. This property and all other properties are
+     * mutually exclusive. If other properties are defined in addition to the ref property then the result is undefined.
      *
      * @return reference to a parameter
      **/

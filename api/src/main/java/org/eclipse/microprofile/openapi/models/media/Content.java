@@ -30,12 +30,14 @@ import org.eclipse.microprofile.openapi.models.Constructible;
 public interface Content extends Constructible {
 
     /**
-     * Adds the MediaType for this Content, where the key is the name of the MediaType and the value is the object that describes the content passed
-     * into or returned from an operation.
+     * Adds the MediaType for this Content, where the key is the name of the MediaType and the value is the object that
+     * describes the content passed into or returned from an operation.
      *
-     * @param name the name of a media type e.g. application/json.
-     * @param mediaType an object that describes the content passed into or returned from an operation. null values will be rejected (implementation
-     *                  will throw an exception) or ignored.
+     * @param name
+     *            the name of a media type e.g. application/json.
+     * @param mediaType
+     *            an object that describes the content passed into or returned from an operation. null values will be
+     *            rejected (implementation will throw an exception) or ignored.
      * @return the current Content instance
      */
     Content addMediaType(String name, MediaType mediaType);
@@ -43,7 +45,8 @@ public interface Content extends Constructible {
     /**
      * Removes the given MediaType for this Content by its name.
      * 
-     * @param name a path name that will be removed.
+     * @param name
+     *            a path name that will be removed.
      */
     void removeMediaType(String name);
 
@@ -57,14 +60,17 @@ public interface Content extends Constructible {
     /**
      * Set the media types map to this Content
      * 
-     * @param mediaTypes a map containing the list of media types. Keys are name of a media type e.g. application/json.
+     * @param mediaTypes
+     *            a map containing the list of media types. Keys are name of a media type e.g. application/json.
      */
     void setMediaTypes(Map<String, MediaType> mediaTypes);
 
     /**
-     * Check whether a media type is present in the map. This is a convenience method for <code>getMediaTypes().containsKey(name)</code>
+     * Check whether a media type is present in the map. This is a convenience method for
+     * <code>getMediaTypes().containsKey(name)</code>
      * 
-     * @param name the name of a media type e.g. application/json.
+     * @param name
+     *            the name of a media type e.g. application/json.
      * @return a boolean to indicate if the media type is present or not.
      */
     default boolean hasMediaType(String name) {
@@ -78,7 +84,8 @@ public interface Content extends Constructible {
     /**
      * Returns a media type for a given name. This is a convenience method for <code>getMediaTypes().get(name)</code>
      * 
-     * @param name the name of a media type e.g. application/json.
+     * @param name
+     *            the name of a media type e.g. application/json.
      * @return the corresponding media type or null.
      */
     default MediaType getMediaType(String name) {

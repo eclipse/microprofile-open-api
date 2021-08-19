@@ -23,8 +23,9 @@ package org.eclipse.microprofile.openapi.models;
  * Allows referencing an external resource for extended documentation.
  * <p>
  * 
- * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#externalDocumentationObject">OpenAPI Specification
- *      External Documentation Object</a>
+ * @see <a href=
+ *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#externalDocumentationObject">OpenAPI
+ *      Specification External Documentation Object</a>
  */
 public interface ExternalDocumentation extends Constructible, Extensible<ExternalDocumentation> {
 
@@ -38,14 +39,16 @@ public interface ExternalDocumentation extends Constructible, Extensible<Externa
     /**
      * Sets this ExternalDocumentation's description property to the given string.
      *
-     * @param description a short description of the target documentation
+     * @param description
+     *            a short description of the target documentation
      */
     void setDescription(String description);
 
     /**
      * Sets this ExternalDocumentation's description property to the given string.
      *
-     * @param description a short description of the target documentation
+     * @param description
+     *            a short description of the target documentation
      * @return the current ExternalDocumentation instance
      */
     default ExternalDocumentation description(String description) {
@@ -63,14 +66,16 @@ public interface ExternalDocumentation extends Constructible, Extensible<Externa
     /**
      * Sets this ExternalDocumentation's url property to the given string.
      *
-     * @param url the URL for the target documentation
+     * @param url
+     *            the URL for the target documentation
      */
     void setUrl(String url);
 
     /**
      * Sets this ExternalDocumentation's url property to the given string.
      *
-     * @param url the URL for the target documentation
+     * @param url
+     *            the URL for the target documentation
      * @return the current ExternalDocumentation instance
      */
     default ExternalDocumentation url(String url) {

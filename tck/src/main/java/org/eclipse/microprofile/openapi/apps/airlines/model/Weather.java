@@ -16,25 +16,25 @@ package org.eclipse.microprofile.openapi.apps.airlines.model;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 public class Weather {
-    @Schema(required=true)
+    @Schema(required = true)
     private String date;
 
-    @Schema(required=true)
+    @Schema(required = true)
     private String city;
 
-    @Schema(required=true)
+    @Schema(required = true)
     private String weather;
-    
-    @Schema(required=true)
+
+    @Schema(required = true)
     private int temperture;
 
-    @Schema(required=true)
+    @Schema(required = true)
     private String narrative;
 
     public Weather() {
         this.narrative = "Weather information is not yet available.";
     }
-    
+
     public Weather(String date, String city, String weather, int temperture, String narrative) {
         this.date = date;
         this.city = city;

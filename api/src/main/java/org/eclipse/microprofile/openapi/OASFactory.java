@@ -50,30 +50,47 @@ import org.eclipse.microprofile.openapi.models.tags.Tag;
 import org.eclipse.microprofile.openapi.spi.OASFactoryResolver;
 
 /**
- * This class allows application developers to build new OpenAPI model elements.  
+ * This class allows application developers to build new OpenAPI model elements.
  * 
- * <br><br>For example, to start a new top-level OpenAPI element with an ExternalDocument inside of it an application developer would write:
+ * <br>
+ * <br>
+ * For example, to start a new top-level OpenAPI element with an ExternalDocument inside of it an application developer
+ * would write:
  * 
- * <pre><code>OASFactory.createObject(OpenAPI.class)
- *          .setExternalDocs(OASFactory.createObject(ExternalDocumentation.class).url("http://myDoc"));</code></pre>
+ * <pre>
+ * <code>OASFactory.createObject(OpenAPI.class)
+ *          .setExternalDocs(OASFactory.createObject(ExternalDocumentation.class).url("http://myDoc"));</code>
+ * </pre>
  */
 public final class OASFactory {
-    
-    private OASFactory() {}
+
+    private OASFactory() {
+    }
 
     /**
      * This method creates a new instance of a constructible element from the OpenAPI model tree.
      *
-     * <br><br>Example:
-     * <pre><code>OASFactory.createObject(Info.class).title("Airlines").description("Airlines APIs").version("1.0.0");
-     * </code></pre>
-     * @param <T> describes the type parameter
-     * @param clazz represents a model which extends the {@link org.eclipse.microprofile.openapi.models.Constructible} interface
+     * <br>
+     * <br>
+     * Example:
+     * 
+     * <pre>
+     * <code>OASFactory.createObject(Info.class).title("Airlines").description("Airlines APIs").version("1.0.0");
+     * </code>
+     * </pre>
+     * 
+     * @param <T>
+     *            describes the type parameter
+     * @param clazz
+     *            represents a model which extends the {@link org.eclipse.microprofile.openapi.models.Constructible}
+     *            interface
      *
      * @return a new instance of the requested model class
      * 
-     * @throws NullPointerException if the specified class is null
-     * @throws IllegalArgumentException if an instance could not be created, most likely, due to an illegal or inappropriate class
+     * @throws NullPointerException
+     *             if the specified class is null
+     * @throws IllegalArgumentException
+     *             if an instance could not be created, most likely, due to an illegal or inappropriate class
      */
     public static <T extends Constructible> T createObject(Class<T> clazz) {
         return OASFactoryResolver.instance().createObject(clazz);

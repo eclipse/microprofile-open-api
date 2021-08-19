@@ -33,60 +33,59 @@ import org.testng.annotations.Test;
 import io.restassured.response.ValidatableResponse;
 
 /**
- * This test covers Open API documents that are specified by the
- * META-INF/openapi.yaml file. It verifies that the /openapi
- * endpoint returns the correct content for these static files.
+ * This test covers Open API documents that are specified by the META-INF/openapi.yaml file. It verifies that the
+ * /openapi endpoint returns the correct content for these static files.
  */
 public class StaticDocumentTest extends AppTestBase {
-    
+
     @Deployment(name = "static")
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "static.war")
                 .addAsManifestResource("simpleapi.yaml", "openapi.yaml");
     }
-    
+
     @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testStaticDocument(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        
+
         vr.body("openapi", startsWith("3.0."));
-        
+
         vr.body("servers", hasSize(1));
         vr.body("servers.find{ it.description == 'MySimpleAPI' }.url",
                 equalTo("https:///MySimpleAPI/1.0.0"));
-        
+
         vr.body("info.description", equalTo("This is a simple API"));
         vr.body("info.version", equalTo("1.0.0"));
         vr.body("info.title", equalTo("Simple Inventory API"));
         vr.body("info.contact.email", equalTo("you@your-company.com"));
         vr.body("info.license.name", equalTo("Apache 2.0"));
         vr.body("info.license.url", equalTo("http://www.apache.org/licenses/LICENSE-2.0.html"));
-        
+
         vr.body("tags", hasSize(2));
         vr.body("tags.find{ it.name == 'admins' }.description",
                 equalTo("Secured Admin-only calls"));
         vr.body("tags.find{ it.name == 'developers' }.description",
                 equalTo("Operations available to regular developers"));
-        
+
         final String inventoryPathGet = "paths.'/inventory'.get";
         vr.body(inventoryPathGet + ".tags", both(hasSize(1)).and(contains("developers")));
         vr.body(inventoryPathGet + ".summary", equalTo("searches inventory"));
         vr.body(inventoryPathGet + ".operationId", equalTo("searchInventory"));
-        vr.body(inventoryPathGet + ".description", 
-                both(containsString("By passing in the appropriate options, you can search for")).
-                and(containsString("available inventory in the system")));
+        vr.body(inventoryPathGet + ".description",
+                both(containsString("By passing in the appropriate options, you can search for"))
+                        .and(containsString("available inventory in the system")));
         vr.body(inventoryPathGet + ".parameters", hasSize(3));
-        vr.body(inventoryPathGet + ".parameters.find{ it.name == 'searchString' }.description", 
+        vr.body(inventoryPathGet + ".parameters.find{ it.name == 'searchString' }.description",
                 equalTo("pass an optional search string for looking up inventory"));
-        vr.body(inventoryPathGet + ".parameters.find{ it.name == 'skip' }.description", 
+        vr.body(inventoryPathGet + ".parameters.find{ it.name == 'skip' }.description",
                 equalTo("number of records to skip for pagination"));
-        vr.body(inventoryPathGet + ".parameters.find{ it.name == 'limit' }.description", 
+        vr.body(inventoryPathGet + ".parameters.find{ it.name == 'limit' }.description",
                 equalTo("maximum number of records to return"));
         vr.body(inventoryPathGet + ".responses", aMapWithSize(2));
         vr.body(inventoryPathGet + ".responses.'200'.description", equalTo("search results matching criteria"));
         vr.body(inventoryPathGet + ".responses.'400'.description", equalTo("bad input parameter"));
-        
+
         final String inventoryPathPost = "paths.'/inventory'.post";
         vr.body(inventoryPathPost + ".tags", both(hasSize(1)).and(contains("admins")));
         vr.body(inventoryPathPost + ".summary", equalTo("adds an inventory item"));
