@@ -25,37 +25,41 @@ import java.lang.annotation.Target;
 /**
  * Configuration details for a supported OAuth Flow.
  * 
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#oauthFlowObject"> OAuth Flow Object</a>
+ * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#oauthFlowObject"> OAuth Flow
+ *      Object</a>
  **/
 @Target({})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface OAuthFlow {
     /**
-     * The authorization URL to be used for this flow. 
+     * The authorization URL to be used for this flow.
      * <p>
-     * This is a REQUIRED property and MUST be in the form of a URL. 
-     * Applies to oauth2 ("implicit", "authorizationCode") type.
+     * This is a REQUIRED property and MUST be in the form of a URL. Applies to oauth2 ("implicit", "authorizationCode")
+     * type.
      * </p>
+     * 
      * @return authorization URL for this flow
      **/
     String authorizationUrl() default "";
 
     /**
-     * The token URL to be used for this flow. 
+     * The token URL to be used for this flow.
      * <p>
-     * This is a REQUIRED property and MUST be in the form of a URL. 
-     * Applies to oauth2 ("password", "clientCredentials", "authorizationCode") type.
+     * This is a REQUIRED property and MUST be in the form of a URL. Applies to oauth2 ("password", "clientCredentials",
+     * "authorizationCode") type.
      * </p>
+     * 
      * @return token URL for this flow
      **/
     String tokenUrl() default "";
 
     /**
      * The URL to be used for obtaining refresh tokens.
-     * <p> 
+     * <p>
      * This MUST be in the form of a URL. Applies to oauth2 type.
      * </p>
+     * 
      * @return URL for obtaining refresh tokens
      **/
     String refreshUrl() default "";
@@ -63,9 +67,9 @@ public @interface OAuthFlow {
     /**
      * This is a REQUIRED property.
      * <p>
-     * The available scopes for the OAuth2 security scheme. 
-     * Applies to oauth2 type.
+     * The available scopes for the OAuth2 security scheme. Applies to oauth2 type.
      * </p>
+     * 
      * @return scopes available for this security scheme
      **/
     OAuthScope[] scopes() default {};

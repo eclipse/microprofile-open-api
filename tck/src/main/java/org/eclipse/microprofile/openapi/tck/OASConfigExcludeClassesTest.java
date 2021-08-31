@@ -31,14 +31,15 @@ import io.restassured.response.ValidatableResponse;
 
 public class OASConfigExcludeClassesTest extends AppTestBase {
     private ValidatableResponse vr;
-    
+
     @Deployment(name = "airlines")
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "airlines.war")
                 .addPackages(true, "org.eclipse.microprofile.openapi.apps.airlines")
-                .addAsManifestResource("exclude-classes-microprofile-config.properties", "microprofile-config.properties");
+                .addAsManifestResource("exclude-classes-microprofile-config.properties",
+                        "microprofile-config.properties");
     }
-    
+
     @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testExcludedClasses(String type) throws InterruptedException {
@@ -46,17 +47,15 @@ public class OASConfigExcludeClassesTest extends AppTestBase {
         vr.body("openapi", startsWith("3.0."));
         vr.body("info.title", equalTo("AirlinesRatingApp API"));
         vr.body("info.version", equalTo("1.0"));
-        
+
         vr.body("paths.", aMapWithSize(10));
         vr.body("paths.'/reviews'", nullValue());
         vr.body("paths.'/reviews/{id}'", nullValue());
         vr.body("paths.'/reviews/users/{user}'", nullValue());
         vr.body("paths.'/reviews/airlines/{airline}'", nullValue());
         vr.body("paths.'/reviews/{user}/{airlines}'", nullValue());
-        
+
         vr.body("paths.'/availability'", nullValue());
 
-        
-        
     }
 }

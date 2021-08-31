@@ -31,14 +31,15 @@ import io.restassured.response.ValidatableResponse;
 
 public class OASConfigExcludePackageTest extends AppTestBase {
     private ValidatableResponse vr;
-    
+
     @Deployment(name = "airlines")
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "airlines.war")
                 .addPackages(true, "org.eclipse.microprofile.openapi.apps.airlines")
-                .addAsManifestResource("exclude-package-microprofile-config.properties", "microprofile-config.properties");
+                .addAsManifestResource("exclude-package-microprofile-config.properties",
+                        "microprofile-config.properties");
     }
-    
+
     @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testExcludePackage(String type) throws InterruptedException {
@@ -49,8 +50,7 @@ public class OASConfigExcludePackageTest extends AppTestBase {
         vr.body("paths", aMapWithSize(14));
         vr.body("paths.'/bookings'", nullValue());
         vr.body("paths.'/bookings/{id}'", nullValue());
-        
+
     }
-    
-    
+
 }

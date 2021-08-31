@@ -16,61 +16,29 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.eclipse.microprofile</groupId>
+        <artifactId>microprofile-parent</artifactId>
+        <version>2.1</version>
+    </parent>
     <groupId>org.eclipse.microprofile.openapi</groupId>
     <artifactId>microprofile-openapi-parent</artifactId>
-    <version>2.1-SNAPSHOT</version>
+    <version>3.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>MicroProfile OpenAPI</name>
     <description>Eclipse MicroProfile OpenAPI</description>
 
-    <url>http://microprofile.io</url>
-
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        
-        <checkstyle.version>2.17</checkstyle.version>
-        <checkstyle.methodNameFormat>^_?[a-z][a-zA-Z0-9]*$|DELETE|GET|HEAD|OPTIONS|PATCH|POST|PUT|TRACE</checkstyle.methodNameFormat>
-        <autorelease>false</autorelease>
-
-        <!-- Versions of API dependencies -->
-        <osgi-annotation.version>1.1.0</osgi-annotation.version>
-        <bnd.version>3.4.0</bnd.version>
-
-        <!-- Versions of TCK dependencies -->
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-        <arquillian.version>1.1.13.Final</arquillian.version>
-        <testng.version>7.0.0</testng.version>
-        <jaxrs.version>2.1.6</jaxrs.version>
+        <inceptionYear>2017</inceptionYear>
+        <osgi-annotation.version>1.1.1</osgi-annotation.version>
+        <!-- Versions of TCK dependencies -->  
         <rest-assured.version>4.3.0</rest-assured.version>
-        <hamcrest-all.version>1.3</hamcrest-all.version>
         <java-hamcrest.version>2.0.0.0</java-hamcrest.version>
         <httpclient.version>4.5.2</httpclient.version>
         <jackson.version>2.10.1</jackson.version>
         <restclient.version>2.0</restclient.version>
-
-        <!-- Versions of SPEC dependencies  -->
-        <asciidoctor-maven.version>1.6.0</asciidoctor-maven.version>
-        <asciidoctorj-pdf.version>1.5.3</asciidoctorj-pdf.version>
-
-        <revremark>Draft</revremark>
-        <inceptionYear>2017</inceptionYear>
+        <biz.aQute.bnd.version>5.3.0</biz.aQute.bnd.version>
     </properties>
-
-    <licenses>
-        <license>
-            <name>Apache License, Version 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-            <comments>A business-friendly OSS license</comments>
-        </license>
-    </licenses>
-
-    <organization>
-        <name>Eclipse Foundation</name>
-        <url>http://www.eclipse.org/</url>
-    </organization>
 
     <developers>
         <developer>
@@ -85,7 +53,7 @@
         <url>https://github.com/eclipse/microprofile-open-api</url>
         <connection>scm:git:https://github.com/eclipse/microprofile-open-api.git</connection>
         <developerConnection>scm:git:git@github.com:eclipse/microprofile-open-api.git</developerConnection>
-        <tag>2.1-SNAPSHOT</tag>
+        <tag>3.0-SNAPSHOT</tag>
     </scm>
 
     <issueManagement>
@@ -93,315 +61,33 @@
         <url>https://github.com/eclipse/microprofile-open-api/issues</url>
     </issueManagement>
 
-    <distributionManagement>
-        <repository>
-            <id>ossrh</id>
-            <name>Sonatype OSSRH - Release Staging Area</name>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <name>Sonatype OSSRH Snapshots</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-            <uniqueVersion>true</uniqueVersion>  <!-- for keeping multipe snapshot versions - maybe for staging a final version besides nightly versions -->
-        </snapshotRepository>
-    </distributionManagement>
-
+    <dependencyManagement>
+        <dependencies> 
+            <dependency>
+                <groupId>biz.aQute.bnd</groupId>
+                <artifactId>biz.aQute.bnd.annotation</artifactId>
+                <version>${biz.aQute.bnd.version}</version>
+                <scope>provided</scope>
+            </dependency>  
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.annotation.versioning</artifactId>
+                <version>${osgi-annotation.version}</version>
+                <scope>provided</scope>
+            </dependency>
+           <dependency>
+                <groupId>org.eclipse.microprofile.openapi</groupId>
+                <artifactId>microprofile-openapi-api</artifactId>
+                <version>${project.version}</version>
+                <scope>provided</scope>
+            </dependency>  
+        </dependencies>
+    </dependencyManagement>
     <modules>
         <module>api</module>
         <module>tck</module>
         <module>spec</module>
         <module>spi</module>
     </modules>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.jboss.arquillian</groupId>
-                <artifactId>arquillian-bom</artifactId>
-                <version>${arquillian.version}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <version>2.5.3</version>
-                    <configuration>
-                        <autoVersionSubmodules>true</autoVersionSubmodules>
-                        <localCheckout>true</localCheckout>
-                        <useReleaseProfile>false</useReleaseProfile>
-                        <arguments>${arguments} -Prelease -Drevremark=${revremark}</arguments>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.eclipse.cbi.maven.plugins</groupId>
-                    <artifactId>eclipse-jarsigner-plugin</artifactId>
-                    <version>1.1.4</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-checkstyle-plugin</artifactId>
-                    <version>${checkstyle.version}</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.2.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-source-plugin</artifactId>
-                    <version>3.2.1</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.2.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-gpg-plugin</artifactId>
-                    <version>1.6</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>3.0.0</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>verify-style</id>
-                        <phase>process-classes</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                    <consoleOutput>true</consoleOutput>
-                    <failOnViolation>true</failOnViolation>
-                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                    <failsOnError>true</failsOnError>
-                    <linkXRef>true</linkXRef>
-                    <logViolationsToConsole>true</logViolationsToConsole>
-                    <checkstyleRules>
-                        <module name="Checker">
-                            <module name="SuppressionCommentFilter" />
-                            <module name="FileLength">
-                                <property name="max" value="3500" />
-                                <property name="fileExtensions" value="java" />
-                            </module>
-                            <module name="FileTabCharacter" />
-                            <module name="TreeWalker">
-                                <module name="FileContentsHolder" />
-                               <module name="ConstantName">
-                                    <property name="format" value="^(([A-Z][A-Z0-9]*(_[A-Z0-9]+)*))$" />
-                                </module>
-                                <module name="LocalVariableName" />
-                                <module name="MethodName">
-                                    <property name="format" value="${checkstyle.methodNameFormat}" />
-                                </module>
-                                <module name="PackageName" />
-                                <module name="LocalFinalVariableName" />
-                                <module name="ParameterName" />
-                                <module name="StaticVariableName" />
-
-                                <module name="TypeName">
-                                    <property name="format" value="^_?[A-Z][a-zA-Z0-9]*$|packageinfo" />
-                                </module>
-                                <module name="AvoidStarImport">
-                                    <property name="excludes" value="java.io,java.net,java.util,javax.enterprise.inject.spi,javax.enterprise.context" />
-                                </module>
-                                <module name="IllegalImport" />
-                                <module name="RedundantImport" />
-                                <module name="UnusedImports" />
-                                <module name="LineLength">
-                                    <property name="max" value="150" />
-                                    <property name="ignorePattern" value="@version|@see" />
-                                </module>
-                                <module name="MethodLength">
-                                    <property name="max" value="250" />
-                                </module>
-                                <module name="ParameterNumber">
-                                    <property name="max" value="11" />
-                                </module>
-                                <module name="EmptyBlock">
-                                    <property name="option" value="text" />
-                                </module>
-                                <module name="NeedBraces" />
-                                <module name="LeftCurly">
-                                    <property name="option" value="EOL" />
-                                </module>
-                                <module name="RightCurly">
-                                    <property name="option" value="ALONE" />
-                                </module>
-                                <module name="EmptyStatement" />
-                                <module name="EqualsHashCode" />
-                                <module name="DefaultComesLast" />
-                                <module name="MissingSwitchDefault" />
-                                <module name="FallThrough" />
-                                <module name="MultipleVariableDeclarations" />
-                                <module name="com.puppycrawl.tools.checkstyle.checks.design.DesignForExtensionCheck">
-                                    <property name="severity" value="ignore" />
-                                </module>
-                                <module name="HideUtilityClassConstructor" />
-                                <module name="com.puppycrawl.tools.checkstyle.checks.design.VisibilityModifierCheck">
-                                    <property name="packageAllowed" value="false" />
-                                    <property name="protectedAllowed" value="true" />
-                                    <property name="publicMemberPattern" value="^serialVersionUID" />
-                                    <property name="severity" value="warning" />
-                                </module>
-                                <module name="UpperEll" />
-                            </module>
-                        </module>
-                    </checkstyleRules>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.rat</groupId>
-                <artifactId>apache-rat-plugin</artifactId>
-                <version>0.12</version>
-                <executions>
-                    <execution>
-                        <id>rat-check</id>
-                        <goals><goal>check</goal></goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <excludes>
-                        <exclude>.travis.yml.*</exclude>
-                        <exclude>**/bnd.bnd</exclude>
-                        <exclude>*.log</exclude>
-                        <exclude>.checkstyle</exclude>
-                        <exclude>.factorypath</exclude>
-                        <exclude>.editorconfig</exclude>
-                        <exclude>**/target/</exclude>
-                        <exclude>**/bin/</exclude>
-                        <exclude>**/*.iml</exclude>
-                        <exclude>**/*.idea</exclude>
-                        <exclude>**/*.ipr</exclude>
-                        <exclude>**/.externalToolBuilders/*</exclude>
-                        <exclude>nb**.xml</exclude>
-                        <exclude>.github/**</exclude>
-                        <exclude>**/license.html</exclude>
-                        <exclude>**/license-efsl.adoc</exclude>
-                        <exclude>**/LICENSE*</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>timestamp-property</id>
-                        <goals>
-                            <goal>timestamp-property</goal>
-                        </goals>
-                        <phase>validate</phase>
-                        <configuration>
-                            <name>currentYear</name>
-                            <pattern>yyyy</pattern>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-
-    <profiles>
-        <profile>
-            <id>release</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.3</version>
-                        <extensions>true</extensions>
-                        <configuration>
-                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                            <serverId>ossrh</serverId>
-                            <autoReleaseAfterClose>${autorelease}</autoReleaseAfterClose>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>attach-sources</id>
-                                <goals>
-                                    <goal>jar-no-fork</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>attach-javadocs</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                                <configuration>
-                                    <gpgArguments>
-                                        <arg>--pinentry-mode</arg>
-                                        <arg>loopback</arg>
-                                    </gpgArguments>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>jdk11plus</id>
-            <activation>
-                <jdk>[11,)</jdk>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>javax.xml.bind</groupId>
-                    <artifactId>jaxb-api</artifactId>
-                    <version>2.3.1</version>
-                    <scope>provided</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>
-
+       
 </project>

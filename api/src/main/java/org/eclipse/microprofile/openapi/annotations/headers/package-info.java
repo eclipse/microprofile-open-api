@@ -15,6 +15,7 @@
  * An annotation to describe a single header object.
  * <p>
  * Example usage:
+ * 
  * <pre>
  * {@literal @}GET
  * {@literal @}APIResponse(

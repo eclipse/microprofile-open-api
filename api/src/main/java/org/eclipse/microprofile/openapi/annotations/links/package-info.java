@@ -12,10 +12,11 @@
  */
 
 /**
- * Annotations to represent a design-time link for a response and the corresponding
- * parameter to be passed to the linked operation.
+ * Annotations to represent a design-time link for a response and the corresponding parameter to be passed to the linked
+ * operation.
  * <p>
  * Example usage:
+ * 
  * <pre>
  *  {@literal @}APIResponse(
  *      responseCode="201",

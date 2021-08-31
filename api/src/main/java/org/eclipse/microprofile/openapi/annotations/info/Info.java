@@ -64,7 +64,7 @@ public @interface Info {
      * 
      * @return the license of the application
      **/
-    License license() default @License(name="");
+    License license() default @License(name = "");
 
     /**
      * The version of the API definition.

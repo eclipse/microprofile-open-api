@@ -25,7 +25,9 @@ import java.lang.annotation.Target;
 /**
  * An object representing a Server Variable for server URL template substitution.
  * 
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#server-variable-object">ServerVariable Object</a>
+ * @see <a href=
+ *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#server-variable-object">ServerVariable
+ *      Object</a>
  **/
 @Target({})
 @Retention(RetentionPolicy.RUNTIME)
@@ -39,8 +41,8 @@ public @interface ServerVariable {
     String name();
 
     /**
-     * An array of enum values for this variable. This field maps to the enum property in the OAS schema and to enumeration field of ServerVariable
-     * model.
+     * An array of enum values for this variable. This field maps to the enum property in the OAS schema and to
+     * enumeration field of ServerVariable model.
      * 
      * @return array of possible values for this ServerVariable
      **/

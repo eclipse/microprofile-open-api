@@ -16,7 +16,6 @@
 
 package org.eclipse.microprofile.openapi.tck;
 
-
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.startsWith;
 import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
@@ -31,7 +30,7 @@ import io.restassured.response.ValidatableResponse;
 
 public class OASConfigScanDisableTest extends AppTestBase {
     private ValidatableResponse vr;
-    
+
     @Deployment(name = "airlines")
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "airlines.war")

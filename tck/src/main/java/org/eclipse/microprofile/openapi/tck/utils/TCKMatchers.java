@@ -37,11 +37,9 @@ public final class TCKMatchers {
     };
 
     /**
-     * Creates a matcher of {@link Comparable Comparable&lt;Number&gt;} that
-     * matches when the examined number is equal to the specified value, as
-     * reported by the <code>compareTo</code> method of the {@link BigDecimal}s
-     * created by passing both Number values' {@link Number#doubleValue()
-     * doubleValue} to {@link BigDecimal#valueOf(double)}.
+     * Creates a matcher of {@link Comparable Comparable&lt;Number&gt;} that matches when the examined number is equal
+     * to the specified value, as reported by the <code>compareTo</code> method of the {@link BigDecimal}s created by
+     * passing both Number values' {@link Number#doubleValue() doubleValue} to {@link BigDecimal#valueOf(double)}.
      * <p>
      * For example:
      *
@@ -50,9 +48,8 @@ public final class TCKMatchers {
      * </pre>
      *
      * @param expected
-     *            the value which, when passed to the compareTo method of the
-     *            examined object following conversion to BigDecimal, should
-     *            return zero
+     *            the value which, when passed to the compareTo method of the examined object following conversion to
+     *            BigDecimal, should return zero
      * @return a matcher to test the equality of the examined Number
      */
     public static Matcher<Number> comparesEqualToNumber(Number expected) {

@@ -12,12 +12,12 @@
  */
 
 /**
- * An interface to represent a programmable model of an example 
- * of a data type or a media type.
+ * An interface to represent a programmable model of an example of a data type or a media type.
  * <p>
  * The behaviour of methods inherited from java.lang.Object are undefined by the MicroProfile OpenAPI specification.
  * <p>
- * Example usage: 
+ * Example usage:
+ * 
  * <pre>
  * .components(OASFactory.createObject(Components.class)
  *      .examples(new HashMap&lt;String, Example&gt;())

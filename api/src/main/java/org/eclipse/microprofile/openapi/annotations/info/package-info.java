@@ -12,10 +12,11 @@
  */
 
 /**
- * A set of annotations to represent metadata about the API, including license information
- * and contact information of the exposed API.
+ * A set of annotations to represent metadata about the API, including license information and contact information of
+ * the exposed API.
  * <p>
  * Example usage:
+ * 
  * <pre>
  * {@literal @}ApplicationPath("/")
    {@literal @}OpenAPIDefinition(

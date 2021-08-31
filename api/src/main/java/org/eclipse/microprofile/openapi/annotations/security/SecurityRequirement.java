@@ -27,26 +27,29 @@ import java.lang.annotation.Target;
 /**
  * Specifies a security requirement for an operation.
  * 
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-requirement-object">SecuirtyRequirement Object</a>
+ * @see <a href=
+ *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-requirement-object">SecuirtyRequirement
+ *      Object</a>
  **/
-@Target({ ElementType.METHOD, ElementType.TYPE })
+@Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Repeatable(SecurityRequirements.class)
 @Inherited
 public @interface SecurityRequirement {
     /**
-     * Name MUST correspond to a security scheme which is declared in the Security Schemes under the Components Object. 
+     * Name MUST correspond to a security scheme which is declared in the Security Schemes under the Components Object.
      * 
      * @return the name of this Security Requirement instance
      */
     String name();
 
     /**
-     * If the security scheme referred by the name property is of type "oauth2" or "openIdConnect", 
-     * then the scopes array is a list of scope names required for the execution. 
+     * If the security scheme referred by the name property is of type "oauth2" or "openIdConnect", then the scopes
+     * array is a list of scope names required for the execution.
      * <p>
      * For other security scheme types, the array MUST be empty.
      * </p>
+     * 
      * @return a list of scope names required for the execution of this Security Requirement instance.
      */
     String[] scopes() default {};

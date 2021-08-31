@@ -16,19 +16,20 @@
 
 package org.eclipse.microprofile.openapi.spi;
 
-import org.eclipse.microprofile.openapi.models.Constructible;
-
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.ServiceLoader;
 
+import org.eclipse.microprofile.openapi.models.Constructible;
+
 /**
- * This class is not intended to be used by end-users. It should
- * be used by vendors to set their implementation of OASFactoryResolver.
+ * This class is not intended to be used by end-users. It should be used by vendors to set their implementation of
+ * OASFactoryResolver.
  *
- * <br><br>Service provider for OASFactoryResolver. The implementation registers
- * itself via the {@link java.util.ServiceLoader} mechanism or by manually
- * setting their implementation using the setInstance method.
+ * <br>
+ * <br>
+ * Service provider for OASFactoryResolver. The implementation registers itself via the {@link java.util.ServiceLoader}
+ * mechanism or by manually setting their implementation using the setInstance method.
  *
  */
 public abstract class OASFactoryResolver {
@@ -38,19 +39,23 @@ public abstract class OASFactoryResolver {
     /**
      * Create a new instance of a constructible element from the OpenAPI model tree.
      * 
-     * @param <T> describes the type parameter
-     * @param clazz represents a model which extends the org.eclipse.microprofile.openapi.models.Constructible interface
-
+     * @param <T>
+     *            describes the type parameter
+     * @param clazz
+     *            represents a model which extends the org.eclipse.microprofile.openapi.models.Constructible interface
+     * 
      * @return a new instance of the requested model class
      * 
-     * @throws NullPointerException if the specified class is null
-     * @throws IllegalArgumentException if an instance could not be created, most likely, due to an illegal or inappropriate class
+     * @throws NullPointerException
+     *             if the specified class is null
+     * @throws IllegalArgumentException
+     *             if an instance could not be created, most likely, due to an illegal or inappropriate class
      */
     public abstract <T extends Constructible> T createObject(Class<T> clazz);
 
     /**
-     * Creates an OASFactoryResolver object.
-     * Only used internally from within {@link org.eclipse.microprofile.openapi.OASFactory}
+     * Creates an OASFactoryResolver object. Only used internally from within
+     * {@link org.eclipse.microprofile.openapi.OASFactory}
      * 
      * @return an instance of OASFactoryResolver
      */
@@ -94,10 +99,10 @@ public abstract class OASFactoryResolver {
         ServiceLoader<OASFactoryResolver> sl = ServiceLoader.load(OASFactoryResolver.class, cl);
         for (OASFactoryResolver spi : sl) {
             if (instance != null) {
-                throw new IllegalStateException("Multiple OASFactoryResolver implementations found: " + spi.getClass().getName() + " and "
-                        + instance.getClass().getName());
-            }
-            else {
+                throw new IllegalStateException(
+                        "Multiple OASFactoryResolver implementations found: " + spi.getClass().getName() + " and "
+                                + instance.getClass().getName());
+            } else {
                 instance = spi;
             }
         }
@@ -107,7 +112,8 @@ public abstract class OASFactoryResolver {
     /**
      * Set the instance. It is used by OSGi environment while service loader pattern is not supported.
      *
-     * @param factory set the instance.
+     * @param factory
+     *            set the instance.
      */
     public static void setInstance(OASFactoryResolver factory) {
         instance = factory;

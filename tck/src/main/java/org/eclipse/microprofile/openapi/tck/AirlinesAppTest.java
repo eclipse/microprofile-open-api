@@ -183,12 +183,12 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/availability'.get.summary", equalTo("Retrieve all available flights"));
         vr.body("paths.'/availability'.get.operationId", equalTo("getFlights"));
     }
-    
+
     @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testRestClientNotPickedUp(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        //We should not be picking up interfaces annotated with @RegisterRestClient
+        // We should not be picking up interfaces annotated with @RegisterRestClient
         vr.body("paths.'/player/{playerId}'", equalTo(null));
     }
 
@@ -200,7 +200,8 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/bookings'.get.operationId", equalTo("getAllBookings"));
 
         vr.body("paths.'/bookings'.post.summary", equalTo("Create a booking"));
-        vr.body("paths.'/bookings'.post.description", equalTo("Create a new booking record with the booking information provided."));
+        vr.body("paths.'/bookings'.post.description",
+                equalTo("Create a new booking record with the booking information provided."));
         vr.body("paths.'/bookings'.post.operationId", equalTo("createBooking"));
 
         vr.body("paths.'/bookings/{id}'.get.summary", equalTo("Get a booking with ID"));
@@ -274,7 +275,8 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/user/logout'.get.operationId", equalTo("logOutUser"));
 
         vr.body("paths.'/user/{username}'.patch.summary", equalTo("Change user password"));
-        vr.body("paths.'/user/{username}'.patch.description", equalTo("This changes the password for the logged in user."));
+        vr.body("paths.'/user/{username}'.patch.description",
+                equalTo("This changes the password for the logged in user."));
         vr.body("paths.'/user/{username}'.patch.operationId", equalTo("changePassword"));
         vr.body("paths.'/user/{username}'.patch.parameters", hasSize(3));
     }
@@ -325,14 +327,14 @@ public class AirlinesAppTest extends AppTestBase {
         testReviewIdMethods(vr);
         testUserLoginMethods(vr);
     }
-    
+
     private void testUserLoginMethods(ValidatableResponse vr) {
         String reviewParameters = "paths.'/user/login'.get.parameters";
         vr.body(reviewParameters, hasSize(2));
         vr.body(reviewParameters + ".findAll { it }.name", hasItems("username", "password"));
         List<String[]> list = new ArrayList<String[]>();
-        list.add(new String[] { "username", "The user name for login" });
-        list.add(new String[] { "password", "The password for login in clear text" });
+        list.add(new String[]{"username", "The user name for login"});
+        list.add(new String[]{"password", "The password for login in clear text"});
 
         for (int i = 0; i < list.size(); i++) {
             String currentParam = list.get(i)[0];
@@ -350,26 +352,29 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(reviewParameters, hasSize(1));
         vr.body(reviewParameters + ".findAll { it }.name", contains("id"));
         vr.body(reviewParameters + ".findAll { it.name == 'id' }.in", both(hasSize(1)).and(contains("path")));
-        vr.body(reviewParameters + ".findAll { it.name == 'id' }.description", both(hasSize(1)).and(contains("ID of the booking")));
+        vr.body(reviewParameters + ".findAll { it.name == 'id' }.description",
+                both(hasSize(1)).and(contains("ID of the booking")));
         vr.body(reviewParameters + ".findAll { it.name == 'id' }.required", both(hasSize(1)).and(contains(true)));
-        vr.body(reviewParameters + ".findAll { it.name == 'id' }.content.'*/*'.schema.type", both(hasSize(1)).and(contains("integer")));
+        vr.body(reviewParameters + ".findAll { it.name == 'id' }.content.'*/*'.schema.type",
+                both(hasSize(1)).and(contains("integer")));
     }
 
     private void testBookingIdMethods(ValidatableResponse vr) {
         String bookingParameters = "paths.'/bookings/{id}'.%s.parameters";
-        
-        for (String method : new String[] { "put", "delete", "get" }) {
+
+        for (String method : new String[]{"put", "delete", "get"}) {
             bookingParameters = String.format(bookingParameters, method);
 
             vr.body(bookingParameters, hasSize(1));
             vr.body(bookingParameters + ".findAll { it }.name", contains("id"));
             vr.body(bookingParameters + ".findAll { it.name == 'id' }.required", both(hasSize(1)).and(contains(true)));
-            vr.body(bookingParameters + ".findAll { it.name == 'id' }.schema.type", both(hasSize(1)).and(contains("integer")));
+            vr.body(bookingParameters + ".findAll { it.name == 'id' }.schema.type",
+                    both(hasSize(1)).and(contains("integer")));
         }
 
         bookingParameters = "paths.'/bookings/{id}'.get.parameters";
         vr.body(bookingParameters + ".findAll { it.name == 'id' }.style", both(hasSize(1)).and(contains("simple")));
-        
+
     }
 
     private void testAvailabilityGetParamater(ValidatableResponse vr) {
@@ -380,11 +385,11 @@ public class AirlinesAppTest extends AppTestBase {
                 hasItems("airportFrom", "returningDate", "airportTo", "numberOfAdults", "numberOfChildren"));
 
         List<String[]> list = new ArrayList<String[]>();
-        list.add(new String[] { "airportFrom", "Airport the customer departs from" });
-        list.add(new String[] { "returningDate", "Customer return date" });
-        list.add(new String[] { "airportTo", "Airport the customer returns to" });
-        list.add(new String[] { "numberOfAdults", "Number of adults on the flight" });
-        list.add(new String[] { "numberOfChildren", "Number of children on the flight" });
+        list.add(new String[]{"airportFrom", "Airport the customer departs from"});
+        list.add(new String[]{"returningDate", "Customer return date"});
+        list.add(new String[]{"airportTo", "Airport the customer returns to"});
+        list.add(new String[]{"numberOfAdults", "Number of adults on the flight"});
+        list.add(new String[]{"numberOfChildren", "Number of children on the flight"});
 
         for (int i = 0; i < list.size(); i++) {
             String currentParam = list.get(i)[0];
@@ -396,17 +401,21 @@ public class AirlinesAppTest extends AppTestBase {
             vr.body(query + ".schema.type", both(hasSize(1)).and(contains("string")));
         }
 
-        vr.body(availabilityParameters + ".findAll { it.name == 'numberOfAdults' }.schema.minimum", both(hasSize(1)).and(contains(0)));
-        vr.body(availabilityParameters + ".findAll { it.name == 'numberOfChildren' }.schema.minimum", both(hasSize(1)).and(contains(0)));
-        
-        vr.body(availabilityParameters + ".findAll { it.$ref == '#/components/parameters/departureDate'}", notNullValue());
+        vr.body(availabilityParameters + ".findAll { it.name == 'numberOfAdults' }.schema.minimum",
+                both(hasSize(1)).and(contains(0)));
+        vr.body(availabilityParameters + ".findAll { it.name == 'numberOfChildren' }.schema.minimum",
+                both(hasSize(1)).and(contains(0)));
+
+        vr.body(availabilityParameters + ".findAll { it.$ref == '#/components/parameters/departureDate'}",
+                notNullValue());
     }
 
     @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testExplode(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        String explode = "paths.'/user/{username}'.put.responses.'200'.content.'application/xml'.encoding.password.explode";
+        String explode =
+                "paths.'/user/{username}'.put.responses.'200'.content.'application/xml'.encoding.password.explode";
         vr.body(explode, equalTo(true));
         explode = "paths.'/user/{username}'.put.responses.'200'.content.'application/xml'.encoding.password.explode";
         vr.body(explode, equalTo(true));
@@ -435,7 +444,8 @@ public class AirlinesAppTest extends AppTestBase {
         ValidatableResponse vr = callEndpoint(type);
 
         // TODO: cover /streams endpoint
-        String endpoint = "paths.'/bookings'.post.callbacks.'bookingCallback'.'http://localhost:9080/airlines/bookings'";
+        String endpoint =
+                "paths.'/bookings'.post.callbacks.'bookingCallback'.'http://localhost:9080/airlines/bookings'";
         vr.body(endpoint, hasKey("get"));
         vr.body(endpoint + ".get.summary", equalTo("Retrieve all bookings for current user"));
         vr.body(endpoint + ".get.responses.'200'.description", equalTo("Bookings retrieved"));
@@ -644,7 +654,8 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("components.schemas.Airlines.title", equalTo("Airlines"));
         vr.body("paths.'/bookings'.post.responses.'201'.content.'application/json'.schema.type", equalTo("string"));
         vr.body("components.schemas.id.format", equalTo("int32"));
-        vr.body("paths.'/bookings'.post.responses.'201'.content.'application/json'.schema.description", equalTo("id of the new booking"));
+        vr.body("paths.'/bookings'.post.responses.'201'.content.'application/json'.schema.description",
+                equalTo("id of the new booking"));
         vr.body("components.schemas.User.properties.password.example", equalTo("bobSm37"));
 
         // Object properties
@@ -668,9 +679,10 @@ public class AirlinesAppTest extends AppTestBase {
         ValidatableResponse vr = callEndpoint(type);
         vr.body("components.schemas.User.properties", IsMapWithSize.aMapWithSize(10));
         vr.body("components.schemas.User.properties.phone.example", equalTo("123-456-7891"));
-        vr.body("components.schemas.User.properties.phone.description", equalTo("Telephone number to contact the user"));
+        vr.body("components.schemas.User.properties.phone.description",
+                equalTo("Telephone number to contact the user"));
     }
-    
+
     @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testSchemaPropertyValuesOverrideClassPropertyValues(String type) {
@@ -679,7 +691,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("components.schemas.User.properties.phone.example", not("123-456-7890"));
         vr.body("components.schemas.User.properties.phone.example", equalTo("123-456-7891"));
     }
-    
+
     @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testExampleObject(String type) {
@@ -690,18 +702,22 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("components.examples.review.externalValue", equalTo("http://foo.bar/examples/review-example.json"));
 
         // Example in Parameter Content
-        vr.body("paths.'/reviews/users/{user}'.get.parameters.find{ it.name=='user'}.content.'*/*'.examples.example.value", equalTo("bsmith"));
+        vr.body("paths.'/reviews/users/{user}'.get.parameters.find{ it.name=='user'}.content.'*/*'.examples.example.value",
+                equalTo("bsmith"));
 
         // Example in Parameter
-        vr.body("paths.'/reviews/users/{user}'.get.parameters.find{ it.name=='user'}.examples.example1.value", equalTo("bsmith"));
-        vr.body("paths.'/reviews/users/{user}'.get.parameters.find{ it.name=='user'}.examples.example2.value", equalTo("pat@example.com"));
+        vr.body("paths.'/reviews/users/{user}'.get.parameters.find{ it.name=='user'}.examples.example1.value",
+                equalTo("bsmith"));
+        vr.body("paths.'/reviews/users/{user}'.get.parameters.find{ it.name=='user'}.examples.example2.value",
+                equalTo("pat@example.com"));
     }
 
     @RunAsClient
     @Test(dataProvider = "formatProvider")
-    public void testContentExampleAttribute(String type){
+    public void testContentExampleAttribute(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        vr.body("paths.'/reviews/{user}/{airlines}'.get.parameters.find{it.name=='airlines'}.content.'*/*'.example", equalTo("Acme Air"));
+        vr.body("paths.'/reviews/{user}/{airlines}'.get.parameters.find{it.name=='airlines'}.content.'*/*'.example",
+                equalTo("Acme Air"));
     }
 
     @RunAsClient
@@ -715,7 +731,8 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(tagsPath + "Airlines" + desc, equalTo("All the airlines methods"));
         vr.body(tagsPath + "Availability" + desc, equalTo("All the availability methods"));
         vr.body(tagsPath + "Get Flights" + desc, equalTo("method to retrieve all flights available"));
-        vr.body(tagsPath + "Get Flights" + "' }.externalDocs.description", equalTo("A list of all the flights offered by the app"));
+        vr.body(tagsPath + "Get Flights" + "' }.externalDocs.description",
+                equalTo("A list of all the flights offered by the app"));
         vr.body(tagsPath + "Get Flights" + "' }.externalDocs.url", equalTo("http://airlinesratingapp.com/ourflights"));
         vr.body(tagsPath + "Bookings" + desc, equalTo("All the bookings methods"));
         vr.body(tagsPath + "Reservations" + desc, equalTo("All the reservation methods"));
@@ -812,7 +829,8 @@ public class AirlinesAppTest extends AppTestBase {
         ValidatableResponse vr = callEndpoint(type);
 
         // Header within Encoding
-        String testHeader = "paths.'/user'.post.requestBody.content.'application/json'.encoding.email.headers.testHeader";
+        String testHeader =
+                "paths.'/user'.post.requestBody.content.'application/json'.encoding.email.headers.testHeader";
         vr.body(testHeader, notNullValue());
         vr.body(testHeader + ".description", equalTo("Minimum rate"));
         vr.body(testHeader + ".required", equalTo(true));
@@ -839,7 +857,8 @@ public class AirlinesAppTest extends AppTestBase {
         ValidatableResponse vr = callEndpoint(type);
 
         // Reference to Header within Encoding
-        String encodingRefHeader = "paths.'/user/{username}'.put.responses.'200'.content.'application/json'.encoding.password.headers.Max-Rate";
+        String encodingRefHeader =
+                "paths.'/user/{username}'.put.responses.'200'.content.'application/json'.encoding.password.headers.Max-Rate";
         vr.body(encodingRefHeader, notNullValue());
         vr.body(encodingRefHeader + ".$ref", equalTo("#/components/headers/Max-Rate"));
     }
@@ -900,13 +919,13 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(content + ".'*/*'", notNullValue());
         vr.body(content + ".'*/*'.schema.type", equalTo("string"));
     }
-    
+
     @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testStaticFileDefinitions(String type) {
         ValidatableResponse vr = callEndpoint(type);
         vr.body("paths.'/streams'.post.description", equalTo("subscribes a client to receive out-of-band data"));
-        
+
         final String parametersPath = "paths.'/streams'.post.parameters";
         vr.body(parametersPath, hasSize(1));
         vr.body(parametersPath + ".find{ it.name == 'callbackUrl' }.in", equalTo("query"));
@@ -915,34 +934,41 @@ public class AirlinesAppTest extends AppTestBase {
                 containsString("the location where data will be sent."));
         vr.body(parametersPath + ".find{ it.name == 'callbackUrl' }.schema.type", equalTo("string"));
         vr.body(parametersPath + ".find{ it.name == 'callbackUrl' }.schema.format", equalTo("uri"));
-        vr.body(parametersPath + ".find{ it.name == 'callbackUrl' }.schema.example", equalTo("https://tonys-server.com"));
-        
+        vr.body(parametersPath + ".find{ it.name == 'callbackUrl' }.schema.example",
+                equalTo("https://tonys-server.com"));
+
         final String responsePath = "paths.'/streams'.post.responses";
         vr.body(responsePath, aMapWithSize(1));
-        
+
         final String response201Path = responsePath + ".'201'";
         vr.body(response201Path + ".description", equalTo("subscription successfully created"));
-        vr.body(response201Path + ".content.'application/json'.schema.description", equalTo("subscription information"));
-        vr.body(response201Path + ".content.'application/json'.schema.required", both(hasSize(1)).and(contains("subscriptionId")));
+        vr.body(response201Path + ".content.'application/json'.schema.description",
+                equalTo("subscription information"));
+        vr.body(response201Path + ".content.'application/json'.schema.required",
+                both(hasSize(1)).and(contains("subscriptionId")));
         vr.body(response201Path + ".content.'application/json'.schema.properties.subscriptionId.description",
                 equalTo("this unique identifier allows management of the subscription"));
-        vr.body(response201Path + ".content.'application/json'.schema.properties.subscriptionId.type", equalTo("string"));
+        vr.body(response201Path + ".content.'application/json'.schema.properties.subscriptionId.type",
+                equalTo("string"));
         vr.body(response201Path + ".content.'application/json'.schema.properties.subscriptionId.example",
                 equalTo("2531329f-fb09-4ef7-887e-84e648214436"));
-        
+
         final String callbacksPath = "paths.'/streams'.post.callbacks.onData.'{$request.query.callbackUrl}/data'.post";
         vr.body(callbacksPath + ".requestBody.description", equalTo("subscription payload"));
-        vr.body(callbacksPath + ".requestBody.content.'application/json'.schema.properties.timestamp.type", equalTo("string"));
-        vr.body(callbacksPath + ".requestBody.content.'application/json'.schema.properties.timestamp.format",equalTo("date-time"));
-        vr.body(callbacksPath + ".requestBody.content.'application/json'.schema.properties.userData.type", equalTo("string"));
-        
+        vr.body(callbacksPath + ".requestBody.content.'application/json'.schema.properties.timestamp.type",
+                equalTo("string"));
+        vr.body(callbacksPath + ".requestBody.content.'application/json'.schema.properties.timestamp.format",
+                equalTo("date-time"));
+        vr.body(callbacksPath + ".requestBody.content.'application/json'.schema.properties.userData.type",
+                equalTo("string"));
+
         vr.body(callbacksPath + ".responses", aMapWithSize(2));
         vr.body(callbacksPath + ".responses.'202'.description",
-                both(containsString("Your server implementation should return this HTTP status code")).
-                and(containsString("if the data was received successfully")));
+                both(containsString("Your server implementation should return this HTTP status code"))
+                        .and(containsString("if the data was received successfully")));
         vr.body(callbacksPath + ".responses.'204'.description",
-                both(containsString("Your server should return this HTTP status code if no longer interested")).
-                and(containsString("in further updates")));
+                both(containsString("Your server should return this HTTP status code if no longer interested"))
+                        .and(containsString("in further updates")));
     }
 
     @RunAsClient
@@ -968,5 +994,5 @@ public class AirlinesAppTest extends AppTestBase {
 
         vr.body("paths.'/user/{id}'.get.responses.'404'.content.'application/json'.schema", notNullValue());
     }
-    
+
 }

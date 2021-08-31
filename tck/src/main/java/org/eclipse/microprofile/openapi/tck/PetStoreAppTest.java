@@ -31,8 +31,6 @@ import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
 import static org.testng.Assert.assertNotNull;
 
-import javax.ws.rs.core.MediaType;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -40,6 +38,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.testng.annotations.Test;
 
 import io.restassured.response.ValidatableResponse;
+import jakarta.ws.rs.core.MediaType;
 
 public class PetStoreAppTest extends AppTestBase {
     @Deployment(name = "petstore")
@@ -55,17 +54,24 @@ public class PetStoreAppTest extends AppTestBase {
         // Schema and DiscriminatorMapping annotation tests
         // Basic properties
         vr.body("paths.'/pet/findByTags'.get.parameters.find{ it.name == 'tags' }.schema.default", equalTo("Dog"));
-        vr.body("paths.'/pet/findByTags'.get.parameters.find{ it.name == 'tags' }.schema.enum", hasItems("Cat", "Dog", "Lizard"));
-        vr.body("paths.'/pet/findByTags'.get.parameters.find{ it.name == 'tags' }.schema.externalDocs.description", equalTo("Pet Types"));
+        vr.body("paths.'/pet/findByTags'.get.parameters.find{ it.name == 'tags' }.schema.enum",
+                hasItems("Cat", "Dog", "Lizard"));
+        vr.body("paths.'/pet/findByTags'.get.parameters.find{ it.name == 'tags' }.schema.externalDocs.description",
+                equalTo("Pet Types"));
         vr.body("paths.'/pet/findByTags'.get.parameters.find{ it.name == 'tags' }.schema.deprecated", equalTo(true));
         vr.body("paths.'/store/order/{orderId}'.get.responses.'900'.schema", nullValue());
 
         // Numerical properties
-        vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.maximum", comparesEqualToNumber(101.0));
-        vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.exclusiveMaximum", equalTo(true));
-        vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.minimum", comparesEqualToNumber(9));
-        vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.exclusiveMinimum", equalTo(true));
-        vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.multipleOf", comparesEqualToNumber(10));
+        vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.maximum",
+                comparesEqualToNumber(101.0));
+        vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.exclusiveMaximum",
+                equalTo(true));
+        vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.minimum",
+                comparesEqualToNumber(9));
+        vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.exclusiveMinimum",
+                equalTo(true));
+        vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.multipleOf",
+                comparesEqualToNumber(10));
 
         // String properties
         vr.body("paths.'/pet/{petId}'.delete.parameters.find{ it.name == 'apiKey' }.schema.maxLength", equalTo(256));
@@ -93,7 +99,7 @@ public class PetStoreAppTest extends AppTestBase {
         vr.body("paths.'/store/order/{orderId}'.get.security.storeOpenIdConnect[0][0]", equalTo("write:store"));
         vr.body("paths.'/store/order/{orderId}'.get.security.storeOpenIdConnect[0][1]", equalTo("read:store"));
         vr.body("paths.'/store/order/{orderId}'.get.security.find { it.storeHttp != null }.storeHttp", empty());
-        
+
         vr.body("paths.'/user'.post.security.find { it.userApiKey != null }.userApiKey", empty());
         vr.body("paths.'/user'.post.security.find { it.userBasicHttp != null }.userBasicHttp", empty());
         vr.body("paths.'/user'.post.security.find { it.userBearerHttp != null }.userBearerHttp", empty());
@@ -126,13 +132,15 @@ public class PetStoreAppTest extends AppTestBase {
 
         String userApiKey = "components.securitySchemes.userApiKey.";
         vr.body(userApiKey + "type", equalTo("apiKey"));
-        vr.body(userApiKey + "description", equalTo("authentication needed to create a new user profile for the store"));
+        vr.body(userApiKey + "description",
+                equalTo("authentication needed to create a new user profile for the store"));
         vr.body(userApiKey + "name", equalTo("createOrUpdateUserProfile1"));
         vr.body(userApiKey + "in", equalTo("header"));
 
         String userBearerHttp = "components.securitySchemes.userBearerHttp.";
         vr.body(userBearerHttp + "type", equalTo("http"));
-        vr.body(userBearerHttp + "description", equalTo("authentication needed to create a new user profile for the store"));
+        vr.body(userBearerHttp + "description",
+                equalTo("authentication needed to create a new user profile for the store"));
         vr.body(userBearerHttp + "scheme", equalTo("bearer"));
         vr.body(userBearerHttp + "bearerFormat", equalTo("JWT"));
 
@@ -142,7 +150,8 @@ public class PetStoreAppTest extends AppTestBase {
 
         String userBasicHttp = "components.securitySchemes.userBasicHttp.";
         vr.body(userBasicHttp + "type", equalTo("http"));
-        vr.body(userBasicHttp + "description", equalTo("authentication needed to create a new user profile for the store"));
+        vr.body(userBasicHttp + "description",
+                equalTo("authentication needed to create a new user profile for the store"));
         vr.body(userBasicHttp + "scheme", equalTo("basic"));
 
         String storeHttp = "components.securitySchemes.storeHttp.";
@@ -152,14 +161,17 @@ public class PetStoreAppTest extends AppTestBase {
 
         String petsHttp = "components.securitySchemes.petsHttp.";
         vr.body(petsHttp + "type", equalTo("http"));
-        vr.body(petsHttp + "description", equalTo("authentication needed to update an exsiting record of a pet in the store"));
+        vr.body(petsHttp + "description",
+                equalTo("authentication needed to update an exsiting record of a pet in the store"));
         vr.body(petsHttp + "scheme", equalTo("bearer"));
         vr.body(petsHttp + "bearerFormat", equalTo("jwt"));
 
         String storeOpenIdConnect = "components.securitySchemes.storeOpenIdConnect.";
         vr.body(storeOpenIdConnect + "type", equalTo("openIdConnect"));
-        vr.body(storeOpenIdConnect + "description", equalTo("openId Connect authentication to access the pet store resource"));
-        vr.body(storeOpenIdConnect + "openIdConnectUrl", equalTo("https://petstoreauth.com:4433/oidc/petstore/oidcprovider/authorize"));
+        vr.body(storeOpenIdConnect + "description",
+                equalTo("openId Connect authentication to access the pet store resource"));
+        vr.body(storeOpenIdConnect + "openIdConnectUrl",
+                equalTo("https://petstoreauth.com:4433/oidc/petstore/oidcprovider/authorize"));
     }
 
     @RunAsClient
@@ -187,12 +199,12 @@ public class PetStoreAppTest extends AppTestBase {
     @Test
     public void testDefaultResponseType() {
         given()
-            .filter(AppTestBase.YAML_FILTER)
-        .when().get("/openapi")
-        .then()
-            .assertThat()
+                .filter(AppTestBase.YAML_FILTER)
+                .when().get("/openapi")
+                .then()
+                .assertThat()
                 .statusCode(200)
-            .and()
+                .and()
                 .body("openapi", startsWith("3.0."));
     }
 
@@ -200,15 +212,15 @@ public class PetStoreAppTest extends AppTestBase {
     @Test
     public void testJsonResponseTypeWithQueryParameter() {
         given()
-            .noFilters()
-            .queryParam("format", "JSON")
-        .when().get("/openapi")
-        .then()
-            .assertThat()
+                .noFilters()
+                .queryParam("format", "JSON")
+                .when().get("/openapi")
+                .then()
+                .assertThat()
                 .contentType(MediaType.APPLICATION_JSON)
-            .and()
+                .and()
                 .statusCode(200)
-            .and()
+                .and()
                 .body("openapi", startsWith("3.0."));
     }
 
@@ -230,9 +242,9 @@ public class PetStoreAppTest extends AppTestBase {
 
         vr.body(schemaObject,
                 allOf(aMapWithSize(3),
-                      hasEntry(equalTo("required"), notNullValue()),
-                      hasEntry(equalTo("type"), equalTo("object")),
-                      hasEntry(equalTo("properties"), notNullValue())));
+                        hasEntry(equalTo("required"), notNullValue()),
+                        hasEntry(equalTo("type"), equalTo("object")),
+                        hasEntry(equalTo("properties"), notNullValue())));
     }
 
     @RunAsClient
@@ -254,11 +266,11 @@ public class PetStoreAppTest extends AppTestBase {
 
         vr.body(schemaObject,
                 allOf(aMapWithSize(3),
-                      hasEntry(equalTo("required"), notNullValue()),
-                      hasEntry(equalTo("type"), equalTo("object")),
-                      hasEntry(equalTo("properties"), notNullValue())));
+                        hasEntry(equalTo("required"), notNullValue()),
+                        hasEntry(equalTo("type"), equalTo("object")),
+                        hasEntry(equalTo("properties"), notNullValue())));
     }
-    
+
     @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testAPIResponseSchemaDefaultResponseCode(String type) {
@@ -280,15 +292,15 @@ public class PetStoreAppTest extends AppTestBase {
 
         vr.body(arraySchemaObject,
                 allOf(aMapWithSize(2),
-                      hasEntry(equalTo("type"), equalTo("array")),
-                      hasEntry(equalTo("items"), notNullValue())));
+                        hasEntry(equalTo("type"), equalTo("array")),
+                        hasEntry(equalTo("items"), notNullValue())));
 
         String schemaObject = dereference(vr, arraySchemaObject + ".items");
 
         vr.body(schemaObject,
                 allOf(aMapWithSize(3),
-                      hasEntry(equalTo("required"), notNullValue()),
-                      hasEntry(equalTo("type"), equalTo("object")),
-                      hasEntry(equalTo("properties"), notNullValue())));
+                        hasEntry(equalTo("required"), notNullValue()),
+                        hasEntry(equalTo("type"), equalTo("object")),
+                        hasEntry(equalTo("properties"), notNullValue())));
     }
 }

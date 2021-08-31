@@ -12,13 +12,13 @@
  */
 
 /**
- * A set of parameters used by other annotations to represent their enumerable properties.
- * This package contains enums for the following annotations:
+ * A set of parameters used by other annotations to represent their enumerable properties. This package contains enums
+ * for the following annotations:
  * <ul>
- *  <li>Parameter: in and style properties</li>
- *  <li>Schema: type property</li>
- *  <li>SecurityScheme: in and type properties</li>
- *  <li>various annotations that have explode property</li>
+ * <li>Parameter: in and style properties</li>
+ * <li>Schema: type property</li>
+ * <li>SecurityScheme: in and type properties</li>
+ * <li>various annotations that have explode property</li>
  * </ul>
  */
 

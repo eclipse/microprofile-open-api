@@ -13,7 +13,7 @@
 
 package org.eclipse.microprofile.openapi.apps.petstore.model;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "Cat")
 public class Cat extends Pet {

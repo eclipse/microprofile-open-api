@@ -21,8 +21,8 @@ import org.eclipse.microprofile.openapi.models.Constructible;
 import org.eclipse.microprofile.openapi.models.Extensible;
 
 /**
- * This interface represents all the metadata about the API. The metadata may be used by clients if needed, and may be presented in editing or
- * documentation tools.
+ * This interface represents all the metadata about the API. The metadata may be used by clients if needed, and may be
+ * presented in editing or documentation tools.
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#infoObject"
  */
@@ -39,14 +39,16 @@ public interface Info extends Constructible, Extensible<Info> {
     /**
      * Sets this Info instance's title for the application to the given title.
      *
-     * @param title the title of the application
+     * @param title
+     *            the title of the application
      */
     void setTitle(String title);
 
     /**
      * Sets this Info instance's title for the application to the given title and returns this instance of Info
      *
-     * @param title the title of the application
+     * @param title
+     *            the title of the application
      * @return this Info instance
      */
     default Info title(String title) {
@@ -65,14 +67,17 @@ public interface Info extends Constructible, Extensible<Info> {
     /**
      * Sets this Info instance's description for the application to the given description.
      *
-     * @param description a short description for the application
+     * @param description
+     *            a short description for the application
      */
     void setDescription(String description);
 
     /**
-     * Sets this Info instance's description for the application to the given description and returns this instance of Info.
+     * Sets this Info instance's description for the application to the given description and returns this instance of
+     * Info.
      *
-     * @param description a short description for the application
+     * @param description
+     *            a short description for the application
      * @return this Info instance
      */
     default Info description(String description) {
@@ -89,17 +94,20 @@ public interface Info extends Constructible, Extensible<Info> {
     String getTermsOfService();
 
     /**
-     * Sets this Info instance's URL to the Terms of Service for the API to the given String. The URL must be in the format of a URL.
+     * Sets this Info instance's URL to the Terms of Service for the API to the given String. The URL must be in the
+     * format of a URL.
      *
-     * @param termsOfService the URL to the Terms of Service for the API
+     * @param termsOfService
+     *            the URL to the Terms of Service for the API
      */
     void setTermsOfService(String termsOfService);
 
     /**
-     * Sets this Info instance's URL to the Terms of Service for the API to the given String and returns this instance of Info. The URL must be in the
-     * format of a URL.
+     * Sets this Info instance's URL to the Terms of Service for the API to the given String and returns this instance
+     * of Info. The URL must be in the format of a URL.
      *
-     * @param termsOfService the URL to the Terms of Service for the API
+     * @param termsOfService
+     *            the URL to the Terms of Service for the API
      * @return this Info instance
      */
     default Info termsOfService(String termsOfService) {
@@ -118,14 +126,16 @@ public interface Info extends Constructible, Extensible<Info> {
     /**
      * Sets this Info instance's contact information for the exposed API.
      *
-     * @param contact the contact information for the exposed API
+     * @param contact
+     *            the contact information for the exposed API
      */
     void setContact(Contact contact);
 
     /**
      * Sets this Info instance's contact information for the exposed API and returns this instance of Info.
      *
-     * @param contact the contact information for the exposed API
+     * @param contact
+     *            the contact information for the exposed API
      * @return this Info instance
      */
     default Info contact(Contact contact) {
@@ -144,14 +154,16 @@ public interface Info extends Constructible, Extensible<Info> {
     /**
      * Sets this Info's license information for the exposed API.
      *
-     * @param license the license information for the exposed API
+     * @param license
+     *            the license information for the exposed API
      */
     void setLicense(License license);
 
     /**
      * Sets this Info's license information for the exposed API and returns this instance of Info.
      *
-     * @param license the license information for the exposed API
+     * @param license
+     *            the license information for the exposed API
      * @return this Info instance
      */
     default Info license(License license) {
@@ -170,14 +182,17 @@ public interface Info extends Constructible, Extensible<Info> {
     /**
      * Sets the version of the OpenAPI document for this instance of Info to the given version.
      *
-     * @param version the version of the OpenAPI document
+     * @param version
+     *            the version of the OpenAPI document
      */
     void setVersion(String version);
 
     /**
-     * Sets the version of the OpenAPI document for this instance of Info to the given version and returns this instance of Info
+     * Sets the version of the OpenAPI document for this instance of Info to the given version and returns this instance
+     * of Info
      *
-     * @param version the version of the OpenAPI document
+     * @param version
+     *            the version of the OpenAPI document
      * @return this Info instance
      */
     default Info version(String version) {

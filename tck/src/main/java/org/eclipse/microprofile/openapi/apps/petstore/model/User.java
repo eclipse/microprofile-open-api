@@ -17,13 +17,13 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 import org.eclipse.microprofile.openapi.annotations.extensions.Extensions;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "User")
 public class User {
     @Extension(name = "x-mp-field1", value = "true")
-    @Extensions( { @Extension(name = "x-mp-field2", value = "true"), @Extension(value = "false", name = "x-mp-field3") } )
+    @Extensions({@Extension(name = "x-mp-field2", value = "true"), @Extension(value = "false", name = "x-mp-field3")})
     private long id;
     private String username;
     private String firstName;
@@ -97,10 +97,8 @@ public class User {
     }
 
     @XmlElement(name = "userStatus")
-    @Schema(
-        name = "userStatus",
-        title = "User Status"//,
-        //_enum = {"1-registered", "2-active", "3-closed"}
+    @Schema(name = "userStatus", title = "User Status"// ,
+    // _enum = {"1-registered", "2-active", "3-closed"}
     )
     public int getUserStatus() {
         return userStatus;

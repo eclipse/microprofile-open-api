@@ -27,7 +27,8 @@ import org.eclipse.microprofile.openapi.models.links.Link;
 import org.eclipse.microprofile.openapi.models.media.Content;
 
 /**
- * This interface represents a single response from an API Operation, including design-time, static links to operations based on the response.
+ * This interface represents a single response from an API Operation, including design-time, static links to operations
+ * based on the response.
  *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responseObject"
  */
@@ -44,7 +45,8 @@ public interface APIResponse extends Constructible, Extensible<APIResponse>, Ref
     /**
      * Sets the description of this instance of ApiResponse.
      *
-     * @param description a short description of the response
+     * @param description
+     *            a short description of the response
      */
 
     void setDescription(String description);
@@ -52,7 +54,8 @@ public interface APIResponse extends Constructible, Extensible<APIResponse>, Ref
     /**
      * Sets the description of this instance of ApiResponse and returns this ApiResponse instance.
      *
-     * @param description a short description of the response
+     * @param description
+     *            a short description of the response
      * @return this ApiResponse instance
      */
 
@@ -70,19 +73,22 @@ public interface APIResponse extends Constructible, Extensible<APIResponse>, Ref
     Map<String, Header> getHeaders();
 
     /**
-     * Sets the Headers for this instance of ApiResponse with the given map of Headers. The Header names are case insensitive and if a Header is
-     * defined with the name 'Content-Type', then it will be ignored.
+     * Sets the Headers for this instance of ApiResponse with the given map of Headers. The Header names are case
+     * insensitive and if a Header is defined with the name 'Content-Type', then it will be ignored.
      *
-     * @param headers the headers of the response
+     * @param headers
+     *            the headers of the response
      */
 
     void setHeaders(Map<String, Header> headers);
 
     /**
-     * Sets the Headers for this instance of ApiResponse with the given map of Headers and returns this instance of ApiResponse. The Header names are
-     * case insensitive and if a Header is defined with the name 'Content-Type', then it will be ignored.
+     * Sets the Headers for this instance of ApiResponse with the given map of Headers and returns this instance of
+     * ApiResponse. The Header names are case insensitive and if a Header is defined with the name 'Content-Type', then
+     * it will be ignored.
      *
-     * @param headers the headers of the response
+     * @param headers
+     *            the headers of the response
      * @return this ApiResponse instance
      */
 
@@ -92,21 +98,27 @@ public interface APIResponse extends Constructible, Extensible<APIResponse>, Ref
     }
 
     /**
-     * Adds the given Header to this ApiResponse instance's map of Headers with the given name and return this instance of ApiResponse. If this
-     * ApiResponse instance does not have any headers, a new map is created and the given header is added.
+     * Adds the given Header to this ApiResponse instance's map of Headers with the given name and return this instance
+     * of ApiResponse. If this ApiResponse instance does not have any headers, a new map is created and the given header
+     * is added.
      *
-     * @param name the unique name of the header
-     * @param header a header for the response. null values will be rejected (implementation will throw an exception) or ignored.
+     * @param name
+     *            the unique name of the header
+     * @param header
+     *            a header for the response. null values will be rejected (implementation will throw an exception) or
+     *            ignored.
      * @return this ApiResponse instance
      */
 
     APIResponse addHeader(String name, Header header);
 
     /**
-     * Removes the given Header to this ApiResponse instance's map of Headers with the given name and return this instance of ApiResponse. If this
-     * ApiResponse instance does not have any headers, a new map is created and the given header is added.
+     * Removes the given Header to this ApiResponse instance's map of Headers with the given name and return this
+     * instance of ApiResponse. If this ApiResponse instance does not have any headers, a new map is created and the
+     * given header is added.
      *
-     * @param name the unique name of the header
+     * @param name
+     *            the unique name of the header
      */
 
     void removeHeader(String name);
@@ -122,15 +134,18 @@ public interface APIResponse extends Constructible, Extensible<APIResponse>, Ref
     /**
      * Sets the map containing descriptions of potential response payload for this instance of ApiResponse.
      *
-     * @param content the potential content of the response
+     * @param content
+     *            the potential content of the response
      */
 
     void setContent(Content content);
 
     /**
-     * Sets the map containing descriptions of potential response payload for this instance of ApiResponse and returns this ApiResponse instance.
+     * Sets the map containing descriptions of potential response payload for this instance of ApiResponse and returns
+     * this ApiResponse instance.
      *
-     * @param content the potential content of the response
+     * @param content
+     *            the potential content of the response
      * @return this ApiResponse instance
      */
 
@@ -150,7 +165,8 @@ public interface APIResponse extends Constructible, Extensible<APIResponse>, Ref
     /**
      * Sets the operations links that can be followed from this instance of ApiResponse.
      *
-     * @param links the operation links followed from the response
+     * @param links
+     *            the operation links followed from the response
      */
 
     void setLinks(Map<String, Link> links);
@@ -158,7 +174,8 @@ public interface APIResponse extends Constructible, Extensible<APIResponse>, Ref
     /**
      * Sets the operations links that can be followed from this instance of ApiResponse.
      *
-     * @param links the operation links followed from the response
+     * @param links
+     *            the operation links followed from the response
      * @return current APIResponse instance
      */
 
@@ -170,9 +187,11 @@ public interface APIResponse extends Constructible, Extensible<APIResponse>, Ref
     /**
      * Adds a link to this instance of ApiResponse using the given name and Link, and returns this ApiResponse instance.
      *
-     * @param name the short name of the link
-     * @param link the operation link that can be followed from the response. null values will be rejected (implementation will throw an exception)
-     *             or ignored.
+     * @param name
+     *            the short name of the link
+     * @param link
+     *            the operation link that can be followed from the response. null values will be rejected
+     *            (implementation will throw an exception) or ignored.
      * @return this ApiResponse instance
      */
 
@@ -181,9 +200,10 @@ public interface APIResponse extends Constructible, Extensible<APIResponse>, Ref
     /**
      * Removes a link to this instance of ApiResponse using the given name and Link.
      *
-     * @param name the short name of the link
+     * @param name
+     *            the short name of the link
      */
-    
+
     void removeLink(String name);
 
 }

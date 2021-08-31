@@ -27,7 +27,7 @@ import java.lang.annotation.Target;
  * 
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#contactObject"
  **/
-@Target({ })
+@Target({})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface Contact {

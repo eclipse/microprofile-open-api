@@ -17,22 +17,22 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 public class CreditCard {
 
-    @Schema(required = true, example="VISA")
+    @Schema(required = true, example = "VISA")
     private String issuer;
 
-    @Schema(required = true, example="Joe Smith")
+    @Schema(required = true, example = "Joe Smith")
     private String cardholderName;
-    
-    @Schema(required = true, example="**********1234")
+
+    @Schema(required = true, example = "**********1234")
     private String cardNumber;
-    
-    @Schema(required = true, example="0322")
+
+    @Schema(required = true, example = "0322")
     private String cvv;
-    
-    @Schema(required = true, example="04/19")
+
+    @Schema(required = true, example = "04/19")
     private String expiryDate;
 
-    private CreditCard(){
+    private CreditCard() {
     }
 
     public String getIssuer() {

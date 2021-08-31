@@ -25,6 +25,7 @@ import java.lang.annotation.Target;
 /**
  * This object represents a map of security requirements that can be specified for the operation or at definition level.
  * All requirements in a set must be satisfied
+ * 
  * <pre>
  * <b>Example:</b> 
  * security: 
@@ -32,9 +33,11 @@ import java.lang.annotation.Target;
  *    oauth_implicit: []
  * </pre>
  * 
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-requirement-object">SecurityRequirement Object</a>
+ * @see <a href=
+ *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-requirement-object">SecurityRequirement
+ *      Object</a>
  **/
-@Target({ ElementType.METHOD, ElementType.TYPE })
+@Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface SecurityRequirementsSet {

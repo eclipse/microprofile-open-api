@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 package org.eclipse.microprofile.openapi.tck;
 
 import static org.hamcrest.Matchers.hasKey;
@@ -30,14 +30,14 @@ import io.restassured.response.ValidatableResponse;
 
 public class OASConfigScanPackageTest extends AppTestBase {
     private ValidatableResponse vr;
-    
+
     @Deployment(name = "airlines")
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "airlines.war")
                 .addPackages(true, "org.eclipse.microprofile.openapi.apps.airlines")
                 .addAsManifestResource("package-microprofile-config.properties", "microprofile-config.properties");
     }
-    
+
     @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testScanPackage(String type) throws InterruptedException {
@@ -47,6 +47,6 @@ public class OASConfigScanPackageTest extends AppTestBase {
         vr.body("paths", hasKey("/bookings"));
         vr.body("paths", hasKey("/bookings/{id}"));
         vr.body("paths.'/bookings'", aMapWithSize(2));
-        vr.body("paths.'/bookings/{id}'", aMapWithSize(3)); 
+        vr.body("paths.'/bookings/{id}'", aMapWithSize(3));
     }
 }

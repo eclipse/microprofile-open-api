@@ -13,15 +13,15 @@
 
 package org.eclipse.microprofile.openapi.apps.petstore.model;
 
-import org.eclipse.microprofile.openapi.annotations.media.Schema;
-
-import java.util.List;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.List;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementWrapper;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "Pet")
 public class Pet {
@@ -82,10 +82,8 @@ public class Pet {
     }
 
     @XmlElement(name = "status")
-    @Schema(
-        name = "status",
-        title = "pet status in the store"//,
-        //_enum = {"available", "pending", "sold"}
+    @Schema(name = "status", title = "pet status in the store"// ,
+    // _enum = {"available", "pending", "sold"}
     )
     public String getStatus() {
         return status;

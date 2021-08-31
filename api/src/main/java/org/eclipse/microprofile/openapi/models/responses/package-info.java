@@ -12,12 +12,13 @@
  */
 
 /**
- * Model interfaces to describe a single response from an API operation, 
- * and an annotation to encapsulate multiple responses from an API operation.
+ * Model interfaces to describe a single response from an API operation, and an annotation to encapsulate multiple
+ * responses from an API operation.
  * <p>
  * The behaviour of methods inherited from java.lang.Object are undefined by the MicroProfile OpenAPI specification.
  * <p>
  * Example usage:
+ * 
  * <pre>
  *  .GET(OASFactory.createObject(Operation.class)
  *      .summary("Retrieve all bookings for current user")

@@ -23,7 +23,8 @@ import org.eclipse.microprofile.openapi.models.Extensible;
 /**
  * Configuration of the supported OAuthFlows
  *
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#oauthFlowsObject">OAuthFlows Object</a>
+ * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#oauthFlowsObject">OAuthFlows
+ *      Object</a>
  */
 public interface OAuthFlows extends Constructible, Extensible<OAuthFlows> {
 
@@ -37,14 +38,17 @@ public interface OAuthFlows extends Constructible, Extensible<OAuthFlows> {
     /**
      * This method sets the implicit property of OAuthFlows instance to the given implicit argument.
      * 
-     * @param implicit the OauthFlow instance
+     * @param implicit
+     *            the OauthFlow instance
      */
     void setImplicit(OAuthFlow implicit);
 
     /**
-     * This method sets the implicit property of OAuthFlows instance to the given implicit argument and returns the modified instance.
+     * This method sets the implicit property of OAuthFlows instance to the given implicit argument and returns the
+     * modified instance.
      * 
-     * @param implicit the OauthFlow instance
+     * @param implicit
+     *            the OauthFlow instance
      * @return OAuthFlows instance with the set implicit property
      */
     default OAuthFlows implicit(OAuthFlow implicit) {
@@ -56,7 +60,8 @@ public interface OAuthFlows extends Constructible, Extensible<OAuthFlows> {
      * OAuth Resource Owner Password flow
      * <p>
      * This method returns the password property from OAuthFlows instance.
-     * </p> 
+     * </p>
+     * 
      * @return OAuthFlow password
      **/
     OAuthFlow getPassword();
@@ -65,17 +70,22 @@ public interface OAuthFlows extends Constructible, Extensible<OAuthFlows> {
      * OAuth Resource Owner Password flow
      * <p>
      * This method sets the password property of OAuthFlows instance to the given password argument.
-     * </p> 
-     * @param password the OAuthFlow instance
+     * </p>
+     * 
+     * @param password
+     *            the OAuthFlow instance
      */
     void setPassword(OAuthFlow password);
 
     /**
      * OAuth Resource Owner Password flow
      * <p>
-     * This method sets the password property of an OAuthFlows instance to the given password argument and returns the modified instance.
+     * This method sets the password property of an OAuthFlows instance to the given password argument and returns the
+     * modified instance.
      * </p>
-     * @param password the OauthFlow instance
+     * 
+     * @param password
+     *            the OauthFlow instance
      * @return OAuthFlows instance with the set password property
      */
     default OAuthFlows password(OAuthFlow password) {
@@ -88,6 +98,7 @@ public interface OAuthFlows extends Constructible, Extensible<OAuthFlows> {
      * <p>
      * This method returns the clientCredentials property from OAuthFlows instance.
      * </p>
+     * 
      * @return OAuthFlow clientCredentials
      **/
     OAuthFlow getClientCredentials();
@@ -96,18 +107,22 @@ public interface OAuthFlows extends Constructible, Extensible<OAuthFlows> {
      * OAuth Client Credential flow; previously called application in OpenAPI 2.0
      * <p>
      * This method sets the clientCredentials property of OAuthFlows instance to the given clientCredentials argument.
-     * </p> 
-     * @param clientCredentials the OauthFlow instance
+     * </p>
+     * 
+     * @param clientCredentials
+     *            the OauthFlow instance
      */
     void setClientCredentials(OAuthFlow clientCredentials);
 
     /**
      * OAuth Client Credential flow; previously called application in OpenAPI 2.0
      * <p>
-     * This method sets the clientCredentials property of OAuthFlows instance to the given clientCredentials argument and returns the modified
-     * instance.
-     * </p> 
-     * @param clientCredentials the OauthFlow instance
+     * This method sets the clientCredentials property of OAuthFlows instance to the given clientCredentials argument
+     * and returns the modified instance.
+     * </p>
+     * 
+     * @param clientCredentials
+     *            the OauthFlow instance
      * @return OAuthFlows instance with the set clientCredentials property
      */
     default OAuthFlows clientCredentials(OAuthFlow clientCredentials) {
@@ -119,7 +134,8 @@ public interface OAuthFlows extends Constructible, Extensible<OAuthFlows> {
      * OAuth Authorization Code flow; previously called accessCode in OpenAPI 2.0
      * <p>
      * This method returns the authorizationCode property from OAuthFlows instance.
-     * </p> 
+     * </p>
+     * 
      * @return OAuthFlow authorizationCode
      **/
     OAuthFlow getAuthorizationCode();
@@ -129,17 +145,21 @@ public interface OAuthFlows extends Constructible, Extensible<OAuthFlows> {
      * <p>
      * This method sets the authorizationCode property of OAuthFlows instance to the given authorizationCode argument.
      * </p>
-     * @param authorizationCode the OauthFlow instance
+     * 
+     * @param authorizationCode
+     *            the OauthFlow instance
      */
     void setAuthorizationCode(OAuthFlow authorizationCode);
 
     /**
      * OAuth Authorization Code flow; previously called accessCode in OpenAPI 2.0
      * <p>
-     * This method sets the authorizationCode property of OAuthFlows instance to the given authorizationCode argument and returns the modified
-     * instance.
-     * </p> 
-     * @param authorizationCode the OauthFlow instance
+     * This method sets the authorizationCode property of OAuthFlows instance to the given authorizationCode argument
+     * and returns the modified instance.
+     * </p>
+     * 
+     * @param authorizationCode
+     *            the OauthFlow instance
      * @return OAuthFlows instance with the set authorizationCode property
      */
     default OAuthFlows authorizationCode(OAuthFlow authorizationCode) {

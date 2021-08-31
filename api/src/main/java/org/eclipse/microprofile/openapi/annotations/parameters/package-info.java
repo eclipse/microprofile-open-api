@@ -12,10 +12,10 @@
  */
 
 /**
- * A set of annotations to describe and encapsulate operation
- * parameters and operation's request body.
+ * A set of annotations to describe and encapsulate operation parameters and operation's request body.
  * <p>
  * Example usage:
+ * 
  * <pre>
  * {@literal @}Produces("application/json")
  *  public Response getReviewById(

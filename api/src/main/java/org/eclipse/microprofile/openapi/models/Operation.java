@@ -33,8 +33,8 @@ import org.eclipse.microprofile.openapi.models.servers.Server;
  * Describes a single API operation on a path.
  * <p>
  * 
- * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#operationObject">OpenAPI Specification Operation
- *      Object</a>
+ * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#operationObject">OpenAPI
+ *      Specification Operation Object</a>
  */
 public interface Operation extends Constructible, Extensible<Operation> {
 
@@ -48,14 +48,16 @@ public interface Operation extends Constructible, Extensible<Operation> {
     /**
      * Sets this Operation's tags property to the given tags.
      *
-     * @param tags a list of tags for API documentation control
+     * @param tags
+     *            a list of tags for API documentation control
      **/
     void setTags(List<String> tags);
 
     /**
      * Sets this Operation's tags property to the given tags.
      *
-     * @param tags a list of tags for API documentation control
+     * @param tags
+     *            a list of tags for API documentation control
      * @return the current Operation object
      **/
     default Operation tags(List<String> tags) {
@@ -66,7 +68,8 @@ public interface Operation extends Constructible, Extensible<Operation> {
     /**
      * Adds the given tag to this Operation's list of tags.
      *
-     * @param tag a tag for API documentation control
+     * @param tag
+     *            a tag for API documentation control
      * @return the current Operation object
      **/
     Operation addTag(String tag);
@@ -74,7 +77,8 @@ public interface Operation extends Constructible, Extensible<Operation> {
     /**
      * Removes the given tag to this Operation's list of tags.
      *
-     * @param tag a tag for API documentation control
+     * @param tag
+     *            a tag for API documentation control
      **/
     void removeTag(String tag);
 
@@ -88,14 +92,16 @@ public interface Operation extends Constructible, Extensible<Operation> {
     /**
      * Sets this Operation's summary property to the given string.
      *
-     * @param summary a short summary of what the operation does
+     * @param summary
+     *            a short summary of what the operation does
      **/
     void setSummary(String summary);
 
     /**
      * Sets this Operation's summary property to the given string.
      *
-     * @param summary a short summary of what the operation does
+     * @param summary
+     *            a short summary of what the operation does
      * @return the current Operation object
      **/
     default Operation summary(String summary) {
@@ -113,14 +119,16 @@ public interface Operation extends Constructible, Extensible<Operation> {
     /**
      * Sets this Operation's description property to the given string.
      *
-     * @param description a verbose explanation of the operation behavior
+     * @param description
+     *            a verbose explanation of the operation behavior
      **/
     void setDescription(String description);
 
     /**
      * Sets this Operation's description property to the given string.
      *
-     * @param description a verbose explanation of the operation behavior
+     * @param description
+     *            a verbose explanation of the operation behavior
      * @return the current Operation object
      **/
     default Operation description(String description) {
@@ -138,14 +146,16 @@ public interface Operation extends Constructible, Extensible<Operation> {
     /**
      * Sets this Operation's externalDocs property to the given object.
      *
-     * @param externalDocs additional external documentation for this operation
+     * @param externalDocs
+     *            additional external documentation for this operation
      **/
     void setExternalDocs(ExternalDocumentation externalDocs);
 
     /**
      * Sets this Operation's externalDocs property to the given object.
      *
-     * @param externalDocs additional external documentation for this operation
+     * @param externalDocs
+     *            additional external documentation for this operation
      * @return the current Operation object
      **/
     default Operation externalDocs(ExternalDocumentation externalDocs) {
@@ -163,14 +173,16 @@ public interface Operation extends Constructible, Extensible<Operation> {
     /**
      * Sets this Operation's operationId property to the given string.
      *
-     * @param operationId unique string used to identify the operation
+     * @param operationId
+     *            unique string used to identify the operation
      **/
     void setOperationId(String operationId);
 
     /**
      * Sets this Operation's operationId property to the given string.
      *
-     * @param operationId unique string used to identify the operation
+     * @param operationId
+     *            unique string used to identify the operation
      * @return the current Operation object
      **/
     default Operation operationId(String operationId) {
@@ -188,14 +200,16 @@ public interface Operation extends Constructible, Extensible<Operation> {
     /**
      * Sets this Operation's parameters property to the given parameter list.
      *
-     * @param parameters a list of parameters that are applicable for this operation
+     * @param parameters
+     *            a list of parameters that are applicable for this operation
      **/
     void setParameters(List<Parameter> parameters);
 
     /**
      * Sets this Operation's parameters property to the given parameter list.
      *
-     * @param parameters a list of parameters that are applicable for this operation
+     * @param parameters
+     *            a list of parameters that are applicable for this operation
      * @return the current Operation object
      **/
     default Operation parameters(List<Parameter> parameters) {
@@ -206,7 +220,8 @@ public interface Operation extends Constructible, Extensible<Operation> {
     /**
      * Adds the given parameter item to this Operation's list of parameters.
      *
-     * @param parameter a parameter that is applicable for this operation
+     * @param parameter
+     *            a parameter that is applicable for this operation
      * @return the current Operation object
      **/
     Operation addParameter(Parameter parameter);
@@ -214,7 +229,8 @@ public interface Operation extends Constructible, Extensible<Operation> {
     /**
      * Removes the given parameter item to this Operation's list of parameters.
      *
-     * @param parameter a parameter that is applicable for this operation
+     * @param parameter
+     *            a parameter that is applicable for this operation
      **/
     void removeParameter(Parameter parameter);
 
@@ -228,14 +244,16 @@ public interface Operation extends Constructible, Extensible<Operation> {
     /**
      * Sets this Operation's requestBody property to the given object.
      *
-     * @param requestBody the request body applicable for this operation
+     * @param requestBody
+     *            the request body applicable for this operation
      **/
     void setRequestBody(RequestBody requestBody);
 
     /**
      * Sets this Operation's requestBody property to the given object.
      *
-     * @param requestBody the request body applicable for this operation
+     * @param requestBody
+     *            the request body applicable for this operation
      * @return the current Operation object
      **/
     default Operation requestBody(RequestBody requestBody) {
@@ -253,14 +271,16 @@ public interface Operation extends Constructible, Extensible<Operation> {
     /**
      * Sets this Operation's responses property to the given responses.
      *
-     * @param responses collection of possible responses from executing this operation
+     * @param responses
+     *            collection of possible responses from executing this operation
      **/
     void setResponses(APIResponses responses);
 
     /**
      * Sets this Operation's responses property to the given responses.
      *
-     * @param responses collection of possible responses from executing this operation
+     * @param responses
+     *            collection of possible responses from executing this operation
      * @return the current Operation object
      **/
     default Operation responses(APIResponses responses) {
@@ -278,14 +298,18 @@ public interface Operation extends Constructible, Extensible<Operation> {
     /**
      * Sets this Operation's callbacks property to the given map.
      *
-     * @param callbacks map of possible out-of-band callbacks related to the operation. The key value must be the correct format for this field.
+     * @param callbacks
+     *            map of possible out-of-band callbacks related to the operation. The key value must be the correct
+     *            format for this field.
      **/
     void setCallbacks(Map<String, Callback> callbacks);
 
     /**
      * Sets this Operation's callbacks property to the given map.
      *
-     * @param callbacks map of possible out-of-band callbacks related to the operation. The key value must be the correct format for this field.
+     * @param callbacks
+     *            map of possible out-of-band callbacks related to the operation. The key value must be the correct
+     *            format for this field.
      * @return the current Operation object
      **/
     default Operation callbacks(Map<String, Callback> callbacks) {
@@ -296,9 +320,11 @@ public interface Operation extends Constructible, Extensible<Operation> {
     /**
      * Adds the given callback item to this Operation's map of callbacks.
      *
-     * @param key a key conforming to the format required for this object
-     * @param callback a callback that is applicable for this operation. null values will be rejected (implementation will throw an exception) or
-     *                 ignored.
+     * @param key
+     *            a key conforming to the format required for this object
+     * @param callback
+     *            a callback that is applicable for this operation. null values will be rejected (implementation will
+     *            throw an exception) or ignored.
      * @return the current Operation object
      **/
     Operation addCallback(String key, Callback callback);
@@ -306,7 +332,8 @@ public interface Operation extends Constructible, Extensible<Operation> {
     /**
      * Removes the given callback item to this Operation's map of callbacks.
      *
-     * @param key a key conforming to the format required for this object
+     * @param key
+     *            a key conforming to the format required for this object
      **/
     void removeCallback(String key);
 
@@ -320,14 +347,16 @@ public interface Operation extends Constructible, Extensible<Operation> {
     /**
      * Sets this Operation's deprecated property to the given value.
      *
-     * @param deprecated declaration whether this operation is deprecated
+     * @param deprecated
+     *            declaration whether this operation is deprecated
      **/
     void setDeprecated(Boolean deprecated);
 
     /**
      * Sets this Operation's deprecated property to the given value.
      *
-     * @param deprecated declaration whether this operation is deprecated
+     * @param deprecated
+     *            declaration whether this operation is deprecated
      * @return the current Operation object
      **/
     default Operation deprecated(Boolean deprecated) {
@@ -345,14 +374,16 @@ public interface Operation extends Constructible, Extensible<Operation> {
     /**
      * Sets this Operation's security property to the given list.
      *
-     * @param security list of which security mechanisms can be used for this operation
+     * @param security
+     *            list of which security mechanisms can be used for this operation
      **/
     void setSecurity(List<SecurityRequirement> security);
 
     /**
      * Sets this Operation's security property to the given list.
      *
-     * @param security list of which security mechanisms can be used for this operation
+     * @param security
+     *            list of which security mechanisms can be used for this operation
      * @return the current Operation object
      **/
     default Operation security(List<SecurityRequirement> security) {
@@ -363,7 +394,8 @@ public interface Operation extends Constructible, Extensible<Operation> {
     /**
      * Adds the given security requirement item to this Operation's list of security mechanisms.
      *
-     * @param securityRequirement security mechanism which can be used for this operation
+     * @param securityRequirement
+     *            security mechanism which can be used for this operation
      * @return the current Operation object
      **/
     Operation addSecurityRequirement(SecurityRequirement securityRequirement);
@@ -371,7 +403,8 @@ public interface Operation extends Constructible, Extensible<Operation> {
     /**
      * Removes the given security requirement item to this Operation's list of security mechanisms.
      *
-     * @param securityRequirement security mechanism which can be used for this operation
+     * @param securityRequirement
+     *            security mechanism which can be used for this operation
      **/
     void removeSecurityRequirement(SecurityRequirement securityRequirement);
 
@@ -385,14 +418,16 @@ public interface Operation extends Constructible, Extensible<Operation> {
     /**
      * Sets this Operation's servers property to the given list.
      *
-     * @param servers list of servers to service this operation
+     * @param servers
+     *            list of servers to service this operation
      **/
     void setServers(List<Server> servers);
 
     /**
      * Sets this Operation's servers property to the given list.
      *
-     * @param servers list of servers to service this operation
+     * @param servers
+     *            list of servers to service this operation
      * @return the current Operation object
      **/
     default Operation servers(List<Server> servers) {
@@ -403,7 +438,8 @@ public interface Operation extends Constructible, Extensible<Operation> {
     /**
      * Adds the given server to this Operation's list of servers.
      *
-     * @param server server which can service this operation
+     * @param server
+     *            server which can service this operation
      * @return the current Operation object
      **/
     Operation addServer(Server server);
@@ -411,7 +447,8 @@ public interface Operation extends Constructible, Extensible<Operation> {
     /**
      * Removes the given server to this Operation's list of servers.
      *
-     * @param server server which can service this operation
+     * @param server
+     *            server which can service this operation
      **/
     void removeServer(Server server);
 

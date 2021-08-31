@@ -27,7 +27,7 @@ import io.restassured.response.ValidatableResponse;
 
 public class OASConfigServersTest extends AppTestBase {
     private ValidatableResponse vr;
-    
+
     @Deployment(name = "airlines")
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "airlines.war")
@@ -39,22 +39,23 @@ public class OASConfigServersTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testServer(String type) throws InterruptedException {
         vr = callEndpoint(type);
-        
+
         vr.body("servers.findAll { it }.url", hasSize(2));
         vr.body("servers.findAll { it }.url", containsInAnyOrder("https://xyz.com/v1", "https://abc.com/v1"));
-        
+
         vr.body("paths.'/bookings/{id}'.servers.findAll { it }.url", hasSize(2));
-        vr.body("paths.'/bookings/{id}'.servers.findAll { it }.url", containsInAnyOrder("https://xyz.io/v1", "https://xyz.io/v2"));
-        
+        vr.body("paths.'/bookings/{id}'.servers.findAll { it }.url",
+                containsInAnyOrder("https://xyz.io/v1", "https://xyz.io/v2"));
+
         vr.body("paths.'/user/createWithArray'.servers.findAll { it }.url", hasSize(1));
         vr.body("paths.'/user/createWithArray'.servers.findAll { it }.url", contains("https://xyz.io/v3"));
-        
+
         vr.body("paths.'/bookings/{id}'.get.servers.findAll { it }.url", hasSize(1));
         vr.body("paths.'/bookings/{id}'.get.servers.findAll { it }.url", contains("https://abc.io/v1"));
-        
+
         vr.body("paths.'/reviews'.post.servers.findAll { it }.url", hasSize(2));
-        vr.body("paths.'/reviews'.post.servers.findAll { it }.url", 
-                containsInAnyOrder("https://newreviewserver.io/v1","https://newreviewserver.io/v2"));
-        
+        vr.body("paths.'/reviews'.post.servers.findAll { it }.url",
+                containsInAnyOrder("https://newreviewserver.io/v1", "https://newreviewserver.io/v2"));
+
     }
 }

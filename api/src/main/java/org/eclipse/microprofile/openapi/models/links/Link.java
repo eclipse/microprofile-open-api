@@ -27,18 +27,20 @@ import org.eclipse.microprofile.openapi.models.servers.Server;
 /**
  * Link
  * <p>
- * The Link object represents a possible design-time link for a response. The presence of a link does not guarantee the caller's ability to
- * successfully invoke it, rather it provides a known relationship and traversal mechanism between responses and other operations.
+ * The Link object represents a possible design-time link for a response. The presence of a link does not guarantee the
+ * caller's ability to successfully invoke it, rather it provides a known relationship and traversal mechanism between
+ * responses and other operations.
  * <p>
- * For computing links, and providing instructions to execute them, a runtime expression is used for accessing values in an operation and using them
- * as parameters while invoking the linked operation.
+ * For computing links, and providing instructions to execute them, a runtime expression is used for accessing values in
+ * an operation and using them as parameters while invoking the linked operation.
  * <p>
- * A linked operation MUST be identified using either an operationRef or operationId. In the case of an operationId, it MUST be unique and resolved in
- * the scope of the OAS document. Because of the potential for name clashes, the operationRef syntax is preferred for specifications with external
- * references.
+ * A linked operation MUST be identified using either an operationRef or operationId. In the case of an operationId, it
+ * MUST be unique and resolved in the scope of the OAS document. Because of the potential for name clashes, the
+ * operationRef syntax is preferred for specifications with external references.
  * <p>
  * 
- * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#linkObject"> OpenAPI Specification Link Object</a>
+ * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#linkObject"> OpenAPI
+ *      Specification Link Object</a>
  */
 public interface Link extends Constructible, Extensible<Link>, Reference<Link> {
 
@@ -52,14 +54,16 @@ public interface Link extends Constructible, Extensible<Link>, Reference<Link> {
     /**
      * Sets this Link's server property to the given object.
      *
-     * @param server a server object to be used by the target operation
+     * @param server
+     *            a server object to be used by the target operation
      */
     void setServer(Server server);
 
     /**
      * Sets this Link's server property to the given object.
      *
-     * @param server a server object to be used by the target operation
+     * @param server
+     *            a server object to be used by the target operation
      * @return the current Link instance
      */
     default Link server(Server server) {
@@ -75,16 +79,20 @@ public interface Link extends Constructible, Extensible<Link>, Reference<Link> {
     String getOperationRef();
 
     /**
-     * Sets this Link's operationRef property to the given string. This field is mutually exclusive of the operationId field.
+     * Sets this Link's operationRef property to the given string. This field is mutually exclusive of the operationId
+     * field.
      *
-     * @param operationRef a relative or absolute reference to an OAS operation
+     * @param operationRef
+     *            a relative or absolute reference to an OAS operation
      */
     void setOperationRef(String operationRef);
 
     /**
-     * Sets this Link's operationRef property to the given string. This field is mutually exclusive of the operationId field.
+     * Sets this Link's operationRef property to the given string. This field is mutually exclusive of the operationId
+     * field.
      *
-     * @param operationRef a relative or absolute reference to an OAS operation
+     * @param operationRef
+     *            a relative or absolute reference to an OAS operation
      * @return the current Link instance
      */
     default Link operationRef(String operationRef) {
@@ -102,14 +110,16 @@ public interface Link extends Constructible, Extensible<Link>, Reference<Link> {
     /**
      * Sets this Link's requestBody property to the given object.
      *
-     * @param requestBody a literal value or runtime expression to use as a request body when calling the target operation
+     * @param requestBody
+     *            a literal value or runtime expression to use as a request body when calling the target operation
      */
     void setRequestBody(Object requestBody);
 
     /**
      * Sets this Link's requestBody property to the given object.
      *
-     * @param requestBody a literal value or runtime expression to use as a request body when calling the target operation
+     * @param requestBody
+     *            a literal value or runtime expression to use as a request body when calling the target operation
      * @return the current Link instance
      */
     default Link requestBody(Object requestBody) {
@@ -125,16 +135,20 @@ public interface Link extends Constructible, Extensible<Link>, Reference<Link> {
     String getOperationId();
 
     /**
-     * Sets this Link's operationId property to the given string. This field is mutually exclusive of the operationRef field.
+     * Sets this Link's operationId property to the given string. This field is mutually exclusive of the operationRef
+     * field.
      *
-     * @param operationId the name of an existing, resolvable OAS operation
+     * @param operationId
+     *            the name of an existing, resolvable OAS operation
      */
     void setOperationId(String operationId);
 
     /**
-     * Sets this Link's operationId property to the given string. This field is mutually exclusive of the operationRef field.
+     * Sets this Link's operationId property to the given string. This field is mutually exclusive of the operationRef
+     * field.
      *
-     * @param operationId the name of an existing, resolvable OAS operation
+     * @param operationId
+     *            the name of an existing, resolvable OAS operation
      * @return the current Link instance
      */
     default Link operationId(String operationId) {
@@ -143,8 +157,8 @@ public interface Link extends Constructible, Extensible<Link>, Reference<Link> {
     }
 
     /**
-     * Returns the parameters property from this instance of Link. The key is the parameter name and the value is a constant or a runtime expression
-     * to be passed to the linked operation.
+     * Returns the parameters property from this instance of Link. The key is the parameter name and the value is a
+     * constant or a runtime expression to be passed to the linked operation.
      *
      * @return a copy Map (potentially immutable) representing parameters to pass to this link's operation
      **/
@@ -153,14 +167,18 @@ public interface Link extends Constructible, Extensible<Link>, Reference<Link> {
     /**
      * Sets this Link's parameters property to the given map.
      *
-     * @param parameters a map representing parameters to pass to this link's operation as specified with operationId or identified via operationRef
+     * @param parameters
+     *            a map representing parameters to pass to this link's operation as specified with operationId or
+     *            identified via operationRef
      */
     void setParameters(Map<String, Object> parameters);
 
     /**
      * Sets this Link's parameters property to the given map and returns the modified Link instance.
      *
-     * @param parameters a map representing parameters to pass to this link's operation as specified with operationId or identified via operationRef
+     * @param parameters
+     *            a map representing parameters to pass to this link's operation as specified with operationId or
+     *            identified via operationRef
      * @return current link instance
      */
     default Link parameters(Map<String, Object> parameters) {
@@ -171,10 +189,12 @@ public interface Link extends Constructible, Extensible<Link>, Reference<Link> {
     /**
      * Add a new parameter to the parameters property of this instance of Link.
      *
-     * @param name The name of the parameter. Can be qualified using the parameter location [{in}.]{name} for operations that use the same parameter
-     *            name in different locations (e.g. path.id).
-     * @param parameter a constant or an expression to be evaluated at runtime and passed to the linked operation. null values will be rejected
-     *                  (implementation will throw an exception) or ignored.
+     * @param name
+     *            The name of the parameter. Can be qualified using the parameter location [{in}.]{name} for operations
+     *            that use the same parameter name in different locations (e.g. path.id).
+     * @param parameter
+     *            a constant or an expression to be evaluated at runtime and passed to the linked operation. null values
+     *            will be rejected (implementation will throw an exception) or ignored.
      * @return the current Link instance
      */
     Link addParameter(String name, Object parameter);
@@ -182,8 +202,9 @@ public interface Link extends Constructible, Extensible<Link>, Reference<Link> {
     /**
      * Remove a new parameter to the parameters property of this instance of Link.
      *
-     * @param name The name of the parameter. Can be qualified using the parameter location [{in}.]{name} for operations that use the same parameter
-     *            name in different locations (e.g. path.id).
+     * @param name
+     *            The name of the parameter. Can be qualified using the parameter location [{in}.]{name} for operations
+     *            that use the same parameter name in different locations (e.g. path.id).
      */
     void removeParameter(String name);
 
@@ -197,14 +218,16 @@ public interface Link extends Constructible, Extensible<Link>, Reference<Link> {
     /**
      * Sets this Link's description property to the given string.
      *
-     * @param description a description of the link
+     * @param description
+     *            a description of the link
      **/
     void setDescription(String description);
 
     /**
      * Sets this Link's description property to the given string.
      *
-     * @param description a description of the link
+     * @param description
+     *            a description of the link
      * @return the current Link instance
      */
     default Link description(String description) {

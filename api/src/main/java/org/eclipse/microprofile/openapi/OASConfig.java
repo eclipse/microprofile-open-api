@@ -20,7 +20,8 @@ package org.eclipse.microprofile.openapi;
  */
 public final class OASConfig {
 
-    private OASConfig(){}
+    private OASConfig() {
+    }
 
     /**
      * Configuration property to specify the fully qualified name of the OASModelReader implementation.
@@ -53,13 +54,13 @@ public final class OASConfig {
      * 
      */
     public static final String SCAN_CLASSES = "mp.openapi.scan.classes";
-    
+
     /**
      * Configuration property to specify the list of packages to exclude from scans.
      * 
      */
     public static final String SCAN_EXCLUDE_PACKAGES = "mp.openapi.scan.exclude.packages";
-    
+
     /**
      * Configuration property to specify the list of classes to exclude from scans.
      * 
@@ -73,7 +74,8 @@ public final class OASConfig {
     public static final String SERVERS = "mp.openapi.servers";
 
     /**
-     * Prefix of the configuration property to specify an alternative list of servers to service all operations in a path.
+     * Prefix of the configuration property to specify an alternative list of servers to service all operations in a
+     * path.
      * 
      */
     public static final String SERVERS_PATH_PREFIX = "mp.openapi.servers.path.";

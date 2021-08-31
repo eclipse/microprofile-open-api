@@ -139,7 +139,8 @@ public class ModelReaderAppTest extends AppTestBase {
         vr.body("paths.'/modelReader/bookings'.get.operationId", equalTo("getAllBookings"));
 
         vr.body("paths.'/modelReader/bookings'.post.summary", equalTo("Create a booking"));
-        vr.body("paths.'/modelReader/bookings'.post.description", equalTo("Create a new booking record with the booking information provided."));
+        vr.body("paths.'/modelReader/bookings'.post.description",
+                equalTo("Create a new booking record with the booking information provided."));
         vr.body("paths.'/modelReader/bookings'.post.operationId", equalTo("createBooking"));
     }
 
@@ -162,15 +163,16 @@ public class ModelReaderAppTest extends AppTestBase {
         vr.body(availabilityParameters, hasSize(6));
         vr.body(availabilityParameters + ".findAll { it }.name",
                 hasItems("airportFrom", "returningDate", "airportTo", "numberOfAdults", "numberOfChildren"));
-        
-        vr.body(availabilityParameters + ".findAll { it.$ref == '#/components/parameters/departureDate'}", notNullValue());
+
+        vr.body(availabilityParameters + ".findAll { it.$ref == '#/components/parameters/departureDate'}",
+                notNullValue());
 
         List<String[]> list = new ArrayList<String[]>();
-        list.add(new String[] { "airportFrom", "Airport the customer departs from" });
-        list.add(new String[] { "returningDate", "Customer return date" });
-        list.add(new String[] { "airportTo", "Airport the customer returns to" });
-        list.add(new String[] { "numberOfAdults", "Number of adults on the flight" });
-        list.add(new String[] { "numberOfChildren", "Number of children on the flight" });
+        list.add(new String[]{"airportFrom", "Airport the customer departs from"});
+        list.add(new String[]{"returningDate", "Customer return date"});
+        list.add(new String[]{"airportTo", "Airport the customer returns to"});
+        list.add(new String[]{"numberOfAdults", "Number of adults on the flight"});
+        list.add(new String[]{"numberOfChildren", "Number of children on the flight"});
 
         for (int i = 0; i < list.size(); i++) {
             String currentParam = list.get(i)[0];
@@ -182,8 +184,10 @@ public class ModelReaderAppTest extends AppTestBase {
             vr.body(query + ".schema.type", both(hasSize(1)).and(contains("string")));
         }
 
-        vr.body(availabilityParameters + ".findAll { it.name == 'numberOfAdults' }.schema.minimum", both(hasSize(1)).and(contains(0)));
-        vr.body(availabilityParameters + ".findAll { it.name == 'numberOfChildren' }.schema.minimum", both(hasSize(1)).and(contains(0)));
+        vr.body(availabilityParameters + ".findAll { it.name == 'numberOfAdults' }.schema.minimum",
+                both(hasSize(1)).and(contains(0)));
+        vr.body(availabilityParameters + ".findAll { it.name == 'numberOfChildren' }.schema.minimum",
+                both(hasSize(1)).and(contains(0)));
     }
 
     @RunAsClient
@@ -222,9 +226,11 @@ public class ModelReaderAppTest extends AppTestBase {
         // Basic properties
         vr.body("components.schemas.AirlinesRef.$ref", equalTo("#/components/schemas/Airlines"));
         vr.body("components.schemas.Airlines.title", equalTo("Airlines"));
-        vr.body("paths.'/modelReader/bookings'.post.responses.'201'.content.'text/plain'.schema.type", equalTo("string"));
+        vr.body("paths.'/modelReader/bookings'.post.responses.'201'.content.'text/plain'.schema.type",
+                equalTo("string"));
         vr.body("components.schemas.id.format", equalTo("int32"));
-        vr.body("paths.'/modelReader/bookings'.post.responses.'201'.content.'text/plain'.schema.description", equalTo("id of the new booking"));
+        vr.body("paths.'/modelReader/bookings'.post.responses.'201'.content.'text/plain'.schema.description",
+                equalTo("id of the new booking"));
     }
 
     @RunAsClient
@@ -248,7 +254,8 @@ public class ModelReaderAppTest extends AppTestBase {
         vr.body(tagsPath + "Airlines" + desc, equalTo("All the airlines methods"));
         vr.body(tagsPath + "Availability" + desc, equalTo("All the availability methods"));
         vr.body(tagsPath + "Get Flights" + desc, equalTo("method to retrieve all flights available"));
-        vr.body(tagsPath + "Get Flights" + "' }.externalDocs.description", equalTo("A list of all the flights offered by the app"));
+        vr.body(tagsPath + "Get Flights" + "' }.externalDocs.description",
+                equalTo("A list of all the flights offered by the app"));
         vr.body(tagsPath + "Get Flights" + "' }.externalDocs.url", equalTo("http://airlinesratingapp.com/ourflights"));
         vr.body(tagsPath + "Bookings" + desc, equalTo("All the bookings methods"));
         vr.body(tagsPath + "Get Airlines" + desc, equalTo("method to get all airlines"));

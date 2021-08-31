@@ -25,38 +25,45 @@ import org.eclipse.microprofile.openapi.models.Constructible;
 /**
  * SecurityRequirement
  *
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-requirement-object">SecurityRequirement Object</a>
+ * @see <a href=
+ *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-requirement-object">SecurityRequirement
+ *      Object</a>
  */
 public interface SecurityRequirement extends Constructible {
 
     /**
-     * Adds a security scheme to the SecurityRequirement instance based on the scheme name and 
-     * required scope (optional) provided.
+     * Adds a security scheme to the SecurityRequirement instance based on the scheme name and required scope (optional)
+     * provided.
      * 
-     * @param securitySchemeName the name of security scheme declared in the Components section of the OpenAPI document
-     * @param scope a required scope - only valid when the defined scheme's type is 'oauth2' or 'openIdConnect'. passing null will
-     *              result in an empty list of scopes
+     * @param securitySchemeName
+     *            the name of security scheme declared in the Components section of the OpenAPI document
+     * @param scope
+     *            a required scope - only valid when the defined scheme's type is 'oauth2' or 'openIdConnect'. passing
+     *            null will result in an empty list of scopes
      * @return Updated SecurityRequirement instance
      */
     SecurityRequirement addScheme(String securitySchemeName, String scope);
 
     /**
-     * Adds a security scheme to the SecurityRequirement instance based on the scheme name and 
-     * required scopes (optional) provided.
+     * Adds a security scheme to the SecurityRequirement instance based on the scheme name and required scopes
+     * (optional) provided.
      * 
-     * @param securitySchemeName the name of security scheme declared in the Components section of the OpenAPI document
-     * @param scopes the scopes required - only valid when the defined scheme is 'oauth2' or 'openIdConnect'. passing null
-     *               will result in an empty list of scopes
+     * @param securitySchemeName
+     *            the name of security scheme declared in the Components section of the OpenAPI document
+     * @param scopes
+     *            the scopes required - only valid when the defined scheme is 'oauth2' or 'openIdConnect'. passing null
+     *            will result in an empty list of scopes
      * @return Updated SecurityRequirement instance
      */
     SecurityRequirement addScheme(String securitySchemeName, List<String> scopes);
 
     /**
-     * Adds a security scheme to the SecurityRequirement instance based on the scheme name.  No 
-     * scopes are included, resulting in an empty list of scopes for the security scheme.  This
-     * is valid when the defined security scheme is not 'oauth2' or 'openIdConnect'.
+     * Adds a security scheme to the SecurityRequirement instance based on the scheme name. No scopes are included,
+     * resulting in an empty list of scopes for the security scheme. This is valid when the defined security scheme is
+     * not 'oauth2' or 'openIdConnect'.
      * 
-     * @param securitySchemeName the name of security scheme declared in the Components section of the OpenAPI document
+     * @param securitySchemeName
+     *            the name of security scheme declared in the Components section of the OpenAPI document
      * @return Updated SecurityRequirement instance
      */
     SecurityRequirement addScheme(String securitySchemeName);
@@ -64,7 +71,8 @@ public interface SecurityRequirement extends Constructible {
     /**
      * Removes a security scheme to the SecurityRequirement instance based on the scheme name.
      * 
-     * @param securitySchemeName the name of security scheme
+     * @param securitySchemeName
+     *            the name of security scheme
      */
     void removeScheme(String securitySchemeName);
 
@@ -76,17 +84,21 @@ public interface SecurityRequirement extends Constructible {
     Map<String, List<String>> getSchemes();
 
     /**
-     * Set all security schemes to the SecurityRequirement instance. Keys are the name of security scheme declared in the Components 
-     * section of the OpenAPI document, values are a list of required scope - only valid when the defined scheme is 'oauth2' or 'openIdConnect'
+     * Set all security schemes to the SecurityRequirement instance. Keys are the name of security scheme declared in
+     * the Components section of the OpenAPI document, values are a list of required scope - only valid when the defined
+     * scheme is 'oauth2' or 'openIdConnect'
      * 
-     * @param items a map containing the security schemes.
+     * @param items
+     *            a map containing the security schemes.
      */
     void setSchemes(Map<String, List<String>> items);
 
     /**
-     * Check whether a scheme is present in the map. This is a convenience method for <code>getSchemes().containsKey(name)</code>
+     * Check whether a scheme is present in the map. This is a convenience method for
+     * <code>getSchemes().containsKey(name)</code>
      * 
-     * @param securitySchemeName the name of security scheme
+     * @param securitySchemeName
+     *            the name of security scheme
      * @return a boolean to indicate if the scheme is present or not.
      */
     default boolean hasScheme(String securitySchemeName) {
@@ -98,9 +110,11 @@ public interface SecurityRequirement extends Constructible {
     }
 
     /**
-     * Returns a list of scopes for a given scheme name. This is a convenience method for <code>getSchemes().get(name)</code>
+     * Returns a list of scopes for a given scheme name. This is a convenience method for
+     * <code>getSchemes().get(name)</code>
      * 
-     * @param securitySchemeName the name of security scheme
+     * @param securitySchemeName
+     *            the name of security scheme
      * @return a list of scopes or null.
      */
     default List<String> getScheme(String securitySchemeName) {

@@ -23,8 +23,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This object represents an array of security requirements that can be specified for the operation or at definition level.
- * Only one of requirements needs be satisfied
+ * This object represents an array of security requirements that can be specified for the operation or at definition
+ * level. Only one of requirements needs be satisfied
+ * 
  * <pre>
  * <b>Example:</b> 
  * security: 
@@ -32,9 +33,11 @@ import java.lang.annotation.Target;
  *   - api_secret: []
  * </pre>
  * 
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-requirement-object">SecurityRequirement Object</a>
+ * @see <a href=
+ *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-requirement-object">SecurityRequirement
+ *      Object</a>
  **/
-@Target({ ElementType.METHOD, ElementType.TYPE })
+@Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface SecurityRequirements {

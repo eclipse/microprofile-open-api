@@ -25,7 +25,7 @@ import java.lang.annotation.Target;
 /**
  * This object represents an array of extensions that can be added to the element.
  **/
-@Target({ ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.TYPE })
+@Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface Extensions {

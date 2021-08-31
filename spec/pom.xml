@@ -20,98 +20,12 @@
         <!-- This is just for now and will not work if the API has a separate release cycle than the rest. -->
         <groupId>org.eclipse.microprofile.openapi</groupId>
         <artifactId>microprofile-openapi-parent</artifactId>
-        <version>2.1-SNAPSHOT</version>
+        <version>3.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>microprofile-openapi-spec</artifactId>
     <packaging>pom</packaging>
     <name>MicroProfile OpenAPI Specification</name>
     <description>MicroProfile OpenAPI :: Specification</description>
-
-    <properties>
-        <maven.build.timestamp.format>MMMM dd, yyyy</maven.build.timestamp.format>
-        <revisiondate>${maven.build.timestamp}</revisiondate>
-        <spec.pdf>${project.build.directory}/generated-docs/${project.build.finalName}.pdf</spec.pdf>
-        <spec.html>${project.build.directory}/generated-docs/${project.build.finalName}.html</spec.html>
-    </properties>
-
-    <build>
-        <defaultGoal>clean package</defaultGoal>
-        <plugins>
-            <plugin>
-                <groupId>org.asciidoctor</groupId>
-                <artifactId>asciidoctor-maven-plugin</artifactId>
-                <version>${asciidoctor-maven.version}</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.asciidoctor</groupId>
-                        <artifactId>asciidoctorj-pdf</artifactId>
-                        <version>${asciidoctorj-pdf.version}</version>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <execution>
-                        <id>generate-pdf-doc</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>process-asciidoc</goal>
-                        </goals>
-                        <configuration>
-                            <outputFile>${spec.pdf}</outputFile>
-                            <backend>pdf</backend>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>output-html</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>process-asciidoc</goal>
-                        </goals>
-                        <configuration>
-                            <outputFile>${spec.html}</outputFile>
-                            <backend>html5</backend>
-                        </configuration>
-                    </execution>
-                </executions>
-                <configuration>
-                    <sourceDocumentName>microprofile-openapi-spec.adoc</sourceDocumentName>
-                    <sourceHighlighter>coderay</sourceHighlighter>
-                    <attributes>
-                        <revnumber>${project.version}</revnumber>
-                        <revremark>${revremark}</revremark>
-                        <revdate>${revisiondate}</revdate>
-                        <currentYear>${currentYear}</currentYear>
-                        <inceptionYear>${inceptionYear}</inceptionYear>
-                    </attributes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>attach-artifacts</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>attach-artifact</goal>
-                        </goals>
-                        <configuration>
-                            <artifacts>
-                                <artifact>
-                                    <file>${spec.pdf}</file>
-                                    <type>pdf</type>
-                                </artifact>
-                                <artifact>
-                                    <file>${spec.html}</file>
-                                    <type>html</type>
-                                </artifact>
-                            </artifacts>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-
 
 </project>

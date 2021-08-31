@@ -29,7 +29,8 @@ import org.eclipse.microprofile.openapi.models.tags.Tag;
  * <p>
  * This is the root document object of the OpenAPI document. It contains required and optional fields.
  * 
- * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#openapi-object">OpenAPI Specification OpenAPI Object</a>
+ * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#openapi-object">OpenAPI
+ *      Specification OpenAPI Object</a>
  */
 public interface OpenAPI extends Constructible, Extensible<OpenAPI> {
 
@@ -43,14 +44,16 @@ public interface OpenAPI extends Constructible, Extensible<OpenAPI> {
     /**
      * Sets this OpenAPI instance's openapi property to the given string.
      *
-     * @param openapi the semantic version number of the OpenAPI Specification version that the OpenAPI document uses
+     * @param openapi
+     *            the semantic version number of the OpenAPI Specification version that the OpenAPI document uses
      */
     void setOpenapi(String openapi);
 
     /**
      * Sets this OpenAPI instance's openapi property to the given string.
      *
-     * @param openapi the semantic version number of the OpenAPI Specification version that the OpenAPI document uses
+     * @param openapi
+     *            the semantic version number of the OpenAPI Specification version that the OpenAPI document uses
      * @return the current OpenAPI object
      */
     default OpenAPI openapi(String openapi) {
@@ -68,14 +71,16 @@ public interface OpenAPI extends Constructible, Extensible<OpenAPI> {
     /**
      * Sets this OpenAPI instance's info property to the given object.
      *
-     * @param info metadata about the API
+     * @param info
+     *            metadata about the API
      */
     void setInfo(Info info);
 
     /**
      * Sets this OpenAPI instance's info property to the given object.
      *
-     * @param info metadata about the API
+     * @param info
+     *            metadata about the API
      * @return the current OpenAPI object
      */
     default OpenAPI info(Info info) {
@@ -93,14 +98,16 @@ public interface OpenAPI extends Constructible, Extensible<OpenAPI> {
     /**
      * Sets this OpenAPI instance's externalDocs property to the given object.
      *
-     * @param externalDocs additional external documentation.
+     * @param externalDocs
+     *            additional external documentation.
      */
     void setExternalDocs(ExternalDocumentation externalDocs);
 
     /**
      * Sets this OpenAPI instance's externalDocs property to the given object.
      *
-     * @param externalDocs additional external documentation
+     * @param externalDocs
+     *            additional external documentation
      * @return the current OpenAPI object
      */
     default OpenAPI externalDocs(ExternalDocumentation externalDocs) {
@@ -111,21 +118,24 @@ public interface OpenAPI extends Constructible, Extensible<OpenAPI> {
     /**
      * Returns the Servers defined in the API
      *
-     * @return a copy List (potentially immutable) of Server objects which provide connectivity information to target servers
+     * @return a copy List (potentially immutable) of Server objects which provide connectivity information to target
+     *         servers
      **/
     List<Server> getServers();
 
     /**
      * Sets this OpenAPI instance's servers property to the given servers.
      *
-     * @param servers Server objects which provide connectivity information to target servers
+     * @param servers
+     *            Server objects which provide connectivity information to target servers
      */
     void setServers(List<Server> servers);
 
     /**
      * Sets this OpenAPI instance's servers property to the given servers.
      *
-     * @param servers Server objects which provide connectivity information to target servers
+     * @param servers
+     *            Server objects which provide connectivity information to target servers
      * @return the current OpenAPI object
      */
     default OpenAPI servers(List<Server> servers) {
@@ -136,7 +146,8 @@ public interface OpenAPI extends Constructible, Extensible<OpenAPI> {
     /**
      * Adds the given server to this OpenAPI instance's list of servers.
      *
-     * @param server Server object which provides connectivity information to a target server
+     * @param server
+     *            Server object which provides connectivity information to a target server
      * @return the current OpenAPI object
      */
     OpenAPI addServer(Server server);
@@ -144,7 +155,8 @@ public interface OpenAPI extends Constructible, Extensible<OpenAPI> {
     /**
      * Removes the given server to this OpenAPI instance's list of servers.
      *
-     * @param server Server object which provides connectivity information to a target server
+     * @param server
+     *            Server object which provides connectivity information to a target server
      */
     void removeServer(Server server);
 
@@ -158,14 +170,16 @@ public interface OpenAPI extends Constructible, Extensible<OpenAPI> {
     /**
      * Sets this OpenAPI instance's security property to the given list.
      *
-     * @param security which security mechanisms can be used across the API
+     * @param security
+     *            which security mechanisms can be used across the API
      */
     void setSecurity(List<SecurityRequirement> security);
 
     /**
      * Sets this OpenAPI instance's security property to the given list.
      *
-     * @param security which security mechanisms can be used across the API
+     * @param security
+     *            which security mechanisms can be used across the API
      * @return the current OpenAPI object
      */
     default OpenAPI security(List<SecurityRequirement> security) {
@@ -176,7 +190,8 @@ public interface OpenAPI extends Constructible, Extensible<OpenAPI> {
     /**
      * Adds the given security requirement to this OpenAPI instance's list of security requirements.
      *
-     * @param securityRequirement security mechanism which can be used across the API
+     * @param securityRequirement
+     *            security mechanism which can be used across the API
      * @return the current OpenAPI object
      */
     OpenAPI addSecurityRequirement(SecurityRequirement securityRequirement);
@@ -184,7 +199,8 @@ public interface OpenAPI extends Constructible, Extensible<OpenAPI> {
     /**
      * Removes the given security requirement to this OpenAPI instance's list of security requirements.
      *
-     * @param securityRequirement security mechanism which can be used across the API
+     * @param securityRequirement
+     *            security mechanism which can be used across the API
      */
     void removeSecurityRequirement(SecurityRequirement securityRequirement);
 
@@ -199,14 +215,16 @@ public interface OpenAPI extends Constructible, Extensible<OpenAPI> {
     /**
      * Sets this OpenAPI instance's tags property to the given Tags.
      *
-     * @param tags tags used by the specification with additional metadata
+     * @param tags
+     *            tags used by the specification with additional metadata
      */
     void setTags(List<Tag> tags);
 
     /**
      * Sets this OpenAPI instance's tags property to the given tags.
      *
-     * @param tags tags used by the specification with additional metadata
+     * @param tags
+     *            tags used by the specification with additional metadata
      * @return the current OpenAPI object
      */
     default OpenAPI tags(List<Tag> tags) {
@@ -217,7 +235,8 @@ public interface OpenAPI extends Constructible, Extensible<OpenAPI> {
     /**
      * Adds the given tag to this OpenAPI instance's list of tags.
      *
-     * @param tag a tag used by the specification with additional metadata
+     * @param tag
+     *            a tag used by the specification with additional metadata
      * @return the current OpenAPI object
      */
     OpenAPI addTag(Tag tag);
@@ -225,7 +244,8 @@ public interface OpenAPI extends Constructible, Extensible<OpenAPI> {
     /**
      * Removes the given tag to this OpenAPI instance's list of tags.
      *
-     * @param tag a tag used by the specification with additional metadata
+     * @param tag
+     *            a tag used by the specification with additional metadata
      */
     void removeTag(Tag tag);
 
@@ -239,14 +259,16 @@ public interface OpenAPI extends Constructible, Extensible<OpenAPI> {
     /**
      * Sets this OpenAPI instance's paths property to the given paths.
      *
-     * @param paths the available paths and operations for the API
+     * @param paths
+     *            the available paths and operations for the API
      */
     void setPaths(Paths paths);
 
     /**
      * Sets this OpenAPI instance's paths property to the given paths.
      *
-     * @param paths the available paths and operations for the API
+     * @param paths
+     *            the available paths and operations for the API
      * @return the current OpenAPI object
      */
     default OpenAPI paths(Paths paths) {
@@ -264,14 +286,16 @@ public interface OpenAPI extends Constructible, Extensible<OpenAPI> {
     /**
      * Sets this OpenAPI instance's components property to the given components.
      *
-     * @param components a set of reusable objects used in the API specification
+     * @param components
+     *            a set of reusable objects used in the API specification
      */
     void setComponents(Components components);
 
     /**
      * Sets this OpenAPI instance's components property to the given components.
      *
-     * @param components a set of reusable objects used in the API specification
+     * @param components
+     *            a set of reusable objects used in the API specification
      * @return the current OpenAPI object
      */
     default OpenAPI components(Components components) {

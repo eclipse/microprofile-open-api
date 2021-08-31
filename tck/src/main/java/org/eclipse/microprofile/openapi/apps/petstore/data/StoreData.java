@@ -13,11 +13,11 @@
 
 package org.eclipse.microprofile.openapi.apps.petstore.data;
 
-import org.eclipse.microprofile.openapi.apps.petstore.model.Order;
-
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.ArrayList;
+
+import org.eclipse.microprofile.openapi.apps.petstore.model.Order;
 
 public class StoreData {
     static List<Order> orders = new ArrayList<Order>();
@@ -69,13 +69,13 @@ public class StoreData {
     }
 
     private static Order createOrder(long id, long petId, int quantity,
-        Date shipDate, String status) {
-            Order order = new Order();
-            order.setId(id);
-            order.setPetId(petId);
-            order.setQuantity(quantity);
-            order.setShipDate(shipDate);
-            order.setStatus(status);
-            return order;
+            Date shipDate, String status) {
+        Order order = new Order();
+        order.setId(id);
+        order.setPetId(petId);
+        order.setQuantity(quantity);
+        order.setShipDate(shipDate);
+        order.setStatus(status);
+        return order;
     }
 }

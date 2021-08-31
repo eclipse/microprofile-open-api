@@ -14,7 +14,7 @@
 package org.eclipse.microprofile.openapi.apps.airlines.exception;
 
 public class NotFoundException extends ApiException {
-  public NotFoundException (String msg) {
-    super(404, msg);
-  }
+    public NotFoundException(String msg) {
+        super(404, msg);
+    }
 }

@@ -27,18 +27,21 @@ import java.lang.annotation.Target;
 /**
  * This object represents a callback URL that will be invoked.
  * 
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#callbackObject">OpenAPI Specification Callback Object</a>
+ * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#callbackObject">OpenAPI
+ *      Specification Callback Object</a>
  **/
-@Target({ ElementType.METHOD, ElementType.TYPE })
+@Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Repeatable(Callbacks.class)
 @Inherited
 public @interface Callback {
     /**
-     * The friendly name used to refer to this callback. It is a REQUIRED property unless this is only a reference to a callback.
+     * The friendly name used to refer to this callback. It is a REQUIRED property unless this is only a reference to a
+     * callback.
      * <p>
-     * The name is REQUIRED when the callback is defined within {@link org.eclipse.microprofile.openapi.annotations.Components}. The 
-     * name will be used as the key to add this callback to the 'callbacks' map for reuse.
+     * The name is REQUIRED when the callback is defined within
+     * {@link org.eclipse.microprofile.openapi.annotations.Components}. The name will be used as the key to add this
+     * callback to the 'callbacks' map for reuse.
      * </p>
      * 
      * @return the name of this callback
@@ -65,9 +68,8 @@ public @interface Callback {
     /**
      * Reference value to a Callback object.
      * <p>
-     * This property provides a reference to an object defined elsewhere. This property and
-     * all other properties are mutually exclusive. If other properties are defined in addition
-     * to the ref property then the result is undefined.
+     * This property provides a reference to an object defined elsewhere. This property and all other properties are
+     * mutually exclusive. If other properties are defined in addition to the ref property then the result is undefined.
      * 
      * @return reference to a callback object definition
      **/

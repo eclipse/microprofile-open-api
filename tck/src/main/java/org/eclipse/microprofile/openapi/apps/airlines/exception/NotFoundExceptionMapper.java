@@ -13,22 +13,18 @@
 
 package org.eclipse.microprofile.openapi.apps.airlines.exception;
 
-import javax.ws.rs.core.Response;
-import javax.ws.rs.ext.ExceptionMapper;
-
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.apps.airlines.model.User;
 
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.ext.ExceptionMapper;
+
 public class NotFoundExceptionMapper implements ExceptionMapper<NotFoundException> {
 
     @Override
-    @APIResponse(responseCode = "404", description = "Not Found",
-        content = @Content(
-            schema = @Schema(implementation = User.class)
-        )
-    )
+    @APIResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(implementation = User.class)))
     public Response toResponse(NotFoundException t) {
         return Response.status(404, t.getMessage()).build();
     }

@@ -29,8 +29,8 @@ import org.eclipse.microprofile.openapi.models.examples.Example;
  * Each Media Type Object provides a schema and examples for the media type identified by its key.
  * <p>
  * 
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#mediaTypeObject">OpenAPI Specification Media Type
- *      Object</a>
+ * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#mediaTypeObject">OpenAPI
+ *      Specification Media Type Object</a>
  */
 public interface MediaType extends Constructible, Extensible<MediaType> {
 
@@ -44,14 +44,16 @@ public interface MediaType extends Constructible, Extensible<MediaType> {
     /**
      * Sets the schema field of a MediaType instance to the given schema object.
      *
-     * @param schema the schema defining the type used for the request body
+     * @param schema
+     *            the schema defining the type used for the request body
      */
     void setSchema(Schema schema);
 
     /**
      * Sets the schema field of a MediaType instance to the given schema object.
      *
-     * @param schema the schema defining the type used for the request body
+     * @param schema
+     *            the schema defining the type used for the request body
      * @return the current MediaType instance
      */
     default MediaType schema(Schema schema) {
@@ -67,18 +69,20 @@ public interface MediaType extends Constructible, Extensible<MediaType> {
     Map<String, Example> getExamples();
 
     /**
-     * Sets the examples field of a MediaType instance to the given map object. Each example object should match the media type and specified schema
-     * if present. The example object is mutually exclusive of the examples object.
+     * Sets the examples field of a MediaType instance to the given map object. Each example object should match the
+     * media type and specified schema if present. The example object is mutually exclusive of the examples object.
      *
-     * @param examples examples of the media type
+     * @param examples
+     *            examples of the media type
      */
     void setExamples(Map<String, Example> examples);
 
     /**
-     * Sets the examples field of a MediaType instance to the given map object. Each example object should match the media type and specified schema
-     * if present. The example object is mutually exclusive of the examples object.
+     * Sets the examples field of a MediaType instance to the given map object. Each example object should match the
+     * media type and specified schema if present. The example object is mutually exclusive of the examples object.
      *
-     * @param examples examples of the media type
+     * @param examples
+     *            examples of the media type
      * @return the current MediaType instance
      */
     default MediaType examples(Map<String, Example> examples) {
@@ -87,20 +91,24 @@ public interface MediaType extends Constructible, Extensible<MediaType> {
     }
 
     /**
-     * Adds an example item to the examples map of a MediaType instance. The example object should match the media type and specified schema if
-     * present.
+     * Adds an example item to the examples map of a MediaType instance. The example object should match the media type
+     * and specified schema if present.
      *
-     * @param key any unique name to identify the example object
-     * @param example an example of a media type. null values will be rejected (implementation will throw an exception) or ignored.
+     * @param key
+     *            any unique name to identify the example object
+     * @param example
+     *            an example of a media type. null values will be rejected (implementation will throw an exception) or
+     *            ignored.
      * @return the current MediaType instance
      */
     MediaType addExample(String key, Example example);
 
     /**
-     * Removes an example item to the examples map of a MediaType instance. The example object should match the media type and specified schema if
-     * present.
+     * Removes an example item to the examples map of a MediaType instance. The example object should match the media
+     * type and specified schema if present.
      *
-     * @param key any unique name to identify the example object
+     * @param key
+     *            any unique name to identify the example object
      */
     void removeExample(String key);
 
@@ -112,18 +120,20 @@ public interface MediaType extends Constructible, Extensible<MediaType> {
     Object getExample();
 
     /**
-     * Sets the example property of a MediaType instance to the given value. The example object should be in the correct format as specified by the
-     * media type. The example object is mutually exclusive of the examples object.
+     * Sets the example property of a MediaType instance to the given value. The example object should be in the correct
+     * format as specified by the media type. The example object is mutually exclusive of the examples object.
      *
-     * @param example an example of the media type
+     * @param example
+     *            an example of the media type
      */
     void setExample(Object example);
 
     /**
-     * Sets the example property of a MediaType instance to the given value. The example object should be in the correct format as specified by the
-     * media type. The example object is mutually exclusive of the examples object.
+     * Sets the example property of a MediaType instance to the given value. The example object should be in the correct
+     * format as specified by the media type. The example object is mutually exclusive of the examples object.
      *
-     * @param example an example of the media type
+     * @param example
+     *            an example of the media type
      * @return the current MediaType instance
      */
     default MediaType example(Object example) {
@@ -134,21 +144,23 @@ public interface MediaType extends Constructible, Extensible<MediaType> {
     /**
      * Returns the encoding property from a MediaType instance.
      *
-     * @return  a copy Map (potentially immutable) between a property name and its encoding information
+     * @return a copy Map (potentially immutable) between a property name and its encoding information
      **/
     Map<String, Encoding> getEncoding();
 
     /**
      * Sets encoding property of a MediaType instance to the given map object.
      *
-     * @param encoding a map between property names and their encoding information
+     * @param encoding
+     *            a map between property names and their encoding information
      */
     void setEncoding(Map<String, Encoding> encoding);
 
     /**
      * Sets encoding property of a MediaType instance to the given map object.
      *
-     * @param encoding a map between property names and their encoding information
+     * @param encoding
+     *            a map between property names and their encoding information
      * @return the current MediaType instance
      */
     default MediaType encoding(Map<String, Encoding> encoding) {
@@ -159,9 +171,11 @@ public interface MediaType extends Constructible, Extensible<MediaType> {
     /**
      * Adds an Encoding item to the encoding property of a MediaType instance.
      *
-     * @param key a property name in the schema
-     * @param encodingItem an encoding definition to apply to the schema property. null values will be rejected (implementation will throw an
-     *                     exception) or ignored.
+     * @param key
+     *            a property name in the schema
+     * @param encodingItem
+     *            an encoding definition to apply to the schema property. null values will be rejected (implementation
+     *            will throw an exception) or ignored.
      * @return the current MediaType instance
      */
     MediaType addEncoding(String key, Encoding encodingItem);
@@ -169,7 +183,8 @@ public interface MediaType extends Constructible, Extensible<MediaType> {
     /**
      * Removes an Encoding item to the encoding property of a MediaType instance.
      *
-     * @param key a property name in the schema
+     * @param key
+     *            a property name in the schema
      */
     void removeEncoding(String key);
 

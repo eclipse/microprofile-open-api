@@ -32,10 +32,10 @@ import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement
 /**
  * Describes a single API callback operation.
  * 
- * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#operationObject">OpenAPI Specification Operation
- *      Object</a>
+ * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#operationObject">OpenAPI
+ *      Specification Operation Object</a>
  **/
-@Target({ })
+@Target({})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface CallbackOperation {
@@ -54,8 +54,8 @@ public @interface CallbackOperation {
     String summary() default "";
 
     /**
-     * A verbose description of the callback operation behavior.
-     * CommonMark syntax MAY be used for rich text representation.
+     * A verbose description of the callback operation behavior. CommonMark syntax MAY be used for rich text
+     * representation.
      *
      * @return a description of this callback operation
      **/
@@ -69,12 +69,13 @@ public @interface CallbackOperation {
     ExternalDocumentation externalDocs() default @ExternalDocumentation();
 
     /**
-     * An array of parameters applicable for this callback operation, 
-     * which will be added to any automatically detected parameters in the method itself.
+     * An array of parameters applicable for this callback operation, which will be added to any automatically detected
+     * parameters in the method itself.
      * <p>
-     * The list MUST NOT include duplicated parameters. 
-     * A unique parameter is defined by a combination of a name and location.
+     * The list MUST NOT include duplicated parameters. A unique parameter is defined by a combination of a name and
+     * location.
      * </p>
+     * 
      * @return the list of parameters for this callback operation
      **/
     Parameter[] parameters() default {};
@@ -91,16 +92,18 @@ public @interface CallbackOperation {
      * <p>
      * The list of possible responses as they are returned from executing this callback operation.
      * </p>
+     * 
      * @return the list of responses for this callback operation
      **/
     APIResponse[] responses() default {};
 
     /**
-     * A declaration of which security mechanisms can be used for this callback operation.
-     * Only one of the security requirement objects need to be satisfied to authorize a request. 
+     * A declaration of which security mechanisms can be used for this callback operation. Only one of the security
+     * requirement objects need to be satisfied to authorize a request.
      * <p>
-     * This definition overrides any declared top-level security. 
-     * To remove a top-level security declaration, an empty array can be used.
+     * This definition overrides any declared top-level security. To remove a top-level security declaration, an empty
+     * array can be used.
+     * 
      * @return the list of security mechanisms for this callback operation
      */
     SecurityRequirement[] security() default {};

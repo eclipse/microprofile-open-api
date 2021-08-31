@@ -17,27 +17,23 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 public class Booking {
 
-
     @Schema(required = true)
     private Flight departtureFlight;
-    
+
     @Schema(required = true)
     private Flight returningFlight;
 
     @Schema(required = true)
     private CreditCard creditCard;
-    
+
     @Schema(required = true, example = "32126319")
     private String airMiles;
-    
+
     @Schema(required = true, example = "window")
     private String seatPreference;
-    
 
-    private Booking(){
+    private Booking() {
     }
-
-
 
     public Flight getDeparttureFlight() {
         return departtureFlight;
@@ -78,6 +74,5 @@ public class Booking {
     public void setSeatPreference(String seatPreference) {
         this.seatPreference = seatPreference;
     }
-    
 
 }

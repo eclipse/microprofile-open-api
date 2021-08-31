@@ -12,13 +12,13 @@
  */
 
 /**
- * Model interfaces to represent servers used for a single API operation
- * or for all operations in an OpenAPI document, as well as a way to represent
- * variables for server URL template substitution.
+ * Model interfaces to represent servers used for a single API operation or for all operations in an OpenAPI document,
+ * as well as a way to represent variables for server URL template substitution.
  * <p>
  * The behaviour of methods inherited from java.lang.Object are undefined by the MicroProfile OpenAPI specification.
  * <p>
  * Example usage:
+ * 
  * <pre>
  * {@literal}Override
  *  public OpenAPI buildModel() {

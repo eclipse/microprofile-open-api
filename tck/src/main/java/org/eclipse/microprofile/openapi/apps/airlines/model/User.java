@@ -15,55 +15,65 @@ package org.eclipse.microprofile.openapi.apps.airlines.model;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
-@Schema(maxProperties = 1024, minProperties = 1, requiredProperties = { "id", "username", "password" })
+@Schema(maxProperties = 1024, minProperties = 1, requiredProperties = {"id", "username", "password"})
 public class User {
-    
+
     @Schema(example = "3456")
     private int id;
-    
+
     @Schema(example = "user1")
     private String userName;
-    
+
     @Schema(example = "bobSm37")
     private String password;
-    
+
     @Schema(required = true, example = "Bob")
     private String firstName;
-    
+
     @Schema(required = true, example = "Smith")
     private String lastName;
-    
+
     @Schema(required = true, example = "M")
     private Gender gender;
-    
+
     @Schema(required = true, example = "37")
     private int age;
-    
+
     @Schema(required = true, example = "bob@test.ca")
     private String email;
-    
+
     @Schema(required = true, example = "123-456-7890")
     private String phone;
-    
+
     @Schema(required = true, example = "1")
     private int status;
-    
+
     /**
      * Creates a User instance with the parameters specified.
      * 
-     * @param id the unique id for this User instance
-     * @param userName the unique username for this User instance
-     * @param password the unique password for this User instance
-     * @param firstName the first name for this User instance
-     * @param lastName the last name for this User instance
-     * @param gender the gender for this User instance
-     * @param age the age value for this User instance
-     * @param email the email associated with this User instance
-     * @param phone the phone number associated with this User instance
-     * @param status the status associated with this User instance
-     */   
-    public User(int id, String userName, String password, String firstName, 
-    String lastName, String gender, int age, String email, String phone, int status){
+     * @param id
+     *            the unique id for this User instance
+     * @param userName
+     *            the unique username for this User instance
+     * @param password
+     *            the unique password for this User instance
+     * @param firstName
+     *            the first name for this User instance
+     * @param lastName
+     *            the last name for this User instance
+     * @param gender
+     *            the gender for this User instance
+     * @param age
+     *            the age value for this User instance
+     * @param email
+     *            the email associated with this User instance
+     * @param phone
+     *            the phone number associated with this User instance
+     * @param status
+     *            the status associated with this User instance
+     */
+    public User(int id, String userName, String password, String firstName,
+            String lastName, String gender, int age, String email, String phone, int status) {
         super();
         this.id = id;
         this.userName = userName;
@@ -76,179 +86,185 @@ public class User {
         this.phone = phone;
         this.status = status;
     }
-    
+
     /**
      * Returns the id property of a User instance
      * 
      * @return int id
-     */    
-    public int getId(){
+     */
+    public int getId() {
         return id;
     }
-    
+
     /**
      * Sets the id property of a User instance to the parameter.
      * 
-     * @param id the unique id for this User instance
-     */    
-    public void setId(int id){
+     * @param id
+     *            the unique id for this User instance
+     */
+    public void setId(int id) {
         this.id = id;
     }
-    
+
     /**
      * Returns the userName property of a User instance.
      * 
      * @return String userName
-     */   
+     */
     public String getUserName() {
         return userName;
     }
-    
+
     /**
      * Sets the userName property of a User instance to the parameter.
      * 
-     * @param userName the user name for this User instance
+     * @param userName
+     *            the user name for this User instance
      */
     public void setUserName(String userName) {
         this.userName = userName;
     }
-    
+
     /**
      * Returns the password property of a User instance.
      * 
      * @return String password
-     */    
+     */
     public String getPassword() {
         return password;
     }
-    
+
     /**
      * Sets the password property of a User instance to the parameter.
      * 
-     * @param password the password associated with this User instance
+     * @param password
+     *            the password associated with this User instance
      */
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     /**
      * Returns firstName property of a User instance.
      * 
      * @return String firstName
-     */   
-    public String getFirstName(){
+     */
+    public String getFirstName() {
         return firstName;
     }
-    
+
     /**
      * Sets the firstName property of a User instance to the parameter.
      * 
-     * @param firstName the first name for this User instance
-     */    
-    public void setFirstName(String firstName){
+     * @param firstName
+     *            the first name for this User instance
+     */
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-    
+
     /**
      * Returns the lastName property of a User instance.
      * 
      * @return String lastName
-     */    
-    public String getLastName(){
+     */
+    public String getLastName() {
         return lastName;
     }
-    
+
     /**
      * Sets the lastName property of a User instance to the parameter.
      * 
-     * @param lastName the last name for this User instance
-     */   
-    public void setLastName(String lastName){
+     * @param lastName
+     *            the last name for this User instance
+     */
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    
+
     /**
      * Returns the gender property of a User instance.
      * 
      * @return the gender
-     */    
-    public Gender getGender(){
+     */
+    public Gender getGender() {
         return gender;
     }
-    
+
     /**
      * Sets the gender property of a User instance to the parameter.
      * 
-     * @param gender the gender for this User instance
-     */   
+     * @param gender
+     *            the gender for this User instance
+     */
     public void setGender(String gender) {
         this.gender = Gender.valueOf(gender.toUpperCase());
     }
-    
+
     /**
      * Returns the age property of a User instance.
      * 
      * @return int age
-     */   
-    public int getAge(){
+     */
+    public int getAge() {
         return age;
     }
-    
+
     /**
      * Sets the age property of a User instance to the parameter.
      * 
-     * @param age the age value for this User instance
-     */    
-    public void setAge(int age){
+     * @param age
+     *            the age value for this User instance
+     */
+    public void setAge(int age) {
         this.age = age;
     }
-    
+
     /**
      * Returns the email property of a User instance.
      * 
      * @return String email
-     */    
+     */
     public String getEmail() {
         return email;
     }
-    
+
     /**
      * Sets the email property of a User instance to the parameter.
      * 
-     * @param email the email associated with this User instance
+     * @param email
+     *            the email associated with this User instance
      */
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
     /**
      * Returns the phone property of a User instance.
      * 
      * @return String phone
-     */   
+     */
     public String getPhone() {
         return phone;
     }
-    
+
     /**
      * Sets the phone property of a User instance to the parameter.
      * 
-     * @param phone the phone number associated with this User instance
+     * @param phone
+     *            the phone number associated with this User instance
      */
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    
-    @Schema(
-        name = "status",
-        title = "User Status"
-    )
+
+    @Schema(name = "status", title = "User Status")
 
     /**
      * Returns the status of this User instance.
      * 
      * @return the integer associated with this User's status
-     * */      
+     */
     public int getUserStatus() {
         return status;
     }
@@ -256,8 +272,9 @@ public class User {
     /**
      * Sets the status of this User instance.
      * 
-     * @param status an integer representing the status of this User instance
-     * */ 
+     * @param status
+     *            an integer representing the status of this User instance
+     */
     public void setUserStatus(int status) {
         this.status = status;
     }

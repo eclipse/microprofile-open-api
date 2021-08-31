@@ -37,9 +37,9 @@ public class OASConfigSchemaTest extends AppTestBase {
     @Deployment(name = "petstore")
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "petstore.war")
-                         .addPackages(true, "org.eclipse.microprofile.openapi.apps.petstore")
-                         .addAsWebInfResource("schema-microprofile-config.properties",
-                                              "classes/META-INF/microprofile-config.properties");
+                .addPackages(true, "org.eclipse.microprofile.openapi.apps.petstore")
+                .addAsWebInfResource("schema-microprofile-config.properties",
+                        "classes/META-INF/microprofile-config.properties");
     }
 
     @RunAsClient
@@ -54,10 +54,10 @@ public class OASConfigSchemaTest extends AppTestBase {
 
     private Matcher<Map<? extends String, ? extends String>> epochSecondsSchema() {
         return allOf(aMapWithSize(4),
-                     hasEntry("title", "Epoch Seconds"),
-                     hasEntry("type", "number"),
-                     hasEntry("format", "int64"),
-                     hasEntry("description", "Number of seconds from the epoch of 1970-01-01T00:00:00Z"));
+                hasEntry("title", "Epoch Seconds"),
+                hasEntry("type", "number"),
+                hasEntry("format", "int64"),
+                hasEntry("description", "Number of seconds from the epoch of 1970-01-01T00:00:00Z"));
     }
 
     private Matcher<Map<? extends String, ? extends String>> epochSecondsRef() {

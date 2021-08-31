@@ -12,13 +12,13 @@
  */
 
 /**
- * A set of interfaces for programmable models and their helper classes,
- * many derived from Swagger Core library. These interfaces can be used to 
- * define OpenAPI document programmatically.
+ * A set of interfaces for programmable models and their helper classes, many derived from Swagger Core library. These
+ * interfaces can be used to define OpenAPI document programmatically.
  * <p>
  * The behaviour of methods inherited from java.lang.Object are undefined by the MicroProfile OpenAPI specification.
  * <p>
  * Example:
+ * 
  * <pre>
  * public class MyOASModelReaderImpl implements OASModelReader {
  *

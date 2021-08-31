@@ -12,12 +12,12 @@
  */
 
 /**
- * An interface of a programmable model to represent a single 
- * header object.
+ * An interface of a programmable model to represent a single header object.
  * <p>
  * The behaviour of methods inherited from java.lang.Object are undefined by the MicroProfile OpenAPI specification.
  * <p>
  * Example usage:
+ * 
  * <pre>
  * .components(OASFactory.createObject(Components.class)
  *  .headers(new HashMap&lt;String, Header&gt;())

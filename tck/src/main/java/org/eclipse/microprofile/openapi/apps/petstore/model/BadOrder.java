@@ -15,8 +15,8 @@ package org.eclipse.microprofile.openapi.apps.petstore.model;
 
 import java.util.Date;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "Order")
 public class BadOrder {
@@ -68,7 +68,7 @@ public class BadOrder {
     }
 
     @XmlElement(name = "status")
-    //@ApiModelProperty(value = "Order Status", allowableValues = "placed, approved, delivered")
+    // @ApiModelProperty(value = "Order Status", allowableValues = "placed, approved, delivered")
     public String getStatus() {
         return status;
     }

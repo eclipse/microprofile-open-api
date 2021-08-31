@@ -25,7 +25,9 @@ import org.eclipse.microprofile.openapi.models.media.Content;
 /**
  * This interface represents the request body of an operation in which body parameters can be specified.
  *
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#requestBodyObject">requestBody Object</a>
+ * @see <a href=
+ *      "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#requestBodyObject">requestBody
+ *      Object</a>
  */
 public interface RequestBody extends Constructible, Extensible<RequestBody>, Reference<RequestBody> {
 
@@ -40,7 +42,8 @@ public interface RequestBody extends Constructible, Extensible<RequestBody>, Ref
     /**
      * Sets the description of this instance of RequestBody. to the parameter.
      *
-     * @param description the brief description of the RequestBody
+     * @param description
+     *            the brief description of the RequestBody
      */
 
     void setDescription(String description);
@@ -48,7 +51,8 @@ public interface RequestBody extends Constructible, Extensible<RequestBody>, Ref
     /**
      * Sets the description of this RequestBody and return this instance of RequestBody
      *
-     * @param description the brief description of the RequestBody
+     * @param description
+     *            the brief description of the RequestBody
      * @return this RequestBody instance
      */
 
@@ -58,7 +62,8 @@ public interface RequestBody extends Constructible, Extensible<RequestBody>, Ref
     }
 
     /**
-     * Returns the content of this instance of RequestBody, where the keys in content are media type names and the values describe it.
+     * Returns the content of this instance of RequestBody, where the keys in content are media type names and the
+     * values describe it.
      *
      * @return the content of this RequestBody
      **/
@@ -66,17 +71,21 @@ public interface RequestBody extends Constructible, Extensible<RequestBody>, Ref
     Content getContent();
 
     /**
-     * Sets the content of this instance of RequestBody, where the keys in content are media type names and the values describe it.
+     * Sets the content of this instance of RequestBody, where the keys in content are media type names and the values
+     * describe it.
      *
-     * @param content the content that describes the RequestBody
+     * @param content
+     *            the content that describes the RequestBody
      */
 
     void setContent(Content content);
 
     /**
-     * Sets the content of this instance of RequestBody, where the keys in content are media type names and the values describe it.
+     * Sets the content of this instance of RequestBody, where the keys in content are media type names and the values
+     * describe it.
      *
-     * @param content the content that describes the RequestBody
+     * @param content
+     *            the content that describes the RequestBody
      * @return RequestBody instance with the modified content property
      */
 
@@ -96,7 +105,8 @@ public interface RequestBody extends Constructible, Extensible<RequestBody>, Ref
     /**
      * Sets whether this instance of RequestBody is required or not.
      *
-     * @param required true iff the RequestBody is required, false otherwise
+     * @param required
+     *            true iff the RequestBody is required, false otherwise
      */
 
     void setRequired(Boolean required);
@@ -104,7 +114,8 @@ public interface RequestBody extends Constructible, Extensible<RequestBody>, Ref
     /**
      * Sets whether this instance of RequestBody is required or not and returns this instance of RequestBody
      *
-     * @param required true iff the RequestBody is required, false otherwise
+     * @param required
+     *            true iff the RequestBody is required, false otherwise
      * @return this RequestBody instance
      */
 

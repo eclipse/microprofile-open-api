@@ -37,14 +37,16 @@ public interface Contact extends Constructible, Extensible<Contact> {
     /**
      * Sets the identifying name of this Contact instance.
      *
-     * @param name the name of the contact person/organization
+     * @param name
+     *            the name of the contact person/organization
      */
     void setName(String name);
 
     /**
      * Sets this Contact instance's identifying name to the given name and returns this instance of Contact.
      *
-     * @param name the name of the contact person/organization
+     * @param name
+     *            the name of the contact person/organization
      * @return this Contact instance
      */
     default Contact name(String name) {
@@ -63,15 +65,17 @@ public interface Contact extends Constructible, Extensible<Contact> {
     /**
      * Sets this Contact instance's URL pointing to the contact information. The URL must be in the format of a URL.
      *
-     * @param url the URL pointing to the contact information
+     * @param url
+     *            the URL pointing to the contact information
      */
     void setUrl(String url);
 
     /**
-     * Sets this Contact instance's URL pointing to the contact information and returns this instance of Contact. The URL must be in the format of a
-     * URL.
+     * Sets this Contact instance's URL pointing to the contact information and returns this instance of Contact. The
+     * URL must be in the format of a URL.
      *
-     * @param url the url pointing to the contact information
+     * @param url
+     *            the url pointing to the contact information
      * @return this Contact instance
      */
     default Contact url(String url) {
@@ -90,14 +94,16 @@ public interface Contact extends Constructible, Extensible<Contact> {
     /**
      * Sets the contact email of this instance of Contact.
      *
-     * @param email the email of the contact person/organization
+     * @param email
+     *            the email of the contact person/organization
      */
     void setEmail(String email);
 
     /**
      * Sets this Contact instance's contact email to the given email and returns this instance of Contact
      *
-     * @param email the email of the contact person/organization
+     * @param email
+     *            the email of the contact person/organization
      * @return this Contact instance
      */
     default Contact email(String email) {

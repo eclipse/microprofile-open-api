@@ -27,7 +27,8 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 /**
  * Describes a single header object
  * 
- * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#header-object">OpenAPI Specification Header Object</a>
+ * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#header-object">OpenAPI
+ *      Specification Header Object</a>
  **/
 @Target({})
 @Retention(RetentionPolicy.RUNTIME)
@@ -38,8 +39,8 @@ public @interface Header {
      * <p>
      * It is a REQUIRED property unless this is only a reference to a header instance.
      * </p>
-     * When the header is defined within {@link org.eclipse.microprofile.openapi.annotations.Components}, 
-     * the name will be used as the key to add this header to the 'headers' map for reuse.
+     * When the header is defined within {@link org.eclipse.microprofile.openapi.annotations.Components}, the name will
+     * be used as the key to add this header to the 'headers' map for reuse.
      * 
      * @return this header's name
      **/
@@ -74,8 +75,8 @@ public @interface Header {
     boolean deprecated() default false;
 
     /**
-     * When true, allows sending an empty value. If false, the header will be considered \&quot;null\&quot; if no value is present. This may create
-     * validation errors when the header is required.
+     * When true, allows sending an empty value. If false, the header will be considered \&quot;null\&quot; if no value
+     * is present. This may create validation errors when the header is required.
      *
      * @return whether or not the header allows empty values
      **/
@@ -84,9 +85,8 @@ public @interface Header {
     /**
      * Reference value to a Header object.
      * <p>
-     * This property provides a reference to an object defined elsewhere. This property and
-     * all other properties are mutually exclusive. If other properties are defined in addition
-     * to the ref property then the result is undefined.
+     * This property provides a reference to an object defined elsewhere. This property and all other properties are
+     * mutually exclusive. If other properties are defined in addition to the ref property then the result is undefined.
      * 
      * @return reference to a header
      **/

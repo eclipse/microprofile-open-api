@@ -24,23 +24,23 @@ import java.lang.annotation.Target;
 
 /**
  * 
- * The Servers annotation is a container for @Server annotations. When used on a method or a type
- * it is treated as if each server annotation were applied individually.
+ * The Servers annotation is a container for @Server annotations. When used on a method or a type it is treated as if
+ * each server annotation were applied individually.
  * <p>
- * <b>Note:</b> If both {@link org.eclipse.microprofile.openapi.annotations.servers.Server Server} and 
- * {@link org.eclipse.microprofile.openapi.annotations.servers.Servers Servers} annotation are specified on the same type,
- * the server definitions will be combined.
+ * <b>Note:</b> If both {@link org.eclipse.microprofile.openapi.annotations.servers.Server Server} and
+ * {@link org.eclipse.microprofile.openapi.annotations.servers.Servers Servers} annotation are specified on the same
+ * type, the server definitions will be combined.
  * 
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#serverObject">Server Object</a>
+ * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#serverObject">Server
+ *      Object</a>
  *
  */
-@Target({ ElementType.TYPE, ElementType.METHOD })
+@Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface Servers {
     /**
-     * An array of Server objects which is used to provide connectivity
-     * information to a target server.
+     * An array of Server objects which is used to provide connectivity information to a target server.
      *
      * @return the servers used for this API or endpoint.
      */
