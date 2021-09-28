@@ -13,3 +13,4 @@ target/
 *.ipr
 *.iws
 /**/nbactions.xml
+.vscode
