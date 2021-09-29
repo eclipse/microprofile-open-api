@@ -33,6 +33,7 @@ There are no functional changes introduced in this release, except the dependenc
 
 * Negative Test Scenario - @SchemaProperty Precedence Behaviour (link:https://github.com/eclipse/microprofile-open-api/issues/466[466])
 * Use MediaType.APPLICATION_JSON instead of application/json in some TCKs (link:https://github.com/eclipse/microprofile-open-api/pull/471[471])
+* TCK Tag Collection Test contains() side effect (link:https://github.com/eclipse/microprofile-open-api/issues/453[453])
 
 [[release_notes_20]]
 == Release Notes for Microprofile OpenAPI 2.0

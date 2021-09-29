@@ -1667,10 +1667,14 @@ public class ModelConstructionTest extends Arquillian {
         assertTrue(list.stream().anyMatch((v) -> v == value), "The list is expected to contain the value: " + value);
     }
 
+    private <T> void checkListEntryAbsent(List<T> list, T value) {
+        assertNotNull(list, "The list must not be null.");
+        assertTrue(list.stream().noneMatch((v) -> v == value), "The list is expected not to contain the value: " + value);
+    }
+
     private <O, V> void checkListImmutable(O container, Function<O, List<V>> listGetter, V otherValue) {
         List<V> list = listGetter.apply(container);
-        assertNotNull(list, "The list must not be null.");
-        assertFalse(list.contains(otherValue), "The list is expected to not contain the value: " + otherValue);
+        checkListEntryAbsent(list, otherValue);
         int originalSize = list.size();
         try {
             list.add(otherValue);
@@ -1678,8 +1682,7 @@ public class ModelConstructionTest extends Arquillian {
             // It is allowed to throw an exception
         }
         List<V> list2 = listGetter.apply(container);
-        assertNotNull(list2, "The list must not be null.");
-        assertFalse(list2.contains(otherValue), "The list is expected to not contain the value: " + otherValue);
+        checkListEntryAbsent(list2, otherValue);
         assertEquals(list2.size(), originalSize, "The list is expected to have a size of " + originalSize);
     }
 
