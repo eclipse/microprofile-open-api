@@ -97,8 +97,8 @@ public class ModelConstructionTest extends Arquillian {
     // Should be removed when TestNG 7.5.0 is released
     // --------------------------------
     /**
-     * Asserts that two objects refer to the same object. If they do not, an AssertionError, with the given
-     * message, is thrown.
+     * Asserts that two objects refer to the same object. If they do not, an AssertionError, with the given message, is
+     * thrown.
      *
      * @param actual
      *            the actual value
