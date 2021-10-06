@@ -16,12 +16,16 @@
 
 package org.eclipse.microprofile.openapi.tck;
 
+// assertSame and assertNotSame are broken in TestNG 7.4.0 - https://github.com/cbeust/testng/issues/2486
+// import static org.testng.Assert.assertNotSame;
+// import static org.testng.Assert.assertSame;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.sameInstance;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertNotSame;
 import static org.testng.Assert.assertNull;
-import static org.testng.Assert.assertSame;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
@@ -87,6 +91,41 @@ import org.testng.annotations.Test;
  * to verify that they behave correctly.
  */
 public class ModelConstructionTest extends Arquillian {
+
+    // assertSame and assertNotSame are broken in TestNG 7.4.0 - https://github.com/cbeust/testng/issues/2486
+    // These are the same methods, re-implemented using Hamcrest Matchers
+    // Should be removed when TestNG 7.5.0 is released
+    // --------------------------------
+    /**
+     * Asserts that two objects refer to the same object. If they do not, an AssertionError, with the given
+     * message, is thrown.
+     *
+     * @param actual
+     *            the actual value
+     * @param expected
+     *            the expected value
+     * @param message
+     *            the assertion error message
+     */
+    public static void assertSame(Object actual, Object expected, String message) {
+        assertThat(message, actual, sameInstance(expected));
+    }
+
+    /**
+     * Asserts that two objects do not refer to the same objects. If they do, an AssertionError, with the given message,
+     * is thrown.
+     *
+     * @param actual
+     *            the actual value
+     * @param expected
+     *            the expected value
+     * @param message
+     *            the assertion error message
+     */
+    public static void assertNotSame(Object actual, Object expected, String message) {
+        assertThat(message, actual, not(sameInstance(expected)));
+    }
+    // --------------------------------
 
     @Deployment
     public static WebArchive createDeployment() {
@@ -1669,7 +1708,8 @@ public class ModelConstructionTest extends Arquillian {
 
     private <T> void checkListEntryAbsent(List<T> list, T value) {
         assertNotNull(list, "The list must not be null.");
-        assertTrue(list.stream().noneMatch((v) -> v == value), "The list is expected not to contain the value: " + value);
+        assertTrue(list.stream().noneMatch((v) -> v == value),
+                "The list is expected not to contain the value: " + value);
     }
 
     private <O, V> void checkListImmutable(O container, Function<O, List<V>> listGetter, V otherValue) {
