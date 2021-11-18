@@ -19,7 +19,7 @@
     <parent>
         <groupId>org.eclipse.microprofile</groupId>
         <artifactId>microprofile-parent</artifactId>
-        <version>2.1</version>
+        <version>2.4</version>
     </parent>
     <groupId>org.eclipse.microprofile.openapi</groupId>
     <artifactId>microprofile-openapi-parent</artifactId>
@@ -36,7 +36,7 @@
         <java-hamcrest.version>2.0.0.0</java-hamcrest.version>
         <httpclient.version>4.5.2</httpclient.version>
         <jackson.version>2.10.1</jackson.version>
-        <restclient.version>3.0-RC3</restclient.version>
+        <restclient.version>3.0</restclient.version>
         <biz.aQute.bnd.version>5.3.0</biz.aQute.bnd.version>
     </properties>
 
