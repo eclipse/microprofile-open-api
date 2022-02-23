@@ -51,6 +51,7 @@ import org.eclipse.microprofile.openapi.apps.airlines.model.User;
 import org.eclipse.microprofile.openapi.apps.airlines.resources.AirlinesResource;
 import org.eclipse.microprofile.openapi.apps.airlines.resources.AvailabilityResource;
 import org.eclipse.microprofile.openapi.apps.airlines.resources.ReviewResource;
+import org.eclipse.microprofile.openapi.apps.airlines.resources.UserResource;
 import org.eclipse.microprofile.openapi.apps.airlines.resources.bookings.BookingResource;
 
 import jakarta.ws.rs.ApplicationPath;
@@ -101,6 +102,7 @@ public class JAXRSApp extends Application {
         singletons.add(new AvailabilityResource());
         singletons.add(new BookingResource());
         singletons.add(new ReviewResource());
+        singletons.add(new UserResource());
         return singletons;
     }
 
