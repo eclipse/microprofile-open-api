@@ -58,7 +58,7 @@ import java.lang.annotation.Target;
  * </pre>
  *
  * @see RequestBody
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#requestBodyObject">OpenAPI
+ * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#requestBodyObject">OpenAPI
  *      requestBody Object</a>
  **/
 @Target({ElementType.PARAMETER, ElementType.METHOD})

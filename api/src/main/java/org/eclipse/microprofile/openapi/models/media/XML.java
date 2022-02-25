@@ -25,7 +25,7 @@ import org.eclipse.microprofile.openapi.models.Extensible;
  * inferred (for singular/plural forms) and the name property SHOULD be used to add that information.
  * <p>
  * 
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#xmlObject">XML Object</a>
+ * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#xmlObject">XML Object</a>
  *      </p>
  */
 public interface XML extends Constructible, Extensible<XML> {
