@@ -28,6 +28,7 @@ import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirementsSet;
 
 /**
  * Describes a single API callback operation.
@@ -101,12 +102,28 @@ public @interface CallbackOperation {
      * A declaration of which security mechanisms can be used for this callback operation. Only one of the security
      * requirement objects need to be satisfied to authorize a request.
      * <p>
+     * Adding a {@code SecurityRequirement} to this array is equivalent to adding a {@code SecurityRequirementsSet}
+     * containing a single {@code SecurityRequirement} to {@link #securitySets()}.
+     * <p>
      * This definition overrides any declared top-level security. To remove a top-level security declaration, an empty
      * array can be used.
      * 
      * @return the list of security mechanisms for this callback operation
      */
     SecurityRequirement[] security() default {};
+
+    /**
+     * A declaration of which security mechanisms can be used for this callback operation. All of the security
+     * requirements within any one of the sets needs needs to be satisfied to authorize a request.
+     * <p>
+     * This definition overrides any declared top-level security. To remove a top-level security declaration, an empty
+     * array can be used.
+     * <p>
+     * Including an empty set within this list indicates that the other requirements are optional.
+     * 
+     * @return the list of security mechanisms for this callback operation
+     */
+    SecurityRequirementsSet[] securitySets() default {};
 
     /**
      * List of extensions to be added to the {@link org.eclipse.microprofile.openapi.models.Operation Operation} model

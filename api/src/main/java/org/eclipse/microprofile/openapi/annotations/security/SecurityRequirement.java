@@ -26,6 +26,9 @@ import java.lang.annotation.Target;
 
 /**
  * Specifies a security requirement for an operation.
+ * <p>
+ * Applying this annotation to a method or class is equivalent to applying a {@link SecurityRequirementsSet} annotation
+ * containing only this annotation.
  * 
  * @see <a href=
  *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-requirement-object">SecuirtyRequirement

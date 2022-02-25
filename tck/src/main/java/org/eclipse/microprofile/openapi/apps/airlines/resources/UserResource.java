@@ -225,6 +225,8 @@ public class UserResource {
 
     @SecurityScheme(ref = "#/components/securitySchemes/httpTestScheme")
     @SecurityRequirement(name = "httpTestScheme")
+    @SecurityRequirementsSet({@SecurityRequirement(name = "testScheme1"), @SecurityRequirement(name = "testScheme2")})
+    @SecurityRequirementsSet
     public Response loginUser(
             @Parameter(name = "username", description = "The user name for login", schema = @Schema(type = SchemaType.STRING), required = true) @QueryParam("username") String username,
             @Parameter(name = "password", description = "The password for login in clear text", schema = @Schema(type = SchemaType.STRING), required = true) @QueryParam("password") String password) {
