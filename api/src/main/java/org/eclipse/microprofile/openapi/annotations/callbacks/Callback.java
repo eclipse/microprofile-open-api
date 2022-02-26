@@ -24,6 +24,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
+
 /**
  * This object represents a callback URL that will be invoked.
  * 
@@ -74,4 +76,13 @@ public @interface Callback {
      * @return reference to a callback object definition
      **/
     String ref() default "";
+
+    /**
+     * The list of optional extensions.
+     *
+     * @return an optional array of extensions
+     * 
+     * @since 3.1
+     */
+    Extension[] extensions() default {};
 }

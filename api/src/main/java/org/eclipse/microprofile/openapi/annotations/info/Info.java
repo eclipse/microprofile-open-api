@@ -22,6 +22,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
+
 /**
  * This annotation provides metadata about the API, and maps to the Info object in OpenAPI Specification 3.
  * 
@@ -73,4 +75,12 @@ public @interface Info {
      **/
     String version();
 
+    /**
+     * The list of optional extensions.
+     *
+     * @return an optional array of extensions
+     * 
+     * @since 3.1
+     */
+    Extension[] extensions() default {};
 }

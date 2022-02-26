@@ -22,6 +22,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 /**
@@ -92,4 +93,12 @@ public @interface Header {
      **/
     String ref() default "";
 
+    /**
+     * The list of optional extensions.
+     *
+     * @return an optional array of extensions
+     * 
+     * @since 3.1
+     */
+    Extension[] extensions() default {};
 }

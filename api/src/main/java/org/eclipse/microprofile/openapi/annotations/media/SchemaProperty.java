@@ -22,6 +22,7 @@ import java.lang.annotation.RetentionPolicy;
 
 import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
+import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 
 /**
  * The SchemaProperty Object allows the definition of input and output data types nested within the
@@ -362,4 +363,14 @@ public @interface SchemaProperty {
      * @return whether the items in this array are unique
      **/
     boolean uniqueItems() default false;
+
+    /**
+     * The list of optional extensions.
+     *
+     * @return an optional array of extensions
+     * 
+     * @since 3.1
+     */
+    Extension[] extensions() default {};
+
 }

@@ -25,6 +25,7 @@ import java.lang.annotation.Target;
 
 import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
+import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 
 /**
  * The Schema Object allows the definition of input and output data types. These types can be objects, but also
@@ -399,4 +400,13 @@ public @interface Schema {
      * @since 2.0
      */
     SchemaProperty[] properties() default {};
+
+    /**
+     * The list of optional extensions.
+     *
+     * @return an optional array of extensions
+     * 
+     * @since 3.1
+     */
+    Extension[] extensions() default {};
 }
