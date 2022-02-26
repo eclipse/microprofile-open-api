@@ -1021,4 +1021,55 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/user/{id}'.get.responses.'404'.content.'application/json'.schema", notNullValue());
     }
 
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testAdditionalPropertiesDefault(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+
+        String responseSchema =
+                dereference(vr, "paths.'/bookings/{id}'.get.responses.'200'", "content.'application/json'.schema");
+        vr.body(responseSchema, notNullValue());
+        vr.body(responseSchema, not(hasKey("additionalProperties")));
+    }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testAdditionalPropertiesFalse(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+
+        String responseSchema =
+                dereference(vr, "paths.'/bookings/{id}'.get.responses.'200'", "content.'application/json'.schema");
+        vr.body(responseSchema, notNullValue());
+        String ccSchema = dereference(vr, responseSchema, "properties.creditCard");
+
+        vr.body(ccSchema + ".additionalProperties", equalTo(false));
+
+    }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testAdditionalPropertiesTrue(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+
+        String responseSchema =
+                dereference(vr, "paths.'/bookings/{id}'.get.responses.'200'", "content.'application/json'.schema");
+
+        vr.body(responseSchema, notNullValue());
+
+        String airlineSchema = dereference(vr, responseSchema, "properties.returningFlight", "properties.airline");
+        vr.body(airlineSchema, hasEntry(equalTo("additionalProperties"), equalTo(true)));
+    }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testAdditionalPropertiesTypeString(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+
+        String responseSchema =
+                dereference(vr, "paths.'/bookings/{id}'.get.responses.'200'", "content.'application/json'.schema");
+        vr.body(responseSchema, notNullValue());
+        String flightSchema = dereference(vr, responseSchema, "properties.returningFlight");
+
+        vr.body(flightSchema + ".additionalProperties.type", equalTo("string"));
+    }
 }

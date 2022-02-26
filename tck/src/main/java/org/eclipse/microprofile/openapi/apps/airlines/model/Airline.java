@@ -15,6 +15,7 @@ package org.eclipse.microprofile.openapi.apps.airlines.model;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
+@Schema(additionalProperties = Schema.True.class)
 public class Airline {
 
     @Schema(required = true, example = "Acme Air")

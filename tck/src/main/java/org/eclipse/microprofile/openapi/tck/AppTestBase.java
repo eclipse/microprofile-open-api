@@ -111,6 +111,87 @@ public abstract class AppTestBase extends Arquillian {
         }
     }
 
+    /**
+     * Builds an absolute path using the series of provided relative {@code paths} by sequentially searching through the
+     * provided {@link ValidatableResponse}. Each time a {@code $ref} is encountered as a key in the path node, it is
+     * treated as an absolute (within the response) path that is used as the context for the next {@code paths} entry.
+     * 
+     * <p>
+     * Consider the following simple schemas as the response content of the {@link ValidatableResponse} argument:
+     * 
+     * <pre>
+     * {
+     *   "components": {
+     *     "schemas": {
+     *       "Person": {
+     *         "type": "object",
+     *         "properties": {
+     *           "firstName": {
+     *             "type": "string"
+     *           },
+     *           "lastName": {
+     *             "type": "string"
+     *           }
+     *         }
+     *       },
+     *       "Employee": {
+     *         "$ref": "#/components/schemas/Person"
+     *       }
+     *     }
+     *   }
+     * }
+     * </pre>
+     * 
+     * Given the {@code paths} {@code "components.schemas.Employee"} and {@code "properties.firstName"}, the value
+     * returned is the absolute path {@code "components.schemas.Person.properties.firstName"}. The path segment
+     * {@code "components.schemas.Employee"} contains a {@code .$ref} which itself resolves to the schema
+     * {@code "components.schemas.Person"} and the second path segment is appended to the resolved reference.
+     * 
+     * Note that this method does not currently support the conversion of Json Pointer escape sequences ({@code ~0} and
+     * {@code ~1}) in {@code $ref} values.
+     * 
+     * @param vr
+     *            the response
+     * @param paths
+     *            paths which may be a reference object (containing a $ref)
+     * @return the path the object references if present, else the input path
+     */
+    public static String dereference(ValidatableResponse vr, String... paths) {
+        ExtractableResponse<Response> response = vr.extract();
+        String context = "";
+        StringBuilder lookup = new StringBuilder();
+        StringBuilder absolutePath = new StringBuilder();
+
+        for (String path : paths) {
+            lookup.setLength(0);
+
+            if (!context.isEmpty()) {
+                lookup.append(context);
+                lookup.append('.');
+            }
+
+            lookup.append(path);
+            lookup.append(".$ref");
+
+            String ref = response.path(lookup.toString());
+
+            if (ref != null) {
+                absolutePath.setLength(0);
+                absolutePath.append(ref.replaceFirst("^#/?", "").replace('/', '.'));
+            } else {
+                // No $ref, keep appending
+                if (absolutePath.length() > 0) {
+                    absolutePath.append('.');
+                }
+                absolutePath.append(path);
+            }
+
+            context = absolutePath.toString();
+        }
+
+        return absolutePath.toString();
+    }
+
     @DataProvider(name = "formatProvider")
     public Object[][] provide() {
         return new Object[][]{{"JSON"}, {"YAML"}};
