@@ -23,7 +23,9 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasKey;
+import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.Matchers.startsWith;
@@ -302,5 +304,20 @@ public class PetStoreAppTest extends AppTestBase {
                         hasEntry(equalTo("required"), notNullValue()),
                         hasEntry(equalTo("type"), equalTo("object")),
                         hasEntry(equalTo("properties"), notNullValue())));
+    }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testExtensionPlacement(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+
+        String opPath = "paths.'/store/inventory'.get";
+
+        vr.body(opPath, hasEntry(equalTo("x-operation-ext"), equalTo("test-operation-ext")));
+
+        vr.body(opPath + ".responses.'200'", not(hasProperty("'x-operation-ext")));
+        vr.body(opPath + ".responses.'200'", hasEntry(equalTo("x-response-ext"), equalTo("test-response-ext")));
+        vr.body(opPath + ".responses.'500'", not(hasProperty("'x-operation-ext")));
+        vr.body(opPath + ".responses.'503'", hasEntry(equalTo("x-operation-ext"), equalTo("test-operation-ext")));
     }
 }

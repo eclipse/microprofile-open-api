@@ -61,8 +61,11 @@ public class PetStoreResource {
     @GET
     @Path("/inventory")
     @Produces({"application/json", "application/xml"})
-    @APIResponse(responseCode = "200", description = "successful operation")
+    @APIResponse(responseCode = "200", description = "successful operation", extensions = @Extension(name = "x-response-ext", value = "test-response-ext"))
+    @APIResponse(responseCode = "500", description = "server error", extensions = {})
+    @APIResponse(responseCode = "503", description = "service not available")
     @Operation(summary = "Returns pet inventories by status", description = "Returns a map of status codes to quantities")
+    @Extension(name = "x-operation-ext", value = "test-operation-ext")
     public java.util.Map<String, Integer> getInventory() {
         return petData.getInventoryByStatus();
     }
