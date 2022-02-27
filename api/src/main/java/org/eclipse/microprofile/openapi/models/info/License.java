@@ -23,7 +23,7 @@ import org.eclipse.microprofile.openapi.models.Extensible;
 /**
  * This interface represents the License information for the exposed API.
  *
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.md#licenseObject"
+ * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#licenseObject"
  */
 public interface License extends Constructible, Extensible<License> {
 

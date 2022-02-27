@@ -26,7 +26,7 @@ import org.eclipse.microprofile.openapi.models.media.Content;
  * This interface represents the request body of an operation in which body parameters can be specified.
  *
  * @see <a href=
- *      "https://github.com/OAI/OpenAPI-Specification/blob/3.0.0-rc2/versions/3.0.md#requestBodyObject">requestBody
+ *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#requestBodyObject">requestBody
  *      Object</a>
  */
 public interface RequestBody extends Constructible, Extensible<RequestBody>, Reference<RequestBody> {
