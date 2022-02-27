@@ -15,10 +15,12 @@ jobs:
       - uses: actions/checkout@v2
         name: checkout
 
-      - uses: actions/setup-java@v1
+      - uses: actions/setup-java@v2
         name: set up jdk ${{matrix.java}}
         with:
           java-version: ${{matrix.java}}
+          distribution: 'temurin'
+          cache: 'maven'
 
       - name: build with maven
         run: mvn -B --no-transfer-progress verify javadoc:javadoc --file pom.xml
