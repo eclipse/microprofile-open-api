@@ -22,6 +22,7 @@ import org.eclipse.microprofile.openapi.annotations.media.DiscriminatorMapping;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirements;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
@@ -61,9 +62,11 @@ public class PetStoreResource {
     @GET
     @Path("/inventory")
     @Produces({"application/json", "application/xml"})
-    @APIResponse(responseCode = "200", description = "successful operation", extensions = @Extension(name = "x-response-ext", value = "test-response-ext"))
-    @APIResponse(responseCode = "500", description = "server error", extensions = {})
-    @APIResponse(responseCode = "503", description = "service not available")
+    @APIResponses(extensions = @Extension(name = "x-responses-ext", value = "test-responses-ext"), value = {
+            @APIResponse(responseCode = "200", description = "successful operation", extensions = @Extension(name = "x-response-ext", value = "test-response-ext")),
+            @APIResponse(responseCode = "500", description = "server error", extensions = {}),
+            @APIResponse(responseCode = "503", description = "service not available", content = @Content(extensions = @Extension(name = "x-notavailable-ext", value = "true"))),
+    })
     @Operation(summary = "Returns pet inventories by status", description = "Returns a map of status codes to quantities")
     @Extension(name = "x-operation-ext", value = "test-operation-ext")
     public java.util.Map<String, Integer> getInventory() {

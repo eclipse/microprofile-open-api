@@ -22,6 +22,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
+
 /**
  * This object provides schema and examples for a particular media type.
  * 
@@ -72,4 +74,12 @@ public @interface Content {
      */
     Encoding[] encoding() default {};
 
+    /**
+     * The list of optional extensions.
+     *
+     * @return an optional array of extensions
+     * 
+     * @since 3.1
+     */
+    Extension[] extensions() default {};
 }

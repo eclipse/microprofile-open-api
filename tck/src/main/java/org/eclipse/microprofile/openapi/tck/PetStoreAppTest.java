@@ -23,7 +23,6 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasKey;
-import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
@@ -315,9 +314,14 @@ public class PetStoreAppTest extends AppTestBase {
 
         vr.body(opPath, hasEntry(equalTo("x-operation-ext"), equalTo("test-operation-ext")));
 
-        vr.body(opPath + ".responses.'200'", not(hasProperty("'x-operation-ext")));
+        vr.body(opPath + ".responses", hasEntry(equalTo("x-responses-ext"), equalTo("test-responses-ext")));
+        vr.body(opPath + ".responses.'200'", not(hasKey("'x-operation-ext")));
         vr.body(opPath + ".responses.'200'", hasEntry(equalTo("x-response-ext"), equalTo("test-response-ext")));
-        vr.body(opPath + ".responses.'500'", not(hasProperty("'x-operation-ext")));
+        vr.body(opPath + ".responses.'500'", not(hasKey("'x-operation-ext")));
         vr.body(opPath + ".responses.'503'", hasEntry(equalTo("x-operation-ext"), equalTo("test-operation-ext")));
+        vr.body(opPath + ".responses.'503'.content.'application/json'",
+                hasEntry(equalTo("x-notavailable-ext"), equalTo("true")));
+        vr.body(opPath + ".responses.'503'.content.'application/xml'",
+                hasEntry(equalTo("x-notavailable-ext"), equalTo("true")));
     }
 }
