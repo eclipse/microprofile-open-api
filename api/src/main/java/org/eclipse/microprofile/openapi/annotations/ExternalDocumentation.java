@@ -59,9 +59,10 @@ public @interface ExternalDocumentation {
     String url() default "";
 
     /**
-     * The list of optional extensions.
+     * List of extensions to be added to the {@link org.eclipse.microprofile.openapi.models.ExternalDocumentation
+     * ExternalDocumentation} model corresponding to the containing annotation.
      *
-     * @return an optional array of extensions
+     * @return array of extensions
      * 
      * @since 3.1
      */

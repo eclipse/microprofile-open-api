@@ -35,11 +35,11 @@ import java.lang.annotation.Target;
  * remove the capability of placing this annotation directly on a Java element.
  * 
  * <p>
- * When {@literal @}Extension annotations are used both directly on a Java element as well as within another annotation
+ * When {@code @Extension} annotations are used both directly on a Java element as well as within another annotation
  * that targets the same Java element, implementations will apply only the nested extensions to the resulting model.
  * 
  * <p>
- * Example of <em>preferred</em> use with {@literal @}Extension nested within an {@literal @}Schema annotation:
+ * Example of <em>preferred</em> use with {@code @Extension} nested within an {@code @Schema} annotation:
  * 
  * <pre>
  * class MyPojo {
@@ -55,7 +55,7 @@ import java.lang.annotation.Target;
  * </pre>
  * 
  * <p>
- * Example of <em>deprecated</em> use with {@literal @}Extension placed directly on a field implied to be a schema
+ * Example of <em>deprecated</em> use with {@code @Extension} placed directly on a field implied to be a schema
  * property:
  * 
  * <pre>
