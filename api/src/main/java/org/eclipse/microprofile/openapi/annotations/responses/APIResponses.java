@@ -22,6 +22,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
+
 /**
  * The ApiResponses annotation is a container for @ApiResponse annotations. When used on a method it is treated as if
  * each ApiResponse annotation were applied individually.
@@ -40,4 +42,13 @@ public @interface APIResponses {
      **/
     APIResponse[] value() default {};
 
+    /**
+     * List of extensions to be added to the {@link org.eclipse.microprofile.openapi.models.responses.APIResponses
+     * APIResponses} model corresponding to the containing annotation.
+     *
+     * @return array of extensions
+     * 
+     * @since 3.1
+     */
+    Extension[] extensions() default {};
 }

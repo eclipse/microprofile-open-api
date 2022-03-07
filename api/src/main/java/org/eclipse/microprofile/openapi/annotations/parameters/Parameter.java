@@ -27,6 +27,7 @@ import java.lang.annotation.Target;
 import org.eclipse.microprofile.openapi.annotations.enums.Explode;
 import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
 import org.eclipse.microprofile.openapi.annotations.enums.ParameterStyle;
+import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.ExampleObject;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
@@ -206,4 +207,14 @@ public @interface Parameter {
      * @return reference to a parameter
      **/
     String ref() default "";
+
+    /**
+     * List of extensions to be added to the {@link org.eclipse.microprofile.openapi.models.parameters.Parameter
+     * Parameter} model corresponding to the containing annotation.
+     *
+     * @return array of extensions
+     * 
+     * @since 3.1
+     */
+    Extension[] extensions() default {};
 }

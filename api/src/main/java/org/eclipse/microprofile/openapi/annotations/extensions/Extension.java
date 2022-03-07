@@ -24,7 +24,51 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * A named extension that should be added to the OpenAPI definition.
+ * A named extension that should be added to the OpenAPI definition. The names of all extensions MUST begin with
+ * {@code x-} or else an invalid document will potentially be created.
+ * 
+ * <p>
+ * Although this annotation may currently be placed directly on a Java language element target, application developers
+ * should instead utilize the {@code extensions} property of the particular annotation that corresponds to the model
+ * being extended. Use of the annotation directly on a Java element is often ambiguous and it may result in the
+ * extension being added to an incorrect location in the OpenAPI model. Future releases of MicroProfile OpenAPI may
+ * remove the capability of placing this annotation directly on a Java element.
+ * 
+ * <p>
+ * When {@code @Extension} annotations are used both directly on a Java element as well as within another annotation
+ * that targets the same Java element, implementations will apply only the nested extensions to the resulting model.
+ * 
+ * <p>
+ * Example of <em>preferred</em> use with {@code @Extension} nested within an {@code @Schema} annotation:
+ * 
+ * <pre>
+ * class MyPojo {
+ *
+ *     {@literal @}Schema(
+ *         type = SchemaType.STRING,
+ *         extensions = {@literal @}Extension(
+ *             name = "x-custom-property",
+ *             value = "custom-value")
+ *     String property1;
+ * 
+ * }
+ * </pre>
+ * 
+ * <p>
+ * Example of <em>deprecated</em> use with {@code @Extension} placed directly on a field implied to be a schema
+ * property:
+ * 
+ * <pre>
+ * class MyPojo {
+ *
+ *     {@literal @}Extension(
+ *         name = "x-custom-property",
+ *         value = "custom-value")
+ *     String property1;
+ *
+ * }
+ * </pre>
+ * 
  */
 @Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
@@ -32,9 +76,10 @@ import java.lang.annotation.Target;
 public @interface Extension {
 
     /**
-     * A name for the extension.
+     * A name for the extension. The names of all extensions MUST begin with {@code x-} or else an invalid document will
+     * potentially be created.
      *
-     * @return an option name for these extensions - will be prefixed with "x-"
+     * @return an option name for these extensions - must be prefixed with {@code x-}
      */
     String name();
 

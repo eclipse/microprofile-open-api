@@ -26,6 +26,7 @@ import java.lang.annotation.Target;
 
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeIn;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
+import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 
 /**
  * Defines a security scheme that can be used by the operations. Supported schemes are HTTP authentication, an API key
@@ -137,4 +138,13 @@ public @interface SecurityScheme {
      **/
     String ref() default "";
 
+    /**
+     * List of extensions to be added to the {@link org.eclipse.microprofile.openapi.models.security.SecurityScheme
+     * SecurityScheme} model corresponding to the containing annotation.
+     *
+     * @return array of extensions
+     * 
+     * @since 3.1
+     */
+    Extension[] extensions() default {};
 }

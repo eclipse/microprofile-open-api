@@ -22,6 +22,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import org.eclipse.microprofile.openapi.annotations.callbacks.Callback;
+import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 import org.eclipse.microprofile.openapi.annotations.headers.Header;
 import org.eclipse.microprofile.openapi.annotations.links.Link;
 import org.eclipse.microprofile.openapi.annotations.media.ExampleObject;
@@ -105,4 +106,15 @@ public @interface Components {
      * @return the reusable Callback objects.
      */
     Callback[] callbacks() default {};
+
+    /**
+     * List of extensions to be added to the {@link org.eclipse.microprofile.openapi.models.Components Components} model
+     * corresponding to the containing annotation.
+     *
+     * @return array of extensions
+     * 
+     * @since 3.1
+     */
+    Extension[] extensions() default {};
+
 }

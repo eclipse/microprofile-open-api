@@ -24,6 +24,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
+
 /**
  * This annotation represents a Server used in an operation or used by all operations in an OpenAPI document.
  * <p>
@@ -72,4 +74,13 @@ public @interface Server {
      **/
     ServerVariable[] variables() default {};
 
+    /**
+     * List of extensions to be added to the {@link org.eclipse.microprofile.openapi.models.servers.Server Server} model
+     * corresponding to the containing annotation.
+     *
+     * @return array of extensions
+     * 
+     * @since 3.1
+     */
+    Extension[] extensions() default {};
 }

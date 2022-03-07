@@ -22,6 +22,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 import org.eclipse.microprofile.openapi.annotations.headers.Header;
 
 /**
@@ -103,4 +104,13 @@ public @interface Encoding {
      */
     Header[] headers() default {};
 
+    /**
+     * List of extensions to be added to the {@link org.eclipse.microprofile.openapi.models.media.Encoding Encoding}
+     * model corresponding to the containing annotation.
+     *
+     * @return array of extensions
+     * 
+     * @since 3.1
+     */
+    Extension[] extensions() default {};
 }

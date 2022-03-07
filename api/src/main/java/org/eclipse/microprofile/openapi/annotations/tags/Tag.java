@@ -25,6 +25,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
+import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 
 /**
  * This object represents a tag. A tag is meta-information you can use to help organize your API end-points and it can
@@ -107,4 +108,14 @@ public @interface Tag {
      * @return reference to a tag
      **/
     String ref() default "";
+
+    /**
+     * List of extensions to be added to the {@link org.eclipse.microprofile.openapi.models.tags.Tag Tag} model
+     * corresponding to the containing annotation.
+     *
+     * @return array of extensions
+     * 
+     * @since 3.1
+     */
+    Extension[] extensions() default {};
 }

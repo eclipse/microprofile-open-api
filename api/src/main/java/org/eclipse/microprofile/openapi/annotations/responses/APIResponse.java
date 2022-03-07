@@ -24,6 +24,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 import org.eclipse.microprofile.openapi.annotations.headers.Header;
 import org.eclipse.microprofile.openapi.annotations.links.Link;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
@@ -129,4 +130,13 @@ public @interface APIResponse {
      **/
     String ref() default "";
 
+    /**
+     * List of extensions to be added to the {@link org.eclipse.microprofile.openapi.models.responses.APIResponse
+     * APIResponse} model corresponding to the containing annotation.
+     *
+     * @return array of extensions
+     * 
+     * @since 3.1
+     */
+    Extension[] extensions() default {};
 }

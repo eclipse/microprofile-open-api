@@ -23,6 +23,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
+
 /**
  * Describes a single API operation on a path.
  * 
@@ -75,4 +77,14 @@ public @interface Operation {
      * @return whether or not this operation is hidden
      */
     boolean hidden() default false;
+
+    /**
+     * List of extensions to be added to the {@link org.eclipse.microprofile.openapi.models.Operation Operation} model
+     * corresponding to the containing annotation.
+     *
+     * @return array of extensions
+     * 
+     * @since 3.1
+     */
+    Extension[] extensions() default {};
 }
