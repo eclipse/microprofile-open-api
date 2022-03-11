@@ -22,6 +22,7 @@ import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.hasSize;
@@ -30,6 +31,7 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.startsWith;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
+import static org.hamcrest.core.CombinableMatcher.either;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -918,6 +920,30 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(content, notNullValue());
         vr.body(content + ".'*/*'", notNullValue());
         vr.body(content + ".'*/*'.schema.type", equalTo("string"));
+    }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testDefaultParameterRequirement(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+
+        String params = "paths.'/reviews/users/{user}'.get.parameters";
+        vr.body(params, notNullValue());
+
+        vr.body(params + ".find{ it.name == 'user' }", hasEntry(equalTo("in"), equalTo("path")));
+        vr.body(params + ".find{ it.name == 'user' }", hasEntry(equalTo("required"), equalTo(true)));
+
+        vr.body(params + ".find{ it.name == 'minRating' }", hasEntry(equalTo("in"), equalTo("query")));
+        vr.body(params + ".find{ it.name == 'minRating' }", either(not(hasKey("required")))
+            .or(hasEntry(equalTo("required"), equalTo(false))));
+
+        vr.body(params + ".find{ it.name == 'If-Match' }", hasEntry(equalTo("in"), equalTo("header")));
+        vr.body(params + ".find{ it.name == 'If-Match' }", either(not(hasKey("required")))
+            .or(hasEntry(equalTo("required"), equalTo(false))));
+
+        vr.body(params + ".find{ it.name == 'trackme' }", hasEntry(equalTo("in"), equalTo("cookie")));
+        vr.body(params + ".find{ it.name == 'trackme' }", either(not(hasKey("required")))
+            .or(hasEntry(equalTo("required"), equalTo(false))));
     }
 
     @RunAsClient

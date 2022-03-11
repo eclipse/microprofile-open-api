@@ -51,12 +51,16 @@ import org.eclipse.microprofile.openapi.apps.airlines.model.Review;
 import org.eclipse.microprofile.openapi.apps.airlines.model.User;
 
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.CookieParam;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.HeaderParam;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.EntityTag;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 
@@ -73,6 +77,7 @@ import jakarta.ws.rs.core.Response.Status;
 public class ReviewResource {
 
     private static Map<Integer, Review> reviews = new ConcurrentHashMap<Integer, Review>();
+    private static Map<String, Long> visits = new ConcurrentHashMap<>();
     private volatile int currentId = 0;
 
     static {
@@ -121,19 +126,35 @@ public class ReviewResource {
     })
     @Produces("application/json")
     public Response getReviewByUser(
-            @Parameter(name = "user", description = "username of the user for the reviews", required = true, in = ParameterIn.PATH, content = @Content(examples = @ExampleObject(name = "example", value = "bsmith")), examples = {
+            @Parameter(name = "user", description = "username of the user for the reviews", in = ParameterIn.PATH, content = @Content(examples = @ExampleObject(name = "example", value = "bsmith")), examples = {
                     @ExampleObject(name = "example1", value = "bsmith"),
-                    @ExampleObject(name = "example2", value = "pat@example.com")}) @PathParam("user") String user) {
+                    @ExampleObject(name = "example2", value = "pat@example.com")}) @PathParam("user") String user,
+            @QueryParam("minRating") Integer minRating,
+            @HeaderParam("If-Match") String ifMatch,
+            @CookieParam("trackme") String trackme) {
+
+        if (trackme != null) {
+            visits.compute(trackme, (k, v) -> v != null ? v + 1 : 1);
+        }
 
         List<Review> reviewsByUser = new ArrayList<Review>();
+
         for (Review review : reviews.values()) {
             User currentUser = review.getUser();
-            if (currentUser.getUserName() == user) {
+            if (currentUser.getUserName() == user && (minRating == null || review.getRating() >= minRating)) {
                 reviewsByUser.add(review);
             }
         }
+
         if (!reviewsByUser.isEmpty()) {
-            return Response.ok().entity(reviewsByUser).build();
+            String entityHash = String.valueOf(reviewsByUser.hashCode());
+            EntityTag etag = new EntityTag(entityHash);
+
+            if (ifMatch != null && ifMatch.equals(String.valueOf(reviewsByUser.hashCode()))) {
+                return Response.notModified(etag).build();
+            }
+
+            return Response.ok().entity(reviewsByUser).tag(etag).build();
         } else {
             return Response.status(Status.NOT_FOUND).build();
         }
