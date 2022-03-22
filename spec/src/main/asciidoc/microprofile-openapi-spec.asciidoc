@@ -779,7 +779,8 @@ ignore, reject, or pass-through invalid inputs).
 
 === Cross Origin Resource Sharing (CORS)
 
-The MP OpenAPI 1.0 specification does not require vendors to support https://www.w3.org/TR/cors/[CORS]
-for the `/openapi` endpoint.  The behavior of CORS requests is implementation dependent.
+The MP OpenAPI specification does not mandate but recommend vendors to support https://www.w3.org/TR/cors/[CORS]
+for the `/openapi` endpoint.  Without the CORS support, the tools such as Swagger-UI might experience some errors. 
+However, the behavior of CORS requests is implementation dependent. 
 
 include::release_notes.asciidoc[]
