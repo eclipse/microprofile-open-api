@@ -935,15 +935,15 @@ public class AirlinesAppTest extends AppTestBase {
 
         vr.body(params + ".find{ it.name == 'minRating' }", hasEntry(equalTo("in"), equalTo("query")));
         vr.body(params + ".find{ it.name == 'minRating' }", either(not(hasKey("required")))
-            .or(hasEntry(equalTo("required"), equalTo(false))));
+                .or(hasEntry(equalTo("required"), equalTo(false))));
 
         vr.body(params + ".find{ it.name == 'If-Match' }", hasEntry(equalTo("in"), equalTo("header")));
         vr.body(params + ".find{ it.name == 'If-Match' }", either(not(hasKey("required")))
-            .or(hasEntry(equalTo("required"), equalTo(false))));
+                .or(hasEntry(equalTo("required"), equalTo(false))));
 
         vr.body(params + ".find{ it.name == 'trackme' }", hasEntry(equalTo("in"), equalTo("cookie")));
         vr.body(params + ".find{ it.name == 'trackme' }", either(not(hasKey("required")))
-            .or(hasEntry(equalTo("required"), equalTo(false))));
+                .or(hasEntry(equalTo("required"), equalTo(false))));
     }
 
     @RunAsClient
