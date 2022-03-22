@@ -16,7 +16,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-[[release_notes_20]]
+[[release_notes_30]]
 == Release Notes for Microprofile OpenAPI 3.0
 
 A full list of changes delivered in the 3.0 release can be found at link:https://github.com/eclipse/microprofile-open-api/milestone/4?closed=1[MicroProfile OpenAPI 3.0 Milestone].
