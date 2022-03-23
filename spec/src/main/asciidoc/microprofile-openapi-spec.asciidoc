@@ -48,7 +48,7 @@ clear and complete contract.  Similar to the WSDL contract for legacy Web Servic
 the https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md[OpenAPI v3] specification is the contract for
 RESTful Services.
 
-This MicroProfile specification, called OpenAPI 1.0, aims to provide a set of Java
+This MicroProfile specification, called OpenAPI, aims to provide a set of Java
 interfaces and programming models which allow Java developers to natively produce
 OpenAPI v3 documents from their JAX-RS applications.
 
@@ -739,7 +739,7 @@ add that context root (`/myApp`) to every `pathItem` defined in that application
 
 === Multiple applications
 
-The 1.0 version of the MicroProfile OpenAPI specification does not define how
+The MicroProfile OpenAPI specification does not define how
 the `/openapi` endpoint may be partitioned in the event that the MicroProfile
 runtime supports deployment of multiple applications. If an implementation wishes
 to support multiple applications within a MicroProfile runtime, the semantics of
@@ -762,7 +762,7 @@ Therefore, vendors are required to exclude from the final OAS3 document any inte
 == Limitations
 
 === Internationalization
-The 1.0 version of the MicroProfile OpenAPI spec does not require vendors to
+The MicroProfile OpenAPI spec does not require vendors to
 support multiple languages based on the `Accept-Language`.  One reasonable
 approach is for vendors to support unique keys (instead of hardcoded text) via
 the various <<Documentation Mechanisms>>, so that the implementing framework can
@@ -772,7 +772,7 @@ processed languages can be kept to improve performance.
 
 === Validation
 
-The MP OpenAPI 1.0 specification does not mandate vendors to validate the resulting
+The MP OpenAPI specification does not mandate vendors to validate the resulting
 OpenAPI v3 model (after processing the 5 steps previously mentioned), which means
 that the behavior of invalid models is vendor specific (i.e. vendors may choose to
 ignore, reject, or pass-through invalid inputs).
@@ -782,5 +782,6 @@ ignore, reject, or pass-through invalid inputs).
 The MP OpenAPI specification does not mandate but recommends vendors support https://www.w3.org/TR/cors/[CORS]
 for the `/openapi` endpoint.  Without CORS support, tools such as Swagger-UI might experience some errors. 
 However, the behavior of CORS requests is implementation dependent.
+
 
 include::release_notes.asciidoc[]
