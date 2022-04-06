@@ -119,6 +119,10 @@ Configuration property to specify the list of packages to exclude from scans. Fo
 Configuration property to specify the list of classes to exclude from scans. For example,
 `mp.openapi.scan.exclude.classes=com.xyz.MyClassC,com.xyz.MyClassD`
 
+[#scan-beanvalidation-config]
+`mp.openapi.scan.beanvalidation`::
+Configuration property to enable or disable the scanning and processing of Jakarta Bean Validation annotations. Defaults to `true`.
+
 `mp.openapi.servers`::
 Configuration property to specify the list of global servers that provide connectivity information. For example,
 `mp.openapi.servers=https://xyz.com/v1,https://abc.com/v1`
@@ -572,6 +576,48 @@ post:
 
 
 For more samples please see the https://github.com/eclipse/microprofile-open-api/wiki[MicroProfile Wiki].
+
+==== Jakarta Bean Validation Annotations
+
+In some cases, additional schema restrictions can be inferred from Jakarta Bean Validation annotations and used to enhance the generated OpenAPI document.
+
+Implementations are required to process Jakarta Bean Validation annotations and add the properties listed in the table below to the schema model when:
+* the annotation is applied to to an element for which a schema is generated and
+* the annotation and generated schema type are listed together in the table below and
+* the annotation has a `group` attribute which is empty or includes `jakarta.validation.groups.Default` and
+* the user has not set any of the relevant property values using other annotations and
+* processing of bean validation annotations has not been disabled <<scan-beanvalidation-config,via configuration>>
+
+|===
+| Annotation | Schema type | Schema properties to set
+| `@NotEmpty` | `string` | `minLength = 1`
+| `@NotEmpty` | `array` | `minItems = 1`
+| `@NotEmpty` | `object` | `minProperties = 1`
+| `@NotBlank` | `string` | `pattern = \S`
+| `@Size(min = a, max = b)` | `string`
+| `minLength = a` +
+`maxLenth = b`
+| `@Size(min = a, max = b)` | `array`
+| `minItems = a` +
+`maxItems = b`
+| `@Size(min = a, max = b)` | `object`
+| `minProperties = a` +
+`maxProperties = b`
+| `@DecimalMax(value = a)` | `number` or `integer` | `maximum = a`
+| `@DecimalMax(value = a, exclusive = false)` | `number` or `integer` | `maximum = a` +
+`exclusiveMaximum = true`
+| `@DecimalMin(value = a)` | `number` or `integer` | `minimum = a`
+| `@DecimalMin(value = a, exclusive = false)` | `number` or `integer` | `minimum = a` +
+`exclusiveMinimum = true`
+| `@Max(a)` | `number` or `integer` | `maximum = a`
+| `@Min(a)` | `number` or `integer` | `minimum = a`
+| `@Negative` | `number` or `integer` | `maximum = 0` +
+`exclusiveMaximum = true`
+| `@NegativeOrZero` | `number` or `integer` | `maximum = 0`
+| `@Positive` | `number` or `integer` | `minimum = 0` +
+`exclusiveMinimum = true`
+| `@PositiveOrZero` | `number` or `integer` | `minimum = 0`
+|===
 
 === Static OpenAPI files
 
