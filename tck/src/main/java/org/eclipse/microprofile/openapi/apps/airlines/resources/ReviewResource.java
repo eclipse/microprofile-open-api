@@ -74,6 +74,8 @@ import jakarta.ws.rs.core.Response.Status;
         @Tag(name = "Reviews", description = "All the review methods"),
         @Tag(name = "Ratings", description = "All the ratings methods")
 })
+@APIResponse(responseCode = "429", description = "Client is rate limited")
+@APIResponse(responseCode = "500", description = "Server error")
 public class ReviewResource {
 
     private static Map<Integer, Review> reviews = new ConcurrentHashMap<Integer, Review>();

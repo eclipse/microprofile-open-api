@@ -56,6 +56,7 @@ import jakarta.ws.rs.core.Response;
 @Produces({"application/json", "application/xml"})
 @SecurityScheme(description = "user security scheme", type = SecuritySchemeType.HTTP, securitySchemeName = "httpSchemeForTest", scheme = "testScheme")
 @SecurityRequirement(name = "httpSchemeForTest")
+@APIResponse(responseCode = "400", description = "Invalid request")
 public class UserResource {
 
     private static UserData userData = new UserData();
