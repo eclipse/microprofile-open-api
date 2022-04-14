@@ -48,6 +48,9 @@ public class User {
     @Schema(required = true, example = "1")
     private int status;
 
+    @Schema(hidden = true)
+    private String undocumentedProperty;
+
     /**
      * Creates a User instance with the parameters specified.
      * 
@@ -277,6 +280,14 @@ public class User {
      */
     public void setUserStatus(int status) {
         this.status = status;
+    }
+
+    public String getUndocumentedProperty() {
+        return undocumentedProperty;
+    }
+
+    public void setUndocumentedProperty(String undocumentedProperty) {
+        this.undocumentedProperty = undocumentedProperty;
     }
 
 }
