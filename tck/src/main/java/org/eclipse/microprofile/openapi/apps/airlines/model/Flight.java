@@ -15,6 +15,7 @@ package org.eclipse.microprofile.openapi.apps.airlines.model;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
+@Schema(additionalProperties = String.class)
 public class Flight {
 
     @Schema(required = true)

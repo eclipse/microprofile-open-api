@@ -15,6 +15,7 @@ package org.eclipse.microprofile.openapi.apps.airlines.model;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
+@Schema(additionalProperties = Schema.False.class)
 public class CreditCard {
 
     @Schema(required = true, example = "VISA")
