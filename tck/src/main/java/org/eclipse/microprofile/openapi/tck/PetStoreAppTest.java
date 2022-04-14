@@ -39,7 +39,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.testng.annotations.Test;
 
 import io.restassured.response.ValidatableResponse;
-import jakarta.ws.rs.core.MediaType;
 
 public class PetStoreAppTest extends AppTestBase {
     @Deployment(name = "petstore")
@@ -204,22 +203,6 @@ public class PetStoreAppTest extends AppTestBase {
                 .when().get("/openapi")
                 .then()
                 .assertThat()
-                .statusCode(200)
-                .and()
-                .body("openapi", startsWith("3.0."));
-    }
-
-    @RunAsClient
-    @Test
-    public void testJsonResponseTypeWithQueryParameter() {
-        given()
-                .noFilters()
-                .queryParam("format", "JSON")
-                .when().get("/openapi")
-                .then()
-                .assertThat()
-                .contentType(MediaType.APPLICATION_JSON)
-                .and()
                 .statusCode(200)
                 .and()
                 .body("openapi", startsWith("3.0."));
