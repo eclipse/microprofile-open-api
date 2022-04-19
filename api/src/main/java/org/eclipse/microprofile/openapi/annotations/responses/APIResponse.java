@@ -51,9 +51,9 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
  * specified responseCode the response is not added to that operation.
  * 
  * <p>
- * When this annotation is applied to an <code>ExceptionMapper</code>, it allows developers to describe the API response
- * that will be added to a generated OpenAPI operation based on a JAX-RS method that declares an <code>Exception</code>
- * of the type handled by the <code>ExceptionMapper</code>.
+ * When this annotation is applied to an <code>ExceptionMapper</code> class or <code>toResponse</code> method, it allows
+ * developers to describe the API response that will be added to a generated OpenAPI operation based on a JAX-RS method
+ * that declares an <code>Exception</code> of the type handled by the <code>ExceptionMapper</code>.
  * 
  * <pre>
  * &#64;Provider

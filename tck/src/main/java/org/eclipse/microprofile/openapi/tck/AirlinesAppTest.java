@@ -1029,6 +1029,14 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/user/{username}'.get.responses.'404'.description", equalTo("Not Found"));
 
         vr.body("paths.'/user/{id}'.get.responses.'404'.content.'application/json'.schema", notNullValue());
+
+        vr.body("paths.'/reviews'.post.responses.'400'.description", equalTo("The review was rejected"));
+        vr.body("paths.'/reviews'.post.responses.'400'.content.'application/json'.schema", notNullValue());
+
+        String rejectedReviewSchema =
+                dereference(vr, "paths.'/reviews'.post.responses.'400'.content.'application/json'.schema");
+        vr.body(rejectedReviewSchema + ".type", equalTo("object"));
+        vr.body(rejectedReviewSchema + ".properties", hasKey("reason"));
     }
 
 }

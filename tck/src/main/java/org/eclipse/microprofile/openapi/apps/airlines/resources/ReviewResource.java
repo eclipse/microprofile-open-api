@@ -46,6 +46,7 @@ import org.eclipse.microprofile.openapi.annotations.servers.ServerVariable;
 import org.eclipse.microprofile.openapi.annotations.servers.Servers;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.eclipse.microprofile.openapi.annotations.tags.Tags;
+import org.eclipse.microprofile.openapi.apps.airlines.exception.ReviewRejectedException;
 import org.eclipse.microprofile.openapi.apps.airlines.model.Airline;
 import org.eclipse.microprofile.openapi.apps.airlines.model.Review;
 import org.eclipse.microprofile.openapi.apps.airlines.model.User;
@@ -233,7 +234,7 @@ public class ReviewResource {
     @Operation(summary = "Create a Review", operationId = "createReview")
     @Consumes("application/json")
     @Produces("application/json")
-    public Response createReview(Review review) {
+    public Response createReview(Review review) throws ReviewRejectedException {
         reviews.put(currentId, review);
         return Response.status(Status.CREATED).entity("{\"id\":" + currentId++ + "}").build();
     }
