@@ -26,6 +26,7 @@ import java.lang.annotation.Target;
 import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 import org.eclipse.microprofile.openapi.annotations.info.Info;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirementsSet;
 import org.eclipse.microprofile.openapi.annotations.servers.Server;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
@@ -67,10 +68,24 @@ public @interface OpenAPIDefinition {
 
     /**
      * A declaration of which security mechanisms can be used across the API.
-     *
-     * @return the array of servers used for this API
+     * <p>
+     * Adding a {@code SecurityRequirement} to this array is equivalent to adding a {@code SecurityRequirementsSet} containing
+     * a single {@code SecurityRequirement} to {@link #securitySets()}.
+     * 
+     * @return the array of security requirements for this API
      */
     SecurityRequirement[] security() default {};
+
+    /**
+     * A declaration of which security mechanisms can be used across the API.
+     * <p>
+     * All of the security requirements within any one of the sets must be satisfied to authorize a request.
+     * <p>
+     * Including an empty set within this list indicates that the other requirements are optional.
+     * 
+     * @return the array of security requirement sets for this API
+     */
+    SecurityRequirementsSet[] securitySets() default {};
 
     /**
      * Any additional external documentation for the API

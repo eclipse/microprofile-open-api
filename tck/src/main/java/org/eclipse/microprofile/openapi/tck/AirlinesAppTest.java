@@ -16,6 +16,8 @@
 
 package org.eclipse.microprofile.openapi.tck;
 
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.anEmptyMap;
 import static org.hamcrest.Matchers.both;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsInAnyOrder;
@@ -496,7 +498,14 @@ public class AirlinesAppTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testSecurityRequirement(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        vr.body("security.airlinesRatingApp_auth[0][0]", equalTo(null));
+        vr.body("security", containsInAnyOrder(
+                allOf(
+                        aMapWithSize(1),
+                        hasEntry(equalTo("airlinesRatingApp_auth"), empty())),
+                allOf(
+                        aMapWithSize(2),
+                        hasEntry(equalTo("testScheme1"), empty()),
+                        hasEntry(equalTo("testScheme2"), empty()))));
 
         vr.body("paths.'/reviews'.post.security.reviewoauth2[0][0]", equalTo("write:reviews"));
         vr.body("paths.'/reviews'.post.security.reviewoauth2", hasSize(1));
@@ -506,9 +515,24 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/reviews'.post.security.bookingSecurityScheme", hasSize(1));
         vr.body("paths.'/bookings'.post.security.bookingSecurityScheme[0]", hasSize(2));
 
-        vr.body("paths.'/user'.post.security.httpSchemeForTest[0][0]", equalTo(null));
+        vr.body("paths.'/user'.post.security", hasSize(1));
+        vr.body("paths.'/user'.post.security[0].keySet()", contains("httpSchemeForTest"));
+        vr.body("paths.'/user'.post.security[0].httpSchemeForTest", hasSize(0));
 
-        vr.body("paths.'/user/login'.get.security.find { it.httpTestScheme != null }.httpTestScheme", empty());
+        vr.body("paths.'/user/login'.get.security", containsInAnyOrder(
+                allOf(
+                        aMapWithSize(1),
+                        hasEntry(equalTo("httpTestScheme"), empty())),
+                allOf(
+                        aMapWithSize(2),
+                        hasEntry(equalTo("testScheme1"), empty()),
+                        hasEntry(equalTo("testScheme2"), empty())),
+                anEmptyMap()));
+
+        vr.body("paths.'/user/{username}'.patch.security", contains(
+                allOf(aMapWithSize(2),
+                        hasEntry(equalTo("userApiKey"), empty()),
+                        hasEntry(equalTo("userBearerHttp"), empty()))));
     }
 
     @RunAsClient

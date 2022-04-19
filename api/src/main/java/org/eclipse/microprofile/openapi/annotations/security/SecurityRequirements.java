@@ -23,8 +23,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This object represents an array of security requirements that can be specified for the operation or at definition
- * level. Only one of requirements needs be satisfied
+ * Container annotation for repeated {@link SecurityRequirement} annotations.
+ * <p>
+ * Note that <em>each</em> {@code SecurityRequirement} annotation is equivalent to a {@link SecurityRequirementsSet} annotation containing only that
+ * annotation.
  * 
  * <pre>
  * <b>Example:</b> 
@@ -42,7 +44,7 @@ import java.lang.annotation.Target;
 @Inherited
 public @interface SecurityRequirements {
     /**
-     * An array of SecurityRequirement annotations that can be specified for the operation or at definition level.
+     * An array of SecurityRequirement annotations
      *
      * @return the array of the SecurityRequirement annotations
      **/

@@ -18,13 +18,30 @@ package org.eclipse.microprofile.openapi.annotations.security;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
+import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
+
 /**
- * This object represents a map of security requirements that can be specified for the operation or at definition level.
- * All requirements in a set must be satisfied
+ * This annotation represents a set of security requirements which permit access to an operation if all of them are satisfied.
+ * <p>
+ * If this annotation is applied to a method which corresponds to an operation, then the requirements will be added to that operation.
+ * <p>
+ * If this annotation is applied to a class which contains methods which correspond to operations, then the requirements will be added to all
+ * operations corresponding to methods within that class which don't specify any other requirements.
+ * <p>
+ * Security requirements can be specified for the whole API using {@link OpenAPIDefinition#securitySets()}. Security requirements specified
+ * for individual operations override those specified for the whole API.
+ * <p>
+ * If multiple security requirement sets are specified for an operation, then a user must satisfy all of the requirements within any one of the sets
+ * to access the operation.
+ * <p>
+ * An empty security requirement set indicates that authentication is not required.
+ * <p>
+ * A {@code SecurityRequirementSet} annotation corresponds to a map of security requirements in an OpenAPI document.
  * 
  * <pre>
  * <b>Example:</b> 
@@ -34,17 +51,18 @@ import java.lang.annotation.Target;
  * </pre>
  * 
  * @see <a href=
- *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-requirement-object">SecurityRequirement
- *      Object</a>
+ * "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-requirement-object">SecurityRequirement
+ * Object</a>
  **/
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
+@Repeatable(SecurityRequirementsSets.class)
 @Inherited
 public @interface SecurityRequirementsSet {
     /**
-     * An array of SecurityRequirement annotations that can be specified for the operation or at definition level.
+     * The security requirements which make up the set
      *
-     * @return the array of the SecurityRequirement annotations
+     * @return the array of the SecurityRequirement annotations, may be empty
      **/
     SecurityRequirement[] value() default {};
 
