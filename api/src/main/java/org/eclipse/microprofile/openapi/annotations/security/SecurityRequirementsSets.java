@@ -24,18 +24,23 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * Represents an array of security requirement sets that apply to an operation. Only one of requirement sets needs be satisfied to access the
- * operation.
+ * Represents an array of security requirement sets that apply to an operation. Only one of requirement sets needs be
+ * satisfied to access the operation.
  * <p>
- * If this annotation is applied to a method which corresponds to an operation, then the requirements will be added to that operation.
+ * If this annotation is applied to a method which corresponds to an operation, then the requirements will be added to
+ * that operation.
  * <p>
- * If this annotation is applied to a class which contains methods which correspond to operations, then the requirements will be added to all
- * operations corresponding to methods within that class which don't specify any other requirements.
+ * If this annotation is applied to a class which contains methods which correspond to operations, then the requirements
+ * will be added to all operations corresponding to methods within that class which don't specify any other
+ * requirements.
  * <p>
- * This annotation may be used with {@code value} set to an empty array. When applied like this to a method or class, it indicates that no security
- * requirements apply to the corresponding operations. This can be used to override security requirements which are specified for the whole API.
+ * This annotation may be used with {@code value} set to an empty array. When applied like this to a method or class, it
+ * indicates that no security requirements apply to the corresponding operations. This can be used to override security
+ * requirements which are specified for the whole API.
  * <p>
- * A {@code SecurityRequirementSets} annotation corresponds to an array of maps of security requirements in an OpenAPI document.
+ * A {@code SecurityRequirementSets} annotation corresponds to an array of maps of security requirements in an OpenAPI
+ * document.
+ * 
  * <pre>
  * <b>Example:</b> 
  * security: 
