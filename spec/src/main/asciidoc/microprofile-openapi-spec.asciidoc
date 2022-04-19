@@ -747,6 +747,12 @@ the `/openapi` endpoint are expected to be the logical union of all the applicat
 in the runtime, which would imply merging multiple OpenAPI documents into a single
 valid document (handling conflicting IDs and unique names).
 
+=== User Interface
+
+Vendors may provide a separate interface to allow users to vizualize or browse the
+contents of the OpenAPI document. If such a user interface is provided, it should
+be made available at `/openapi/ui`.
+
 == Integration with other MicroProfile specifications
 
 This section will outline specific integrations between MicroProfile OpenAPI and other MicroProfile specifications.
