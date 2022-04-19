@@ -25,11 +25,14 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasEntry;
+import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.Matchers.startsWith;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
@@ -283,6 +286,10 @@ public class AirlinesAppTest extends AppTestBase {
                 equalTo("This changes the password for the logged in user."));
         vr.body("paths.'/user/{username}'.patch.operationId", equalTo("changePassword"));
         vr.body("paths.'/user/{username}'.patch.parameters", hasSize(3));
+
+        // Operation with hidden schemas
+        vr.body("paths.'/user/special'.post.requestBody.content.'application/json'.schema", is(nullValue()));
+        vr.body("paths.'/user/special'.post.parameters[0].schema", is(nullValue()));
     }
 
     @RunAsClient
@@ -688,6 +695,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/user'.post.requestBody.content.'application/json'.schema.maxProperties", equalTo(1024));
         vr.body("paths.'/user'.post.requestBody.content.'application/json'.schema.minProperties", equalTo(1));
         vr.body("components.schemas.User.required", hasItems("id", "username", "password")); // requiredProperties
+        vr.body("components.schemas.User", not(hasItem("undocumentedProperty"))); // hidden property
         vr.body("components.schemas.Gender.enum", hasItems("Male", "Female", "Other"));
 
         // Array properties

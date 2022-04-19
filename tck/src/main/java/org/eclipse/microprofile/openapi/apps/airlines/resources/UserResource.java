@@ -244,4 +244,17 @@ public class UserResource {
     public Response logoutUser() {
         return Response.ok().entity("").build();
     }
+
+    /**
+     * Operation to test hiding of request body and parameter schemas
+     * 
+     * @return a user
+     */
+    @POST
+    @Path("/special")
+    public User specialOperation(@Schema(hidden = true) User body,
+            @Schema(hidden = true) @QueryParam("param1") String param1) {
+        return body;
+    }
+
 }

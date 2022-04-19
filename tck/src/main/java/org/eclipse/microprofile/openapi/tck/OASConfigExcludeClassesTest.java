@@ -48,7 +48,7 @@ public class OASConfigExcludeClassesTest extends AppTestBase {
         vr.body("info.title", equalTo("AirlinesRatingApp API"));
         vr.body("info.version", equalTo("1.0"));
 
-        vr.body("paths.", aMapWithSize(10));
+        vr.body("paths.", aMapWithSize(11));
         vr.body("paths.'/reviews'", nullValue());
         vr.body("paths.'/reviews/{id}'", nullValue());
         vr.body("paths.'/reviews/users/{user}'", nullValue());
