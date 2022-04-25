@@ -304,10 +304,17 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/bookings'.post.responses", aMapWithSize(1));
         vr.body("paths.'/bookings'.post.responses.'201'.description", equalTo("Booking created"));
 
+        // @APIResponse at class level overridden at method level
         vr.body("paths.'/user/{username}'.delete.responses", aMapWithSize(3));
         vr.body("paths.'/user/{username}'.delete.responses.'200'.description", equalTo("User deleted successfully"));
         vr.body("paths.'/user/{username}'.delete.responses.'400'.description", equalTo("Invalid username supplied"));
         vr.body("paths.'/user/{username}'.delete.responses.'404'.description", equalTo("User not found"));
+
+        // @APIResponse at class level combined with method level
+        vr.body("paths.'/user/{username}'.patch.responses", aMapWithSize(2));
+        vr.body("paths.'/user/{username}'.patch.responses.'200'.description",
+                equalTo("Password was changed successfully"));
+        vr.body("paths.'/user/{username}'.patch.responses.'400'.description", equalTo("Invalid request"));
     }
 
     @RunAsClient
@@ -319,14 +326,17 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/bookings/{id}'.get.responses.'200'.description", equalTo("Booking retrieved"));
         vr.body("paths.'/bookings/{id}'.get.responses.'404'.description", equalTo("Booking not found"));
 
-        vr.body("paths.'/reviews/users/{user}'.get.responses", aMapWithSize(2));
-        vr.body("paths.'/reviews/users/{user}'.get.responses.'200'.description", equalTo("Review(s) retrieved"));
-        vr.body("paths.'/reviews/users/{user}'.get.responses.'404'.description", equalTo("Review(s) not found"));
-
         vr.body("paths.'/user/{username}'.put.responses", aMapWithSize(3));
         vr.body("paths.'/user/{username}'.put.responses.'200'.description", equalTo("User updated successfully"));
         vr.body("paths.'/user/{username}'.put.responses.'400'.description", equalTo("Invalid user supplied"));
         vr.body("paths.'/user/{username}'.put.responses.'404'.description", equalTo("User not found"));
+
+        // @APIResponses on body combined with annotations on method
+        vr.body("paths.'/reviews/users/{user}'.get.responses", aMapWithSize(4));
+        vr.body("paths.'/reviews/users/{user}'.get.responses.'200'.description", equalTo("Review(s) retrieved"));
+        vr.body("paths.'/reviews/users/{user}'.get.responses.'404'.description", equalTo("Review(s) not found"));
+        vr.body("paths.'/reviews/users/{user}'.get.responses.'429'.description", equalTo("Client is rate limited"));
+        vr.body("paths.'/reviews/users/{user}'.get.responses.'500'.description", equalTo("Server error"));
     }
 
     @RunAsClient
@@ -1051,6 +1061,14 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/user/{username}'.get.responses.'404'.description", equalTo("Not Found"));
 
         vr.body("paths.'/user/{id}'.get.responses.'404'.content.'application/json'.schema", notNullValue());
+
+        vr.body("paths.'/reviews'.post.responses.'400'.description", equalTo("The review was rejected"));
+        vr.body("paths.'/reviews'.post.responses.'400'.content.'application/json'.schema", notNullValue());
+
+        String rejectedReviewSchema =
+                dereference(vr, "paths.'/reviews'.post.responses.'400'.content.'application/json'.schema");
+        vr.body(rejectedReviewSchema + ".type", equalTo("object"));
+        vr.body(rejectedReviewSchema + ".properties", hasKey("reason"));
     }
 
     @RunAsClient

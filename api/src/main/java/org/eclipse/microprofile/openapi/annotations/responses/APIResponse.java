@@ -46,9 +46,14 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
  * }
  * </pre>
  * <p>
- * When this annotation is applied to an <code>ExceptionMapper</code>, it allows developers to describe the API response
- * that will be added to a generated OpenAPI operation based on a JAX-RS method that declares an <code>Exception</code>
- * of the type handled by the <code>ExceptionMapper</code>.
+ * When this annotation is applied to a JAX-RS resource class, the response is added to the responses defined in all
+ * OpenAPI operations which correspond to a method on that class. If an operation already has a response with the
+ * specified responseCode the response is not added to that operation.
+ * 
+ * <p>
+ * When this annotation is applied to an <code>ExceptionMapper</code> class or <code>toResponse</code> method, it allows
+ * developers to describe the API response that will be added to a generated OpenAPI operation based on a JAX-RS method
+ * that declares an <code>Exception</code> of the type handled by the <code>ExceptionMapper</code>.
  * 
  * <pre>
  * &#64;Provider
@@ -67,7 +72,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responseObject"
  * 
  **/
-@Target({ElementType.METHOD})
+@Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Repeatable(APIResponses.class)

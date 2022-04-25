@@ -46,6 +46,7 @@ import org.eclipse.microprofile.openapi.annotations.servers.ServerVariable;
 import org.eclipse.microprofile.openapi.annotations.servers.Servers;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.eclipse.microprofile.openapi.annotations.tags.Tags;
+import org.eclipse.microprofile.openapi.apps.airlines.exception.ReviewRejectedException;
 import org.eclipse.microprofile.openapi.apps.airlines.model.Airline;
 import org.eclipse.microprofile.openapi.apps.airlines.model.Review;
 import org.eclipse.microprofile.openapi.apps.airlines.model.User;
@@ -74,6 +75,8 @@ import jakarta.ws.rs.core.Response.Status;
         @Tag(name = "Reviews", description = "All the review methods"),
         @Tag(name = "Ratings", description = "All the ratings methods")
 })
+@APIResponse(responseCode = "429", description = "Client is rate limited")
+@APIResponse(responseCode = "500", description = "Server error")
 public class ReviewResource {
 
     private static Map<Integer, Review> reviews = new ConcurrentHashMap<Integer, Review>();
@@ -231,7 +234,7 @@ public class ReviewResource {
     @Operation(summary = "Create a Review", operationId = "createReview")
     @Consumes("application/json")
     @Produces("application/json")
-    public Response createReview(Review review) {
+    public Response createReview(Review review) throws ReviewRejectedException {
         reviews.put(currentId, review);
         return Response.status(Status.CREATED).entity("{\"id\":" + currentId++ + "}").build();
     }
