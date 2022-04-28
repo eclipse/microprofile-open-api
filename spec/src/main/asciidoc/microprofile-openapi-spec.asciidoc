@@ -700,8 +700,14 @@ from the current model.
 == OpenAPI Endpoint
 
 === Overview
-A fully processed OpenAPI document must be available at the root
-URL `/openapi`, as a `HTTP GET` operation.
+A fully processed OpenAPI document must be served from the root
+URL `/openapi` in response to an `HTTP GET` request if any of the
+following conditions are met:
+
+- an `OASModelReader` has been configured with `mp.openapi.model.reader`
+- an `OASFilter` has been configured with `mp.openapi.filter`
+- one of the allowed static files is present, i.e. `META-INF/openapi.(json|yaml)`
+- the application uses JAX-RS
 
 For example, `GET http://myHost:myPort/openapi`.
 

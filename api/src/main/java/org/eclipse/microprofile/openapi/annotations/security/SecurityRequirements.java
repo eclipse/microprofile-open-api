@@ -25,8 +25,8 @@ import java.lang.annotation.Target;
 /**
  * Container annotation for repeated {@link SecurityRequirement} annotations.
  * <p>
- * Note that <em>each</em> {@code SecurityRequirement} annotation is equivalent to a {@link SecurityRequirementsSet} annotation containing only that
- * annotation.
+ * Note that <em>each</em> {@code SecurityRequirement} annotation is equivalent to a {@link SecurityRequirementsSet}
+ * annotation containing only that annotation.
  * 
  * <pre>
  * <b>Example:</b> 

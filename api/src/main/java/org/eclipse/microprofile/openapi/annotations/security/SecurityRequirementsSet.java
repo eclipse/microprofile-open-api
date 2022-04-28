@@ -26,18 +26,21 @@ import java.lang.annotation.Target;
 import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
 
 /**
- * This annotation represents a set of security requirements which permit access to an operation if all of them are satisfied.
+ * This annotation represents a set of security requirements which permit access to an operation if all of them are
+ * satisfied.
  * <p>
- * If this annotation is applied to a method which corresponds to an operation, then the requirements will be added to that operation.
+ * If this annotation is applied to a method which corresponds to an operation, then the requirements will be added to
+ * that operation.
  * <p>
- * If this annotation is applied to a class which contains methods which correspond to operations, then the requirements will be added to all
- * operations corresponding to methods within that class which don't specify any other requirements.
+ * If this annotation is applied to a class which contains methods which correspond to operations, then the requirements
+ * will be added to all operations corresponding to methods within that class which don't specify any other
+ * requirements.
  * <p>
- * Security requirements can be specified for the whole API using {@link OpenAPIDefinition#securitySets()}. Security requirements specified
- * for individual operations override those specified for the whole API.
+ * Security requirements can be specified for the whole API using {@link OpenAPIDefinition#securitySets()}. Security
+ * requirements specified for individual operations override those specified for the whole API.
  * <p>
- * If multiple security requirement sets are specified for an operation, then a user must satisfy all of the requirements within any one of the sets
- * to access the operation.
+ * If multiple security requirement sets are specified for an operation, then a user must satisfy all of the
+ * requirements within any one of the sets to access the operation.
  * <p>
  * An empty security requirement set indicates that authentication is not required.
  * <p>
@@ -51,8 +54,8 @@ import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
  * </pre>
  * 
  * @see <a href=
- * "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-requirement-object">SecurityRequirement
- * Object</a>
+ *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-requirement-object">SecurityRequirement
+ *      Object</a>
  **/
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
