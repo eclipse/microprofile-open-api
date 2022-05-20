@@ -69,8 +69,8 @@ public @interface OpenAPIDefinition {
     /**
      * A declaration of which security mechanisms can be used across the API.
      * <p>
-     * Adding a {@code SecurityRequirement} to this array is equivalent to adding a {@code SecurityRequirementsSet} containing
-     * a single {@code SecurityRequirement} to {@link #securitySets()}.
+     * Adding a {@code SecurityRequirement} to this array is equivalent to adding a {@code SecurityRequirementsSet}
+     * containing a single {@code SecurityRequirement} to {@link #securitySets()}.
      * 
      * @return the array of security requirements for this API
      */
