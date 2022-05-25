@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017 Contributors to the Eclipse Foundation
+ * Copyright (c) 2022 Contributors to the Eclipse Foundation
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,5 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
- mp.openapi.scan.packages=org.eclipse.microprofile.openapi.apps.airlines.resources.bookings
+package org.eclipse.microprofile.openapi.apps.scanconfig.x;
+
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+
+@Path("x")
+public class XResource {
+
+    @GET
+    public String get() {
+        return "x";
+    }
+}

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017 Contributors to the Eclipse Foundation
+ * Copyright (c) 2022 Contributors to the Eclipse Foundation
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,5 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
-mp.openapi.scan.exclude.classes=org.eclipse.microprofile.openapi.apps.airlines.resources.ReviewResource,org.eclipse.microprofile.openapi.apps.airlines.resources.AvailabilityResource
+package org.eclipse.microprofile.openapi.apps.scanconfig;
+
+import jakarta.ws.rs.ApplicationPath;
+import jakarta.ws.rs.core.Application;
+
+@ApplicationPath("/")
+public class ScanConfigApplication extends Application {
+
+}
