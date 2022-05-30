@@ -68,6 +68,11 @@ public final class OASConfig {
     public static final String SCAN_EXCLUDE_CLASSES = "mp.openapi.scan.exclude.classes";
 
     /**
+     * Configuration property to enable or disable scanning Jakarta Bean Validation annotations
+     */
+    public static final String SCAN_BEANVALIDATION = "mp.openapi.scan.beanvalidation";
+
+    /**
      * Configuration property to specify the list of global servers that provide connectivity information.
      * 
      */
