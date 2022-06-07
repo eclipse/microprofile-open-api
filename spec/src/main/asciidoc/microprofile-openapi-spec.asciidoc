@@ -103,21 +103,29 @@ Configuration property to specify the fully qualified name of the <<OASFilter>> 
 `mp.openapi.scan.disable`::
 Configuration property to disable annotation scanning. Default value is `false`.
 
-`mp.openapi.scan.packages`:: 
-Configuration property to specify the list of packages to scan. For example,
-`mp.openapi.scan.packages=com.xyz.PackageA,com.xyz.PackageB`
+`mp.openapi.scan.packages`::
+Configuration property to specify the list of packages to scan. Classes within the package and any subpackages will be scanned for annotations. For example,
+`mp.openapi.scan.packages=com.xyz.packageA,com.xyz.packageB`
 
 `mp.openapi.scan.classes`::
 Configuration property to specify the list of classes to scan. For example,
 `mp.openapi.scan.classes=com.xyz.MyClassA,com.xyz.MyClassB`
 
 `mp.openapi.scan.exclude.packages`::
-Configuration property to specify the list of packages to exclude from scans. For example,
-`mp.openapi.scan.exclude.packages=com.xyz.PackageC,com.xyz.PackageD`
+Configuration property to specify the list of packages to exclude from scans. Classes within the package and any subpackages will be excluded from scans. For example,
+`mp.openapi.scan.exclude.packages=com.xyz.packageC,com.xyz.packageD`
 
 `mp.openapi.scan.exclude.classes`::
 Configuration property to specify the list of classes to exclude from scans. For example,
 `mp.openapi.scan.exclude.classes=com.xyz.MyClassC,com.xyz.MyClassD`
++
+The following rules are used to determine whether a class is scanned for annotations:
++
+1. A class is not scanned if it's listed in `mp.openapi.scan.exclude.classes`
+2. A class is scanned if it's listed in `mp.openapi.scan.classes`
+3. A class is not scanned if its package, or any of its parent packages are listed in `mp.openapi.scan.exclude.packages`, unless a more complete package or parent package is listed in `mp.openapi.scan.packages`
+4. A class is scanned if its package or any of its parent packages are listed in `mp.openapi.scan.packages`
+5. A class is scanned if `mp.openapi.scan.classes` and `mp.openapi.scan.packages` are both empty or not set
 
 [#scan-beanvalidation-config]
 `mp.openapi.scan.beanvalidation`::
