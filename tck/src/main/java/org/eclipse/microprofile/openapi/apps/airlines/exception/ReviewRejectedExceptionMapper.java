@@ -22,7 +22,9 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 import jakarta.ws.rs.ext.ExceptionMapper;
 
-@APIResponse(responseCode = "400", description = "The review was rejected", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = RejectionResponse.class)))
+@APIResponse(responseCode = "400", description = "The review was rejected",
+             content = @Content(mediaType = MediaType.APPLICATION_JSON,
+                                schema = @Schema(implementation = RejectionResponse.class)))
 public class ReviewRejectedExceptionMapper implements ExceptionMapper<ReviewRejectedException> {
 
     @Override

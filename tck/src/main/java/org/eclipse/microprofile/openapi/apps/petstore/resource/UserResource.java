@@ -46,9 +46,15 @@ import jakarta.ws.rs.core.Response;
 @Schema(name = "/user")
 @Produces({"application/json", "application/xml"})
 @SecuritySchemes(value = {
-        @SecurityScheme(securitySchemeName = "userApiKey", type = SecuritySchemeType.APIKEY, description = "authentication needed to create a new user profile for the store", apiKeyName = "createOrUpdateUserProfile1", in = SecuritySchemeIn.HEADER),
-        @SecurityScheme(securitySchemeName = "userBasicHttp", type = SecuritySchemeType.HTTP, description = "authentication needed to create a new user profile for the store", scheme = "basic"),
-        @SecurityScheme(securitySchemeName = "userBearerHttp", type = SecuritySchemeType.HTTP, description = "authentication needed to create a new user profile for the store", scheme = "bearer", bearerFormat = "JWT")
+        @SecurityScheme(securitySchemeName = "userApiKey", type = SecuritySchemeType.APIKEY,
+                        description = "authentication needed to create a new user profile for the store",
+                        apiKeyName = "createOrUpdateUserProfile1", in = SecuritySchemeIn.HEADER),
+        @SecurityScheme(securitySchemeName = "userBasicHttp", type = SecuritySchemeType.HTTP,
+                        description = "authentication needed to create a new user profile for the store",
+                        scheme = "basic"),
+        @SecurityScheme(securitySchemeName = "userBearerHttp", type = SecuritySchemeType.HTTP,
+                        description = "authentication needed to create a new user profile for the store",
+                        scheme = "bearer", bearerFormat = "JWT")
 })
 public class UserResource {
     static UserData userData = new UserData();
@@ -62,7 +68,8 @@ public class UserResource {
             @SecurityRequirement(name = "userBearerHttp")
     })
     public Response createUser(
-            @Parameter(description = "Created user object", schema = @Schema(ref = "#/components/schemas/User"), required = true) User user) {
+            @Parameter(description = "Created user object", schema = @Schema(ref = "#/components/schemas/User"),
+                       required = true) User user) {
         userData.addUser(user);
         return Response.ok().entity("").build();
     }
@@ -101,7 +108,9 @@ public class UserResource {
             @SecurityRequirement(name = "userBearerHttp")
     })
     public Response updateUser(
-            @Parameter(name = "username", description = "name that need to be deleted", schema = @Schema(type = SchemaType.STRING), required = true) @PathParam("username") String username,
+            @Parameter(name = "username", description = "name that need to be deleted",
+                       schema = @Schema(type = SchemaType.STRING),
+                       required = true) @PathParam("username") String username,
             @Parameter(description = "Updated user object", required = true) User user) {
         userData.addUser(user);
         return Response.ok().entity("").build();
@@ -115,7 +124,9 @@ public class UserResource {
     })
     @Operation(summary = "Delete user", description = "This can only be done by the logged in user.")
     public Response deleteUser(
-            @Parameter(name = "username", description = "The name that needs to be deleted", schema = @Schema(type = SchemaType.STRING), required = true) @PathParam("username") String username) {
+            @Parameter(name = "username", description = "The name that needs to be deleted",
+                       schema = @Schema(type = SchemaType.STRING),
+                       required = true) @PathParam("username") String username) {
         if (userData.removeUser(username)) {
             return Response.ok().entity("").build();
         } else {
@@ -126,13 +137,18 @@ public class UserResource {
     @GET
     @Path("/{username}")
     @APIResponses(value = {
-            @APIResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(implementation = User.class))),
-            @APIResponse(responseCode = "400", description = "Invalid username supplied", content = @Content(schema = @Schema(implementation = User.class))),
-            @APIResponse(responseCode = "404", description = "User not found", content = @Content(schema = @Schema(implementation = User.class)))
+            @APIResponse(responseCode = "200", description = "successful operation",
+                         content = @Content(schema = @Schema(implementation = User.class))),
+            @APIResponse(responseCode = "400", description = "Invalid username supplied",
+                         content = @Content(schema = @Schema(implementation = User.class))),
+            @APIResponse(responseCode = "404", description = "User not found",
+                         content = @Content(schema = @Schema(implementation = User.class)))
     })
     @Operation(summary = "Get user by user name")
     public Response getUserByName(
-            @Parameter(name = "username", description = "The name that needs to be fetched. Use user1 for testing.", schema = @Schema(type = SchemaType.STRING), required = true) @PathParam("username") String username)
+            @Parameter(name = "username", description = "The name that needs to be fetched. Use user1 for testing.",
+                       schema = @Schema(type = SchemaType.STRING),
+                       required = true) @PathParam("username") String username)
             throws ApiException {
         User user = userData.findUserByName(username);
         if (null != user) {
@@ -144,12 +160,18 @@ public class UserResource {
 
     @GET
     @Path("/login")
-    @APIResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(implementation = String.class)))
-    @APIResponse(responseCode = "400", description = "Invalid username/password supplied", content = @Content(schema = @Schema(implementation = String.class)))
+    @APIResponse(responseCode = "200", description = "successful operation",
+                 content = @Content(schema = @Schema(implementation = String.class)))
+    @APIResponse(responseCode = "400", description = "Invalid username/password supplied",
+                 content = @Content(schema = @Schema(implementation = String.class)))
     @Operation(summary = "Logs user into the system")
     public Response loginUser(
-            @Parameter(name = "username", description = "The user name for login", schema = @Schema(type = SchemaType.STRING), required = true) @QueryParam("username") String username,
-            @Parameter(name = "password", description = "The password for login in clear text", schema = @Schema(type = SchemaType.STRING), required = true) @QueryParam("password") String password) {
+            @Parameter(name = "username", description = "The user name for login",
+                       schema = @Schema(type = SchemaType.STRING),
+                       required = true) @QueryParam("username") String username,
+            @Parameter(name = "password", description = "The password for login in clear text",
+                       schema = @Schema(type = SchemaType.STRING),
+                       required = true) @QueryParam("password") String password) {
         return Response.ok()
                 .entity("logged in user session:" + System.currentTimeMillis())
                 .build();
