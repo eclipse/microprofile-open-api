@@ -23,6 +23,7 @@ import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
 import org.eclipse.microprofile.openapi.annotations.enums.ParameterStyle;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
+import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.ExampleObject;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
@@ -100,7 +101,8 @@ public class BookingResource {
                          content = @Content(mediaType = "application/json", schema = @Schema(ref = "Booking"),
                                             examples = @ExampleObject(name = "booking",
                                                                       summary = "External booking example",
-                                                                      externalValue = "http://foo.bar/examples/booking-example.json"))) Booking task) {
+                                                                      externalValue = "http://foo.bar/examples/booking-example.json")),
+                         extensions = @Extension(name = "x-request-body", value = "test-request-body")) Booking task) {
         bookings.put(currentId, task);
         return Response.status(Status.CREATED).entity("{\"id\":" + currentId++ + "}").build();
     }

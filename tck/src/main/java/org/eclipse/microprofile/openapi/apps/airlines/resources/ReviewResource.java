@@ -25,6 +25,7 @@ import org.eclipse.microprofile.openapi.annotations.callbacks.Callbacks;
 import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
+import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 import org.eclipse.microprofile.openapi.annotations.headers.Header;
 import org.eclipse.microprofile.openapi.annotations.links.Link;
 import org.eclipse.microprofile.openapi.annotations.links.LinkParameter;
@@ -74,7 +75,9 @@ import jakarta.ws.rs.core.Response.Status;
                 description = "authentication needed to create and delete reviews",
                 flows = @OAuthFlows(implicit = @OAuthFlow(authorizationUrl = "https://example.com/api/oauth/dialog",
                                                           scopes = @OAuthScope(name = "write:reviews",
-                                                                               description = "create a review")),
+                                                                               description = "create a review"),
+                                                          extensions = @Extension(name = "x-oauth-flow",
+                                                                                  value = "test-oauth-flow")),
                                     authorizationCode = @OAuthFlow(authorizationUrl = "https://example.com/api/oauth/dialog",
                                                                    tokenUrl = "https://example.com/api/oauth/token",
                                                                    scopes = @OAuthScope(name = "read:reviews",
@@ -85,7 +88,8 @@ import jakarta.ws.rs.core.Response.Status;
                                                                                description = "create a review")),
                                     clientCredentials = @OAuthFlow(tokenUrl = "https://example.com/api/oauth/token",
                                                                    scopes = @OAuthScope(name = "read:reviews",
-                                                                                        description = "search for a review"))))
+                                                                                        description = "search for a review")),
+                                    extensions = @Extension(name = "x-oauth-flows", value = "test-oauth-flows")))
 @Tags(value = {
         @Tag(name = "Reviews", description = "All the review methods"),
         @Tag(name = "Ratings", description = "All the ratings methods")
@@ -262,7 +266,10 @@ public class ReviewResource {
                                                                                description = "successful operation",
                                                                                content = @Content(mediaType = "application/json",
                                                                                                   schema = @Schema(type = SchemaType.ARRAY,
-                                                                                                                   implementation = Review.class)))))
+                                                                                                                   implementation = Review.class))),
+                                                      extensions = @Extension(name = "x-callback-operation",
+                                                                              value = "test-callback-operation")),
+                      extensions = @Extension(name = "x-callback", value = "test-callback"))
     })
     @Tag(ref = "Reviews")
     @Servers(value = {

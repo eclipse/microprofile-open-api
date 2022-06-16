@@ -19,6 +19,7 @@ import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
 import org.eclipse.microprofile.openapi.annotations.enums.ParameterStyle;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
+import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 import org.eclipse.microprofile.openapi.annotations.headers.Header;
 import org.eclipse.microprofile.openapi.annotations.links.Link;
 import org.eclipse.microprofile.openapi.annotations.links.LinkParameter;
@@ -129,7 +130,9 @@ public class UserResource {
                                                                                    schema = @Schema(type = SchemaType.INTEGER),
                                                                                    required = true,
                                                                                    allowEmptyValue = true,
-                                                                                   deprecated = true)))) User user) {
+                                                                                   deprecated = true),
+                                                                 extensions = @Extension(name = "x-encoding",
+                                                                                         value = "test-encoding")))) User user) {
         userData.addUser(user);
         return Response.ok().entity("").build();
     }
@@ -273,7 +276,8 @@ public class UserResource {
                  content = @Content(schema = @Schema(implementation = User.class)), links = {
                          @Link(name = "User name", description = "The username corresponding to provided user id",
                                operationId = "getUserByName",
-                               parameters = @LinkParameter(name = "userId", expression = "$request.path.id")),
+                               parameters = @LinkParameter(name = "userId", expression = "$request.path.id"),
+                               extensions = @Extension(name = "x-link", value = "test-link")),
                          @Link(name = "Review", description = "The reviews provided by user",
                                operationRef = "/db/reviews/{userName}",
                                parameters = @LinkParameter(name = "path.userName",

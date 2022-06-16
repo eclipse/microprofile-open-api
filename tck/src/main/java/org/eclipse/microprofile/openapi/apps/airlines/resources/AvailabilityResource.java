@@ -19,6 +19,7 @@ import java.util.List;
 import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
+import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
@@ -44,15 +45,18 @@ public class AvailabilityResource {
     @Tag(ref = "Availability")
     @APIResponse(responseCode = "200", description = "successful operation",
                  content = @Content(mediaType = "application/json",
-                                    schema = @Schema(type = SchemaType.ARRAY, implementation = Flight.class)))
+                                    schema = @Schema(type = SchemaType.ARRAY, implementation = Flight.class),
+                                    extensions = @Extension(name = "x-content", value = "test-content")))
     @APIResponse(responseCode = "404", description = "No available flights found",
                  content = @Content(mediaType = "n/a"))
-    @Operation(summary = "Retrieve all available flights", operationId = "getFlights")
+    @Operation(summary = "Retrieve all available flights", operationId = "getFlights",
+               extensions = @Extension(name = "x-operation", value = "test-operation"))
     @Produces("application/json")
     public Response getFlights(
             @Parameter(ref = "#/components/parameters/departureDate") @QueryParam("departureDate") String departureDate,
             @Parameter(name = "airportFrom", required = true, allowEmptyValue = true,
                        description = "Airport the customer departs from",
+                       extensions = @Extension(name = "x-parameter", value = "test-parameter"),
                        schema = @Schema(implementation = String.class)) @QueryParam("airportFrom") String airportFrom,
             @Parameter(name = "returningDate", required = true, allowReserved = true,
                        description = "Customer return date",

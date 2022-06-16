@@ -26,6 +26,7 @@ import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeIn;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
+import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 import org.eclipse.microprofile.openapi.annotations.headers.Header;
 import org.eclipse.microprofile.openapi.annotations.info.Contact;
 import org.eclipse.microprofile.openapi.annotations.info.Info;
@@ -63,16 +64,24 @@ import jakarta.ws.rs.core.MediaType;
 @OpenAPIDefinition(
                    tags = {@Tag(name = "user", description = "Operations about user"),
                            @Tag(name = "create", description = "Operations about create"),
-                           @Tag(name = "Bookings", description = "All the bookings methods")},
+                           @Tag(name = "Bookings", description = "All the bookings methods",
+                                extensions = @Extension(name = "x-tag", value = "test-tag"))},
                    externalDocs = @ExternalDocumentation(description = "instructions for how to deploy this app",
-                                                         url = "https://github.com/microservices-api/oas3-airlines/blob/master/README.md"),
+                                                         url = "https://github.com/microservices-api/oas3-airlines/blob/master/README.md",
+                                                         extensions = @Extension(name = "x-external-docs",
+                                                                                 value = "test-external-docs")),
                    info = @Info(title = "AirlinesRatingApp API", version = "1.0",
                                 termsOfService = "http://airlinesratingapp.com/terms",
                                 contact = @Contact(name = "AirlinesRatingApp API Support",
                                                    url = "http://exampleurl.com/contact",
-                                                   email = "techsupport@airlinesratingapp.com"),
+                                                   email = "techsupport@airlinesratingapp.com",
+                                                   extensions = @Extension(name = "x-contact", value = "test-contact")),
                                 license = @License(name = "Apache 2.0",
-                                                   url = "http://www.apache.org/licenses/LICENSE-2.0.html")),
+                                                   url = "http://www.apache.org/licenses/LICENSE-2.0.html",
+                                                   extensions = @Extension(name = "x-license", value = "test-license")),
+                                extensions = {@Extension(name = "x-info-1", value = "test-info-1"),
+                                        @Extension(name = "x-info", value = "test-info")
+                                }),
                    security = @SecurityRequirement(name = "airlinesRatingApp_auth"),
                    securitySets = @SecurityRequirementsSet({
                            @SecurityRequirement(name = "testScheme1"), @SecurityRequirement(name = "testScheme2")
@@ -88,9 +97,12 @@ import jakarta.ws.rs.core.MediaType;
                                            @ServerVariable(name = "port", description = "Booking data",
                                                            defaultValue = "8443"),
                                            @ServerVariable(name = "user", description = "User data",
-                                                           defaultValue = "user"),
+                                                           defaultValue = "user",
+                                                           extensions = @Extension(name = "x-server-variable",
+                                                                                   value = "test-server-variable")),
                                            @ServerVariable(name = "basePath", defaultValue = "v2")
-                                   }),
+                                   },
+                                   extensions = @Extension(name = "x-server", value = "test-server")),
                            @Server(url = "https://test-server.com:80/basePath", description = "The test API server")
                    },
                    components = @Components(
@@ -100,14 +112,18 @@ import jakarta.ws.rs.core.MediaType;
                                                             implementation = Booking.class),
                                                     @Schema(name = "Airlines", title = "Airlines",
                                                             type = SchemaType.ARRAY,
-                                                            implementation = Airline.class),
+                                                            implementation = Airline.class,
+                                                            extensions = @Extension(name = "x-schema",
+                                                                                    value = "test-schema")),
                                                     @Schema(name = "id", type = SchemaType.INTEGER, format = "int32"),
                                                     @Schema(name = "AirlinesRef",
                                                             ref = "#/components/schemas/Airlines"),
                                                     @Schema(name = "User", implementation = User.class, properties = {
                                                             @SchemaProperty(name = "phone",
                                                                             description = "Telephone number to contact the user",
-                                                                            example = "123-456-7891")
+                                                                            example = "123-456-7891",
+                                                                            extensions = @Extension(name = "x-schema-property",
+                                                                                                    value = "test-schema-property"))
                                                     })},
                                             responses = {
                                                     @APIResponse(name = "FoundAirlines", responseCode = "200",
@@ -133,7 +149,9 @@ import jakarta.ws.rs.core.MediaType;
                                             examples = {
                                                     @ExampleObject(name = "review", summary = "External review example",
                                                                    description = "This example exemplifies the content on our site.",
-                                                                   externalValue = "http://foo.bar/examples/review-example.json"),
+                                                                   externalValue = "http://foo.bar/examples/review-example.json",
+                                                                   extensions = @Extension(name = "x-example-object",
+                                                                                           value = "test-example-object")),
                                                     @ExampleObject(name = "user", summary = "External user example",
                                                                    externalValue = "http://foo.bar/examples/user-example.json")
                                             },
@@ -147,7 +165,9 @@ import jakarta.ws.rs.core.MediaType;
                                                     @Header(name = "Max-Rate", description = "Maximum rate",
                                                             schema = @Schema(type = SchemaType.INTEGER),
                                                             required = true, allowEmptyValue = true,
-                                                            deprecated = true),
+                                                            deprecated = true,
+                                                            extensions = @Extension(name = "x-header",
+                                                                                    value = "test-header")),
                                                     @Header(name = "Request-Limit",
                                                             description = "The number of allowed requests in the current period",
                                                             schema = @Schema(type = SchemaType.INTEGER))
@@ -172,12 +192,15 @@ import jakarta.ws.rs.core.MediaType;
                                                                                               responses = {
                                                                                                       @APIResponse(ref = "FoundBookings")
                                                                                               }))
-                                            }))
+                                            },
+                                            extensions = @Extension(name = "x-components", value = "test-components")),
+                   extensions = @Extension(name = "x-openapi-definition", value = "test-openapi-definition"))
 @SecurityScheme(securitySchemeName = "airlinesRatingApp_auth",
                 description = "authentication needed to access Airlines app",
                 type = SecuritySchemeType.APIKEY,
                 apiKeyName = "api_key",
-                in = SecuritySchemeIn.HEADER)
+                in = SecuritySchemeIn.HEADER,
+                extensions = @Extension(name = "x-security-scheme", value = "test-security-scheme"))
 @SecurityScheme(securitySchemeName = "testScheme1",
                 type = SecuritySchemeType.APIKEY,
                 apiKeyName = "test1",
