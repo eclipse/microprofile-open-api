@@ -107,4 +107,16 @@
          </dependency>
     </dependencies>
     
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>net.revelc.code.formatter</groupId>
+                <artifactId>formatter-maven-plugin</artifactId>
+                <configuration>
+                    <configFile>${project.basedir}/formatter.xml</configFile>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    
 </project>
