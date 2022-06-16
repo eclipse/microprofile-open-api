@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2016-2017 Contributors to the Eclipse Foundation
+// Copyright (c) 2016-2022 Contributors to the Eclipse Foundation
 //
 // See the NOTICE file(s) distributed with this work for additional
 // information regarding copyright ownership.
@@ -16,19 +16,48 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+[[release_notes_31]]
+== Release Notes for MicroProfile OpenAPI 3.1
+
+A full list of changes delivered in the 3.1 release can be found at link:https://github.com/eclipse/microprofile-open-api/milestone/5?closed=1[MicroProfile OpenAPI 3.1 Milestone].
+
+[[api_changes_31]]
+=== API/SPI Changes
+
+* Add `extensions` attribute to most annotations (https://github.com/eclipse/microprofile-open-api/issues/387[387])
+* Improvements to the definition of security requirements (https://github.com/eclipse/microprofile-open-api/issues/483[483], https://github.com/eclipse/microprofile-open-api/issues/468[468])
+** Define behavior of `@SecurityRequirementsSet` and make it repeatable
+** Clarify that a individual `@SecurityRequirement` annotation applied to a class or method is equivalent to a `@SecurityRequirementsSet` annotation containing that `@SecurityRequirement` annotation
+** Add `securitySets` attribute to `@OpenAPIDefinition` and `@CallbackOperation`
+* Add `additionalProperties` attribute to `@Schema` (https://github.com/eclipse/microprofile-open-api/issues/423[423])
+* Allow `@APIResponse` to be applied to a class, indicating that every resource method on that class has that response (https://github.com/eclipse/microprofile-open-api/issues/417[417])
+
+[[other_changes_31]]
+=== Other Changes
+
+* Add processing of some Jakarta Bean Validation annotations (https://github.com/eclipse/microprofile-open-api/issues/482[482])
+* Define the precedence of the `mp.openapi.scan.*` config properties (https://github.com/eclipse/microprofile-open-api/issues/422[422])
+* Clarify that the `name` attribute of `@Extension` must include the `x-` prefix (https://github.com/eclipse/microprofile-open-api/issues/339[339])
+* Only require that the `/openapi` endpoint is made available if there is documentation to show (https://github.com/eclipse/microprofile-open-api/issues/413[413])
+* Recommend a standard endpoint for implementations which provide a user interface (https://github.com/eclipse/microprofile-open-api/issues/334[334])
+* Recommend that implementations provide a way to serve CORS headers on the `/openapi` endpoint (https://github.com/eclipse/microprofile-open-api/issues/416[416])
+
 [[release_notes_30]]
-== Release Notes for Microprofile OpenAPI 3.0
+== Release Notes for MicroProfile OpenAPI 3.0
 
 A full list of changes delivered in the 3.0 release can be found at link:https://github.com/eclipse/microprofile-open-api/milestone/4?closed=1[MicroProfile OpenAPI 3.0 Milestone].
 
+[[incompatible_changes_30]]
 === Incompatible Changes
 
 This release aligns with Jakarta EE 9.1 (link:https://github.com/eclipse/microprofile-open-api/issues/487[487]), so it won’t work with earlier versions of Jakarta or Java EE.
 
+[[api_changes_30]]
 ==== API/SPI Changes
 
 There are no functional changes introduced in this release, except the dependency updating from javax to jakarta.
 
+[[other_changes_30]]
 ==== Other Changes
 
 * Negative Test Scenario - @SchemaProperty Precedence Behaviour (link:https://github.com/eclipse/microprofile-open-api/issues/466[466])
@@ -37,10 +66,11 @@ There are no functional changes introduced in this release, except the dependenc
 * TestNG 7.4.0 Assert.assertNotSame has a bug which causes ModelConstructionTest TCK to fail (link:https://github.com/eclipse/microprofile-open-api/issues/494[494])
 
 [[release_notes_20]]
-== Release Notes for Microprofile OpenAPI 2.0
+== Release Notes for MicroProfile OpenAPI 2.0
 
 A full list of changes delivered in the 2.0 release can be found at link:https://github.com/eclipse/microprofile-open-api/milestone/2?closed=1[MicroProfile OpenAPI 2.0 Milestone].
 
+[[incompatible_changes_20]]
 === Incompatible Changes
 
 * Model interfaces that were deprecated in 1.1 have been removed:
@@ -107,6 +137,7 @@ A full list of changes delivered in the 2.0 release can be found at link:https:/
     *** `setVariables(ServerVariables variables)` - use `setVariables(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/245[245])
     *** `variables(ServerVariables variables)` - use `variables(Map)` instead (link:https://github.com/eclipse/microprofile-open-api/issues/245[245])
 
+[[api_changes_20]]
 === API/SPI Changes
 
 * The `@SchemaProperty` annotation has been added to allow the properties for a schema to be defined inline. (link:https://github.com/eclipse/microprofile-open-api/issues/360[360]). For example:
@@ -139,12 +170,14 @@ A full list of changes delivered in the 2.0 release can be found at link:https:/
     }
 ```
 
+[[functional_changes_20]]
 === Functional Changes
 
 * Getter methods on model interfaces that return a list or map now return a copy of the list/map containing the same items. This list/map CAN be immutable. (link:https://github.com/eclipse/microprofile-open-api/issues/240[240])
 
 * Setter methods on model interfaces that take a list or a map as a parameter MUST not use the list/map instance directly (link:https://github.com/eclipse/microprofile-open-api/issues/284[284])
 
+[[other_changes_20]]
 === Other Changes
 
 * JavaDoc updates to clarify the behaviour of getter methods on model interfaces that return a list or map ((link:https://github.com/eclipse/microprofile-open-api/issues/240[240]), link:https://github.com/eclipse/microprofile-open-api/pull/288[288])
@@ -152,7 +185,7 @@ A full list of changes delivered in the 2.0 release can be found at link:https:/
 * TCK updates to verify that getter methods on model interfaces return a list or map, return a copy of underlying collection ((link:https://github.com/eclipse/microprofile-open-api/issues/240[240]), link:https://github.com/eclipse/microprofile-open-api/pull/288[288])
 
 [[release_notes_11]]
-== Release Notes for Microprofile OpenAPI 1.1
+== Release Notes for MicroProfile OpenAPI 1.1
 
 Changes include:
 
