@@ -41,6 +41,7 @@ import org.eclipse.microprofile.openapi.annotations.security.OAuthFlow;
 import org.eclipse.microprofile.openapi.annotations.security.OAuthFlows;
 import org.eclipse.microprofile.openapi.annotations.security.OAuthScope;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirementsSet;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.annotations.servers.Server;
 import org.eclipse.microprofile.openapi.annotations.servers.ServerVariable;
@@ -268,7 +269,14 @@ public class ReviewResource {
                                                                                                   schema = @Schema(type = SchemaType.ARRAY,
                                                                                                                    implementation = Review.class))),
                                                       extensions = @Extension(name = "x-callback-operation",
-                                                                              value = "test-callback-operation")),
+                                                                              value = "test-callback-operation"),
+                                                      security = @SecurityRequirement(name = "httpTestScheme"),
+                                                      securitySets = {@SecurityRequirementsSet({
+                                                              @SecurityRequirement(name = "testScheme1"),
+                                                              @SecurityRequirement(name = "testScheme2")
+                                                      }),
+                                                              @SecurityRequirementsSet()
+                                                      }),
                       extensions = @Extension(name = "x-callback", value = "test-callback"))
     })
     @Tag(ref = "Reviews")

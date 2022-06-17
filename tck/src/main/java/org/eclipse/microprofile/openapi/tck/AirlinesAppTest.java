@@ -566,6 +566,18 @@ public class AirlinesAppTest extends AppTestBase {
 
     @RunAsClient
     @Test(dataProvider = "formatProvider")
+    public void testSecuirtyRequirementInCallback(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+        String callbackOpPath =
+                "paths.'/reviews'.post.callbacks.testCallback.'http://localhost:9080/oas3-airlines/reviews'.get";
+        vr.body(callbackOpPath + ".security", containsInAnyOrder(
+                hasKey("httpTestScheme"),
+                allOf(hasKey("testScheme1"), hasKey("testScheme2")),
+                anEmptyMap()));
+    }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
     public void testSecuritySchemes(String type) {
         ValidatableResponse vr = callEndpoint(type);
         String s = "components.securitySchemes";
