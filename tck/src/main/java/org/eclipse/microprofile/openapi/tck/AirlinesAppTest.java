@@ -72,6 +72,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("info.title", equalTo("AirlinesRatingApp API"));
         vr.body("info.version", equalTo("1.0"));
         vr.body("info.termsOfService", equalTo("http://airlinesratingapp.com/terms"));
+        vr.body("info.x-info", equalTo("test-info"));
     }
 
     @RunAsClient
@@ -81,6 +82,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("info.contact.name", equalTo("AirlinesRatingApp API Support"));
         vr.body("info.contact.url", equalTo("http://exampleurl.com/contact"));
         vr.body("info.contact.email", equalTo("techsupport@airlinesratingapp.com"));
+        vr.body("info.contact.x-contact", equalTo("test-contact"));
     }
 
     @RunAsClient
@@ -89,6 +91,7 @@ public class AirlinesAppTest extends AppTestBase {
         ValidatableResponse vr = callEndpoint(type);
         vr.body("info.license.name", equalTo("Apache 2.0"));
         vr.body("info.license.url", equalTo("http://www.apache.org/licenses/LICENSE-2.0.html"));
+        vr.body("info.license.x-license", equalTo("test-license"));
     }
 
     @RunAsClient
@@ -97,6 +100,7 @@ public class AirlinesAppTest extends AppTestBase {
         ValidatableResponse vr = callEndpoint(type);
         vr.body("externalDocs.description", equalTo("instructions for how to deploy this app"));
         vr.body("externalDocs.url", containsString("README.md"));
+        vr.body("externalDocs.x-external-docs", equalTo("test-external-docs"));
     }
 
     @RunAsClient
@@ -117,7 +121,9 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(serverPath + ".variables.port.default", equalTo("8443"));
         vr.body(serverPath + ".variables.user.description", equalTo("User data"));
         vr.body(serverPath + ".variables.user.default", equalTo("user"));
+        vr.body(serverPath + ".variables.user.x-server-variable", equalTo("test-server-variable"));
         vr.body(serverPath + ".variables.basePath.default", equalTo("v2"));
+        vr.body(serverPath + ".x-server", equalTo("test-server"));
 
         url = "https://test-server.com:80/basePath";
         serverPath = "servers.find { it.url == '" + url + "' }";
@@ -189,6 +195,7 @@ public class AirlinesAppTest extends AppTestBase {
         ValidatableResponse vr = callEndpoint(type);
         vr.body("paths.'/availability'.get.summary", equalTo("Retrieve all available flights"));
         vr.body("paths.'/availability'.get.operationId", equalTo("getFlights"));
+        vr.body("paths.'/availability'.get.x-operation", equalTo("test-operation"));
     }
 
     @RunAsClient
@@ -426,6 +433,8 @@ public class AirlinesAppTest extends AppTestBase {
                 both(hasSize(1)).and(contains(0)));
         vr.body(availabilityParameters + ".findAll { it.name == 'numberOfChildren' }.schema.minimum",
                 both(hasSize(1)).and(contains(0)));
+        vr.body(availabilityParameters + ".findAll { it.name == 'airportFrom' }.x-parameter",
+                contains("test-parameter"));
 
         vr.body(availabilityParameters + ".findAll { it.$ref == '#/components/parameters/departureDate'}",
                 notNullValue());
@@ -453,6 +462,7 @@ public class AirlinesAppTest extends AppTestBase {
         endpoint = "paths.'/reviews'.post.callbacks";
         vr.body(endpoint, hasKey("testCallback"));
         vr.body(endpoint + ".testCallback", hasKey("http://localhost:9080/oas3-airlines/reviews"));
+        vr.body(endpoint + ".testCallback.x-callback", equalTo("test-callback"));
 
         endpoint = "paths.'/bookings'.post.callbacks";
         vr.body(endpoint, hasKey("bookingCallback"));
@@ -478,6 +488,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(endpoint + ".get.responses.'200'.description", equalTo("successful operation"));
         vr.body(endpoint + ".get.responses.'200'.content.'application/json'.schema.type", equalTo("array"));
         vr.body(endpoint + ".get.responses.'200'.content.'application/json'.schema.items", notNullValue());
+        vr.body(endpoint + ".get.x-callback-operation", equalTo("test-callback-operation"));
     }
 
     @RunAsClient
@@ -487,6 +498,7 @@ public class AirlinesAppTest extends AppTestBase {
         String endpoint = "paths.'/bookings'.post.requestBody";
         vr.body(endpoint + ".description", equalTo("Create a new booking with the provided information."));
         vr.body(endpoint + ".content", notNullValue());
+        vr.body(endpoint + ".x-request-body", equalTo("test-request-body"));
 
         endpoint = "paths.'/bookings/{id}'.put.requestBody";
         vr.body(endpoint + ".content", notNullValue());
@@ -582,6 +594,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(auth + "description", equalTo("authentication needed to access Airlines app"));
         vr.body(auth + "name", equalTo("api_key"));
         vr.body(auth + "in", equalTo("header"));
+        vr.body(auth + "x-security-scheme", equalTo("test-security-scheme"));
 
         String reviewoauth2 = "components.securitySchemes.reviewoauth2.";
         vr.body(reviewoauth2 + "type", equalTo("oauth2"));
@@ -597,6 +610,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(t, hasKey("authorizationCode"));
         vr.body(t, hasKey("password"));
         vr.body(t, hasKey("clientCredentials"));
+        vr.body(t + ".x-oauth-flows", equalTo("test-oauth-flows"));
     }
 
     @RunAsClient
@@ -605,6 +619,7 @@ public class AirlinesAppTest extends AppTestBase {
         ValidatableResponse vr = callEndpoint(type);
         String implicit = "components.securitySchemes.reviewoauth2.flows.implicit.";
         vr.body(implicit + "authorizationUrl", equalTo("https://example.com/api/oauth/dialog"));
+        vr.body(implicit + "x-oauth-flow", equalTo("test-oauth-flow"));
 
         String authCode = "components.securitySchemes.reviewoauth2.flows.authorizationCode.";
         vr.body(authCode + "authorizationUrl", equalTo("https://example.com/api/oauth/dialog"));
@@ -637,6 +652,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(s + "style", equalTo("form"));
         vr.body(s + "explode", equalTo(true));
         vr.body(s + "allowReserved", equalTo(true));
+        vr.body(s + "x-encoding", equalTo("test-encoding"));
     }
 
     @RunAsClient
@@ -663,6 +679,7 @@ public class AirlinesAppTest extends AppTestBase {
         String s = "paths.'/user/{id}'.get.responses.'200'.links.'User name'.";
         vr.body(s + "operationId", equalTo("getUserByName"));
         vr.body(s + "description", equalTo("The username corresponding to provided user id"));
+        vr.body(s + "x-link", equalTo("test-link"));
 
         String t = "paths.'/user/{id}'.get.responses.'200'.links.Review.";
         vr.body(t + "operationRef", equalTo("/db/reviews/{userName}"));
@@ -695,6 +712,7 @@ public class AirlinesAppTest extends AppTestBase {
         // Basic properties
         vr.body("components.schemas.AirlinesRef.$ref", equalTo("#/components/schemas/Airlines"));
         vr.body("components.schemas.Airlines.title", equalTo("Airlines"));
+        vr.body("components.schemas.Airlines.x-schema", equalTo("test-schema"));
         vr.body("paths.'/bookings'.post.responses.'201'.content.'application/json'.schema.type", equalTo("string"));
         vr.body("components.schemas.id.format", equalTo("int32"));
         vr.body("paths.'/bookings'.post.responses.'201'.content.'application/json'.schema.description",
@@ -725,6 +743,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("components.schemas.User.properties.phone.example", equalTo("123-456-7891"));
         vr.body("components.schemas.User.properties.phone.description",
                 equalTo("Telephone number to contact the user"));
+        vr.body("components.schemas.User.properties.phone.x-schema-property", equalTo("test-schema-property"));
     }
 
     @RunAsClient
@@ -744,6 +763,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("components.examples.review.summary", equalTo("External review example"));
         vr.body("components.examples.review.description", equalTo("This example exemplifies the content on our site."));
         vr.body("components.examples.review.externalValue", equalTo("http://foo.bar/examples/review-example.json"));
+        vr.body("components.examples.review.x-example-object", equalTo("test-example-object"));
 
         // Example in Parameter Content
         vr.body("paths.'/reviews/users/{user}'.get.parameters.find{ it.name=='user'}.content.'*/*'.examples.example.value",
@@ -782,6 +802,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(tagsPath + "Reservations" + desc, equalTo("All the reservation methods"));
         vr.body(tagsPath + "Reviews" + desc, equalTo("All the review methods"));
         vr.body(tagsPath + "Ratings" + desc, equalTo("All the ratings methods"));
+        vr.body(tagsPath + "Bookings" + "' }.x-tag", equalTo("test-tag"));
     }
 
     @RunAsClient
@@ -840,6 +861,9 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("components.securitySchemes.httpTestScheme", notNullValue());
         vr.body("components.links.UserName", notNullValue());
         vr.body("components.callbacks.GetBookings", notNullValue());
+
+        // Test an extension on the components object itself
+        vr.body("components.x-components", equalTo("test-components"));
     }
 
     @RunAsClient
@@ -918,6 +942,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(maxRate + ".allowEmptyValue", equalTo(true));
         vr.body(maxRate + ".style", equalTo("simple"));
         vr.body(maxRate + ".schema.type", equalTo("integer"));
+        vr.body(maxRate + ".x-header", equalTo("test-header"));
     }
 
     @RunAsClient
@@ -929,6 +954,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(content1, notNullValue());
         vr.body(content1 + ".schema.type", equalTo("array"));
         vr.body(content1 + ".schema.items", notNullValue());
+        vr.body(content1 + ".x-content", equalTo("test-content"));
 
         String content2 = "paths.'/user/{username}'.put.responses.'200'.content";
         vr.body(content2, notNullValue());
@@ -1122,4 +1148,12 @@ public class AirlinesAppTest extends AppTestBase {
 
         vr.body(flightSchema + ".additionalProperties.type", equalTo("string"));
     }
+
+    @RunAsClient
+    @Test(dataProvider = "formatProvider")
+    public void testOpenAPIDefinitionExtension(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+        vr.body("x-openapi-definition", equalTo("test-openapi-definition"));
+    }
+
 }

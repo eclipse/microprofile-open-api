@@ -46,8 +46,11 @@ import jakarta.ws.rs.core.Response;
 @Schema(name = "/store")
 @Produces({"application/json", "application/xml"})
 @SecuritySchemes(value = {
-        @SecurityScheme(securitySchemeName = "storeOpenIdConnect", type = SecuritySchemeType.OPENIDCONNECT, description = "openId Connect authentication to access the pet store resource", openIdConnectUrl = "https://petstoreauth.com:4433/oidc/petstore/oidcprovider/authorize"),
-        @SecurityScheme(securitySchemeName = "storeHttp", type = SecuritySchemeType.HTTP, description = "Basic http authentication to access the pet store resource", scheme = "basic")
+        @SecurityScheme(securitySchemeName = "storeOpenIdConnect", type = SecuritySchemeType.OPENIDCONNECT,
+                        description = "openId Connect authentication to access the pet store resource",
+                        openIdConnectUrl = "https://petstoreauth.com:4433/oidc/petstore/oidcprovider/authorize"),
+        @SecurityScheme(securitySchemeName = "storeHttp", type = SecuritySchemeType.HTTP,
+                        description = "Basic http authentication to access the pet store resource", scheme = "basic")
 })
 @SecurityRequirements(value = {
         @SecurityRequirement(name = "storeOpenIdConnect", scopes = {"write:store", "read:store"}),
@@ -63,11 +66,14 @@ public class PetStoreResource {
     @Path("/inventory")
     @Produces({"application/json", "application/xml"})
     @APIResponses(extensions = @Extension(name = "x-responses-ext", value = "test-responses-ext"), value = {
-            @APIResponse(responseCode = "200", description = "successful operation", extensions = @Extension(name = "x-response-ext", value = "test-response-ext")),
+            @APIResponse(responseCode = "200", description = "successful operation",
+                         extensions = @Extension(name = "x-response-ext", value = "test-response-ext")),
             @APIResponse(responseCode = "500", description = "server error", extensions = {}),
-            @APIResponse(responseCode = "503", description = "service not available", content = @Content(extensions = @Extension(name = "x-notavailable-ext", value = "true"))),
+            @APIResponse(responseCode = "503", description = "service not available",
+                         content = @Content(extensions = @Extension(name = "x-notavailable-ext", value = "true"))),
     })
-    @Operation(summary = "Returns pet inventories by status", description = "Returns a map of status codes to quantities")
+    @Operation(summary = "Returns pet inventories by status",
+               description = "Returns a map of status codes to quantities")
     @Extension(name = "x-operation-ext", value = "test-operation-ext")
     public java.util.Map<String, Integer> getInventory() {
         return petData.getInventoryByStatus();
@@ -75,16 +81,25 @@ public class PetStoreResource {
 
     @GET
     @Path("/order/{orderId}")
-    @Operation(summary = "Find purchase order by ID", description = "For valid response try integer IDs with value between the integers of 1 and 10. Other values will generated exceptions")
-    @APIResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(implementation = Order.class, allOf = {
-            Order.class, Pet.class}, not = BadOrder.class)))
-    @APIResponse(responseCode = "400", description = "Invalid ID supplied", content = @Content(schema = @Schema(implementation = Order.class)))
-    @APIResponse(responseCode = "404", description = "Order not found", content = @Content(schema = @Schema(implementation = Order.class, anyOf = {
-            Order.class,
-            BadOrder.class}, discriminatorProperty = "id", discriminatorMapping = @DiscriminatorMapping(value = "0", schema = BadOrder.class))))
-    @APIResponse(responseCode = "900", description = "Invalid", content = @Content(schema = @Schema(implementation = Order.class, hidden = true)))
+    @Operation(summary = "Find purchase order by ID",
+               description = "For valid response try integer IDs with value between the integers of 1 and 10. Other values will generated exceptions")
+    @APIResponse(responseCode = "200", description = "successful operation",
+                 content = @Content(schema = @Schema(implementation = Order.class, allOf = {
+                         Order.class, Pet.class}, not = BadOrder.class)))
+    @APIResponse(responseCode = "400", description = "Invalid ID supplied",
+                 content = @Content(schema = @Schema(implementation = Order.class)))
+    @APIResponse(responseCode = "404", description = "Order not found",
+                 content = @Content(schema = @Schema(implementation = Order.class, anyOf = {
+                         Order.class,
+                         BadOrder.class}, discriminatorProperty = "id",
+                                                     discriminatorMapping = @DiscriminatorMapping(value = "0",
+                                                                                                  schema = BadOrder.class))))
+    @APIResponse(responseCode = "900", description = "Invalid",
+                 content = @Content(schema = @Schema(implementation = Order.class, hidden = true)))
     public Response getOrderById(
-            @Parameter(name = "orderId", description = "ID of pet that needs to be fetched", schema = @Schema(type = SchemaType.INTEGER, minimum = "1", maximum = "10"), required = true) @PathParam("orderId") Long orderId)
+            @Parameter(name = "orderId", description = "ID of pet that needs to be fetched",
+                       schema = @Schema(type = SchemaType.INTEGER, minimum = "1", maximum = "10"),
+                       required = true) @PathParam("orderId") Long orderId)
             throws NotFoundException {
         Order order = storeData.findOrderById(orderId);
         if (null != order) {
@@ -109,9 +124,13 @@ public class PetStoreResource {
     @Path("/order/{orderId}")
     @APIResponse(responseCode = "400", description = "Invalid ID supplied")
     @APIResponse(responseCode = "404", description = "Order not found")
-    @Operation(summary = "Delete purchase order by ID", description = "For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors")
+    @Operation(summary = "Delete purchase order by ID",
+               description = "For valid response try integer IDs with positive integer value. "
+                       + "Negative or non-integer values will generate API errors")
     public Response deleteOrder(
-            @Parameter(name = "orderId", description = "ID of the order that needs to be deleted", schema = @Schema(type = SchemaType.INTEGER, minimum = "1"), required = true) @PathParam("orderId") Long orderId) {
+            @Parameter(name = "orderId", description = "ID of the order that needs to be deleted",
+                       schema = @Schema(type = SchemaType.INTEGER, minimum = "1"),
+                       required = true) @PathParam("orderId") Long orderId) {
         if (storeData.deleteOrder(orderId)) {
             return Response.ok().entity("").build();
         } else {

@@ -19,6 +19,7 @@ import java.util.List;
 import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
+import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
@@ -38,19 +39,37 @@ import jakarta.ws.rs.core.Response;
 public class AvailabilityResource {
 
     @GET
-    @Tag(name = "Get Flights", description = "method to retrieve all flights available", externalDocs = @ExternalDocumentation(description = "A list of all the flights offered by the app", url = "http://airlinesratingapp.com/ourflights"))
+    @Tag(name = "Get Flights", description = "method to retrieve all flights available",
+         externalDocs = @ExternalDocumentation(description = "A list of all the flights offered by the app",
+                                               url = "http://airlinesratingapp.com/ourflights"))
     @Tag(ref = "Availability")
-    @APIResponse(responseCode = "200", description = "successful operation", content = @Content(mediaType = "application/json", schema = @Schema(type = SchemaType.ARRAY, implementation = Flight.class)))
-    @APIResponse(responseCode = "404", description = "No available flights found", content = @Content(mediaType = "n/a"))
-    @Operation(summary = "Retrieve all available flights", operationId = "getFlights")
+    @APIResponse(responseCode = "200", description = "successful operation",
+                 content = @Content(mediaType = "application/json",
+                                    schema = @Schema(type = SchemaType.ARRAY, implementation = Flight.class),
+                                    extensions = @Extension(name = "x-content", value = "test-content")))
+    @APIResponse(responseCode = "404", description = "No available flights found",
+                 content = @Content(mediaType = "n/a"))
+    @Operation(summary = "Retrieve all available flights", operationId = "getFlights",
+               extensions = @Extension(name = "x-operation", value = "test-operation"))
     @Produces("application/json")
     public Response getFlights(
             @Parameter(ref = "#/components/parameters/departureDate") @QueryParam("departureDate") String departureDate,
-            @Parameter(name = "airportFrom", required = true, allowEmptyValue = true, description = "Airport the customer departs from", schema = @Schema(implementation = String.class)) @QueryParam("airportFrom") String airportFrom,
-            @Parameter(name = "returningDate", required = true, allowReserved = true, description = "Customer return date", schema = @Schema(implementation = String.class)) @QueryParam("returningDate") String returningDate,
-            @Parameter(name = "airportTo", required = true, description = "Airport the customer returns to", schema = @Schema(implementation = String.class)) @QueryParam("airportTo") String airportTo,
-            @Parameter(name = "numberOfAdults", required = true, description = "Number of adults on the flight", schema = @Schema(minimum = "0", implementation = String.class)) @QueryParam("numberOfAdults") int numberOfAdults,
-            @Parameter(name = "numberOfChildren", required = true, deprecated = true, description = "Number of children on the flight", schema = @Schema(minimum = "0", implementation = String.class)) @QueryParam("numberOfChildren") int numberOfChildren) {
+            @Parameter(name = "airportFrom", required = true, allowEmptyValue = true,
+                       description = "Airport the customer departs from",
+                       extensions = @Extension(name = "x-parameter", value = "test-parameter"),
+                       schema = @Schema(implementation = String.class)) @QueryParam("airportFrom") String airportFrom,
+            @Parameter(name = "returningDate", required = true, allowReserved = true,
+                       description = "Customer return date",
+                       schema = @Schema(implementation = String.class)) @QueryParam("returningDate") String returningDate,
+            @Parameter(name = "airportTo", required = true, description = "Airport the customer returns to",
+                       schema = @Schema(implementation = String.class)) @QueryParam("airportTo") String airportTo,
+            @Parameter(name = "numberOfAdults", required = true, description = "Number of adults on the flight",
+                       schema = @Schema(minimum = "0",
+                                        implementation = String.class)) @QueryParam("numberOfAdults") int numberOfAdults,
+            @Parameter(name = "numberOfChildren", required = true, deprecated = true,
+                       description = "Number of children on the flight",
+                       schema = @Schema(minimum = "0",
+                                        implementation = String.class)) @QueryParam("numberOfChildren") int numberOfChildren) {
         return Response.ok().entity(findFlights(airportFrom, airportTo, departureDate, returningDate)).build();
     }
 

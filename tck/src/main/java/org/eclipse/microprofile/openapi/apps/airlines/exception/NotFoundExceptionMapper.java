@@ -24,7 +24,8 @@ import jakarta.ws.rs.ext.ExceptionMapper;
 public class NotFoundExceptionMapper implements ExceptionMapper<NotFoundException> {
 
     @Override
-    @APIResponse(responseCode = "404", description = "Not Found", content = @Content(schema = @Schema(implementation = User.class)))
+    @APIResponse(responseCode = "404", description = "Not Found",
+                 content = @Content(schema = @Schema(implementation = User.class)))
     public Response toResponse(NotFoundException t) {
         return Response.status(404, t.getMessage()).build();
     }
