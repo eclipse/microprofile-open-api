@@ -15,6 +15,7 @@
  */
 package org.eclipse.microprofile.openapi.tck.beanvalidation;
 
+import static org.eclipse.microprofile.openapi.tck.Groups.BEAN_VALIDATION;
 import static org.eclipse.microprofile.openapi.tck.beanvalidation.BeanValidationTest.assertProperty;
 import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.not;
@@ -43,7 +44,7 @@ public class BeanValidationDisabledTest extends AppTestBase {
                 .addAsManifestResource(config, "microprofile-config.properties");
     }
 
-    @Test(dataProvider = "formatProvider")
+    @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
     @RunAsClient
     public void beanValidationScanningDisabledTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
