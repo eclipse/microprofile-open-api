@@ -195,6 +195,15 @@ public class BeanValidationTest extends AppTestBase {
         assertProperty(vr, "defaultAndOtherGroups", hasEntry("minLength", 1));
     }
 
+    @Test(dataProvider = "formatProvider")
+    @RunAsClient
+    public void parameterTest(String format) {
+        ValidatableResponse vr = callEndpoint(format);
+        String schemaPath = dereference(vr, "paths.'/parameter/{test}'.post.parameters[0]", "schema");
+        vr.body(schemaPath, hasEntry("maxLength", 6));
+        vr.body(schemaPath, hasEntry("type", "string"));
+    }
+
     /**
      * Asserts that a property from the test schema matches the given matcher
      * 
