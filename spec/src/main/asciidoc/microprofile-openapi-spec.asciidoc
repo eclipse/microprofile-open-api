@@ -589,7 +589,8 @@ For more samples please see the https://github.com/eclipse/microprofile-open-api
 
 In some cases, additional schema restrictions can be inferred from Jakarta Bean Validation annotations and used to enhance the generated OpenAPI document.
 
-Implementations are required to process Jakarta Bean Validation annotations and add the properties listed in the table below to the schema model when:
+If an implementation includes support for the Jakarta Bean Validation specification, then it must also process Jakarta Bean Validation annotations when creating OpenAPI schemas. Such implementations must add the properties listed in the table below to the schema model when:
+
 * the annotation is applied to to an element for which a schema is generated and
 * the annotation and generated schema type are listed together in the table below and
 * the annotation has a `group` attribute which is empty or includes `jakarta.validation.groups.Default` and
@@ -603,27 +604,27 @@ Implementations are required to process Jakarta Bean Validation annotations and 
 | `@NotEmpty` | `object` | `minProperties = 1`
 | `@NotBlank` | `string` | `pattern = \S`
 | `@Size(min = a, max = b)` | `string`
-| `minLength = a` +
-`maxLenth = b`
+| `minLength = a +
+maxLenth = b`
 | `@Size(min = a, max = b)` | `array`
-| `minItems = a` +
-`maxItems = b`
+| `minItems = a +
+maxItems = b`
 | `@Size(min = a, max = b)` | `object`
-| `minProperties = a` +
-`maxProperties = b`
+| `minProperties = a +
+maxProperties = b`
 | `@DecimalMax(value = a)` | `number` or `integer` | `maximum = a`
-| `@DecimalMax(value = a, exclusive = false)` | `number` or `integer` | `maximum = a` +
-`exclusiveMaximum = true`
+| `@DecimalMax(value = a, exclusive = false)` | `number` or `integer` | `maximum = a +
+exclusiveMaximum = true`
 | `@DecimalMin(value = a)` | `number` or `integer` | `minimum = a`
-| `@DecimalMin(value = a, exclusive = false)` | `number` or `integer` | `minimum = a` +
-`exclusiveMinimum = true`
+| `@DecimalMin(value = a, exclusive = false)` | `number` or `integer` | `minimum = a +
+exclusiveMinimum = true`
 | `@Max(a)` | `number` or `integer` | `maximum = a`
 | `@Min(a)` | `number` or `integer` | `minimum = a`
-| `@Negative` | `number` or `integer` | `maximum = 0` +
-`exclusiveMaximum = true`
+| `@Negative` | `number` or `integer` | `maximum = 0 +
+exclusiveMaximum = true`
 | `@NegativeOrZero` | `number` or `integer` | `maximum = 0`
-| `@Positive` | `number` or `integer` | `minimum = 0` +
-`exclusiveMinimum = true`
+| `@Positive` | `number` or `integer` | `minimum = 0 +
+exclusiveMinimum = true`
 | `@PositiveOrZero` | `number` or `integer` | `minimum = 0`
 |===
 

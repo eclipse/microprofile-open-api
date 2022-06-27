@@ -84,6 +84,25 @@ If you use Apache Maven, then the tests are run via the `maven-surefire-plugin` 
 ----
 Note: Be sure to set up your Arquillian.xml as required for your server under test.
 
+=== Testing platforms without Bean Validation
+
+Implementations which are part of runtimes which don't include Jakarta Bean Validation may exclude the relevant tests.
+
+[source, xml]
+----
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>2.19.1</version>
+    <configuration>
+        <dependenciesToScan>
+            <dependency>org.eclipse.microprofile.openapi:microprofile-openapi-tck</dependency>
+        </dependenciesToScan>
+        <excludedGroups>bean-validation</excludedGroups>
+    </configuration>
+</plugin>
+----
+
 == Deploying Additional Implementation Artifacts
 TCK tests need some additional `jar` files to be located in `/lib` in the TCK runner project. The files are as follows: `commons-lang3-3.4.jar`, `commons-logging-1.2.jar`, `httpclient-4.5.2.jar`, `httpcore-4.4.4.jar`, `jackson-annotations-2.8.0.jar`, `jackson-core-2.8.6.jar`, `jackson-databind-2.8.6.jar`, `jackson-dataformat-yaml-2.8.6.jar` and `snakeyaml-1.17.jar`. These libraries are used by applications deployed to the server when running the TCK tests.
 
