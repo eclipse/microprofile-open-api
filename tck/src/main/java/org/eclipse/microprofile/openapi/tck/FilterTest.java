@@ -25,7 +25,6 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.testng.annotations.Test;
@@ -33,7 +32,7 @@ import org.testng.annotations.Test;
 import io.restassured.response.ValidatableResponse;
 
 public class FilterTest extends AppTestBase {
-    @Deployment(name = "airlinesFiltered")
+    @Deployment(name = "airlinesFiltered", testable = false)
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "airlinesFiltered.war")
                 .addPackages(true, "org.eclipse.microprofile.openapi.apps.airlines")
@@ -42,7 +41,6 @@ public class FilterTest extends AppTestBase {
                 .addAsManifestResource("microprofile-config-filter.properties", "microprofile-config.properties");
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testFilterServer(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -70,7 +68,6 @@ public class FilterTest extends AppTestBase {
         vr.body(serverPath + ".variables.protocol.enum", containsInAnyOrder("http", "https"));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testFilterPathItemEnsureOrder(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -82,7 +79,6 @@ public class FilterTest extends AppTestBase {
                 equalTo("parent - Retrieve all bookings for current user"));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testFilterPathItemAddOperation(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -91,7 +87,6 @@ public class FilterTest extends AppTestBase {
                 equalTo("filterPathItem - successfully put airlines"));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testFilterOperation(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -101,7 +96,6 @@ public class FilterTest extends AppTestBase {
         vr.body("paths.'/bookings/{id}'.get.tags", containsInAnyOrder("Reservations", "parent - Bookings"));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testFilterOpenAPI(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -109,7 +103,6 @@ public class FilterTest extends AppTestBase {
         vr.body("paths.'/bookings/{id}'.put.operationId", equalTo("updateBookingId"));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testFilterParameter(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -125,7 +118,6 @@ public class FilterTest extends AppTestBase {
         vr.body(reviewParameters, hasSize(1));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testFilterRequestBody(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -135,7 +127,6 @@ public class FilterTest extends AppTestBase {
         vr.body(endpoint + ".content", notNullValue());
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testFilterSecurityScheme(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -145,7 +136,6 @@ public class FilterTest extends AppTestBase {
         vr.body(booking + "openIdConnectUrl", equalTo("http://openidconnect.com/testurl"));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testFilterLink(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -154,7 +144,6 @@ public class FilterTest extends AppTestBase {
         vr.body(s + "description", equalTo("filterLink - The username corresponding to provided user id"));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testFilterTag(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -163,7 +152,6 @@ public class FilterTest extends AppTestBase {
         vr.body(tagsPath + "user" + desc, equalTo("filterTag - Operations about user"));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testFilterHeader(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -176,7 +164,6 @@ public class FilterTest extends AppTestBase {
         vr.body(maxRate + ".schema.type", equalTo("integer"));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testFilterAPIResponse(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -186,7 +173,6 @@ public class FilterTest extends AppTestBase {
         vr.body(parentChild, equalTo("parent - id of the new review"));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testFilterSchema(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -196,7 +182,6 @@ public class FilterTest extends AppTestBase {
 
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testFilterCallback(String type) {
         ValidatableResponse vr = callEndpoint(type);

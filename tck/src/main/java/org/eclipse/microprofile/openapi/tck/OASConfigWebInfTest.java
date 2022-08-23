@@ -22,7 +22,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 
 public class OASConfigWebInfTest extends OASConfigScanClassBase {
 
-    @Deployment(name = "airlinesWebInf")
+    @Deployment(name = "airlinesWebInf", testable = false)
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "airlinesWebInf.war")
                 .addPackages(true, "org.eclipse.microprofile.openapi.apps.airlines")

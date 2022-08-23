@@ -24,7 +24,6 @@ import org.eclipse.microprofile.openapi.OASConfig;
 import org.eclipse.microprofile.openapi.apps.beanvalidation.BeanValidationApp;
 import org.eclipse.microprofile.openapi.tck.AppTestBase;
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.Asset;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
@@ -35,7 +34,7 @@ import io.restassured.response.ValidatableResponse;
 
 public class BeanValidationDisabledTest extends AppTestBase {
 
-    @Deployment
+    @Deployment(testable = false)
     public static WebArchive buildApp() {
         Asset config = new StringAsset(OASConfig.SCAN_BEANVALIDATION + "=false");
 
@@ -45,7 +44,6 @@ public class BeanValidationDisabledTest extends AppTestBase {
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
-    @RunAsClient
     public void beanValidationScanningDisabledTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "notEmptyString", not(hasKey("minLength")));

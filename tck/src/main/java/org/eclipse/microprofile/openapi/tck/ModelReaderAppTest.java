@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.testng.annotations.Test;
@@ -40,7 +39,7 @@ import org.testng.annotations.Test;
 import io.restassured.response.ValidatableResponse;
 
 public class ModelReaderAppTest extends AppTestBase {
-    @Deployment(name = "airlinesModelReader")
+    @Deployment(name = "airlinesModelReader", testable = false)
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "airlinesReader.war")
                 .addPackages(true, "org.eclipse.microprofile.openapi.apps.airlines")
@@ -48,14 +47,12 @@ public class ModelReaderAppTest extends AppTestBase {
                 .addAsManifestResource("microprofile-reader.properties", "microprofile-config.properties");
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testVersion(String type) {
         ValidatableResponse vr = callEndpoint(type);
         vr.body("openapi", startsWith("3.0."));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testInfo(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -64,7 +61,6 @@ public class ModelReaderAppTest extends AppTestBase {
         vr.body("info.termsOfService", equalTo("http://airlinesratingapp.com/terms"));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testContact(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -73,7 +69,6 @@ public class ModelReaderAppTest extends AppTestBase {
         vr.body("info.contact.email", equalTo("techsupport@airlinesratingapp.com"));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testLicense(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -81,7 +76,6 @@ public class ModelReaderAppTest extends AppTestBase {
         vr.body("info.license.url", equalTo("http://www.apache.org/licenses/LICENSE-2.0.html"));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testExternalDocumentation(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -89,7 +83,6 @@ public class ModelReaderAppTest extends AppTestBase {
         vr.body("externalDocs.url", containsString("README.md"));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testServer(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -115,7 +108,6 @@ public class ModelReaderAppTest extends AppTestBase {
 
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testOperationAirlinesResource(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -123,7 +115,6 @@ public class ModelReaderAppTest extends AppTestBase {
         vr.body("paths.'/modelReader/airlines'.get.operationId", equalTo("getAirlines"));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testOperationAvailabilityResource(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -131,7 +122,6 @@ public class ModelReaderAppTest extends AppTestBase {
         vr.body("paths.'/availability'.get.operationId", equalTo("getFlights"));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testOperationBookingResource(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -144,7 +134,6 @@ public class ModelReaderAppTest extends AppTestBase {
         vr.body("paths.'/modelReader/bookings'.post.operationId", equalTo("createBooking"));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testAPIResponse(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -154,7 +143,6 @@ public class ModelReaderAppTest extends AppTestBase {
         vr.body("paths.'/availability'.get.responses.'404'.description", equalTo("No available flights found"));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testAvailabilityGetParameter(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -190,7 +178,6 @@ public class ModelReaderAppTest extends AppTestBase {
                 both(hasSize(1)).and(contains(0)));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testSecurityRequirement(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -201,7 +188,6 @@ public class ModelReaderAppTest extends AppTestBase {
         vr.body("paths.'/bookings'.post.security.bookingSecurityScheme[0]", hasSize(2));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testSecuritySchemes(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -209,7 +195,6 @@ public class ModelReaderAppTest extends AppTestBase {
         vr.body(s, hasKey("httpTestScheme"));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testSecurityScheme(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -219,7 +204,6 @@ public class ModelReaderAppTest extends AppTestBase {
         vr.body(http + "scheme", equalTo("testScheme"));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testSchema(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -233,7 +217,6 @@ public class ModelReaderAppTest extends AppTestBase {
                 equalTo("id of the new booking"));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testExampleObject(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -243,7 +226,6 @@ public class ModelReaderAppTest extends AppTestBase {
         vr.body("components.examples.review.externalValue", equalTo("http://foo.bar/examples/review-example.json"));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testTagDeclarations(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -262,7 +244,6 @@ public class ModelReaderAppTest extends AppTestBase {
         vr.body(tagsPath + "Retrieve Airlines" + desc, equalTo("method to retrieve all airlines"));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testTagsInOperations(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -270,7 +251,6 @@ public class ModelReaderAppTest extends AppTestBase {
         vr.body("paths.'/modelReader/bookings'.get.tags", containsInAnyOrder("bookings"));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testComponents(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -295,7 +275,6 @@ public class ModelReaderAppTest extends AppTestBase {
         vr.body("components.links.UserName", notNullValue());
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testHeaderInComponents(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -306,7 +285,6 @@ public class ModelReaderAppTest extends AppTestBase {
         vr.body(maxRate + ".allowEmptyValue", equalTo(true));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testContentInAPIResponse(String type) {
         ValidatableResponse vr = callEndpoint(type);

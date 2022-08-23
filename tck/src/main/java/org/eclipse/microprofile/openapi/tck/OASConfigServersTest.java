@@ -18,7 +18,6 @@ import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.hasSize;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.testng.annotations.Test;
@@ -28,14 +27,13 @@ import io.restassured.response.ValidatableResponse;
 public class OASConfigServersTest extends AppTestBase {
     private ValidatableResponse vr;
 
-    @Deployment(name = "airlines")
+    @Deployment(name = "airlines", testable = false)
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "airlines.war")
                 .addPackages(true, "org.eclipse.microprofile.openapi.apps.airlines")
                 .addAsManifestResource("server-microprofile-config.properties", "microprofile-config.properties");
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testServer(String type) throws InterruptedException {
         vr = callEndpoint(type);
