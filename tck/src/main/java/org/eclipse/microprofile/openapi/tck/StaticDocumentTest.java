@@ -25,7 +25,6 @@ import static org.hamcrest.Matchers.startsWith;
 import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.testng.annotations.Test;
@@ -38,13 +37,12 @@ import io.restassured.response.ValidatableResponse;
  */
 public class StaticDocumentTest extends AppTestBase {
 
-    @Deployment(name = "static")
+    @Deployment(name = "static", testable = false)
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "static.war")
                 .addAsManifestResource("simpleapi.yaml", "openapi.yaml");
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testStaticDocument(String type) {
         ValidatableResponse vr = callEndpoint(type);

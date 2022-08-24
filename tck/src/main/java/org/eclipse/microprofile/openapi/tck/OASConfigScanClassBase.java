@@ -20,7 +20,6 @@ import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.startsWith;
 import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
 
-import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.testng.annotations.Test;
 
 import io.restassured.response.ValidatableResponse;
@@ -31,7 +30,6 @@ import io.restassured.response.ValidatableResponse;
 public abstract class OASConfigScanClassBase extends AppTestBase {
     private ValidatableResponse vr;
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testScanClass(String type) throws InterruptedException {
         vr = callEndpoint(type);

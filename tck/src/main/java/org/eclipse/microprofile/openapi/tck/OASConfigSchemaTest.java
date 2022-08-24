@@ -25,7 +25,6 @@ import java.util.Map;
 
 import org.hamcrest.Matcher;
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.testng.annotations.Test;
@@ -34,7 +33,7 @@ import io.restassured.response.ValidatableResponse;
 
 public class OASConfigSchemaTest extends AppTestBase {
 
-    @Deployment(name = "petstore")
+    @Deployment(name = "petstore", testable = false)
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "petstore.war")
                 .addPackages(true, "org.eclipse.microprofile.openapi.apps.petstore")
@@ -42,7 +41,6 @@ public class OASConfigSchemaTest extends AppTestBase {
                         "classes/META-INF/microprofile-config.properties");
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testSchemaConfigApplied(String type) {
         ValidatableResponse vr = callEndpoint(type);

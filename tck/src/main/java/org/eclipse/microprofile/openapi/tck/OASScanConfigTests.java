@@ -26,7 +26,6 @@ import org.eclipse.microprofile.openapi.apps.scanconfig.a.b.c.CResource;
 import org.eclipse.microprofile.openapi.apps.scanconfig.x.y.YResource;
 import org.eclipse.microprofile.openapi.tck.utils.ConfigAsset;
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.testng.annotations.Test;
@@ -37,14 +36,13 @@ public class OASScanConfigTests {
 
     public static class ScanConfigIncludeOnly extends AppTestBase {
 
-        @Deployment
+        @Deployment(testable = false)
         public static WebArchive deployment() {
             ConfigAsset config = new ConfigAsset()
                     .put(OASConfig.SCAN_CLASSES, BResource.class.getName());
             return scanConfigApp("scanConfigIncludeOnly.war", config);
         }
 
-        @RunAsClient
         @Test(dataProvider = "formatProvider")
         public void testIncludeOnly(String type) {
             assertPaths(callEndpoint(type), "/b");
@@ -53,14 +51,13 @@ public class OASScanConfigTests {
 
     public static class ScanConfigIncludeMultiple extends AppTestBase {
 
-        @Deployment
+        @Deployment(testable = false)
         public static WebArchive deployment() {
             ConfigAsset config = new ConfigAsset()
                     .put(OASConfig.SCAN_CLASSES, BResource.class.getName(), YResource.class.getName());
             return scanConfigApp("scanConfigIncludeMultiple.war", config);
         }
 
-        @RunAsClient
         @Test(dataProvider = "formatProvider")
         public void testIncludeMultiple(String type) {
             assertPaths(callEndpoint(type), "/b", "/y");
@@ -69,14 +66,13 @@ public class OASScanConfigTests {
 
     public static class ScanConfigPackageIncludeOnly extends AppTestBase {
 
-        @Deployment
+        @Deployment(testable = false)
         public static WebArchive deployment() {
             ConfigAsset config = new ConfigAsset()
                     .put(OASConfig.SCAN_PACKAGES, BResource.class.getPackage().getName());
             return scanConfigApp("scanConfigPackageIncludeOnly.war", config);
         }
 
-        @RunAsClient
         @Test(dataProvider = "formatProvider")
         public void testPackageIncludeOnly(String type) {
             assertPaths(callEndpoint(type), "/b", "/c");
@@ -85,7 +81,7 @@ public class OASScanConfigTests {
 
     public static class ScanConfigPackageIncludeMultiple extends AppTestBase {
 
-        @Deployment
+        @Deployment(testable = false)
         public static WebArchive deployment() {
             ConfigAsset config = new ConfigAsset()
                     .put(OASConfig.SCAN_PACKAGES, BResource.class.getPackage().getName(),
@@ -93,7 +89,6 @@ public class OASScanConfigTests {
             return scanConfigApp("scanConfigPackageIncludeMultiple.war", config);
         }
 
-        @RunAsClient
         @Test(dataProvider = "formatProvider")
         public void testPackageIncludeMultiple(String type) {
             assertPaths(callEndpoint(type), "/b", "/c", "/y");
@@ -102,14 +97,13 @@ public class OASScanConfigTests {
 
     public static class ScanConfigExcludeOnly extends AppTestBase {
 
-        @Deployment
+        @Deployment(testable = false)
         public static WebArchive deployment() {
             ConfigAsset config = new ConfigAsset()
                     .put(OASConfig.SCAN_EXCLUDE_CLASSES, BResource.class.getName());
             return scanConfigApp("scanConfigExcludeOnly.war", config);
         }
 
-        @RunAsClient
         @Test(dataProvider = "formatProvider")
         public void testExcludeOnly(String type) {
             assertPaths(callEndpoint(type), "/a", "/c", "/x", "/y");
@@ -118,14 +112,13 @@ public class OASScanConfigTests {
 
     public static class ScanConfigExcludeMultiple extends AppTestBase {
 
-        @Deployment
+        @Deployment(testable = false)
         public static WebArchive deployment() {
             ConfigAsset config = new ConfigAsset()
                     .put(OASConfig.SCAN_EXCLUDE_CLASSES, BResource.class.getName(), YResource.class.getName());
             return scanConfigApp("scanConfigExcludeMultiple.war", config);
         }
 
-        @RunAsClient
         @Test(dataProvider = "formatProvider")
         public void testExcludeMultiple(String type) {
             assertPaths(callEndpoint(type), "/a", "/c", "/x");
@@ -134,14 +127,13 @@ public class OASScanConfigTests {
 
     public static class ScanConfigPackageExcludeOnly extends AppTestBase {
 
-        @Deployment
+        @Deployment(testable = false)
         public static WebArchive deployment() {
             ConfigAsset config = new ConfigAsset()
                     .put(OASConfig.SCAN_EXCLUDE_PACKAGES, BResource.class.getPackage().getName());
             return scanConfigApp("scanConfigPackageExcludeOnly.war", config);
         }
 
-        @RunAsClient
         @Test(dataProvider = "formatProvider")
         public void testPackageExcludeOnly(String type) {
             assertPaths(callEndpoint(type), "/a", "/x", "/y");
@@ -150,7 +142,7 @@ public class OASScanConfigTests {
 
     public static class ScanConfigPackageExcludeMultiple extends AppTestBase {
 
-        @Deployment
+        @Deployment(testable = false)
         public static WebArchive deployment() {
             ConfigAsset config = new ConfigAsset()
                     .put(OASConfig.SCAN_EXCLUDE_PACKAGES, BResource.class.getPackage().getName(),
@@ -158,7 +150,6 @@ public class OASScanConfigTests {
             return scanConfigApp("scanConfigPackageExcludeMultiple.war", config);
         }
 
-        @RunAsClient
         @Test(dataProvider = "formatProvider")
         public void testPackageExcludeMultiple(String type) {
             assertPaths(callEndpoint(type), "/a", "/x");
@@ -167,7 +158,7 @@ public class OASScanConfigTests {
 
     public static class ScanConfigPackageIncludesAroundExcludes extends AppTestBase {
 
-        @Deployment
+        @Deployment(testable = false)
         public static WebArchive deployment() {
             ConfigAsset config = new ConfigAsset()
                     .put(OASConfig.SCAN_PACKAGES, AResource.class.getPackage().getName(),
@@ -176,7 +167,6 @@ public class OASScanConfigTests {
             return scanConfigApp("scanConfigPackageIncludesAroundExcludes.war", config);
         }
 
-        @RunAsClient
         @Test(dataProvider = "formatProvider")
         public void testPackageIncludesAroundExcludes(String type) {
             assertPaths(callEndpoint(type), "/a", "/c");
@@ -185,7 +175,7 @@ public class OASScanConfigTests {
 
     public static class ScanConfigPackageExcludesAroundInclude extends AppTestBase {
 
-        @Deployment
+        @Deployment(testable = false)
         public static WebArchive deployment() {
             ConfigAsset config = new ConfigAsset()
                     .put(OASConfig.SCAN_PACKAGES, BResource.class.getPackage().getName())
@@ -194,7 +184,6 @@ public class OASScanConfigTests {
             return scanConfigApp("scanConfigPackageExcludesAroundInclude.war", config);
         }
 
-        @RunAsClient
         @Test(dataProvider = "formatProvider")
         public void testPackageExcludesAroundInclude(String type) {
             assertPaths(callEndpoint(type), "/b");
@@ -203,7 +192,7 @@ public class OASScanConfigTests {
 
     public static class ScanConfigPackageExcludeClassInclude extends AppTestBase {
 
-        @Deployment
+        @Deployment(testable = false)
         public static WebArchive deployment() {
             ConfigAsset config = new ConfigAsset()
                     .put(OASConfig.SCAN_CLASSES, AResource.class.getName())
@@ -211,7 +200,6 @@ public class OASScanConfigTests {
             return scanConfigApp("scanConfigPackageExcludeClassInclude.war", config);
         }
 
-        @RunAsClient
         @Test(dataProvider = "formatProvider")
         public void testPackageExcludeClassInclude(String type) {
             assertPaths(callEndpoint(type), "/a");
@@ -220,7 +208,7 @@ public class OASScanConfigTests {
 
     public static class ScanConfigPackageIncludeClassExclude extends AppTestBase {
 
-        @Deployment
+        @Deployment(testable = false)
         public static WebArchive deployment() {
             ConfigAsset config = new ConfigAsset()
                     .put(OASConfig.SCAN_PACKAGES, AResource.class.getPackage().getName())
@@ -228,7 +216,6 @@ public class OASScanConfigTests {
             return scanConfigApp("scanConfigPackageIncludeClassExclude.war", config);
         }
 
-        @RunAsClient
         @Test(dataProvider = "formatProvider")
         public void testPackageIncludeClassExclude(String type) {
             assertPaths(callEndpoint(type), "/b", "/c");
@@ -237,7 +224,7 @@ public class OASScanConfigTests {
 
     public static class ScanConfigPartialPackage extends AppTestBase {
 
-        @Deployment
+        @Deployment(testable = false)
         public static WebArchive deployment() {
             ConfigAsset config = new ConfigAsset()
                     .put(OASConfig.SCAN_PACKAGES, "a.b.c");
@@ -245,7 +232,6 @@ public class OASScanConfigTests {
             return scanConfigApp("scanConfigPartialPackage.war", config);
         }
 
-        @RunAsClient
         @Test(dataProvider = "formatProvider")
         public void testPartialPackage(String type) {
             assertPaths(callEndpoint(type)); // assert no paths

@@ -24,7 +24,6 @@ import org.eclipse.microprofile.openapi.apps.beanvalidation.BeanValidationApp;
 import org.eclipse.microprofile.openapi.tck.AppTestBase;
 import org.hamcrest.Matcher;
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.testng.annotations.Test;
@@ -33,14 +32,13 @@ import io.restassured.response.ValidatableResponse;
 
 public class BeanValidationTest extends AppTestBase {
 
-    @Deployment
+    @Deployment(testable = false)
     public static WebArchive buildApp() {
         return ShrinkWrap.create(WebArchive.class, "beanValidation.war")
                 .addPackage(BeanValidationApp.class.getPackage());
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
-    @RunAsClient
     public void notEmptyStringTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "notEmptyString", hasEntry("minLength", 1));
@@ -48,7 +46,6 @@ public class BeanValidationTest extends AppTestBase {
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
-    @RunAsClient
     public void notEmptyListTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "notEmptyList", hasEntry("minItems", 1));
@@ -56,7 +53,6 @@ public class BeanValidationTest extends AppTestBase {
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
-    @RunAsClient
     public void notEmptyMapTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "notEmptyMap", hasEntry("minProperties", 1));
@@ -64,14 +60,12 @@ public class BeanValidationTest extends AppTestBase {
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
-    @RunAsClient
     public void notBlankStringTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "notBlankString", hasEntry("pattern", "\\S"));
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
-    @RunAsClient
     public void sizedStringTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "sizedString", hasEntry("minLength", 2));
@@ -80,7 +74,6 @@ public class BeanValidationTest extends AppTestBase {
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
-    @RunAsClient
     public void sizedListTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "sizedList", hasEntry("minItems", 1));
@@ -89,7 +82,6 @@ public class BeanValidationTest extends AppTestBase {
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
-    @RunAsClient
     public void sizedMapTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "sizedMap", hasEntry("minProperties", 3));
@@ -98,7 +90,6 @@ public class BeanValidationTest extends AppTestBase {
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
-    @RunAsClient
     public void maxDecimalInclusiveTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "maxDecimalInclusive", hasEntry("maximum", 1.5f));
@@ -106,7 +97,6 @@ public class BeanValidationTest extends AppTestBase {
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
-    @RunAsClient
     public void maxDecimalExclusiveTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "maxDecimalExclusive", hasEntry("maximum", 1.5f));
@@ -115,7 +105,6 @@ public class BeanValidationTest extends AppTestBase {
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
-    @RunAsClient
     public void minDecimalInclusiveTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "minDecimalInclusive", hasEntry("minimum", 3.25f));
@@ -123,7 +112,6 @@ public class BeanValidationTest extends AppTestBase {
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
-    @RunAsClient
     public void minDecimalExclusiveTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "minDecimalExclusive", hasEntry("minimum", 3.25f));
@@ -132,21 +120,18 @@ public class BeanValidationTest extends AppTestBase {
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
-    @RunAsClient
     public void maxIntTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "maxInt", hasEntry("maximum", 5));
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
-    @RunAsClient
     public void minIntTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "minInt", hasEntry("minimum", 7));
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
-    @RunAsClient
     public void negativeIntTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "negativeInt", hasEntry("maximum", 0));
@@ -154,14 +139,12 @@ public class BeanValidationTest extends AppTestBase {
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
-    @RunAsClient
     public void negativeOrZeroIntTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "negativeOrZeroInt", hasEntry("maximum", 0));
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
-    @RunAsClient
     public void positiveIntTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "positiveInt", hasEntry("minimum", 0));
@@ -169,35 +152,30 @@ public class BeanValidationTest extends AppTestBase {
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
-    @RunAsClient
     public void positiveOrZeroIntTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "positiveOrZeroInt", hasEntry("minimum", 0));
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
-    @RunAsClient
     public void overridenBySchemaAnnotationTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "overridenBySchemaAnnotation", hasEntry("minLength", 6));
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
-    @RunAsClient
     public void nonDefaultGroupTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "nonDefaultGroup", not(hasKey("minLength")));
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
-    @RunAsClient
     public void defaultAndOtherGroupsTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "defaultAndOtherGroups", hasEntry("minLength", 1));
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
-    @RunAsClient
     public void parameterTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         String schemaPath = dereference(vr, "paths.'/parameter/{test}'.post.parameters[0]", "schema");

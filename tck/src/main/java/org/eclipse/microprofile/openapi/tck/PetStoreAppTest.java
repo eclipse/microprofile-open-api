@@ -33,7 +33,6 @@ import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
 import static org.testng.Assert.assertNotNull;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.testng.annotations.Test;
@@ -41,13 +40,12 @@ import org.testng.annotations.Test;
 import io.restassured.response.ValidatableResponse;
 
 public class PetStoreAppTest extends AppTestBase {
-    @Deployment(name = "petstore")
+    @Deployment(name = "petstore", testable = false)
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "petstore.war")
                 .addPackages(true, "org.eclipse.microprofile.openapi.apps.petstore");
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testSchema(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -79,7 +77,6 @@ public class PetStoreAppTest extends AppTestBase {
 
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testSecurityRequirement(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -105,7 +102,6 @@ public class PetStoreAppTest extends AppTestBase {
         vr.body("paths.'/user'.post.security.find { it.userBearerHttp != null }.userBearerHttp", empty());
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testSecuritySchemes(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -120,7 +116,6 @@ public class PetStoreAppTest extends AppTestBase {
         vr.body(s, hasKey("petsHttp"));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testSecurityScheme(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -174,7 +169,6 @@ public class PetStoreAppTest extends AppTestBase {
                 equalTo("https://petstoreauth.com:4433/oidc/petstore/oidcprovider/authorize"));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testOAuthFlows(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -183,7 +177,6 @@ public class PetStoreAppTest extends AppTestBase {
         vr.body(t, hasKey("authorizationCode"));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testOAuthFlow(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -195,7 +188,6 @@ public class PetStoreAppTest extends AppTestBase {
         vr.body(authCode + "tokenUrl", equalTo("https://example.com/api/oauth/token"));
     }
 
-    @RunAsClient
     @Test
     public void testDefaultResponseType() {
         given()
@@ -208,7 +200,6 @@ public class PetStoreAppTest extends AppTestBase {
                 .body("openapi", startsWith("3.0."));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testRequestBodySchema(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -231,7 +222,6 @@ public class PetStoreAppTest extends AppTestBase {
                         hasEntry(equalTo("properties"), notNullValue())));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testAPIResponseSchema(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -255,7 +245,6 @@ public class PetStoreAppTest extends AppTestBase {
                         hasEntry(equalTo("properties"), notNullValue())));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testAPIResponseSchemaDefaultResponseCode(String type) {
         ValidatableResponse vr = callEndpoint(type);
@@ -288,7 +277,6 @@ public class PetStoreAppTest extends AppTestBase {
                         hasEntry(equalTo("properties"), notNullValue())));
     }
 
-    @RunAsClient
     @Test(dataProvider = "formatProvider")
     public void testExtensionPlacement(String type) {
         ValidatableResponse vr = callEndpoint(type);
