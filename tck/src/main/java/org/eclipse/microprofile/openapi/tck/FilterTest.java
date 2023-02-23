@@ -139,7 +139,7 @@ public class FilterTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testFilterLink(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        String s = "paths.'/user/{id}'.get.responses.'200'.links.'User name'.";
+        String s = "paths.'/user/id/{id}'.get.responses.'200'.links.'User name'.";
         vr.body(s + "operationId", equalTo("getUserByName"));
         vr.body(s + "description", equalTo("filterLink - The username corresponding to provided user id"));
     }
