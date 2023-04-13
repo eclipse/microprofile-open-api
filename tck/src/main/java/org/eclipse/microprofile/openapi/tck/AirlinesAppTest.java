@@ -255,19 +255,21 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/user/createWithList'.post.summary", equalTo("Creates list of users with given input list"));
         vr.body("paths.'/user/createWithList'.post.operationId", equalTo("createUsersFromList"));
 
-        vr.body("paths.'/user/{username}'.put.summary", equalTo("Update user"));
-        vr.body("paths.'/user/{username}'.put.description", equalTo("This can only be done by the logged in user."));
-        vr.body("paths.'/user/{username}'.put.operationId", equalTo("updateUser"));
+        vr.body("paths.'/user/username/{username}'.put.summary", equalTo("Update user"));
+        vr.body("paths.'/user/username/{username}'.put.description",
+                equalTo("This can only be done by the logged in user."));
+        vr.body("paths.'/user/username/{username}'.put.operationId", equalTo("updateUser"));
 
-        vr.body("paths.'/user/{username}'.delete.summary", equalTo("Delete user"));
-        vr.body("paths.'/user/{username}'.delete.description", equalTo("This can only be done by the logged in user."));
-        vr.body("paths.'/user/{username}'.delete.operationId", equalTo("deleteUser"));
+        vr.body("paths.'/user/username/{username}'.delete.summary", equalTo("Delete user"));
+        vr.body("paths.'/user/username/{username}'.delete.description",
+                equalTo("This can only be done by the logged in user."));
+        vr.body("paths.'/user/username/{username}'.delete.operationId", equalTo("deleteUser"));
 
-        vr.body("paths.'/user/{username}'.get.summary", equalTo("Get user by user name"));
-        vr.body("paths.'/user/{username}'.get.operationId", equalTo("getUserByName"));
+        vr.body("paths.'/user/username/{username}'.get.summary", equalTo("Get user by user name"));
+        vr.body("paths.'/user/username/{username}'.get.operationId", equalTo("getUserByName"));
 
-        vr.body("paths.'/user/{id}'.get.summary", equalTo("Get user by id"));
-        vr.body("paths.'/user/{id}'.get.operationId", equalTo("getUserById"));
+        vr.body("paths.'/user/id/{id}'.get.summary", equalTo("Get user by id"));
+        vr.body("paths.'/user/id/{id}'.get.operationId", equalTo("getUserById"));
 
         vr.body("paths.'/user/login'.get.summary", equalTo("Logs user into the system"));
         vr.body("paths.'/user/login'.get.operationId", equalTo("logInUser"));
@@ -275,11 +277,11 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/user/logout'.get.summary", equalTo("Logs out current logged in user session"));
         vr.body("paths.'/user/logout'.get.operationId", equalTo("logOutUser"));
 
-        vr.body("paths.'/user/{username}'.patch.summary", equalTo("Change user password"));
-        vr.body("paths.'/user/{username}'.patch.description",
+        vr.body("paths.'/user/username/{username}'.patch.summary", equalTo("Change user password"));
+        vr.body("paths.'/user/username/{username}'.patch.description",
                 equalTo("This changes the password for the logged in user."));
-        vr.body("paths.'/user/{username}'.patch.operationId", equalTo("changePassword"));
-        vr.body("paths.'/user/{username}'.patch.parameters", hasSize(3));
+        vr.body("paths.'/user/username/{username}'.patch.operationId", equalTo("changePassword"));
+        vr.body("paths.'/user/username/{username}'.patch.parameters", hasSize(3));
 
         // Operation with hidden schemas
         vr.body("paths.'/user/special'.post.requestBody.content.'application/json'.schema", is(nullValue()));
@@ -298,16 +300,18 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/bookings'.post.responses.'201'.description", equalTo("Booking created"));
 
         // @APIResponse at class level overridden at method level
-        vr.body("paths.'/user/{username}'.delete.responses", aMapWithSize(3));
-        vr.body("paths.'/user/{username}'.delete.responses.'200'.description", equalTo("User deleted successfully"));
-        vr.body("paths.'/user/{username}'.delete.responses.'400'.description", equalTo("Invalid username supplied"));
-        vr.body("paths.'/user/{username}'.delete.responses.'404'.description", equalTo("User not found"));
+        vr.body("paths.'/user/username/{username}'.delete.responses", aMapWithSize(3));
+        vr.body("paths.'/user/username/{username}'.delete.responses.'200'.description",
+                equalTo("User deleted successfully"));
+        vr.body("paths.'/user/username/{username}'.delete.responses.'400'.description",
+                equalTo("Invalid username supplied"));
+        vr.body("paths.'/user/username/{username}'.delete.responses.'404'.description", equalTo("User not found"));
 
         // @APIResponse at class level combined with method level
-        vr.body("paths.'/user/{username}'.patch.responses", aMapWithSize(2));
-        vr.body("paths.'/user/{username}'.patch.responses.'200'.description",
+        vr.body("paths.'/user/username/{username}'.patch.responses", aMapWithSize(2));
+        vr.body("paths.'/user/username/{username}'.patch.responses.'200'.description",
                 equalTo("Password was changed successfully"));
-        vr.body("paths.'/user/{username}'.patch.responses.'400'.description", equalTo("Invalid request"));
+        vr.body("paths.'/user/username/{username}'.patch.responses.'400'.description", equalTo("Invalid request"));
     }
 
     @Test(dataProvider = "formatProvider")
@@ -318,10 +322,11 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/bookings/{id}'.get.responses.'200'.description", equalTo("Booking retrieved"));
         vr.body("paths.'/bookings/{id}'.get.responses.'404'.description", equalTo("Booking not found"));
 
-        vr.body("paths.'/user/{username}'.put.responses", aMapWithSize(3));
-        vr.body("paths.'/user/{username}'.put.responses.'200'.description", equalTo("User updated successfully"));
-        vr.body("paths.'/user/{username}'.put.responses.'400'.description", equalTo("Invalid user supplied"));
-        vr.body("paths.'/user/{username}'.put.responses.'404'.description", equalTo("User not found"));
+        vr.body("paths.'/user/username/{username}'.put.responses", aMapWithSize(3));
+        vr.body("paths.'/user/username/{username}'.put.responses.'200'.description",
+                equalTo("User updated successfully"));
+        vr.body("paths.'/user/username/{username}'.put.responses.'400'.description", equalTo("Invalid user supplied"));
+        vr.body("paths.'/user/username/{username}'.put.responses.'404'.description", equalTo("User not found"));
 
         // @APIResponses on body combined with annotations on method
         vr.body("paths.'/reviews/users/{user}'.get.responses", aMapWithSize(4));
@@ -428,9 +433,10 @@ public class AirlinesAppTest extends AppTestBase {
     public void testExplode(String type) {
         ValidatableResponse vr = callEndpoint(type);
         String explode =
-                "paths.'/user/{username}'.put.responses.'200'.content.'application/xml'.encoding.password.explode";
+                "paths.'/user/username/{username}'.put.responses.'200'.content.'application/xml'.encoding.password.explode";
         vr.body(explode, equalTo(true));
-        explode = "paths.'/user/{username}'.put.responses.'200'.content.'application/xml'.encoding.password.explode";
+        explode =
+                "paths.'/user/username/{username}'.put.responses.'200'.content.'application/xml'.encoding.password.explode";
         vr.body(explode, equalTo(true));
     }
 
@@ -488,7 +494,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(endpoint + ".content", notNullValue());
         vr.body(endpoint + ".required", equalTo(true));
 
-        endpoint = "paths.'/user/{username}'.put.requestBody";
+        endpoint = "paths.'/user/username/{username}'.put.requestBody";
         vr.body(endpoint + ".description", equalTo("Record of a new user to be created in the system."));
         vr.body(endpoint + ".content", notNullValue());
 
@@ -537,7 +543,7 @@ public class AirlinesAppTest extends AppTestBase {
                         hasEntry(equalTo("testScheme2"), empty())),
                 anEmptyMap()));
 
-        vr.body("paths.'/user/{username}'.patch.security", contains(
+        vr.body("paths.'/user/username/{username}'.patch.security", contains(
                 allOf(aMapWithSize(2),
                         hasEntry(equalTo("userApiKey"), empty()),
                         hasEntry(equalTo("userBearerHttp"), empty()))));
@@ -642,13 +648,14 @@ public class AirlinesAppTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testEncodingResponses(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        String s = "paths.'/user/{username}'.put.responses.'200'.content.'application/json'.encoding.password.";
+        String s =
+                "paths.'/user/username/{username}'.put.responses.'200'.content.'application/json'.encoding.password.";
         vr.body(s + "contentType", equalTo("text/plain"));
         vr.body(s + "style", equalTo("form"));
         vr.body(s + "explode", equalTo(true));
         vr.body(s + "allowReserved", equalTo(true));
 
-        String t = "paths.'/user/{username}'.put.responses.'200'.content.'application/xml'.encoding.password.";
+        String t = "paths.'/user/username/{username}'.put.responses.'200'.content.'application/xml'.encoding.password.";
         vr.body(t + "contentType", equalTo("text/plain"));
         vr.body(t + "style", equalTo("form"));
         vr.body(t + "explode", equalTo(true));
@@ -658,12 +665,12 @@ public class AirlinesAppTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testLink(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        String s = "paths.'/user/{id}'.get.responses.'200'.links.'User name'.";
+        String s = "paths.'/user/id/{id}'.get.responses.'200'.links.'User name'.";
         vr.body(s + "operationId", equalTo("getUserByName"));
         vr.body(s + "description", equalTo("The username corresponding to provided user id"));
         vr.body(s + "x-link", equalTo("test-link"));
 
-        String t = "paths.'/user/{id}'.get.responses.'200'.links.Review.";
+        String t = "paths.'/user/id/{id}'.get.responses.'200'.links.Review.";
         vr.body(t + "operationRef", equalTo("/db/reviews/{userName}"));
         vr.body(t + "description", equalTo("The reviews provided by user"));
 
@@ -675,10 +682,10 @@ public class AirlinesAppTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testLinkParameter(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        String s = "paths.'/user/{id}'.get.responses.'200'.links.'User name'.";
+        String s = "paths.'/user/id/{id}'.get.responses.'200'.links.'User name'.";
         vr.body(s + "parameters.userId", equalTo("$request.path.id"));
 
-        String t = "paths.'/user/{id}'.get.responses.'200'.links.Review.";
+        String t = "paths.'/user/id/{id}'.get.responses.'200'.links.Review.";
         vr.body(t + "parameters.'path.userName'", equalTo("$response.body#userName"));
 
         String k = "paths.'/reviews'.post.responses.'201'.links.Review.";
@@ -800,10 +807,10 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("paths.'/user'.post.tags", containsInAnyOrder("user", "create"));
         vr.body("paths.'/user/createWithArray'.post.tags", containsInAnyOrder("user", "create"));
         vr.body("paths.'/user/createWithList'.post.tags", containsInAnyOrder("user", "create"));
-        vr.body("paths.'/user/{username}'.get.tags", containsInAnyOrder("user"));
-        vr.body("paths.'/user/{username}'.put.tags", containsInAnyOrder("user"));
-        vr.body("paths.'/user/{username}'.delete.tags", containsInAnyOrder("user"));
-        vr.body("paths.'/user/{id}'.get.tags", containsInAnyOrder("user"));
+        vr.body("paths.'/user/username/{username}'.get.tags", containsInAnyOrder("user"));
+        vr.body("paths.'/user/username/{username}'.put.tags", containsInAnyOrder("user"));
+        vr.body("paths.'/user/username/{username}'.delete.tags", containsInAnyOrder("user"));
+        vr.body("paths.'/user/id/{id}'.get.tags", containsInAnyOrder("user"));
         // empty tag was defined
         vr.body("paths.'/user/login'.get.tags", not(hasSize(greaterThan(0))));
         // no tag was defined
@@ -895,7 +902,7 @@ public class AirlinesAppTest extends AppTestBase {
 
         // Reference to Header within Encoding
         String encodingRefHeader =
-                "paths.'/user/{username}'.put.responses.'200'.content.'application/json'.encoding.password.headers.Max-Rate";
+                "paths.'/user/username/{username}'.put.responses.'200'.content.'application/json'.encoding.password.headers.Max-Rate";
         vr.body(encodingRefHeader, notNullValue());
         vr.body(encodingRefHeader + ".$ref", equalTo("#/components/headers/Max-Rate"));
     }
@@ -923,7 +930,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(content1 + ".schema.items", notNullValue());
         vr.body(content1 + ".x-content", equalTo("test-content"));
 
-        String content2 = "paths.'/user/{username}'.put.responses.'200'.content";
+        String content2 = "paths.'/user/username/{username}'.put.responses.'200'.content";
         vr.body(content2, notNullValue());
         vr.body(content2 + ".'application/json'", notNullValue());
         vr.body(content2 + ".'application/json'.schema.$ref", equalTo("#/components/schemas/User"));
@@ -1044,10 +1051,10 @@ public class AirlinesAppTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testExceptionMappers(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        vr.body("paths.'/user/{id}'.get.responses.'404'.description", equalTo("Not Found"));
-        vr.body("paths.'/user/{username}'.get.responses.'404'.description", equalTo("Not Found"));
+        vr.body("paths.'/user/id/{id}'.get.responses.'404'.description", equalTo("Not Found"));
+        vr.body("paths.'/user/username/{username}'.get.responses.'404'.description", equalTo("Not Found"));
 
-        vr.body("paths.'/user/{id}'.get.responses.'404'.content.'application/json'.schema", notNullValue());
+        vr.body("paths.'/user/id/{id}'.get.responses.'404'.content.'application/json'.schema", notNullValue());
 
         vr.body("paths.'/reviews'.post.responses.'400'.description", equalTo("The review was rejected"));
         vr.body("paths.'/reviews'.post.responses.'400'.content.'application/json'.schema", notNullValue());

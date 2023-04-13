@@ -178,7 +178,7 @@ public class UserResource {
         return Response.ok().entity("").build();
     }
 
-    @Path("/{username}")
+    @Path("/username/{username}")
     @PUT
     @RequestBody(name = "user", description = "Record of a new user to be created in the system.",
                  content = @Content(mediaType = "application/json", schema = @Schema(implementation = User.class),
@@ -207,7 +207,7 @@ public class UserResource {
     }
 
     @PATCH
-    @Path("/{username}")
+    @Path("/username/{username}")
     @APIResponse(responseCode = "200", description = "Password was changed successfully")
     @Operation(summary = "Change user password", description = "This changes the password for the logged in user.",
                operationId = "changePassword")
@@ -229,7 +229,7 @@ public class UserResource {
     }
 
     @DELETE
-    @Path("/{username}")
+    @Path("/username/{username}")
     @Tag(ref = "user")
     @APIResponse(responseCode = "200", description = "User deleted successfully")
     @APIResponse(responseCode = "400", description = "Invalid username supplied")
@@ -248,7 +248,7 @@ public class UserResource {
     }
 
     @GET
-    @Path("/{username}")
+    @Path("/username/{username}")
     @Tag(ref = "user")
     @APIResponses(value = {
             @APIResponse(responseCode = "200", description = "Successfully retrieved user by user name.",
@@ -270,7 +270,7 @@ public class UserResource {
     }
 
     @GET
-    @Path("/{id}")
+    @Path("/id/{id}")
     @Tag(ref = "user")
     @APIResponse(responseCode = "200", description = "Successfully retrieved user by id.",
                  content = @Content(schema = @Schema(implementation = User.class)), links = {
