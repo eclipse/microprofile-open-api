@@ -44,7 +44,7 @@
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.annotation.versioning</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.eclipse.microprofile.openapi</groupId>
             <artifactId>microprofile-openapi-api</artifactId>
@@ -53,29 +53,29 @@
         <dependency>
             <groupId>org.eclipse.microprofile.rest.client</groupId>
             <artifactId>microprofile-rest-client-api</artifactId>
-            <version>3.0</version>
+            <version>${mp.rest-client-api.version}</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
-            <version>3.0.0</version>
+            <version>${jakarta.xml.bind-api.version}</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
-            <version>3.0.0</version>
+            <version>${jakarta.validation-api.version}</version>
             <scope>provided</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>jakarta.ws.rs</groupId>
             <artifactId>jakarta.ws.rs-api</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -121,7 +121,7 @@
              <version>${jackson.version}</version>
          </dependency>
     </dependencies>
-    
+
     <build>
         <plugins>
             <plugin>
@@ -133,5 +133,5 @@
             </plugin>
         </plugins>
     </build>
-    
+
 </project>
