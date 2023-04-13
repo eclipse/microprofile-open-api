@@ -761,7 +761,7 @@ following conditions are met:
 
 - an `OASModelReader` has been configured with `mp.openapi.model.reader`
 - an `OASFilter` has been configured with `mp.openapi.filter`
-- one of the allowed static files is present, i.e. `META-INF/openapi.(json|yaml)`
+- one of the allowed static files is present, i.e. `META-INF/openapi.(json|yaml|yml)`
 - the application uses JAX-RS
 
 For example, `GET http://myHost:myPort/openapi`.
