@@ -22,6 +22,7 @@ import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
 import org.eclipse.microprofile.openapi.annotations.info.Contact;
 import org.eclipse.microprofile.openapi.annotations.info.Info;
 import org.eclipse.microprofile.openapi.annotations.info.License;
+import org.eclipse.microprofile.openapi.annotations.media.ExampleObject;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.eclipse.microprofile.openapi.apps.petstore.model.Lizard;
@@ -48,9 +49,20 @@ import jakarta.ws.rs.core.Application;
                                 externalDocs = @ExternalDocumentation(url = "http://swagger.io",
                                                                       description = "Find out more about our store"))
                    },
-                   components = @Components(schemas = {
-                           @Schema(name = "Lizard", implementation = Lizard.class)
-                   }))
+                   components = @Components(
+                                            schemas = {
+                                                    @Schema(name = "Lizard", implementation = Lizard.class)
+                                            },
+                                            examples = {
+                                                    @ExampleObject(name = "pet-example", value = "{"
+                                                            + "  \"id\": 4,"
+                                                            + "  \"name\": \"Dog 1\","
+                                                            + "  \"category\": { \"id\": 1, \"name\": \"Dogs\" },"
+                                                            + "  \"photoUrls\": [ \"url1\", \"url2\" ],"
+                                                            + "  \"tags\": [ \"tag1\", \"tag2\" ],"
+                                                            + "  \"status\": \"available\""
+                                                            + "}")
+                                            }))
 @Schema(externalDocs = @ExternalDocumentation(url = "http://swagger.io", description = "Find out more about our store"))
 public class PetStoreApp extends Application {
     @Override

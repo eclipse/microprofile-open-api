@@ -57,7 +57,7 @@ public class PetStoreAppTest extends AppTestBase {
         vr.body("paths.'/pet/findByTags'.get.parameters.find{ it.name == 'tags' }.schema.externalDocs.description",
                 equalTo("Pet Types"));
         vr.body("paths.'/pet/findByTags'.get.parameters.find{ it.name == 'tags' }.schema.deprecated", equalTo(true));
-        vr.body("paths.'/store/order/{orderId}'.get.responses.'900'.schema", nullValue());
+        vr.body("paths.'/store/order/{orderId}'.get.responses.'599'.schema", nullValue());
 
         // Numerical properties
         vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.maximum",

@@ -21,6 +21,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.DiscriminatorMapping;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
@@ -43,7 +44,6 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Response;
 
 @Path("/store")
-@Schema(name = "/store")
 @Produces({"application/json", "application/xml"})
 @SecuritySchemes(value = {
         @SecurityScheme(securitySchemeName = "storeOpenIdConnect", type = SecuritySchemeType.OPENIDCONNECT,
@@ -94,7 +94,7 @@ public class PetStoreResource {
                          BadOrder.class}, discriminatorProperty = "id",
                                                      discriminatorMapping = @DiscriminatorMapping(value = "0",
                                                                                                   schema = BadOrder.class))))
-    @APIResponse(responseCode = "900", description = "Invalid",
+    @APIResponse(responseCode = "599", description = "Invalid",
                  content = @Content(schema = @Schema(implementation = Order.class, hidden = true)))
     public Response getOrderById(
             @Parameter(name = "orderId", description = "ID of pet that needs to be fetched",
@@ -115,7 +115,7 @@ public class PetStoreResource {
     @APIResponse(responseCode = "200", description = "successful operation")
     @APIResponse(responseCode = "400", description = "Invalid Order")
     public Order placeOrder(
-            @Parameter(description = "order placed for purchasing the pet", required = true) Order order) {
+            @RequestBody(description = "order placed for purchasing the pet", required = true) Order order) {
         storeData.placeOrder(order);
         return storeData.placeOrder(order);
     }

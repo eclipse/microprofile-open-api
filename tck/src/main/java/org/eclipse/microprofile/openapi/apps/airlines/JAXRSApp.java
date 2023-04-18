@@ -71,6 +71,7 @@ import jakarta.ws.rs.core.MediaType;
                                                          extensions = @Extension(name = "x-external-docs",
                                                                                  value = "test-external-docs")),
                    info = @Info(title = "AirlinesRatingApp API", version = "1.0",
+                                description = "APIs for booking and managing air flights",
                                 termsOfService = "http://airlinesratingapp.com/terms",
                                 contact = @Contact(name = "AirlinesRatingApp API Support",
                                                    url = "http://exampleurl.com/contact",
@@ -208,10 +209,6 @@ import jakarta.ws.rs.core.MediaType;
 @SecurityScheme(securitySchemeName = "testScheme2",
                 type = SecuritySchemeType.HTTP,
                 scheme = "Basic")
-@Schema(name = "AirlinesRatingApp API",
-        description = "APIs for booking and managing air flights",
-        externalDocs = @ExternalDocumentation(description = "For more information, see the link.",
-                                              url = "http://exampleurl.com/schema"))
 public class JAXRSApp extends Application {
     @Override
     public Set<Object> getSingletons() {
