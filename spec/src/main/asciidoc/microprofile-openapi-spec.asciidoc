@@ -50,7 +50,8 @@ RESTful Services.
 
 This MicroProfile specification, called OpenAPI, aims to provide a set of Java
 interfaces and programming models which allow Java developers to natively produce
-OpenAPI v3 documents from their JAX-RS applications.
+OpenAPI v3 documents from their applications written using Jakarta RESTful Web
+Services (JAX-RS).
 
 == Architecture
 
@@ -176,7 +177,7 @@ There are many different ways to provide input for the generation of the resulti
 OpenAPI document.
 
 The MP OpenAPI specification requires vendors to produce a valid OpenAPI document
-from pure JAX-RS 2.0 applications.  This means that vendors must process all the
+from pure JAX-RS applications.  This means that vendors must process all the
 relevant JAX-RS annotations (such as `@Path` and `@Consumes`) as well as Java objects
 (POJOs) used as input or output to JAX-RS operations.  This is a good place to
 start for application developers that are new to OpenAPI: just deploy your existing
