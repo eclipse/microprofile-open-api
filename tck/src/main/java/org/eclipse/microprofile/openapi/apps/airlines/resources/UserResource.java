@@ -277,7 +277,7 @@ public class UserResource {
                                extensions = @Extension(name = "x-link", value = "test-link")),
                          @Link(name = "Review", description = "The reviews provided by user",
                                operationRef = "#/paths/~1reviews~1users~1{user}/get",
-                               parameters = @LinkParameter(name = "path.userName",
+                               parameters = @LinkParameter(name = "path.user",
                                                            expression = "$response.body#userName"),
                                requestBody = "$request.path.id", server = @Server(url = "http://example.com"))
                  })
