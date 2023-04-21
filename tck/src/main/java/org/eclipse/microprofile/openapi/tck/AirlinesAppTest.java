@@ -686,7 +686,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(s + "parameters.userId", equalTo("$request.path.id"));
 
         String t = "paths.'/user/id/{id}'.get.responses.'200'.links.Review.";
-        vr.body(t + "parameters.'path.userName'", equalTo("$response.body#userName"));
+        vr.body(t + "parameters.'path.user'", equalTo("$response.body#userName"));
 
         String k = "paths.'/reviews'.post.responses.'201'.links.Review.";
         vr.body(k + "parameters.reviewId", equalTo("$request.path.id"));
@@ -749,11 +749,9 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("components.examples.review.externalValue", equalTo("http://foo.bar/examples/review-example.json"));
         vr.body("components.examples.review.x-example-object", equalTo("test-example-object"));
 
-        // Examples in Parameter Content
-        vr.body("paths.'/reviews/users/{user}'.get.parameters.find{ it.name=='user'}.content.'*/*'.examples.example1.value",
+        // Example in Parameter Content
+        vr.body("paths.'/reviews/users/{user}'.get.parameters.find{ it.name=='user'}.content.'*/*'.examples.example.value",
                 equalTo("bsmith"));
-        vr.body("paths.'/reviews/users/{user}'.get.parameters.find{ it.name=='user'}.content.'*/*'.examples.example2.value",
-                equalTo("pat@example.com"));
     }
 
     @Test(dataProvider = "formatProvider")

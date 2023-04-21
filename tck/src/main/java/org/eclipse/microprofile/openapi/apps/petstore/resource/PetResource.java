@@ -19,12 +19,9 @@ import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.callbacks.Callback;
 import org.eclipse.microprofile.openapi.annotations.callbacks.CallbackOperation;
-import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeIn;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
-import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
-import org.eclipse.microprofile.openapi.annotations.extensions.Extensions;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.ExampleObject;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
@@ -173,7 +170,7 @@ public class PetResource {
                                     schema = @Schema(implementation = ApiResponse.class)))
     @RequestBody(name = "pet",
                  content = @Content(mediaType = "application/json", schema = @Schema(implementation = Pet.class),
-                                    examples = @ExampleObject(ref = "#/components/examples/pet-example")),
+                                    examples = @ExampleObject(ref = "http://example.org/petapi-examples/openapi.json#/components/examples/pet-example")),
                  required = true, description = "example of a new pet to add")
     @Operation(summary = "Add pet to store", description = "Add a new pet to the store")
     public Response addPet(Pet pet) {
@@ -194,39 +191,11 @@ public class PetResource {
     })
     @Operation(summary = "Update an existing pet", description = "Update an existing pet with the given new attributes")
     public Response updatePet(
-            @RequestBody(name = "petAttribute", description = "Attribute to update existing pet record",
+            @RequestBody(description = "Attribute to update existing pet record",
                          required = true,
                          content = @Content(schema = @Schema(implementation = Pet.class))) Pet pet) {
         Pet updatedPet = petData.addPet(pet);
         return Response.ok().entity(updatedPet).build();
-    }
-
-    @GET
-    @Path("/findByStatus")
-    @APIResponse(responseCode = "400", description = "Invalid status value", content = @Content(mediaType = "none"))
-    @APIResponse(responseCode = "200", description = "Pets found with matching status",
-                 content = @Content(mediaType = "application/json",
-                                    schema = @Schema(type = SchemaType.ARRAY, implementation = Pet.class)))
-    @Operation(summary = "Finds Pets by status",
-               description = "Find all the Pets with the given status; Multiple status values can be provided with comma seperated strings")
-    @Extension(name = "x-mp-method1", value = "true")
-    @Extensions({@Extension(name = "x-mp-method2", value = "true"), @Extension(value = "false", name = "x-mp-method3")})
-    public Response findPetsByStatus(
-            @Parameter(name = "status", in = ParameterIn.QUERY,
-                       description = "Status values that need to be considered for filter",
-                       required = true, content = {
-                               @Content(
-                                        schema = @Schema(implementation = String.class),
-                                        examples = {
-                                                @ExampleObject(name = "Available", value = "available",
-                                                               summary = "Retrieves all the pets that are available"),
-                                                @ExampleObject(name = "Pending", value = "pending",
-                                                               summary = "Retrieves all the pets that are pending to be sold"),
-                                                @ExampleObject(name = "Sold", value = "sold",
-                                                               summary = "Retrieves all the pets that are sold")
-                                        })
-                       }, allowEmptyValue = true) @Extension(name = "x-mp-parm1", value = "true") String status) {
-        return Response.ok(petData.findPetByStatus(status)).build();
     }
 
     @GET

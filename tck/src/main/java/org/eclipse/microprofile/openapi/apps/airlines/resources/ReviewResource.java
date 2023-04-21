@@ -162,9 +162,7 @@ public class ReviewResource {
     public Response getReviewByUser(
             @Parameter(name = "user", description = "username of the user for the reviews", in = ParameterIn.PATH,
                        content = @Content(examples = {
-                               @ExampleObject(name = "example1", value = "bsmith"),
-                               @ExampleObject(name = "example2",
-                                              value = "pat@example.com")})) @PathParam("user") String user,
+                               @ExampleObject(name = "example", value = "bsmith")})) @PathParam("user") String user,
             @QueryParam("minRating") Integer minRating,
             @HeaderParam("If-Match") String ifMatch,
             @CookieParam("trackme") String trackme) {
