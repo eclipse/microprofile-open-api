@@ -161,10 +161,8 @@ public class ReviewResource {
     @Produces("application/json")
     public Response getReviewByUser(
             @Parameter(name = "user", description = "username of the user for the reviews", in = ParameterIn.PATH,
-                       content = @Content(examples = @ExampleObject(name = "example", value = "bsmith")), examples = {
-                               @ExampleObject(name = "example1", value = "bsmith"),
-                               @ExampleObject(name = "example2",
-                                              value = "pat@example.com")}) @PathParam("user") String user,
+                       content = @Content(examples = {
+                               @ExampleObject(name = "example", value = "bsmith")})) @PathParam("user") String user,
             @QueryParam("minRating") Integer minRating,
             @HeaderParam("If-Match") String ifMatch,
             @CookieParam("trackme") String trackme) {
@@ -201,8 +199,7 @@ public class ReviewResource {
     @Operation(operationId = "getReviewByAirline", summary = "Get all reviews by airlines")
     @Parameter(name = "airline", description = "name of the airlines for the reviews", required = true,
                in = ParameterIn.PATH,
-               content = @Content(examples = @ExampleObject(name = "example", value = "Acme Air")),
-               example = "Acme Air")
+               content = @Content(examples = @ExampleObject(name = "example", value = "Acme Air")))
     @APIResponse(responseCode = "200", description = "Review(s) retrieved",
                  content = @Content(schema = @Schema(implementation = Review.class)))
     @APIResponse(responseCode = "404", description = "Review(s) not found")

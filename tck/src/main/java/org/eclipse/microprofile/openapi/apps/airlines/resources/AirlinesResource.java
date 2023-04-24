@@ -37,7 +37,6 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Response;
 
 @Path("")
-@Schema(name = "Airline Booking API")
 @Tags(value = @Tag(name = "Airlines", description = "All the airlines methods"))
 @Callback(name = "availabilityCallback", callbackUrlExpression = "http://localhost:9080/oas3-airlines/availability",
           operations = @CallbackOperation(method = "get", summary = "Retrieve available flights.", responses = {

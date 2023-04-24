@@ -33,7 +33,7 @@ public class User {
     @Schema(required = true, example = "Smith")
     private String lastName;
 
-    @Schema(required = true, example = "M")
+    @Schema(required = true, example = "Male")
     private Gender gender;
 
     @Schema(required = true, example = "37")

@@ -20,6 +20,7 @@ import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
@@ -43,7 +44,6 @@ import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.Response;
 
 @Path("/user")
-@Schema(name = "/user")
 @Produces({"application/json", "application/xml"})
 @SecuritySchemes(value = {
         @SecurityScheme(securitySchemeName = "userApiKey", type = SecuritySchemeType.APIKEY,
@@ -68,8 +68,9 @@ public class UserResource {
             @SecurityRequirement(name = "userBearerHttp")
     })
     public Response createUser(
-            @Parameter(description = "Created user object", schema = @Schema(ref = "#/components/schemas/User"),
-                       required = true) User user) {
+            @RequestBody(description = "Created user object",
+                         content = @Content(schema = @Schema(ref = "#/components/schemas/User")),
+                         required = true) User user) {
         userData.addUser(user);
         return Response.ok().entity("").build();
     }
@@ -79,7 +80,7 @@ public class UserResource {
     @APIResponse(description = "successful operation")
     @Operation(summary = "Creates list of users with given input array")
     public Response createUsersWithArrayInput(
-            @Parameter(description = "List of user object", required = true) User[] users) {
+            @RequestBody(description = "List of user object", required = true) User[] users) {
         for (User user : users) {
             userData.addUser(user);
         }
@@ -91,7 +92,7 @@ public class UserResource {
     @APIResponse(description = "successful operation")
     @Operation(summary = "Creates list of users with given input array")
     public Response createUsersWithListInput(
-            @Parameter(description = "List of user object", required = true) java.util.List<User> users) {
+            @RequestBody(description = "List of user object", required = true) java.util.List<User> users) {
         for (User user : users) {
             userData.addUser(user);
         }
@@ -111,7 +112,7 @@ public class UserResource {
             @Parameter(name = "username", description = "name that need to be deleted",
                        schema = @Schema(type = SchemaType.STRING),
                        required = true) @PathParam("username") String username,
-            @Parameter(description = "Updated user object", required = true) User user) {
+            @RequestBody(description = "Updated user object", required = true) User user) {
         userData.addUser(user);
         return Response.ok().entity("").build();
     }

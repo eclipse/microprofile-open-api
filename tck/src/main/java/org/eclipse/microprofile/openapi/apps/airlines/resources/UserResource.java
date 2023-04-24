@@ -152,10 +152,7 @@ public class UserResource {
                          content = @Content(mediaType = "application/json",
                                             schema = @Schema(type = SchemaType.ARRAY, implementation = User.class,
                                                              nullable = true, writeOnly = true, minItems = 2,
-                                                             maxItems = 20, uniqueItems = true),
-                                            encoding = @Encoding(name = "firstName", contentType = "text/plain",
-                                                                 style = "form", allowReserved = true,
-                                                                 explode = true))) User[] users) {
+                                                             maxItems = 20, uniqueItems = true))) User[] users) {
         for (User user : users) {
             userData.addUser(user);
         }
@@ -279,8 +276,8 @@ public class UserResource {
                                parameters = @LinkParameter(name = "userId", expression = "$request.path.id"),
                                extensions = @Extension(name = "x-link", value = "test-link")),
                          @Link(name = "Review", description = "The reviews provided by user",
-                               operationRef = "/db/reviews/{userName}",
-                               parameters = @LinkParameter(name = "path.userName",
+                               operationRef = "#/paths/~1reviews~1users~1{user}/get",
+                               parameters = @LinkParameter(name = "path.user",
                                                            expression = "$response.body#userName"),
                                requestBody = "$request.path.id", server = @Server(url = "http://example.com"))
                  })

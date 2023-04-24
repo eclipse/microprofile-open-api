@@ -22,8 +22,6 @@ import org.eclipse.microprofile.openapi.annotations.callbacks.CallbackOperation;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeIn;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
-import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
-import org.eclipse.microprofile.openapi.annotations.extensions.Extensions;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.ExampleObject;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
@@ -62,16 +60,17 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.StreamingOutput;
 
 @Path("/pet")
-@Schema(name = "pet", description = "Operations on pets resource")
 @SecuritySchemes(value = {
         @SecurityScheme(securitySchemeName = "petsApiKey", type = SecuritySchemeType.APIKEY,
                         description = "authentication needed to create a new pet profile for the store",
                         apiKeyName = "createPetProfile", in = SecuritySchemeIn.HEADER),
         @SecurityScheme(securitySchemeName = "petsOAuth2", type = SecuritySchemeType.OAUTH2,
                         description = "authentication needed to delete a pet profile",
-                        flows = @OAuthFlows(implicit = @OAuthFlow(authorizationUrl = "https://example.com/api/oauth/dialog"),
+                        flows = @OAuthFlows(implicit = @OAuthFlow(authorizationUrl = "https://example.com/api/oauth/dialog",
+                                                                  scopes = {}),
                                             authorizationCode = @OAuthFlow(authorizationUrl = "https://example.com/api/oauth/dialog",
-                                                                           tokenUrl = "https://example.com/api/oauth/token"))),
+                                                                           tokenUrl = "https://example.com/api/oauth/token",
+                                                                           scopes = {}))),
         @SecurityScheme(securitySchemeName = "petsHttp", type = SecuritySchemeType.HTTP,
                         description = "authentication needed to update an exsiting record of a pet in the store",
                         scheme = "bearer", bearerFormat = "jwt")
@@ -87,6 +86,7 @@ public class PetResource {
                          content = @Content(mediaType = "none")),
             @APIResponse(responseCode = "404", description = "Pet not found", content = @Content(mediaType = "none")),
             @APIResponse(responseCode = "200",
+                         description = "Pet found",
                          content = @Content(mediaType = "application/json",
                                             schema = @Schema(type = SchemaType.OBJECT, implementation = Pet.class,
                                                              oneOf = {
@@ -150,7 +150,7 @@ public class PetResource {
     public Response deletePet(
             @Parameter(name = "apiKey", description = "authentication key to access this method",
                        schema = @Schema(type = SchemaType.STRING, implementation = String.class, maxLength = 256,
-                                        minLength = 32)) @HeaderParam("api_key") String apiKey,
+                                        minLength = 32)) @HeaderParam("apiKey") String apiKey,
             @Parameter(name = "petId", description = "ID of pet that needs to be fetched", required = true,
                        schema = @Schema(implementation = Long.class, maximum = "10",
                                         minimum = "1")) @PathParam("petId") Long petId) {
@@ -191,35 +191,11 @@ public class PetResource {
     })
     @Operation(summary = "Update an existing pet", description = "Update an existing pet with the given new attributes")
     public Response updatePet(
-            @Parameter(name = "petAttribute", description = "Attribute to update existing pet record", required = true,
-                       schema = @Schema(implementation = Pet.class)) Pet pet) {
+            @RequestBody(description = "Attribute to update existing pet record",
+                         required = true,
+                         content = @Content(schema = @Schema(implementation = Pet.class))) Pet pet) {
         Pet updatedPet = petData.addPet(pet);
         return Response.ok().entity(updatedPet).build();
-    }
-
-    @GET
-    @Path("/findByStatus")
-    @APIResponse(responseCode = "400", description = "Invalid status value", content = @Content(mediaType = "none"))
-    @APIResponse(responseCode = "200",
-                 content = @Content(mediaType = "application/json",
-                                    schema = @Schema(type = SchemaType.ARRAY, implementation = Pet.class)))
-    @Operation(summary = "Finds Pets by status",
-               description = "Find all the Pets with the given status; Multiple status values can be provided with comma seperated strings")
-    @Extension(name = "x-mp-method1", value = "true")
-    @Extensions({@Extension(name = "x-mp-method2", value = "true"), @Extension(value = "false", name = "x-mp-method3")})
-    public Response findPetsByStatus(
-            @Parameter(name = "status", description = "Status values that need to be considered for filter",
-                       required = true, schema = @Schema(implementation = String.class), content = {
-                               @Content(examples = {
-                                       @ExampleObject(name = "Available", value = "available",
-                                                      summary = "Retrieves all the pets that are available"),
-                                       @ExampleObject(name = "Pending", value = "pending",
-                                                      summary = "Retrieves all the pets that are pending to be sold"),
-                                       @ExampleObject(name = "Sold", value = "sold",
-                                                      summary = "Retrieves all the pets that are sold")
-                               })
-                       }, allowEmptyValue = true) @Extension(name = "x-mp-parm1", value = "true") String status) {
-        return Response.ok(petData.findPetByStatus(status)).build();
     }
 
     @GET
@@ -233,6 +209,7 @@ public class PetResource {
                                                                    description = "Invalid tag value",
                                                                    content = @Content(mediaType = "none")),
                                                       @APIResponse(responseCode = "200",
+                                                                   description = "Pet callback successfully processed",
                                                                    content = @Content(mediaType = "application/json",
                                                                                       schema = @Schema(type = SchemaType.ARRAY,
                                                                                                        implementation = Pet.class)))
