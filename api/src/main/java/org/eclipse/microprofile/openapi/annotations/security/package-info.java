@@ -13,10 +13,10 @@
 
 /**
  * A set of annotations to represent various security components of an OpenAPI app.
- * 
+ *
  * <p>
  * Example usage:
- * 
+ *
  * <pre>
  * {@literal @}Path("/reviews")
  * {@literal @}SecurityScheme(

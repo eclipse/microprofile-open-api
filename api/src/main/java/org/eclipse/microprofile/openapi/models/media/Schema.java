@@ -37,7 +37,7 @@ import org.eclipse.microprofile.openapi.models.Reference;
  * <p>
  * Any time a Schema Object can be used, a Reference Object can be used in its place. This allows referencing an
  * existing definition instead of defining the same Schema again.
- * 
+ *
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#schemaObject">OpenAPI
  *      Specification Schema Object</a>
  */
@@ -708,7 +708,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      * <li>If "additionalProperties" is a Schema, then additional properties are allowed but should conform to the
      * Schema.</li>
      * </ul>
-     * 
+     *
      * @return this Schema's additionalProperties property (as {@link Schema})
      */
     Schema getAdditionalPropertiesSchema();
@@ -725,7 +725,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      * <li>If "additionalProperties" is false, then only properties covered by the "properties" and "patternProperties"
      * are allowed.</li>
      * </ul>
-     * 
+     *
      * @return this Schema's additionalProperties property (as {@link Boolean})
      */
     Boolean getAdditionalPropertiesBoolean();
@@ -1069,7 +1069,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
 
     /**
      * Sets the schemas used by the allOf property of this Schema.
-     * 
+     *
      * @param allOf
      *            the list of schemas used by the allOf property
      */
@@ -1077,7 +1077,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
 
     /**
      * Sets the schemas used by the allOf property of this Schema.
-     * 
+     *
      * @param allOf
      *            the list of schemas used by the allOf property
      * @return the current Schema instance
@@ -1089,7 +1089,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
 
     /**
      * Adds the given Schema to the list of schemas used by the allOf property.
-     * 
+     *
      * @param allOf
      *            a Schema to use with the allOf property
      * @return the current Schema instance
@@ -1098,7 +1098,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
 
     /**
      * Removes the given Schema to the list of schemas used by the allOf property.
-     * 
+     *
      * @param allOf
      *            a Schema to use with the allOf property
      */
@@ -1113,7 +1113,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
 
     /**
      * Sets the schemas used by the anyOf property of this Schema.
-     * 
+     *
      * @param anyOf
      *            the list of schemas used by the anyOf property
      */
@@ -1121,7 +1121,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
 
     /**
      * Sets the schemas used by the anyOf property of this Schema.
-     * 
+     *
      * @param anyOf
      *            the list of schemas used by the anyOf property
      * @return the current Schema instance
@@ -1133,7 +1133,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
 
     /**
      * Adds the given Schema to the list of schemas used by the anyOf property.
-     * 
+     *
      * @param anyOf
      *            a Schema to use with the anyOf property
      * @return the current Schema instance
@@ -1142,7 +1142,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
 
     /**
      * Removes the given Schema to the list of schemas used by the anyOf property.
-     * 
+     *
      * @param anyOf
      *            a Schema to use with the anyOf property
      */
@@ -1157,7 +1157,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
 
     /**
      * Sets the schemas used by the oneOf property of this Schema.
-     * 
+     *
      * @param oneOf
      *            the list of schemas used by the oneOf property
      */
@@ -1165,7 +1165,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
 
     /**
      * Sets the schemas used by the oneOf property of this Schema.
-     * 
+     *
      * @param oneOf
      *            the list of schemas used by the oneOf property
      * @return the current Schema instance
@@ -1177,7 +1177,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
 
     /**
      * Adds the given Schema to the list of schemas used by the oneOf property.
-     * 
+     *
      * @param oneOf
      *            a Schema to use with the oneOf property
      * @return the current Schema instance
@@ -1186,7 +1186,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
 
     /**
      * Removes the given Schema to the list of schemas used by the oneOf property.
-     * 
+     *
      * @param oneOf
      *            a Schema to use with the oneOf property
      */

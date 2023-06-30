@@ -34,7 +34,7 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
  * When it is applied to a type and one or more of the fields are not empty strings the annotation value is added to the
  * OpenAPI document root. If more than one non-empty annotation is applied to a type in the application or if the
  * externalDocs field of the OpenAPIDefinition annotation is supplied the results are not defined.
- * 
+ *
  * @see <a href=
  *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#externalDocumentationObject">OpenAPI
  *      Specification External Documentation Object</a>
@@ -46,14 +46,14 @@ public @interface ExternalDocumentation {
 
     /**
      * A short description of the target documentation.
-     * 
+     *
      * @return the documentation description
      **/
     String description() default "";
 
     /**
      * The URL for the target documentation. Value must be in the format of a URL.
-     * 
+     *
      * @return the documentation URL
      **/
     String url() default "";
@@ -63,7 +63,7 @@ public @interface ExternalDocumentation {
      * ExternalDocumentation} model corresponding to the containing annotation.
      *
      * @return array of extensions
-     * 
+     *
      * @since 3.1
      */
     Extension[] extensions() default {};

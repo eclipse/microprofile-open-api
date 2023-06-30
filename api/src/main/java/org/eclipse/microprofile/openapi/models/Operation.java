@@ -32,7 +32,7 @@ import org.eclipse.microprofile.openapi.models.servers.Server;
  * <p>
  * Describes a single API operation on a path.
  * <p>
- * 
+ *
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#operationObject">OpenAPI
  *      Specification Operation Object</a>
  */

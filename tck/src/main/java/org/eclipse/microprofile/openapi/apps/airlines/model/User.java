@@ -53,7 +53,7 @@ public class User {
 
     /**
      * Creates a User instance with the parameters specified.
-     * 
+     *
      * @param id
      *            the unique id for this User instance
      * @param userName
@@ -92,7 +92,7 @@ public class User {
 
     /**
      * Returns the id property of a User instance
-     * 
+     *
      * @return int id
      */
     public int getId() {
@@ -101,7 +101,7 @@ public class User {
 
     /**
      * Sets the id property of a User instance to the parameter.
-     * 
+     *
      * @param id
      *            the unique id for this User instance
      */
@@ -111,7 +111,7 @@ public class User {
 
     /**
      * Returns the userName property of a User instance.
-     * 
+     *
      * @return String userName
      */
     public String getUserName() {
@@ -120,7 +120,7 @@ public class User {
 
     /**
      * Sets the userName property of a User instance to the parameter.
-     * 
+     *
      * @param userName
      *            the user name for this User instance
      */
@@ -130,7 +130,7 @@ public class User {
 
     /**
      * Returns the password property of a User instance.
-     * 
+     *
      * @return String password
      */
     public String getPassword() {
@@ -139,7 +139,7 @@ public class User {
 
     /**
      * Sets the password property of a User instance to the parameter.
-     * 
+     *
      * @param password
      *            the password associated with this User instance
      */
@@ -149,7 +149,7 @@ public class User {
 
     /**
      * Returns firstName property of a User instance.
-     * 
+     *
      * @return String firstName
      */
     public String getFirstName() {
@@ -158,7 +158,7 @@ public class User {
 
     /**
      * Sets the firstName property of a User instance to the parameter.
-     * 
+     *
      * @param firstName
      *            the first name for this User instance
      */
@@ -168,7 +168,7 @@ public class User {
 
     /**
      * Returns the lastName property of a User instance.
-     * 
+     *
      * @return String lastName
      */
     public String getLastName() {
@@ -177,7 +177,7 @@ public class User {
 
     /**
      * Sets the lastName property of a User instance to the parameter.
-     * 
+     *
      * @param lastName
      *            the last name for this User instance
      */
@@ -187,7 +187,7 @@ public class User {
 
     /**
      * Returns the gender property of a User instance.
-     * 
+     *
      * @return the gender
      */
     public Gender getGender() {
@@ -196,7 +196,7 @@ public class User {
 
     /**
      * Sets the gender property of a User instance to the parameter.
-     * 
+     *
      * @param gender
      *            the gender for this User instance
      */
@@ -206,7 +206,7 @@ public class User {
 
     /**
      * Returns the age property of a User instance.
-     * 
+     *
      * @return int age
      */
     public int getAge() {
@@ -215,7 +215,7 @@ public class User {
 
     /**
      * Sets the age property of a User instance to the parameter.
-     * 
+     *
      * @param age
      *            the age value for this User instance
      */
@@ -225,7 +225,7 @@ public class User {
 
     /**
      * Returns the email property of a User instance.
-     * 
+     *
      * @return String email
      */
     public String getEmail() {
@@ -234,7 +234,7 @@ public class User {
 
     /**
      * Sets the email property of a User instance to the parameter.
-     * 
+     *
      * @param email
      *            the email associated with this User instance
      */
@@ -244,7 +244,7 @@ public class User {
 
     /**
      * Returns the phone property of a User instance.
-     * 
+     *
      * @return String phone
      */
     public String getPhone() {
@@ -253,7 +253,7 @@ public class User {
 
     /**
      * Sets the phone property of a User instance to the parameter.
-     * 
+     *
      * @param phone
      *            the phone number associated with this User instance
      */
@@ -265,7 +265,7 @@ public class User {
 
     /**
      * Returns the status of this User instance.
-     * 
+     *
      * @return the integer associated with this User's status
      */
     public int getUserStatus() {
@@ -274,7 +274,7 @@ public class User {
 
     /**
      * Sets the status of this User instance.
-     * 
+     *
      * @param status
      *            an integer representing the status of this User instance
      */

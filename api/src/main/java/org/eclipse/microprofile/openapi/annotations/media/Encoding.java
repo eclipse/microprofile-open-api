@@ -27,7 +27,7 @@ import org.eclipse.microprofile.openapi.annotations.headers.Header;
 
 /**
  * Single encoding definition to be applied to single Schema Object
- * 
+ *
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#encodingObject">Encoding
  *      Object</a>
  **/
@@ -40,7 +40,7 @@ public @interface Encoding {
     /**
      * The name of this encoding object instance. This property is a key in an encoding map of a MediaType object and
      * MUST exist in a schema as a property.
-     * 
+     *
      * @return the name of this encoding instance
      **/
     String name() default "";
@@ -52,7 +52,7 @@ public @interface Encoding {
      * object - application/json. The value can be a specific media type (e.g. application/json), a wildcard media type
      * (e.g. image/*), or a comma-separated list of the two types.
      * </p>
-     * 
+     *
      * @return the contentType property of this encoding instance
      **/
     String contentType() default "";
@@ -63,7 +63,7 @@ public @interface Encoding {
      * <p>
      * Default values include: form, spaceDelimited, pipeDelimited, and deepObject.
      * </p>
-     * 
+     *
      * @return the style of this encoding instance
      **/
     String style() default "";
@@ -75,7 +75,7 @@ public @interface Encoding {
      * For other types of properties this property has no effect. When style is form, the default value is true.
      * </p>
      * For all other styles, the default value is false.
-     * 
+     *
      * @return whether or not this array type encoding will have separate parameters generated for each array value
      **/
     boolean explode() default false;
@@ -86,7 +86,7 @@ public @interface Encoding {
      * <p>
      * See RFC3986 for full definition of reserved characters.
      * </p>
-     * 
+     *
      * @return whether or not this encoding instance allows reserved characters
      **/
     boolean allowReserved() default false;
@@ -99,7 +99,7 @@ public @interface Encoding {
      * </p>
      * Content-Type is described separately and SHALL be ignored in this section. This property SHALL be ignored if the
      * request body media type is not a multipart.
-     * 
+     *
      * @return the array of headers for this encoding instance
      */
     Header[] headers() default {};
@@ -109,7 +109,7 @@ public @interface Encoding {
      * model corresponding to the containing annotation.
      *
      * @return array of extensions
-     * 
+     *
      * @since 3.1
      */
     Extension[] extensions() default {};

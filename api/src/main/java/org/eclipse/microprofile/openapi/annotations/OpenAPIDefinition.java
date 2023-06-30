@@ -34,7 +34,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
  * OpenAPI
  * <p>
  * This is the root document object of the OpenAPI document. It contains required and optional fields.
- * 
+ *
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#openapi-object">OpenAPI
  *      Specification OpenAPI Object</a>
  */
@@ -71,7 +71,7 @@ public @interface OpenAPIDefinition {
      * <p>
      * Adding a {@code SecurityRequirement} to this array is equivalent to adding a {@code SecurityRequirementsSet}
      * containing a single {@code SecurityRequirement} to {@link #securitySets()}.
-     * 
+     *
      * @return the array of security requirements for this API
      */
     SecurityRequirement[] security() default {};
@@ -82,7 +82,7 @@ public @interface OpenAPIDefinition {
      * All of the security requirements within any one of the sets must be satisfied to authorize a request.
      * <p>
      * Including an empty set within this list indicates that the other requirements are optional.
-     * 
+     *
      * @return the array of security requirement sets for this API
      */
     SecurityRequirementsSet[] securitySets() default {};
@@ -109,7 +109,7 @@ public @interface OpenAPIDefinition {
      * corresponding to the containing annotation.
      *
      * @return array of extensions
-     * 
+     *
      * @since 3.1
      */
     Extension[] extensions() default {};

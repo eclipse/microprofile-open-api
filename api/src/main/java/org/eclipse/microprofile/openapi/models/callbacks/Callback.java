@@ -31,7 +31,7 @@ import org.eclipse.microprofile.openapi.models.Reference;
  * that describes a set of requests that may be initiated by the API provider and the expected responses. The key value
  * used to identify the callback object is an expression, evaluated at runtime, that identifies a URL to use for the
  * callback operation.
- * 
+ *
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#callbackObject">OpenAPI
  *      Specification Callback Object</a>
  */
@@ -44,7 +44,7 @@ public interface Callback extends Constructible, Extensible<Callback>, Reference
      * runtime HTTP request/response to identify the URL to be used for the callback request. A simple example might be
      * $request.body#/url. However, using a runtime expression the complete HTTP message can be accessed. This includes
      * accessing any part of a body that a JSON Pointer RFC6901 can reference.
-     * 
+     *
      * @param name
      *            a runtime expression that can be evaluated in the context of a runtime HTTP request/response
      * @param pathItem
@@ -56,7 +56,7 @@ public interface Callback extends Constructible, Extensible<Callback>, Reference
 
     /**
      * Removes the given path item of the Callback PathItems.
-     * 
+     *
      * @param name
      *            a path name that will be removed.
      */
@@ -64,14 +64,14 @@ public interface Callback extends Constructible, Extensible<Callback>, Reference
 
     /**
      * Returns a copy map (potentially immutable) of the path items.
-     * 
+     *
      * @return all items
      */
     Map<String, PathItem> getPathItems();
 
     /**
      * Set the path items map to this Callback.
-     * 
+     *
      * @param items
      *            a map containing the list of paths.
      */
@@ -80,7 +80,7 @@ public interface Callback extends Constructible, Extensible<Callback>, Reference
     /**
      * Check whether a path item is present to the map. This is a convenience method for
      * <code>getPathItems().containsKey(name)</code>
-     * 
+     *
      * @param name
      *            a path name in the format valid for a Paths object.
      * @return a boolean to indicate if the path item is present or not.
@@ -95,7 +95,7 @@ public interface Callback extends Constructible, Extensible<Callback>, Reference
 
     /**
      * Returns a path item for a given name. This is a convenience method for <code>getPathItems().get(name)</code>
-     * 
+     *
      * @param name
      *            a path name in the format valid for a Paths object.
      * @return the corresponding path item or null.

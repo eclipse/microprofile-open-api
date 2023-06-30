@@ -34,7 +34,7 @@ public interface SecurityRequirement extends Constructible {
     /**
      * Adds a security scheme to the SecurityRequirement instance based on the scheme name and required scope (optional)
      * provided.
-     * 
+     *
      * @param securitySchemeName
      *            the name of security scheme declared in the Components section of the OpenAPI document
      * @param scope
@@ -47,7 +47,7 @@ public interface SecurityRequirement extends Constructible {
     /**
      * Adds a security scheme to the SecurityRequirement instance based on the scheme name and required scopes
      * (optional) provided.
-     * 
+     *
      * @param securitySchemeName
      *            the name of security scheme declared in the Components section of the OpenAPI document
      * @param scopes
@@ -61,7 +61,7 @@ public interface SecurityRequirement extends Constructible {
      * Adds a security scheme to the SecurityRequirement instance based on the scheme name. No scopes are included,
      * resulting in an empty list of scopes for the security scheme. This is valid when the defined security scheme is
      * not 'oauth2' or 'openIdConnect'.
-     * 
+     *
      * @param securitySchemeName
      *            the name of security scheme declared in the Components section of the OpenAPI document
      * @return Updated SecurityRequirement instance
@@ -70,7 +70,7 @@ public interface SecurityRequirement extends Constructible {
 
     /**
      * Removes a security scheme to the SecurityRequirement instance based on the scheme name.
-     * 
+     *
      * @param securitySchemeName
      *            the name of security scheme
      */
@@ -78,7 +78,7 @@ public interface SecurityRequirement extends Constructible {
 
     /**
      * Returns a copy map (potentially immutable) of the schemes.
-     * 
+     *
      * @return all items
      */
     Map<String, List<String>> getSchemes();
@@ -87,7 +87,7 @@ public interface SecurityRequirement extends Constructible {
      * Set all security schemes to the SecurityRequirement instance. Keys are the name of security scheme declared in
      * the Components section of the OpenAPI document, values are a list of required scope - only valid when the defined
      * scheme is 'oauth2' or 'openIdConnect'
-     * 
+     *
      * @param items
      *            a map containing the security schemes.
      */
@@ -96,7 +96,7 @@ public interface SecurityRequirement extends Constructible {
     /**
      * Check whether a scheme is present in the map. This is a convenience method for
      * <code>getSchemes().containsKey(name)</code>
-     * 
+     *
      * @param securitySchemeName
      *            the name of security scheme
      * @return a boolean to indicate if the scheme is present or not.
@@ -112,7 +112,7 @@ public interface SecurityRequirement extends Constructible {
     /**
      * Returns a list of scopes for a given scheme name. This is a convenience method for
      * <code>getSchemes().get(name)</code>
-     * 
+     *
      * @param securitySchemeName
      *            the name of security scheme
      * @return a list of scopes or null.

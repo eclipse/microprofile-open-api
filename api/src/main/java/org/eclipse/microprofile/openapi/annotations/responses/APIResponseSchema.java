@@ -81,7 +81,7 @@ public @interface APIResponseSchema {
      * If no value is specified, the default value will set to the description given by the
      * <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10">HTTP/1.1 documentation</a> for the
      * {@link #responseCode() responseCode} in use.
-     * 
+     *
      * @return description of the response.
      **/
     String responseDescription() default "";

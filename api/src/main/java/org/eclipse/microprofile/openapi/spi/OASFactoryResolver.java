@@ -38,14 +38,14 @@ public abstract class OASFactoryResolver {
 
     /**
      * Create a new instance of a constructible element from the OpenAPI model tree.
-     * 
+     *
      * @param <T>
      *            describes the type parameter
      * @param clazz
      *            represents a model which extends the org.eclipse.microprofile.openapi.models.Constructible interface
-     * 
+     *
      * @return a new instance of the requested model class
-     * 
+     *
      * @throws NullPointerException
      *             if the specified class is null
      * @throws IllegalArgumentException
@@ -56,7 +56,7 @@ public abstract class OASFactoryResolver {
     /**
      * Creates an OASFactoryResolver object. Only used internally from within
      * {@link org.eclipse.microprofile.openapi.OASFactory}
-     * 
+     *
      * @return an instance of OASFactoryResolver
      */
     public static OASFactoryResolver instance() {

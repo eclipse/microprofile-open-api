@@ -24,7 +24,7 @@ import java.lang.annotation.Target;
 
 /**
  * This object maps payload values to a particular Schema.
- * 
+ *
  * @see <a href=
  *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#discriminator-object">OpenAPI
  *      Specification Discriminator Object</a>
@@ -36,14 +36,14 @@ public @interface DiscriminatorMapping {
 
     /**
      * The property value that will be mapped to a Schema
-     * 
+     *
      * @return the property value
      **/
     String value() default "";
 
     /**
      * The schema that is being mapped to a property value
-     * 
+     *
      * @return the Schema reference
      **/
     Class<?> schema() default Void.class;

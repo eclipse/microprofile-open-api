@@ -40,15 +40,15 @@ import java.lang.annotation.Target;
  * <p>
  * A {@code SecurityRequirementSets} annotation corresponds to an array of maps of security requirements in an OpenAPI
  * document.
- * 
+ *
  * <pre>
- * <b>Example:</b> 
- * security: 
+ * <b>Example:</b>
+ * security:
  *   - oauth_implicit: []
  *     http_basic: []
  *   - api_secret: []
  * </pre>
- * 
+ *
  * @see <a href=
  *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-requirement-object">SecurityRequirement
  *      Object</a>

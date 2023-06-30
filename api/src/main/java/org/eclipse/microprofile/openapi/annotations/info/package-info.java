@@ -16,14 +16,14 @@
  * the exposed API.
  * <p>
  * Example usage:
- * 
+ *
  * <pre>
  * {@literal @}ApplicationPath("/")
    {@literal @}OpenAPIDefinition(
     info = {@literal @}Info(
-        title="AirlinesRatingApp API", 
+        title="AirlinesRatingApp API",
         version = "1.0",
-        termsOfService = "http://airlinesratingapp.com/terms", 
+        termsOfService = "http://airlinesratingapp.com/terms",
         contact = {@literal @}Contact(
             name = "AirlinesRatingApp API Support",
             url = "http://exampleurl.com/contact",

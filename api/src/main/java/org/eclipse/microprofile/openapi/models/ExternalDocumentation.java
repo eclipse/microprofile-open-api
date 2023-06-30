@@ -22,7 +22,7 @@ package org.eclipse.microprofile.openapi.models;
  * <p>
  * Allows referencing an external resource for extended documentation.
  * <p>
- * 
+ *
  * @see <a href=
  *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#externalDocumentationObject">OpenAPI
  *      Specification External Documentation Object</a>

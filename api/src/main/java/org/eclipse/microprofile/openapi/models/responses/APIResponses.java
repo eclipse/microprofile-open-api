@@ -35,7 +35,7 @@ public interface APIResponses extends Constructible, Extensible<APIResponses> {
 
     /**
      * Adds an APIResponse in the format of the name as a key and the item as the value to APIResponses map
-     * 
+     *
      * @param name
      *            the name of APIResponse (http status code eventually with wildcard or {@value #DEFAULT})
      * @param apiResponse
@@ -47,7 +47,7 @@ public interface APIResponses extends Constructible, Extensible<APIResponses> {
 
     /**
      * Removes the given APIResponse to this APIResponses.
-     * 
+     *
      * @param name
      *            the name of APIResponse that will be removed (http status code eventually with wildcard or
      *            {@value #DEFAULT})
@@ -56,14 +56,14 @@ public interface APIResponses extends Constructible, Extensible<APIResponses> {
 
     /**
      * Returns a copy map (potentially immutable) of the APIResponses.
-     * 
+     *
      * @return all responses
      */
     Map<String, APIResponse> getAPIResponses();
 
     /**
      * Set the APIResponses map to this APIResponses
-     * 
+     *
      * @param items
      *            a map containing all responses. Keys are http statuses code eventually with wildcard or
      *            {@value #DEFAULT}.
@@ -73,7 +73,7 @@ public interface APIResponses extends Constructible, Extensible<APIResponses> {
     /**
      * Check whether a APIResponse is present in the map. This is a convenience method for
      * <code>getAPIResponses().containsKey(name)</code>
-     * 
+     *
      * @param name
      *            the name of APIResponse (http status code eventually with wildcard or {@value #DEFAULT})
      * @return a boolean to indicate if the APIResponse is present or not.
@@ -88,7 +88,7 @@ public interface APIResponses extends Constructible, Extensible<APIResponses> {
 
     /**
      * Returns a APIResponse for a given name. This is a convenience method for <code>getAPIResponses().get(name)</code>
-     * 
+     *
      * @param name
      *            the name of APIResponse (http status code eventually with wildcard or {@value #DEFAULT})
      * @return the corresponding APIResponse or null.
@@ -107,7 +107,7 @@ public interface APIResponses extends Constructible, Extensible<APIResponses> {
      * <p>
      * Convenience method that is the same as calling {@link #getAPIResponse(String)} on the map with {@value #DEFAULT}
      * as value for the key.
-     * 
+     *
      * @return the default documentation of responses
      **/
     APIResponse getDefaultValue();
@@ -118,7 +118,7 @@ public interface APIResponses extends Constructible, Extensible<APIResponses> {
      * <p>
      * Convenience method that is the same as calling {@link #addAPIResponse(String, APIResponse)} with
      * {@value #DEFAULT} as value for the key.
-     * 
+     *
      * @param defaultValue
      *            the default documentation of responses
      */
@@ -130,7 +130,7 @@ public interface APIResponses extends Constructible, Extensible<APIResponses> {
      * <p>
      * Convenience method that is the same as calling {@link #addAPIResponse(String, APIResponse)} with
      * {@value #DEFAULT} as value for the key.
-     * 
+     *
      * @param defaultValue
      *            the default documentation of responses
      * @return this ApiResponses instance

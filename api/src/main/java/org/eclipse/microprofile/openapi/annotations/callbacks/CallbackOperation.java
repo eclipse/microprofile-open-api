@@ -32,7 +32,7 @@ import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement
 
 /**
  * Describes a single API callback operation.
- * 
+ *
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#operationObject">OpenAPI
  *      Specification Operation Object</a>
  **/
@@ -76,7 +76,7 @@ public @interface CallbackOperation {
      * The list MUST NOT include duplicated parameters. A unique parameter is defined by a combination of a name and
      * location.
      * </p>
-     * 
+     *
      * @return the list of parameters for this callback operation
      **/
     Parameter[] parameters() default {};
@@ -93,7 +93,7 @@ public @interface CallbackOperation {
      * <p>
      * The list of possible responses as they are returned from executing this callback operation.
      * </p>
-     * 
+     *
      * @return the list of responses for this callback operation
      **/
     APIResponse[] responses() default {};
@@ -107,7 +107,7 @@ public @interface CallbackOperation {
      * <p>
      * This definition overrides any declared top-level security. To remove a top-level security declaration, an empty
      * array can be used.
-     * 
+     *
      * @return the list of security mechanisms for this callback operation
      */
     SecurityRequirement[] security() default {};
@@ -120,7 +120,7 @@ public @interface CallbackOperation {
      * array can be used.
      * <p>
      * Including an empty set within this list indicates that the other requirements are optional.
-     * 
+     *
      * @return the list of security mechanisms for this callback operation
      */
     SecurityRequirementsSet[] securitySets() default {};
@@ -130,7 +130,7 @@ public @interface CallbackOperation {
      * corresponding to the containing annotation.
      *
      * @return array of extensions
-     * 
+     *
      * @since 3.1
      */
     Extension[] extensions() default {};

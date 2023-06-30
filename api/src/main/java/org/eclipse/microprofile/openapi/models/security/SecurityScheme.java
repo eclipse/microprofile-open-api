@@ -77,7 +77,7 @@ public interface SecurityScheme extends Constructible, Extensible<SecurityScheme
      * <p>
      * This method returns the type property from SecurityScheme instance.
      * </p>
-     * 
+     *
      * @return Type type
      **/
     SecurityScheme.Type getType();
@@ -87,7 +87,7 @@ public interface SecurityScheme extends Constructible, Extensible<SecurityScheme
      * <p>
      * This method sets the type property of SecurityScheme instance to the given Type argument.
      * </p>
-     * 
+     *
      * @param type
      *            the type of SecurityScheme instance
      */
@@ -99,7 +99,7 @@ public interface SecurityScheme extends Constructible, Extensible<SecurityScheme
      * This method sets the type property of SecurityScheme instance to the given Type argument and returns the modified
      * instance.
      * </p>
-     * 
+     *
      * @param type
      *            the type of SecurityScheme instance
      * @return SecurityScheme instance with the set type property
@@ -114,7 +114,7 @@ public interface SecurityScheme extends Constructible, Extensible<SecurityScheme
      * <p>
      * This method returns the description property from SecurityScheme instance.
      * </p>
-     * 
+     *
      * @return String description
      **/
     String getDescription();
@@ -124,7 +124,7 @@ public interface SecurityScheme extends Constructible, Extensible<SecurityScheme
      * <p>
      * This method sets the description property of SecurityScheme instance.
      * </p>
-     * 
+     *
      * @param description
      *            short description of the SecuirtyScheme instance
      */
@@ -135,7 +135,7 @@ public interface SecurityScheme extends Constructible, Extensible<SecurityScheme
      * <p>
      * This method sets the description property of SecurityScheme instance and returns the modified instance.
      * </p>
-     * 
+     *
      * @param description
      *            short description of the SecuirtyScheme instance
      * @return SecurityScheme instance with the set description property
@@ -150,7 +150,7 @@ public interface SecurityScheme extends Constructible, Extensible<SecurityScheme
      * <p>
      * This method returns the name property from SecurityScheme instance.
      * </p>
-     * 
+     *
      * @return String name
      **/
     String getName();
@@ -160,7 +160,7 @@ public interface SecurityScheme extends Constructible, Extensible<SecurityScheme
      * <p>
      * This method sets the name property of SecurityScheme instance to the parameter.
      * </p>
-     * 
+     *
      * @param name
      *            the name of the header, query or cookie parameter to be used
      */
@@ -172,7 +172,7 @@ public interface SecurityScheme extends Constructible, Extensible<SecurityScheme
      * This method sets the name property of SecurityScheme instance to the given String argument and returns the
      * modified instance.
      * </p>
-     * 
+     *
      * @param name
      *            the name of the header, query or cookie parameter to be used
      * @return SecurityScheme instance with the set name property
@@ -188,7 +188,7 @@ public interface SecurityScheme extends Constructible, Extensible<SecurityScheme
      * <p>
      * This method returns the in property from SecurityScheme instance.
      * </p>
-     * 
+     *
      * @return In in
      **/
     SecurityScheme.In getIn();
@@ -199,7 +199,7 @@ public interface SecurityScheme extends Constructible, Extensible<SecurityScheme
      * <p>
      * The method sets the in property of SecurityScheme instance to the given In argument.
      * </p>
-     * 
+     *
      * @param in
      *            the location of the API key
      */
@@ -212,7 +212,7 @@ public interface SecurityScheme extends Constructible, Extensible<SecurityScheme
      * This method sets the in property of SecurityScheme instance to the given In argument and returns the modified
      * instance.
      * </p>
-     * 
+     *
      * @param in
      *            the location of the API key
      * @return SecurityScheme instance with the set in property
@@ -228,7 +228,7 @@ public interface SecurityScheme extends Constructible, Extensible<SecurityScheme
      * <p>
      * This method returns the scheme property from SecurityScheme instance.
      * </p>
-     * 
+     *
      * @return String scheme
      **/
     String getScheme();
@@ -239,7 +239,7 @@ public interface SecurityScheme extends Constructible, Extensible<SecurityScheme
      * <p>
      * This method sets the scheme property of SecurityScheme instance to the given String argument.
      * </p>
-     * 
+     *
      * @param scheme
      *            the name of the HTTP Authorization scheme to be used in the Authorization header
      */
@@ -252,7 +252,7 @@ public interface SecurityScheme extends Constructible, Extensible<SecurityScheme
      * This method sets the scheme property of SecurityScheme instance to the given String argument and returns the
      * modified instance.
      * </p>
-     * 
+     *
      * @param scheme
      *            the name of the HTTP Authorization scheme to be used in the Authorization header
      * @return SecurityScheme instance with the set scheme property
@@ -268,7 +268,7 @@ public interface SecurityScheme extends Constructible, Extensible<SecurityScheme
      * <p>
      * This method returns the bearerFormat property from SecurityScheme instance.
      * </p>
-     * 
+     *
      * @return String bearerFormat
      **/
     String getBearerFormat();
@@ -279,7 +279,7 @@ public interface SecurityScheme extends Constructible, Extensible<SecurityScheme
      * <p>
      * This method sets the bearerFormat property of SecurityScheme instance to the given String argument.
      * </p>
-     * 
+     *
      * @param bearerFormat
      *            a hint to the client to identify how the bearer token is formatted
      */
@@ -292,7 +292,7 @@ public interface SecurityScheme extends Constructible, Extensible<SecurityScheme
      * This method sets the bearerFormat property of SecurityScheme instance to the given String argument and returns
      * the modified instance.
      * </p>
-     * 
+     *
      * @param bearerFormat
      *            a hint to the client to identify how the bearer token is formatted
      * @return SecurityScheme instance with the set bearerFormat property
@@ -310,7 +310,7 @@ public interface SecurityScheme extends Constructible, Extensible<SecurityScheme
      * <p>
      * This method returns the flows property from SecurityScheme instance.
      * </p>
-     * 
+     *
      * @return OAuthFlows flows
      **/
     OAuthFlows getFlows();
@@ -323,7 +323,7 @@ public interface SecurityScheme extends Constructible, Extensible<SecurityScheme
      * <p>
      * This method sets the flows property of SecurityScheme instance to the given OAuthFlows argument.
      * </p>
-     * 
+     *
      * @param flows
      *            an object containing configuration information for the flow types supported
      */
@@ -338,7 +338,7 @@ public interface SecurityScheme extends Constructible, Extensible<SecurityScheme
      * This method sets the flows property of SecurityScheme instance to the given OAuthFlows argument and returns the
      * modified instance.
      * </p>
-     * 
+     *
      * @param flows
      *            an object containing configuration information for the flow types supported
      * @return SecurityScheme instance with the set flows property
@@ -356,7 +356,7 @@ public interface SecurityScheme extends Constructible, Extensible<SecurityScheme
      * <p>
      * This method returns the openIdConnectUrl property from SecurityScheme instance.
      * </p>
-     * 
+     *
      * @return String openIdConnectUrl
      **/
     String getOpenIdConnectUrl();
@@ -369,7 +369,7 @@ public interface SecurityScheme extends Constructible, Extensible<SecurityScheme
      * <p>
      * This method sets the openIdConnectUrl property of a SecurityScheme instance to the given String argument.
      * </p>
-     * 
+     *
      * @param openIdConnectUrl
      *            a URL where OAuth2 configuration values are stored
      */
@@ -384,7 +384,7 @@ public interface SecurityScheme extends Constructible, Extensible<SecurityScheme
      * This method sets the openIdConnectUrl property of SecurityScheme instance to the given String argument and
      * returns the modified instance.
      * </p>
-     * 
+     *
      * @param openIdConnectUrl
      *            a URL where OAuth2 configuration values are stored
      * @return SecurityScheme instance with the set openIdConnectUrl property

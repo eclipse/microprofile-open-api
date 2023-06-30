@@ -25,7 +25,7 @@ import org.eclipse.microprofile.openapi.models.ExternalDocumentation;
  * Tag
  * <p>
  * An object to store metadata to be available in the OpenAPI document.
- * 
+ *
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#tagObject">OpenAPI
  *      Specification Tag Object</a>
  */
@@ -40,7 +40,7 @@ public interface Tag extends Constructible, Extensible<Tag> {
 
     /**
      * Sets the name property of a Tag instance to the given string.
-     * 
+     *
      * @param name
      *            the name property for this tag
      */
@@ -48,7 +48,7 @@ public interface Tag extends Constructible, Extensible<Tag> {
 
     /**
      * Sets the name property of a Tag instance to the given string.
-     * 
+     *
      * @param name
      *            the name property for this tag
      * @return the current Tag instance
@@ -67,7 +67,7 @@ public interface Tag extends Constructible, Extensible<Tag> {
 
     /**
      * Sets the description property of a Tag instance to the given string.
-     * 
+     *
      * @param description
      *            the description property for this tag
      */
@@ -75,7 +75,7 @@ public interface Tag extends Constructible, Extensible<Tag> {
 
     /**
      * Sets the description property of a Tag instance to the given string.
-     * 
+     *
      * @param description
      *            the description property for this tag
      * @return the current Tag instance
@@ -94,7 +94,7 @@ public interface Tag extends Constructible, Extensible<Tag> {
 
     /**
      * Sets the externalDocs property of a Tag instance to the given object.
-     * 
+     *
      * @param externalDocs
      *            additional external documentation for this tag
      */
@@ -102,7 +102,7 @@ public interface Tag extends Constructible, Extensible<Tag> {
 
     /**
      * Sets the externalDocs property of a Tag instance to the given object.
-     * 
+     *
      * @param externalDocs
      *            additional external documentation for this tag
      * @return the current Tag instance

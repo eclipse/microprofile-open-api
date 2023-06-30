@@ -26,7 +26,7 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 
 /**
  * Allows configuration of the supported OAuth Flows.
- * 
+ *
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#oauthFlowsObject">OAuthFlows
  *      Object</a>
  **/
@@ -36,28 +36,28 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 public @interface OAuthFlows {
     /**
      * Configuration for the OAuth Implicit flow.
-     * 
+     *
      * @return implicit OAuth flow
      **/
     OAuthFlow implicit() default @OAuthFlow();
 
     /**
      * Configuration for the OAuth Resource Owner Password flow.
-     * 
+     *
      * @return OAuth Resource Owner Password flow
      **/
     OAuthFlow password() default @OAuthFlow();
 
     /**
      * Configuration for the OAuth Client Credentials flow.
-     * 
+     *
      * @return OAuth Client Credentials flow
      **/
     OAuthFlow clientCredentials() default @OAuthFlow();
 
     /**
      * Configuration for the OAuth Authorization Code flow.
-     * 
+     *
      * @return OAuth Authorization Code flow
      **/
     OAuthFlow authorizationCode() default @OAuthFlow();
@@ -67,7 +67,7 @@ public @interface OAuthFlows {
      * OAuthFlows} model corresponding to the containing annotation.
      *
      * @return array of extensions
-     * 
+     *
      * @since 3.1
      */
     Extension[] extensions() default {};

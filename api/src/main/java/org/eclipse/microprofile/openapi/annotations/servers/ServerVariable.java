@@ -26,7 +26,7 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 
 /**
  * An object representing a Server Variable for server URL template substitution.
- * 
+ *
  * @see <a href=
  *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#server-variable-object">ServerVariable
  *      Object</a>
@@ -37,7 +37,7 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 public @interface ServerVariable {
     /**
      * The name of this server variable. This is a REQUIRED property.
-     * 
+     *
      * @return the name of the server variable
      **/
     String name();
@@ -45,21 +45,21 @@ public @interface ServerVariable {
     /**
      * An array of enum values for this variable. This field maps to the enum property in the OAS schema and to
      * enumeration field of ServerVariable model.
-     * 
+     *
      * @return array of possible values for this ServerVariable
      **/
     String[] enumeration() default {};
 
     /**
      * The default value of this server variable. This is a REQUIRED property.
-     * 
+     *
      * @return the defualt value of this server variable
      **/
     String defaultValue();
 
     /**
      * An optional description for the server variable. CommonMark syntax can be used for rich text representation.
-     * 
+     *
      * @return the description of this server variable
      **/
     String description() default "";
@@ -69,7 +69,7 @@ public @interface ServerVariable {
      * ServerVariable} model corresponding to the containing annotation.
      *
      * @return array of extensions
-     * 
+     *
      * @since 3.1
      */
     Extension[] extensions() default {};

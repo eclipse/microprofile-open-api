@@ -36,7 +36,7 @@ public interface Extensible<T extends Extensible<T>> {
 
     /**
      * Sets this Extensible's extensions property to the given map of extensions.
-     * 
+     *
      * @param extensions
      *            map containing keys which start with "x-" and values which provide additional information
      * @return the current instance

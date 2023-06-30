@@ -93,7 +93,7 @@ public abstract class AppTestBase extends Arquillian {
     /**
      * Lookup the object at the provided path in the response and if the object is a reference (contains a $ref
      * property), return the reference path. If the object is not a reference, return the input path.
-     * 
+     *
      * @param vr
      *            the response
      * @param path
@@ -115,10 +115,10 @@ public abstract class AppTestBase extends Arquillian {
      * Builds an absolute path using the series of provided relative {@code paths} by sequentially searching through the
      * provided {@link ValidatableResponse}. Each time a {@code $ref} is encountered as a key in the path node, it is
      * treated as an absolute (within the response) path that is used as the context for the next {@code paths} entry.
-     * 
+     *
      * <p>
      * Consider the following simple schemas as the response content of the {@link ValidatableResponse} argument:
-     * 
+     *
      * <pre>
      * {
      *   "components": {
@@ -141,15 +141,15 @@ public abstract class AppTestBase extends Arquillian {
      *   }
      * }
      * </pre>
-     * 
+     *
      * Given the {@code paths} {@code "components.schemas.Employee"} and {@code "properties.firstName"}, the value
      * returned is the absolute path {@code "components.schemas.Person.properties.firstName"}. The path segment
      * {@code "components.schemas.Employee"} contains a {@code .$ref} which itself resolves to the schema
      * {@code "components.schemas.Person"} and the second path segment is appended to the resolved reference.
-     * 
+     *
      * Note that this method does not currently support the conversion of Json Pointer escape sequences ({@code ~0} and
      * {@code ~1}) in {@code $ref} values.
-     * 
+     *
      * @param vr
      *            the response
      * @param paths

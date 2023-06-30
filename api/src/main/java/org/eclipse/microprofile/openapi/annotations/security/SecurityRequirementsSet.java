@@ -45,14 +45,14 @@ import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
  * An empty security requirement set indicates that authentication is not required.
  * <p>
  * A {@code SecurityRequirementSet} annotation corresponds to a map of security requirements in an OpenAPI document.
- * 
+ *
  * <pre>
- * <b>Example:</b> 
- * security: 
+ * <b>Example:</b>
+ * security:
  *  - api_secret: []
  *    oauth_implicit: []
  * </pre>
- * 
+ *
  * @see <a href=
  *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-requirement-object">SecurityRequirement
  *      Object</a>

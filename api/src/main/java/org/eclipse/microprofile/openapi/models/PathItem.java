@@ -31,7 +31,7 @@ import org.eclipse.microprofile.openapi.models.servers.Server;
  * constraints</a>. In that case the path itself is still exposed to the documentation viewer but you will not know
  * which operations and parameters are available.
  * <p>
- * 
+ *
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#pathItemObject"> OpenAPI
  *      Specification Path Item Object</a>
  */
@@ -316,14 +316,14 @@ public interface PathItem extends Constructible, Extensible<PathItem>, Reference
 
     /**
      * Returns a map with all the operations for this path where the keys are {@link PathItem.HttpMethod} items
-     * 
+     *
      * @return a map with all the operations for this path where the keys are HttpMethods
      **/
     Map<PathItem.HttpMethod, Operation> getOperations();
 
     /**
      * Sets an operation for a given http method.
-     * 
+     *
      * @param httpMethod
      *            the http method
      * @param operation

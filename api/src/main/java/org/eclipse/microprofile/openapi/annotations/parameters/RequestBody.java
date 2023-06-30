@@ -28,7 +28,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
 
 /**
  * Describes a single request body.
- * 
+ *
  * @see <a href=
  *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#requestBodyObject">requestBody
  *      Object</a>
@@ -42,7 +42,7 @@ public @interface RequestBody {
      * <p>
      * This could contain examples of use. CommonMark syntax MAY be used for rich text representation.
      * </p>
-     * 
+     *
      * @return description of this requestBody instance
      **/
     String description() default "";
@@ -50,14 +50,14 @@ public @interface RequestBody {
     /**
      * The content of the request body. It is a REQUIRED property unless this is only a reference to a request body
      * instance.
-     * 
+     *
      * @return content of this requestBody instance
      **/
     Content[] content() default {};
 
     /**
      * Determines if the request body is required in the request.
-     * 
+     *
      * @return whether or not this requestBody is required
      **/
     boolean required() default false;
@@ -67,7 +67,7 @@ public @interface RequestBody {
      * parameter, it is required to match the name of that parameter so the appropriate association can be made. When
      * the request body is defined within {@link org.eclipse.microprofile.openapi.annotations.Components}. The name will
      * be used as the key to add this request body to the 'requestBodies' map for reuse.
-     * 
+     *
      * @return this request body's name
      **/
     String name() default "";
@@ -87,7 +87,7 @@ public @interface RequestBody {
      * RequestBody} model corresponding to the containing annotation.
      *
      * @return array of extensions
-     * 
+     *
      * @since 3.1
      */
     Extension[] extensions() default {};

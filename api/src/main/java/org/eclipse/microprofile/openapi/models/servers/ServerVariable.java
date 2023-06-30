@@ -37,7 +37,7 @@ public interface ServerVariable extends Constructible, Extensible<ServerVariable
      * This property represents an enumeration of string values to be used if the substitution options are from a
      * limited set
      * </p>
-     * 
+     *
      * @return a copy List (potentially immutable) of possible values for this variable
      **/
     List<String> getEnumeration();
@@ -48,7 +48,7 @@ public interface ServerVariable extends Constructible, Extensible<ServerVariable
      * This property represents an enumeration of string values to be used if the substitution options are from a
      * limited set
      * </p>
-     * 
+     *
      * @param enumeration
      *            an list of string values to be used if the substitution options are from a limited set
      */
@@ -60,7 +60,7 @@ public interface ServerVariable extends Constructible, Extensible<ServerVariable
      * <p>
      * This property represents an enum of string values to be used if the substitution options are from a limited set.
      * </p>
-     * 
+     *
      * @param enumeration
      *            an list of string values to be used if the substitution options are from a limited set
      * @return ServerVariable instance with the set enumeration property
@@ -75,7 +75,7 @@ public interface ServerVariable extends Constructible, Extensible<ServerVariable
      * <p>
      * If the enumeration list is null, this method should create a new ArrayList and add the item.
      * </p>
-     * 
+     *
      * @param enumeration
      *            an item to be added to enum list
      * @return ServerVariable instance with the added enum item.
@@ -84,7 +84,7 @@ public interface ServerVariable extends Constructible, Extensible<ServerVariable
 
     /**
      * This method removes a string item to enumeration list of a ServerVariable instance.
-     * 
+     *
      * @param enumeration
      *            an item to be removed to enum list
      */
@@ -96,7 +96,7 @@ public interface ServerVariable extends Constructible, Extensible<ServerVariable
      * <p>
      * This method returns the defaultValue property from ServerVariable instance.
      * </p>
-     * 
+     *
      * @return String defaultValue
      **/
     String getDefaultValue();
@@ -107,7 +107,7 @@ public interface ServerVariable extends Constructible, Extensible<ServerVariable
      * <p>
      * This method sets the defaultValue property of ServerVariable instance to the given defaultValue argument.
      * </p>
-     * 
+     *
      * @param defaultValue
      *            the value to use for substitution, and to send, if an alternate value is not supplied
      */
@@ -120,7 +120,7 @@ public interface ServerVariable extends Constructible, Extensible<ServerVariable
      * This method sets the defaultValue property of ServerVariable instance to the given defaultValue argument and
      * returns the modified instance.
      * </p>
-     * 
+     *
      * @param defaultValue
      *            the value to use for substitution, and to send, if an alternate value is not supplied
      * @return ServerVariable instance with the set defaultValue property
@@ -134,7 +134,7 @@ public interface ServerVariable extends Constructible, Extensible<ServerVariable
     /**
      * This method returns the description property of ServerVariable instance. Description property is optional for
      * server variable.
-     * 
+     *
      * @return String description
      **/
     String getDescription();
@@ -144,7 +144,7 @@ public interface ServerVariable extends Constructible, Extensible<ServerVariable
      * <p>
      * Description property is optional for server variable. CommonMark syntax can be used for rich text representation.
      * </p>
-     * 
+     *
      * @param description
      *            a short description of the server variable
      */
@@ -156,7 +156,7 @@ public interface ServerVariable extends Constructible, Extensible<ServerVariable
      * <p>
      * Description property is optional for server variable. CommonMark syntax can be used for rich text representation.
      * </p>
-     * 
+     *
      * @param description
      *            a short description of the server variable
      * @return ServerVariable instance with the set description property

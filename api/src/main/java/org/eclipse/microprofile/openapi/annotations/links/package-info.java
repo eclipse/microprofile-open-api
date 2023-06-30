@@ -16,7 +16,7 @@
  * operation.
  * <p>
  * Example usage:
- * 
+ *
  * <pre>
  *  {@literal @}APIResponse(
  *      responseCode="201",

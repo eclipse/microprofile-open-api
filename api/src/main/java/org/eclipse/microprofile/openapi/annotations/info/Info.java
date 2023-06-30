@@ -26,7 +26,7 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 
 /**
  * This annotation provides metadata about the API, and maps to the Info object in OpenAPI Specification 3.
- * 
+ *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#infoObject"
  **/
 @Target({})
@@ -35,42 +35,42 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 public @interface Info {
     /**
      * The title of the application.
-     * 
+     *
      * @return the application's title
      **/
     String title();
 
     /**
      * A short description of the application. CommonMark syntax can be used for rich text representation.
-     * 
+     *
      * @return the application's description
      **/
     String description() default "";
 
     /**
      * A URL to the Terms of Service for the API. Must be in the format of a URL.
-     * 
+     *
      * @return the application's terms of service
      **/
     String termsOfService() default "";
 
     /**
      * The contact information for the exposed API.
-     * 
+     *
      * @return a contact for the application
      **/
     Contact contact() default @Contact();
 
     /**
      * The license information for the exposed API.
-     * 
+     *
      * @return the license of the application
      **/
     License license() default @License(name = "");
 
     /**
      * The version of the API definition.
-     * 
+     *
      * @return the application's version
      **/
     String version();
@@ -80,7 +80,7 @@ public @interface Info {
      * corresponding to the containing annotation.
      *
      * @return array of extensions
-     * 
+     *
      * @since 3.1
      */
     Extension[] extensions() default {};

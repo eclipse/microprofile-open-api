@@ -35,7 +35,7 @@ import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 /**
  * Describes the Components object that holds various reusable objects for different aspects of the OpenAPI
  * Specification (OAS).
- * 
+ *
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#componentsObject"> OpenAPI
  *      Specification Components Object</a>
  */
@@ -112,7 +112,7 @@ public @interface Components {
      * corresponding to the containing annotation.
      *
      * @return array of extensions
-     * 
+     *
      * @since 3.1
      */
     Extension[] extensions() default {};

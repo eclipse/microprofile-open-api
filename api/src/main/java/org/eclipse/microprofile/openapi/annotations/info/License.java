@@ -26,7 +26,7 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 
 /**
  * License information for the exposed API.
- * 
+ *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#licenseObject"
  **/
 @Target({})
@@ -35,14 +35,14 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 public @interface License {
     /**
      * The license name used for the API.
-     * 
+     *
      * @return the name of the license
      **/
     String name();
 
     /**
      * A URL to the license used for the API. MUST be in the format of a URL.
-     * 
+     *
      * @return the URL of the license
      **/
     String url() default "";
@@ -52,7 +52,7 @@ public @interface License {
      * corresponding to the containing annotation.
      *
      * @return array of extensions
-     * 
+     *
      * @since 3.1
      */
     Extension[] extensions() default {};

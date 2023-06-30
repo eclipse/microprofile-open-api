@@ -27,7 +27,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 /**
  * Describes a single header object
- * 
+ *
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#header-object">OpenAPI
  *      Specification Header Object</a>
  **/
@@ -42,7 +42,7 @@ public @interface Header {
      * </p>
      * When the header is defined within {@link org.eclipse.microprofile.openapi.annotations.Components}, the name will
      * be used as the key to add this header to the 'headers' map for reuse.
-     * 
+     *
      * @return this header's name
      **/
     String name() default "";
@@ -88,7 +88,7 @@ public @interface Header {
      * <p>
      * This property provides a reference to an object defined elsewhere. This property and all other properties are
      * mutually exclusive. If other properties are defined in addition to the ref property then the result is undefined.
-     * 
+     *
      * @return reference to a header
      **/
     String ref() default "";
@@ -98,7 +98,7 @@ public @interface Header {
      * corresponding to the containing annotation.
      *
      * @return array of extensions
-     * 
+     *
      * @since 3.1
      */
     Extension[] extensions() default {};

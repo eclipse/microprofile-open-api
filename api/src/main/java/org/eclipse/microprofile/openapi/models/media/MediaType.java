@@ -28,7 +28,7 @@ import org.eclipse.microprofile.openapi.models.examples.Example;
  * <p>
  * Each Media Type Object provides a schema and examples for the media type identified by its key.
  * <p>
- * 
+ *
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#mediaTypeObject">OpenAPI
  *      Specification Media Type Object</a>
  */

@@ -16,7 +16,7 @@
  * responses from an API operation.
  * <p>
  * Example usage:
- * 
+ *
  * <pre>
  * {@literal @}GET
  *  {@literal @}Path("{id}")

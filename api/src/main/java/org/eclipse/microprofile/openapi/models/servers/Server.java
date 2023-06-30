@@ -40,7 +40,7 @@ public interface Server extends Constructible, Extensible<Server> {
      * <p>
      * This is a REQUIRED property.
      * </p>
-     * 
+     *
      * @return String url
      **/
     String getUrl();
@@ -56,7 +56,7 @@ public interface Server extends Constructible, Extensible<Server> {
      * <p>
      * This is a REQUIRED property.
      * </p>
-     * 
+     *
      * @param url
      *            a URL to the target host
      */
@@ -73,7 +73,7 @@ public interface Server extends Constructible, Extensible<Server> {
      * <p>
      * This is a REQUIRED property.
      * </p>
-     * 
+     *
      * @param url
      *            a URL to the target host
      * @return Server instance with the set url property.
@@ -86,7 +86,7 @@ public interface Server extends Constructible, Extensible<Server> {
     /**
      * This method returns the description property of Server instance. The decsription property is an optional string
      * describing the host designated by the URL.
-     * 
+     *
      * @return String description
      **/
     String getDescription();
@@ -97,7 +97,7 @@ public interface Server extends Constructible, Extensible<Server> {
      * Description of a server is an optional string describing the host designated by the URL. CommonMark syntax can be
      * used for rich text representation.
      * </p>
-     * 
+     *
      * @param description
      *            an optional string describing the host designated by the URL
      */
@@ -110,7 +110,7 @@ public interface Server extends Constructible, Extensible<Server> {
      * Description of a server is an optional string describing the host designated by the URL. CommonMark syntax can be
      * used for rich text representation.
      * </p>
-     * 
+     *
      * @param description
      *            an optional string describing the host designated by the URL
      * @return Server instance with the set description property.
@@ -126,7 +126,7 @@ public interface Server extends Constructible, Extensible<Server> {
      * Variables are represented as a map between variable name and its value. The value is used for substitution in the
      * server's URL template.
      * </p>
-     * 
+     *
      * @return map of server variables (potentially immutable).
      **/
     Map<String, ServerVariable> getVariables();
@@ -144,7 +144,7 @@ public interface Server extends Constructible, Extensible<Server> {
 
     /**
      * Removes the given server variable item from the Server's map of variables
-     * 
+     *
      * @param variableName
      *            the name the variable to remove
      */
@@ -156,7 +156,7 @@ public interface Server extends Constructible, Extensible<Server> {
      * Variables property is a map between variable name and its value. The value is used for substitution in the
      * server's URL template.
      * </p>
-     * 
+     *
      * @param variables
      *            a map between variable name and its value
      */
@@ -169,7 +169,7 @@ public interface Server extends Constructible, Extensible<Server> {
      * Variables property is a map between variable name and its value. The value is used for substitution in the
      * server's URL template.
      * </p>
-     * 
+     *
      * @param variables
      *            a map between variable name and its value
      * @return Server instance with the set variables property.

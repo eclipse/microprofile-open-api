@@ -34,7 +34,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 /**
  * Describes a single operation parameter
- * 
+ *
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject">OpenAPI
  *      Specification Parameter Object</a>
  **/
@@ -58,7 +58,7 @@ public @interface Parameter {
      * <p>
      * For all other cases, the name corresponds to the parameter name used by the in property.
      * </p>
-     * 
+     *
      * @return this parameter's name
      **/
     String name() default "";
@@ -68,7 +68,7 @@ public @interface Parameter {
      * <p>
      * Possible values are specified in ParameterIn enum. Ignored when empty string.
      * </p>
-     * 
+     *
      * @return this parameter's location
      **/
     ParameterIn in() default ParameterIn.DEFAULT;
@@ -76,7 +76,7 @@ public @interface Parameter {
     /**
      * A brief description of the parameter. This could contain examples of use. CommonMark syntax MAY be used for rich
      * text representation.
-     * 
+     *
      * @return this parameter's description
      **/
     String description() default "";
@@ -87,14 +87,14 @@ public @interface Parameter {
      * If the parameter location is "path", this property is REQUIRED and its value MUST be true. Otherwise, the
      * property may be included and its default value is false.
      * </p>
-     * 
+     *
      * @return whether or not this parameter is required
      **/
     boolean required() default false;
 
     /**
      * Specifies that a parameter is deprecated and SHOULD be transitioned out of usage.
-     * 
+     *
      * @return whether or not this parameter is deprecated
      **/
     boolean deprecated() default false;
@@ -107,7 +107,7 @@ public @interface Parameter {
      * sending a parameter with an empty value.
      * </p>
      * If style is used, and if behavior is n/a (cannot be serialized), the value of allowEmptyValue SHALL be ignored.
-     * 
+     *
      * @return whether or not this parameter allows empty values
      **/
     boolean allowEmptyValue() default false;
@@ -119,7 +119,7 @@ public @interface Parameter {
      * form.
      * </p>
      * Ignored if the properties content or array are specified.
-     * 
+     *
      * @return the style of this parameter
      **/
     ParameterStyle style() default ParameterStyle.DEFAULT;
@@ -132,7 +132,7 @@ public @interface Parameter {
      * other styles, the default value is false.
      * </p>
      * Ignored if the properties content or array are specified.
-     * 
+     *
      * @return whether or not to expand individual array members
      **/
     Explode explode() default Explode.DEFAULT;
@@ -143,28 +143,28 @@ public @interface Parameter {
      * This property only applies to parameters with an in value of query. Ignored if the properties content or array
      * are specified.
      * </p>
-     * 
+     *
      * @return whether or not this parameter allows reserved characters
      **/
     boolean allowReserved() default false;
 
     /**
      * The schema defining the type used for the parameter. Ignored if the properties content or array are specified.
-     * 
+     *
      * @return the schema of this parameter
      **/
     Schema schema() default @Schema();
 
     /**
      * The representation of this parameter, for different media types.
-     * 
+     *
      * @return the content of this parameter
      **/
     Content[] content() default {};
 
     /**
      * Allows this parameter to be marked as hidden
-     * 
+     *
      * @return whether or not this parameter is hidden
      */
     boolean hidden() default false;
@@ -178,7 +178,7 @@ public @interface Parameter {
      * an object or an array.
      * </p>
      * Ignored if the properties content or array are specified.
-     * 
+     *
      * @return the list of examples for this parameter
      **/
     ExampleObject[] examples() default {};
@@ -193,7 +193,7 @@ public @interface Parameter {
      * an object or an array.
      * </p>
      * Ignored if the properties examples, content or array are specified.
-     * 
+     *
      * @return an example of the parameter
      **/
     String example() default "";
@@ -213,7 +213,7 @@ public @interface Parameter {
      * Parameter} model corresponding to the containing annotation.
      *
      * @return array of extensions
-     * 
+     *
      * @since 3.1
      */
     Extension[] extensions() default {};
