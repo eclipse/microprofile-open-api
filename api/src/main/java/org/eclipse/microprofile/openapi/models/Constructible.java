@@ -18,7 +18,7 @@ package org.eclipse.microprofile.openapi.models;
 
 /**
  * Marker interface for OpenAPI model objects that can be constructed by the OASFactory.
- * 
+ *
  * @see org.eclipse.microprofile.openapi.OASFactory
  */
 public interface Constructible {

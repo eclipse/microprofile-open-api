@@ -38,7 +38,7 @@ import org.eclipse.microprofile.openapi.models.servers.Server;
  * MUST be unique and resolved in the scope of the OAS document. Because of the potential for name clashes, the
  * operationRef syntax is preferred for specifications with external references.
  * <p>
- * 
+ *
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#linkObject"> OpenAPI
  *      Specification Link Object</a>
  */

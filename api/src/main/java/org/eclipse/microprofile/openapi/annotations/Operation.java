@@ -27,7 +27,7 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 
 /**
  * Describes a single API operation on a path.
- * 
+ *
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#operationObject">OpenAPI
  *      Specification Operation Object</a>
  **/
@@ -56,7 +56,7 @@ public @interface Operation {
      * Tools and libraries MAY use the operationId to uniquely identify an operation, therefore, it is RECOMMENDED to
      * follow common programming naming conventions.
      * </p>
-     * 
+     *
      * @return the ID of this operation
      **/
     String operationId() default "";
@@ -66,14 +66,14 @@ public @interface Operation {
      * <p>
      * Consumers SHOULD refrain from usage of a deprecated operation.
      * </p>
-     * 
+     *
      * @return whether or not this operation is deprecated
      **/
     boolean deprecated() default false;
 
     /**
      * Allows this operation to be marked as hidden
-     * 
+     *
      * @return whether or not this operation is hidden
      */
     boolean hidden() default false;
@@ -83,7 +83,7 @@ public @interface Operation {
      * corresponding to the containing annotation.
      *
      * @return array of extensions
-     * 
+     *
      * @since 3.1
      */
     Extension[] extensions() default {};

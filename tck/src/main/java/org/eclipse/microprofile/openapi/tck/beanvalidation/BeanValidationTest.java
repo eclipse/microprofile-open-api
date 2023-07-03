@@ -185,7 +185,7 @@ public class BeanValidationTest extends AppTestBase {
 
     /**
      * Asserts that a property from the test schema matches the given matcher
-     * 
+     *
      * @param vr
      *            the response
      * @param propertyName

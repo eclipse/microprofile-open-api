@@ -24,7 +24,7 @@ import java.lang.annotation.Target;
 
 /**
  * Represents an OAuth scope.
- * 
+ *
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#oauthFlowObject">OAuthFlow
  *      Object</a>
  **/
@@ -34,14 +34,14 @@ import java.lang.annotation.Target;
 public @interface OAuthScope {
     /**
      * Name of the scope.
-     * 
+     *
      * @return the name of this scope
      */
     String name() default "";
 
     /**
      * Short description of the scope.
-     * 
+     *
      * @return the description of this scope
      */
     String description() default "";

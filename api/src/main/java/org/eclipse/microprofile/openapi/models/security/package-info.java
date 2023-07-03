@@ -17,7 +17,7 @@
  * The behaviour of methods inherited from java.lang.Object are undefined by the MicroProfile OpenAPI specification.
  * <p>
  * Example usage:
- * 
+ *
  * <pre>
  * {@literal @}Override
  *  public OpenAPI buildModel() {

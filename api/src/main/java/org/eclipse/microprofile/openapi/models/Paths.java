@@ -27,7 +27,7 @@ import java.util.Map;
  * <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-filtering">security
  * constraints</a>.
  * <p>
- * 
+ *
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#pathsObject"> OpenAPI
  *      Specification Paths Object</a>
  */
@@ -35,7 +35,7 @@ public interface Paths extends Constructible, Extensible<Paths> {
 
     /**
      * Adds the given path item to this Paths and return this instance of Paths
-     * 
+     *
      * @param name
      *            a path name in the format valid for a Paths object. The field name MUST begin with a slash.
      * @param item
@@ -47,7 +47,7 @@ public interface Paths extends Constructible, Extensible<Paths> {
 
     /**
      * Removes the given path item to this Paths.
-     * 
+     *
      * @param name
      *            a path name that will be removed.
      */
@@ -55,14 +55,14 @@ public interface Paths extends Constructible, Extensible<Paths> {
 
     /**
      * Returns a copy map (potentially immutable) of the path items.
-     * 
+     *
      * @return all items
      */
     Map<String, PathItem> getPathItems();
 
     /**
      * Set the path items map to this Paths
-     * 
+     *
      * @param items
      *            a map containing the list of paths. Keys MUST begin with a slash.
      */
@@ -71,7 +71,7 @@ public interface Paths extends Constructible, Extensible<Paths> {
     /**
      * Check whether a path item is present in the map. This is a convenience method for
      * <code>getPathItems().containsKey(name)</code>
-     * 
+     *
      * @param name
      *            a path name in the format valid for a Paths object.
      * @return a boolean to indicate if the path item is present or not.
@@ -86,7 +86,7 @@ public interface Paths extends Constructible, Extensible<Paths> {
 
     /**
      * Returns a path item for a given name. This is a convenience method for <code>getPathItems().get(name)</code>
-     * 
+     *
      * @param name
      *            a path name in the format valid for a Paths object.
      * @return the corresponding path item or null.

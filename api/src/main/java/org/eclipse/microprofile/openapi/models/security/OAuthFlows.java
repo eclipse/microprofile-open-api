@@ -30,14 +30,14 @@ public interface OAuthFlows extends Constructible, Extensible<OAuthFlows> {
 
     /**
      * This method returns the implicit property from OAuthFlows instance.
-     * 
+     *
      * @return OAuthFlow implicit
      **/
     OAuthFlow getImplicit();
 
     /**
      * This method sets the implicit property of OAuthFlows instance to the given implicit argument.
-     * 
+     *
      * @param implicit
      *            the OauthFlow instance
      */
@@ -46,7 +46,7 @@ public interface OAuthFlows extends Constructible, Extensible<OAuthFlows> {
     /**
      * This method sets the implicit property of OAuthFlows instance to the given implicit argument and returns the
      * modified instance.
-     * 
+     *
      * @param implicit
      *            the OauthFlow instance
      * @return OAuthFlows instance with the set implicit property
@@ -61,7 +61,7 @@ public interface OAuthFlows extends Constructible, Extensible<OAuthFlows> {
      * <p>
      * This method returns the password property from OAuthFlows instance.
      * </p>
-     * 
+     *
      * @return OAuthFlow password
      **/
     OAuthFlow getPassword();
@@ -71,7 +71,7 @@ public interface OAuthFlows extends Constructible, Extensible<OAuthFlows> {
      * <p>
      * This method sets the password property of OAuthFlows instance to the given password argument.
      * </p>
-     * 
+     *
      * @param password
      *            the OAuthFlow instance
      */
@@ -83,7 +83,7 @@ public interface OAuthFlows extends Constructible, Extensible<OAuthFlows> {
      * This method sets the password property of an OAuthFlows instance to the given password argument and returns the
      * modified instance.
      * </p>
-     * 
+     *
      * @param password
      *            the OauthFlow instance
      * @return OAuthFlows instance with the set password property
@@ -98,7 +98,7 @@ public interface OAuthFlows extends Constructible, Extensible<OAuthFlows> {
      * <p>
      * This method returns the clientCredentials property from OAuthFlows instance.
      * </p>
-     * 
+     *
      * @return OAuthFlow clientCredentials
      **/
     OAuthFlow getClientCredentials();
@@ -108,7 +108,7 @@ public interface OAuthFlows extends Constructible, Extensible<OAuthFlows> {
      * <p>
      * This method sets the clientCredentials property of OAuthFlows instance to the given clientCredentials argument.
      * </p>
-     * 
+     *
      * @param clientCredentials
      *            the OauthFlow instance
      */
@@ -120,7 +120,7 @@ public interface OAuthFlows extends Constructible, Extensible<OAuthFlows> {
      * This method sets the clientCredentials property of OAuthFlows instance to the given clientCredentials argument
      * and returns the modified instance.
      * </p>
-     * 
+     *
      * @param clientCredentials
      *            the OauthFlow instance
      * @return OAuthFlows instance with the set clientCredentials property
@@ -135,7 +135,7 @@ public interface OAuthFlows extends Constructible, Extensible<OAuthFlows> {
      * <p>
      * This method returns the authorizationCode property from OAuthFlows instance.
      * </p>
-     * 
+     *
      * @return OAuthFlow authorizationCode
      **/
     OAuthFlow getAuthorizationCode();
@@ -145,7 +145,7 @@ public interface OAuthFlows extends Constructible, Extensible<OAuthFlows> {
      * <p>
      * This method sets the authorizationCode property of OAuthFlows instance to the given authorizationCode argument.
      * </p>
-     * 
+     *
      * @param authorizationCode
      *            the OauthFlow instance
      */
@@ -157,7 +157,7 @@ public interface OAuthFlows extends Constructible, Extensible<OAuthFlows> {
      * This method sets the authorizationCode property of OAuthFlows instance to the given authorizationCode argument
      * and returns the modified instance.
      * </p>
-     * 
+     *
      * @param authorizationCode
      *            the OauthFlow instance
      * @return OAuthFlows instance with the set authorizationCode property

@@ -46,7 +46,7 @@ import org.eclipse.microprofile.openapi.models.security.SecurityScheme;
  * <li>user-name</li>
  * <li>my.org.User</li>
  * </ul>
- * 
+ *
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#componentsObject"> OpenAPI
  *      Specification Components Object</a>
  */
@@ -61,7 +61,7 @@ public interface Components extends Constructible, Extensible<Components> {
 
     /**
      * Sets this Components' schemas property to the given Map containing keys and reusable schema objects.
-     * 
+     *
      * @param schemas
      *            a Map containing keys and reusable schema objects
      */
@@ -69,7 +69,7 @@ public interface Components extends Constructible, Extensible<Components> {
 
     /**
      * Sets this Components' schemas property to the given Map containing keys and reusable schemas.
-     * 
+     *
      * @param schemas
      *            a Map containing keys and reusable schemas
      * @return the current Components object

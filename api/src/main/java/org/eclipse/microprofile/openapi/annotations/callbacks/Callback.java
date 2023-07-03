@@ -28,7 +28,7 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 
 /**
  * This object represents a callback URL that will be invoked.
- * 
+ *
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#callbackObject">OpenAPI
  *      Specification Callback Object</a>
  **/
@@ -45,7 +45,7 @@ public @interface Callback {
      * {@link org.eclipse.microprofile.openapi.annotations.Components}. The name will be used as the key to add this
      * callback to the 'callbacks' map for reuse.
      * </p>
-     * 
+     *
      * @return the name of this callback
      **/
     String name() default "";
@@ -55,14 +55,14 @@ public @interface Callback {
      * <p>
      * It is a REQUIRED property unless this is only a reference to a callback instance.
      * </p>
-     * 
+     *
      * @return the callback URL
      */
     String callbackUrlExpression() default "";
 
     /**
      * The array of operations that will be called out-of band
-     * 
+     *
      * @return the callback operations
      **/
     CallbackOperation[] operations() default {};
@@ -72,7 +72,7 @@ public @interface Callback {
      * <p>
      * This property provides a reference to an object defined elsewhere. This property and all other properties are
      * mutually exclusive. If other properties are defined in addition to the ref property then the result is undefined.
-     * 
+     *
      * @return reference to a callback object definition
      **/
     String ref() default "";
@@ -82,7 +82,7 @@ public @interface Callback {
      * model corresponding to the containing annotation.
      *
      * @return array of extensions
-     * 
+     *
      * @since 3.1
      */
     Extension[] extensions() default {};

@@ -36,7 +36,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
  * When this annotation is applied to a JAX-RS method the response is added to the responses defined in the
  * corresponding OpenAPI operation. If the operation already has a response with the specified responseCode the
  * annotation on the method is ignored.
- * 
+ *
  * <pre>
  * &#64;APIResponse(responseCode = "200", description = "Calculate load size", content = {
  *         &#64;Content(mediaType = "application/json", Schema = &#64;Schema(type = "integer"))})
@@ -49,12 +49,12 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
  * When this annotation is applied to a JAX-RS resource class, the response is added to the responses defined in all
  * OpenAPI operations which correspond to a method on that class. If an operation already has a response with the
  * specified responseCode the response is not added to that operation.
- * 
+ *
  * <p>
  * When this annotation is applied to an <code>ExceptionMapper</code> class or <code>toResponse</code> method, it allows
  * developers to describe the API response that will be added to a generated OpenAPI operation based on a JAX-RS method
  * that declares an <code>Exception</code> of the type handled by the <code>ExceptionMapper</code>.
- * 
+ *
  * <pre>
  * &#64;Provider
  * public class NotFoundExceptionMapper implements ExceptionMapper&lt;NotFoundException&gt; {
@@ -68,9 +68,9 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
  *     }
  * }
  * </pre>
- * 
+ *
  * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responseObject"
- * 
+ *
  **/
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
@@ -80,14 +80,14 @@ public @interface APIResponse {
     /**
      * A short description of the response. It is a REQUIRED property unless this is only a reference to a response
      * instance.
-     * 
+     *
      * @return description of the response.
      **/
     String description() default "";
 
     /**
      * The HTTP response code, or 'default', for the supplied response. May only have 1 default entry.
-     * 
+     *
      * @return HTTP response code for this response instance or default
      **/
     String responseCode() default "default";
@@ -97,21 +97,21 @@ public @interface APIResponse {
      * <p>
      * RFC7230 states header names are case insensitive. If a response header is defined with the name "Content-Type",
      * it SHALL be ignored.
-     * 
+     *
      * @return array of headers for this response instance
      **/
     Header[] headers() default {};
 
     /**
      * An array of operation links that can be followed from the response.
-     * 
+     *
      * @return array of operation links for this response instance
      **/
     Link[] links() default {};
 
     /**
      * An array containing descriptions of potential response payloads for different media types.
-     * 
+     *
      * @return content of this response instance
      **/
     Content[] content() default {};
@@ -120,7 +120,7 @@ public @interface APIResponse {
      * The unique name to identify this response. Only REQUIRED when the response is defined within
      * {@link org.eclipse.microprofile.openapi.annotations.Components}. The name will be used as the key to add this
      * response to the 'responses' map for reuse.
-     * 
+     *
      * @return this response's name
      **/
     String name() default "";
@@ -140,7 +140,7 @@ public @interface APIResponse {
      * APIResponse} model corresponding to the containing annotation.
      *
      * @return array of extensions
-     * 
+     *
      * @since 3.1
      */
     Extension[] extensions() default {};

@@ -27,14 +27,14 @@ import java.lang.annotation.Target;
  * <p>
  * Note that <em>each</em> {@code SecurityRequirement} annotation is equivalent to a {@link SecurityRequirementsSet}
  * annotation containing only that annotation.
- * 
+ *
  * <pre>
- * <b>Example:</b> 
- * security: 
+ * <b>Example:</b>
+ * security:
  *   - oauth_implicit: []
  *   - api_secret: []
  * </pre>
- * 
+ *
  * @see <a href=
  *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-requirement-object">SecurityRequirement
  *      Object</a>

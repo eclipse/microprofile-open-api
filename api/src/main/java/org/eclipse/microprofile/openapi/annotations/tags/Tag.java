@@ -51,7 +51,7 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
  * <b>Note:</b> If both {@link org.eclipse.microprofile.openapi.annotations.tags.Tag Tag} and
  * {@link org.eclipse.microprofile.openapi.annotations.tags.Tags Tags} annotations are specified on the same method or
  * class, then both tag definitions should be applied.
- * 
+ *
  * <pre>
  * &#64;Tag(name = "luggage", description = "Operations related to luggage handling.")
  * &#64;GET
@@ -59,7 +59,7 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
  *     return getLuggageLocation(id);
  * }
  * </pre>
- * 
+ *
  * <pre>
  * &#64;Tag(ref = "Bookings")
  * &#64;GET
@@ -67,7 +67,7 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
  *     return Response.ok().entity(bookings.values()).build();
  * }
  * </pre>
- * 
+ *
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#tagObject"> OpenAPI
  *      Specification Tag Object</a>
  */
@@ -114,7 +114,7 @@ public @interface Tag {
      * corresponding to the containing annotation.
      *
      * @return array of extensions
-     * 
+     *
      * @since 3.1
      */
     Extension[] extensions() default {};

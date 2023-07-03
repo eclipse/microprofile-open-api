@@ -26,7 +26,7 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 
 /**
  * This object illustrates an example of a particular content
- * 
+ *
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#exampleObject">OpenAPI
  *      Specification Example Object</a>
  **/
@@ -41,21 +41,21 @@ public @interface ExampleObject {
      * {@link org.eclipse.microprofile.openapi.annotations.Components}. The name will be used as the key to add this
      * example to the 'examples' map for reuse.
      * </p>
-     * 
+     *
      * @return the name of this example
      **/
     String name() default "";
 
     /**
      * A brief summary of the purpose or context of the example
-     * 
+     *
      * @return a summary of this example
      **/
     String summary() default "";
 
     /**
      * Long description for the example. CommonMark syntax MAY be used for rich text representation.
-     * 
+     *
      * @return a description of this example
      **/
     String description() default "";
@@ -67,7 +67,7 @@ public @interface ExampleObject {
      * specified.
      * </p>
      * If the media type associated with the example allows parsing into an object, it may be converted from a string.
-     * 
+     *
      * @return the value of the example
      **/
     String value() default "";
@@ -78,7 +78,7 @@ public @interface ExampleObject {
      * <p>
      * This is mutually exclusive with the value property.
      * </p>
-     * 
+     *
      * @return an external URL of the example
      **/
     String externalValue() default "";
@@ -98,7 +98,7 @@ public @interface ExampleObject {
      * model corresponding to the containing annotation.
      *
      * @return array of extensions
-     * 
+     *
      * @since 3.1
      */
     Extension[] extensions() default {};

@@ -18,7 +18,7 @@
  * The behaviour of methods inherited from java.lang.Object are undefined by the MicroProfile OpenAPI specification.
  * <p>
  * Example usage:
- * 
+ *
  * <pre>
  *  .GET(OASFactory.createObject(Operation.class)
  *      .summary("Retrieve all bookings for current user")

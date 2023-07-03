@@ -24,7 +24,7 @@ import org.eclipse.microprofile.openapi.models.Extensible;
  * A metadata object that allows for more fine-tuned XML model definitions. When using arrays, XML element names are not
  * inferred (for singular/plural forms) and the name property SHOULD be used to add that information.
  * <p>
- * 
+ *
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#xmlObject">XML Object</a>
  *      </p>
  */
@@ -35,7 +35,7 @@ public interface XML extends Constructible, Extensible<XML> {
      * <p>
      * The name property replaces the name of the element/attribute used for the described schema property.
      * </p>
-     * 
+     *
      * @return String name
      **/
     String getName();
@@ -45,7 +45,7 @@ public interface XML extends Constructible, Extensible<XML> {
      * <p>
      * The name property replaces the name of the element/attribute used for the described schema property.
      * </p>
-     * 
+     *
      * @param name
      *            the name of this XML instance
      */
@@ -57,7 +57,7 @@ public interface XML extends Constructible, Extensible<XML> {
      * <p>
      * The name property replaces the name of the element/attribute used for the described schema property.
      * </p>
-     * 
+     *
      * @param name
      *            the name of this XML instance
      * @return XML instance with the set name property
@@ -72,7 +72,7 @@ public interface XML extends Constructible, Extensible<XML> {
      * <p>
      * The namespace property is the URI of the namespace definition. Value MUST be in the form of an absolute URI.
      * </p>
-     * 
+     *
      * @return String namespace
      **/
     String getNamespace();
@@ -82,7 +82,7 @@ public interface XML extends Constructible, Extensible<XML> {
      * <p>
      * The namespace property is the URI of the namespace definition. Value MUST be in the form of an absolute URI.
      * </p>
-     * 
+     *
      * @param namespace
      *            the URI of the namespace definition
      */
@@ -94,7 +94,7 @@ public interface XML extends Constructible, Extensible<XML> {
      * <p>
      * The namespace property is the URI of the namespace definition. Value MUST be in the form of an absolute URI.
      * </p>
-     * 
+     *
      * @param namespace
      *            the URI of the namespace definition
      * @return XML instance with the set namespace property
@@ -109,7 +109,7 @@ public interface XML extends Constructible, Extensible<XML> {
      * <p>
      * This property is a String prefix to be used for the name.
      * </p>
-     * 
+     *
      * @return String prefix
      **/
     String getPrefix();
@@ -119,7 +119,7 @@ public interface XML extends Constructible, Extensible<XML> {
      * <p>
      * This property is a String prefix to be used for the name.
      * </p>
-     * 
+     *
      * @param prefix
      *            string prefix to be used with the name
      */
@@ -131,7 +131,7 @@ public interface XML extends Constructible, Extensible<XML> {
      * <p>
      * This property is a String prefix to be used for the name.
      * </p>
-     * 
+     *
      * @param prefix
      *            string prefix to be used with the name
      * @return XML instance with the set prefix property
@@ -147,7 +147,7 @@ public interface XML extends Constructible, Extensible<XML> {
      * Attribute property declares whether the property definition translates to an attribute instead of an element.
      * Default value is FALSE.
      * </p>
-     * 
+     *
      * @return Boolean attribute
      **/
     Boolean getAttribute();
@@ -158,7 +158,7 @@ public interface XML extends Constructible, Extensible<XML> {
      * Attribute property declares whether the property definition translates to an attribute instead of an element.
      * Default value is FALSE.
      * </p>
-     * 
+     *
      * @param attribute
      *            a boolean that declares whether the property definition translates to an attribute instead of an
      *            element
@@ -172,7 +172,7 @@ public interface XML extends Constructible, Extensible<XML> {
      * Attribute property declares whether the property definition translates to an attribute instead of an element.
      * Default value is FALSE.
      * </p>
-     * 
+     *
      * @param attribute
      *            a boolean that declares whether the property definition translates to an attribute instead of an
      *            element
@@ -189,7 +189,7 @@ public interface XML extends Constructible, Extensible<XML> {
      * Wrapped property MAY be used only for an array definition. Signifies whether the array is wrapped. The definition
      * takes effect only when defined alongside type being array. Default value is FALSE.
      * </p>
-     * 
+     *
      * @return Boolean wrapped
      **/
     Boolean getWrapped();
@@ -200,7 +200,7 @@ public interface XML extends Constructible, Extensible<XML> {
      * Wrapped property MAY be used only for an array definition. Signifies whether the array is wrapped. The definition
      * takes effect only when defined alongside type being array. Default value is FALSE.
      * </p>
-     * 
+     *
      * @param wrapped
      *            a boolean that signifies whether the array is wrapped
      */
@@ -213,7 +213,7 @@ public interface XML extends Constructible, Extensible<XML> {
      * Wrapped property MAY be used only for an array definition. Signifies whether the array is wrapped. The definition
      * takes effect only when defined alongside type being array. Default value is FALSE.
      * </p>
-     * 
+     *
      * @param wrapped
      *            a boolean that signifies whether the array is wrapped
      * @return XML instance with the set wrapped property

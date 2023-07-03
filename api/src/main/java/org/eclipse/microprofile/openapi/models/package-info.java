@@ -18,7 +18,7 @@
  * The behaviour of methods inherited from java.lang.Object are undefined by the MicroProfile OpenAPI specification.
  * <p>
  * Example:
- * 
+ *
  * <pre>
  * public class MyOASModelReaderImpl implements OASModelReader {
  *

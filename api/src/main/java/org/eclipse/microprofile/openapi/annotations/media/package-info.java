@@ -13,10 +13,10 @@
 
 /**
  * A set of annotations to represent input and output data type, media type and relevant examples.
- * 
+ *
  * <p>
  * Example usage:
- * 
+ *
  * <pre>
  * content = {@literal @}Content(
  *      examples = {@literal @}ExampleObject(

@@ -333,7 +333,7 @@ public class UserResource {
 
     /**
      * Operation to test hiding of request body and parameter schemas
-     * 
+     *
      * @return a user
      */
     @POST

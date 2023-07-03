@@ -29,7 +29,7 @@ import org.eclipse.microprofile.openapi.models.Constructible;
  * which is used to inform the consumer of the specification of an alternative schema based on the value associated with
  * it.
  * <p>
- * 
+ *
  * @see <a href=
  *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#discriminator-object">OpenAPI
  *      Specification Discriminator Object</a>
@@ -65,7 +65,7 @@ public interface Discriminator extends Constructible {
 
     /**
      * Maps the given name to the given value and stores it in this Discriminator's mapping property.
-     * 
+     *
      * @param name
      *            a key which will be compared to information from a request body or response payload.
      * @param value
@@ -77,7 +77,7 @@ public interface Discriminator extends Constructible {
 
     /**
      * Remove the given name to the given value and stores it in this Discriminator's mapping property.
-     * 
+     *
      * @param name
      *            a key which will be compared to information from a request body or response payload.
      */

@@ -15,7 +15,7 @@
  * A set of annotations to represent a tag for an API endpoint and a container that encapsulates multiple such tags.
  * <p>
  * Example usage:
- * 
+ *
  * <pre>
  * {@literal @}Path("/reviews")
  * {@literal @}Tags(

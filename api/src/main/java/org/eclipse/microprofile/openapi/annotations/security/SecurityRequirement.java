@@ -29,7 +29,7 @@ import java.lang.annotation.Target;
  * <p>
  * Applying this annotation to a method or class is equivalent to applying a {@link SecurityRequirementsSet} annotation
  * containing only this annotation.
- * 
+ *
  * @see <a href=
  *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-requirement-object">SecuirtyRequirement
  *      Object</a>
@@ -41,7 +41,7 @@ import java.lang.annotation.Target;
 public @interface SecurityRequirement {
     /**
      * Name MUST correspond to a security scheme which is declared in the Security Schemes under the Components Object.
-     * 
+     *
      * @return the name of this Security Requirement instance
      */
     String name();
@@ -52,7 +52,7 @@ public @interface SecurityRequirement {
      * <p>
      * For other security scheme types, the array MUST be empty.
      * </p>
-     * 
+     *
      * @return a list of scope names required for the execution of this Security Requirement instance.
      */
     String[] scopes() default {};

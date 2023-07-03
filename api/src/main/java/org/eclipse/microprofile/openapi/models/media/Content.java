@@ -25,7 +25,7 @@ import org.eclipse.microprofile.openapi.models.Constructible;
  * Content
  * <p>
  * A map to assist describing the media types for an operation's parameter or response.
- * 
+ *
  */
 public interface Content extends Constructible {
 
@@ -44,7 +44,7 @@ public interface Content extends Constructible {
 
     /**
      * Removes the given MediaType for this Content by its name.
-     * 
+     *
      * @param name
      *            a path name that will be removed.
      */
@@ -52,14 +52,14 @@ public interface Content extends Constructible {
 
     /**
      * Returns a copy map (potentially immutable) of media types.
-     * 
+     *
      * @return all items
      */
     Map<String, MediaType> getMediaTypes();
 
     /**
      * Set the media types map to this Content
-     * 
+     *
      * @param mediaTypes
      *            a map containing the list of media types. Keys are name of a media type e.g. application/json.
      */
@@ -68,7 +68,7 @@ public interface Content extends Constructible {
     /**
      * Check whether a media type is present in the map. This is a convenience method for
      * <code>getMediaTypes().containsKey(name)</code>
-     * 
+     *
      * @param name
      *            the name of a media type e.g. application/json.
      * @return a boolean to indicate if the media type is present or not.
@@ -83,7 +83,7 @@ public interface Content extends Constructible {
 
     /**
      * Returns a media type for a given name. This is a convenience method for <code>getMediaTypes().get(name)</code>
-     * 
+     *
      * @param name
      *            the name of a media type e.g. application/json.
      * @return the corresponding media type or null.

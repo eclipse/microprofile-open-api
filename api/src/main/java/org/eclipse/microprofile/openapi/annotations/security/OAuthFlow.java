@@ -26,7 +26,7 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 
 /**
  * Configuration details for a supported OAuth Flow.
- * 
+ *
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#oauthFlowObject"> OAuth Flow
  *      Object</a>
  **/
@@ -40,7 +40,7 @@ public @interface OAuthFlow {
      * This is a REQUIRED property and MUST be in the form of a URL. Applies to oauth2 ("implicit", "authorizationCode")
      * type.
      * </p>
-     * 
+     *
      * @return authorization URL for this flow
      **/
     String authorizationUrl() default "";
@@ -51,7 +51,7 @@ public @interface OAuthFlow {
      * This is a REQUIRED property and MUST be in the form of a URL. Applies to oauth2 ("password", "clientCredentials",
      * "authorizationCode") type.
      * </p>
-     * 
+     *
      * @return token URL for this flow
      **/
     String tokenUrl() default "";
@@ -61,7 +61,7 @@ public @interface OAuthFlow {
      * <p>
      * This MUST be in the form of a URL. Applies to oauth2 type.
      * </p>
-     * 
+     *
      * @return URL for obtaining refresh tokens
      **/
     String refreshUrl() default "";
@@ -71,7 +71,7 @@ public @interface OAuthFlow {
      * <p>
      * The available scopes for the OAuth2 security scheme. Applies to oauth2 type.
      * </p>
-     * 
+     *
      * @return scopes available for this security scheme
      **/
     OAuthScope[] scopes() default {};
@@ -81,7 +81,7 @@ public @interface OAuthFlow {
      * OAuthFlow} model corresponding to the containing annotation.
      *
      * @return array of extensions
-     * 
+     *
      * @since 3.1
      */
     Extension[] extensions() default {};

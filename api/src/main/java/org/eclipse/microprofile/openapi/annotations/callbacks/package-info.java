@@ -16,7 +16,7 @@
  * particular HTTP operation as well as the HTTP operation that will be invoked with the callback.
  * <p>
  * Example annotation:
- * 
+ *
  * <pre>
  * {@literal @}POST
     {@literal @}Callbacks(

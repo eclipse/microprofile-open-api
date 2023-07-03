@@ -27,7 +27,7 @@ import org.jboss.shrinkwrap.api.asset.Asset;
  * Utility to allow the contents of microprofile-config.properties to be defined within the deployment method
  * <p>
  * Example usage:
- * 
+ *
  * <pre>
  * <code>
  * ConfigAsset config = new ConfigAsset()

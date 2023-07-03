@@ -42,13 +42,13 @@ public interface Reference<T extends Reference<T>> {
      * <p>
      * The appropriate full reference is determined by the context. For a parameter the short name will be prefixed by
      * "#/components/parameters/" to create "#/components/parameters/ShortName".
-     * 
+     *
      * <pre>
      * <code>parameter.setRef("ShortName"); // #/components/parameters/ShortName</code>
      * </pre>
-     * 
+     *
      * For a response the prefix is "#/components/responses/":
-     * 
+     *
      * <pre>
      * <code>response.setRef("NotFound"); // #/components/responses/NotFound</code>
      * </pre>
@@ -56,7 +56,7 @@ public interface Reference<T extends Reference<T>> {
      * This property provides a reference to an object defined elsewhere. This property and all other properties are
      * mutually exclusive. If other properties are defined in addition to the reference property then the result is
      * undefined.
-     * 
+     *
      * @param ref
      *            a reference to a T object in the components section of this OpenAPI document or a JSON pointer to
      *            another document.

@@ -16,7 +16,7 @@
  * well as a way to represent variables for server URL template substitution.
  * <p>
  * Example usage:
- * 
+ *
  * <pre>
  * {@literal @}POST
  * {@literal @}Servers(value={

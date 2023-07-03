@@ -41,7 +41,7 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
  * <b>Note:</b> If both {@link org.eclipse.microprofile.openapi.annotations.servers.Server Server} and
  * {@link org.eclipse.microprofile.openapi.annotations.servers.Servers Servers} annotation are specified on the same
  * type, the server definitions will be combined.
- * 
+ *
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#server-object"> OpenAPI
  *      Specification Server Object</a>
  **/
@@ -54,7 +54,7 @@ public @interface Server {
      * A URL to the target host. This URL supports Server Variables and may be relative, to indicate that the host
      * location is relative to the location where the OpenAPI definition is being served. Variable substitutions will be
      * made when a variable is named in {brackets}. This is a REQUIRED property.
-     * 
+     *
      * @return URL to the target host
      **/
     String url() default "";
@@ -62,14 +62,14 @@ public @interface Server {
     /**
      * An optional string describing the host designated by the URL. CommonMark syntax MAY be used for rich text
      * representation.
-     * 
+     *
      * @return description of the host designated by URL
      **/
     String description() default "";
 
     /**
      * An array of variables used for substitution in the server's URL template.
-     * 
+     *
      * @return array of variables
      **/
     ServerVariable[] variables() default {};
@@ -79,7 +79,7 @@ public @interface Server {
      * corresponding to the containing annotation.
      *
      * @return array of extensions
-     * 
+     *
      * @since 3.1
      */
     Extension[] extensions() default {};

@@ -61,7 +61,7 @@ public @interface SchemaProperty {
      * <p>
      * Inline or referenced schema MUST be of a Schema Object and not a standard JSON Schema.
      * </p>
-     * 
+     *
      * @return the list of possible classes for a single match
      **/
     Class<?>[] oneOf() default {};
@@ -72,7 +72,7 @@ public @interface SchemaProperty {
      * <p>
      * Inline or referenced schema MUST be of a Schema Object and not a standard JSON Schema.
      * </p>
-     * 
+     *
      * @return the list of possible class matches
      **/
     Class<?>[] anyOf() default {};
@@ -83,7 +83,7 @@ public @interface SchemaProperty {
      * <p>
      * Inline or referenced schema MUST be of a Schema Object and not a standard JSON Schema.
      * </p>
-     * 
+     *
      * @return the list of classes to match
      **/
     Class<?>[] allOf() default {};
@@ -199,7 +199,7 @@ public @interface SchemaProperty {
      * format. For example, if \&quot;type: integer, format: int128\&quot; were used to designate a very large integer,
      * most consumers will not understand how to handle it, and fall back to simply \&quot;type: integer\&quot;
      * </p>
-     * 
+     *
      * @return this schema's format
      **/
     String format() default "";
@@ -228,7 +228,7 @@ public @interface SchemaProperty {
      * If the property is marked as readOnly being true and is in the required list, the required will take effect on
      * the response only. A property MUST NOT be marked as both readOnly and writeOnly being true.
      * </p>
-     * 
+     *
      * @return whether or not this schema is read only
      **/
     boolean readOnly() default false;
@@ -240,7 +240,7 @@ public @interface SchemaProperty {
      * If the property is marked as writeOnly being true and is in the required list, the required will take effect on
      * the request only. A property MUST NOT be marked as both readOnly and writeOnly being true.
      * </p>
-     * 
+     *
      * @return whether or not this schema is write only
      **/
     boolean writeOnly() default false;
@@ -253,7 +253,7 @@ public @interface SchemaProperty {
      * </p>
      * When associated with a specific media type, the example string shall be parsed by the consumer to be treated as
      * an object or an array.
-     * 
+     *
      * @return an example of this schema
      **/
     String example() default "";
@@ -309,7 +309,7 @@ public @interface SchemaProperty {
      * The discriminator is an object name that is used to differentiate between other schemas which may satisfy the
      * payload description.
      * </p>
-     * 
+     *
      * @return the discriminator property
      */
     String discriminatorProperty() default "";
@@ -359,7 +359,7 @@ public @interface SchemaProperty {
      * If false, the instance validates successfully. If true, the instance validates successfully if all of its
      * elements are unique.
      * </p>
-     * 
+     *
      * @return whether the items in this array are unique
      **/
     boolean uniqueItems() default false;
@@ -369,7 +369,7 @@ public @interface SchemaProperty {
      * corresponding to the containing annotation.
      *
      * @return array of extensions
-     * 
+     *
      * @since 3.1
      */
     Extension[] extensions() default {};

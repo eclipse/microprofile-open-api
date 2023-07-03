@@ -19,7 +19,7 @@ import org.eclipse.microprofile.openapi.models.OpenAPI;
 
 /**
  * This interface allows application developers to programmatically contribute an OpenAPI model tree.
- * 
+ *
  * In this scenario the developer can choose whether to provide the entire OpenAPI model while disabling annotation
  * scanning, or they can provide a starting OpenAPI model to be augmented with the application annotations.
  *
@@ -34,7 +34,7 @@ public interface OASModelReader {
      * This method is called by the vendor's OpenAPI processing framework. It can be a fully complete and valid OpenAPI
      * model tree, or a partial base model tree that will be augmented by either annotations or pre-generated OpenAPI
      * documents.
-     * 
+     *
      * @return the OpenAPI model to be used by the vendor
      */
     OpenAPI buildModel();

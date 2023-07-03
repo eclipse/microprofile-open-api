@@ -26,7 +26,7 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 
 /**
  * This object provides schema and examples for a particular media type.
- * 
+ *
  * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#mediaTypeObject">OpenAPI
  *      Specification Media Type Object</a>
  **/
@@ -69,7 +69,7 @@ public @interface Content {
      * The encoding object SHALL only apply to requestBody objects when the media type is multipart or
      * application/x-www-form-urlencoded.
      * </p>
-     * 
+     *
      * @return the array of encodings
      */
     Encoding[] encoding() default {};
@@ -79,7 +79,7 @@ public @interface Content {
      * model corresponding to the containing annotation.
      *
      * @return array of extensions
-     * 
+     *
      * @since 3.1
      */
     Extension[] extensions() default {};
