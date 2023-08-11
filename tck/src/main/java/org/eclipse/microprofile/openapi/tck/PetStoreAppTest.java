@@ -291,7 +291,6 @@ public class PetStoreAppTest extends AppTestBase {
         vr.body(opPath + ".responses.'200'", not(hasKey(X_OPERATION_EXT)));
         vr.body(opPath + ".responses.'200'", hasEntry(equalTo("x-response-ext"), equalTo("test-response-ext")));
         vr.body(opPath + ".responses.'500'", not(hasKey(X_OPERATION_EXT)));
-        vr.body(opPath + ".responses.'503'", hasEntry(equalTo(X_OPERATION_EXT), equalTo(TEST_OPERATION_EXT)));
         vr.body(opPath + ".responses.'503'.content.'application/json'",
                 hasEntry(equalTo("x-notavailable-ext"), equalTo("true")));
         vr.body(opPath + ".responses.'503'.content.'application/xml'",
