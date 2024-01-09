@@ -95,7 +95,7 @@ public @interface APIResponseSchema {
      * <ul>
      * <li>If the method's return type is <code>void</code> and the HTTP method is <code>&#64;POST</code>, the code will
      * be <code>201</code>.
-     * <li>Otherwise, if the method's return type is <code>void</code> the method does not list a JAX-RS
+     * <li>Otherwise, if the method's return type is <code>void</code> the method does not list a Jakarta REST
      * <code>AsyncResponse</code> parameter, the code will be <code>204</code>.
      * <li>Otherwise, the code will be <code>200</code>.
      * </ul>
