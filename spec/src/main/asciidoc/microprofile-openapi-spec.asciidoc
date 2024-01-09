@@ -159,7 +159,7 @@ escapes and indentation added for readability):
 [source, json]
 ----
 mp.openapi.schema.java.util.Date = { \
-  "name": "EpochMillis" \
+  "name": "EpochMillis", \
   "type": "number", \
   "format": "int64", \
   "description": "Milliseconds since January 1, 1970, 00:00:00 GMT" \
