@@ -31,7 +31,11 @@ import org.eclipse.microprofile.openapi.models.Constructible;
  * Service provider for OASFactoryResolver. The implementation registers itself via the {@link java.util.ServiceLoader}
  * mechanism or by manually setting their implementation using the setInstance method.
  *
+ * @deprecated the OASFactoryResolver available in module
+ *             {@code org.eclipse.microprofile.openapi:microprofile-openapi-api} should be used instead of this version
+ *             which will be removed in a future major release.
  */
+@Deprecated(forRemoval = true)
 public abstract class OASFactoryResolver {
 
     private static volatile OASFactoryResolver instance = null;
