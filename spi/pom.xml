@@ -30,7 +30,7 @@
     <dependencies>
         <dependency>
             <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.annotation.versioning</artifactId>
+            <artifactId>osgi.annotation</artifactId>
         </dependency>
         <dependency>
             <groupId>org.eclipse.microprofile.openapi</groupId>
