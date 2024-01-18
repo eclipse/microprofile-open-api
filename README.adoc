@@ -40,7 +40,7 @@ Do you want to contribute to this project? Here is what you can do:
 ** Make sure you have signed the https://www.eclipse.org/legal/ECA.php[Eclipse Contributor Agreement]
 * https://github.com/eclipse/microprofile-open-api/issues[Create or fix an issue].
 * https://gitter.im/eclipse/microprofile-open-api[Join us on Gitter to discuss this project].
-* Join our weekly meeting (https://calendar.google.com/calendar/u/0/embed?src=gbnbc373ga40n0tvbl88nkc3r4%40group.calendar.google.com&ctz=UTC[UTC] / https://calendar.google.com/calendar/u/0/embed?src=gbnbc373ga40n0tvbl88nkc3r4%40group.calendar.google.com&ctz=America/New_York[US Eastern time]) every Monday.
+* Join our weekly meeting (https://calendar.google.com/calendar/u/0/embed?src=gbnbc373ga40n0tvbl88nkc3r4%40group.calendar.google.com&ctz=UTC[UTC] / https://calendar.google.com/calendar/u/0/embed?src=gbnbc373ga40n0tvbl88nkc3r4%40group.calendar.google.com&ctz=America/New_York[US Eastern time]).
 ** https://docs.google.com/document/d/1lwrGcNTGnML4Aof0FyGVZCPaaNDBOoKLa5jivlVY1D8/edit?usp=sharing[Minutes and Agenda].
 * Join the discussions on the https://groups.google.com/forum/#!forum/microprofile[MicroProfile Google Group]
 * https://microprofile.io/blog/[Contribute a blog post].
