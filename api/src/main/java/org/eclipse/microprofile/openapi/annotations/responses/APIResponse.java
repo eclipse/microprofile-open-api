@@ -33,7 +33,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
  * The APIResponse annotation corresponds to the OpenAPI Response model object which describes a single response from an
  * API Operation, including design-time, static links to operations based on the response.
  * <p>
- * When this annotation is applied to a JAX-RS method the response is added to the responses defined in the
+ * When this annotation is applied to a Jakarta REST method the response is added to the responses defined in the
  * corresponding OpenAPI operation. If the operation already has a response with the specified responseCode the
  * annotation on the method is ignored.
  *
@@ -46,13 +46,13 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
  * }
  * </pre>
  * <p>
- * When this annotation is applied to a JAX-RS resource class, the response is added to the responses defined in all
+ * When this annotation is applied to a Jakarta REST resource class, the response is added to the responses defined in all
  * OpenAPI operations which correspond to a method on that class. If an operation already has a response with the
  * specified responseCode the response is not added to that operation.
  *
  * <p>
  * When this annotation is applied to an <code>ExceptionMapper</code> class or <code>toResponse</code> method, it allows
- * developers to describe the API response that will be added to a generated OpenAPI operation based on a JAX-RS method
+ * developers to describe the API response that will be added to a generated OpenAPI operation based on a Jakarta REST method
  * that declares an <code>Exception</code> of the type handled by the <code>ExceptionMapper</code>.
  *
  * <pre>

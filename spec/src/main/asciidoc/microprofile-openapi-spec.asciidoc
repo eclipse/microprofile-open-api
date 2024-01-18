@@ -51,11 +51,11 @@ RESTful Services.
 This MicroProfile specification, called OpenAPI, aims to provide a set of Java
 interfaces and programming models which allow Java developers to natively produce
 OpenAPI v3 documents from their applications written using Jakarta RESTful Web
-Services (JAX-RS).
+Services (Jakarta REST).
 
 == Architecture
 
-There are different ways to augment a JAX-RS application in order to produce an
+There are different ways to augment a Jakarta REST application in order to produce an
 OpenAPI document, which are described in <<Documentation Mechanisms>>.  The picture
 below provides a quick overview of the different types of components that make up
 the MP OpenAPI specification:
@@ -177,18 +177,18 @@ There are many different ways to provide input for the generation of the resulti
 OpenAPI document.
 
 The MP OpenAPI specification requires vendors to produce a valid OpenAPI document
-from pure JAX-RS applications.  This means that vendors must process all the
-relevant JAX-RS annotations (such as `@Path` and `@Consumes`) as well as Java objects
-(POJOs) used as input or output to JAX-RS operations.  This is a good place to
+from pure Jakarta REST applications.  This means that vendors must process all the
+relevant Jakarta REST annotations (such as `@Path` and `@Consumes`) as well as Java objects
+(POJOs) used as input or output to Jakarta REST operations.  This is a good place to
 start for application developers that are new to OpenAPI: just deploy your existing
-JAX-RS application into a MP OpenAPI vendor and check out the output from `/openapi`!
+Jakarta REST application into a MP OpenAPI vendor and check out the output from `/openapi`!
 
 The application developer then has a few choices:
 
-1.  Augment those JAX-RS annotations with the
+1.  Augment those Jakarta REST annotations with the
 OpenAPI <<Annotations>>.  Using annotations means
 developers don't have to re-write the portions of the OpenAPI document that are
-already covered by the JAX-RS framework (e.g. the HTTP method of an operation).
+already covered by the Jakarta REST framework (e.g. the HTTP method of an operation).
 
 2. Take the initial output from `/openapi` as a starting point to document
 your APIs via <<Static OpenAPI files>>.  It's worth mentioning that these static
@@ -747,7 +747,7 @@ conflicts), or create a new model if an `OASModelReader` was not registered.
 If found, it will read that document and merge with the model produced by previous
 processing steps (if any), where conflicting elements from the static file will override
 the values from the original model.
-* If annotation scanning was not disabled, the JAX-RS and OpenAPI annotations from
+* If annotation scanning was not disabled, the Jakarta REST and OpenAPI annotations from
 the application will be processed, further overriding any conflicting elements
 from the current model.
 * The final model is filtered by walking the model tree and invoking all registered
@@ -763,7 +763,7 @@ following conditions are met:
 - an `OASModelReader` has been configured with `mp.openapi.model.reader`
 - an `OASFilter` has been configured with `mp.openapi.filter`
 - one of the allowed static files is present, i.e. `META-INF/openapi.(json|yaml|yml)`
-- the application uses JAX-RS
+- the application uses Jakarta REST
 
 For example, `GET http://myHost:myPort/openapi`.
 
