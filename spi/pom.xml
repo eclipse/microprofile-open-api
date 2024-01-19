@@ -25,7 +25,13 @@
 
     <artifactId>microprofile-openapi-spi</artifactId>
     <name>MicroProfile OpenAPI SPI</name>
-    <description>MicroProfile OpenAPI SPI :: SPI</description>
+    <description>
+        MicroProfile OpenAPI :: SPI
+
+        This module is deprecated and will be removed in a future release of MicroProfile
+        OpenAPI. The functionality offered by this module is available in the microprofile-openapi-api
+        module which should be used instead.
+    </description>
 
     <dependencies>
         <dependency>
@@ -37,6 +43,4 @@
             <artifactId>microprofile-openapi-api</artifactId>
         </dependency>
     </dependencies>
-
-    
 </project>
