@@ -13,11 +13,7 @@
 
 /**
  * Service provider interface which allows vendors to set their implementations of OASFactoryResolver.
- * <p>
- * The {@code org.eclipse.microprofile.openapi.spi} package available in module
- * {@code org.eclipse.microprofile.openapi:microprofile-openapi-api} should be used instead of this version which will
- * be removed in a future major release.
  */
-@Deprecated(forRemoval = true)
+
 @org.osgi.annotation.versioning.Version("1.0")
 package org.eclipse.microprofile.openapi.spi;
