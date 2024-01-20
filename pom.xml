@@ -24,7 +24,7 @@
 
     <groupId>org.eclipse.microprofile.openapi</groupId>
     <artifactId>microprofile-openapi-parent</artifactId>
-    <version>3.2-SNAPSHOT</version>
+    <version>4.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>MicroProfile OpenAPI</name>
     <description>Eclipse MicroProfile OpenAPI</description>
@@ -80,6 +80,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
     <modules>
         <module>api</module>
         <module>tck</module>
@@ -87,4 +88,19 @@
         <module>spi</module>
     </modules>
 
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>3.2.1</version>
+                    <configuration>
+                        <!-- https://github.com/checkstyle/checkstyle/issues/8240 -->
+                        <excludes>**/module-info.java</excludes>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>

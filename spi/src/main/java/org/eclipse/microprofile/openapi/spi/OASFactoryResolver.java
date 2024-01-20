@@ -20,14 +20,11 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.ServiceLoader;
 
-import org.eclipse.microprofile.openapi.models.Constructible;
-
 /**
  * This class is not intended to be used by end-users. It should be used by vendors to set their implementation of
  * OASFactoryResolver.
  *
- * <br>
- * <br>
+ * <p>
  * Service provider for OASFactoryResolver. The implementation registers itself via the {@link java.util.ServiceLoader}
  * mechanism or by manually setting their implementation using the setInstance method.
  *
@@ -51,7 +48,7 @@ public abstract class OASFactoryResolver {
      * @throws IllegalArgumentException
      *             if an instance could not be created, most likely, due to an illegal or inappropriate class
      */
-    public abstract <T extends Constructible> T createObject(Class<T> clazz);
+    public abstract <T> T createObject(Class<T> clazz);
 
     /**
      * Creates an OASFactoryResolver object. Only used internally from within
@@ -94,18 +91,16 @@ public abstract class OASFactoryResolver {
             return null;
         }
 
-        OASFactoryResolver instance = loadSpi(cl.getParent());
+        OASFactoryResolver instance = null;
 
-        if (instance == null) {
-            ServiceLoader<OASFactoryResolver> sl = ServiceLoader.load(OASFactoryResolver.class, cl);
-            for (OASFactoryResolver spi : sl) {
-                if (instance != null) {
-                    throw new IllegalStateException(
-                            "Multiple OASFactoryResolver implementations found: " + spi.getClass().getName() + " and "
-                                    + instance.getClass().getName());
-                } else {
-                    instance = spi;
-                }
+        ServiceLoader<OASFactoryResolver> sl = ServiceLoader.load(OASFactoryResolver.class, cl);
+        for (OASFactoryResolver spi : sl) {
+            if (instance != null) {
+                throw new IllegalStateException(
+                        "Multiple OASFactoryResolver implementations found: " + spi.getClass().getName() + " and "
+                                + instance.getClass().getName());
+            } else {
+                instance = spi;
             }
         }
         return instance;
