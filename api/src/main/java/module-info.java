@@ -17,6 +17,7 @@
  * A set of Java interfaces, annotations, and programming models which allow Java developers to natively produce OpenAPI
  * documents from Jakarta RESTful Web Services applications.
  */
+@SuppressWarnings("module") // silence warning about unstable name `osgi.annotation`
 module org.eclipse.microprofile.openapi {
 
     exports org.eclipse.microprofile.openapi;
@@ -46,6 +47,8 @@ module org.eclipse.microprofile.openapi {
     exports org.eclipse.microprofile.openapi.models.servers;
     exports org.eclipse.microprofile.openapi.models.tags;
     exports org.eclipse.microprofile.openapi.spi;
+
+    uses org.eclipse.microprofile.openapi.spi.OASFactoryResolver;
 
     // Required for compilation, not used at runtime
     requires static osgi.annotation;
