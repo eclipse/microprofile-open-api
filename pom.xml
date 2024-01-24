@@ -87,4 +87,25 @@
         <module>spi</module>
     </modules>
 
+    <profiles>
+        <profile>
+            <id>validate-formatting</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>net.revelc.code.formatter</groupId>
+                        <artifactId>formatter-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                            <goals>
+                                <goal>validate</goal>
+                            </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 </project>
