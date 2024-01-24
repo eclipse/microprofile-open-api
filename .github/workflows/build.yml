@@ -23,4 +23,4 @@ jobs:
           cache: 'maven'
 
       - name: build with maven
-        run: mvn -B --no-transfer-progress verify javadoc:javadoc --file pom.xml
+        run: mvn -B --no-transfer-progress verify javadoc:javadoc --file pom.xml -Pvalidate-formatting
