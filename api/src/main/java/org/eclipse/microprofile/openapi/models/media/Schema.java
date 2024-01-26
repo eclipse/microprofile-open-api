@@ -1192,4 +1192,761 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      */
     void removeOneOf(Schema oneOf);
 
+    /**
+     * Returns the schema dialect in use. This is the value of the {@code $schema} property.
+     *
+     * @return the schema dialect name, or {@code null} for the default
+     * @since 4.0
+     */
+    String getSchemaDialect();
+
+    /**
+     * Sets the schema dialect in use. This is the value of the {@code $schema} property.
+     *
+     * @param schemaDialect
+     *            the schema dialect name, or {@code null} for the default
+     * @since 4.0
+     */
+    void setSchemaDialect(String schemaDialect);
+
+    /**
+     * Sets the schema dialect in use. This is the value of the {@code $schema} property.
+     *
+     * @param schemaDialect
+     *            the schema dialect name, or {@code null} for the default
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema schemaDialect(String schemaDialect) {
+        setSchemaDialect(schemaDialect);
+        return this;
+    }
+
+    /**
+     * Returns the comment to be included in the {@code $comment} property of the schema.
+     *
+     * @return the comment, or {@code null} if no comment is set
+     * @since 4.0
+     */
+    String getComment();
+
+    /**
+     * Sets the comment to be included in the {@code $comment} property of the schema.
+     *
+     * @param comment
+     *            the comment, or {@code null} to remove any comment
+     * @since 4.0
+     */
+    void setComment(String comment);
+
+    /**
+     * Sets the comment to be included in the {@code $comment} property of the schema.
+     *
+     * @param comment
+     *            the comment, or {@code null} to remove any comment
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema comment(String comment) {
+        setComment(comment);
+        return this;
+    }
+
+    /**
+     * Returns the "if" schema. If an object is valid against the "if" schema, then it must also be valid against the
+     * "then" schema, otherwise it must be valid against the "else" schema.
+     *
+     * @return the if schema
+     * @since 4.0
+     */
+    Schema getIfSchema();
+
+    /**
+     * Sets the "if" schema. If an object is valid against the "if" schema, then it must also be valid against the
+     * "then" schema, otherwise it must be valid against the "else" schema.
+     *
+     * @param ifSchema
+     *            the if schema
+     * @since 4.0
+     */
+    void setIfSchema(Schema ifSchema);
+
+    /**
+     * Sets the "if" schema. If an object is valid against the "if" schema, then it must also be valid against the
+     * "then" schema, otherwise it must be valid against the "else" schema.
+     *
+     * @param ifSchema
+     *            the if schema
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema ifSchema(Schema ifSchema) {
+        setIfSchema(ifSchema);
+        return this;
+    }
+
+    /**
+     * Returns the "then" schema. If an object is valid against the "if" schema, then it must also be valid against the
+     * "then" schema.
+     *
+     * @return the then schema
+     * @since 4.0
+     */
+    Schema getThenSchema();
+
+    /**
+     * Sets the "then" schema. If an object is valid against the "if" schema, then it must also be valid against the
+     * "then" schema.
+     *
+     * @param thenSchema
+     *            the then schema
+     * @since 4.0
+     */
+    void setThenSchema(Schema thenSchema);
+
+    /**
+     * Sets the "then" schema. If an object is valid against the "if" schema, then it must also be valid against the
+     * "then" schema.
+     *
+     * @param thenSchema
+     *            the then schema
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema thenSchema(Schema thenSchema) {
+        setThenSchema(thenSchema);
+        return this;
+    }
+
+    /**
+     * Returns the "else" schema. If an object is not valid against the "if" schema, then it must be valid against the
+     * "else" schema.
+     *
+     * @return the else schema
+     * @since 4.0
+     */
+    Schema getElseSchema();
+
+    /**
+     * Sets the "else" schema. If an object is not valid against the "if" schema, then it must be valid against the
+     * "else" schema.
+     *
+     * @param elseSchema
+     *            the else schema
+     * @since 4.0
+     */
+    void setElseSchema(Schema elseSchema);
+
+    /**
+     * Sets the "else" schema. If an object is not valid against the "if" schema, then it must be valid against the
+     * "else" schema.
+     *
+     * @param elseSchema
+     *            the else schema
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema elseSchema(Schema elseSchema) {
+        setElseSchema(elseSchema);
+        return this;
+    }
+
+    /**
+     * Returns the dependentSchemas property of this Schema instance.
+     * <p>
+     * For each name and property pair in the map, if the object contains a property with the given name, it must match
+     * the corresponding schema.
+     *
+     * @return a copy Map (potentially immutable) of properties and their dependent schemas
+     * @since 4.0
+     */
+    Map<String, Schema> getDependentSchemas();
+
+    /**
+     * Sets the dependentSchemas property of this Schema instance.
+     * <p>
+     * For each name and property pair in the map, if the object contains a property with the given name, it must match
+     * the corresponding schema.
+     *
+     * @param dependentSchemas
+     *            a map of properties and their dependent schemas
+     * @since 4.0
+     */
+    void setDependentSchemas(Map<String, Schema> dependentSchemas);
+
+    /**
+     * Sets the dependentSchemas property of this Schema instance.
+     * <p>
+     * For each name and property pair in the map, if the object contains a property with the given name, it must match
+     * the corresponding schema.
+     *
+     * @param dependentSchemas
+     *            a map of properties and their dependent schemas
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema dependentSchemas(Map<String, Schema> dependentSchemas) {
+        setDependentSchemas(dependentSchemas);
+        return this;
+    }
+
+    /**
+     * Sets the dependent schema for a property name.
+     * <p>
+     * If the object contains a property with the given name, it must match the dependent schema.
+     *
+     * @param propertyName
+     *            the property name
+     * @param schema
+     *            the dependent schema
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    Schema addDependentSchema(String propertyName, Schema schema);
+
+    /**
+     * Removes the dependent schema for a property name.
+     *
+     * @param propertyName
+     *            the property name
+     * @since 4.0
+     */
+    void removeDependentSchema(String propertyName);
+
+    /**
+     * Returns the prefixItems property of this Schema instance.
+     * <p>
+     * If the object is an array, the nth item in the array must match the nth schema in this list.
+     *
+     * @return a copy List (potentially immutable) of prefix item schemas
+     * @since 4.0
+     */
+    List<Schema> getPrefixItems();
+
+    /**
+     * Sets the prefixItems property of this Schema instance.
+     * <p>
+     * If the object is an array, the nth item in the array must match the nth schema in this list.
+     *
+     * @param prefixItems
+     *            a list of prefix item schemas
+     * @since 4.0
+     */
+    void setPrefixItems(List<Schema> prefixItems);
+
+    /**
+     * Sets the prefixItems property of this Schema instance.
+     * <p>
+     * If the object is an array, the nth item in the array must match the nth schema in this list.
+     *
+     * @param prefixItems
+     *            a list of prefix item schemas
+     * @return current Schema instance
+     * @since 4.0
+     */
+    default Schema prefixItems(List<Schema> prefixItems) {
+        setPrefixItems(prefixItems);
+        return this;
+    }
+
+    /**
+     * Adds a schema to the end of the prefixItems list.
+     *
+     * @param prefixItem
+     *            the schema to add to the prefixItems list
+     * @return current Schema instance
+     * @since 4.0
+     */
+    Schema addPrefixItem(Schema prefixItem);
+
+    /**
+     * Removes a schema from the prefixItems list.
+     *
+     * @param prefixItem
+     *            the schema to remove from the prefixItems list
+     * @since 4.0
+     */
+    void removePrefixItem(Schema prefixItem);
+
+    /**
+     * Returns the contains property of this Schema instance.
+     * <p>
+     * If the object is an array, at least one item in the array must match the returned schema.
+     *
+     * @return a schema that one item in the array should match
+     * @since 4.0
+     */
+    Schema getContains();
+
+    /**
+     * Sets the contains property of this Schema instance.
+     * <p>
+     * If the object is an array, at least one item in the array must match the returned schema.
+     *
+     * @param contains
+     *            a schema that one item in the array should match
+     * @since 4.0
+     */
+    void setContains(Schema contains);
+
+    /**
+     * Sets the contains property of this Schema instance.
+     * <p>
+     * If the object is an array, at least one item in the array must match the returned schema.
+     *
+     * @param contains
+     *            a schema that one item in the array should match
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema contains(Schema contains) {
+        setContains(contains);
+        return this;
+    }
+
+    /**
+     * Returns the patternProperties property from this Schema instance.
+     * <p>
+     * The value of patternProperties is a map from a regular expression to a schema. For each string and schema pair in
+     * the map, if a property name is matched by the regular expression then the value of that property must validate
+     * against the schema.
+     *
+     * @return a copy Map (potentially immutable) of regular expression and schema pairs
+     * @since 4.0
+     */
+    Map<String, Schema> getPatternProperties();
+
+    /**
+     * Sets the patternProperties property from this Schema instance.
+     * <p>
+     * The value of patternProperties is a map from a regular expression to a schema. For each string and schema pair in
+     * the map, if a property name is matched by the regular expression then the value of that property must validate
+     * against the schema.
+     *
+     * @param patternProperties
+     *            a map of regular expression and schema pairs
+     * @since 4.0
+     */
+    void setPatternProperties(Map<String, Schema> patternProperties);
+
+    /**
+     * Sets the patternProperties property from this Schema instance.
+     * <p>
+     * The value of patternProperties is a map from a regular expression to a schema. For each string and schema pair in
+     * the map, if a property name is matched by the regular expression then the value of that property must validate
+     * against the schema.
+     *
+     * @param patternProperties
+     *            a map of regular expression and schema pairs
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema patternProperties(Map<String, Schema> patternProperties) {
+        setPatternProperties(patternProperties);
+        return this;
+    }
+
+    /**
+     * Adds a regular expression and schema pair to the list of pattern properties.
+     * <p>
+     * The value of patternProperties is a map from a regular expression to a schema. For each string and schema pair in
+     * the map, if a property name is matched by the regular expression then the value of that property must validate
+     * against the schema.
+     *
+     * @param regularExpression
+     *            the regular expression to add
+     * @param schema
+     *            the schema that a property value must validate against if its name matches {@code regularExpression}
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    Schema addPatternProperty(String regularExpression, Schema schema);
+
+    /**
+     * Removes a regular expression and its corresponding schema pair from the list of pattern properties.
+     *
+     * @param regularExpression
+     *            the regular expression to remove
+     * @since 4.0
+     */
+    void removePatternProperty(String regularExpression);
+
+    /**
+     * Returns the propertyNames property from this Schema instance. Each property <em>name</em> in the object must
+     * validate against this schema.
+     *
+     * @return the schema which each property name must validate against
+     * @since 4.0
+     */
+    Schema getPropertyNames();
+
+    /**
+     * Sets the propertyNames property from this Schema instance. Each property <em>name</em> in the object must
+     * validate against this schema.
+     *
+     * @param propertyNameSchema
+     *            the schema which each property name must validate against
+     * @since 4.0
+     */
+    void setPropertyNames(Schema propertyNameSchema);
+
+    /**
+     * Sets the propertyNames property from this Schema instance. Each property <em>name</em> in the object must
+     * validate against this schema.
+     *
+     * @param propertyNameSchema
+     *            the schema which each property name must validate against
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema propertyNames(Schema propertyNameSchema) {
+        setPropertyNames(propertyNameSchema);
+        return this;
+    }
+
+    /**
+     * Returns the unevaluatedItems property of this Schema instance.
+     * <p>
+     * Items which have not successfully validated against {@code prefixItems}, {@code items}, or {@code contains} must
+     * validate against this schema.
+     *
+     * @return a schema that unevaluated array items must validate against
+     * @since 4.0
+     */
+    Schema getUnevaluatedItems();
+
+    /**
+     * Sets the unevaluatedItems property of this Schema instance.
+     * <p>
+     * Items which have not successfully validated against {@code prefixItems}, {@code items}, or {@code contains} must
+     * validate against this schema.
+     *
+     * @param unevaluatedItems
+     *            a schema that unevaluated array items must validate against
+     * @since 4.0
+     */
+    void setUnevaluatedItems(Schema unevaluatedItems);
+
+    /**
+     * Sets the unevaluatedItems property of this Schema instance.
+     * <p>
+     * Items which have not successfully validated against {@code prefixItems}, {@code items}, or {@code contains} must
+     * validate against this schema.
+     *
+     * @param unevaluatedItems
+     *            a schema that unevaluated array items must validate against
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema unevaluatedItems(Schema unevaluatedItems) {
+        setUnevaluatedItems(unevaluatedItems);
+        return this;
+    }
+
+    /**
+     * Returns the unevaluatedProperties property of this Schema instance.
+     * <p>
+     * Property values which have not successfully validated against {@code properties}, {@code patternProperties}, or
+     * {@code additionalProperties} must validate against this schema.
+     *
+     * @return a schema that unevaluated object properties must validate against
+     * @since 4.0
+     */
+    Schema getUnevaluatedProperties();
+
+    /**
+     * Sets the unevaluatedProperties property of this Schema instance.
+     * <p>
+     * Property values which have not successfully validated against {@code properties}, {@code patternProperties}, or
+     * {@code additionalProperties} must validate against this schema.
+     *
+     * @param unevaluatedProperties
+     *            a schema that unevaluated object properties must validate against
+     * @since 4.0
+     */
+    void setUnevaluatedProperties(Schema unevaluatedProperties);
+
+    /**
+     * Sets the unevaluatedProperties property of this Schema instance.
+     * <p>
+     * Property values which have not successfully validated against {@code properties}, {@code patternProperties}, or
+     * {@code additionalProperties} must validate against this schema.
+     *
+     * @param unevaluatedProperties
+     *            a schema that unevaluated object properties must validate against
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema unevaluatedProperties(Schema unevaluatedProperties) {
+        setUnevaluatedProperties(unevaluatedProperties);
+        return this;
+    }
+
+    /**
+     * Returns the const property from this Schema instance. Indicates that the object must have a specific value.
+     *
+     * @return the value that the object must have
+     * @since 4.0
+     */
+    Object getConstValue();
+
+    /**
+     * Sets the const property from this Schema instance. Indicates that the object must have a specific value.
+     *
+     * @param constValue
+     *            the value that the object must have
+     * @since 4.0
+     */
+    void setConstValue(Object constValue);
+
+    /**
+     * Sets the const property from this Schema instance. Indicates that the object must have a specific value.
+     *
+     * @param constValue
+     *            the value that the object must have
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema constValue(Object constValue) {
+        setConstValue(constValue);
+        return this;
+    }
+
+    /**
+     * Returns the maxContains property from this Schema instance. Specifies that {@code contains} must match no more
+     * than this many items in the array.
+     *
+     * @return the max number of items which may be matched by {@code contains}
+     * @since 4.0
+     */
+    Integer getMaxContains();
+
+    /**
+     * Sets the maxContains property from this Schema instance. Specifies that {@code contains} must match no more than
+     * this many items in the array.
+     *
+     * @param maxContains
+     *            the max number of items which may be matched by {@code contains}
+     * @since 4.0
+     */
+    void setMaxContains(Integer maxContains);
+
+    /**
+     * Sets the maxContains property from this Schema instance. Specifies that {@code contains} must match no more than
+     * this many items in the array.
+     *
+     * @param maxContains
+     *            the maximum number of items which may be matched by {@code contains}
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema maxContains(Integer maxContains) {
+        setMaxContains(maxContains);
+        return this;
+    }
+
+    /**
+     * Returns the minContains property from this Schema instance. Specifies that {@code contains} must match at least
+     * this many items in the array.
+     *
+     * @return the minimum number of items which may be matched by {@code contains}
+     * @since 4.0
+     */
+    Integer getMinContains();
+
+    /**
+     * Sets the minContains property from this Schema instance. Specifies that {@code contains} must match at least this
+     * many items in the array.
+     *
+     * @param minContains
+     *            the minimum number of items which may be matched by {@code contains}
+     * @since 4.0
+     */
+    void setMinContains(Integer minContains);
+
+    /**
+     * Sets the minContains property from this Schema instance. Specifies that {@code contains} must match at least this
+     * many items in the array.
+     *
+     * @param minContains
+     *            the minimum number of items which may be matched by {@code contains}
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema minContains(Integer minContains) {
+        setMinContains(minContains);
+        return this;
+    }
+
+    /**
+     * Returns the dependentRequired property of this Schema instance.
+     * <p>
+     * For each entry in the map, if the key exists as a property name in the object, then the list of names in the
+     * value must also exist as property names in the object.
+     *
+     * @return a copy Map (potentially immutable) of property names to lists of additional required property names
+     * @since 4.0
+     */
+    Map<String, List<String>> getDependentRequired();
+
+    /**
+     * Sets the dependentRequired property of this Schema instance.
+     * <p>
+     * For each entry in the map, if the key exists as a property name in the object, then the list of names in the
+     * value must also exist as property names in the object.
+     *
+     * @param dependentRequired
+     *            a map of property names to lists of additional required property names
+     * @since 4.0
+     */
+    void setDependentRequired(Map<String, List<String>> dependentRequired);
+
+    /**
+     * Sets the dependentRequired property of this Schema instance.
+     * <p>
+     * For each entry in the map, if the key exists as a property name in the object, then the list of names in the
+     * value must also exist as property names in the object.
+     *
+     * @param dependentRequired
+     *            a map of property names to lists of additional required property names
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema dependentRequired(Map<String, List<String>> dependentRequired) {
+        setDependentRequired(dependentRequired);
+        return this;
+    }
+
+    /**
+     * Sets the list of additional property names that are required if a property named {@code propertyName} exists.
+     *
+     * @param propertyName
+     *            the property name
+     * @param additionalRequiredPropertyNames
+     *            the names of additional properties which are required if {@code propertyName} exists to add
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    Schema addDependentRequired(String propertyName, List<String> additionalRequiredPropertyNames);
+
+    /**
+     * Removes the list of additional property names that are required if a property named {@code propertyName} exists.
+     *
+     * @param propertyName
+     *            the property name
+     * @since 4.0
+     */
+    void removeDependentRequired(String propertyName);
+
+    /**
+     * Returns the contentEncoding property from this Schema instance.
+     * <p>
+     * Specifies the encoding used to represent binary data as a string (e.g. base64).
+     *
+     * @return the encoding type
+     * @since 4.0
+     */
+    String getContentEncoding();
+
+    /**
+     * Sets the contentEncoding property from this Schema instance.
+     * <p>
+     * Specifies the encoding used to represent binary data as a string (e.g. base64).
+     *
+     * @param contentEncoding
+     *            the encoding type
+     * @since 4.0
+     */
+    void setContentEncoding(String contentEncoding);
+
+    /**
+     * Sets the contentEncoding property from this Schema instance.
+     * <p>
+     * Specifies the encoding used to represent binary data as a string (e.g. base64).
+     *
+     * @param contentEncoding
+     *            the encoding type
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema contentEncoding(String contentEncoding) {
+        setContentEncoding(contentEncoding);
+        return this;
+    }
+
+    /**
+     * Returns the contentMediaType property from this Schema instance.
+     * <p>
+     * Specifies the media type of the content of a string.
+     *
+     * @return the media type
+     * @since 4.0
+     */
+    String getContentMediaType();
+
+    /**
+     * Sets the contentMediaType property from this Schema instance.
+     * <p>
+     * Specifies the media type of the content of a string.
+     *
+     * @param contentMediaType
+     *            the media type
+     * @since 4.0
+     */
+    void setContentMediaType(String contentMediaType);
+
+    /**
+     * Sets the contentMediaType property from this Schema instance.
+     * <p>
+     * Specifies the media type of the content of a string.
+     *
+     * @param contentMediaType
+     *            the media type
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema contentMediaType(String contentMediaType) {
+        setContentMediaType(contentMediaType);
+        return this;
+    }
+
+    /**
+     * Returns the contentSchema property from this Schema instance.
+     * <p>
+     * If {@code contentMediaType} is a media type that maps into JSON Schema's data model, this property specifies a
+     * schema that the data in the string must conform to.
+     *
+     * @return the schema for the data within the string
+     * @since 4.0
+     */
+    Schema getContentSchema();
+
+    /**
+     * Sets the contentSchema property from this Schema instance.
+     * <p>
+     * If {@code contentMediaType} is a media type that maps into JSON Schema's data model, this property specifies a
+     * schema that the data in the string must conform to.
+     *
+     * @param contentSchema
+     *            the schema for the data within the string
+     * @since 4.0
+     */
+    void setContentSchema(Schema contentSchema);
+
+    /**
+     * Sets the contentSchema property from this Schema instance.
+     * <p>
+     * If {@code contentMediaType} is a media type that maps into JSON Schema's data model, this property specifies a
+     * schema that the data in the string must conform to.
+     *
+     * @param contentSchema
+     *            the schema for the data within the string
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema contentSchema(Schema contentSchema) {
+        setContentSchema(contentSchema);
+        return this;
+    }
+
 }

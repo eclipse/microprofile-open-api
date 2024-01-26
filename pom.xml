@@ -24,7 +24,7 @@
 
     <groupId>org.eclipse.microprofile.openapi</groupId>
     <artifactId>microprofile-openapi-parent</artifactId>
-    <version>3.2-SNAPSHOT</version>
+    <version>4.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>MicroProfile OpenAPI</name>
     <description>Eclipse MicroProfile OpenAPI</description>
