@@ -1192,4 +1192,103 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      */
     void removeOneOf(Schema oneOf);
 
+    /**
+     * Returns the "if" schema. If an object is valid against the "if" schema, then it must also be valid against the
+     * "then" schema, otherwise if must be valid against the "else" schema.
+     *
+     * @return the if schema
+     * @since 4.0
+     */
+    Schema getIfSchema();
+
+    /**
+     * Sets the "if" schema. If an object is valid against the "if" schema, then it must also be valid against the
+     * "then" schema, otherwise if must be valid against the "else" schema.
+     *
+     * @param ifSchema
+     *            the if schema
+     * @since 4.0
+     */
+    void setIfSchema(Schema ifSchema);
+
+    /**
+     * Sets the "if" schema. If an object is valid against the "if" schema, then it must also be valid against the
+     * "then" schema, otherwise if must be valid against the "else" schema.
+     *
+     * @param ifSchema
+     *            the if schema
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema ifSchema(Schema ifSchema) {
+        setIfSchema(ifSchema);
+        return this;
+    }
+
+    /**
+     * Returns the "then" schema. If an object is valid against the "if" schema, then it must also be valid against the
+     * "then" schema.
+     *
+     * @return the then schema
+     * @since 4.0
+     */
+    Schema getThenSchema();
+
+    /**
+     * Sets the "then" schema. If an object is valid against the "if" schema, then it must also be valid against the
+     * "then" schema.
+     *
+     * @param thenSchema
+     *            the then schema
+     * @since 4.0
+     */
+    void setThenSchema(Schema thenSchema);
+
+    /**
+     * Sets the "then" schema. If an object is valid against the "if" schema, then it must also be valid against the
+     * "then" schema.
+     *
+     * @param thenSchema
+     *            the then schema
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema thenSchema(Schema thenSchema) {
+        setThenSchema(thenSchema);
+        return this;
+    }
+
+    /**
+     * Returns the "else" schema. If an object is not valid against the "if" schema, then it must be valid against the
+     * "else" schema.
+     *
+     * @return the else schema
+     * @since 4.0
+     */
+    Schema getElseSchema();
+
+    /**
+     * Sets the "else" schema. If an object is not valid against the "if" schema, then it must be valid against the
+     * "else" schema.
+     *
+     * @param elseSchema
+     *            the else schema
+     * @since 4.0
+     */
+    void setElseSchema(Schema elseSchema);
+
+    /**
+     * Sets the "else" schema. If an object is not valid against the "if" schema, then it must be valid against the
+     * "else" schema.
+     *
+     * @param elseSchema
+     *            the else schema
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema elseSchema(Schema elseSchema) {
+        setElseSchema(elseSchema);
+        return this;
+    }
+
 }
