@@ -1193,6 +1193,66 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
     void removeOneOf(Schema oneOf);
 
     /**
+     * Returns the schema dialect in use. This is the value of the {@code $schema} property.
+     *
+     * @return the schema dialect name, or {@code null} for the default
+     * @since 4.0
+     */
+    String getSchemaDialect();
+
+    /**
+     * Sets the schema dialect in use. This is the value of the {@code $schema} property.
+     *
+     * @param schemaDialect
+     *            the schema dialect name, or {@code null} for the default
+     * @since 4.0
+     */
+    void setSchemaDialect(String schemaDialect);
+
+    /**
+     * Sets the schema dialect in use. This is the value of the {@code $schema} property.
+     *
+     * @param schemaDialect
+     *            the schema dialect name, or {@code null} for the default
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema schemaDialect(String schemaDialect) {
+        setSchemaDialect(schemaDialect);
+        return this;
+    }
+
+    /**
+     * Returns the comment to be included in the {@code $comment} property of the schema.
+     *
+     * @return the comment, or {@code null} if no comment is set
+     * @since 4.0
+     */
+    String getComment();
+
+    /**
+     * Sets the comment to be included in the {@code $comment} property of the schema.
+     *
+     * @param comment
+     *            the comment, or {@code null} to remove any comment
+     * @since 4.0
+     */
+    void setComment(String comment);
+
+    /**
+     * Sets the comment to be included in the {@code $comment} property of the schema.
+     *
+     * @param comment
+     *            the comment, or {@code null} to remove any comment
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema comment(String comment) {
+        setComment(comment);
+        return this;
+    }
+
+    /**
      * Returns the "if" schema. If an object is valid against the "if" schema, then it must also be valid against the
      * "then" schema, otherwise if must be valid against the "else" schema.
      *
