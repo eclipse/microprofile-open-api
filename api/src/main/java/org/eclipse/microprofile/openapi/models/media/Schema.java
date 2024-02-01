@@ -1413,4 +1413,95 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      */
     void removeDependentSchema(String propertyName);
 
+    /**
+     * Returns the prefixItems property of this Schema instance.
+     * <p>
+     * If the object is an array, the nth item in the array must match the nth schema in this list.
+     *
+     * @return a copy List (potentially immutable) of prefix item schemas
+     * @since 4.0
+     */
+    List<Schema> getPrefixItems();
+
+    /**
+     * Sets the prefixItems property of this Schema instance.
+     * <p>
+     * If the object is an array, the nth item in the array must match the nth schema in this list.
+     *
+     * @param prefixItems
+     *            a list of prefix item schemas
+     * @since 4.0
+     */
+    void setPrefixItems(List<Schema> prefixItems);
+
+    /**
+     * Sets the prefixItems property of this Schema instance.
+     * <p>
+     * If the object is an array, the nth item in the array must match the nth schema in this list.
+     *
+     * @param prefixItems
+     *            a list of prefix item schemas
+     * @return current Schema instance
+     * @since 4.0
+     */
+    default Schema prefixItems(List<Schema> prefixItems) {
+        setPrefixItems(prefixItems);
+        return this;
+    }
+
+    /**
+     * Adds a schema to the end of the prefixItems list.
+     *
+     * @param prefixItem
+     *            the schema to add to the prefixItems list
+     * @return current Schema instance
+     * @since 4.0
+     */
+    Schema addPrefixItem(Schema prefixItem);
+
+    /**
+     * Removes a schema from the prefixItems list.
+     *
+     * @param prefixItem
+     *            the schema to remove from the prefixItems list
+     * @since 4.0
+     */
+    void removePrefixItem(Schema prefixItem);
+
+    /**
+     * Returns the contains property of this Schema instance.
+     * <p>
+     * If the object is an array, at least one item in the array must match the returned schema.
+     *
+     * @return a schema that one item in the array should match
+     * @since 4.0
+     */
+    Schema getContains();
+
+    /**
+     * Sets the contains property of this Schema instance.
+     * <p>
+     * If the object is an array, at least one item in the array must match the returned schema.
+     *
+     * @param contains
+     *            a schema that one item in the array should match
+     * @since 4.0
+     */
+    void setContains(Schema contains);
+
+    /**
+     * Sets the contains property of this Schema instance.
+     * <p>
+     * If the object is an array, at least one item in the array must match the returned schema.
+     *
+     * @param contains
+     *            a schema that one item in the array should match
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema contains(Schema contains) {
+        setContains(contains);
+        return this;
+    }
+
 }
