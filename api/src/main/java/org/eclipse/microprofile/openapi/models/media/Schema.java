@@ -1504,4 +1504,104 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
         return this;
     }
 
+    /**
+     * Returns the patternProperties property from this Schema instance.
+     * <p>
+     * The value of patternProperties is a map from a regular expression to a schema. For each string and schema pair in
+     * the map, if a property name is matched by the regular expression then the value of that property must validate
+     * against the schema.
+     *
+     * @return a copy Map (potentially immutable) of regular expression and schema pairs
+     * @since 4.0
+     */
+    Map<String, Schema> getPatternProperties();
+
+    /**
+     * Sets the patternProperties property from this Schema instance.
+     * <p>
+     * The value of patternProperties is a map from a regular expression to a schema. For each string and schema pair in
+     * the map, if a property name is matched by the regular expression then the value of that property must validate
+     * against the schema.
+     *
+     * @param patternProperties
+     *            a map of regular expression and schema pairs
+     * @since 4.0
+     */
+    void setPatternProperties(Map<String, Schema> patternProperties);
+
+    /**
+     * Sets the patternProperties property from this Schema instance.
+     * <p>
+     * The value of patternProperties is a map from a regular expression to a schema. For each string and schema pair in
+     * the map, if a property name is matched by the regular expression then the value of that property must validate
+     * against the schema.
+     *
+     * @param patternProperties
+     *            a map of regular expression and schema pairs
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema patternProperties(Map<String, Schema> patternProperties) {
+        setPatternProperties(patternProperties);
+        return this;
+    }
+
+    /**
+     * Adds a regular expression and schema pair to the list of pattern properties.
+     * <p>
+     * The value of patternProperties is a map from a regular expression to a schema. For each string and schema pair in
+     * the map, if a property name is matched by the regular expression then the value of that property must validate
+     * against the schema.
+     *
+     * @param regularExpression
+     *            the regular expression to add
+     * @param schema
+     *            the schema that a property value must validate against if its name matches {@code regularExpression}
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    Schema addPatternProperty(String regularExpression, Schema schema);
+
+    /**
+     * Removes a regular expression and its corresponding schema pair from the list of pattern properties.
+     *
+     * @param regularExpression
+     *            the regular expression to remove
+     * @since 4.0
+     */
+    void removePatternProperty(String regularExpression);
+
+    /**
+     * Returns the propertyNames property from this Schema instance. Each property <em>name</em> in the object must
+     * validate against this schema.
+     *
+     * @return the schema which each property name must validate against
+     * @since 4.0
+     */
+    Schema getPropertyNames();
+
+    /**
+     * Sets the propertyNames property from this Schema instance. Each property <em>name</em> in the object must
+     * validate against this schema.
+     *
+     * @param propertyNameSchema
+     *            the schema which each property name must validate against
+     * @since 4.0
+     */
+    void setPropertyNames(Schema propertyNameSchema);
+
+    /**
+     * Sets the propertyNames property from this Schema instance. Each property <em>name</em> in the object must
+     * validate against this schema.
+     *
+     * @param propertyNameSchema
+     *            the schema which each property name must validate against
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema propertyNames(Schema propertyNameSchema) {
+        setPropertyNames(propertyNameSchema);
+        return this;
+    }
+
 }
