@@ -1351,4 +1351,66 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
         return this;
     }
 
+    /**
+     * Returns the dependentSchemas property of this Schema instance.
+     * <p>
+     * For each name and property pair in the map, if the object contains a property with the given name, it must match
+     * the corresponding schema.
+     *
+     * @return a copy Map (potentially immutable) of properties and their dependent schemas
+     * @since 4.0
+     */
+    Map<String, Schema> getDependentSchemas();
+
+    /**
+     * Sets the dependentSchemas property of this Schema instance.
+     * <p>
+     * For each name and property pair in the map, if the object contains a property with the given name, it must match
+     * the corresponding schema.
+     *
+     * @param dependentSchemas
+     *            a map of properties and their dependent schemas
+     * @since 4.0
+     */
+    void setDependentSchemas(Map<String, Schema> dependentSchemas);
+
+    /**
+     * Sets the dependentSchemas property of this Schema instance.
+     * <p>
+     * For each name and property pair in the map, if the object contains a property with the given name, it must match
+     * the corresponding schema.
+     *
+     * @param dependentSchemas
+     *            a map of properties and their dependent schemas
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema dependentSchemas(Map<String, Schema> dependentSchemas) {
+        setDependentSchemas(dependentSchemas);
+        return this;
+    }
+
+    /**
+     * Sets the dependent schema for a property name.
+     * <p>
+     * If the object contains a property with the given name, it must match the dependent schema.
+     *
+     * @param propertyName
+     *            the property name
+     * @param schema
+     *            the dependent schema
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    Schema addDependentSchema(String propertyName, Schema schema);
+
+    /**
+     * Removes the dependent schema for a property name.
+     *
+     * @param propertyName
+     *            the property name
+     * @since 4.0
+     */
+    void removeDependentSchema(String propertyName);
+
 }
