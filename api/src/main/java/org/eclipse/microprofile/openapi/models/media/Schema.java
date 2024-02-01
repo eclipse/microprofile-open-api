@@ -1604,4 +1604,82 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
         return this;
     }
 
+    /**
+     * Returns the unevaluatedItems property of this Schema instance.
+     * <p>
+     * Items which have not successfully validated against {@code prefixItems}, {@code items}, or {@code contains} must
+     * validate against this schema.
+     *
+     * @return a schema that unevaluated array items must validate against
+     * @since 4.0
+     */
+    Schema getUnevaluatedItems();
+
+    /**
+     * Sets the unevaluatedItems property of this Schema instance.
+     * <p>
+     * Items which have not successfully validated against {@code prefixItems}, {@code items}, or {@code contains} must
+     * validate against this schema.
+     *
+     * @param unevaluatedItems
+     *            a schema that unevaluated array items must validate against
+     * @since 4.0
+     */
+    void setUnevaluatedItems(Schema unevaluatedItems);
+
+    /**
+     * Sets the unevaluatedItems property of this Schema instance.
+     * <p>
+     * Items which have not successfully validated against {@code prefixItems}, {@code items}, or {@code contains} must
+     * validate against this schema.
+     *
+     * @param unevaluatedItems
+     *            a schema that unevaluated array items must validate against
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema unevaluatedItems(Schema unevaluatedItems) {
+        setUnevaluatedItems(unevaluatedItems);
+        return this;
+    }
+
+    /**
+     * Returns the unevaluatedProperties property of this Schema instance.
+     * <p>
+     * Property values which have not successfully validated against {@code properties}, {@code patternProperties}, or
+     * {@code additionalProperties} must validate against this schema.
+     *
+     * @return a schema that unevaluated object properties must validate against
+     * @since 4.0
+     */
+    Schema getUnevaluatedProperties();
+
+    /**
+     * Sets the unevaluatedProperties property of this Schema instance.
+     * <p>
+     * Property values which have not successfully validated against {@code properties}, {@code patternProperties}, or
+     * {@code additionalProperties} must validate against this schema.
+     *
+     * @param unevaluatedProperties
+     *            a schema that unevaluated object properties must validate against
+     * @since 4.0
+     */
+    void setUnevaluatedProperties(Schema unevaluatedProperties);
+
+    /**
+     * Sets the unevaluatedProperties property of this Schema instance.
+     * <p>
+     * Property values which have not successfully validated against {@code properties}, {@code patternProperties}, or
+     * {@code additionalProperties} must validate against this schema.
+     *
+     * @param unevaluatedProperties
+     *            a schema that unevaluated object properties must validate against
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema unevaluatedProperties(Schema unevaluatedProperties) {
+        setUnevaluatedProperties(unevaluatedProperties);
+        return this;
+    }
+
 }
