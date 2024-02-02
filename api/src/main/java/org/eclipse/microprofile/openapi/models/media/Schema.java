@@ -1712,4 +1712,70 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
         return this;
     }
 
+    /**
+     * Returns the maxContains property from this Schema instance. Specifies that {@code contains} must match no more
+     * than this many items in the array.
+     *
+     * @return the max number of items which may be matched by {@code contains}
+     * @since 4.0
+     */
+    Integer getMaxContains();
+
+    /**
+     * Sets the maxContains property from this Schema instance. Specifies that {@code contains} must match no more than
+     * this many items in the array.
+     *
+     * @param maxContains
+     *            the max number of items which may be matched by {@code contains}
+     * @since 4.0
+     */
+    void setMaxContains(Integer maxContains);
+
+    /**
+     * Sets the maxContains property from this Schema instance. Specifies that {@code contains} must match no more than
+     * this many items in the array.
+     *
+     * @param maxContains
+     *            the maximum number of items which may be matched by {@code contains}
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema maxContains(Integer maxContains) {
+        setMaxContains(maxContains);
+        return this;
+    }
+
+    /**
+     * Returns the minContains property from this Schema instance. Specifies that {@code contains} must match at least
+     * this many items in the array.
+     *
+     * @return the minimum number of items which may be matched by {@code contains}
+     * @since 4.0
+     */
+    Integer getMinContains();
+
+    /**
+     * Sets the minContains property from this Schema instance. Specifies that {@code contains} must match at least this
+     * many items in the array.
+     *
+     * @param minContains
+     *            the minimum number of items which may be matched by {@code contains}
+     * @since 4.0
+     */
+    void setMinContains(Integer minContains);
+
+    /**
+     * Sets the minContains property from this Schema instance. Specifies that {@code contains} must match at least this
+     * many items in the array.
+     *
+     * @param minContains
+     *            the minimum number of items which may be matched by {@code contains}
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema minContains(Integer minContains) {
+        setMinContains(minContains);
+        return this;
+    }
+
 }
