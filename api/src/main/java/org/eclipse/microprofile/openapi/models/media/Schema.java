@@ -212,7 +212,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
     /**
      * Returns the maximum property from this Schema instance.
      *
-     * @return the maximum value of a numeric object
+     * @return the value that a numeric object must be less than or equal to
      **/
     BigDecimal getMaximum();
 
@@ -220,7 +220,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      * Sets the maximum property of this Schema instance to the value given.
      *
      * @param maximum
-     *            specifies the maximum numeric value of objects defined by this Schema
+     *            the value that a numeric object must be less than or equal to
      */
     void setMaximum(BigDecimal maximum);
 
@@ -228,7 +228,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      * Sets the maximum property of this Schema instance to the value given.
      *
      * @param maximum
-     *            specifies the maximum numeric value of objects defined by this Schema
+     *            the value that a numeric object must be less than or equal to
      * @return the current Schema instance
      */
     default Schema maximum(BigDecimal maximum) {
@@ -239,28 +239,29 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
     /**
      * Returns the exclusiveMaximum property from this Schema instance.
      *
-     * @return whether the numeric value of objects must be less than the maximum property
-     **/
-    Boolean getExclusiveMaximum();
-
-    /**
-     * Sets the exclusiveMaximum property of this Schema instance to the value given.
-     *
-     * @param exclusiveMaximum
-     *            when true the numeric value of objects defined by this Schema must be less than indicated by the
-     *            maximum property
+     * @return the value that a numeric object must be less than
+     * @since 4.0
      */
-    void setExclusiveMaximum(Boolean exclusiveMaximum);
+    BigDecimal getExclusiveMaximum();
 
     /**
      * Sets the exclusiveMaximum property of this Schema instance to the value given.
      *
      * @param exclusiveMaximum
-     *            when true the numeric value of objects defined by this Schema must be less than indicated by the
-     *            maximum property
+     *            the value that a numeric object must be less than
+     * @since 4.0
+     */
+    void setExclusiveMaximum(BigDecimal exclusiveMaximum);
+
+    /**
+     * Sets the exclusiveMaximum property of this Schema instance to the value given.
+     *
+     * @param exclusiveMaximum
+     *            the value that a numeric object must be less than
      * @return the current Schema instance
+     * @since 4.0
      */
-    default Schema exclusiveMaximum(Boolean exclusiveMaximum) {
+    default Schema exclusiveMaximum(BigDecimal exclusiveMaximum) {
         setExclusiveMaximum(exclusiveMaximum);
         return this;
     }
@@ -268,7 +269,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
     /**
      * Returns the minimum property from this Schema instance.
      *
-     * @return the minimum value of a numeric object
+     * @return the value that a numeric object must be greater than or equal to
      **/
     BigDecimal getMinimum();
 
@@ -276,7 +277,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      * Sets the minimum property of this Schema instance to the value given.
      *
      * @param minimum
-     *            specifies the minimum numeric value of objects defined by this Schema
+     *            the value that a numeric object must be greater than or equal to
      */
     void setMinimum(BigDecimal minimum);
 
@@ -284,7 +285,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      * Sets the minimum property of this Schema instance to the value given.
      *
      * @param minimum
-     *            specifies the minimum numeric value of objects defined by this Schema
+     *            the value that a numeric object must be greater than or equal to
      * @return the current Schema instance
      */
     default Schema minimum(BigDecimal minimum) {
@@ -295,28 +296,29 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
     /**
      * Returns the exclusiveMinimum property from this Schema instance.
      *
-     * @return whether the numeric value of objects must be greater than the minimum property
-     **/
-    Boolean getExclusiveMinimum();
-
-    /**
-     * Sets the exclusiveMinimum property of this Schema instance to the value given.
-     *
-     * @param exclusiveMinimum
-     *            when true the numeric value of objects defined by this Schema must be greater than indicated by the
-     *            minimum property
+     * @return the value that a numeric object must be greater than
+     * @since 4.0
      */
-    void setExclusiveMinimum(Boolean exclusiveMinimum);
+    BigDecimal getExclusiveMinimum();
 
     /**
      * Sets the exclusiveMinimum property of this Schema instance to the value given.
      *
      * @param exclusiveMinimum
-     *            when true the numeric value of objects defined by this Schema must be greater than indicated by the
-     *            minimum property
+     *            the value that a numeric object must be greater than
+     * @since 4.0
+     */
+    void setExclusiveMinimum(BigDecimal exclusiveMinimum);
+
+    /**
+     * Sets the exclusiveMinimum property of this Schema instance to the value given.
+     *
+     * @param exclusiveMinimum
+     *            the value that a numeric object must be greater than
      * @return the current Schema instance
+     * @since 4.0
      */
-    default Schema exclusiveMinimum(Boolean exclusiveMinimum) {
+    default Schema exclusiveMinimum(BigDecimal exclusiveMinimum) {
         setExclusiveMinimum(exclusiveMinimum);
         return this;
     }
