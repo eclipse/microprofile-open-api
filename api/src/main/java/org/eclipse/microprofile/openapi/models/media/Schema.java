@@ -47,7 +47,8 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      * The values allowed for the in field.
      */
     enum SchemaType {
-        INTEGER("integer"), NUMBER("number"), BOOLEAN("boolean"), STRING("string"), OBJECT("object"), ARRAY("array");
+        INTEGER("integer"), NUMBER("number"), BOOLEAN("boolean"), STRING("string"), OBJECT("object"), ARRAY(
+                "array"), NULL("null");
 
         private final String value;
 
@@ -596,27 +597,72 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
     void removeRequired(String required);
 
     /**
-     * Returns the type property from this Schema.
+     * Returns the type property of this Schema instance. Defines the types which are valid.
      *
-     * @return the type used in this Schema. Default value <b>must</b> be <code>null</code>
-     **/
-    SchemaType getType();
+     * @return a copy List (potentially immutable) of the allowed types
+     */
+    List<SchemaType> getType();
 
     /**
-     * Sets the type used by this Schema to the string given.
+     * Sets the type property of this Schema instance. Defines the types which are valid.
+     *
+     * @param types
+     *            a list of the allowed types
+     */
+    void setType(List<SchemaType> types);
+
+    /**
+     * Sets the type property of this Schema instance. Defines the types which are valid.
+     *
+     * @param types
+     *            a list of the allowed types
+     * @return current Schema instance
+     * @since "4.0"
+     */
+    default Schema type(List<SchemaType> types) {
+        setType(types);
+        return this;
+    }
+
+    /**
+     * Adds a type to the type list.
      *
      * @param type
-     *            the type used by this Schema or <code>null</code> for reference schemas
+     *            the type to add to the type list
+     * @return current Schema instance
+     * @since "4.0"
      */
+    Schema addType(SchemaType type);
+
+    /**
+     * Removes a type from the type list.
+     *
+     * @param type
+     *            the type to remove from the type list
+     * @since "4.0"
+     */
+    void removeType(SchemaType type);
+
+    /**
+     * Sets the type property of this Schema instance to a single type.
+     *
+     * @param type
+     *            the required type
+     * @since "4.0"
+     * @deprecated use {@link #setType(List)}
+     */
+    @Deprecated(since = "4.0")
     void setType(SchemaType type);
 
     /**
-     * Sets the type used by this Schema to the string given.
+     * Sets the type property of this Schema instance to a single type.
      *
      * @param type
-     *            the type used by this Schema or <code>null</code> for reference schemas
+     *            the required type
      * @return the current Schema instance
+     * @deprecated use {@link #setType(List)}
      */
+    @Deprecated(since = "4.0")
     default Schema type(SchemaType type) {
         setType(type);
         return this;
@@ -847,18 +893,23 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
     }
 
     /**
-     * Returns the nullable property from this Schema instance which indicates whether null is a valid value.
+     * Returns whether the type property allows the object to be {@code null}
      *
-     * @return the nullable property
-     **/
+     * @return whether null is allowed
+     * @deprecated use {@link #getType()} and check if the result contains {@link SchemaType#NULL}
+     */
+    @Deprecated(since = "4.0")
     Boolean getNullable();
 
     /**
-     * Sets the nullable property of this Schema instance. Specify true if this Schema will allow null values.
+     * Updates the type property to either permit or disallow {@code null}
      *
      * @param nullable
-     *            a boolean value indicating this Schema allows a null value.
+     *            a boolean value indicating whether this Schema allows a null value.
+     * @deprecated use {@link #setType(List)}, {@link #addType(SchemaType)}, or {@link #removeType(SchemaType)} to add
+     *             or remove {@link SchemaType#NULL}
      */
+    @Deprecated(since = "4.0")
     void setNullable(Boolean nullable);
 
     /**
@@ -867,7 +918,10 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      * @param nullable
      *            a boolean value indicating this Schema allows a null value.
      * @return the current Schema instance
+     * @deprecated use {@link #setType(List)}, {@link #addType(SchemaType)}, or {@link #removeType(SchemaType)} to add
+     *             or remove {@link SchemaType#NULL}
      */
+    @Deprecated(since = "4.0")
     default Schema nullable(Boolean nullable) {
         setNullable(nullable);
         return this;
