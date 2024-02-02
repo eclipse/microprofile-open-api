@@ -1778,4 +1778,64 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
         return this;
     }
 
+    /**
+     * Returns the dependentRequired property of this Schema instance.
+     * <p>
+     * For each entry in the map, if the key exists as a property name in the object, then the list of names in the
+     * value must also exist as property names in the object.
+     *
+     * @return a copy Map (potentially immutable) of property names to lists of additional required property names
+     * @since 4.0
+     */
+    Map<String, List<String>> getDependentRequired();
+
+    /**
+     * Sets the dependentRequired property of this Schema instance.
+     * <p>
+     * For each entry in the map, if the key exists as a property name in the object, then the list of names in the
+     * value must also exist as property names in the object.
+     *
+     * @param dependentRequired
+     *            a map of property names to lists of additional required property names
+     * @since 4.0
+     */
+    void setDependentRequired(Map<String, List<String>> dependentRequired);
+
+    /**
+     * Sets the dependentRequired property of this Schema instance.
+     * <p>
+     * For each entry in the map, if the key exists as a property name in the object, then the list of names in the
+     * value must also exist as property names in the object.
+     *
+     * @param dependentRequired
+     *            a map of property names to lists of additional required property names
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema dependentRequired(Map<String, List<String>> dependentRequired) {
+        setDependentRequired(dependentRequired);
+        return this;
+    }
+
+    /**
+     * Sets the list of additional property names that are required if a property named {@code propertyName} exists.
+     *
+     * @param propertyName
+     *            the property name
+     * @param additionalRequiredPropertyNames
+     *            the names of additional properties which are required if {@code propertyName} exists to add
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    Schema addDependentRequired(String propertyName, List<String> additionalRequiredPropertyNames);
+
+    /**
+     * Removes the list of additional property names that are required if a property named {@code propertyName} exists.
+     *
+     * @param propertyName
+     *            the property name
+     * @since 4.0
+     */
+    void removeDependentRequired(String propertyName);
+
 }
