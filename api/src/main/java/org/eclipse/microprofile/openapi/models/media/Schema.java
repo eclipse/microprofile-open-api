@@ -1682,4 +1682,34 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
         return this;
     }
 
+    /**
+     * Returns the const property from this Schema instance. Indicates that the object must have a specific value.
+     *
+     * @return the value that the object must have
+     * @since 4.0
+     */
+    Object getConstValue();
+
+    /**
+     * Sets the const property from this Schema instance. Indicates that the object must have a specific value.
+     *
+     * @param constValue
+     *            the value that the object must have
+     * @since 4.0
+     */
+    void setConstValue(Object constValue);
+
+    /**
+     * Sets the const property from this Schema instance. Indicates that the object must have a specific value.
+     *
+     * @param constValue
+     *            the value that the object must have
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema constValue(Object constValue) {
+        setConstValue(constValue);
+        return this;
+    }
+
 }
