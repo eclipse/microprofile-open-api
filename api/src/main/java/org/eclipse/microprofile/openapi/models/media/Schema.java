@@ -926,29 +926,33 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
     }
 
     /**
-     * Returns the example property from this Schema instance.
+     * Returns the first value from the examples property from this Schema instance.
      *
      * @return an object which is an example of an instance of this Schema
-     **/
+     * @deprecated use {@link #getExamples()}
+     */
+    @Deprecated(since = "4.0")
     Object getExample();
 
     /**
-     * Sets the example property of this Schema instance. To represent examples that cannot be naturally represented in
-     * JSON or YAML, a string value can be used to contain the example with escaping where necessary.
+     * Sets the examples property of this Schema instance to a single example.
      *
      * @param example
      *            an object which is an instance of this Schema
+     * @deprecated use {@link #setExamples(List)}
      */
+    @Deprecated(since = "4.0")
     void setExample(Object example);
 
     /**
-     * Sets the example property of this Schema instance. To represent examples that cannot be naturally represented in
-     * JSON or YAML, a string value can be used to contain the example with escaping where necessary.
+     * Sets the examples property of this Schema instance to a single example.
      *
      * @param example
      *            an object which is an instance of this Schema
      * @return the current Schema instance
+     * @deprecated use {@link #examples(List)}
      */
+    @Deprecated(since = "4.0")
     default Schema example(Object example) {
         setExample(example);
         return this;
@@ -1993,5 +1997,54 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
         setBooleanSchema(booleanSchema);
         return this;
     }
+
+    /**
+     * Returns the examples property of this Schema instance.
+     *
+     * @return a copy List (potentially immutable) of example objects which this schema could describe
+     * @since 4.0
+     */
+    List<Object> getExamples();
+
+    /**
+     * Sets the examples property of this Schema instance.
+     *
+     * @param examples
+     *            a list of example objects which this schema could describe
+     * @since 4.0
+     */
+    void setExamples(List<Object> examples);
+
+    /**
+     * Sets the examples property of this Schema instance.
+     *
+     * @param examples
+     *            a list of example objects which this schema could describe
+     * @return current Schema instance
+     * @since 4.0
+     */
+    default Schema examples(List<Object> examples) {
+        setExamples(examples);
+        return this;
+    }
+
+    /**
+     * Adds an example to the examples list.
+     *
+     * @param example
+     *            the example to add to the examples list
+     * @return current Schema instance
+     * @since 4.0
+     */
+    Schema addExample(Object example);
+
+    /**
+     * Removes an example from the examples list.
+     *
+     * @param example
+     *            the example to remove from the examples list
+     * @since 4.0
+     */
+    void removeExample(Object example);
 
 }
