@@ -879,18 +879,18 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
     Boolean getReadOnly();
 
     /**
-     * Sets the readOnly property of this Schema. Only valid when the Schema is the property in an object.
+     * Sets the readOnly property of this Schema.
      *
      * @param readOnly
-     *            true indicates the Schema should not be sent as part of a request message
+     *            {@code true} indicates the Schema should not be sent as part of a request message
      */
     void setReadOnly(Boolean readOnly);
 
     /**
-     * Sets the readOnly property of this Schema. Only valid when the Schema is the property in an object.
+     * Sets the readOnly property of this Schema.
      *
      * @param readOnly
-     *            true indicates the Schema should not be sent as part of a request message
+     *            {@code true} indicates the Schema should not be sent as part of a request message
      * @return the current Schema instance
      */
     default Schema readOnly(Boolean readOnly) {
@@ -906,18 +906,18 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
     Boolean getWriteOnly();
 
     /**
-     * Sets the writeOnly property of this Schema. Only valid when the Schema is the property in an object.
+     * Sets the writeOnly property of this Schema.
      *
      * @param writeOnly
-     *            true indicates the Schema should not be sent as part of a response message
+     *            {@code true} indicates the Schema should not be sent as part of a response message
      */
     void setWriteOnly(Boolean writeOnly);
 
     /**
-     * Sets the writeOnly property of this Schema. Only valid when the Schema is the property in an object.
+     * Sets the writeOnly property of this Schema.
      *
      * @param writeOnly
-     *            true indicates the Schema should not be sent as part of a response message
+     *            {@code true} indicates the Schema should not be sent as part of a response message
      * @return the current Schema instance
      */
     default Schema writeOnly(Boolean writeOnly) {
