@@ -1838,4 +1838,115 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      */
     void removeDependentRequired(String propertyName);
 
+    /**
+     * Returns the contentEncoding property from this Schema instance.
+     * <p>
+     * Specifies the encoding used to represent binary data as a string (e.g. base64).
+     *
+     * @return the encoding type
+     * @since 4.0
+     */
+    String getContentEncoding();
+
+    /**
+     * Sets the contentEncoding property from this Schema instance.
+     * <p>
+     * Specifies the encoding used to represent binary data as a string (e.g. base64).
+     *
+     * @param contentEncoding
+     *            the encoding type
+     * @since 4.0
+     */
+    void setContentEncoding(String contentEncoding);
+
+    /**
+     * Sets the contentEncoding property from this Schema instance.
+     * <p>
+     * Specifies the encoding used to represent binary data as a string (e.g. base64).
+     *
+     * @param contentEncoding
+     *            the encoding type
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema contentEncoding(String contentEncoding) {
+        setContentEncoding(contentEncoding);
+        return this;
+    }
+
+    /**
+     * Returns the contentMediaType property from this Schema instance.
+     * <p>
+     * Specifies the media type of the content of a string.
+     *
+     * @return the media type
+     * @since 4.0
+     */
+    String getContentMediaType();
+
+    /**
+     * Sets the contentMediaType property from this Schema instance.
+     * <p>
+     * Specifies the media type of the content of a string.
+     *
+     * @param contentMediaType
+     *            the media type
+     * @since 4.0
+     */
+    void setContentMediaType(String contentMediaType);
+
+    /**
+     * Sets the contentMediaType property from this Schema instance.
+     * <p>
+     * Specifies the media type of the content of a string.
+     *
+     * @param contentMediaType
+     *            the media type
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema contentMediaType(String contentMediaType) {
+        setContentMediaType(contentMediaType);
+        return this;
+    }
+
+    /**
+     * Returns the contentSchema property from this Schema instance.
+     * <p>
+     * If {@code contentMediaType} is a media type that maps into JSON Schema's data model, this property specifies a
+     * schema that the data in the string must conform to.
+     *
+     * @return the schema for the data within the string
+     * @since 4.0
+     */
+    Schema getContentSchema();
+
+    /**
+     * Sets the contentSchema property from this Schema instance.
+     * <p>
+     * If {@code contentMediaType} is a media type that maps into JSON Schema's data model, this property specifies a
+     * schema that the data in the string must conform to.
+     *
+     * @param contentSchema
+     *            the schema for the data within the string
+     * @since 4.0
+     */
+    void setContentSchema(Schema contentSchema);
+
+    /**
+     * Sets the contentSchema property from this Schema instance.
+     * <p>
+     * If {@code contentMediaType} is a media type that maps into JSON Schema's data model, this property specifies a
+     * schema that the data in the string must conform to.
+     *
+     * @param contentSchema
+     *            the schema for the data within the string
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema contentSchema(Schema contentSchema) {
+        setContentSchema(contentSchema);
+        return this;
+    }
+
 }
