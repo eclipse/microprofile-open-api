@@ -1949,4 +1949,43 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
         return this;
     }
 
+    /**
+     * Returns whether this Schema is a boolean schema.
+     * <p>
+     * If this property is not {@code null}, then all other properties are ignored and the schema will be represented by
+     * a boolean {@code true} or {@code false} value.
+     *
+     * @return the boolean value of this schema, or {@code null} if it is not a boolean schema
+     * @since 4.0
+     */
+    Boolean getBooleanSchema();
+
+    /**
+     * Sets this schema to a boolean value.
+     * <p>
+     * If this property is not {@code null}, then all other properties are ignored and the schema will be represented by
+     * a boolean {@code true} or {@code false} value.
+     *
+     * @param booleanSchema
+     *            the boolean value of this schema, or {@code null} if it is not a boolean schema
+     * @since 4.0
+     */
+    void setBooleanSchema(Boolean booleanSchema);
+
+    /**
+     * Sets this schema to a boolean value.
+     * <p>
+     * If this property is not {@code null}, then all other properties are ignored and the schema will be represented by
+     * a boolean {@code true} or {@code false} value.
+     *
+     * @param booleanSchema
+     *            the boolean value of this schema, or {@code null} if it is not a boolean schema
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default Schema booleanSchema(Boolean booleanSchema) {
+        setBooleanSchema(booleanSchema);
+        return this;
+    }
+
 }
