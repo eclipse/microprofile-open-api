@@ -727,7 +727,9 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      * </ul>
      *
      * @return this Schema's additionalProperties property (as {@link Boolean})
+     * @deprecated use {@link #getAdditionalPropertiesSchema()} which may return a boolean-valued schema
      */
+    @Deprecated(since = "4.0")
     Boolean getAdditionalPropertiesBoolean();
 
     /**
@@ -749,7 +751,9 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      *
      * @param additionalProperties
      *            a Schema which defines additional properties
+     * @deprecated use {@link #setAdditionalPropertiesSchema(Schema)} with a boolean-valued schema
      */
+    @Deprecated(since = "4.0")
     void setAdditionalPropertiesBoolean(Boolean additionalProperties);
 
     /**
@@ -775,7 +779,9 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      * @param additionalProperties
      *            a Schema which defines additional properties
      * @return the current Schema instance
+     * @deprecated use {@link #additionalPropertiesSchema(Schema)} with a boolean-valued schema
      */
+    @Deprecated(since = "4.0")
     default Schema additionalPropertiesBoolean(Boolean additionalProperties) {
         setAdditionalPropertiesBoolean(additionalProperties);
         return this;
