@@ -133,14 +133,17 @@ components:
         id:
           type: string
           format: uuid
-          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+          examples:
+            - d290f1ee-6c54-4b01-90e6-d701748f0851
         name:
           type: string
-          example: Widget Adapter
+          examples:
+            - Widget Adapter
         releaseDate:
           type: string
           format: int32
-          example: '2016-08-29T09:12:33.001Z'
+          examples:
+            - '2016-08-29T09:12:33.001Z'
         manufacturer:
           $ref: '#/components/schemas/Manufacturer'
     Manufacturer:
@@ -149,12 +152,15 @@ components:
       properties:
         name:
           type: string
-          example: ACME Corporation
+          examples:
+            - ACME Corporation
         homePage:
           type: string
           format: url
-          example: 'https://www.acme-corp.com'
+          examples:
+            - 'https://www.acme-corp.com'
         phone:
           type: string
-          example: 408-867-5309
+          examples:
+            - 408-867-5309
       type: object

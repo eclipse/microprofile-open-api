@@ -704,7 +704,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("components.schemas.id.format", equalTo("int32"));
         vr.body("paths.'/bookings'.post.responses.'201'.content.'application/json'.schema.description",
                 equalTo("id of the new booking"));
-        vr.body("components.schemas.User.properties.password.example", equalTo("bobSm37"));
+        vr.body("components.schemas.User.properties.password.examples", contains("bobSm37"));
 
         // Object properties
         vr.body("paths.'/user'.post.requestBody.content.'application/json'.schema.maxProperties", equalTo(1024));
@@ -726,7 +726,7 @@ public class AirlinesAppTest extends AppTestBase {
     public void testSchemaProperty(String type) {
         ValidatableResponse vr = callEndpoint(type);
         vr.body("components.schemas.User.properties", IsMapWithSize.aMapWithSize(10));
-        vr.body("components.schemas.User.properties.phone.example", equalTo("123-456-7891"));
+        vr.body("components.schemas.User.properties.phone.examples", contains("123-456-7891"));
         vr.body("components.schemas.User.properties.phone.description",
                 equalTo("Telephone number to contact the user"));
         vr.body("components.schemas.User.properties.phone.x-schema-property", equalTo("test-schema-property"));
@@ -736,8 +736,8 @@ public class AirlinesAppTest extends AppTestBase {
     public void testSchemaPropertyValuesOverrideClassPropertyValues(String type) {
         ValidatableResponse vr = callEndpoint(type);
         vr.body("components.schemas.User.properties", IsMapWithSize.aMapWithSize(10));
-        vr.body("components.schemas.User.properties.phone.example", not("123-456-7890"));
-        vr.body("components.schemas.User.properties.phone.example", equalTo("123-456-7891"));
+        vr.body("components.schemas.User.properties.phone.examples", not(contains("123-456-7890")));
+        vr.body("components.schemas.User.properties.phone.examples", contains("123-456-7891"));
     }
 
     @Test(dataProvider = "formatProvider")
@@ -992,8 +992,8 @@ public class AirlinesAppTest extends AppTestBase {
                 containsString("the location where data will be sent."));
         vr.body(parametersPath + ".find{ it.name == 'callbackUrl' }.schema.type", equalTo("string"));
         vr.body(parametersPath + ".find{ it.name == 'callbackUrl' }.schema.format", equalTo("uri"));
-        vr.body(parametersPath + ".find{ it.name == 'callbackUrl' }.schema.example",
-                equalTo("https://tonys-server.com"));
+        vr.body(parametersPath + ".find{ it.name == 'callbackUrl' }.schema.examples",
+                contains("https://tonys-server.com"));
 
         final String responsePath = "paths.'/streams'.post.responses";
         vr.body(responsePath, aMapWithSize(1));
@@ -1008,8 +1008,8 @@ public class AirlinesAppTest extends AppTestBase {
                 equalTo("this unique identifier allows management of the subscription"));
         vr.body(response201Path + ".content.'application/json'.schema.properties.subscriptionId.type",
                 equalTo("string"));
-        vr.body(response201Path + ".content.'application/json'.schema.properties.subscriptionId.example",
-                equalTo("2531329f-fb09-4ef7-887e-84e648214436"));
+        vr.body(response201Path + ".content.'application/json'.schema.properties.subscriptionId.examples",
+                contains("2531329f-fb09-4ef7-887e-84e648214436"));
 
         final String callbacksPath = "paths.'/streams'.post.callbacks.onData.'{$request.query.callbackUrl}/data'.post";
         vr.body(callbacksPath + ".requestBody.description", equalTo("subscription payload"));
