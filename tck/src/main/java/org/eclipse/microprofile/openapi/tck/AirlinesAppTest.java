@@ -42,6 +42,7 @@ import static org.hamcrest.core.CombinableMatcher.either;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hamcrest.Matchers;
 import org.hamcrest.collection.IsMapWithSize;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -716,7 +717,7 @@ public class AirlinesAppTest extends AppTestBase {
 
         // Array properties
         String createSchema = "paths.'/user/createWithArray'.post.requestBody.content.'application/json'.schema";
-        vr.body(createSchema + ".nullable", equalTo(true));
+        vr.body(createSchema + ".type", containsInAnyOrder("array", "null"));
         vr.body(createSchema + ".writeOnly", equalTo(true));
         vr.body(createSchema + ".maxItems", equalTo(20));
         vr.body(createSchema + ".minItems", equalTo(2));
