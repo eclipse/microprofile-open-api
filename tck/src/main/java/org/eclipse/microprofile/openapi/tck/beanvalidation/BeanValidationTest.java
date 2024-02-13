@@ -16,8 +16,10 @@
 package org.eclipse.microprofile.openapi.tck.beanvalidation;
 
 import static org.eclipse.microprofile.openapi.tck.Groups.BEAN_VALIDATION;
+import static org.eclipse.microprofile.openapi.tck.utils.TCKMatchers.itemOrSingleton;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.hasKey;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
 import org.eclipse.microprofile.openapi.apps.beanvalidation.BeanValidationApp;
@@ -42,21 +44,21 @@ public class BeanValidationTest extends AppTestBase {
     public void notEmptyStringTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "notEmptyString", hasEntry("minLength", 1));
-        assertProperty(vr, "notEmptyString", hasEntry("type", "string"));
+        assertProperty(vr, "notEmptyString", hasEntry(is("type"), itemOrSingleton("string")));
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
     public void notEmptyListTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "notEmptyList", hasEntry("minItems", 1));
-        assertProperty(vr, "notEmptyList", hasEntry("type", "array"));
+        assertProperty(vr, "notEmptyList", hasEntry(is("type"), itemOrSingleton("array")));
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
     public void notEmptyMapTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "notEmptyMap", hasEntry("minProperties", 1));
-        assertProperty(vr, "notEmptyMap", hasEntry("type", "object"));
+        assertProperty(vr, "notEmptyMap", hasEntry(is("type"), itemOrSingleton("object")));
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
@@ -70,7 +72,7 @@ public class BeanValidationTest extends AppTestBase {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "sizedString", hasEntry("minLength", 2));
         assertProperty(vr, "sizedString", hasEntry("maxLength", 7));
-        assertProperty(vr, "sizedString", hasEntry("type", "string"));
+        assertProperty(vr, "sizedString", hasEntry(is("type"), itemOrSingleton("string")));
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
@@ -78,7 +80,7 @@ public class BeanValidationTest extends AppTestBase {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "sizedList", hasEntry("minItems", 1));
         assertProperty(vr, "sizedList", hasEntry("maxItems", 10));
-        assertProperty(vr, "sizedList", hasEntry("type", "array"));
+        assertProperty(vr, "sizedList", hasEntry(is("type"), itemOrSingleton("array")));
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
@@ -86,14 +88,14 @@ public class BeanValidationTest extends AppTestBase {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "sizedMap", hasEntry("minProperties", 3));
         assertProperty(vr, "sizedMap", hasEntry("maxProperties", 5));
-        assertProperty(vr, "sizedMap", hasEntry("type", "object"));
+        assertProperty(vr, "sizedMap", hasEntry(is("type"), itemOrSingleton("object")));
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
     public void maxDecimalInclusiveTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "maxDecimalInclusive", hasEntry("maximum", 1.5f));
-        assertProperty(vr, "maxDecimalInclusive", hasEntry("type", "number"));
+        assertProperty(vr, "maxDecimalInclusive", hasEntry(is("type"), itemOrSingleton("number")));
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
@@ -101,14 +103,14 @@ public class BeanValidationTest extends AppTestBase {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "maxDecimalExclusive", hasEntry("maximum", 1.5f));
         assertProperty(vr, "maxDecimalExclusive", hasEntry("exclusiveMaximum", true));
-        assertProperty(vr, "maxDecimalExclusive", hasEntry("type", "number"));
+        assertProperty(vr, "maxDecimalExclusive", hasEntry(is("type"), itemOrSingleton("number")));
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
     public void minDecimalInclusiveTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "minDecimalInclusive", hasEntry("minimum", 3.25f));
-        assertProperty(vr, "minDecimalInclusive", hasEntry("type", "number"));
+        assertProperty(vr, "minDecimalInclusive", hasEntry(is("type"), itemOrSingleton("number")));
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
@@ -116,7 +118,7 @@ public class BeanValidationTest extends AppTestBase {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "minDecimalExclusive", hasEntry("minimum", 3.25f));
         assertProperty(vr, "minDecimalExclusive", hasEntry("exclusiveMinimum", true));
-        assertProperty(vr, "minDecimalExclusive", hasEntry("type", "number"));
+        assertProperty(vr, "minDecimalExclusive", hasEntry(is("type"), itemOrSingleton("number")));
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
@@ -180,7 +182,7 @@ public class BeanValidationTest extends AppTestBase {
         ValidatableResponse vr = callEndpoint(format);
         String schemaPath = dereference(vr, "paths.'/parameter/{test}'.post.parameters[0]", "schema");
         vr.body(schemaPath, hasEntry("maxLength", 6));
-        vr.body(schemaPath, hasEntry("type", "string"));
+        vr.body(schemaPath, hasEntry(is("type"), itemOrSingleton("string")));
     }
 
     /**

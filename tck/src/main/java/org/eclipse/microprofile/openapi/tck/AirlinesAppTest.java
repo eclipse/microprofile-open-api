@@ -16,6 +16,7 @@
 
 package org.eclipse.microprofile.openapi.tck;
 
+import static org.eclipse.microprofile.openapi.tck.utils.TCKMatchers.itemOrSingleton;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anEmptyMap;
 import static org.hamcrest.Matchers.both;
@@ -360,7 +361,7 @@ public class AirlinesAppTest extends AppTestBase {
             vr.body(query + ".in", both(hasSize(1)).and(contains("query")));
             vr.body(query + ".description", both(hasSize(1)).and(contains(list.get(i)[1])));
             vr.body(query + ".required", both(hasSize(1)).and(contains(true)));
-            vr.body(query + ".schema.type", both(hasSize(1)).and(contains("string")));
+            vr.body(query + ".schema.type", both(hasSize(1)).and(contains(itemOrSingleton("string"))));
         }
     }
 
@@ -373,7 +374,7 @@ public class AirlinesAppTest extends AppTestBase {
                 both(hasSize(1)).and(contains("ID of the booking")));
         vr.body(reviewParameters + ".findAll { it.name == 'id' }.required", both(hasSize(1)).and(contains(true)));
         vr.body(reviewParameters + ".findAll { it.name == 'id' }.content.'*/*'.schema.type",
-                both(hasSize(1)).and(contains("integer")));
+                both(hasSize(1)).and(contains(itemOrSingleton("integer"))));
     }
 
     private void testBookingIdMethods(ValidatableResponse vr) {
@@ -386,7 +387,7 @@ public class AirlinesAppTest extends AppTestBase {
             vr.body(bookingParameters + ".findAll { it }.name", contains("id"));
             vr.body(bookingParameters + ".findAll { it.name == 'id' }.required", both(hasSize(1)).and(contains(true)));
             vr.body(bookingParameters + ".findAll { it.name == 'id' }.schema.type",
-                    both(hasSize(1)).and(contains("integer")));
+                    both(hasSize(1)).and(contains(itemOrSingleton("integer"))));
         }
 
         bookingParameters = "paths.'/bookings/{id}'.get.parameters";
@@ -415,7 +416,7 @@ public class AirlinesAppTest extends AppTestBase {
             vr.body(query + ".in", both(hasSize(1)).and(contains("query")));
             vr.body(query + ".description", both(hasSize(1)).and(contains(list.get(i)[1])));
             vr.body(query + ".required", both(hasSize(1)).and(contains(true)));
-            vr.body(query + ".schema.type", both(hasSize(1)).and(contains("string")));
+            vr.body(query + ".schema.type", both(hasSize(1)).and(contains(itemOrSingleton("string"))));
         }
 
         vr.body(availabilityParameters + ".findAll { it.name == 'numberOfAdults' }.schema.minimum",
@@ -467,13 +468,13 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(endpoint, hasKey("get"));
         vr.body(endpoint + ".get.summary", equalTo("Retrieve all bookings for current user"));
         vr.body(endpoint + ".get.responses.'200'.description", equalTo("Bookings retrieved"));
-        vr.body(endpoint + ".get.responses.'200'.content.'application/json'.schema.type", equalTo("array"));
+        vr.body(endpoint + ".get.responses.'200'.content.'application/json'.schema.type", itemOrSingleton("array"));
 
         endpoint = "paths.'/reviews'.post.callbacks.testCallback.'http://localhost:9080/oas3-airlines/reviews'";
         vr.body(endpoint, hasKey("get"));
         vr.body(endpoint + ".get.summary", equalTo("Get all reviews"));
         vr.body(endpoint + ".get.responses.'200'.description", equalTo("successful operation"));
-        vr.body(endpoint + ".get.responses.'200'.content.'application/json'.schema.type", equalTo("array"));
+        vr.body(endpoint + ".get.responses.'200'.content.'application/json'.schema.type", itemOrSingleton("array"));
         vr.body(endpoint + ".get.responses.'200'.content.'application/json'.schema.items", notNullValue());
         vr.body(endpoint + ".get.x-callback-operation", equalTo("test-callback-operation"));
     }
@@ -700,7 +701,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("components.schemas.AirlinesRef.$ref", equalTo("#/components/schemas/Airlines"));
         vr.body("components.schemas.Airlines.title", equalTo("Airlines"));
         vr.body("components.schemas.Airlines.x-schema", equalTo("test-schema"));
-        vr.body("paths.'/bookings'.post.responses.'201'.content.'application/json'.schema.type", equalTo("string"));
+        vr.body("paths.'/bookings'.post.responses.'201'.content.'application/json'.schema.type", itemOrSingleton("string"));
         vr.body("components.schemas.id.format", equalTo("int32"));
         vr.body("paths.'/bookings'.post.responses.'201'.content.'application/json'.schema.description",
                 equalTo("id of the new booking"));
@@ -852,7 +853,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(responseHeader1 + ".deprecated", equalTo(true));
         vr.body(responseHeader1 + ".allowEmptyValue", equalTo(true));
         vr.body(responseHeader1 + ".style", equalTo("simple"));
-        vr.body(responseHeader1 + ".schema.type", equalTo("integer"));
+        vr.body(responseHeader1 + ".schema.type", itemOrSingleton("integer"));
 
         String responseHeader2 = "paths.'/reviews/{id}'.get.responses.'200'.headers.responseHeader2";
         vr.body(responseHeader2, notNullValue());
@@ -861,7 +862,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(responseHeader2 + ".deprecated", equalTo(true));
         vr.body(responseHeader2 + ".allowEmptyValue", equalTo(true));
         vr.body(responseHeader2 + ".style", equalTo("simple"));
-        vr.body(responseHeader2 + ".schema.type", equalTo("string"));
+        vr.body(responseHeader2 + ".schema.type", itemOrSingleton("string"));
     }
 
     @Test(dataProvider = "formatProvider")
@@ -877,7 +878,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(testHeader + ".deprecated", equalTo(true));
         vr.body(testHeader + ".allowEmptyValue", equalTo(true));
         vr.body(testHeader + ".style", equalTo("simple"));
-        vr.body(testHeader + ".schema.type", equalTo("integer"));
+        vr.body(testHeader + ".schema.type", itemOrSingleton("integer"));
     }
 
     @Test(dataProvider = "formatProvider")
@@ -910,7 +911,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(maxRate + ".deprecated", equalTo(true));
         vr.body(maxRate + ".allowEmptyValue", equalTo(true));
         vr.body(maxRate + ".style", equalTo("simple"));
-        vr.body(maxRate + ".schema.type", equalTo("integer"));
+        vr.body(maxRate + ".schema.type", itemOrSingleton("integer"));
         vr.body(maxRate + ".x-header", equalTo("test-header"));
     }
 
@@ -920,7 +921,7 @@ public class AirlinesAppTest extends AppTestBase {
 
         String content1 = "paths.'/availability'.get.responses.'200'.content.'application/json'";
         vr.body(content1, notNullValue());
-        vr.body(content1 + ".schema.type", equalTo("array"));
+        vr.body(content1 + ".schema.type", itemOrSingleton("array"));
         vr.body(content1 + ".schema.items", notNullValue());
         vr.body(content1 + ".x-content", equalTo("test-content"));
 
@@ -953,7 +954,7 @@ public class AirlinesAppTest extends AppTestBase {
         String content = "paths.'/reviews/users/{user}'.get.parameters.find{ it.name == 'user' }.content";
         vr.body(content, notNullValue());
         vr.body(content + ".'*/*'", notNullValue());
-        vr.body(content + ".'*/*'.schema.type", equalTo("string"));
+        vr.body(content + ".'*/*'.schema.type", itemOrSingleton("string"));
     }
 
     @Test(dataProvider = "formatProvider")
@@ -990,7 +991,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(parametersPath + ".find{ it.name == 'callbackUrl' }.required", equalTo(true));
         vr.body(parametersPath + ".find{ it.name == 'callbackUrl' }.description",
                 containsString("the location where data will be sent."));
-        vr.body(parametersPath + ".find{ it.name == 'callbackUrl' }.schema.type", equalTo("string"));
+        vr.body(parametersPath + ".find{ it.name == 'callbackUrl' }.schema.type", itemOrSingleton("string"));
         vr.body(parametersPath + ".find{ it.name == 'callbackUrl' }.schema.format", equalTo("uri"));
         vr.body(parametersPath + ".find{ it.name == 'callbackUrl' }.schema.examples",
                 contains("https://tonys-server.com"));
@@ -1007,18 +1008,18 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(response201Path + ".content.'application/json'.schema.properties.subscriptionId.description",
                 equalTo("this unique identifier allows management of the subscription"));
         vr.body(response201Path + ".content.'application/json'.schema.properties.subscriptionId.type",
-                equalTo("string"));
+                itemOrSingleton("string"));
         vr.body(response201Path + ".content.'application/json'.schema.properties.subscriptionId.examples",
                 contains("2531329f-fb09-4ef7-887e-84e648214436"));
 
         final String callbacksPath = "paths.'/streams'.post.callbacks.onData.'{$request.query.callbackUrl}/data'.post";
         vr.body(callbacksPath + ".requestBody.description", equalTo("subscription payload"));
         vr.body(callbacksPath + ".requestBody.content.'application/json'.schema.properties.timestamp.type",
-                equalTo("string"));
+                itemOrSingleton("string"));
         vr.body(callbacksPath + ".requestBody.content.'application/json'.schema.properties.timestamp.format",
                 equalTo("date-time"));
         vr.body(callbacksPath + ".requestBody.content.'application/json'.schema.properties.userData.type",
-                equalTo("string"));
+                itemOrSingleton("string"));
 
         vr.body(callbacksPath + ".responses", aMapWithSize(2));
         vr.body(callbacksPath + ".responses.'202'.description",
@@ -1055,7 +1056,7 @@ public class AirlinesAppTest extends AppTestBase {
 
         String rejectedReviewSchema =
                 dereference(vr, "paths.'/reviews'.post.responses.'400'.content.'application/json'.schema");
-        vr.body(rejectedReviewSchema + ".type", equalTo("object"));
+        vr.body(rejectedReviewSchema + ".type", itemOrSingleton("object"));
         vr.body(rejectedReviewSchema + ".properties", hasKey("reason"));
     }
 
@@ -1104,7 +1105,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(responseSchema, notNullValue());
         String flightSchema = dereference(vr, responseSchema, "properties.returningFlight");
 
-        vr.body(flightSchema + ".additionalProperties.type", equalTo("string"));
+        vr.body(flightSchema + ".additionalProperties.type", itemOrSingleton("string"));
     }
 
     @Test(dataProvider = "formatProvider")

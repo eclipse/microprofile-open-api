@@ -18,6 +18,7 @@ package org.eclipse.microprofile.openapi.tck;
 
 import static io.restassured.RestAssured.given;
 import static org.eclipse.microprofile.openapi.tck.utils.TCKMatchers.comparesEqualToNumber;
+import static org.eclipse.microprofile.openapi.tck.utils.TCKMatchers.itemOrSingleton;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasEntry;
@@ -218,7 +219,7 @@ public class PetStoreAppTest extends AppTestBase {
         vr.body(schemaObject,
                 allOf(aMapWithSize(3),
                         hasEntry(equalTo("required"), notNullValue()),
-                        hasEntry(equalTo("type"), equalTo("object")),
+                        hasEntry(equalTo("type"), itemOrSingleton("object")),
                         hasEntry(equalTo("properties"), notNullValue())));
     }
 
@@ -241,7 +242,7 @@ public class PetStoreAppTest extends AppTestBase {
         vr.body(schemaObject,
                 allOf(aMapWithSize(3),
                         hasEntry(equalTo("required"), notNullValue()),
-                        hasEntry(equalTo("type"), equalTo("object")),
+                        hasEntry(equalTo("type"), itemOrSingleton("object")),
                         hasEntry(equalTo("properties"), notNullValue())));
     }
 
@@ -265,7 +266,7 @@ public class PetStoreAppTest extends AppTestBase {
 
         vr.body(arraySchemaObject,
                 allOf(aMapWithSize(2),
-                        hasEntry(equalTo("type"), equalTo("array")),
+                        hasEntry(equalTo("type"), itemOrSingleton("array")),
                         hasEntry(equalTo("items"), notNullValue())));
 
         String schemaObject = dereference(vr, arraySchemaObject + ".items");
@@ -273,7 +274,7 @@ public class PetStoreAppTest extends AppTestBase {
         vr.body(schemaObject,
                 allOf(aMapWithSize(3),
                         hasEntry(equalTo("required"), notNullValue()),
-                        hasEntry(equalTo("type"), equalTo("object")),
+                        hasEntry(equalTo("type"), itemOrSingleton("object")),
                         hasEntry(equalTo("properties"), notNullValue())));
     }
 

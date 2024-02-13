@@ -16,9 +16,11 @@
 
 package org.eclipse.microprofile.openapi.tck;
 
+import static org.eclipse.microprofile.openapi.tck.utils.TCKMatchers.itemOrSingleton;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.hasEntry;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
 
 import java.util.Map;
@@ -53,7 +55,7 @@ public class OASConfigSchemaTest extends AppTestBase {
     private Matcher<Map<? extends String, ? extends String>> epochSecondsSchema() {
         return allOf(aMapWithSize(4),
                 hasEntry("title", "Epoch Seconds"),
-                hasEntry("type", "number"),
+                hasEntry(is("type"), itemOrSingleton("number")),
                 hasEntry("format", "int64"),
                 hasEntry("description", "Number of seconds from the epoch of 1970-01-01T00:00:00Z"));
     }

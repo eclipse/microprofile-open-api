@@ -16,6 +16,7 @@
 
 package org.eclipse.microprofile.openapi.tck;
 
+import static org.eclipse.microprofile.openapi.tck.utils.TCKMatchers.itemOrSingleton;
 import static org.hamcrest.Matchers.both;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsInAnyOrder;
@@ -169,7 +170,7 @@ public class ModelReaderAppTest extends AppTestBase {
             vr.body(query + ".in", both(hasSize(1)).and(contains("query")));
             vr.body(query + ".description", both(hasSize(1)).and(contains(list.get(i)[1])));
             vr.body(query + ".required", both(hasSize(1)).and(contains(true)));
-            vr.body(query + ".schema.type", both(hasSize(1)).and(contains("string")));
+            vr.body(query + ".schema.type", both(hasSize(1)).and(contains(itemOrSingleton("string"))));
         }
 
         vr.body(availabilityParameters + ".findAll { it.name == 'numberOfAdults' }.schema.minimum",
@@ -211,7 +212,7 @@ public class ModelReaderAppTest extends AppTestBase {
         vr.body("components.schemas.AirlinesRef.$ref", equalTo("#/components/schemas/Airlines"));
         vr.body("components.schemas.Airlines.title", equalTo("Airlines"));
         vr.body("paths.'/modelReader/bookings'.post.responses.'201'.content.'text/plain'.schema.type",
-                equalTo("string"));
+                itemOrSingleton("string"));
         vr.body("components.schemas.id.format", equalTo("int32"));
         vr.body("paths.'/modelReader/bookings'.post.responses.'201'.content.'text/plain'.schema.description",
                 equalTo("id of the new booking"));
@@ -291,7 +292,7 @@ public class ModelReaderAppTest extends AppTestBase {
 
         String content1 = "paths.'/availability'.get.responses.'200'.content.'application/json'";
         vr.body(content1, notNullValue());
-        vr.body(content1 + ".schema.type", equalTo("array"));
+        vr.body(content1 + ".schema.type", itemOrSingleton("array"));
         vr.body(content1 + ".schema.items", notNullValue());
     }
 }

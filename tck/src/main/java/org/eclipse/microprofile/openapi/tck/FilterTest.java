@@ -16,6 +16,7 @@
 
 package org.eclipse.microprofile.openapi.tck;
 
+import static org.eclipse.microprofile.openapi.tck.utils.TCKMatchers.itemOrSingleton;
 import static org.hamcrest.Matchers.both;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsInAnyOrder;
@@ -112,7 +113,7 @@ public class FilterTest extends AppTestBase {
         vr.body(username + ".in", both(hasSize(1)).and(contains("query")));
         vr.body(username + ".description", both(hasSize(1)).and(contains("filterParameter - The user name for login")));
         vr.body(username + ".required", both(hasSize(1)).and(contains(true)));
-        vr.body(username + ".schema.type", both(hasSize(1)).and(contains("string")));
+        vr.body(username + ".schema.type", both(hasSize(1)).and(contains(itemOrSingleton("string"))));
 
         // Parameter named 'password' should have been removed by filter
         vr.body(reviewParameters, hasSize(1));
@@ -161,7 +162,7 @@ public class FilterTest extends AppTestBase {
         vr.body(maxRate + ".deprecated", equalTo(true));
         vr.body(maxRate + ".allowEmptyValue", equalTo(true));
         vr.body(maxRate + ".style", equalTo("simple"));
-        vr.body(maxRate + ".schema.type", equalTo("integer"));
+        vr.body(maxRate + ".schema.type", itemOrSingleton("integer"));
     }
 
     @Test(dataProvider = "formatProvider")
