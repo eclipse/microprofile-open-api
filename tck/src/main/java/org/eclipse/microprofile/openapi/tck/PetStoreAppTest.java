@@ -61,14 +61,10 @@ public class PetStoreAppTest extends AppTestBase {
         vr.body("paths.'/store/order/{orderId}'.get.responses.'599'.schema", nullValue());
 
         // Numerical properties
-        vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.maximum",
-                comparesEqualToNumber(101.0));
         vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.exclusiveMaximum",
-                equalTo(true));
-        vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.minimum",
-                comparesEqualToNumber(9));
+                comparesEqualToNumber(101.0));
         vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.exclusiveMinimum",
-                equalTo(true));
+                comparesEqualToNumber(9));
         vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.multipleOf",
                 comparesEqualToNumber(10));
 

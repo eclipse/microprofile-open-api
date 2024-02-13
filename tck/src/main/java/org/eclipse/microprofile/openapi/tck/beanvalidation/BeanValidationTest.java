@@ -95,14 +95,15 @@ public class BeanValidationTest extends AppTestBase {
     public void maxDecimalInclusiveTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "maxDecimalInclusive", hasEntry("maximum", 1.5f));
+        assertProperty(vr, "maxDecimalInclusive", not(hasKey("exclusiveMaximum")));
         assertProperty(vr, "maxDecimalInclusive", hasEntry(is("type"), itemOrSingleton("number")));
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
     public void maxDecimalExclusiveTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
-        assertProperty(vr, "maxDecimalExclusive", hasEntry("maximum", 1.5f));
-        assertProperty(vr, "maxDecimalExclusive", hasEntry("exclusiveMaximum", true));
+        assertProperty(vr, "maxDecimalExclusive", hasEntry("exclusiveMaximum", 1.5f));
+        assertProperty(vr, "maxDecimalExclusive", not(hasKey("maximum")));
         assertProperty(vr, "maxDecimalExclusive", hasEntry(is("type"), itemOrSingleton("number")));
     }
 
@@ -110,14 +111,15 @@ public class BeanValidationTest extends AppTestBase {
     public void minDecimalInclusiveTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "minDecimalInclusive", hasEntry("minimum", 3.25f));
+        assertProperty(vr, "minDecimalInclusive", not(hasKey("exclusiveMinimum")));
         assertProperty(vr, "minDecimalInclusive", hasEntry(is("type"), itemOrSingleton("number")));
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
     public void minDecimalExclusiveTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
-        assertProperty(vr, "minDecimalExclusive", hasEntry("minimum", 3.25f));
-        assertProperty(vr, "minDecimalExclusive", hasEntry("exclusiveMinimum", true));
+        assertProperty(vr, "minDecimalExclusive", hasEntry("exclusiveMinimum", 3.25f));
+        assertProperty(vr, "minDecimalExclusive", not(hasKey("minimum")));
         assertProperty(vr, "minDecimalExclusive", hasEntry(is("type"), itemOrSingleton("number")));
     }
 
@@ -136,27 +138,29 @@ public class BeanValidationTest extends AppTestBase {
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
     public void negativeIntTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
-        assertProperty(vr, "negativeInt", hasEntry("maximum", 0));
-        assertProperty(vr, "negativeInt", hasEntry("exclusiveMaximum", true));
+        assertProperty(vr, "negativeInt", hasEntry("exclusiveMaximum", 0));
+        assertProperty(vr, "negativeInt", not(hasKey("maximum")));
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
     public void negativeOrZeroIntTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "negativeOrZeroInt", hasEntry("maximum", 0));
+        assertProperty(vr, "negativeOrZeroInt", not(hasKey("exclusiveMaximum")));
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
     public void positiveIntTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
-        assertProperty(vr, "positiveInt", hasEntry("minimum", 0));
-        assertProperty(vr, "positiveInt", hasEntry("exclusiveMinimum", true));
+        assertProperty(vr, "positiveInt", hasEntry("exclusiveMinimum", 0));
+        assertProperty(vr, "positiveInt", not(hasKey("minimum")));
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
     public void positiveOrZeroIntTest(String format) {
         ValidatableResponse vr = callEndpoint(format);
         assertProperty(vr, "positiveOrZeroInt", hasEntry("minimum", 0));
+        assertProperty(vr, "positiveOrZeroInt", not(hasKey("exclusiveMinimum")));
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)
