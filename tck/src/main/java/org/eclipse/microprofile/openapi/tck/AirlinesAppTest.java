@@ -42,7 +42,6 @@ import static org.hamcrest.core.CombinableMatcher.either;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hamcrest.Matchers;
 import org.hamcrest.collection.IsMapWithSize;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -702,7 +701,8 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("components.schemas.AirlinesRef.$ref", equalTo("#/components/schemas/Airlines"));
         vr.body("components.schemas.Airlines.title", equalTo("Airlines"));
         vr.body("components.schemas.Airlines.x-schema", equalTo("test-schema"));
-        vr.body("paths.'/bookings'.post.responses.'201'.content.'application/json'.schema.type", itemOrSingleton("string"));
+        vr.body("paths.'/bookings'.post.responses.'201'.content.'application/json'.schema.type",
+                itemOrSingleton("string"));
         vr.body("components.schemas.id.format", equalTo("int32"));
         vr.body("paths.'/bookings'.post.responses.'201'.content.'application/json'.schema.description",
                 equalTo("id of the new booking"));

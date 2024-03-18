@@ -26,6 +26,7 @@ import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
 import java.util.Map;
 
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -52,12 +53,14 @@ public class OASConfigSchemaTest extends AppTestBase {
                 anyOf(epochSecondsSchema(), epochSecondsRef()));
     }
 
-    private Matcher<Map<? extends String, ? extends String>> epochSecondsSchema() {
-        return allOf(aMapWithSize(4),
+    private Matcher<Map<? extends String, ?>> epochSecondsSchema() {
+        return Matchers.<Map<? extends String, ?>>allOf(
+                aMapWithSize(4),
                 hasEntry("title", "Epoch Seconds"),
                 hasEntry(is("type"), itemOrSingleton("number")),
                 hasEntry("format", "int64"),
-                hasEntry("description", "Number of seconds from the epoch of 1970-01-01T00:00:00Z"));
+                hasEntry("description",
+                        "Number of seconds from the epoch of 1970-01-01T00:00:00Z"));
     }
 
     private Matcher<Map<? extends String, ? extends String>> epochSecondsRef() {

@@ -70,7 +70,7 @@ public final class TCKMatchers {
     public static Matcher<Object> itemOrSingleton(Matcher<?> itemMatcher) {
         return new ItemOrSingletonMatcher(itemMatcher);
     }
-    
+
     /**
      * Creates a matcher which matches an item or a {@link Collection} containing just that item
      *
@@ -81,7 +81,6 @@ public final class TCKMatchers {
     public static Matcher<Object> itemOrSingleton(Object item) {
         return itemOrSingleton(equalTo(item));
     }
-
 
     public static class ItemOrSingletonMatcher extends TypeSafeDiagnosingMatcher<Object> {
 
