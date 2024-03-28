@@ -21,6 +21,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.microprofile.openapi.OASFactory;
 import org.eclipse.microprofile.openapi.models.Constructible;
 import org.eclipse.microprofile.openapi.models.Extensible;
 import org.eclipse.microprofile.openapi.models.ExternalDocumentation;
@@ -2105,4 +2106,85 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      */
     void removeExample(Object example);
 
+    /**
+     * Gets a schema property by name.
+     * <p>
+     * Allows access to arbitrary properties in a schema object, allowing use of alternative schema dialects which use
+     * different property names (or the same property names with different data types).
+     * <p>
+     * When using the standard schema dialect, this method can be used to retrieve values set by other methods. E.g.
+     *
+     * <pre>
+     * {@code
+     * schema.setMinimum(new BigDecimal(3));
+     * BigDecimal minimum = (BigDecimal) schema.get("minimum"); // returns 3
+     * }
+     * </pre>
+     *
+     * @param propertyName
+     *            the property name
+     * @return the value of the named property, or {@code null} if a property with the given name is not set
+     */
+    Object get(String propertyName);
+
+    /**
+     * Sets a schema property.
+     * <p>
+     * Allows the modifications of arbitrary schema properties in a schema properties, allowing use of alternative
+     * schema dialects which use different property names (or the same property names with different data types).
+     * <p>
+     * Passing {@code null} as the {@code value} removes the property from the schema object.
+     * <p>
+     * {@code value} must be one of the following types, otherwise non-portable behavior results:
+     * <ul>
+     * <li>Any primitive type
+     * <li>Any primitive wrapper class
+     * <li>{@code null}
+     * <li>{@code String}
+     * <li>{@code BigDecimal}
+     * <li>{@code BigInteger}
+     * <li>Any type which {@link OASFactory} can create
+     * <li>Any Enumeration
+     * <li>{@code List} where every value is a permitted type
+     * <li>{@code Map} where every key is a {@code String} and every value is a permitted type
+     * </ul>
+     *
+     * <p>
+     * When using the standard schema dialect, values set by this method can be retrieved by other methods. E.g.
+     *
+     * <pre>
+     * {@code
+     * schema.set("minimum", new BigDecimal(3));
+     * BigDecimal minimum = schema.getMinimum(); // returns 3
+     * }
+     * </pre>
+     *
+     * @param propertyName
+     *            the property name
+     * @param value
+     *            the value to set, or {@code null} to remove the property
+     * @return the current Schema instance
+     */
+    Schema set(String propertyName, Object value);
+
+    /**
+     * Gets all properties of a schema.
+     * <p>
+     * Equivalent to calling {@link #get(String)} for each property set to a non-{@code null} value and putting them all
+     * into a {@code Map}.
+     *
+     * @return a {@code Map} of property names to their corresponding values
+     */
+    Map<String, ?> getAll();
+
+    /**
+     * Sets all properties of a schema.
+     * <p>
+     * Equivalent to clearing all properties and then setting each property with {@link #set(String, Object)}.
+     *
+     * @param allProperties
+     *            the properties to set. Each value in the map must be valid according to the rules in
+     *            {@link #set(String, Object)}
+     */
+    void setAll(Map<String, ?> allProperties);
 }
