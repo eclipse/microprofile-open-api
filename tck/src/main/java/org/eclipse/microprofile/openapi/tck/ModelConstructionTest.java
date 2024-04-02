@@ -166,7 +166,7 @@ public class ModelConstructionTest extends Arquillian {
             try {
                 return getter.invoke(target);
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                fail("Invocation of getter method \"" + getter.getName() + "\" failed: " + e.getMessage());
+                fail("Invocation of getter method \"" + getter.getName() + "\" failed: " + e.getMessage(), e);
                 throw new RuntimeException(e);
             }
         }
@@ -174,7 +174,7 @@ public class ModelConstructionTest extends Arquillian {
             try {
                 setter.invoke(target, value);
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                fail("Invocation of setter method \"" + setter.getName() + "\" failed: " + e.getMessage());
+                fail("Invocation of setter method \"" + setter.getName() + "\" failed: " + e.getMessage(), e);
                 throw new RuntimeException(e);
             }
         }
@@ -182,7 +182,7 @@ public class ModelConstructionTest extends Arquillian {
             try {
                 return builder.invoke(target, value);
             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                fail("Invocation of builder method \"" + builder.getName() + "\" failed: " + e.getMessage());
+                fail("Invocation of builder method \"" + builder.getName() + "\" failed: " + e.getMessage(), e);
                 throw new RuntimeException(e);
             }
         }
