@@ -1554,21 +1554,21 @@ public class ModelConstructionTest extends Arquillian {
         } else if (clazz == String.class) {
             return new String("value");
         } else if (clazz == Boolean.class || clazz == Boolean.TYPE) {
-            return new Boolean(true);
+            return Boolean.valueOf(true);
         } else if (clazz == Byte.class || clazz == Byte.TYPE) {
-            return new Byte((byte) 1);
+            return Byte.valueOf((byte) 1);
         } else if (clazz == Short.class || clazz == Short.TYPE) {
-            return new Short((short) 1);
+            return Short.valueOf((short) 1);
         } else if (clazz == Integer.class || clazz == Integer.TYPE) {
-            return new Integer(1);
+            return Integer.valueOf(1);
         } else if (clazz == Long.class || clazz == Long.TYPE) {
-            return new Long(1L);
+            return Long.valueOf(1L);
         } else if (clazz == Float.class || clazz == Float.TYPE) {
-            return new Float(1);
+            return Float.valueOf(1);
         } else if (clazz == Double.class || clazz == Double.TYPE) {
-            return new Double(1);
+            return Double.valueOf(1);
         } else if (clazz == Character.class || clazz == Character.TYPE) {
-            return new Character('a');
+            return Character.valueOf('a');
         } else if (clazz == BigInteger.class) {
             return new BigInteger("1");
         } else if (clazz == BigDecimal.class) {
