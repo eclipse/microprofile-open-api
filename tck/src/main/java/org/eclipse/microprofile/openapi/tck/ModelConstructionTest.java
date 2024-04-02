@@ -1531,6 +1531,7 @@ public class ModelConstructionTest extends Arquillian {
                         "\" is expected to be equal to the value that was set.");
             }
         }
+        p.invokeSetter(o, null);
     }
 
     // Returns instances for testing getter, setter and builder methods.
