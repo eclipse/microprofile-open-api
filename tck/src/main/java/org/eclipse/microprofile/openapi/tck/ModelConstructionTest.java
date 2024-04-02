@@ -999,16 +999,23 @@ public class ModelConstructionTest extends Arquillian {
         checkSameObject(ap, s.getAdditionalPropertiesSchema());
         assertEquals(s.getAdditionalPropertiesBoolean(), null,
                 "AdditionalProperties (Boolean type) is expected to be null");
+
         checkSameObject(s, s.additionalPropertiesBoolean(Boolean.TRUE));
         assertEquals(s.getAdditionalPropertiesBoolean(), Boolean.TRUE,
                 "AdditionalProperties (Boolean type) is expected to be true");
-        assertEquals(s.getAdditionalPropertiesSchema(), null,
-                "AdditionalProperties (Schema type) is expected to be null");
+        Schema s2 = s.getAdditionalPropertiesSchema();
+        assertNotNull(s2, "AdditionalProperties (Schema type) is expected to be non-null");
+        assertEquals(s2.getBooleanSchema(), Boolean.TRUE,
+                "AdditionalProperties (Schema type) is expected to return a boolean-true schema");
+
         s.setAdditionalPropertiesBoolean(Boolean.FALSE);
         assertEquals(s.getAdditionalPropertiesBoolean(), Boolean.FALSE,
                 "AdditionalProperties (Boolean type) is expected to be false");
-        assertEquals(s.getAdditionalPropertiesSchema(), null,
-                "AdditionalProperties (Schema type) is expected to be null");
+        s2 = s.getAdditionalPropertiesSchema();
+        assertNotNull(s2, "AdditionalProperties (Schema type) is expected to be non-null");
+        assertEquals(s2.getBooleanSchema(), Boolean.FALSE,
+                "AdditionalProperties (Schema type) is expected to return a boolean-false schema");
+
         s.setAdditionalPropertiesSchema(null);
         assertEquals(s.getAdditionalPropertiesBoolean(), null,
                 "AdditionalProperties (Boolean type) is expected to be null");
