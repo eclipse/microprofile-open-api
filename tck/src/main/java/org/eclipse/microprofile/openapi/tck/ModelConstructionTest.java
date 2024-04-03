@@ -20,6 +20,7 @@ package org.eclipse.microprofile.openapi.tck;
 // import static org.testng.Assert.assertNotSame;
 // import static org.testng.Assert.assertSame;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.sameInstance;
 import static org.testng.Assert.assertEquals;
@@ -1021,6 +1022,17 @@ public class ModelConstructionTest extends Arquillian {
                 "AdditionalProperties (Boolean type) is expected to be null");
         assertEquals(s.getAdditionalPropertiesSchema(), null,
                 "AdditionalProperties (Schema type) is expected to be null");
+
+        s.setExamples(null);
+        s.setExample("example1");
+        assertEquals(s.getExample(), "example1", "Example is expected to be set");
+        assertNull(s.getExamples(), "Examples should be null");
+        s.setExamples(Arrays.asList("example2", "example3"));
+        assertEquals(s.getExample(), "example1", "Example should not be affected by settings examples");
+        assertThat("Examples should be set", s.getExamples(), contains("example2", "example3"));
+        s.setExample("example4");
+        assertEquals(s.getExample(), "example4", "Example should be set");
+        assertThat("Examples should not be affected by example", s.getExamples(), contains("example2", "example3"));
 
         final Schema allOf = createConstructibleInstance(Schema.class);
         checkSameObject(s, s.addAllOf(allOf));
