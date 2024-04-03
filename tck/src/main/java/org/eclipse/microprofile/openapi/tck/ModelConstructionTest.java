@@ -20,7 +20,9 @@ package org.eclipse.microprofile.openapi.tck;
 // import static org.testng.Assert.assertNotSame;
 // import static org.testng.Assert.assertSame;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.anEmptyMap;
 import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.sameInstance;
 import static org.testng.Assert.assertEquals;
@@ -41,6 +43,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -991,6 +994,7 @@ public class ModelConstructionTest extends Arquillian {
         checkNullValueInAdd(mt::getExamples, mt::addExample, "otherExample", exampleValue);
     }
 
+    @SuppressWarnings("deprecation") // Testing deprecated Schema methods
     @Test
     public void schemaTest() {
         final Schema s = processConstructible(Schema.class);
@@ -1228,6 +1232,200 @@ public class ModelConstructionTest extends Arquillian {
         checkMapImmutable(s, Schema::getDependentRequired, "otherDependentRequiredKey", otherDependentRequiredValue);
         checkNullValueInAdd(s::getDependentRequired, s::addDependentRequired, "otherDependentRequiredKey",
                 dependentRequiredValue);
+    }
+
+    @SuppressWarnings("deprecation") // Testing deprecated Schema methods
+    @Test
+    public void testSchemaArbitraryProperties() {
+        Schema s = createConstructibleInstance(Schema.class);
+
+        testSchemaProperty(s, "discriminator", Schema::getDiscriminator, Schema::setDiscriminator,
+                createConstructibleInstance(Discriminator.class));
+        testSchemaProperty(s, "title", Schema::getTitle, Schema::setTitle, "test title");
+        testSchemaProperty(s, "default", Schema::getDefaultValue, Schema::setDefaultValue, "test");
+        testSchemaListProperty(s, "enum", Schema::getEnumeration, Schema::setEnumeration, "a");
+        testSchemaProperty(s, "multipleOf", Schema::getMultipleOf, Schema::setMultipleOf, new BigDecimal("3"));
+        testSchemaProperty(s, "maximum", Schema::getMaximum, Schema::setMaximum, new BigDecimal("3"));
+        testSchemaProperty(s, "exclusiveMaximum", Schema::getExclusiveMaximum, Schema::setExclusiveMaximum,
+                new BigDecimal("3"));
+        testSchemaProperty(s, "minimum", Schema::getMinimum, Schema::setMinimum, new BigDecimal("3"));
+        testSchemaProperty(s, "exclusiveMinimum", Schema::getExclusiveMinimum, Schema::setExclusiveMinimum,
+                new BigDecimal("3"));
+        testSchemaProperty(s, "maxLength", Schema::getMaxLength, Schema::setMaxLength, 17);
+        testSchemaProperty(s, "minLength", Schema::getMinLength, Schema::setMinLength, 5);
+        testSchemaProperty(s, "pattern", Schema::getPattern, Schema::setPattern, "[a-z]+");
+        testSchemaProperty(s, "maxItems", Schema::getMaxItems, Schema::setMaxItems, 5);
+        testSchemaProperty(s, "minItems", Schema::getMinItems, Schema::setMinItems, 3);
+        testSchemaProperty(s, "uniqueItems", Schema::getUniqueItems, Schema::setUniqueItems, true);
+        testSchemaProperty(s, "maxProperties", Schema::getMaxProperties, Schema::setMaxProperties, 10);
+        testSchemaProperty(s, "minProperties", Schema::getMinProperties, Schema::setMinProperties, 8);
+        testSchemaListProperty(s, "required", Schema::getRequired, Schema::setRequired, "propName");
+        testSchemaListProperty(s, "type", Schema::getType, Schema::setType, Schema.SchemaType.OBJECT);
+        testSchemaProperty(s, "not", Schema::getNot, Schema::setNot, createConstructibleInstance(Schema.class));
+        testSchemaMapProperty(s, "properties", Schema::getProperties, Schema::setProperties,
+                createConstructibleInstance(Schema.class));
+        testSchemaProperty(s, "additionalProperties", Schema::getAdditionalPropertiesSchema,
+                Schema::setAdditionalPropertiesSchema,
+                createConstructibleInstance(Schema.class));
+        testSchemaProperty(s, "description", Schema::getDescription, Schema::setDescription, "test schema");
+        testSchemaProperty(s, "format", Schema::getFormat, Schema::setFormat, "date-time");
+        testSchemaProperty(s, "readOnly", Schema::getReadOnly, Schema::setReadOnly, true);
+        testSchemaProperty(s, "writeOnly", Schema::getWriteOnly, Schema::setWriteOnly, true);
+        testSchemaProperty(s, "example", Schema::getExample, Schema::setExample, "test");
+        testSchemaProperty(s, "externalDocs", Schema::getExternalDocs, Schema::setExternalDocs,
+                createConstructibleInstance(ExternalDocumentation.class));
+        testSchemaProperty(s, "deprecated", Schema::getDeprecated, Schema::setDeprecated, true);
+        testSchemaProperty(s, "xml", Schema::getXml, Schema::setXml, createConstructibleInstance(XML.class));
+        testSchemaProperty(s, "items", Schema::getItems, Schema::setItems, createConstructibleInstance(Schema.class));
+        testSchemaListProperty(s, "allOf", Schema::getAllOf, Schema::setAllOf,
+                createConstructibleInstance(Schema.class));
+        testSchemaListProperty(s, "anyOf", Schema::getAnyOf, Schema::setAnyOf,
+                createConstructibleInstance(Schema.class));
+        testSchemaListProperty(s, "oneOf", Schema::getOneOf, Schema::setOneOf,
+                createConstructibleInstance(Schema.class));
+        testSchemaProperty(s, "$schema", Schema::getSchemaDialect, Schema::setSchemaDialect, "http://test.dialect");
+        testSchemaProperty(s, "$comment", Schema::getComment, Schema::setComment, "about this schema");
+        testSchemaProperty(s, "if", Schema::getIfSchema, Schema::setIfSchema,
+                createConstructibleInstance(Schema.class));
+        testSchemaProperty(s, "then", Schema::getThenSchema, Schema::setThenSchema,
+                createConstructibleInstance(Schema.class));
+        testSchemaProperty(s, "else", Schema::getElseSchema, Schema::setElseSchema,
+                createConstructibleInstance(Schema.class));
+        testSchemaMapProperty(s, "dependentSchemas", Schema::getDependentSchemas, Schema::setDependentSchemas,
+                createConstructibleInstance(Schema.class));
+        testSchemaListProperty(s, "prefixItems", Schema::getPrefixItems, Schema::setPrefixItems,
+                createConstructibleInstance(Schema.class));
+        testSchemaProperty(s, "contains", Schema::getContains, Schema::setContains,
+                createConstructibleInstance(Schema.class));
+        testSchemaMapProperty(s, "patternProperties", Schema::getPatternProperties, Schema::setPatternProperties,
+                createConstructibleInstance(Schema.class));
+        testSchemaProperty(s, "propertyNames", Schema::getPropertyNames, Schema::setPropertyNames,
+                createConstructibleInstance(Schema.class));
+        testSchemaProperty(s, "unevaluatedItems", Schema::getUnevaluatedItems, Schema::setUnevaluatedItems,
+                createConstructibleInstance(Schema.class));
+        testSchemaProperty(s, "unevaluatedProperties", Schema::getUnevaluatedProperties,
+                Schema::setUnevaluatedProperties, createConstructibleInstance(Schema.class));
+        testSchemaProperty(s, "const", Schema::getConstValue, Schema::setConstValue, "value");
+        testSchemaProperty(s, "maxContains", Schema::getMaxContains, Schema::setMaxContains, 5);
+        testSchemaProperty(s, "minContains", Schema::getMinContains, Schema::setMinContains, 3);
+        testSchemaMapProperty(s, "dependentRequired", Schema::getDependentRequired, Schema::setDependentRequired,
+                Arrays.asList("a", "b"));
+        testSchemaProperty(s, "contentEncoding", Schema::getContentEncoding, Schema::setContentEncoding, "base64");
+        testSchemaProperty(s, "contentMediaType", Schema::getContentMediaType, Schema::setContentMediaType,
+                "test/plain");
+        testSchemaProperty(s, "contentSchema", Schema::getContentSchema, Schema::setContentSchema,
+                createConstructibleInstance(Schema.class));
+        testSchemaListProperty(s, "examples", Schema::getExamples, Schema::setExamples, "foo");
+    }
+
+    public <V> void testSchemaProperty(Schema testSchema, String name, Function<Schema, V> getter,
+            BiConsumer<Schema, V> setter, V testValue) {
+        // Set with the setter
+        setter.accept(testSchema, testValue);
+        assertSame(getter.apply(testSchema), testValue,
+                "Getter should return the same instance as was set for property " + name);
+        assertSame(testSchema.get(name), testValue,
+                "Generic getter should return same instance as was set for property " + name);
+
+        // Clear with the setter
+        setter.accept(testSchema, null);
+        assertNull(getter.apply(testSchema), "Getter should return null for property " + name);
+        assertNull(testSchema.get(name), "Generic access should return null for property " + name);
+
+        // Set with generic access
+        testSchema.set(name, testValue);
+        assertSame(getter.apply(testSchema), testValue,
+                "Getter should return the same instance as was set for property " + name);
+        assertSame(testSchema.get(name), testValue,
+                "Generic getter should return same instance as was set for property " + name);
+
+        // Clear with generic access
+        testSchema.set(name, null);
+        assertNull(getter.apply(testSchema), "Getter should return null for property " + name);
+        assertNull(testSchema.get(name), "Generic access should return null for property " + name);
+    }
+
+    public <V> void testSchemaMapProperty(Schema testSchema, String name,
+            Function<Schema, Map<String, V>> getter, BiConsumer<Schema, Map<String, V>> setter,
+            V testValue) {
+        // Set with the setter
+        Map<String, V> testMap = new HashMap<>();
+        testMap.put("test1", testValue);
+
+        setter.accept(testSchema, testMap);
+        testMapFromGetter(() -> getter.apply(testSchema), testMap, name);
+        testMapFromGetter(() -> testSchema.get(name), testMap, name);
+
+        // Clear with the setter
+        setter.accept(testSchema, null);
+        assertNull(getter.apply(testSchema), "Getter should return null for property " + name);
+        assertNull(testSchema.get(name), "Generic access should return null for property " + name);
+
+        // Set with generic access
+        testSchema.set(name, testMap);
+        testMapFromGetter(() -> getter.apply(testSchema), testMap, name);
+        testMapFromGetter(() -> testSchema.get(name), testMap, name);
+
+        // Clear with generic access
+        testSchema.set(name, null);
+        assertNull(getter.apply(testSchema), "Getter should return null for property " + name);
+        assertNull(testSchema.get(name), "Generic access should return null for property " + name);
+    }
+
+    private <V> void testMapFromGetter(Supplier<Object> getter, Map<String, V> expected,
+            String name) {
+        assertThat("Test error: expected may not be empty", expected, not(anEmptyMap()));
+
+        Object actualObj = getter.get();
+        assertEquals(actualObj, expected, "Getter should return value that was set for property " + name);
+
+        // Check that all values are the same instance
+        Map<?, ?> actualMap = (Map<?, ?>) actualObj;
+        expected.forEach((k, v) -> {
+            assertSame(v, actualMap.get(k),
+                    "Getter should return value with same instance for key " + v + " property " + name);
+        });
+    }
+
+    public <V> void testSchemaListProperty(Schema testSchema, String name,
+            Function<Schema, List<V>> getter, BiConsumer<Schema, List<V>> setter,
+            V testValue) {
+        // Set with the setter
+        List<V> testList = new ArrayList<>();
+        testList.add(testValue);
+
+        setter.accept(testSchema, testList);
+        testListFromGetter(() -> getter.apply(testSchema), testList, name);
+        testListFromGetter(() -> testSchema.get(name), testList, name);
+
+        // Clear with the setter
+        setter.accept(testSchema, null);
+        assertNull(getter.apply(testSchema), "Getter should return null for property " + name);
+        assertNull(testSchema.get(name), "Generic access should return null for property " + name);
+
+        // Set with generic access
+        testSchema.set(name, testList);
+        testListFromGetter(() -> getter.apply(testSchema), testList, name);
+        testListFromGetter(() -> testSchema.get(name), testList, name);
+
+        // Clear with generic access
+        testSchema.set(name, null);
+        assertNull(getter.apply(testSchema), "Getter should return null for property " + name);
+        assertNull(testSchema.get(name), "Generic access should return null for property " + name);
+    }
+
+    private <V> void testListFromGetter(Supplier<Object> getter, List<V> expected, String name) {
+        assertThat("Test error: expected may not be empty", expected, not(empty()));
+
+        Object actualObj = getter.get();
+        assertEquals(actualObj, expected, "Getter should return value that was set for property " + name);
+
+        // Check that all values are the same instance
+        List<?> actualList = (List<?>) actualObj;
+        expected.forEach((expectedV) -> {
+            assertTrue(actualList.stream().anyMatch((actualV) -> expectedV == actualV),
+                    "Getter should return value containing " + expectedV + " for property " + name);
+        });
     }
 
     @Test
