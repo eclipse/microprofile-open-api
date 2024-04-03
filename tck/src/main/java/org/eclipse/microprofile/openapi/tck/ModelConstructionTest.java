@@ -1131,7 +1131,91 @@ public class ModelConstructionTest extends Arquillian {
         checkListEntry(s.getRequired(), required);
 
         final String otherRequiredValue = new String("otherRequired");
-        checkListImmutable(s, Schema::getEnumeration, otherRequiredValue);
+        checkListImmutable(s, Schema::getRequired, otherRequiredValue);
+
+        final String dependentSchemaKey = "myDependentSchemaKey";
+        final Schema dependentSchemaValue = createConstructibleInstance(Schema.class);
+        checkSameObject(s, s.addDependentSchema(dependentSchemaKey, dependentSchemaValue));
+        checkMapEntry(s.getDependentSchemas(), dependentSchemaKey, dependentSchemaValue);
+        assertEquals(s.getDependentSchemas().size(), 1, "The map is expected to contain one entry.");
+        s.removeDependentSchema(dependentSchemaKey);
+        assertEquals(s.getDependentSchemas().size(), 0, "The map is expected to be empty.");
+
+        final String dependentSchemaKey2 = "myDependentSchemaKey2";
+        final Schema dependentSchemaValue2 = createConstructibleInstance(Schema.class);
+        s.setDependentSchemas(Collections.singletonMap(dependentSchemaKey2, dependentSchemaValue2));
+        checkMapEntry(s.getDependentSchemas(), dependentSchemaKey2, dependentSchemaValue2);
+        assertEquals(s.getDependentSchemas().size(), 1, "The map is expected to contain one entry.");
+        checkSameObject(s, s.addDependentSchema(dependentSchemaKey, dependentSchemaValue));
+        checkMapEntry(s.getDependentSchemas(), dependentSchemaKey, dependentSchemaValue);
+        assertEquals(s.getDependentSchemas().size(), 2, "The map is expected to contain two entries.");
+
+        final Schema otherDependentSchemaValue = createConstructibleInstance(Schema.class);
+        checkMapImmutable(s, Schema::getDependentSchemas, "otherDependentSchemaKey", otherDependentSchemaValue);
+        checkNullValueInAdd(s::getDependentSchemas, s::addDependentSchema, "otherDependentSchemaKey",
+                dependentSchemaValue);
+
+        final Schema prefixItem = createConstructibleInstance(Schema.class);
+        checkSameObject(s, s.addPrefixItem(prefixItem));
+        checkListEntry(s.getPrefixItems(), prefixItem);
+        assertEquals(s.getPrefixItems().size(), 1, "The list is expected to contain one entry.");
+        s.removePrefixItem(prefixItem);
+        assertEquals(s.getPrefixItems().size(), 0, "The list is expected to be empty.");
+
+        final Schema prefixItem2 = createConstructibleInstance(Schema.class);
+        s.setPrefixItems(Collections.singletonList(prefixItem2));
+        assertEquals(s.getPrefixItems().size(), 1, "The list is expected to contain one entry.");
+        checkListEntry(s.getPrefixItems(), prefixItem2);
+        checkSameObject(s, s.addPrefixItem(prefixItem));
+        assertEquals(s.getPrefixItems().size(), 2, "The list is expected to contain two entries.");
+        checkListEntry(s.getPrefixItems(), prefixItem);
+
+        final Schema otherPrefixItemValue = createConstructibleInstance(Schema.class);
+        checkListImmutable(s, Schema::getPrefixItems, otherPrefixItemValue);
+
+        final String patternPropertyKey = "myPatternPropertyKey";
+        final Schema patternPropertyValue = createConstructibleInstance(Schema.class);
+        checkSameObject(s, s.addPatternProperty(patternPropertyKey, patternPropertyValue));
+        checkMapEntry(s.getPatternProperties(), patternPropertyKey, patternPropertyValue);
+        assertEquals(s.getPatternProperties().size(), 1, "The map is expected to contain one entry.");
+        s.removePatternProperty(patternPropertyKey);
+        assertEquals(s.getPatternProperties().size(), 0, "The map is expected to be empty.");
+
+        final String patternPropertyKey2 = "myPatternPropertyKey2";
+        final Schema patternPropertyValue2 = createConstructibleInstance(Schema.class);
+        s.setPatternProperties(Collections.singletonMap(patternPropertyKey2, patternPropertyValue2));
+        checkMapEntry(s.getPatternProperties(), patternPropertyKey2, patternPropertyValue2);
+        assertEquals(s.getPatternProperties().size(), 1, "The map is expected to contain one entry.");
+        checkSameObject(s, s.addPatternProperty(patternPropertyKey, patternPropertyValue));
+        checkMapEntry(s.getPatternProperties(), patternPropertyKey, patternPropertyValue);
+        assertEquals(s.getPatternProperties().size(), 2, "The map is expected to contain two entries.");
+
+        final Schema otherPatternPropertyValue = createConstructibleInstance(Schema.class);
+        checkMapImmutable(s, Schema::getPatternProperties, "otherPatternPropertyKey", otherPatternPropertyValue);
+        checkNullValueInAdd(s::getPatternProperties, s::addPatternProperty, "otherPatternPropertyKey",
+                patternPropertyValue);
+
+        final String dependentRequiredKey = "myDependentRequiredKey";
+        final List<String> dependentRequiredValue = Collections.singletonList("myDependentRequired");
+        checkSameObject(s, s.addDependentRequired(dependentRequiredKey, dependentRequiredValue));
+        checkMapEntry(s.getDependentRequired(), dependentRequiredKey, dependentRequiredValue);
+        assertEquals(s.getDependentRequired().size(), 1, "The map is expected to contain one entry.");
+        s.removeDependentRequired(dependentRequiredKey);
+        assertEquals(s.getDependentRequired().size(), 0, "The map is expected to be empty.");
+
+        final String dependentRequiredKey2 = "myDependentRequiredKey2";
+        final List<String> dependentRequiredValue2 = Collections.singletonList("myDependentRequired2");
+        s.setDependentRequired(Collections.singletonMap(dependentRequiredKey2, dependentRequiredValue2));
+        checkMapEntry(s.getDependentRequired(), dependentRequiredKey2, dependentRequiredValue2);
+        assertEquals(s.getDependentRequired().size(), 1, "The map is expected to contain one entry.");
+        checkSameObject(s, s.addDependentRequired(dependentRequiredKey, dependentRequiredValue));
+        checkMapEntry(s.getDependentRequired(), dependentRequiredKey, dependentRequiredValue);
+        assertEquals(s.getDependentRequired().size(), 2, "The map is expected to contain two entries.");
+
+        final List<String> otherDependentRequiredValue = Collections.singletonList("myOtherDependentRequired");
+        checkMapImmutable(s, Schema::getDependentRequired, "otherDependentRequiredKey", otherDependentRequiredValue);
+        checkNullValueInAdd(s::getDependentRequired, s::addDependentRequired, "otherDependentRequiredKey",
+                dependentRequiredValue);
     }
 
     @Test
