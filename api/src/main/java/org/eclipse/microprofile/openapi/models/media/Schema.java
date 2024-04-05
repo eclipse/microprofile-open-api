@@ -645,31 +645,6 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
     void removeType(SchemaType type);
 
     /**
-     * Sets the type property of this Schema instance to a single type.
-     *
-     * @param type
-     *            the required type
-     * @since "4.0"
-     * @deprecated use {@link #setType(List)}
-     */
-    @Deprecated(since = "4.0")
-    void setType(SchemaType type);
-
-    /**
-     * Sets the type property of this Schema instance to a single type.
-     *
-     * @param type
-     *            the required type
-     * @return the current Schema instance
-     * @deprecated use {@link #setType(List)}
-     */
-    @Deprecated(since = "4.0")
-    default Schema type(SchemaType type) {
-        setType(type);
-        return this;
-    }
-
-    /**
      * Returns a Schema which describes properties not allowed in objects defined by the current schema.
      *
      * @return the not property's schema
@@ -890,41 +865,6 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      */
     default Schema format(String format) {
         setFormat(format);
-        return this;
-    }
-
-    /**
-     * Returns whether the type property allows the object to be {@code null}
-     *
-     * @return whether null is allowed
-     * @deprecated use {@link #getType()} and check if the result contains {@link SchemaType#NULL}
-     */
-    @Deprecated(since = "4.0")
-    Boolean getNullable();
-
-    /**
-     * Updates the type property to either permit or disallow {@code null}
-     *
-     * @param nullable
-     *            a boolean value indicating whether this Schema allows a null value.
-     * @deprecated use {@link #setType(List)}, {@link #addType(SchemaType)}, or {@link #removeType(SchemaType)} to add
-     *             or remove {@link SchemaType#NULL}
-     */
-    @Deprecated(since = "4.0")
-    void setNullable(Boolean nullable);
-
-    /**
-     * Sets the nullable property of this Schema instance. Specify true if this Schema will allow null values.
-     *
-     * @param nullable
-     *            a boolean value indicating this Schema allows a null value.
-     * @return the current Schema instance
-     * @deprecated use {@link #setType(List)}, {@link #addType(SchemaType)}, or {@link #removeType(SchemaType)} to add
-     *             or remove {@link SchemaType#NULL}
-     */
-    @Deprecated(since = "4.0")
-    default Schema nullable(Boolean nullable) {
-        setNullable(nullable);
         return this;
     }
 
