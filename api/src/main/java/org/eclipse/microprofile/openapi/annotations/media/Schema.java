@@ -29,7 +29,21 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 
 /**
  * The Schema Object allows the definition of input and output data types. These types can be objects, but also
- * primitives and arrays. This object is an extended subset of the JSON Schema Specification Wright Draft 00.
+ * primitives and arrays. This object is an extended subset of the JSON Schema draft specification 2020-12.
+ *
+ * <h2>Defining subschemas</h2>
+ * <p>
+ * Some of the parameters on this annotation correspond to parts of an OpenAPI document where a subschema is expected,
+ * for example {@link #allOf()}, {@link #contains()} and {@link #propertyNames()}. Due to limitations in the Java
+ * language, we can't use a second {@code @Schema} annotation, so instead we allow a class to be provided. A schema will
+ * be generated from that class by introspecting its annotations, methods and fields.
+ * <p>
+ * In addition, several special values can be used:
+ * <ul>
+ * <li>{@link True} to indicate a boolean {@code true} schema (accepts anything)
+ * <li>{@link False} to indicate a boolean {@code false} schema (accepts nothing)
+ * <li>{@link Void} to indicate that the schema should not be included at all (this is the default for most parameters)
+ * </ul>
  *
  * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#schemaObject">OpenAPI
  *      Specification Schema Object</a>
@@ -40,10 +54,7 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 public @interface Schema {
 
     /**
-     * Marker class for use in {@link #additionalProperties() additionalProperties} to indicate that the corresponding
-     * schema's {@link org.eclipse.microprofile.openapi.models.media.Schema#setAdditionalPropertiesBoolean(Boolean)
-     * additionalPropertiesBoolean} value is to be set to boolean {@code true}. The value {@code true} declares that any
-     * properties in addition to those defined by the {@code properties} attribute of the same schema are valid.
+     * Marker class to indicate that a boolean {@code true} schema should be used.
      *
      * @since 3.1
      */
@@ -53,10 +64,7 @@ public @interface Schema {
     }
 
     /**
-     * Marker class for use in {@link #additionalProperties() additionalProperties} to indicate that the corresponding
-     * schema's {@link org.eclipse.microprofile.openapi.models.media.Schema#setAdditionalPropertiesBoolean(Boolean)
-     * additionalPropertiesBoolean} value is to be set to boolean {@code false}. The value {@code false} declares that
-     * no property in addition to those defined by the {@code properties} attribute of the same schema is valid.
+     * Marker class to indicate that a boolean {@code false} schema should be used.
      *
      * @since 3.1
      */
@@ -84,9 +92,6 @@ public @interface Schema {
     /**
      * Provides an array of java class implementations which can be used to describe multiple acceptable schemas. If
      * more than one match the derived schemas, a validation error will occur.
-     * <p>
-     * Inline or referenced schema MUST be of a Schema Object and not a standard JSON Schema.
-     * </p>
      *
      * @return the list of possible classes for a single match
      **/
@@ -95,9 +100,6 @@ public @interface Schema {
     /**
      * Provides an array of java class implementations which can be used to describe multiple acceptable schemas. If any
      * match, the schema will be considered valid.
-     * <p>
-     * Inline or referenced schema MUST be of a Schema Object and not a standard JSON Schema.
-     * </p>
      *
      * @return the list of possible class matches
      **/
@@ -106,9 +108,6 @@ public @interface Schema {
     /**
      * Provides an array of java class implementations which can be used to describe multiple acceptable schemas. If all
      * match, the schema will be considered valid.
-     * <p>
-     * Inline or referenced schema MUST be of a Schema Object and not a standard JSON Schema.
-     * </p>
      *
      * @return the list of classes to match
      **/
@@ -134,8 +133,8 @@ public @interface Schema {
     String title() default "";
 
     /**
-     * Constrains a value such that when divided by the multipleOf, the remainder must be an integer. Ignored if the
-     * value is 0.
+     * Constrains a value such that when divided by the multipleOf, the result must be an integer. Ignored if the value
+     * is {@code 0}.
      *
      * @return the multiplier constraint of the schema
      **/
@@ -186,9 +185,11 @@ public @interface Schema {
     int minLength() default 0;
 
     /**
-     * A pattern that the value must satisfy. Ignored if the value is an empty string.
+     * A regular expression that the value must satisfy. Ignored if the value is an empty string.
+     * <p>
+     * If the instance is a string, the regular expression must match the instance.
      *
-     * @return the pattern of this schema
+     * @return the ECMA-262 regular expression to match against
      **/
     String pattern() default "";
 
@@ -214,7 +215,7 @@ public @interface Schema {
     String[] requiredProperties() default {};
 
     /**
-     * Mandates whether the annotated item is required or not.
+     * Specifies whether the annotated item is required or not.
      *
      * @return whether or not this schema is required
      **/
@@ -242,8 +243,10 @@ public @interface Schema {
     /**
      * Reference value to a Schema definition.
      * <p>
-     * This property provides a reference to an object defined elsewhere. This property and all other properties are
-     * mutually exclusive. If other properties are defined in addition to the ref property then the result is undefined.
+     * This property provides a reference to an object defined elsewhere.
+     * <p>
+     * Unlike {@code ref} on most MP OpenAPI annotations, this property is <em>not</em> mutually exclusive with other
+     * properties.
      *
      * @return a reference to a schema definition
      **/
@@ -257,8 +260,8 @@ public @interface Schema {
     boolean nullable() default false;
 
     /**
-     * Relevant only for Schema "properties" definitions. Declares the property as "read only". This means that it MAY
-     * be sent as part of a response but SHOULD NOT be sent as part of the request.
+     * Declares the property as "read only". This means that it MAY be sent as part of a response but SHOULD NOT be sent
+     * as part of the request.
      * <p>
      * If the property is marked as readOnly being true and is in the required list, the required will take effect on
      * the response only. A property MUST NOT be marked as both readOnly and writeOnly being true.
@@ -269,8 +272,8 @@ public @interface Schema {
     boolean readOnly() default false;
 
     /**
-     * Relevant only for Schema "properties" definitions. Declares the property as "write only". Therefore, it MAY be
-     * sent as part of a request but SHOULD NOT be sent as part of the response.
+     * Declares the property as "write only". This means that it MAY be sent as part of a request but SHOULD NOT be sent
+     * as part of the response.
      * <p>
      * If the property is marked as writeOnly being true and is in the required list, the required will take effect on
      * the request only. A property MUST NOT be marked as both readOnly and writeOnly being true.
@@ -282,16 +285,25 @@ public @interface Schema {
 
     /**
      * A free-form property to include an example of an instance for this schema.
-     * <p>
-     * To represent examples that cannot be naturally represented in JSON or YAML, a string value is used to contain the
-     * example with escaping where necessary.
-     * </p>
-     * When associated with a specific media type, the example string shall be parsed by the consumer to be treated as
-     * an object or an array.
      *
      * @return an example of this schema
+     * @deprecated use {@link #examples()}
      **/
+    @Deprecated(since = "4.0")
     String example() default "";
+
+    /**
+     * A free-form property to include examples of an instance for this schema.
+     * <p>
+     * Each example SHOULD validate against this schema.
+     * <p>
+     * If the schema {@link #type()} is STRING, the value will be interpreted as a literal string, otherwise it will be
+     * parsed as JSON.
+     *
+     * @return an array of examples of this schema
+     * @since 4.0
+     **/
+    String[] examples() default {};
 
     /**
      * Additional external documentation for this schema.
@@ -463,4 +475,183 @@ public @interface Schema {
      * @since 3.1
      */
     Extension[] extensions() default {};
+
+    /**
+     * A comment to be included in the schema
+     * <p>
+     * This value is set in the {@code $comment} property of the schema object
+     *
+     * @return the comment
+     * @since 4.0
+     */
+    String comment() default "";
+
+    /**
+     * Requires that the instance must be a specific value. No other values are permitted.
+     * <p>
+     * The value is parsed as JSON if the schema type is anything other than STRING.
+     *
+     * @return the value which the instance must be equal to, expressed according to the type of the schema
+     * @since 4.0
+     */
+    String constValue() default "";
+
+    /**
+     * A class used to create a schema used to control conditional evaluation. If an instance validates against the
+     * {@code if} schema then it must also validate against the {@code then} schema. Otherwise it must validate against
+     * the {@code else} schema.
+     *
+     * @return a class used to create the {@code if} schema
+     * @see #thenSchema()
+     * @see #elseSchema()
+     * @since 4.0
+     */
+    Class<?> ifSchema() default Void.class;
+
+    /**
+     * A class used to create a schema that an instance must validate against if it validates against the {@code if}
+     * schema.
+     *
+     * @return a class used to create the {@code then} schema
+     * @see #ifSchema()
+     * @see #elseSchema()
+     * @since 4.0
+     */
+    Class<?> thenSchema() default Void.class;
+
+    /**
+     * A class used to create a schema that an instance must validate against if it does not validate against the
+     * {@code if} schema.
+     *
+     * @return a class used to create the {@code else} schema
+     * @see #ifSchema()
+     * @see #thenSchema()
+     * @since 4.0
+     */
+    Class<?> elseSchema() default Void.class;
+
+    /**
+     * Schemas which an instance must validate against if the instance has certain properties.
+     * <p>
+     * For each {@link DependentSchema} listed, if the instance is an object which has a property named
+     * {@link DependentSchema#name() name()} then the instance must validate against the schema created from
+     * {@link DependentSchema#schema() schema()}.
+     *
+     * @return an array of DependentSchema entries
+     * @since 4.0
+     */
+    DependentSchema[] dependentSchemas() default {};
+
+    /**
+     * A schema which at least one element of an array instance must validate against.
+     * <p>
+     * The class is used to create a schema. If the instance is an array, then at least one element of the array must
+     * validate against the schema.
+     *
+     * @return a class used to create a schema which at least one element of an array instance must validate against
+     * @since 4.0
+     */
+    Class<?> contains() default Void.class;
+
+    /**
+     * Specifies the maximum number of elements which may validate against the {@link #contains()} schema.
+     * <p>
+     * If more than this number of elements of an array instance match the {@code contains} schema, the instance does
+     * not validate against this schema.
+     *
+     * @return the maximum number of elements which may validate against the {@link #contains()} schema
+     * @since 4.0
+     */
+    int maxContains() default Integer.MAX_VALUE;
+
+    /**
+     * Specifies the minimum number of elements which must validate against the {@link #contains()} schema.
+     * <p>
+     * If fewer than this number of elements of an array instance match the {@code contains} schema, the instance does
+     * not validate against this schema.
+     *
+     * @return the minimum number of elements which must validate against the {@link #contains()} schema
+     * @since 4.0
+     */
+    int minContains() default 0;
+
+    /**
+     * Schemas which the leading elements of an array instance must validate against.
+     * <p>
+     * The array of classes is used to create an array of schemas. If an instance is an array, the first element of the
+     * array must validate against the first schema, the second element must validate against the second schema and so
+     * on.
+     *
+     * @return an array of classes used to create an array of schemas used to validate the leading elements of an array
+     *         instance
+     * @since 4.0
+     */
+    Class<?>[] prefixItems() default {};
+
+    /**
+     * Applies subschemas against properties matched by regular expressions.
+     * <p>
+     * For each {@link PatternProperty} listed, for each property whose name matches {@link PatternProperty#regex() |
+     * regex()}, its value must validate against the schema created from {@link PatternProperty#schema() schema()}.
+     *
+     * @return a mapping from regular expressions to schemas
+     * @since 4.0
+     */
+    PatternProperty[] patternProperties() default {};
+
+    /**
+     * Specifies that certain properties must be present if other properties are present.
+     * <p>
+     * For each {@link DependentRequired} entry in the list, if the instance is an object and has a property named
+     * {@link DependentRequired#name()} then it must also have property named for each entry of
+     * {@link DependentRequired#requires()} to validate against this schema.
+     *
+     * @return the properties required if certain other properties are present
+     * @since 4.0
+     */
+    DependentRequired[] dependentRequired() default {};
+
+    /**
+     * A schema which the names of properties of an object instance must validate against.
+     * <p>
+     * The class is used to create a schema. If the instance is an object, then the name of each property in the
+     * instance must validate against the schema.
+     *
+     * @return a schema that property names must validate against
+     * @since 4.0
+     */
+    Class<?> propertyNames() default Void.class;
+
+    /**
+     * The encoding used to allow binary data to be stored in a string.
+     * <p>
+     * If the instance is a string, this property specifies that it contains binary data encoded as text using the
+     * specified encoding (e.g. base64).
+     *
+     * @return the encoding
+     * @since 4.0
+     */
+    String contentEncoding() default "";
+
+    /**
+     * The media type of the data in a string.
+     * <p>
+     * If the instance is a string, this property specifies the media type of the data it contains. If
+     * {@link #contentEncoding()} is also set, it specifies the media type of the decoded string.
+     *
+     * @return the media type of the data in a string
+     * @since 4.0
+     */
+    String contentMediaType() default "";
+
+    /**
+     * The schema that data in a string must validate against.
+     * <p>
+     * The class is used to create a schema. If the instance is a string and {@link #contentMediaType()} is set, the
+     * data must validate against the schema when interpreted as the given media type.
+     *
+     * @return a class used to create a schema used to validate the data in a string
+     * @since 4.0
+     */
+    Class<?> contentSchema() default Void.class;
 }
