@@ -13,9 +13,19 @@
 
 package org.eclipse.microprofile.openapi.apps.airlines.model;
 
-import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import java.time.LocalDate;
 
-@Schema(maxProperties = 1024, minProperties = 1, requiredProperties = {"id", "username", "password"})
+import org.eclipse.microprofile.openapi.annotations.media.DependentRequired;
+import org.eclipse.microprofile.openapi.annotations.media.DependentSchema;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.media.Schema.False;
+import org.eclipse.microprofile.openapi.annotations.media.Schema.True;
+
+@Schema(maxProperties = 1024, minProperties = 1,
+        requiredProperties = {"id", "username", "password"},
+        dependentRequired = @DependentRequired(name = "frequentFlyerNumber",
+                                               requires = {"frequentFlyerProgrammeName", "frequentFlyerStartDate"}),
+        dependentSchemas = @DependentSchema(name = "forbiddenField", schema = False.class))
 public class User {
 
     @Schema(example = "3456")
@@ -50,6 +60,22 @@ public class User {
 
     @Schema(hidden = true)
     private String undocumentedProperty;
+
+    private String frequentFlyerNumber;
+
+    private String frequentFlyerProgrammeName;
+
+    private LocalDate frequentFlyerStartDate;
+
+    @Schema(constValue = "true")
+    private boolean human;
+
+    /** Base64 encoded JPEG photo */
+    @Schema(contentEncoding = "base64", contentMediaType = "image/jpeg")
+    private String photo;
+
+    @Schema(implementation = True.class)
+    private Object freeformNotes;
 
     /**
      * Creates a User instance with the parameters specified.
@@ -288,6 +314,54 @@ public class User {
 
     public void setUndocumentedProperty(String undocumentedProperty) {
         this.undocumentedProperty = undocumentedProperty;
+    }
+
+    public String getFrequentFlyerNumber() {
+        return frequentFlyerNumber;
+    }
+
+    public void setFrequentFlyerNumber(String frequentFlyerNumber) {
+        this.frequentFlyerNumber = frequentFlyerNumber;
+    }
+
+    public String getFrequentFlyerProgrammeName() {
+        return frequentFlyerProgrammeName;
+    }
+
+    public void setFrequentFlyerProgrammeName(String frequentFlyerProgrammeName) {
+        this.frequentFlyerProgrammeName = frequentFlyerProgrammeName;
+    }
+
+    public LocalDate getFrequentFlyerStartDate() {
+        return frequentFlyerStartDate;
+    }
+
+    public void setFrequentFlyerStartDate(LocalDate frequentFlyerStartDate) {
+        this.frequentFlyerStartDate = frequentFlyerStartDate;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public boolean getHuman() {
+        return human;
+    }
+
+    public void setHuman(boolean human) {
+        this.human = human;
+    }
+
+    public Object getFreeformNotes() {
+        return freeformNotes;
+    }
+
+    public void setFreeformNotes(Object freeformNotes) {
+        this.freeformNotes = freeformNotes;
     }
 
 }

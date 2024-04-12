@@ -700,6 +700,7 @@ public class AirlinesAppTest extends AppTestBase {
         // Basic properties
         vr.body("components.schemas.AirlinesRef.$ref", equalTo("#/components/schemas/Airlines"));
         vr.body("components.schemas.Airlines.title", equalTo("Airlines"));
+        vr.body("components.schemas.Airlines.$comment", equalTo("This is an airline"));
         vr.body("components.schemas.Airlines.x-schema", equalTo("test-schema"));
         vr.body("paths.'/bookings'.post.responses.'201'.content.'application/json'.schema.type",
                 itemOrSingleton("string"));
@@ -714,6 +715,17 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("components.schemas.User.required", hasItems("id", "username", "password")); // requiredProperties
         vr.body("components.schemas.User", not(hasItem("undocumentedProperty"))); // hidden property
         vr.body("components.schemas.Gender.enum", hasItems("Male", "Female", "Other"));
+        vr.body("components.schemas.User.dependentRequired", aMapWithSize(1));
+        vr.body("components.schemas.User.dependentRequired.frequentFlyerNumber",
+                contains("frequentFlyerProgrammeName", "frequentFlyerStartDate"));
+        String photoPath = dereference(vr, "components.schemas.User.properties.photo");
+        vr.body(photoPath + ".contentEncoding", equalTo("base64"));
+        vr.body(photoPath + ".contentMediaType", equalTo("image/jpeg"));
+        String humanPath = dereference(vr, "components.schemas.User.properties.human");
+        vr.body(humanPath + ".const", equalTo(true));
+        vr.body("components.schemas.User.properties.freeformNotes", equalTo(true));
+        vr.body("components.schemas.User.dependentSchemas", aMapWithSize(1));
+        vr.body("components.schemas.User.dependentSchemas.forbiddenField", equalTo(false));
 
         // Array properties
         String createSchema = "paths.'/user/createWithArray'.post.requestBody.content.'application/json'.schema";
@@ -727,7 +739,7 @@ public class AirlinesAppTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testSchemaProperty(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        vr.body("components.schemas.User.properties", IsMapWithSize.aMapWithSize(10));
+        vr.body("components.schemas.User.properties", IsMapWithSize.aMapWithSize(16));
         vr.body("components.schemas.User.properties.phone.examples", contains("123-456-7891"));
         vr.body("components.schemas.User.properties.phone.description",
                 equalTo("Telephone number to contact the user"));
@@ -737,7 +749,7 @@ public class AirlinesAppTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testSchemaPropertyValuesOverrideClassPropertyValues(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        vr.body("components.schemas.User.properties", IsMapWithSize.aMapWithSize(10));
+        vr.body("components.schemas.User.properties", IsMapWithSize.aMapWithSize(16));
         vr.body("components.schemas.User.properties.phone.examples", not(contains("123-456-7890")));
         vr.body("components.schemas.User.properties.phone.examples", contains("123-456-7891"));
     }
