@@ -23,6 +23,8 @@ import java.lang.annotation.RetentionPolicy;
 import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
+import org.eclipse.microprofile.openapi.annotations.media.Schema.False;
+import org.eclipse.microprofile.openapi.annotations.media.Schema.True;
 
 /**
  * The SchemaProperty Object allows the definition of input and output data types nested within the
@@ -367,6 +369,32 @@ public @interface SchemaProperty {
      * @return whether the items in this array are unique
      **/
     boolean uniqueItems() default false;
+
+    /**
+     * Provides a Java class as implementation for additional properties that may be present in instances of this
+     * schema.
+     *
+     * <p>
+     * If no additional properties are allowed, the value of this property should be set to {@link False False.class}
+     * which will be rendered as boolean <code>false</code> in the resulting OpenAPI document.
+     *
+     * <p>
+     * The default value {@link Void Void.class} will result in no {@code additionalProperties} attribute being
+     * generated in the resulting OpenAPI document. The effective value in that case is {@code true} per the OpenAPI
+     * specification.
+     *
+     * <p>
+     * Implementations MAY ignore this property if this schema's {@linkplain #type() type} is not
+     * {@linkplain SchemaType#OBJECT OBJECT}, either explicitly or as derived by the placement of the annotation.
+     *
+     * @return a class that describes the allowable schema for additional properties not explicitly defined
+     *
+     * @since 4.0
+     *
+     * @see True
+     * @see False
+     */
+    Class<?> additionalProperties() default Void.class;
 
     /**
      * List of extensions to be added to the {@link org.eclipse.microprofile.openapi.models.media.Schema Schema} model
