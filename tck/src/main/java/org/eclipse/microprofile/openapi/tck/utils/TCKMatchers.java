@@ -19,6 +19,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.comparator.ComparatorMatcherBuilder.comparedBy;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Comparator;
 
@@ -82,6 +83,20 @@ public final class TCKMatchers {
         return itemOrSingleton(equalTo(item));
     }
 
+    /**
+     * Creates a matcher which matches numbers based on their numeric value without considering their type.
+     * <p>
+     * Both the expected and actual value are converted to {@link BigDecimal} and compared using
+     * {@link BigDecimal#compareTo(BigDecimal) compareTo}.
+     *
+     * @param number
+     *            the expected number
+     * @return the matcher
+     */
+    public static Matcher<Number> number(Number number) {
+        return new NumericEqualityMatcher(number);
+    }
+
     public static class ItemOrSingletonMatcher extends TypeSafeDiagnosingMatcher<Object> {
 
         private Matcher<?> baseMatcher;
@@ -113,5 +128,45 @@ public final class TCKMatchers {
             }
             return result;
         }
+    }
+
+    public static class NumericEqualityMatcher extends TypeSafeDiagnosingMatcher<Number> {
+
+        private BigDecimal expected;
+
+        public NumericEqualityMatcher(Number expected) {
+            this.expected = toBigDecimal(expected);
+        }
+
+        @Override
+        public void describeTo(Description desc) {
+            desc.appendText("A number equal to ").appendValue(expected);
+        }
+
+        @Override
+        protected boolean matchesSafely(Number item, Description mismatchDescription) {
+            BigDecimal actual = toBigDecimal(item);
+            mismatchDescription.appendText("was: ").appendValue(item);
+            return expected.compareTo(actual) == 0;
+        }
+
+        private static BigDecimal toBigDecimal(Number number) {
+            if (number instanceof Integer) {
+                return new BigDecimal((Integer) number);
+            } else if (number instanceof Short) {
+                return new BigDecimal((Short) number);
+            } else if (number instanceof Long) {
+                return new BigDecimal((Long) number);
+            } else if (number instanceof Float) {
+                return new BigDecimal((Float) number);
+            } else if (number instanceof Double) {
+                return new BigDecimal((Double) number);
+            } else if (number instanceof BigInteger) {
+                return new BigDecimal((BigInteger) number);
+            } else {
+                return new BigDecimal(number.doubleValue());
+            }
+        }
+
     }
 }

@@ -15,9 +15,14 @@
  */
 package org.eclipse.microprofile.openapi.reader;
 
+import static java.util.Collections.emptyMap;
+
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 
 import org.eclipse.microprofile.openapi.OASFactory;
@@ -38,11 +43,13 @@ import org.eclipse.microprofile.openapi.models.media.Content;
 import org.eclipse.microprofile.openapi.models.media.MediaType;
 import org.eclipse.microprofile.openapi.models.media.Schema;
 import org.eclipse.microprofile.openapi.models.parameters.Parameter;
+import org.eclipse.microprofile.openapi.models.parameters.Parameter.In;
 import org.eclipse.microprofile.openapi.models.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.models.responses.APIResponse;
 import org.eclipse.microprofile.openapi.models.responses.APIResponses;
 import org.eclipse.microprofile.openapi.models.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.models.security.SecurityScheme;
+import org.eclipse.microprofile.openapi.models.security.SecurityScheme.Type;
 import org.eclipse.microprofile.openapi.models.servers.Server;
 import org.eclipse.microprofile.openapi.models.servers.ServerVariable;
 import org.eclipse.microprofile.openapi.models.tags.Tag;
@@ -101,6 +108,60 @@ public class MyOASModelReaderImpl implements OASModelReader {
                         .addSchema("id", OASFactory.createObject(Schema.class)
                                 .addType(Schema.SchemaType.INTEGER)
                                 .format("int32"))
+                        .addSchema("custom", OASFactory.createSchema()
+                                .schemaDialect("http://example.com/myCustomSchema")
+                                .set("shortKey", (short) 1)
+                                .set("intKey", 2)
+                                .set("longKey", 3L)
+                                .set("booleanKey", true)
+                                .set("charKey", 'a')
+                                .set("stringKey", "string")
+                                .set("floatKey", 3.5f)
+                                .set("doubleKey", 3.5d)
+                                .set("bigDecimalKey", new BigDecimal("3.5"))
+                                .set("bigIntegerKey", new BigInteger("7"))
+                                .set("extDocKey", OASFactory.createExternalDocumentation().description("test"))
+                                .set("operationKey", OASFactory.createOperation().description("test"))
+                                .set("pathItemKey", OASFactory.createPathItem().description("test"))
+                                .set("pathsKey", OASFactory.createPaths()
+                                        .addPathItem("test", OASFactory.createPathItem().description("test")))
+                                .set("callbackKey", OASFactory.createCallback()
+                                        .addPathItem("test", OASFactory.createPathItem().description("test")))
+                                .set("exampleKey", OASFactory.createExample().value("test"))
+                                .set("headerKey", OASFactory.createHeader().description("test"))
+                                .set("contactKey", OASFactory.createContact().name("test"))
+                                .set("infoKey", OASFactory.createInfo().title("test").version("1.0"))
+                                .set("licenseKey", OASFactory.createLicense().name("test"))
+                                .set("linkKey", OASFactory.createLink().operationId("getTestFlights"))
+                                .set("contentKey", OASFactory.createContent()
+                                        .addMediaType("test", OASFactory.createMediaType().example("test")))
+                                .set("discriminatorKey", OASFactory.createDiscriminator().propertyName("test"))
+                                .set("schemaKey", OASFactory.createSchema().title("test"))
+                                .set("xmlKey", OASFactory.createXML().name("test"))
+                                .set("parameterKey", OASFactory.createParameter().name("test").in(In.PATH))
+                                .set("requestBodyKey", OASFactory.createRequestBody()
+                                        .content(OASFactory.createContent()
+                                                .addMediaType("test", OASFactory.createMediaType().example("test"))))
+                                .set("apiResponseKey", OASFactory.createAPIResponse().description("test"))
+                                .set("apiResponsesKey", OASFactory.createAPIResponses()
+                                        .addAPIResponse("200", OASFactory.createAPIResponse().description("test")))
+                                .set("oAuthFlowKey",
+                                        OASFactory.createOAuthFlow().authorizationUrl("http://example.com"))
+                                .set("oAuthFlowsKey", OASFactory.createOAuthFlows().implicit(
+                                        OASFactory.createOAuthFlow().authorizationUrl("http://example.com")
+                                                .scopes(emptyMap())))
+                                .set("securityReqKey", OASFactory.createSecurityRequirement().addScheme("test"))
+                                .set("securitySchemeKey", OASFactory.createSecurityScheme()
+                                        .type(Type.HTTP)
+                                        .scheme("Basic"))
+                                .set("serverKey", OASFactory.createServer().url("http://example.com"))
+                                .set("serverVarKey", OASFactory.createServerVariable().defaultValue("test"))
+                                .set("tagKey", OASFactory.createTag().name("test"))
+                                .set("enumKey", DayOfWeek.MONDAY)
+                                .set("listKey", Arrays.asList(
+                                        "test",
+                                        OASFactory.createXML().name("test")))
+                                .set("mapKey", Collections.singletonMap("test", DayOfWeek.THURSDAY)))
                         .responses(new HashMap<String, APIResponse>())
                         .addResponse("FoundAirlines", OASFactory.createObject(APIResponse.class)
                                 .description("successfully found airlines")
