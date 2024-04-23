@@ -15,9 +15,14 @@
  */
 package org.eclipse.microprofile.openapi.reader;
 
+import static java.util.Collections.emptyMap;
+
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 
 import org.eclipse.microprofile.openapi.OASFactory;
@@ -38,11 +43,13 @@ import org.eclipse.microprofile.openapi.models.media.Content;
 import org.eclipse.microprofile.openapi.models.media.MediaType;
 import org.eclipse.microprofile.openapi.models.media.Schema;
 import org.eclipse.microprofile.openapi.models.parameters.Parameter;
+import org.eclipse.microprofile.openapi.models.parameters.Parameter.In;
 import org.eclipse.microprofile.openapi.models.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.models.responses.APIResponse;
 import org.eclipse.microprofile.openapi.models.responses.APIResponses;
 import org.eclipse.microprofile.openapi.models.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.models.security.SecurityScheme;
+import org.eclipse.microprofile.openapi.models.security.SecurityScheme.Type;
 import org.eclipse.microprofile.openapi.models.servers.Server;
 import org.eclipse.microprofile.openapi.models.servers.ServerVariable;
 import org.eclipse.microprofile.openapi.models.tags.Tag;
@@ -90,30 +97,84 @@ public class MyOASModelReaderImpl implements OASModelReader {
                 .components(OASFactory.createObject(Components.class)
                         .schemas(new HashMap<String, Schema>())
                         .addSchema("Bookings", OASFactory.createObject(Schema.class)
-                                .type(Schema.SchemaType.INTEGER)
+                                .addType(Schema.SchemaType.INTEGER)
                                 .title("Bookings")
                                 .ref("#/components.schemas.Booking"))
                         .addSchema("Airlines", OASFactory.createObject(Schema.class)
-                                .type(Schema.SchemaType.INTEGER)
+                                .addType(Schema.SchemaType.INTEGER)
                                 .title("Airlines"))
                         .addSchema("AirlinesRef", OASFactory.createObject(Schema.class)
                                 .ref("#/components/schemas/Airlines"))
                         .addSchema("id", OASFactory.createObject(Schema.class)
-                                .type(Schema.SchemaType.INTEGER)
+                                .addType(Schema.SchemaType.INTEGER)
                                 .format("int32"))
+                        .addSchema("custom", OASFactory.createSchema()
+                                .schemaDialect("http://example.com/myCustomSchema")
+                                .set("shortKey", (short) 1)
+                                .set("intKey", 2)
+                                .set("longKey", 3L)
+                                .set("booleanKey", true)
+                                .set("charKey", 'a')
+                                .set("stringKey", "string")
+                                .set("floatKey", 3.5f)
+                                .set("doubleKey", 3.5d)
+                                .set("bigDecimalKey", new BigDecimal("3.5"))
+                                .set("bigIntegerKey", new BigInteger("7"))
+                                .set("extDocKey", OASFactory.createExternalDocumentation().description("test"))
+                                .set("operationKey", OASFactory.createOperation().description("test"))
+                                .set("pathItemKey", OASFactory.createPathItem().description("test"))
+                                .set("pathsKey", OASFactory.createPaths()
+                                        .addPathItem("test", OASFactory.createPathItem().description("test")))
+                                .set("callbackKey", OASFactory.createCallback()
+                                        .addPathItem("test", OASFactory.createPathItem().description("test")))
+                                .set("exampleKey", OASFactory.createExample().value("test"))
+                                .set("headerKey", OASFactory.createHeader().description("test"))
+                                .set("contactKey", OASFactory.createContact().name("test"))
+                                .set("infoKey", OASFactory.createInfo().title("test").version("1.0"))
+                                .set("licenseKey", OASFactory.createLicense().name("test"))
+                                .set("linkKey", OASFactory.createLink().operationId("getTestFlights"))
+                                .set("contentKey", OASFactory.createContent()
+                                        .addMediaType("test", OASFactory.createMediaType().example("test")))
+                                .set("discriminatorKey", OASFactory.createDiscriminator().propertyName("test"))
+                                .set("schemaKey", OASFactory.createSchema().title("test"))
+                                .set("xmlKey", OASFactory.createXML().name("test"))
+                                .set("parameterKey", OASFactory.createParameter().name("test").in(In.PATH))
+                                .set("requestBodyKey", OASFactory.createRequestBody()
+                                        .content(OASFactory.createContent()
+                                                .addMediaType("test", OASFactory.createMediaType().example("test"))))
+                                .set("apiResponseKey", OASFactory.createAPIResponse().description("test"))
+                                .set("apiResponsesKey", OASFactory.createAPIResponses()
+                                        .addAPIResponse("200", OASFactory.createAPIResponse().description("test")))
+                                .set("oAuthFlowKey",
+                                        OASFactory.createOAuthFlow().authorizationUrl("http://example.com"))
+                                .set("oAuthFlowsKey", OASFactory.createOAuthFlows().implicit(
+                                        OASFactory.createOAuthFlow().authorizationUrl("http://example.com")
+                                                .scopes(emptyMap())))
+                                .set("securityReqKey", OASFactory.createSecurityRequirement().addScheme("test"))
+                                .set("securitySchemeKey", OASFactory.createSecurityScheme()
+                                        .type(Type.HTTP)
+                                        .scheme("Basic"))
+                                .set("serverKey", OASFactory.createServer().url("http://example.com"))
+                                .set("serverVarKey", OASFactory.createServerVariable().defaultValue("test"))
+                                .set("tagKey", OASFactory.createTag().name("test"))
+                                .set("enumKey", DayOfWeek.MONDAY)
+                                .set("listKey", Arrays.asList(
+                                        "test",
+                                        OASFactory.createXML().name("test")))
+                                .set("mapKey", Collections.singletonMap("test", DayOfWeek.THURSDAY)))
                         .responses(new HashMap<String, APIResponse>())
                         .addResponse("FoundAirlines", OASFactory.createObject(APIResponse.class)
                                 .description("successfully found airlines")
                                 .content(OASFactory.createObject(Content.class)
                                         .addMediaType("application/json", OASFactory.createObject(MediaType.class)
                                                 .schema(OASFactory.createObject(Schema.class)
-                                                        .type(Schema.SchemaType.ARRAY)))))
+                                                        .addType(Schema.SchemaType.ARRAY)))))
                         .addResponse("FoundBookings", OASFactory.createObject(APIResponse.class)
                                 .description("Bookings retrieved")
                                 .content(OASFactory.createObject(Content.class)
                                         .addMediaType("application/json", OASFactory.createObject(MediaType.class)
                                                 .schema(OASFactory.createObject(Schema.class)
-                                                        .type(Schema.SchemaType.ARRAY)
+                                                        .addType(Schema.SchemaType.ARRAY)
                                                         .ref("#/components.schemas.Booking")))))
                         .parameters(new HashMap<String, Parameter>())
                         .addParameter("departureDate", OASFactory.createObject(Parameter.class)
@@ -144,14 +205,14 @@ public class MyOASModelReaderImpl implements OASModelReader {
                         .addHeader("Max-Rate", OASFactory.createObject(Header.class)
                                 .description("Maximum rate")
                                 .schema(OASFactory.createObject(Schema.class)
-                                        .type(Schema.SchemaType.INTEGER))
+                                        .addType(Schema.SchemaType.INTEGER))
                                 .required(true)
                                 .allowEmptyValue(true)
                                 .deprecated(true))
                         .addHeader("Request-Limit", OASFactory.createObject(Header.class)
                                 .description("The number of allowed requests in the current period")
                                 .schema(OASFactory.createObject(Schema.class)
-                                        .type(Schema.SchemaType.INTEGER)))
+                                        .addType(Schema.SchemaType.INTEGER)))
                         .securitySchemes(new HashMap<String, SecurityScheme>())
                         .addSecurityScheme("httpTestScheme", OASFactory.createObject(SecurityScheme.class)
                                 .description("user security scheme")
@@ -218,7 +279,7 @@ public class MyOASModelReaderImpl implements OASModelReader {
                                                                 .addMediaType("application/json", OASFactory
                                                                         .createObject(MediaType.class)
                                                                         .schema(OASFactory.createObject(Schema.class)
-                                                                                .type(Schema.SchemaType.ARRAY)
+                                                                                .addType(Schema.SchemaType.ARRAY)
                                                                                 .ref("#/components.schemas.Flight")))))
                                                 .addAPIResponse("404", OASFactory.createObject(APIResponse.class)
                                                         .description("No available flights found")
@@ -235,7 +296,7 @@ public class MyOASModelReaderImpl implements OASModelReader {
                                                 .allowEmptyValue(true)
                                                 .description("Airport the customer departs from")
                                                 .schema(OASFactory.createObject(Schema.class)
-                                                        .type(Schema.SchemaType.STRING)))
+                                                        .addType(Schema.SchemaType.STRING)))
                                         .addParameter(OASFactory.createObject(Parameter.class)
                                                 .name("returningDate")
                                                 .required(true)
@@ -243,14 +304,14 @@ public class MyOASModelReaderImpl implements OASModelReader {
                                                 .allowReserved(true)
                                                 .description("Customer return date")
                                                 .schema(OASFactory.createObject(Schema.class)
-                                                        .type(Schema.SchemaType.STRING)))
+                                                        .addType(Schema.SchemaType.STRING)))
                                         .addParameter(OASFactory.createObject(Parameter.class)
                                                 .name("airportTo")
                                                 .required(true)
                                                 .in(Parameter.In.QUERY)
                                                 .description("Airport the customer returns to")
                                                 .schema(OASFactory.createObject(Schema.class)
-                                                        .type(Schema.SchemaType.STRING)))
+                                                        .addType(Schema.SchemaType.STRING)))
                                         .addParameter(OASFactory.createObject(Parameter.class)
                                                 .name("numberOfAdults")
                                                 .required(true)
@@ -258,7 +319,7 @@ public class MyOASModelReaderImpl implements OASModelReader {
                                                 .description("Number of adults on the flight")
                                                 .schema(OASFactory.createObject(Schema.class)
                                                         .minimum(new BigDecimal(0))
-                                                        .type(Schema.SchemaType.STRING)))
+                                                        .addType(Schema.SchemaType.STRING)))
                                         .addParameter(OASFactory.createObject(Parameter.class)
                                                 .name("numberOfChildren")
                                                 .required(true)
@@ -267,7 +328,7 @@ public class MyOASModelReaderImpl implements OASModelReader {
                                                 .description("Number of children on the flight")
                                                 .schema(OASFactory.createObject(Schema.class)
                                                         .minimum(new BigDecimal(0))
-                                                        .type(Schema.SchemaType.STRING)))))
+                                                        .addType(Schema.SchemaType.STRING)))))
                         .addPathItem("/modelReader/bookings", OASFactory.createObject(PathItem.class)
                                 .GET(OASFactory.createObject(Operation.class)
                                         .tags(new ArrayList<String>())
@@ -281,7 +342,7 @@ public class MyOASModelReaderImpl implements OASModelReader {
                                                                 .addMediaType("applictaion/json", OASFactory
                                                                         .createObject(MediaType.class)
                                                                         .schema(OASFactory.createObject(Schema.class)
-                                                                                .type(Schema.SchemaType.ARRAY)
+                                                                                .addType(Schema.SchemaType.ARRAY)
                                                                                 .ref("#/components.schemas.Booking")))))
                                                 .addAPIResponse("404", OASFactory.createObject(APIResponse.class)
                                                         .description("No bookings found for the user"))))
@@ -304,6 +365,7 @@ public class MyOASModelReaderImpl implements OASModelReader {
                                                                         .schema(OASFactory.createObject(Schema.class)
                                                                                 .title("id")
                                                                                 .description("id of the new booking")
-                                                                                .type(Schema.SchemaType.STRING)))))))));
+                                                                                .addType(
+                                                                                        Schema.SchemaType.STRING)))))))));
     }
 }

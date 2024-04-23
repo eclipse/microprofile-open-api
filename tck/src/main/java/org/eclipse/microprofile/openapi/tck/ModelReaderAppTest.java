@@ -16,11 +16,15 @@
 
 package org.eclipse.microprofile.openapi.tck;
 
+import static org.eclipse.microprofile.openapi.tck.utils.TCKMatchers.itemOrSingleton;
+import static org.eclipse.microprofile.openapi.tck.utils.TCKMatchers.number;
 import static org.hamcrest.Matchers.both;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.equalToIgnoringCase;
+import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.hasSize;
@@ -169,7 +173,7 @@ public class ModelReaderAppTest extends AppTestBase {
             vr.body(query + ".in", both(hasSize(1)).and(contains("query")));
             vr.body(query + ".description", both(hasSize(1)).and(contains(list.get(i)[1])));
             vr.body(query + ".required", both(hasSize(1)).and(contains(true)));
-            vr.body(query + ".schema.type", both(hasSize(1)).and(contains("string")));
+            vr.body(query + ".schema.type", both(hasSize(1)).and(contains(itemOrSingleton("string"))));
         }
 
         vr.body(availabilityParameters + ".findAll { it.name == 'numberOfAdults' }.schema.minimum",
@@ -211,10 +215,56 @@ public class ModelReaderAppTest extends AppTestBase {
         vr.body("components.schemas.AirlinesRef.$ref", equalTo("#/components/schemas/Airlines"));
         vr.body("components.schemas.Airlines.title", equalTo("Airlines"));
         vr.body("paths.'/modelReader/bookings'.post.responses.'201'.content.'text/plain'.schema.type",
-                equalTo("string"));
+                itemOrSingleton("string"));
         vr.body("components.schemas.id.format", equalTo("int32"));
         vr.body("paths.'/modelReader/bookings'.post.responses.'201'.content.'text/plain'.schema.description",
                 equalTo("id of the new booking"));
+    }
+
+    @Test(dataProvider = "formatProvider")
+    public void testSchemaCustomProperties(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+        vr.body("components.schemas.custom.$schema", equalTo("http://example.com/myCustomSchema"));
+        vr.body("components.schemas.custom.shortKey", number(1));
+        vr.body("components.schemas.custom.intKey", number(2));
+        vr.body("components.schemas.custom.longKey", number(3));
+        vr.body("components.schemas.custom.booleanKey", equalTo(true));
+        vr.body("components.schemas.custom.charKey", equalTo("a"));
+        vr.body("components.schemas.custom.stringKey", equalTo("string"));
+        vr.body("components.schemas.custom.floatKey", number(3.5));
+        vr.body("components.schemas.custom.doubleKey", number(3.5));
+        vr.body("components.schemas.custom.bigDecimalKey", number(3.5));
+        vr.body("components.schemas.custom.bigIntegerKey", number(7));
+        vr.body("components.schemas.custom.extDocKey.description", equalTo("test"));
+        vr.body("components.schemas.custom.operationKey.description", equalTo("test"));
+        vr.body("components.schemas.custom.pathItemKey.description", equalTo("test"));
+        vr.body("components.schemas.custom.pathsKey.test.description", equalTo("test"));
+        vr.body("components.schemas.custom.callbacKey.description", equalTo("test"));
+        vr.body("components.schemas.custom.exampleKey.value", equalTo("test"));
+        vr.body("components.schemas.custom.headerKey.description", equalTo("test"));
+        vr.body("components.schemas.custom.contactKey.name", equalTo("test"));
+        vr.body("components.schemas.custom.infoKey.title", equalTo("test"));
+        vr.body("components.schemas.custom.licenseKey.name", equalTo("test"));
+        vr.body("components.schemas.custom.linkKey.operationId", equalTo("test"));
+        vr.body("components.schemas.custom.contentKey.test.example", equalTo("test"));
+        vr.body("components.schemas.custom.discriminatorKey.propertyName", equalTo("test"));
+        vr.body("components.schemas.custom.schemaKey.title", equalTo("test"));
+        vr.body("components.schemas.custom.xmlKey.name", equalTo("test"));
+        vr.body("components.schemas.custom.parameterKey.name", equalTo("test"));
+        vr.body("components.schemas.custom.requestBodyKey.content.test.example", equalTo("test"));
+        vr.body("components.schemas.custom.apiResponseKey.description", equalTo("test"));
+        vr.body("components.schemas.custom.apiResponsesKey.200.description", equalTo("test"));
+        vr.body("components.schemas.custom.oAuthFlowKey.authorizationUrl", equalTo("http://example.com"));
+        vr.body("components.schemas.custom.oAuthFlowsKey.implicit.authorizationUrl", equalTo("http://example.com"));
+        vr.body("components.schemas.custom.securityReqKey.scheme", contains("test"));
+        vr.body("components.schemas.custom.securitySchemeKey.type", equalTo("http"));
+        vr.body("components.schemas.custom.serverKey.url", equalTo("http://example.com"));
+        vr.body("components.schemas.custom.serverVarKey.default", equalTo("test"));
+        vr.body("components.schemas.custom.tagKey.name", equalTo("test"));
+        vr.body("components.schemas.custom.enumKey", equalToIgnoringCase("MONDAY"));
+        vr.body("components.schemas.custom.listKey", hasItem("test"));
+        vr.body("components.schemas.custom.listKey.name", hasItem("test"));
+        vr.body("components.schemas.custom.mapKey.test", equalToIgnoringCase("MONDAY"));
     }
 
     @Test(dataProvider = "formatProvider")
@@ -291,7 +341,7 @@ public class ModelReaderAppTest extends AppTestBase {
 
         String content1 = "paths.'/availability'.get.responses.'200'.content.'application/json'";
         vr.body(content1, notNullValue());
-        vr.body(content1 + ".schema.type", equalTo("array"));
+        vr.body(content1 + ".schema.type", itemOrSingleton("array"));
         vr.body(content1 + ".schema.items", notNullValue());
     }
 }

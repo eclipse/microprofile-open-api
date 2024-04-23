@@ -18,6 +18,7 @@ package org.eclipse.microprofile.openapi.tck;
 
 import static io.restassured.RestAssured.given;
 import static org.eclipse.microprofile.openapi.tck.utils.TCKMatchers.comparesEqualToNumber;
+import static org.eclipse.microprofile.openapi.tck.utils.TCKMatchers.itemOrSingleton;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasEntry;
@@ -60,14 +61,10 @@ public class PetStoreAppTest extends AppTestBase {
         vr.body("paths.'/store/order/{orderId}'.get.responses.'599'.schema", nullValue());
 
         // Numerical properties
-        vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.maximum",
-                comparesEqualToNumber(101.0));
         vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.exclusiveMaximum",
-                equalTo(true));
-        vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.minimum",
-                comparesEqualToNumber(9));
+                comparesEqualToNumber(101.0));
         vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.exclusiveMinimum",
-                equalTo(true));
+                comparesEqualToNumber(9));
         vr.body("paths.'/pet/{petId}'.get.parameters.find{ it.name == 'petId' }.schema.multipleOf",
                 comparesEqualToNumber(10));
 
@@ -218,7 +215,7 @@ public class PetStoreAppTest extends AppTestBase {
         vr.body(schemaObject,
                 allOf(aMapWithSize(3),
                         hasEntry(equalTo("required"), notNullValue()),
-                        hasEntry(equalTo("type"), equalTo("object")),
+                        hasEntry(equalTo("type"), itemOrSingleton("object")),
                         hasEntry(equalTo("properties"), notNullValue())));
     }
 
@@ -241,7 +238,7 @@ public class PetStoreAppTest extends AppTestBase {
         vr.body(schemaObject,
                 allOf(aMapWithSize(3),
                         hasEntry(equalTo("required"), notNullValue()),
-                        hasEntry(equalTo("type"), equalTo("object")),
+                        hasEntry(equalTo("type"), itemOrSingleton("object")),
                         hasEntry(equalTo("properties"), notNullValue())));
     }
 
@@ -265,7 +262,7 @@ public class PetStoreAppTest extends AppTestBase {
 
         vr.body(arraySchemaObject,
                 allOf(aMapWithSize(2),
-                        hasEntry(equalTo("type"), equalTo("array")),
+                        hasEntry(equalTo("type"), itemOrSingleton("array")),
                         hasEntry(equalTo("items"), notNullValue())));
 
         String schemaObject = dereference(vr, arraySchemaObject + ".items");
@@ -273,7 +270,7 @@ public class PetStoreAppTest extends AppTestBase {
         vr.body(schemaObject,
                 allOf(aMapWithSize(3),
                         hasEntry(equalTo("required"), notNullValue()),
-                        hasEntry(equalTo("type"), equalTo("object")),
+                        hasEntry(equalTo("type"), itemOrSingleton("object")),
                         hasEntry(equalTo("properties"), notNullValue())));
     }
 
