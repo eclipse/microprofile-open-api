@@ -76,6 +76,13 @@ public @interface Info {
     String version();
 
     /**
+     * The summary of the API.
+     *
+     * @return the summary for the API
+     **/
+    String summary() default "";
+
+    /**
      * List of extensions to be added to the {@link org.eclipse.microprofile.openapi.models.info.Info Info} model
      * corresponding to the containing annotation.
      *
