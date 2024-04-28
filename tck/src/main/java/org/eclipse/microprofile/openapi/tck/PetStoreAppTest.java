@@ -194,7 +194,7 @@ public class PetStoreAppTest extends AppTestBase {
                 .assertThat()
                 .statusCode(200)
                 .and()
-                .body("openapi", startsWith("3.0."));
+                .body("openapi", startsWith("3.1."));
     }
 
     @Test(dataProvider = "formatProvider")

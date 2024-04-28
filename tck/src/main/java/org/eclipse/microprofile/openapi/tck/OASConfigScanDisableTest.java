@@ -40,7 +40,7 @@ public class OASConfigScanDisableTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testScanDisable(String type) throws InterruptedException {
         vr = callEndpoint(type);
-        vr.body("openapi", startsWith("3.0."));
+        vr.body("openapi", startsWith("3.1."));
         vr.body("info", notNullValue());
         vr.body("info.title", notNullValue());
         vr.body("info.version", notNullValue());
