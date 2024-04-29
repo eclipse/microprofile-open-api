@@ -22,6 +22,7 @@ import static org.hamcrest.Matchers.both;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
 import static org.hamcrest.Matchers.hasItem;
@@ -239,13 +240,13 @@ public class ModelReaderAppTest extends AppTestBase {
         vr.body("components.schemas.custom.operationKey.description", equalTo("test"));
         vr.body("components.schemas.custom.pathItemKey.description", equalTo("test"));
         vr.body("components.schemas.custom.pathsKey.test.description", equalTo("test"));
-        vr.body("components.schemas.custom.callbacKey.description", equalTo("test"));
+        vr.body("components.schemas.custom.callbackKey.test.description", equalTo("test"));
         vr.body("components.schemas.custom.exampleKey.value", equalTo("test"));
         vr.body("components.schemas.custom.headerKey.description", equalTo("test"));
         vr.body("components.schemas.custom.contactKey.name", equalTo("test"));
         vr.body("components.schemas.custom.infoKey.title", equalTo("test"));
         vr.body("components.schemas.custom.licenseKey.name", equalTo("test"));
-        vr.body("components.schemas.custom.linkKey.operationId", equalTo("test"));
+        vr.body("components.schemas.custom.linkKey.operationId", equalTo("getTestFlights"));
         vr.body("components.schemas.custom.contentKey.test.example", equalTo("test"));
         vr.body("components.schemas.custom.discriminatorKey.propertyName", equalTo("test"));
         vr.body("components.schemas.custom.schemaKey.title", equalTo("test"));
@@ -256,15 +257,15 @@ public class ModelReaderAppTest extends AppTestBase {
         vr.body("components.schemas.custom.apiResponsesKey.200.description", equalTo("test"));
         vr.body("components.schemas.custom.oAuthFlowKey.authorizationUrl", equalTo("http://example.com"));
         vr.body("components.schemas.custom.oAuthFlowsKey.implicit.authorizationUrl", equalTo("http://example.com"));
-        vr.body("components.schemas.custom.securityReqKey.scheme", contains("test"));
+        vr.body("components.schemas.custom.securityReqKey.test", empty());
         vr.body("components.schemas.custom.securitySchemeKey.type", equalTo("http"));
         vr.body("components.schemas.custom.serverKey.url", equalTo("http://example.com"));
         vr.body("components.schemas.custom.serverVarKey.default", equalTo("test"));
         vr.body("components.schemas.custom.tagKey.name", equalTo("test"));
         vr.body("components.schemas.custom.enumKey", equalToIgnoringCase("MONDAY"));
         vr.body("components.schemas.custom.listKey", hasItem("test"));
-        vr.body("components.schemas.custom.listKey.name", hasItem("test"));
-        vr.body("components.schemas.custom.mapKey.test", equalToIgnoringCase("MONDAY"));
+        vr.body("components.schemas.custom.listKey[1].name", equalTo("test"));
+        vr.body("components.schemas.custom.mapKey.test", equalToIgnoringCase("THURSDAY"));
     }
 
     @Test(dataProvider = "formatProvider")
