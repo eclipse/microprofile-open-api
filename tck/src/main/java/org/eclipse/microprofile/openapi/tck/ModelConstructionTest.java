@@ -1674,6 +1674,9 @@ public class ModelConstructionTest extends Arquillian {
         sv.removeEnumeration(enumeration);
         assertEquals(sv.getEnumeration().size(), 0, "The list is expected to be empty.");
 
+        sv.setDefaultValue(enumeration);
+        assertEquals(sv.getDefaultValue(), enumeration);
+
         final String enumeration2 = new String("enumValue2");
         sv.setEnumeration(Collections.singletonList(enumeration2));
         assertEquals(sv.getEnumeration().size(), 1, "The list is expected to contain one entry.");
