@@ -35,9 +35,8 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
  * OpenAPI document root. If more than one non-empty annotation is applied to a type in the application or if the
  * externalDocs field of the OpenAPIDefinition annotation is supplied the results are not defined.
  *
- * @see <a href=
- *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#externalDocumentationObject">OpenAPI
- *      Specification External Documentation Object</a>
+ * @see <a href= "https://spec.openapis.org/oas/v3.1.0.html#external-documentation-object">OpenAPI Specification
+ *      External Documentation Object</a>
  **/
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

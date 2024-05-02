@@ -30,8 +30,7 @@ import org.eclipse.microprofile.openapi.annotations.servers.Server;
  * caller's ability to successfully invoke it, rather it provides a known relationship and traversal mechanism between
  * responses and other operations.
  *
- * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#linkObject"> OpenAPI
- *      Specification Link Object</a>
+ * @see <a href= "https://spec.openapis.org/oas/v3.1.0.html#link-object"> OpenAPI Specification Link Object</a>
  **/
 @Target({})
 @Retention(RetentionPolicy.RUNTIME)

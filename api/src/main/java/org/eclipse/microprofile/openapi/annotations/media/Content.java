@@ -27,8 +27,8 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 /**
  * This object provides schema and examples for a particular media type.
  *
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#mediaTypeObject">OpenAPI
- *      Specification Media Type Object</a>
+ * @see <a href="https://spec.openapis.org/oas/v3.1.0.html#media-type-object">OpenAPI Specification Media Type
+ *      Object</a>
  **/
 @Target({})
 @Retention(RetentionPolicy.RUNTIME)

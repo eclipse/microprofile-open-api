@@ -26,8 +26,7 @@ import java.lang.annotation.Target;
 /**
  * This object encapsulates input parameters
  *
- * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject">OpenAPI
- *      Specification Parameter Object</a>
+ * @see <a href= "https://spec.openapis.org/oas/v3.1.0.html#parameter-object">OpenAPI Specification Parameter Object</a>
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})

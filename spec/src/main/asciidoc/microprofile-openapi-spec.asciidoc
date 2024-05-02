@@ -45,12 +45,12 @@ anywhere: on-premises, private cloud, public cloud, etc.
 
 For the clients and providers of these services to connect there needs to be a
 clear and complete contract.  Similar to the WSDL contract for legacy Web Services,
-the https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md[OpenAPI v3] specification is the contract for
+the https://spec.openapis.org/oas/v3.1.0.html[OpenAPI v3.1] specification is the contract for
 RESTful Services.
 
 This MicroProfile specification, called OpenAPI, aims to provide a set of Java
 interfaces and programming models which allow Java developers to natively produce
-OpenAPI v3 documents from their applications written using Jakarta RESTful Web
+OpenAPI v3.1 documents from their applications written using Jakarta RESTful Web
 Services (Jakarta REST).
 
 == Architecture
@@ -72,8 +72,8 @@ which means that vendors implementing the MP OpenAPI specification must also imp
 the MP Config specification.
 
 There are various ways to inject these configuration values into an MP OpenAPI
-framework, including the https://github.com/eclipse/microprofile-config/blob/master/spec/src/main/asciidoc/configsources.asciidoc#default-configources[default ConfigSource] as well as
-https://github.com/eclipse/microprofile-config/blob/master/spec/src/main/asciidoc/configsources.asciidoc#custom-configsources[custom ConfigSource].
+framework, including the https://download.eclipse.org/microprofile/microprofile-config-3.1/microprofile-config-spec-3.1.html#default_configsources[default ConfigSource] as well as
+https://download.eclipse.org/microprofile/microprofile-config-3.1/microprofile-config-spec-3.1.html#custom_configsources[custom ConfigSource].
 
 Vendors implementing the MP OpenAPI specification can optionally provide additional native
 ways for these configuration values to be injected into the framework
@@ -89,7 +89,7 @@ framework-specific values for configurations that affect implementation behavior
 
 For convenience of vendors (and application developers using custom ConfigSources),
 the full list of supported configuration keys is available as constants in the
-https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/OASConfig.java[OASConfig] class.
+https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/OASConfig.java[OASConfig] class.
 
 ==== Core configurations
 
@@ -205,7 +205,7 @@ been built from the previously described documentation mechanisms.
 
 === Annotations
 
-Many of these OpenAPI v3 annotations were derived from the https://github.com/swagger-api/swagger-core[Swagger Core] library, which
+Many of these annotations were derived from the https://github.com/swagger-api/swagger-core[Swagger Core] library, which
 allows for a mostly-mechanical transformation of applications that are using that
 library and wish to take advantage to the official MP OpenAPI interfaces.
 
@@ -217,52 +217,52 @@ The following annotations are found in the https://github.com/eclipse/microprofi
 |===
 | Annotation | Description
 
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/callbacks/Callback.java[@Callback] | Represents a callback URL that will be invoked.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/callbacks/Callbacks.java[@Callbacks] | Represents an array of Callback URLs that can be invoked.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/callbacks/CallbackOperation.java[@CallbackOperation] | Represents an operation that will be invoked during the callback.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/Components.java[@Components] | A container that holds various reusable objects for different aspects of the OpenAPI Specification.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/enums/Explode.java[@Explode] | Enumeration used to define the value of the `explode` property.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/enums/ParameterIn.java[@ParameterIn] | Enumeration representing the parameter's `in` property.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/enums/ParameterStyle.java[@ParameterStyle] | Enumeration for the parameter's `style` property.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/enums/SecuritySchemeIn.java[@SecuritySchemeIn] | Enumeration for the security scheme's `in` property.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/enums/SecuritySchemeType.java[@SecuritySchemeType] | Enumeration for the security scheme's `type` property.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/extensions/Extension.java[@Extension] | Adds an extension with contained properties.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/extensions/Extensions.java[@Extensions] | Adds custom properties to an extension.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/ExternalDocumentation.java[@ExternalDocumentation] | References an external resource for extended documentation.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/headers/Header.java[@Header] | Describes a single header object.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/info/Contact.java[@Contact] | Contact information for the exposed API.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/info/Info.java[@Info] | This annotation encapsulates metadata about the API.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/info/License.java[@License] | License information for the exposed API.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/links/Link.java[@Link] | Represents a design-time link for a response.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/links/LinkParameter.java[@LinkParameter] | Represents a parameter to pass to the linked operation.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/media/Content.java[@Content] | Provides schema and examples for a particular media type.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/media/DiscriminatorMapping.java[@DiscriminatorMapping] | Used to differentiate between other schemas which may satisfy the payload description.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/media/Encoding.java[@Encoding] | Single encoding definition to be applied to single Schema Object.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/media/ExampleObject.java[@ExampleObject] | Illustrates an example of a particular content.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/media/Schema.java[@Schema] | Allows the definition of input and output data types.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/media/Schema.java[@SchemaProperty] | Allows the definition of a property nested within a parent @Schema.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/OpenAPIDefinition.java[@OpenAPIDefinition] | General metadata for an OpenAPI definition.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/Operation.java[@Operation] | Describes an operation or typically a HTTP method against a specific path.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/parameters/Parameter.java[@Parameter] | Describes a single operation parameter.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/parameters/Parameters.java[@Parameters] | Encapsulates input parameters.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/parameters/RequestBody.java[@RequestBody] | Describes a single request body.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/parameters/RequestBodySchema.java[@RequestBodySchema] | Describes a single request body with schema implementation class.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/responses/APIResponse.java[@APIResponse] | Describes a single response from an API operation.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/responses/APIResponses.java[@APIResponses] | A container for multiple responses from an API operation.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/responses/APIResponseSchema.java[@APIResponseSchema] | Describes a single response with schema implementation class from an API operation.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/OAuthFlow.java[@OAuthFlow] | Configuration details for a supported OAuth Flow.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/OAuthFlows.java[@OAuthFlows] | Allows configuration of the supported OAuth Flows.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/OAuthScope.java[@OAuthScope] | Represents an OAuth scope.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/SecurityRequirement.java[@SecurityRequirement] |  Specifies a security requirement for an operation.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/SecurityRequirements.java[@SecurityRequirements] | Represents an array of security requirements where only one needs to be satisfied.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/SecurityRequirementsSet.java[@SecurityRequirementsSet] | Represents an array of security requirements that need to be satisfied.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/SecurityScheme.java[@SecurityScheme] |  Defines a security scheme that can be used by the operations.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/SecuritySchemes.java[@SecuritySchemes] | Represents an array of security schemes that can be specified.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/servers/Server.java[@Server]|  Represents a server used in an operation or used by all operations in an OpenAPI document.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/servers/Servers.java[@Servers] | A container for multiple server definitions.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/servers/ServerVariable.java[@ServerVariable] | Represents a server variable for server URL template substitution.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/tags/Tag.java[@Tag] | Represents a tag for the API endpoint.
-| https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations/tags/Tags.java[@Tags] | A container of multiple tags.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/callbacks/Callback.java[@Callback] | Represents a callback URL that will be invoked.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/callbacks/Callbacks.java[@Callbacks] | Represents an array of Callback URLs that can be invoked.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/callbacks/CallbackOperation.java[@CallbackOperation] | Represents an operation that will be invoked during the callback.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/Components.java[@Components] | A container that holds various reusable objects for different aspects of the OpenAPI Specification.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/enums/Explode.java[@Explode] | Enumeration used to define the value of the `explode` property.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/enums/ParameterIn.java[@ParameterIn] | Enumeration representing the parameter's `in` property.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/enums/ParameterStyle.java[@ParameterStyle] | Enumeration for the parameter's `style` property.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/enums/SecuritySchemeIn.java[@SecuritySchemeIn] | Enumeration for the security scheme's `in` property.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/enums/SecuritySchemeType.java[@SecuritySchemeType] | Enumeration for the security scheme's `type` property.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/extensions/Extension.java[@Extension] | Adds an extension with contained properties.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/extensions/Extensions.java[@Extensions] | Adds custom properties to an extension.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/ExternalDocumentation.java[@ExternalDocumentation] | References an external resource for extended documentation.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/headers/Header.java[@Header] | Describes a single header object.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/info/Contact.java[@Contact] | Contact information for the exposed API.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/info/Info.java[@Info] | This annotation encapsulates metadata about the API.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/info/License.java[@License] | License information for the exposed API.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/links/Link.java[@Link] | Represents a design-time link for a response.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/links/LinkParameter.java[@LinkParameter] | Represents a parameter to pass to the linked operation.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/media/Content.java[@Content] | Provides schema and examples for a particular media type.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/media/DiscriminatorMapping.java[@DiscriminatorMapping] | Used to differentiate between other schemas which may satisfy the payload description.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/media/Encoding.java[@Encoding] | Single encoding definition to be applied to single Schema Object.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/media/ExampleObject.java[@ExampleObject] | Illustrates an example of a particular content.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/media/Schema.java[@Schema] | Allows the definition of input and output data types.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/media/SchemaProperty.java[@SchemaProperty] | Allows the definition of a property nested within a parent @Schema.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/OpenAPIDefinition.java[@OpenAPIDefinition] | General metadata for an OpenAPI definition.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/Operation.java[@Operation] | Describes an operation or typically a HTTP method against a specific path.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/parameters/Parameter.java[@Parameter] | Describes a single operation parameter.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/parameters/Parameters.java[@Parameters] | Encapsulates input parameters.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/parameters/RequestBody.java[@RequestBody] | Describes a single request body.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/parameters/RequestBodySchema.java[@RequestBodySchema] | Describes a single request body with schema implementation class.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/responses/APIResponse.java[@APIResponse] | Describes a single response from an API operation.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/responses/APIResponses.java[@APIResponses] | A container for multiple responses from an API operation.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/responses/APIResponseSchema.java[@APIResponseSchema] | Describes a single response with schema implementation class from an API operation.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/OAuthFlow.java[@OAuthFlow] | Configuration details for a supported OAuth Flow.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/OAuthFlows.java[@OAuthFlows] | Allows configuration of the supported OAuth Flows.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/OAuthScope.java[@OAuthScope] | Represents an OAuth scope.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/SecurityRequirement.java[@SecurityRequirement] |  Specifies a security requirement for an operation.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/SecurityRequirements.java[@SecurityRequirements] | Represents an array of security requirements where only one needs to be satisfied.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/SecurityRequirementsSet.java[@SecurityRequirementsSet] | Represents an array of security requirements that need to be satisfied.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/SecurityScheme.java[@SecurityScheme] |  Defines a security scheme that can be used by the operations.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/security/SecuritySchemes.java[@SecuritySchemes] | Represents an array of security schemes that can be specified.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/servers/Server.java[@Server]|  Represents a server used in an operation or used by all operations in an OpenAPI document.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/servers/Servers.java[@Servers] | A container for multiple server definitions.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/servers/ServerVariable.java[@ServerVariable] | Represents a server variable for server URL template substitution.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/tags/Tag.java[@Tag] | Represents a tag for the API endpoint.
+| https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations/tags/Tags.java[@Tags] | A container of multiple tags.
 |===
 
 ===== Overrides
@@ -660,9 +660,9 @@ complete set of models are found in the https://github.com/eclipse/microprofile-
 
 ==== OASFactory
 
-The https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/OASFactory.java[OASFactory] is used to create all of the elements of an OpenAPI tree.
+The https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/OASFactory.java[OASFactory] is used to create all of the elements of an OpenAPI tree.
 
-For example, the following snippet creates a simple https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/models/info/Info.java[Info] element that contains a title, description, and version.
+For example, the following snippet creates a simple https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/models/info/Info.java[Info] element that contains a title, description, and version.
 
 [source,java]
 ----
@@ -671,7 +671,7 @@ OASFactory.createObject(Info.class).title("Airlines").description("Airlines APIs
 
 ==== OASModelReader
 
-The https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/OASModelReader.java[OASModelReader] interface allows application developers to bootstrap the OpenAPI model tree
+The https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/OASModelReader.java[OASModelReader] interface allows application developers to bootstrap the OpenAPI model tree
 used by the processing framework.  To use it, simply create an implementation of
 this interface and register it using the `mp.openapi.model.reader` configuration
 key, where the value is the fully qualified name of the reader class.
@@ -700,7 +700,7 @@ which is called once after all other documentation mechanisms have completed.
 
 ==== OASFilter
 
-The https://github.com/eclipse/microprofile-open-api/blob/master/api/src/main/java/org/eclipse/microprofile/openapi/OASFilter.java[OASFilter] interface allows application developers
+The https://github.com/eclipse/microprofile-open-api/blob/main/api/src/main/java/org/eclipse/microprofile/openapi/OASFilter.java[OASFilter] interface allows application developers
 to receive callbacks for various key OpenAPI elements.  The interface has a default
 implementation for every method, which allows application developers to only override
 the methods they care about.  To use it, simply create an implementation of
@@ -787,8 +787,8 @@ where the value can be either `JSON` or `YAML`, to facilitate the toggle between
 the default `YAML` format and `JSON` format.
 
 === Context root behavior
-Vendors are required to ensure that the combination of each global https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#serverObject[server]
-element and https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#pathItemObject[pathItem] element resolve to the absolute backend URL of that
+Vendors are required to ensure that the combination of each global https://spec.openapis.org/oas/v3.1.0.html#server-object[server]
+element and https://spec.openapis.org/oas/v3.1.0.html#path-item-object[pathItem] element resolve to the absolute backend URL of that
 particular path.  If that `pathItem` contains a `servers` element , then this
 list of operation-level `server` elements replaces the global list of servers
 for that particular `pathItem`.
@@ -825,7 +825,7 @@ It is common that a microservice (A) using MicroProfile OpenAPI will also use ht
 to make outbound calls into another microservice (B).  In this case, we do not want
 the interface for microservice (B) to appear in microservice (A)'s OAS3 document.
 
-Therefore, vendors are required to exclude from the final OAS3 document any interface annotated with https://github.com/eclipse/microprofile-rest-client/blob/master/api/src/main/java/org/eclipse/microprofile/rest/client/inject/RegisterRestClient.java[org.eclipse.microprofile.rest.client.inject.RegisterRestClient].
+Therefore, vendors are required to exclude from the final OAS3 document any interface annotated with https://download.eclipse.org/microprofile/microprofile-rest-client-3.0/apidocs/org/eclipse/microprofile/rest/client/inject/RegisterRestClient.html[org.eclipse.microprofile.rest.client.inject.RegisterRestClient].
 
 == Limitations
 
@@ -841,7 +841,7 @@ processed languages can be kept to improve performance.
 === Validation
 
 The MP OpenAPI specification does not mandate vendors to validate the resulting
-OpenAPI v3 model (after processing the 5 steps previously mentioned), which means
+OpenAPI v3.1 model (after processing the 5 steps previously mentioned), which means
 that the behavior of invalid models is vendor specific (i.e. vendors may choose to
 ignore, reject, or pass-through invalid inputs).
 

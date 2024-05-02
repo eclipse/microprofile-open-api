@@ -25,8 +25,7 @@ import org.eclipse.microprofile.openapi.models.Extensible;
 /**
  * An object representing a server.
  *
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#serverObject">Server
- *      Object</a>
+ * @see <a href="https://spec.openapis.org/oas/v3.1.0.html#server-object">OpenAPI Specification Server Object</a>
  */
 public interface Server extends Constructible, Extensible<Server> {
 

@@ -27,7 +27,7 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 /**
  * Configuration details for a supported OAuth Flow.
  *
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#oauthFlowObject"> OAuth Flow
+ * @see <a href="https://spec.openapis.org/oas/v3.1.0.html#oauth-flow-object">OpenAPI Specification OAuth Flow
  *      Object</a>
  **/
 @Target({})

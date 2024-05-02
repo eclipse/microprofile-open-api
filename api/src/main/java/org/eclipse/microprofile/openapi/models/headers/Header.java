@@ -32,8 +32,7 @@ import org.eclipse.microprofile.openapi.models.media.Schema;
  * Describes a single header parameter for an operation.
  * <p>
  *
- * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#header-object">OpenAPI
- *      Specification Header Object</a>
+ * @see <a href= "https://spec.openapis.org/oas/v3.1.0.html#header-object">OpenAPI Specification Header Object</a>
  */
 public interface Header extends Constructible, Extensible<Header>, Reference<Header> {
 

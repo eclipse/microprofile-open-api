@@ -39,8 +39,7 @@ import org.eclipse.microprofile.openapi.models.Reference;
  * Any time a Schema Object can be used, a Reference Object can be used in its place. This allows referencing an
  * existing definition instead of defining the same Schema again.
  *
- * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#schemaObject">OpenAPI
- *      Specification Schema Object</a>
+ * @see <a href= "https://spec.openapis.org/oas/v3.1.0.html#schema-object">OpenAPI Specification Schema Object</a>
  */
 public interface Schema extends Extensible<Schema>, Constructible, Reference<Schema> {
 

@@ -24,7 +24,7 @@ import org.eclipse.microprofile.openapi.models.Extensible;
  * A metadata object that allows for more fine-tuned XML model definitions. When using arrays, XML element names are not
  * inferred (for singular/plural forms) and the name property SHOULD be used to add that information.
  *
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#xmlObject">XML Object</a>
+ * @see <a href="https://spec.openapis.org/oas/v3.1.0.html#xml-object">OpenAPI Specification XML Object</a>
  */
 public interface XML extends Constructible, Extensible<XML> {
 

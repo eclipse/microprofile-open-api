@@ -27,7 +27,7 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 /**
  * This annotation provides metadata about the API, and maps to the Info object in OpenAPI Specification 3.
  *
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#infoObject"
+ * @see <a href="https://spec.openapis.org/oas/v3.1.0.html#info-object">OpenAPI Specification Info Object</a>
  **/
 @Target({})
 @Retention(RetentionPolicy.RUNTIME)

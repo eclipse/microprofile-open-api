@@ -25,7 +25,7 @@ import java.lang.annotation.Target;
 /**
  * Represents an OAuth scope.
  *
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#oauthFlowObject">OAuthFlow
+ * @see <a href="https://spec.openapis.org/oas/v3.1.0.html#oauth-flow-object">OpenAPI Specification OAuth Flow
  *      Object</a>
  **/
 @Target({})

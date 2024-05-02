@@ -33,7 +33,8 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
  * (either as a header or as a query parameter), OAuth2's common flows (implicit, password, application and access code)
  * as defined in RFC6749, and OpenID Connect Discovery.
  *
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-scheme-object"
+ * @see <a href="https://spec.openapis.org/oas/v3.1.0.html#security-scheme-object">OpenAPI Specification Security Scheme
+ *      Object</a>
  **/
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

@@ -13,7 +13,7 @@
 
 /**
  * A set of Java interfaces, annotations and programming models which allow Java developers to natively produce OpenAPI
- * v3 documents from their Jakarta REST applications.
+ * v3.1 documents from their Jakarta REST applications.
  */
 
 @org.osgi.annotation.versioning.Version("2.1")

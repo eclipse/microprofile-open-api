@@ -26,8 +26,7 @@ import org.eclipse.microprofile.openapi.models.ExternalDocumentation;
  * <p>
  * An object to store metadata to be available in the OpenAPI document.
  *
- * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#tagObject">OpenAPI
- *      Specification Tag Object</a>
+ * @see <a href= "https://spec.openapis.org/oas/v3.1.0.html#tag-object">OpenAPI Specification Tag Object</a>
  */
 public interface Tag extends Constructible, Extensible<Tag> {
 

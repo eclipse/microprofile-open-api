@@ -24,7 +24,7 @@ import org.eclipse.microprofile.openapi.models.Extensible;
  * This interface represents all the metadata about the API. The metadata may be used by clients if needed, and may be
  * presented in editing or documentation tools.
  *
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#infoObject"
+ * @see <a href="https://spec.openapis.org/oas/v3.1.0.html#info-object">OpenAPI Specification Info Object</a>
  */
 public interface Info extends Constructible, Extensible<Info> {
 

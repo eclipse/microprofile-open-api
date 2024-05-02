@@ -27,9 +27,8 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 /**
  * An object representing a Server Variable for server URL template substitution.
  *
- * @see <a href=
- *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#server-variable-object">ServerVariable
- *      Object</a>
+ * @see <a href= "https://spec.openapis.org/oas/v3.1.0.html#server-variable-object">OpenAPI Specification Server
+ *      Variable Object</a>
  **/
 @Target({})
 @Retention(RetentionPolicy.RUNTIME)

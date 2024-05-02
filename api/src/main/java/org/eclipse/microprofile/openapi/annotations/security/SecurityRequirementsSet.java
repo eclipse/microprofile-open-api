@@ -53,9 +53,8 @@ import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
  *    oauth_implicit: []
  * </pre>
  *
- * @see <a href=
- *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-requirement-object">SecurityRequirement
- *      Object</a>
+ * @see <a href= "https://spec.openapis.org/oas/v3.1.0.html#security-requirement-object">OpenAPI Specification Security
+ *      Requirement Object</a>
  **/
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

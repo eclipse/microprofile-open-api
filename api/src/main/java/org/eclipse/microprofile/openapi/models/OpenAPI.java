@@ -29,8 +29,7 @@ import org.eclipse.microprofile.openapi.models.tags.Tag;
  * <p>
  * This is the root document object of the OpenAPI document. It contains required and optional fields.
  *
- * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#openapi-object">OpenAPI
- *      Specification OpenAPI Object</a>
+ * @see <a href= "https://spec.openapis.org/oas/v3.1.0.html#openapi-object">OpenAPI Specification OpenAPI Object</a>
  */
 public interface OpenAPI extends Constructible, Extensible<OpenAPI> {
 

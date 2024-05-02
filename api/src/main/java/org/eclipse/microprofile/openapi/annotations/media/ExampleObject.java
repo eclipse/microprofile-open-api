@@ -27,8 +27,7 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
 /**
  * This object illustrates an example of a particular content
  *
- * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#exampleObject">OpenAPI
- *      Specification Example Object</a>
+ * @see <a href= "https://spec.openapis.org/oas/v3.1.0.html#example-object">OpenAPI Specification Example Object</a>
  **/
 @Target({})
 @Retention(RetentionPolicy.RUNTIME)

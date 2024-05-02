@@ -23,7 +23,7 @@ import org.eclipse.microprofile.openapi.models.Extensible;
 /**
  * This interface represents the Contact information for the exposed API.
  *
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#contactObject"
+ * @see <a href="https://spec.openapis.org/oas/v3.1.0.html#contact-object">OpenAPI Specification Contact Object</a>
  */
 public interface Contact extends Constructible, Extensible<Contact> {
 

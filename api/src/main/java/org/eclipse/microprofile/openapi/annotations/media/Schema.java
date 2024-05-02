@@ -31,8 +31,7 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
  * The Schema Object allows the definition of input and output data types. These types can be objects, but also
  * primitives and arrays. This object is an extended subset of the JSON Schema Specification Wright Draft 00.
  *
- * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#schemaObject">OpenAPI
- *      Specification Schema Object</a>
+ * @see <a href= "https://spec.openapis.org/oas/v3.1.0.html#schema-object">OpenAPI Specification Schema Object</a>
  **/
 @Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

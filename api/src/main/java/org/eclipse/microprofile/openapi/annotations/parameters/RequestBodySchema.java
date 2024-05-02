@@ -58,8 +58,8 @@ import java.lang.annotation.Target;
  * </pre>
  *
  * @see RequestBody
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#requestBodyObject">OpenAPI
- *      requestBody Object</a>
+ * @see <a href="https://spec.openapis.org/oas/v3.1.0.html#request-body-object">OpenAPI Specification Request Body
+ *      Object</a>
  **/
 @Target({ElementType.PARAMETER, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
