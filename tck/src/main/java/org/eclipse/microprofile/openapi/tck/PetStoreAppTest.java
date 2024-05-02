@@ -278,16 +278,16 @@ public class PetStoreAppTest extends AppTestBase {
     public void testExtensionPlacement(String type) {
         ValidatableResponse vr = callEndpoint(type);
 
-        final String X_OPERATION_EXT = "x-operation-ext";
-        final String TEST_OPERATION_EXT = "test-operation-ext";
+        final String xOperationExt = "x-operation-ext";
+        final String testOperationExt = "test-operation-ext";
         String opPath = "paths.'/store/inventory'.get";
 
-        vr.body(opPath, hasEntry(equalTo(X_OPERATION_EXT), equalTo(TEST_OPERATION_EXT)));
+        vr.body(opPath, hasEntry(equalTo(xOperationExt), equalTo(testOperationExt)));
 
         vr.body(opPath + ".responses", hasEntry(equalTo("x-responses-ext"), equalTo("test-responses-ext")));
-        vr.body(opPath + ".responses.'200'", not(hasKey(X_OPERATION_EXT)));
+        vr.body(opPath + ".responses.'200'", not(hasKey(xOperationExt)));
         vr.body(opPath + ".responses.'200'", hasEntry(equalTo("x-response-ext"), equalTo("test-response-ext")));
-        vr.body(opPath + ".responses.'500'", not(hasKey(X_OPERATION_EXT)));
+        vr.body(opPath + ".responses.'500'", not(hasKey(xOperationExt)));
         vr.body(opPath + ".responses.'503'.content.'application/json'",
                 hasEntry(equalTo("x-notavailable-ext"), equalTo("true")));
         vr.body(opPath + ".responses.'503'.content.'application/xml'",

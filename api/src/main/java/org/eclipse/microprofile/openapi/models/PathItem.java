@@ -120,6 +120,7 @@ public interface PathItem extends Constructible, Extensible<PathItem>, Reference
      *            definition of a GET operation
      * @return the current PathItem instance
      **/
+    @SuppressWarnings("checkstyle:methodname")
     default PathItem GET(Operation get) {
         setGET(get);
         return this;
@@ -147,6 +148,7 @@ public interface PathItem extends Constructible, Extensible<PathItem>, Reference
      *            definition of a PUT operation
      * @return the current PathItem instance
      **/
+    @SuppressWarnings("checkstyle:methodname")
     default PathItem PUT(Operation put) {
         setPUT(put);
         return this;
@@ -174,6 +176,7 @@ public interface PathItem extends Constructible, Extensible<PathItem>, Reference
      *            definition of a PUT operation
      * @return the current PathItem instance
      **/
+    @SuppressWarnings("checkstyle:methodname")
     default PathItem POST(Operation post) {
         setPOST(post);
         return this;
@@ -201,6 +204,7 @@ public interface PathItem extends Constructible, Extensible<PathItem>, Reference
      *            definition of a DELETE operation
      * @return the current PathItem instance
      **/
+    @SuppressWarnings("checkstyle:methodname")
     default PathItem DELETE(Operation delete) {
         setDELETE(delete);
         return this;
@@ -228,6 +232,7 @@ public interface PathItem extends Constructible, Extensible<PathItem>, Reference
      *            definition of an OPTIONS operation
      * @return the current PathItem instance
      **/
+    @SuppressWarnings("checkstyle:methodname")
     default PathItem OPTIONS(Operation options) {
         setOPTIONS(options);
         return this;
@@ -255,6 +260,7 @@ public interface PathItem extends Constructible, Extensible<PathItem>, Reference
      *            definition of a HEAD operation
      * @return the current PathItem instance
      **/
+    @SuppressWarnings("checkstyle:methodname")
     default PathItem HEAD(Operation head) {
         setHEAD(head);
         return this;
@@ -282,6 +288,7 @@ public interface PathItem extends Constructible, Extensible<PathItem>, Reference
      *            definition of a PATCH operation
      * @return the current PathItem instance
      **/
+    @SuppressWarnings("checkstyle:methodname")
     default PathItem PATCH(Operation patch) {
         setPATCH(patch);
         return this;
@@ -309,6 +316,7 @@ public interface PathItem extends Constructible, Extensible<PathItem>, Reference
      *            definition of a TRACE operation
      * @return the current PathItem instance
      **/
+    @SuppressWarnings("checkstyle:methodname")
     default PathItem TRACE(Operation trace) {
         setTRACE(trace);
         return this;

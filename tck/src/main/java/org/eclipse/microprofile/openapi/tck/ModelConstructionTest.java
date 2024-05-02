@@ -1922,10 +1922,8 @@ public class ModelConstructionTest extends Arquillian {
                         p.addBuilder(m);
                     }
                 }
-            }
-            // Possible setter method
-            else if (returnType == Void.TYPE) {
-                if (name.startsWith("set") && parameterCount == 1) {
+            } else if (returnType == Void.TYPE) {
+                if (name.startsWith("set") && parameterCount == 1) { // Possible setter method
                     name = Introspector.decapitalize(name.substring(3));
                     type = m.getParameterTypes()[0];
                     p = properties.get(name);
@@ -1937,10 +1935,8 @@ public class ModelConstructionTest extends Arquillian {
                         p.addSetter(m);
                     }
                 }
-            }
-            // Possible getter method
-            else {
-                if (name.startsWith("get") && parameterCount == 0) {
+            } else {
+                if (name.startsWith("get") && parameterCount == 0) { // Possible getter method
                     name = Introspector.decapitalize(name.substring(3));
                     type = returnType;
                     p = properties.get(name);

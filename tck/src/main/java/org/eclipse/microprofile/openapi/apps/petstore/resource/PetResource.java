@@ -168,6 +168,7 @@ public class PetResource {
     @APIResponse(responseCode = "400", description = "Invalid input",
                  content = @Content(mediaType = "application/json",
                                     schema = @Schema(implementation = ApiResponse.class)))
+    @SuppressWarnings("checkstyle:linelength")
     @RequestBody(name = "pet",
                  content = @Content(mediaType = "application/json", schema = @Schema(implementation = Pet.class),
                                     examples = @ExampleObject(ref = "http://example.org/petapi-examples/openapi.json#/components/examples/pet-example")),
@@ -203,7 +204,8 @@ public class PetResource {
     @Produces("application/json")
     @Callback(name = "tagsCallback", callbackUrlExpression = "http://petstoreapp.com/pet",
               operations = @CallbackOperation(method = "GET", summary = "Finds Pets by tags",
-                                              description = "Find Pets by tags; Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.",
+                                              description = "Find Pets by tags; Muliple tags can be provided with comma seperated strings. "
+                                                      + "Use tag1, tag2, tag3 for testing.",
                                               responses = {
                                                       @APIResponse(responseCode = "400",
                                                                    description = "Invalid tag value",
