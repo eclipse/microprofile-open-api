@@ -18,7 +18,7 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "Dog")
 public class Dog extends Pet {
 
-    String dogBreed;
+    private String dogBreed;
 
     public String getDogBreed() {
         return dogBreed;

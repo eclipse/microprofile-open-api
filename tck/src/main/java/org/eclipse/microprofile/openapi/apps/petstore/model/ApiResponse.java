@@ -23,9 +23,9 @@ public class ApiResponse {
     public static final int OK = 4;
     public static final int TOO_BUSY = 5;
 
-    int code;
-    String type;
-    String message;
+    private int code;
+    private String type;
+    private String message;
 
     public ApiResponse() {
     }

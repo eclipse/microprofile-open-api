@@ -19,7 +19,7 @@ import java.util.List;
 import org.eclipse.microprofile.openapi.apps.airlines.model.User;
 
 public class UserData {
-    static List<User> users = new ArrayList<User>();
+    static private List<User> users = new ArrayList<User>();
 
     static {
         users.add(createUser(1, "Bob1", "pswd", "Bob", "Smith", "male", 12,

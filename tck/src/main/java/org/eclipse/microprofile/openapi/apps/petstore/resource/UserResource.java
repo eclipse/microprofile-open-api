@@ -57,7 +57,7 @@ import jakarta.ws.rs.core.Response;
                         scheme = "bearer", bearerFormat = "JWT")
 })
 public class UserResource {
-    static UserData userData = new UserData();
+    private static UserData userData = new UserData();
 
     @POST
     @APIResponse(description = "successful operation")

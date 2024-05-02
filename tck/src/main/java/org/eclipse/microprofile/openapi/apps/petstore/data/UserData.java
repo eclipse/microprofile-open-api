@@ -19,7 +19,7 @@ import java.util.List;
 import org.eclipse.microprofile.openapi.apps.petstore.model.User;
 
 public class UserData {
-    static List<User> users = new ArrayList<User>();
+    private static List<User> users = new ArrayList<User>();
 
     static {
         users.add(createUser(1, "user1", "first name 1", "last name 1",

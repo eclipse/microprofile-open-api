@@ -77,7 +77,7 @@ import jakarta.ws.rs.core.StreamingOutput;
 })
 public class PetResource {
 
-    static PetData petData = new PetData();
+    static private PetData petData = new PetData();
 
     @GET
     @Path("/{petId}")
