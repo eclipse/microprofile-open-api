@@ -25,6 +25,6 @@
  * </pre>
  */
 
-@org.osgi.annotation.versioning.Version("1.2")
+@org.osgi.annotation.versioning.Version("1.3")
 @org.osgi.annotation.versioning.ProviderType
 package org.eclipse.microprofile.openapi.annotations.media;
