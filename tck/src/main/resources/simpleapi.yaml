@@ -120,6 +120,28 @@ paths:
       responses:
         '200':
           description: trace operation tested
+webhooks:
+  bookingEvent:
+    put:
+      summary: Notifies that a booking has been created
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Booking'
+      responses:
+        '204':
+          description: Indicates that the creation event was processed successfully
+    delete:
+      summary: Notifies that a booking has been deleted
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Booking'
+      responses:
+        '204':
+          description: Indicates that the deletion event was processed successfully
 components:
   schemas:
     InventoryItem:

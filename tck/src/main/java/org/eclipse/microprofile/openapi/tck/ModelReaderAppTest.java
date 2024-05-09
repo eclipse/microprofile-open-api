@@ -346,4 +346,26 @@ public class ModelReaderAppTest extends AppTestBase {
         vr.body(content1 + ".schema.type", itemOrSingleton("array"));
         vr.body(content1 + ".schema.items", notNullValue());
     }
+
+    @Test(dataProvider = "formatProvider")
+    public void testWebhooks(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+
+        String webhookPut = "webhooks.bookingEvent.put";
+        vr.body(webhookPut, notNullValue());
+        vr.body(webhookPut + ".summary", equalTo("Notifies that a booking has been created"));
+        vr.body(webhookPut + ".requestBody.content.'application/json'.schema.$ref",
+                equalTo("#/components/schemas/Booking"));
+        vr.body(webhookPut + ".responses.'204'.description",
+                equalTo("Indicates that the creation event was processed successfully"));
+
+        String webhookDelete = "webhooks.bookingEvent.delete";
+        vr.body(webhookPut, notNullValue());
+        vr.body(webhookDelete + ".summary", equalTo("Notifies that a booking has been deleted"));
+        vr.body(webhookDelete + ".requestBody.content.'application/json'.schema.$ref",
+                equalTo("#/components/schemas/Booking"));
+        vr.body(webhookDelete + ".responses.'204'.description",
+                equalTo("Indicates that the deletion event was processed successfully"));
+
+    }
 }
