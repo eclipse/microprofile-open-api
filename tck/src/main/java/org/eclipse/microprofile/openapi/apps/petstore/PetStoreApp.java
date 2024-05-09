@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017 Contributors to the Eclipse Foundation
+ * Copyright (c) 2017, 2024 Contributors to the Eclipse Foundation
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a
  * copy of the License at
@@ -38,7 +38,8 @@ import jakarta.ws.rs.core.Application;
                                                    url = "http://www.apache.org/licenses/LICENSE-2.0.html"),
                                 contact = @Contact(name = "PetStore API Support",
                                                    url = "https://github.com/eclipse/microprofile-open-api",
-                                                   email = "support@petstore.com")),
+                                                   email = "support@petstore.com"),
+                                summary = "An API for a pet store"),
                    externalDocs = @ExternalDocumentation(url = "http://swagger.io",
                                                          description = "Find out more about our store"),
                    tags = {

@@ -200,4 +200,31 @@ public interface Info extends Constructible, Extensible<Info> {
         return this;
     }
 
+    /**
+     * Returns the summary of the exposed API from this Info instance.
+     *
+     * @return the summary of the exposed API
+     **/
+    String getSummary();
+
+    /**
+     * Sets this Info instance's summary information for the exposed API.
+     *
+     * @param summary
+     *            the summary of the exposed API
+     */
+    void setSummary(String summary);
+
+    /**
+     * Sets this Info instance's summary of the API to the given summary and returns this instance of Info.
+     *
+     * @param summary
+     *            the summary for the exposed API
+     * @return this Info instance
+     */
+    default Info summary(String summary) {
+        setSummary(summary);
+        return this;
+    }
+
 }

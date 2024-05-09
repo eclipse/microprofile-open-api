@@ -63,6 +63,7 @@ public class ModelReaderAppTest extends AppTestBase {
         ValidatableResponse vr = callEndpoint(type);
         vr.body("info.title", equalTo("AirlinesRatingApp API"));
         vr.body("info.version", equalTo("1.0"));
+        vr.body("info.summary", equalTo("An API for an Airline application"));
         vr.body("info.termsOfService", equalTo("http://airlinesratingapp.com/terms"));
     }
 

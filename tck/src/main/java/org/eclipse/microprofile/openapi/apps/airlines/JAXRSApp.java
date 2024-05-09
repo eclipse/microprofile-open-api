@@ -73,6 +73,7 @@ import jakarta.ws.rs.core.MediaType;
                    info = @Info(title = "AirlinesRatingApp API", version = "1.0",
                                 description = "APIs for booking and managing air flights",
                                 termsOfService = "http://airlinesratingapp.com/terms",
+                                summary = "An API for an Airline application",
                                 contact = @Contact(name = "AirlinesRatingApp API Support",
                                                    url = "http://exampleurl.com/contact",
                                                    email = "techsupport@airlinesratingapp.com",
