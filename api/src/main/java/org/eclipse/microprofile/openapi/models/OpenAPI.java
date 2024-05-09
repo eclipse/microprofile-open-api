@@ -18,6 +18,7 @@
 package org.eclipse.microprofile.openapi.models;
 
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.microprofile.openapi.models.info.Info;
 import org.eclipse.microprofile.openapi.models.security.SecurityRequirement;
@@ -274,6 +275,57 @@ public interface OpenAPI extends Constructible, Extensible<OpenAPI> {
         setPaths(paths);
         return this;
     }
+
+    /**
+     * Returns the webhooks property of this OpenAPI instance.
+     *
+     * @return a copy Map (potentially immutable) of named webhook definitions
+     * @since 4.0
+     */
+    Map<String, PathItem> getWebhooks();
+
+    /**
+     * Sets the webhooks property of this OpenAPI instance.
+     *
+     * @param webhooks
+     *            a map of named webhook definitions
+     * @since 4.0
+     */
+    void setWebhooks(Map<String, PathItem> webhooks);
+
+    /**
+     * Sets the webhooks property of this OpenAPI instance.
+     *
+     * @param webhooks
+     *            a map of named webhook definitions
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    default OpenAPI webhooks(Map<String, PathItem> webhooks) {
+        setWebhooks(webhooks);
+        return this;
+    }
+
+    /**
+     * Adds a webhook definition.
+     *
+     * @param name
+     *            unique name of the webhook to add
+     * @param webhook
+     *            webhook definition to add
+     * @return the current Schema instance
+     * @since 4.0
+     */
+    OpenAPI addWebhook(String name, PathItem webhook);
+
+    /**
+     * Removes a webhook definition.
+     *
+     * @param name
+     *            unique name of the webhook to remove
+     * @since 4.0
+     */
+    void removeWebhook(String name);
 
     /**
      * Returns the components property from an OpenAPI instance.
