@@ -35,7 +35,7 @@ import jakarta.ws.rs.core.Application;
 @ApplicationPath("/")
 @OpenAPIDefinition(info = @Info(title = "Pet Store App", version = "2.0", description = "Pet Store App API",
                                 license = @License(name = "Apache 2.0",
-                                                   url = "http://www.apache.org/licenses/LICENSE-2.0.html"),
+                                                   identifier = "Apache-2.0"),
                                 contact = @Contact(name = "PetStore API Support",
                                                    url = "https://github.com/eclipse/microprofile-open-api",
                                                    email = "support@petstore.com"),
