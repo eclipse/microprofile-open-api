@@ -33,7 +33,7 @@ public abstract class OASConfigScanClassBase extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testScanClass(String type) throws InterruptedException {
         vr = callEndpoint(type);
-        vr.body("openapi", startsWith("3.0."));
+        vr.body("openapi", startsWith("3.1."));
         vr.body("paths", aMapWithSize(5));
         vr.body("paths", hasKey("/reviews"));
         vr.body("paths", hasKey("/reviews/{id}"));

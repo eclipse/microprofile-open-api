@@ -55,7 +55,7 @@ public class ModelReaderAppTest extends AppTestBase {
     @Test(dataProvider = "formatProvider")
     public void testVersion(String type) {
         ValidatableResponse vr = callEndpoint(type);
-        vr.body("openapi", startsWith("3.0."));
+        vr.body("openapi", startsWith("3.1."));
     }
 
     @Test(dataProvider = "formatProvider")

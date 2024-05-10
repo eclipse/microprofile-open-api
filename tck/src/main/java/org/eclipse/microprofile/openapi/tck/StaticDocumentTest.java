@@ -47,7 +47,7 @@ public class StaticDocumentTest extends AppTestBase {
     public void testStaticDocument(String type) {
         ValidatableResponse vr = callEndpoint(type);
 
-        vr.body("openapi", startsWith("3.0."));
+        vr.body("openapi", startsWith("3.1."));
 
         vr.body("servers", hasSize(1));
         vr.body("servers.find{ it.description == 'MySimpleAPI' }.url",
