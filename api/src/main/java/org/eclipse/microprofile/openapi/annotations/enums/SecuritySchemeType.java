@@ -18,7 +18,8 @@
 package org.eclipse.microprofile.openapi.annotations.enums;
 
 public enum SecuritySchemeType {
-    DEFAULT(""), APIKEY("apiKey"), HTTP("http"), OPENIDCONNECT("openIdConnect"), OAUTH2("oauth2");
+    DEFAULT(""), APIKEY("apiKey"), HTTP("http"), OPENIDCONNECT("openIdConnect"), OAUTH2("oauth2"), MUTUALTLS(
+            "mutualTLS");
 
     private String value;
 

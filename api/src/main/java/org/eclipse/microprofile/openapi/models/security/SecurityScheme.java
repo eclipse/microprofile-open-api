@@ -36,7 +36,7 @@ public interface SecurityScheme extends Constructible, Extensible<SecurityScheme
      * </p>
      */
     public enum Type {
-        APIKEY("apiKey"), HTTP("http"), OAUTH2("oauth2"), OPENIDCONNECT("openIdConnect");
+        APIKEY("apiKey"), HTTP("http"), OAUTH2("oauth2"), OPENIDCONNECT("openIdConnect"), MUTUALTLS("mutualTLS");
 
         private final String value;
 
