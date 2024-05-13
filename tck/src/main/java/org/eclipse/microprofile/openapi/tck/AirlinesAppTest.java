@@ -594,6 +594,10 @@ public class AirlinesAppTest extends AppTestBase {
         String reviewoauth2 = "components.securitySchemes.reviewoauth2.";
         vr.body(reviewoauth2 + "type", equalTo("oauth2"));
         vr.body(reviewoauth2 + "description", equalTo("authentication needed to create and delete reviews"));
+
+        String mutualTLS = "components.securitySchemes.mutualTLSScheme.";
+        vr.body(mutualTLS + "type", equalTo("mutualTLS"));
+        vr.body(mutualTLS + "description", equalTo("mutualTLS authentication needed to manage zepplins"));
     }
 
     @Test(dataProvider = "formatProvider")
