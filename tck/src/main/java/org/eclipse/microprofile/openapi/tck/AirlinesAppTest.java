@@ -549,6 +549,8 @@ public class AirlinesAppTest extends AppTestBase {
                 allOf(aMapWithSize(2),
                         hasEntry(equalTo("userApiKey"), empty()),
                         hasEntry(equalTo("userBearerHttp"), empty()))));
+
+        vr.body("paths.'/zepplins/{id}'.delete.security[0].mutualTLSScheme[0]", equalTo("zepplinScope"));
     }
 
     @Test(dataProvider = "formatProvider")
@@ -599,7 +601,6 @@ public class AirlinesAppTest extends AppTestBase {
         String mutualTLS = "components.securitySchemes.mutualTLSScheme.";
         vr.body(mutualTLS + "type", equalTo("mutualTLS"));
         vr.body(mutualTLS + "description", equalTo("mutualTLS authentication needed to manage zepplins"));
-        vr.body(mutualTLS + "scopes", equalTo("zepplinScope"));
     }
 
     @Test(dataProvider = "formatProvider")

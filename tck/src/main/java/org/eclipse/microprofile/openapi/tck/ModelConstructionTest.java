@@ -1635,6 +1635,14 @@ public class ModelConstructionTest extends Arquillian {
         final List<String> schemeValue4 = Collections.emptyList();
         assertEquals(sr.getScheme(schemeKey4), schemeValue4,
                 "The value associated with the key: " + schemeKey4 + " is expected to be an empty list.");
+
+        // Test a requirement with roles
+        final String schemeKey5 = "myScheme5";
+        final List<String> schemeValue5 = Arrays.asList("myRole1", "myRole2");
+        sr.addScheme(schemeKey5, schemeValue5);
+        assertTrue(sr.hasScheme(schemeKey5), "Expected " + schemeKey5 + " to be present");
+        assertEquals(sr.getScheme(schemeKey5), schemeValue5,
+                "The value associated with the key: " + schemeKey5 + " is expected to have two roles.");
     }
 
     @Test
