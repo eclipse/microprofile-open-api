@@ -37,8 +37,7 @@ public interface SecurityRequirement extends Constructible {
      * @param securitySchemeName
      *            the name of security scheme declared in the Components section of the OpenAPI document
      * @param scope
-     *            a required scope - only valid when the defined scheme's type is 'oauth2' or 'openIdConnect'. passing
-     *            null will result in an empty list of scopes
+     *            a required scope. passing null will result in an empty list of scopes
      * @return Updated SecurityRequirement instance
      */
     SecurityRequirement addScheme(String securitySchemeName, String scope);
@@ -50,8 +49,7 @@ public interface SecurityRequirement extends Constructible {
      * @param securitySchemeName
      *            the name of security scheme declared in the Components section of the OpenAPI document
      * @param scopes
-     *            the scopes required - only valid when the defined scheme is 'oauth2' or 'openIdConnect'. passing null
-     *            will result in an empty list of scopes
+     *            the scopes required. passing null will result in an empty list of scopes
      * @return Updated SecurityRequirement instance
      */
     SecurityRequirement addScheme(String securitySchemeName, List<String> scopes);

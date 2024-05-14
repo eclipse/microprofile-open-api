@@ -599,6 +599,7 @@ public class AirlinesAppTest extends AppTestBase {
         String mutualTLS = "components.securitySchemes.mutualTLSScheme.";
         vr.body(mutualTLS + "type", equalTo("mutualTLS"));
         vr.body(mutualTLS + "description", equalTo("mutualTLS authentication needed to manage zepplins"));
+        vr.body(mutualTLS + "scopes", equalTo("zepplinScope"));
     }
 
     @Test(dataProvider = "formatProvider")

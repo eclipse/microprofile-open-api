@@ -49,7 +49,7 @@ public @interface SecurityRequirement {
      * If the security scheme referred by the name property is of type "oauth2" or "openIdConnect", then the scopes
      * array is a list of scope names required for the execution.
      * <p>
-     * For other security scheme types, the array MUST be empty.
+     * For other security scheme types, the array MAY contain a list of required roles.
      * </p>
      *
      * @return a list of scope names required for the execution of this Security Requirement instance.
