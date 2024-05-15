@@ -26,8 +26,7 @@ import org.eclipse.microprofile.openapi.models.Extensible;
  * This interface represents the container for the expected responses of an operation. The container maps a HTTP
  * response code to the expected response.
  *
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responses-object">Responses
- *      Object</a>
+ * @see <a href="https://spec.openapis.org/oas/v3.1.0.html#responses-object">OpenAPI Specification Responses Object</a>
  */
 public interface APIResponses extends Constructible, Extensible<APIResponses> {
 

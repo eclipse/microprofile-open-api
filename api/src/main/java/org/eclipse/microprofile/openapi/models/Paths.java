@@ -24,12 +24,10 @@ import java.util.Map;
  * <p>
  * Holds the relative paths to the individual endpoints and their operations. The path is appended to the URL from the
  * Server Object in order to construct the full URL. The Paths MAY be empty, due to
- * <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-filtering">security
- * constraints</a>.
+ * <a href= "https://spec.openapis.org/oas/v3.1.0.html#security-filtering">security constraints</a>.
  * <p>
  *
- * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#pathsObject"> OpenAPI
- *      Specification Paths Object</a>
+ * @see <a href= "https://spec.openapis.org/oas/v3.1.0.html#paths-object"> OpenAPI Specification Paths Object</a>
  */
 public interface Paths extends Constructible, Extensible<Paths> {
 

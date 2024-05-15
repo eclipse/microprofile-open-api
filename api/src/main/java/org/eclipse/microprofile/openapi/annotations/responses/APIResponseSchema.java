@@ -58,7 +58,7 @@ import java.lang.annotation.Target;
  *
  * @since 2.0
  * @see APIResponse
- * @see "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#responseObject"
+ * @see <a href="https://spec.openapis.org/oas/v3.1.0.html#response-object">OpenAPI Specification Response Object</a>
  *
  **/
 @Target({ElementType.METHOD})

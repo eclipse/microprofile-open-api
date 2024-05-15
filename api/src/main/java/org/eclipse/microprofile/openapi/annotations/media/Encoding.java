@@ -28,8 +28,7 @@ import org.eclipse.microprofile.openapi.annotations.headers.Header;
 /**
  * Single encoding definition to be applied to single Schema Object
  *
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#encodingObject">Encoding
- *      Object</a>
+ * @see <a href="https://spec.openapis.org/oas/v3.1.0.html#encoding-object">OpenAPI Specification Encoding Object</a>
  **/
 
 @Target({})

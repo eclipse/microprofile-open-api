@@ -30,9 +30,8 @@ import java.lang.annotation.Target;
  * Applying this annotation to a method or class is equivalent to applying a {@link SecurityRequirementsSet} annotation
  * containing only this annotation.
  *
- * @see <a href=
- *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-requirement-object">SecuirtyRequirement
- *      Object</a>
+ * @see <a href= "https://spec.openapis.org/oas/v3.1.0.html#security-requirement-object">OpenAPI Specification Security
+ *      Requirement Object</a>
  **/
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

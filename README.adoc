@@ -21,7 +21,7 @@
 
 image:https://github.com/eclipse/microprofile-open-api/workflows/Build/badge.svg?branch=master[link=https://github.com/eclipse/microprofile-open-api/actions]
 
-This MicroProfile specification aims at providing a unified Java API for the link:++https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md++[OpenAPI v3 specification],
+This MicroProfile specification aims at providing a unified Java API for the link:++https://spec.openapis.org/oas/v3.1.0.html++[OpenAPI v3.1 specification],
 that all application developers can use to expose their API documentation.
 
 * The link:++https://github.com/eclipse/microprofile-open-api/tree/master/api/src/main/java/org/eclipse/microprofile/openapi++[spec APIs] are composed of annotations, models, and programming interfaces.

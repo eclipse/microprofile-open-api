@@ -32,8 +32,7 @@ import org.eclipse.microprofile.openapi.models.Reference;
  * used to identify the callback object is an expression, evaluated at runtime, that identifies a URL to use for the
  * callback operation.
  *
- * @see <a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#callbackObject">OpenAPI
- *      Specification Callback Object</a>
+ * @see <a href="https://spec.openapis.org/oas/v3.1.0.html#callback-object">OpenAPI Specification Callback Object</a>
  */
 public interface Callback extends Constructible, Extensible<Callback>, Reference<Callback> {
 

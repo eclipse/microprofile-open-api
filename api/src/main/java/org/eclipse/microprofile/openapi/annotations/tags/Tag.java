@@ -68,8 +68,7 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
  * }
  * </pre>
  *
- * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#tagObject"> OpenAPI
- *      Specification Tag Object</a>
+ * @see <a href= "https://spec.openapis.org/oas/v3.1.0.html#tag-object"> OpenAPI Specification Tag Object</a>
  */
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)

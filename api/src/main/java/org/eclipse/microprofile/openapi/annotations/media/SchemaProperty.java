@@ -33,8 +33,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema.True;
  *
  * This object is an extended subset of the JSON Schema draft specification 2020-12.
  *
- * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#schemaObject">OpenAPI
- *      Specification Schema Object</a>
+ * @see <a href= "https://spec.openapis.org/oas/v3.1.0.html#schema-object">OpenAPI Specification Schema Object</a>
  *
  * @since 2.0
  **/

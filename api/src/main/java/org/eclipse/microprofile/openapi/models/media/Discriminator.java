@@ -30,9 +30,8 @@ import org.eclipse.microprofile.openapi.models.Constructible;
  * it.
  * <p>
  *
- * @see <a href=
- *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#discriminator-object">OpenAPI
- *      Specification Discriminator Object</a>
+ * @see <a href= "https://spec.openapis.org/oas/v3.1.0.html#discriminator-object">OpenAPI Specification Discriminator
+ *      Object</a>
  */
 public interface Discriminator extends Constructible {
 

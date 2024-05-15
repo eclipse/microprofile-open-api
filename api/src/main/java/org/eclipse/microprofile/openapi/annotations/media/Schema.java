@@ -45,8 +45,7 @@ import org.eclipse.microprofile.openapi.annotations.extensions.Extension;
  * <li>{@link Void} to indicate that the schema should not be included at all (this is the default for most parameters)
  * </ul>
  *
- * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#schemaObject">OpenAPI
- *      Specification Schema Object</a>
+ * @see <a href= "https://spec.openapis.org/oas/v3.1.0.html#schema-object">OpenAPI Specification Schema Object</a>
  **/
 @Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)

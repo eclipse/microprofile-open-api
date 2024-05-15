@@ -25,9 +25,8 @@ import org.eclipse.microprofile.openapi.models.Constructible;
 /**
  * SecurityRequirement
  *
- * @see <a href=
- *      "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#security-requirement-object">SecurityRequirement
- *      Object</a>
+ * @see <a href= "https://spec.openapis.org/oas/v3.1.0.html#security-requirement-object">OpenAPI Specification Security
+ *      Requirement Object</a>
  */
 public interface SecurityRequirement extends Constructible {
 

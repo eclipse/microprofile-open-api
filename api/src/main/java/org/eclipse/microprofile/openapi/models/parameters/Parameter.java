@@ -49,8 +49,7 @@ import org.eclipse.microprofile.openapi.models.media.Schema;
  * For more complex scenarios, the content property can define the media type and schema of the parameter. A parameter
  * must contain either a schema property, or a content property, but not both.
  *
- * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#parameterObject">OpenAPI
- *      Specification Parameter Object</a>
+ * @see <a href= "https://spec.openapis.org/oas/v3.1.0.html#parameter-object">OpenAPI Specification Parameter Object</a>
  */
 public interface Parameter extends Constructible, Extensible<Parameter>, Reference<Parameter> {
 

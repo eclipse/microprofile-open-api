@@ -29,8 +29,7 @@ import org.eclipse.microprofile.openapi.models.Reference;
  * In all cases, the example value is expected to be compatible with the type schema of its associated value. Tooling
  * implementations MAY choose to validate compatibility automatically, and reject the example value(s) if incompatible.
  *
- * @see <a href= "https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#exampleObject">OpenAPI
- *      Specification Example Object</a>
+ * @see <a href= "https://spec.openapis.org/oas/v3.1.0.html#example-object">OpenAPI Specification Example Object</a>
  */
 public interface Example extends Constructible, Extensible<Example>, Reference<Example> {
 
