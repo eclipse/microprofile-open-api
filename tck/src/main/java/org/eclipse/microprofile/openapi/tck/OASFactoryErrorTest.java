@@ -72,6 +72,13 @@ public class OASFactoryErrorTest extends Arquillian {
         public License url(String url) {
             return null;
         }
+        @Override
+        public String getIdentifier() {
+            return null;
+        }
+        @Override
+        public void setIdentifier(String identifier) {
+        }
     }
 
     @Deployment

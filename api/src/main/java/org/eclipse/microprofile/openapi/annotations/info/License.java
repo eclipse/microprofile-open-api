@@ -41,6 +41,13 @@ public @interface License {
     String name();
 
     /**
+     * The license identifier used for the API.
+     *
+     * @return the identifier of the license
+     **/
+    String identifier() default "";
+
+    /**
      * A URL to the license used for the API. MUST be in the format of a URL.
      *
      * @return the URL of the license

@@ -47,6 +47,16 @@ public class PetStoreAppTest extends AppTestBase {
                 .addPackages(true, "org.eclipse.microprofile.openapi.apps.petstore");
     }
 
+    // This test covers basic OpenAPI ingredients like licenses, if something is here instead of tested in the
+    // AirlinesApp
+    // It is likely because it is mutually exclusive with something in the AirlinesApp
+    @Test(dataProvider = "formatProvider")
+    public void testOpenAPIEssentials(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+
+        vr.body("info.license.identifier", equalTo("Apache-2.0"));
+    }
+
     @Test(dataProvider = "formatProvider")
     public void testSchema(String type) {
         ValidatableResponse vr = callEndpoint(type);

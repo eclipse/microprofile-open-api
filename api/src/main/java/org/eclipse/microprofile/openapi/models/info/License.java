@@ -55,6 +55,33 @@ public interface License extends Constructible, Extensible<License> {
     }
 
     /**
+     * Returns the license identifier for this License instance that is used for the API.
+     *
+     * @return the license identifier used for the API
+     **/
+    String getIdentifier();
+
+    /**
+     * Sets the license identifier for this License instance that is used for the API.
+     *
+     * @param identifier
+     *            the license identifier used for the API
+     */
+    void setIdentifier(String identifier);
+
+    /**
+     * Sets this License instance's identifier used for the API and returns this instance of License.
+     *
+     * @param identifier
+     *            the license identifier used for the API
+     * @return this License instance
+     */
+    default License identifier(String identifier) {
+        setIdentifier(identifier);
+        return this;
+    }
+
+    /**
      * Returns the URL for this License instance that is used for the API.
      *
      * @return the URL to the license used for the API
