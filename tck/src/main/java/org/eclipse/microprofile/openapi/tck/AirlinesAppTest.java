@@ -1128,4 +1128,35 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("x-openapi-definition", equalTo("test-openapi-definition"));
     }
 
+    @Test(dataProvider = "formatProvider")
+    public void testRef(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+
+        vr.body("components.responses.FoundBookingsARef.$ref", equalTo("#/components/responses/FoundBookings"));
+        vr.body("components.responses.FoundBookingsARef.description", equalTo("Found Bookings Reference"));
+
+        vr.body("components.parameters.usernameARef.$ref", equalTo("#/components/parameters/username"));
+        vr.body("components.parameters.usernameARef.description", equalTo("username reference"));
+
+        vr.body("components.examples.userARef.$ref", equalTo("#/components/examples/user"));
+        vr.body("components.examples.userARef.description", equalTo("User reference"));
+        vr.body("components.examples.userARef.summary", equalTo("Referenced example"));
+
+        vr.body("components.requestBodies.reviewARef.$ref", equalTo("#/components/requestBodies/review"));
+        vr.body("components.requestBodies.reviewARef.description", equalTo("Review reference"));
+
+        vr.body("components.headers.Request-Limit-ARef.$ref", equalTo("#/components/headers/Request-Limit"));
+        vr.body("components.headers.Request-Limit-ARef.description", equalTo("Request-Limit reference"));
+
+        vr.body("components.securitySchemes.httpTestSchemeARef.$ref",
+                equalTo("#/components/securitySchemes/httpTestScheme"));
+        vr.body("components.securitySchemes.httpTestSchemeARef.description", equalTo("httpTestScheme reference"));
+
+        vr.body("components.links.UserNameARef.$ref", equalTo("#/components/links/UserName"));
+        vr.body("components.links.UserNameARef.description", equalTo("UserName reference"));
+
+        vr.body("components.callbacks.GetBookingsARef.$ref",
+                equalTo("#/components/callbacks/GetBookings"));
+    }
+
 }

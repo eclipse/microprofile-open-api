@@ -53,9 +53,10 @@ public interface Reference<T extends Reference<T>> {
      * <code>response.setRef("NotFound"); // #/components/responses/NotFound</code>
      * </pre>
      * <p>
-     * This property provides a reference to an object defined elsewhere. This property and all other properties are
-     * mutually exclusive. If other properties are defined in addition to the reference property then the result is
-     * undefined.
+     * This property provides a reference to an object defined elsewhere. This property may be used alongside
+     * {@code description} and {@code summary} if they exist on the object, but is mutually exclusive with all other
+     * properties. If properties other than {@code description} and {@code summary} are defined in addition to the
+     * reference property then the result is undefined.
      *
      * @param ref
      *            a reference to a T object in the components section of this OpenAPI document or a JSON pointer to
