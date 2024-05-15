@@ -1042,6 +1042,14 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(callbacksPath + ".responses.'204'.description",
                 both(containsString("Your server should return this HTTP status code if no longer interested"))
                         .and(containsString("in further updates")));
+
+        // Test an operation with no responses
+        String noResponsePath = "paths.'/streams'.get";
+        vr.body(noResponsePath + ".description", equalTo("An operation without a response"));
+        vr.body(noResponsePath + ".parameters[0].name", equalTo("callbackUrl"));
+        vr.body(noResponsePath + ".parameters[0].description",
+                equalTo("the location where data will be sent.  Must be network accessible\n"
+                        + "by the source server\n"));
     }
 
     @Test(dataProvider = "formatProvider")
