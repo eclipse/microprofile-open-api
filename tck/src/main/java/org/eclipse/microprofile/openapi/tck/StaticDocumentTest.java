@@ -21,6 +21,7 @@ import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.startsWith;
 import static org.hamcrest.collection.IsMapWithSize.aMapWithSize;
 
@@ -123,5 +124,21 @@ public class StaticDocumentTest extends AppTestBase {
         vr.body(inventoryPathTrace + ".summary", equalTo("trace operation"));
         vr.body(inventoryPathTrace + ".operationId", equalTo("traceInventory"));
         vr.body(inventoryPathTrace + ".description", equalTo("tests the trace operation"));
+
+        String webhookPut = "webhooks.bookingEvent.put";
+        vr.body(webhookPut, notNullValue());
+        vr.body(webhookPut + ".summary", equalTo("Notifies that a booking has been created"));
+        vr.body(webhookPut + ".requestBody.content.'application/json'.schema.$ref",
+                equalTo("#/components/schemas/Booking"));
+        vr.body(webhookPut + ".responses.'204'.description",
+                equalTo("Indicates that the creation event was processed successfully"));
+
+        String webhookDelete = "webhooks.bookingEvent.delete";
+        vr.body(webhookPut, notNullValue());
+        vr.body(webhookDelete + ".summary", equalTo("Notifies that a booking has been deleted"));
+        vr.body(webhookDelete + ".requestBody.content.'application/json'.schema.$ref",
+                equalTo("#/components/schemas/Booking"));
+        vr.body(webhookDelete + ".responses.'204'.description",
+                equalTo("Indicates that the deletion event was processed successfully"));
     }
 }
