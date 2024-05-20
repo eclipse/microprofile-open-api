@@ -51,8 +51,10 @@ public @interface ServerVariable {
 
     /**
      * The default value of this server variable. This is a REQUIRED property.
+     * <p>
+     * If {@code enumeration} is set the default value MUST be one of the values in {@code enumeration}.
      *
-     * @return the defualt value of this server variable
+     * @return the default value of this server variable
      **/
     String defaultValue();
 

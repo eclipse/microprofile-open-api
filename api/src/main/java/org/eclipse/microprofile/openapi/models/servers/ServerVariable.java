@@ -104,6 +104,8 @@ public interface ServerVariable extends Constructible, Extensible<ServerVariable
      * The default value to use for substitution, and to send, if an alternate value is not supplied. This value MUST be
      * provided by the consumer and is REQUIRED.
      * <p>
+     * If {@code enumeration} is set the default value MUST be one of the values in {@code enumeration}.
+     * <p>
      * This method sets the defaultValue property of ServerVariable instance to the given defaultValue argument.
      * </p>
      *
@@ -115,6 +117,8 @@ public interface ServerVariable extends Constructible, Extensible<ServerVariable
     /**
      * The default value to use for substitution, and to send, if an alternate value is not supplied. This value MUST be
      * provided by the consumer and is REQUIRED.
+     * <p>
+     * If {@code enumeration} is set the default value MUST be one of the values in {@code enumeration}.
      * <p>
      * This method sets the defaultValue property of ServerVariable instance to the given defaultValue argument and
      * returns the modified instance.
