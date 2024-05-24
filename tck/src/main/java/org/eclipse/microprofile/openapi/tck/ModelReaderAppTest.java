@@ -325,6 +325,7 @@ public class ModelReaderAppTest extends AppTestBase {
         vr.body("components.headers.Request-Limit", notNullValue());
         vr.body("components.securitySchemes.httpTestScheme", notNullValue());
         vr.body("components.links.UserName", notNullValue());
+        vr.body("components.pathItems.idCrud", notNullValue());
     }
 
     @Test(dataProvider = "formatProvider")
@@ -366,6 +367,22 @@ public class ModelReaderAppTest extends AppTestBase {
         vr.body(maxRate + ".required", equalTo(true));
         vr.body(maxRate + ".deprecated", equalTo(true));
         vr.body(maxRate + ".allowEmptyValue", equalTo(true));
+    }
+
+    @Test(dataProvider = "formatProvider")
+    public void testPathItemWithRef(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+
+        // Referencing path item
+        String refpath = "paths.'/refpath/{id}'";
+        vr.body(refpath + ".$ref", equalTo("#/components/pathItems/idCrud"));
+        vr.body(refpath + ".get.responses.'200'", notNullValue());
+
+        // Referenced path item
+        String idCrud = "components.pathItems.idCrud";
+        vr.body(idCrud, notNullValue());
+        vr.body(idCrud + ".parameters[0].description", equalTo("The item parameter"));
+        vr.body(idCrud + ".delete.responses.'202'.description", equalTo("Delete item"));
     }
 
     @Test(dataProvider = "formatProvider")

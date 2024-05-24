@@ -140,5 +140,14 @@ public class StaticDocumentTest extends AppTestBase {
                 equalTo("#/components/schemas/Booking"));
         vr.body(webhookDelete + ".responses.'204'.description",
                 equalTo("Indicates that the deletion event was processed successfully"));
+
+        String idCrud = "components.pathItems.idCrud";
+        vr.body(idCrud, notNullValue());
+        vr.body(idCrud + ".parameters[0].description", equalTo("The item parameter"));
+        vr.body(idCrud + ".delete.responses.'202'.description", equalTo("Delete item"));
+
+        String refpath = "paths.'/refpath/{id}'";
+        vr.body(refpath + ".$ref", equalTo("#/components/pathItems/idCrud"));
+        vr.body(refpath + ".get.responses.'200'", notNullValue());
     }
 }
