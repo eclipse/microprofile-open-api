@@ -56,10 +56,14 @@ public @interface RequestBody {
 
     /**
      * Determines if the request body is required in the request.
+     * <p>
+     * Note that the default value of this property is {@code true}, while the default value of the {@code required}
+     * property in the OpenAPI specification is {@code false}, because Jakarta REST resource methods which accept a
+     * request body generally require it.
      *
      * @return whether or not this requestBody is required
      **/
-    boolean required() default false;
+    boolean required() default true;
 
     /**
      * The unique name to identify this request body. Unless this annotation is used on the actual request body

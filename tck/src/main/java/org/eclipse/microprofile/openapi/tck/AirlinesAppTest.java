@@ -487,9 +487,16 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(endpoint + ".description", equalTo("Create a new booking with the provided information."));
         vr.body(endpoint + ".content", notNullValue());
         vr.body(endpoint + ".x-request-body", equalTo("test-request-body"));
+        vr.body(endpoint + ".required", equalTo(true));
 
+        // PUT method with entity parameter but no @RequestBody annotation
         endpoint = "paths.'/bookings/{id}'.put.requestBody";
         vr.body(endpoint + ".content", notNullValue());
+        vr.body(endpoint + ".required", equalTo(true));
+
+        // GET method without @RequestBody annotation
+        endpoint = "paths.'/bookings/{id}'.get.requestBody";
+        vr.body(endpoint, nullValue());
 
         endpoint = "paths.'/user'.post.requestBody";
         vr.body(endpoint + ".description", equalTo("Record of a new user to be created in the system."));
@@ -499,6 +506,7 @@ public class AirlinesAppTest extends AppTestBase {
         endpoint = "paths.'/user/username/{username}'.put.requestBody";
         vr.body(endpoint + ".description", equalTo("Record of a new user to be created in the system."));
         vr.body(endpoint + ".content", notNullValue());
+        vr.body(endpoint + ".required", either(nullValue()).or(equalTo(false)));
 
         endpoint = "paths.'/user/createWithArray'.post.requestBody";
         vr.body(endpoint + ".description", equalTo("Array of user object"));
@@ -507,6 +515,21 @@ public class AirlinesAppTest extends AppTestBase {
 
         endpoint = "paths.'/user/createWithList'.post.requestBody";
         vr.body(endpoint + ".description", equalTo("List of user object"));
+        vr.body(endpoint + ".content", notNullValue());
+        vr.body(endpoint + ".required", equalTo(true));
+
+        endpoint = "components.requestBodies.review";
+        vr.body(endpoint + ".description", equalTo("example review to add"));
+        vr.body(endpoint + ".content", notNullValue());
+        vr.body(endpoint + ".required", equalTo(true));
+
+        endpoint = "components.requestBodies.nonRequiredReview";
+        vr.body(endpoint + ".description", equalTo("example non-required review"));
+        vr.body(endpoint + ".content", notNullValue());
+        vr.body(endpoint + ".required", either(nullValue()).or(equalTo(false)));
+
+        endpoint = "components.requestBodies.requiredReview";
+        vr.body(endpoint + ".description", equalTo("example required review"));
         vr.body(endpoint + ".content", notNullValue());
         vr.body(endpoint + ".required", equalTo(true));
     }

@@ -148,7 +148,7 @@ public class UserResource {
     /* tags = {"user"}, //this operation intentionally doesn't have tags attribute, since above Tag ref should apply */
     )
     public Response createUsersWithArrayInput(
-            @RequestBody(description = "Array of user object", required = true,
+            @RequestBody(description = "Array of user object",
                          content = @Content(mediaType = "application/json",
                                             schema = @Schema(type = SchemaType.ARRAY, implementation = User.class,
                                                              nullable = true, writeOnly = true, minItems = 2,
@@ -168,7 +168,7 @@ public class UserResource {
     @Operation(summary = "Creates list of users with given input list", // List of User objects
                operationId = "createUsersFromList")
     public Response createUsersWithListInput(
-            @RequestBody(description = "List of user object", required = true) java.util.List<User> users) {
+            @RequestBody(description = "List of user object") java.util.List<User> users) {
         for (User user : users) {
             userData.addUser(user);
         }
@@ -177,7 +177,7 @@ public class UserResource {
 
     @Path("/username/{username}")
     @PUT
-    @RequestBody(name = "user", description = "Record of a new user to be created in the system.",
+    @RequestBody(name = "user", description = "Record of a new user to be created in the system.", required = false,
                  content = @Content(mediaType = "application/json", schema = @Schema(implementation = User.class),
                                     examples = @ExampleObject(name = "user",
                                                               summary = "Example user properties to update",

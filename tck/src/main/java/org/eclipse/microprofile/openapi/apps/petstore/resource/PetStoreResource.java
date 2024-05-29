@@ -115,7 +115,7 @@ public class PetStoreResource {
     @APIResponse(responseCode = "200", description = "successful operation")
     @APIResponse(responseCode = "400", description = "Invalid Order")
     public Order placeOrder(
-            @RequestBody(description = "order placed for purchasing the pet", required = true) Order order) {
+            @RequestBody(description = "order placed for purchasing the pet") Order order) {
         storeData.placeOrder(order);
         return storeData.placeOrder(order);
     }
