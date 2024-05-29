@@ -70,7 +70,8 @@ public class AirlinesResource {
             @Extension(name = "x-boolean-property", value = "true", parseValue = true),
             @Extension(name = "x-number-property", value = "117", parseValue = true),
             @Extension(name = "x-object-property",
-                       value = "{ \"property-1\" : \"value-1\", \"property-2\" : \"value-2\", \"property-3\" : { \"prop-3-1\" : 17, \"prop-3-2\" : true } }",
+                       value = "{ \"property-1\" : \"value-1\", \"property-2\" : \"value-2\","
+                               + " \"property-3\" : { \"prop-3-1\" : 17, \"prop-3-2\" : true } }",
                        parseValue = true),
             @Extension(name = "x-string-array-property", value = "[ \"one\", \"two\", \"three\" ]", parseValue = true),
             @Extension(name = "x-object-array-property",

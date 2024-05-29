@@ -23,8 +23,8 @@ import org.eclipse.microprofile.openapi.apps.petstore.model.Pet;
 import org.eclipse.microprofile.openapi.apps.petstore.model.Tag;
 
 public class PetData {
-    static List<Pet> pets = new ArrayList<Pet>();
-    static List<Category> categories = new ArrayList<Category>();
+    static private List<Pet> pets = new ArrayList<Pet>();
+    static private List<Category> categories = new ArrayList<Category>();
 
     static {
         categories.add(createCategory(1, "Dogs"));

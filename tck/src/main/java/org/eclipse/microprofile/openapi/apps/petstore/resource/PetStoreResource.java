@@ -59,8 +59,8 @@ import jakarta.ws.rs.core.Response;
 @Extension(name = "x-mp-type1", value = "true")
 @Extension(name = "x-mp-type2", value = "false")
 public class PetStoreResource {
-    static StoreData storeData = new StoreData();
-    static PetData petData = new PetData();
+    static private StoreData storeData = new StoreData();
+    static private PetData petData = new PetData();
 
     @GET
     @Path("/inventory")

@@ -20,7 +20,7 @@ import java.util.List;
 import org.eclipse.microprofile.openapi.apps.petstore.model.Order;
 
 public class StoreData {
-    static List<Order> orders = new ArrayList<Order>();
+    private static List<Order> orders = new ArrayList<Order>();
 
     static {
         orders.add(createOrder(1, 1, 2, new Date(), "placed"));

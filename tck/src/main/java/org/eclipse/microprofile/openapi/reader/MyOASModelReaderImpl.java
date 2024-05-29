@@ -57,6 +57,7 @@ import org.eclipse.microprofile.openapi.models.tags.Tag;
 public class MyOASModelReaderImpl implements OASModelReader {
 
     @Override
+    @SuppressWarnings("checkstyle:methodlength")
     public OpenAPI buildModel() {
         return OASFactory.createObject(OpenAPI.class)
                 .info(OASFactory.createObject(Info.class)
