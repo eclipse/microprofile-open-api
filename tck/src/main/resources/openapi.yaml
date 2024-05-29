@@ -18,6 +18,20 @@ info:
   version: 1.0.0
 paths:
   /streams:
+    get:
+      description: An operation without a response
+      parameters:
+        - name: callbackUrl
+          in: query
+          required: true
+          description: |
+            the location where data will be sent.  Must be network accessible
+            by the source server
+          schema:
+            type: string
+            format: uri
+            examples:
+              - https://tonys-server.com
     post:
       description: subscribes a client to receive out-of-band data
       parameters:
