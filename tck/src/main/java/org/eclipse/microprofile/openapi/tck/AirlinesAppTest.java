@@ -549,6 +549,8 @@ public class AirlinesAppTest extends AppTestBase {
                 allOf(aMapWithSize(2),
                         hasEntry(equalTo("userApiKey"), empty()),
                         hasEntry(equalTo("userBearerHttp"), empty()))));
+
+        vr.body("paths.'/zepplins/{id}'.delete.security[0].mutualTLSScheme[0]", equalTo("zepplinScope"));
     }
 
     @Test(dataProvider = "formatProvider")

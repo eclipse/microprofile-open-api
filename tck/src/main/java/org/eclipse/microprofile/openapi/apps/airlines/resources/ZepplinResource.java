@@ -35,7 +35,7 @@ public class ZepplinResource {
     @APIResponse(responseCode = "404", description = "Review not found")
     @Operation(summary = "Deprecate outdated airship technology", operationId = "deprecateZepplin")
     @Produces("text/plain")
-    @SecurityRequirement(name = "mutualTLSScheme")
+    @SecurityRequirement(name = "mutualTLSScheme", scopes = "zepplinScope")
     public Response deprecateZepplin() {
         return Response.ok().build();
     }
