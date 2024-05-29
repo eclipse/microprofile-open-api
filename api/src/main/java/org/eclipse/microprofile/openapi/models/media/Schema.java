@@ -29,12 +29,12 @@ import org.eclipse.microprofile.openapi.models.Reference;
 
 /**
  * The Schema Object allows the definition of input and output data types. These types can be objects, but also
- * primitives and arrays. This object is an extended subset of the
- * <a href="https://tools.ietf.org/html/draft-wright-json-schema-00">JSON Schema Specification Wright Draft 00</a>.
+ * primitives and arrays. This object is a superset of the
+ * <a href="https://json-schema.org/draft/2020-12/json-schema-core">JSON Schema Specification Draft 2020-12</a>.
  * <p>
- * For more information about the properties, see <a href="http://json-schema.org/">JSON Schema Core</a> and
- * <a href= "https://tools.ietf.org/html/draft-wright-json-schema-validation-00">JSON Schema Validation</a>. Unless
- * stated otherwise, the property definitions follow the JSON Schema.
+ * For more information about the properties, see <a href="https://json-schema.org/draft/2020-12/json-schema-core">JSON
+ * Schema Core</a> and <a href= "https://json-schema.org/draft/2020-12/json-schema-validation">JSON Schema
+ * Validation</a>. Unless stated otherwise, the property definitions follow the JSON Schema.
  * <p>
  * Any time a Schema Object can be used, a Reference Object can be used in its place. This allows referencing an
  * existing definition instead of defining the same Schema again.
