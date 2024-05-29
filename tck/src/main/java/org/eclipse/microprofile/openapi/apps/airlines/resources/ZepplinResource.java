@@ -14,7 +14,12 @@
 package org.eclipse.microprofile.openapi.apps.airlines.resources;
 
 import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
+import org.eclipse.microprofile.openapi.annotations.enums.ParameterStyle;
+import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
@@ -49,6 +54,9 @@ public class ZepplinResource {
     @Operation(summary = "Deprecate outdated airship technology", operationId = "deprecateZepplin")
     @Produces("text/plain")
     @SecurityRequirement(name = "mutualTLSScheme", scopes = "zepplinScope")
+    @Parameter(name = "string", description = "something about a string", in = ParameterIn.QUERY,
+               required = true,
+               schema = @Schema(type = SchemaType.OBJECT), style = ParameterStyle.SPACEDELIMITED)
     public Response headZepplin() {
         return Response.ok().build();
     }
@@ -60,6 +68,9 @@ public class ZepplinResource {
     @Operation(summary = "Deprecate outdated airship technology", operationId = "deprecateZepplin")
     @Produces("text/plain")
     @SecurityRequirement(name = "mutualTLSScheme", scopes = "zepplinScope")
+    @Parameter(name = "string", description = "something about a string", in = ParameterIn.QUERY,
+               required = true,
+               schema = @Schema(type = SchemaType.OBJECT), style = ParameterStyle.PIPEDELIMITED)
     public Response getZepplin() {
         return Response.ok().build();
     }
