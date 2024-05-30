@@ -15,8 +15,6 @@ package org.eclipse.microprofile.openapi.apps.airlines.resources;
 
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
-import org.eclipse.microprofile.openapi.annotations.media.Content;
-import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
@@ -40,8 +38,7 @@ public class ZepplinResource {
     @Operation(summary = "Deprecate outdated airship technology", operationId = "deprecateZepplin")
     @Produces("text/plain")
     @SecurityRequirement(name = "mutualTLSScheme", scopes = "zepplinScope")
-    public Response deprecateZepplin(@RequestBody(description = "Something about a zepplin.",
-                                                  content = @Content(mediaType = "application/json")) String string) {
+    public Response deprecateZepplin(String string) {
         return Response.ok().build();
     }
 
@@ -52,7 +49,7 @@ public class ZepplinResource {
     @Operation(summary = "Deprecate outdated airship technology", operationId = "deprecateZepplin")
     @Produces("text/plain")
     @SecurityRequirement(name = "mutualTLSScheme", scopes = "zepplinScope")
-    public Response headZepplin(@RequestBody(ref = "#/paths/~1zepplins~1{id}/delete/requestBody") String string) {
+    public Response headZepplin() {
         return Response.ok().build();
     }
 
@@ -63,7 +60,7 @@ public class ZepplinResource {
     @Operation(summary = "Deprecate outdated airship technology", operationId = "deprecateZepplin")
     @Produces("text/plain")
     @SecurityRequirement(name = "mutualTLSScheme", scopes = "zepplinScope")
-    public Response getZepplin(@RequestBody(ref = "#/paths/~1zepplins~1{id}/delete/requestBody") String string) {
+    public Response getZepplin() {
         return Response.ok().build();
     }
 }

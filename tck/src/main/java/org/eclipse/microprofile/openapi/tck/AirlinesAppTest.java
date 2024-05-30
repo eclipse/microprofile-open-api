@@ -291,17 +291,6 @@ public class AirlinesAppTest extends AppTestBase {
     }
 
     @Test(dataProvider = "formatProvider")
-    public void testOperationZepplinResource(String type) {
-        ValidatableResponse vr = callEndpoint(type);
-
-        vr.body("paths.'/zepplins/{id}'.delete.requestBody.description", equalTo("Something about a zepplin."));
-        vr.body("paths.'/zepplins/{id}'.head.requestBody.$ref", equalTo("#/paths/~1zepplins~1{id}/delete/requestBody"));
-        vr.body("paths.'/zepplins/{id}'.get.requestBody.$ref", equalTo("#/paths/~1zepplins~1{id}/delete/requestBody"));
-
-        vr.body("paths.'/zepplins/{id}'.delete.requestBody.content", notNullValue());
-    }
-
-    @Test(dataProvider = "formatProvider")
     public void testAPIResponse(String type) {
         ValidatableResponse vr = callEndpoint(type);
         // @APIResponse at method level
