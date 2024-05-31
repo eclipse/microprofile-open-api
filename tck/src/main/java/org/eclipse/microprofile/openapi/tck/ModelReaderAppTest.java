@@ -368,4 +368,15 @@ public class ModelReaderAppTest extends AppTestBase {
                 equalTo("Indicates that the deletion event was processed successfully"));
 
     }
+
+    @Test(dataProvider = "formatProvider")
+    public void testRequestBodyInOperations(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+
+        vr.body("paths.'/zepplins/{id}'.delete.requestBody.description", equalTo("Something about a zepplin."));
+        vr.body("paths.'/zepplins/{id}'.head.requestBody.$ref", equalTo("#/paths/~1zepplins~1{id}/delete/requestBody"));
+        vr.body("paths.'/zepplins/{id}'.get.requestBody.$ref", equalTo("#/paths/~1zepplins~1{id}/delete/requestBody"));
+
+        vr.body("paths.'/zepplins/{id}'.delete.requestBody.content", notNullValue());
+    }
 }

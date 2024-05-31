@@ -20,6 +20,8 @@ import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 
 import jakarta.ws.rs.DELETE;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.HEAD;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Response;
@@ -36,7 +38,29 @@ public class ZepplinResource {
     @Operation(summary = "Deprecate outdated airship technology", operationId = "deprecateZepplin")
     @Produces("text/plain")
     @SecurityRequirement(name = "mutualTLSScheme", scopes = "zepplinScope")
-    public Response deprecateZepplin() {
+    public Response deprecateZepplin(String string) {
+        return Response.ok().build();
+    }
+
+    @HEAD
+    @Path("{id}")
+    @APIResponse(responseCode = "200", description = "Review deleted")
+    @APIResponse(responseCode = "404", description = "Review not found")
+    @Operation(summary = "Deprecate outdated airship technology", operationId = "deprecateZepplin")
+    @Produces("text/plain")
+    @SecurityRequirement(name = "mutualTLSScheme", scopes = "zepplinScope")
+    public Response headZepplin() {
+        return Response.ok().build();
+    }
+
+    @GET
+    @Path("{id}")
+    @APIResponse(responseCode = "200", description = "Review deleted")
+    @APIResponse(responseCode = "404", description = "Review not found")
+    @Operation(summary = "Deprecate outdated airship technology", operationId = "deprecateZepplin")
+    @Produces("text/plain")
+    @SecurityRequirement(name = "mutualTLSScheme", scopes = "zepplinScope")
+    public Response getZepplin() {
         return Response.ok().build();
     }
 }
