@@ -39,7 +39,7 @@ public class FilterTest extends AppTestBase {
                 .addPackages(true, "org.eclipse.microprofile.openapi.apps.airlines")
                 .addPackages(true, "org.eclipse.microprofile.openapi.filter")
                 .addAsManifestResource("openapi.yaml", "openapi.yaml")
-                .addAsManifestResource("microprofile-config-filter.properties", "microprofile-config.properties");
+                .addAsResource("microprofile-config-filter.properties", "META-INF/microprofile-config.properties");
     }
 
     @Test(dataProvider = "formatProvider")

@@ -241,7 +241,7 @@ public class OASScanConfigTests {
     private static WebArchive scanConfigApp(String name, ConfigAsset config) {
         return ShrinkWrap.create(WebArchive.class, name)
                 .addPackages(true, ScanConfigApplication.class.getPackage())
-                .addAsManifestResource(config, "microprofile-config.properties");
+                .addAsResource(config, "META-INF/microprofile-config.properties");
     }
 
     private static void assertPaths(ValidatableResponse vr, String... paths) {

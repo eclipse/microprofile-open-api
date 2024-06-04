@@ -31,7 +31,7 @@ public class OASConfigServersTest extends AppTestBase {
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class, "airlines.war")
                 .addPackages(true, "org.eclipse.microprofile.openapi.apps.airlines")
-                .addAsManifestResource("server-microprofile-config.properties", "microprofile-config.properties");
+                .addAsResource("server-microprofile-config.properties", "META-INF/microprofile-config.properties");
     }
 
     @Test(dataProvider = "formatProvider")

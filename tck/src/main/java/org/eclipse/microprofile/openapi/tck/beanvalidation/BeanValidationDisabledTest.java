@@ -40,7 +40,7 @@ public class BeanValidationDisabledTest extends AppTestBase {
 
         return ShrinkWrap.create(WebArchive.class, "beanValidation.war")
                 .addPackage(BeanValidationApp.class.getPackage())
-                .addAsManifestResource(config, "microprofile-config.properties");
+                .addAsResource(config, "META-INF/microprofile-config.properties");
     }
 
     @Test(dataProvider = "formatProvider", groups = BEAN_VALIDATION)

@@ -35,7 +35,7 @@ import org.jboss.shrinkwrap.api.asset.Asset;
  *         .put(OASConfig.SCAN_EXCLUDE_CLASSES, "com.example.myPackage.MyClass");
  * WebArchive war = ShrinkWrap.create(WebArchive.class, "test.war")
  *         .addPackages(true, "com.example.myPackage")
- *         .addAsManifestResource(config, "microprofile-config.properties");
+ *         .addAsResource(config, "META-INF/microprofile-config.properties");
  * </code>
  * </pre>
  */
