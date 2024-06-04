@@ -328,6 +328,37 @@ public class ModelReaderAppTest extends AppTestBase {
     }
 
     @Test(dataProvider = "formatProvider")
+    public void testReferences(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+
+        vr.body("components.responses.FoundBookingsRef.$ref", equalTo("#/components/responses/FoundBookings"));
+        vr.body("components.responses.FoundBookingsRef.description", equalTo("Found Bookings Reference"));
+
+        vr.body("components.parameters.usernameRef.$ref", equalTo("#/components/parameters/username"));
+        vr.body("components.parameters.usernameRef.description", equalTo("username reference"));
+
+        vr.body("components.examples.userRef.$ref", equalTo("#/componets/examples/user"));
+        vr.body("components.examples.userRef.description", equalTo("User reference"));
+        vr.body("components.examples.userRef.summary", equalTo("Referenced example"));
+
+        vr.body("components.requestBodies.reviewRef.$ref", equalTo("#/components/requestBodies/review"));
+        vr.body("components.requestBodies.reviewRef.description", equalTo("Review reference"));
+
+        vr.body("components.headers.Request-Limit-Ref.$ref", equalTo("#/components/headers/Request-Limit"));
+        vr.body("components.headers.Request-Limit-Ref.description", equalTo("Request-Limit reference"));
+
+        vr.body("components.securitySchemes.httpTestSchemeRef.$ref",
+                equalTo("#/components/securitySchemes/httpTestScheme"));
+        vr.body("components.securitySchemes.httpTestSchemeRef.description", equalTo("httpTestScheme reference"));
+
+        vr.body("components.links.UserNameRef.$ref", equalTo("#/components/links/UserName"));
+        vr.body("components.links.UserNameRef.description", equalTo("UserName reference"));
+
+        vr.body("components.callbacks.availabilityCallbackRef.$ref",
+                equalTo("#/components/callbacks/availabilityCallback"));
+    }
+
+    @Test(dataProvider = "formatProvider")
     public void testHeaderInComponents(String type) {
         ValidatableResponse vr = callEndpoint(type);
         String maxRate = "components.headers.Max-Rate";

@@ -137,7 +137,10 @@ import jakarta.ws.rs.core.MediaType;
                                                     @APIResponse(name = "FoundBookings", responseCode = "200",
                                                                  description = "Bookings retrieved",
                                                                  content = @Content(schema = @Schema(type = SchemaType.ARRAY,
-                                                                                                     implementation = Booking.class)))
+                                                                                                     implementation = Booking.class))),
+                                                    @APIResponse(name = "FoundBookingsARef",
+                                                                 ref = "#/components/responses/FoundBookings",
+                                                                 description = "Found Bookings Reference")
                                             },
                                             parameters = {
                                                     @Parameter(name = "departureDate", in = ParameterIn.QUERY,
@@ -147,7 +150,10 @@ import jakarta.ws.rs.core.MediaType;
                                                     @Parameter(name = "username", in = ParameterIn.QUERY,
                                                                description = "The name that needs to be deleted",
                                                                schema = @Schema(type = SchemaType.STRING),
-                                                               required = true)
+                                                               required = true),
+                                                    @Parameter(name = "usernameARef",
+                                                               ref = "#/components/parameters/username",
+                                                               description = "username reference")
                                             },
                                             examples = {
                                                     @ExampleObject(name = "review", summary = "External review example",
@@ -156,13 +162,21 @@ import jakarta.ws.rs.core.MediaType;
                                                                    extensions = @Extension(name = "x-example-object",
                                                                                            value = "test-example-object")),
                                                     @ExampleObject(name = "user", summary = "External user example",
-                                                                   externalValue = "http://foo.bar/examples/user-example.json")
+                                                                   externalValue = "http://foo.bar/examples/user-example.json"),
+                                                    @ExampleObject(name = "userARef",
+                                                                   ref = "#/components/examples/user",
+                                                                   description = "User reference",
+                                                                   summary = "Referenced example")
                                             },
                                             requestBodies = {
                                                     @RequestBody(name = "review",
                                                                  content = @Content(mediaType = MediaType.APPLICATION_JSON,
                                                                                     schema = @Schema(implementation = Review.class)),
-                                                                 required = true, description = "example review to add")
+                                                                 required = true,
+                                                                 description = "example review to add"),
+                                                    @RequestBody(name = "reviewARef",
+                                                                 ref = "#/components/requestBodies/review",
+                                                                 description = "Review reference")
                                             },
                                             headers = {
                                                     @Header(name = "Max-Rate", description = "Maximum rate",
@@ -173,20 +187,29 @@ import jakarta.ws.rs.core.MediaType;
                                                                                     value = "test-header")),
                                                     @Header(name = "Request-Limit",
                                                             description = "The number of allowed requests in the current period",
-                                                            schema = @Schema(type = SchemaType.INTEGER))
+                                                            schema = @Schema(type = SchemaType.INTEGER)),
+                                                    @Header(name = "Request-Limit-ARef",
+                                                            ref = "#/components/headers/Request-Limit",
+                                                            description = "Request-Limit reference")
                                             },
                                             securitySchemes = {
                                                     @SecurityScheme(securitySchemeName = "httpTestScheme",
                                                                     description = "user security scheme",
                                                                     type = SecuritySchemeType.HTTP,
-                                                                    scheme = "testScheme")
+                                                                    scheme = "testScheme"),
+                                                    @SecurityScheme(securitySchemeName = "httpTestSchemeARef",
+                                                                    ref = "#/components/securitySchemes/httpTestScheme",
+                                                                    description = "httpTestScheme reference")
                                             },
                                             links = {
                                                     @Link(name = "UserName",
                                                           description = "The username corresponding to provided user id",
                                                           operationId = "getUserByName",
                                                           parameters = @LinkParameter(name = "userId",
-                                                                                      expression = "$request.path.id"))
+                                                                                      expression = "$request.path.id")),
+                                                    @Link(name = "UserNameARef",
+                                                          ref = "#/components/links/UserName",
+                                                          description = "UserName reference")
                                             },
                                             callbacks = {
                                                     @Callback(name = "GetBookings",
@@ -194,7 +217,9 @@ import jakarta.ws.rs.core.MediaType;
                                                               operations = @CallbackOperation(summary = "Retrieve all bookings for current user",
                                                                                               responses = {
                                                                                                       @APIResponse(ref = "FoundBookings")
-                                                                                              }))
+                                                                                              })),
+                                                    @Callback(name = "GetBookingsARef",
+                                                              ref = "#/components/callbacks/GetBookings")
                                             },
                                             extensions = @Extension(name = "x-components", value = "test-components")),
                    extensions = @Extension(name = "x-openapi-definition", value = "test-openapi-definition"))
