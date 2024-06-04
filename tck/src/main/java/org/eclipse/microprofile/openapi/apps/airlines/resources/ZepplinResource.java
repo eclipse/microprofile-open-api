@@ -37,7 +37,6 @@ import jakarta.ws.rs.core.Response;
 public class ZepplinResource {
 
     @DELETE
-    @Path("{id}")
     @APIResponse(responseCode = "200", description = "Review deleted")
     @APIResponse(responseCode = "404", description = "Review not found")
     @Operation(summary = "Deprecate outdated airship technology", operationId = "deprecateZepplin")
@@ -48,7 +47,6 @@ public class ZepplinResource {
     }
 
     @HEAD
-    @Path("{id}")
     @APIResponse(responseCode = "200", description = "Review deleted")
     @APIResponse(responseCode = "404", description = "Review not found")
     @Operation(summary = "Deprecate outdated airship technology", operationId = "deprecateZepplin")
@@ -62,7 +60,6 @@ public class ZepplinResource {
     }
 
     @GET
-    @Path("{id}")
     @APIResponse(responseCode = "200", description = "Review deleted")
     @APIResponse(responseCode = "404", description = "Review not found")
     @Operation(summary = "Deprecate outdated airship technology", operationId = "deprecateZepplin")

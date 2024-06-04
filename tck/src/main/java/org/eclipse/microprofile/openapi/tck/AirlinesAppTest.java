@@ -349,8 +349,8 @@ public class AirlinesAppTest extends AppTestBase {
     }
 
     private void testParameterWithObjectAndStyle(ValidatableResponse vr) {
-        String headParameters = "paths.'/zepplins/{id}'.head.parameters";
-        String getParameters = "paths.'/zepplins/{id}'.get.parameters";
+        String headParameters = "paths.'/zepplins'.head.parameters";
+        String getParameters = "paths.'/zepplins'.get.parameters";
 
         vr.body(headParameters, hasSize(1));
         vr.body(getParameters, hasSize(1));
@@ -565,7 +565,7 @@ public class AirlinesAppTest extends AppTestBase {
                         hasEntry(equalTo("userApiKey"), empty()),
                         hasEntry(equalTo("userBearerHttp"), empty()))));
 
-        vr.body("paths.'/zepplins/{id}'.delete.security[0].mutualTLSScheme[0]", equalTo("zepplinScope"));
+        vr.body("paths.'/zepplins'.delete.security[0].mutualTLSScheme[0]", equalTo("zepplinScope"));
     }
 
     @Test(dataProvider = "formatProvider")
