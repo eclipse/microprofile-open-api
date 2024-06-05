@@ -404,10 +404,10 @@ public class ModelReaderAppTest extends AppTestBase {
     public void testRequestBodyInOperations(String type) {
         ValidatableResponse vr = callEndpoint(type);
 
-        vr.body("paths.'/zepplins/{id}'.delete.requestBody.description", equalTo("Something about a zepplin."));
-        vr.body("paths.'/zepplins/{id}'.head.requestBody.$ref", equalTo("#/paths/~1zepplins~1{id}/delete/requestBody"));
-        vr.body("paths.'/zepplins/{id}'.get.requestBody.$ref", equalTo("#/paths/~1zepplins~1{id}/delete/requestBody"));
+        vr.body("paths.'/zepplins'.delete.requestBody.description", equalTo("Something about a zepplin."));
+        vr.body("paths.'/zepplins'.head.requestBody.$ref", equalTo("#/paths/~1zepplins/delete/requestBody"));
+        vr.body("paths.'/zepplins'.get.requestBody.$ref", equalTo("#/paths/~1zepplins/delete/requestBody"));
 
-        vr.body("paths.'/zepplins/{id}'.delete.requestBody.content", notNullValue());
+        vr.body("paths.'/zepplins'.delete.requestBody.content", notNullValue());
     }
 }

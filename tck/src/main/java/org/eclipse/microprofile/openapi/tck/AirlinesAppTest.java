@@ -345,6 +345,21 @@ public class AirlinesAppTest extends AppTestBase {
         testBookingIdMethods(vr);
         testReviewIdMethods(vr);
         testUserLoginMethods(vr);
+        testParameterWithObjectAndStyle(vr);
+    }
+
+    private void testParameterWithObjectAndStyle(ValidatableResponse vr) {
+        String headParameters = "paths.'/zepplins'.head.parameters";
+        String getParameters = "paths.'/zepplins'.get.parameters";
+
+        vr.body(headParameters, hasSize(1));
+        vr.body(getParameters, hasSize(1));
+
+        vr.body(headParameters + "[0].schema.type", equalTo("object"));
+        vr.body(getParameters + "[0].schema.type", equalTo("object"));
+
+        vr.body(headParameters + "[0].style", equalTo("spaceDelimited"));
+        vr.body(getParameters + "[0].style", equalTo("pipeDelimited"));
     }
 
     private void testUserLoginMethods(ValidatableResponse vr) {
@@ -550,7 +565,7 @@ public class AirlinesAppTest extends AppTestBase {
                         hasEntry(equalTo("userApiKey"), empty()),
                         hasEntry(equalTo("userBearerHttp"), empty()))));
 
-        vr.body("paths.'/zepplins/{id}'.delete.security[0].mutualTLSScheme[0]", equalTo("zepplinScope"));
+        vr.body("paths.'/zepplins'.delete.security[0].mutualTLSScheme[0]", equalTo("zepplinScope"));
     }
 
     @Test(dataProvider = "formatProvider")
