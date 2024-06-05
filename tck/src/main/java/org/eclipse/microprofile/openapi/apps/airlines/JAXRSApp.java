@@ -20,6 +20,8 @@ import java.util.Set;
 import org.eclipse.microprofile.openapi.annotations.Components;
 import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
 import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
+import org.eclipse.microprofile.openapi.annotations.PathItem;
+import org.eclipse.microprofile.openapi.annotations.PathItemOperation;
 import org.eclipse.microprofile.openapi.annotations.callbacks.Callback;
 import org.eclipse.microprofile.openapi.annotations.callbacks.CallbackOperation;
 import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
@@ -60,6 +62,7 @@ import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
 import jakarta.ws.rs.core.MediaType;
 
+@SuppressWarnings("checkstyle:linelength") // indentation of annotations leads to long lines
 @ApplicationPath("/")
 @OpenAPIDefinition(
                    tags = {@Tag(name = "user", description = "Operations about user"),
@@ -106,6 +109,27 @@ import jakarta.ws.rs.core.MediaType;
                                    },
                                    extensions = @Extension(name = "x-server", value = "test-server")),
                            @Server(url = "https://test-server.com:80/basePath", description = "The test API server")
+                   },
+                   webhooks = {
+                           @PathItem(name = "bookingEvent",
+                                     description = "Notifies about booking creation and deletion",
+                                     summary = "Booking Events",
+                                     operations = {
+                                             @PathItemOperation(method = "put",
+                                                                summary = "Notifies that a booking has been created",
+                                                                requestBody = @RequestBody(content = @Content(mediaType = "application/json",
+                                                                                                              schema = @Schema(ref = "#/components/schemas/Booking"))),
+                                                                responses = @APIResponse(responseCode = "204",
+                                                                                         description = "Indicates that the creation event was processed successfully")),
+                                             @PathItemOperation(method = "delete",
+                                                                summary = "Notifies that a booking has been deleted",
+                                                                requestBody = @RequestBody(content = @Content(mediaType = "application/json",
+                                                                                                              schema = @Schema(ref = "#/components/schemas/Booking"))),
+                                                                responses = @APIResponse(responseCode = "204",
+                                                                                         description = "Indicates that the deletion event was processed successfully"))
+                                     },
+                                     extensions = @Extension(name = "x-webhook", value = "test-webhook")),
+                           @PathItem(name = "userEvent", ref = "UserEvent")
                    },
                    components = @Components(
                                             schemas = {
@@ -219,7 +243,101 @@ import jakarta.ws.rs.core.MediaType;
                                                                                                       @APIResponse(ref = "FoundBookings")
                                                                                               })),
                                                     @Callback(name = "GetBookingsARef",
-                                                              ref = "#/components/callbacks/GetBookings")
+                                                              ref = "#/components/callbacks/GetBookings"),
+                                                    @Callback(name = "UserEvents",
+                                                              callbackUrlExpression = "http://localhost:9080/users/events",
+                                                              pathItemRef = "UserEvent")
+                                            },
+                                            pathItems = {
+                                                    @PathItem(name = "UserEvent",
+                                                              description = "Standard definition for receiving events about users",
+                                                              summary = "User Event reception API",
+                                                              operations = {
+                                                                      @PathItemOperation(
+                                                                                         method = "PUT",
+                                                                                         summary = "User added event",
+                                                                                         description = "A user was added",
+                                                                                         externalDocs = @ExternalDocumentation(url = "http://example.com/docs"),
+                                                                                         operationId = "userAddedEvent",
+                                                                                         parameters = @Parameter(name = "authenticated",
+                                                                                                                 description = "Whether the user is authenticated",
+                                                                                                                 in = ParameterIn.QUERY,
+                                                                                                                 schema = @Schema(type = SchemaType.BOOLEAN),
+                                                                                                                 required = false),
+                                                                                         requestBody = @RequestBody(
+                                                                                                                    description = "The added user",
+                                                                                                                    content = @Content(mediaType = MediaType.APPLICATION_JSON,
+                                                                                                                                       schema = @Schema(ref = "User"))),
+                                                                                         responses = {
+                                                                                                 @APIResponse(responseCode = "200",
+                                                                                                              description = "Event received"),
+                                                                                                 @APIResponse(responseCode = "429",
+                                                                                                              description = "Server is too busy to process the event. It will be sent again later")
+                                                                                         }),
+                                                                      @PathItemOperation(
+                                                                                         method = "DELETE",
+                                                                                         summary = "A user was deleted",
+                                                                                         parameters = @Parameter(name = "id",
+                                                                                                                 in = ParameterIn.QUERY,
+                                                                                                                 schema = @Schema(type = SchemaType.STRING),
+                                                                                                                 required = true),
+                                                                                         responses = {
+                                                                                                 @APIResponse(responseCode = "200",
+                                                                                                              description = "Event received")
+                                                                                         })
+                                                              }),
+                                                    @PathItem(name = "UserEventARef",
+                                                              ref = "#/components/pathItems/UserEvent",
+                                                              description = "UserEvent reference",
+                                                              summary = "Referenced PathItem",
+                                                              operations = @PathItemOperation(
+                                                                                              method = "POST",
+                                                                                              summary = "User updated event",
+                                                                                              description = "A user was modified",
+                                                                                              requestBody = @RequestBody(
+                                                                                                                         description = "The modified user",
+                                                                                                                         content = @Content(mediaType = MediaType.APPLICATION_JSON,
+                                                                                                                                            schema = @Schema(ref = "User"))),
+                                                                                              responses = {
+                                                                                                      @APIResponse(responseCode = "200",
+                                                                                                                   description = "Event received")
+                                                                                              })),
+                                                    @PathItem(name = "CallbackPathItem",
+                                                              operations = @PathItemOperation(
+                                                                                              method = "POST",
+                                                                                              responses = @APIResponse(responseCode = "200"),
+                                                                                              callbacks = @Callback(name = "getBookings",
+                                                                                                                    ref = "#/components/callbacks/GetBookings"))),
+                                                    // Test remaining properties on PathItemOperation
+                                                    @PathItem(name = "OperationTest",
+                                                              operations = @PathItemOperation(
+                                                                                              method = "POST",
+                                                                                              responses = @APIResponse(responseCode = "200"),
+                                                                                              deprecated = true,
+                                                                                              tags = {
+                                                                                                      @Tag(ref = "create"),
+                                                                                                      @Tag(name = "pathItemTest",
+                                                                                                           description = "part of the path item tests")
+                                                                                              },
+                                                                                              security = @SecurityRequirement(name = "testScheme1"),
+                                                                                              securitySets = @SecurityRequirementsSet({}),
+                                                                                              servers = @Server(url = "http://old.example.com/api"),
+                                                                                              extensions = @Extension(name = "x-operation",
+                                                                                                                      value = "test operation"))),
+                                                    // Test remaining properties on PathItem
+                                                    @PathItem(name = "PathItemTest",
+                                                              operations = {
+                                                                      @PathItemOperation(method = "POST",
+                                                                                         responses = @APIResponse(responseCode = "200")),
+                                                                      @PathItemOperation(method = "PUT",
+                                                                                         responses = @APIResponse(responseCode = "200"))
+                                                              },
+                                                              servers = @Server(url = "http://example.com"),
+                                                              parameters = @Parameter(name = "id",
+                                                                                      in = ParameterIn.PATH,
+                                                                                      schema = @Schema(type = SchemaType.STRING)),
+                                                              extensions = @Extension(name = "x-pathItem",
+                                                                                      value = "test path item"))
                                             },
                                             extensions = @Extension(name = "x-components", value = "test-components")),
                    extensions = @Extension(name = "x-openapi-definition", value = "test-openapi-definition"))
