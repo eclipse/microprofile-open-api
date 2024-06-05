@@ -483,4 +483,53 @@ public interface Components extends Constructible, Extensible<Components> {
      */
     void removeCallback(String key);
 
+    /**
+     * Returns the pathItems property of this Components instance. Path items listed here can be referenced from
+     * elsewhere in the OpenAPI document.
+     *
+     * @return a copy Map (potentially immutable) of path items
+     */
+    Map<String, PathItem> getPathItems();
+
+    /**
+     * Sets the pathItems property of this Components instance. Path items listed here can be referenced from elsewhere
+     * in the OpenAPI document.
+     *
+     * @param pathItems
+     *            a map of path items
+     */
+    void setPathItems(Map<String, PathItem> pathItems);
+
+    /**
+     * Sets the pathItems property of this Components instance. Path items listed here can be referenced from elsewhere
+     * in the OpenAPI document.
+     *
+     * @param pathItems
+     *            a map of path items
+     * @return the current Schema instance
+     */
+    default Components pathItems(Map<String, PathItem> pathItems) {
+        setPathItems(pathItems);
+        return this;
+    }
+
+    /**
+     * Adds a path item.
+     *
+     * @param name
+     *            name of the path item to add
+     * @param pathItem
+     *            the path item to add
+     * @return the current Schema instance
+     */
+    Components addPathItem(String name, PathItem pathItem);
+
+    /**
+     * Removes a path item.
+     *
+     * @param name
+     *            name of the path item to remove
+     */
+    void removePathItem(String name);
+
 }

@@ -393,6 +393,27 @@ public class ModelConstructionTest extends Arquillian {
         SecurityScheme otherSecuritySchemeValue = createConstructibleInstance(SecurityScheme.class);
         checkMapImmutable(c, Components::getSecuritySchemes, "otherSecurityScheme", otherSecuritySchemeValue);
         checkNullValueInAdd(c::getSecuritySchemes, c::addSecurityScheme, "someSecurityScheme", securitySchemeValue);
+
+        final String pathItemKey = "myPathItem";
+        final PathItem pathItemValue = createConstructibleInstance(PathItem.class);
+        checkSameObject(c, c.addPathItem(pathItemKey, pathItemValue));
+        checkMapEntry(c.getPathItems(), pathItemKey, pathItemValue);
+        assertEquals(c.getPathItems().size(), 1, "The map is expected to contain one entry.");
+        c.removePathItem(pathItemKey);
+        assertEquals(c.getPathItems().size(), 0, "The map is expected to be empty.");
+
+        final String pathItemKey2 = "myPathItem2";
+        final PathItem pathItemValue2 = createConstructibleInstance(PathItem.class);
+        c.setPathItems(Collections.singletonMap(pathItemKey2, pathItemValue2));
+        checkMapEntry(c.getPathItems(), pathItemKey2, pathItemValue2);
+        assertEquals(c.getPathItems().size(), 1, "The map is expected to contain one entry.");
+        checkSameObject(c, c.addPathItem(pathItemKey, pathItemValue));
+        checkMapEntry(c.getPathItems(), pathItemKey, pathItemValue);
+        assertEquals(c.getPathItems().size(), 2, "The map is expected to contain two entries.");
+
+        PathItem otherPathItemValue = createConstructibleInstance(PathItem.class);
+        checkMapImmutable(c, Components::getPathItems, "otherPathItem", otherPathItemValue);
+        checkNullValueInAdd(c::getPathItems, c::addPathItem, "somePathItem", pathItemValue);
     }
 
     @Test
@@ -1779,14 +1800,14 @@ public class ModelConstructionTest extends Arquillian {
         r.setRef(myRef1);
         assertEquals(r.getRef(), myRef1,
                 "The return value of getRef() is expected to be equal to the value that was set.");
+
         // Check that the short name ref value can be set using the setter method and that the getter method returns the
         // expanded value.
-        if (!(r instanceof PathItem)) {
-            final String shortName = "myRef2";
-            final String myRef2 = createReference(r, shortName);
-            r.setRef(shortName);
-            assertEquals(r.getRef(), myRef2, "The return value of getRef() is expected to be a fully expanded name.");
-        }
+        final String shortName2 = "myRef2";
+        final String myRef2 = createReference(r, shortName2);
+        r.setRef(shortName2);
+        assertEquals(r.getRef(), myRef2, "The return value of getRef() is expected to be a fully expanded name.");
+
         // Check that the ref value can be set using the builder method and that the getter method returns the same
         // value.
         final String myRef3 = createReference(r, "myRef3");
@@ -1794,15 +1815,14 @@ public class ModelConstructionTest extends Arquillian {
         assertSame(self, r, "The return value of ref() is expected to return the current instance.");
         assertEquals(r.getRef(), myRef3,
                 "The return value of getRef() is expected to be equal to the value that was set.");
+
         // Check that the short name ref value can be set using the builder method and that the getter method returns
         // the expanded value.
-        if (!(r instanceof PathItem)) {
-            final String shortName = "myRef4";
-            final String myRef4 = createReference(r, shortName);
-            final Reference<?> self2 = r.ref(shortName);
-            assertSame(self2, r, "The return value of ref() is expected to return the current instance.");
-            assertEquals(r.getRef(), myRef4, "The return value of getRef() is expected to be a fully expanded name.");
-        }
+        final String shortName4 = "myRef4";
+        final String myRef4 = createReference(r, shortName4);
+        final Reference<?> self2 = r.ref(shortName4);
+        assertSame(self2, r, "The return value of ref() is expected to return the current instance.");
+        assertEquals(r.getRef(), myRef4, "The return value of getRef() is expected to be a fully expanded name.");
     }
 
     private void processConstructibleProperty(Constructible o, Property p, Class<?> enclosingInterface) {
@@ -1896,7 +1916,7 @@ public class ModelConstructionTest extends Arquillian {
         } else if (r instanceof Parameter) {
             sb.append("#/components/parameters/");
         } else if (r instanceof PathItem) {
-            sb.append("http://www.abc.def.ghi/");
+            sb.append("#/components/pathItems/");
         } else if (r instanceof RequestBody) {
             sb.append("#/components/requestBodies/");
         } else if (r instanceof Schema) {

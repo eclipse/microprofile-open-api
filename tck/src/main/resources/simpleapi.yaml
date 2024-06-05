@@ -120,6 +120,15 @@ paths:
       responses:
         '200':
           description: trace operation tested
+  /refpath/{id}:
+    $ref: '#/components/pathItems/idCrud'
+    get:
+      responses:
+        '200':
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/InventoryItem'
 webhooks:
   bookingEvent:
     put:
@@ -186,3 +195,15 @@ components:
           examples:
             - 408-867-5309
       type: object
+  pathItems:
+    idCrud:
+      delete:
+        responses:
+          '202':
+            content: []
+            description: Delete item
+      parameters:
+        - name: id
+          in: path
+          description: The item parameter
+          required: true
