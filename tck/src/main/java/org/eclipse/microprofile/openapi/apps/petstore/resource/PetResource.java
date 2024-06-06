@@ -172,7 +172,7 @@ public class PetResource {
     @RequestBody(name = "pet",
                  content = @Content(mediaType = "application/json", schema = @Schema(implementation = Pet.class),
                                     examples = @ExampleObject(ref = "http://example.org/petapi-examples/openapi.json#/components/examples/pet-example")),
-                 required = true, description = "example of a new pet to add")
+                 description = "example of a new pet to add")
     @Operation(summary = "Add pet to store", description = "Add a new pet to the store")
     public Response addPet(Pet pet) {
         Pet updatedPet = petData.addPet(pet);
@@ -193,7 +193,6 @@ public class PetResource {
     @Operation(summary = "Update an existing pet", description = "Update an existing pet with the given new attributes")
     public Response updatePet(
             @RequestBody(description = "Attribute to update existing pet record",
-                         required = true,
                          content = @Content(schema = @Schema(implementation = Pet.class))) Pet pet) {
         Pet updatedPet = petData.addPet(pet);
         return Response.ok().entity(updatedPet).build();

@@ -69,8 +69,7 @@ public class UserResource {
     })
     public Response createUser(
             @RequestBody(description = "Created user object",
-                         content = @Content(schema = @Schema(ref = "#/components/schemas/User")),
-                         required = true) User user) {
+                         content = @Content(schema = @Schema(ref = "#/components/schemas/User"))) User user) {
         userData.addUser(user);
         return Response.ok().entity("").build();
     }
@@ -112,7 +111,7 @@ public class UserResource {
             @Parameter(name = "username", description = "name that need to be deleted",
                        schema = @Schema(type = SchemaType.STRING),
                        required = true) @PathParam("username") String username,
-            @RequestBody(description = "Updated user object", required = true) User user) {
+            @RequestBody(description = "Updated user object") User user) {
         userData.addUser(user);
         return Response.ok().entity("").build();
     }
