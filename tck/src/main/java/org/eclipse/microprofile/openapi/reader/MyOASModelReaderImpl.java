@@ -455,6 +455,16 @@ public class MyOASModelReaderImpl implements OASModelReader {
                                                                                 .title("id")
                                                                                 .description("id of the new booking")
                                                                                 .addType(
-                                                                                        Schema.SchemaType.STRING)))))))));
+                                                                                        Schema.SchemaType.STRING))))))))
+                        .addPathItem("/refpath/{id}", OASFactory.createPathItem()
+                                .ref("idCrud") // Note PathItem allows ref with other properties
+                                .GET(OASFactory.createOperation()
+                                        .responses(OASFactory.createAPIResponses()
+                                                .addAPIResponse("200", OASFactory.createAPIResponse()
+                                                        .content(OASFactory.createContent()
+                                                                .addMediaType("application/json",
+                                                                        OASFactory.createMediaType()
+                                                                                .schema(OASFactory.createSchema()
+                                                                                        .ref("Airlines")))))))));
     }
 }
