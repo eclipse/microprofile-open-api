@@ -94,6 +94,15 @@ public @interface OpenAPIDefinition {
     ExternalDocumentation externalDocs() default @ExternalDocumentation;
 
     /**
+     * An array of webhook definitions which the API may be instructed to call using out-of-band mechanisms.
+     *
+     * @return the array of webhooks
+     *
+     * @since 4.0
+     */
+    PathItem[] webhooks() default {};
+
+    /**
      * An element to hold a set of reusable objects for different aspects of the OpenAPI Specification (OAS).
      *
      * All objects defined within the components object will have no effect on the API unless they are explicitly

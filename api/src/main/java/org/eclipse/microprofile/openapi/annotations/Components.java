@@ -108,6 +108,15 @@ public @interface Components {
     Callback[] callbacks() default {};
 
     /**
+     * An object to hold reusable Path Item Objects.
+     *
+     * @return the reusable PathItem objects.
+     *
+     * @since 4.0
+     */
+    PathItem[] pathItems() default {};
+
+    /**
      * List of extensions to be added to the {@link org.eclipse.microprofile.openapi.models.Components Components} model
      * corresponding to the containing annotation.
      *

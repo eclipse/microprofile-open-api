@@ -78,6 +78,16 @@ public @interface Callback {
     String ref() default "";
 
     /**
+     * Reference value to a Path Item object, to be referenced by the Callback object.
+     * <p>
+     * This property provides a reference to a Path Item object defined elsewhere. {@code #callbackUrlExpression()} is
+     * REQUIRED when this property is set. The referenced Path Item will be used for the URL expression specified.
+     *
+     * @since 4.0
+     */
+    String pathItemRef() default "";
+
+    /**
      * List of extensions to be added to the {@link org.eclipse.microprofile.openapi.models.callbacks.Callback Callback}
      * model corresponding to the containing annotation.
      *

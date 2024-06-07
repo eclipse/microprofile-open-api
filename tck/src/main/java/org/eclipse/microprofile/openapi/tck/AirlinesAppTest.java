@@ -23,6 +23,7 @@ import static org.hamcrest.Matchers.both;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.emptyIterable;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasEntry;
@@ -472,6 +473,10 @@ public class AirlinesAppTest extends AppTestBase {
         endpoint = "paths.'/bookings'.post.callbacks";
         vr.body(endpoint, hasKey("bookingCallback"));
         vr.body(endpoint + ".'bookingCallback'", hasKey("http://localhost:9080/airlines/bookings"));
+
+        endpoint = "components.callbacks.UserEvents";
+        vr.body(endpoint, hasKey("http://localhost:9080/users/events"));
+        vr.body(endpoint + ".'http://localhost:9080/users/events'.$ref", equalTo("#/components/pathItems/UserEvent"));
     }
 
     @Test(dataProvider = "formatProvider")
@@ -894,6 +899,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body("components.securitySchemes.httpTestScheme", notNullValue());
         vr.body("components.links.UserName", notNullValue());
         vr.body("components.callbacks.GetBookings", notNullValue());
+        vr.body("components.pathItems.UserEvent", notNullValue());
 
         // Test an extension on the components object itself
         vr.body("components.x-components", equalTo("test-components"));
@@ -1209,6 +1215,82 @@ public class AirlinesAppTest extends AppTestBase {
 
         vr.body("components.callbacks.GetBookingsARef.$ref",
                 equalTo("#/components/callbacks/GetBookings"));
+
+        vr.body("components.pathItems.UserEventARef.$ref", equalTo("#/components/pathItems/UserEvent"));
+        vr.body("components.pathItems.UserEventARef.description", equalTo("UserEvent reference"));
+        vr.body("components.pathItems.UserEventARef.summary", equalTo("Referenced PathItem"));
     }
 
+    @Test(dataProvider = "formatProvider")
+    public void testPathItem(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+
+        String pathItem = "components.pathItems.UserEvent";
+        vr.body(pathItem + ".description", equalTo("Standard definition for receiving events about users"));
+        vr.body(pathItem + ".summary", equalTo("User Event reception API"));
+        vr.body(pathItem + ".put", notNullValue());
+        vr.body(pathItem + ".delete", notNullValue());
+
+        pathItem = "components.pathItems.PathItemTest";
+        vr.body(pathItem + ".servers[0].url", equalTo("http://example.com"));
+        vr.body(pathItem + ".parameters[0].name", equalTo("id"));
+        vr.body(pathItem + ".x-pathItem", equalTo("test path item"));
+
+        pathItem = "components.pathItems.UserEventARef";
+        vr.body(pathItem + ".$ref", equalTo("#/components/pathItems/UserEvent"));
+        vr.body(pathItem + ".post", notNullValue());
+        vr.body(pathItem + ".post.summary", equalTo("User updated event"));
+    }
+
+    @Test(dataProvider = "formatProvider")
+    public void testPathItemOperation(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+
+        String op = "components.pathItems.UserEvent.put";
+        vr.body(op, notNullValue());
+        vr.body(op + ".summary", equalTo("User added event"));
+        vr.body(op + ".description", equalTo("A user was added"));
+        vr.body(op + ".externalDocs.url", equalTo("http://example.com/docs"));
+        vr.body(op + ".operationId", equalTo("userAddedEvent"));
+        vr.body(op + ".parameters[0].name", equalTo("authenticated"));
+        vr.body(op + ".requestBody.description", equalTo("The added user"));
+        vr.body(op + ".responses.'200'.description", equalTo("Event received"));
+        vr.body(op + ".responses.'429'.description", containsString("Server is too busy"));
+
+        op = "components.pathItems.CallbackPathItem.post";
+        vr.body(op, notNullValue());
+        vr.body(op + ".callbacks.getBookings.$ref", equalTo("#/components/callbacks/GetBookings"));
+
+        op = "components.pathItems.OperationTest.post";
+        vr.body(op, notNullValue());
+        vr.body(op + ".tags", containsInAnyOrder("create", "pathItemTest"));
+        vr.body(op + ".deprecated", equalTo(true));
+        vr.body(op + ".security", hasSize(2));
+        vr.body(op + ".security", hasItem(anEmptyMap()));
+        // JsonPath syntax sucks - this expects security to contain two items, one of which
+        // maps "testScheme1" to an empty list and the other of which doesn't have a "testScheme1" entry.
+        vr.body(op + ".security.testScheme1", containsInAnyOrder(emptyIterable(), nullValue()));
+        vr.body(op + ".servers[0].url", equalTo("http://old.example.com/api"));
+        vr.body(op + ".x-operation", equalTo("test operation"));
+
+        // Check the new tag was created
+        vr.body("tags.findAll { it.name == 'pathItemTest'}.description", contains("part of the path item tests"));
+    }
+
+    @Test(dataProvider = "formatProvider")
+    public void testWebhooks(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+
+        String webhook = "webhooks.bookingEvent";
+        vr.body(webhook, notNullValue());
+        vr.body(webhook + ".description", equalTo("Notifies about booking creation and deletion"));
+        vr.body(webhook + ".summary", equalTo("Booking Events"));
+        vr.body(webhook + ".put", notNullValue());
+        vr.body(webhook + ".delete", notNullValue());
+        vr.body(webhook + ".x-webhook", equalTo("test-webhook"));
+
+        webhook = "webhooks.userEvent";
+        vr.body(webhook, notNullValue());
+        vr.body(webhook + ".$ref", equalTo("#/components/pathItems/UserEvent"));
+    }
 }
