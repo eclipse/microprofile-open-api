@@ -16,6 +16,61 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+[[release_notes_40]]
+== Release Notes for MicroProfile OpenAPI 4.0
+
+A full list of changes delivered in the 4.0 release can be found at link:https://github.com/eclipse/microprofile-open-api/milestone/6?closed=1[MicroProfile OpenAPI 4.0 Milestone]
+
+[[incompatible_changes_40]]
+=== Incompatible Changes
+
+* `/openapi` endpoint now serves documentation in OpenAPI v3.1 format (https://github.com/eclipse/microprofile-open-api/issues/333[333])
+* Incompatible changes to the `Schema` model API, reflecting changes in the OpenAPI v3.1 document format (https://github.com/eclipse/microprofile-open-api/issues/584[584])
+** `type` property type changed from `SchemaType` to `List<SchemaType>`
+** `exclusiveMinimum` and `exclusiveMaximum` property types changed from `Boolean` to `BigDecimal`
+** `nullable` property removed (replaced by the addition of `NULL` to `SchemaType`)
+* `@RequestBody.required` changed to `true` to reflect that this is the much more common case where a RESTful resource method accepts a request body (https://github.com/eclipse/microprofile-open-api/issues/349[349])
+* Minimum Java version increased to 11
+
+[[api_changes_40]]
+=== API/SPI changes
+
+* Model API changes, reflecting changes in the OpenAPI v3.1 document format
+** New `OpenAPI` property: `webhooks` (https://github.com/eclipse/microprofile-open-api/issues/583[583])
+** New `Components` property: `pathItems` (https://github.com/eclipse/microprofile-open-api/issues/437[437])
+** New `Info` property: `summary` (https://github.com/eclipse/microprofile-open-api/issues/435[435])
+** New `License` property: `identifier` (https://github.com/eclipse/microprofile-open-api/issues/436[436])
+** New `Schema` properties: `booleanSchema`, `comment`, `constValue`, `contains`, `contentEncoding`, `contentMediaType`, `contentSchema`, `dependentRequired`, `dependentSchemas`, `elseSchema`, `examples`, `ifSchema`, `maxContains`, `minContains`, `patternProperties`, `prefixItems`, `propertyNames`, `schemaDialect`, `thenSchema`, `unevaluatedItems`, `unevaluatedProperties` (https://github.com/eclipse/microprofile-open-api/issues/584[584]), (https://github.com/eclipse/microprofile-open-api/issues/567[567])
+** New `Schema.SchemaType` enum value: `NULL` (https://github.com/eclipse/microprofile-open-api/issues/584[584])
+** New `SecuritySchema.Type` enum value: `MUTUALTLS` (https://github.com/eclipse/microprofile-open-api/issues/582[582])
+* Annotation API changes, reflecting changes in the OpenAPI v3.1 document format
+** New `@OpenAPIDefinition` property: `webhooks` (https://github.com/eclipse/microprofile-open-api/issues/583[583])
+** New `@Components` property: `pathItems` (https://github.com/eclipse/microprofile-open-api/issues/437[437])
+** New annotation `@PathItem` (https://github.com/eclipse/microprofile-open-api/issues/437[437])
+** New annotation `@PathItemOperation` (https://github.com/eclipse/microprofile-open-api/issues/437[437])
+** New `@Callback` property: `pathItemRef` (https://github.com/eclipse/microprofile-open-api/issues/437[437])
+** New `@Info` property: `summary` (https://github.com/eclipse/microprofile-open-api/issues/435[435])
+** New `@License` property: `identifier` (https://github.com/eclipse/microprofile-open-api/issues/436[436])
+** New `@Schema` properties: `comment`, `constValue`, `contains`, `contentEncoding`, `contentMediaType`, `contentSchema`, `dependentRequired`, `dependentSchemas`, `elseSchema`, `examples`, `ifSchema`, `maxContains`, `minContains`, `patternProperties`, `prefixItems`, `propertyNames`, `thenSchema` (https://github.com/eclipse/microprofile-open-api/issues/584[584]), (https://github.com/eclipse/microprofile-open-api/issues/567[567])
+** New `@SchemaProperty` properties: `additionalProperties`, `comment`, `constValue`, `contains`, `contentEncoding`, `contentMediaType`, `contentSchema`, `dependentRequired`, `dependentSchemas`,`elseSchema`, `examples`, `ifSchema`, `maxContains`, `minContains`, `patternProperties`, `prefixItems`, `propertyNames`, `thenSchema` (https://github.com/eclipse/microprofile-open-api/issues/584[584])
+** New annotations supporting the new `@Schema` properties: `@DependentRequired`, `@DependentSchema`, `@PatternProperty` (https://github.com/eclipse/microprofile-open-api/issues/584[584]), (https://github.com/eclipse/microprofile-open-api/issues/567[567])
+** New `SecuritySchemeType` enum value: `MUTUALTLS` (https://github.com/eclipse/microprofile-open-api/issues/582[582])
+* Added `module-info` to the API jar (https://github.com/eclipse/microprofile-open-api/pull/577[577])
+
+[[other_changes_40]]
+=== Other changes
+
+* Update references to the OpenAPI spec to point to v3.1 (https://github.com/eclipse/microprofile-open-api/pull/606[606])
+* Update documentation and TCKs to reflect changes in OpenAPI v3.1 which don't affect the model API
+** All security schemes may define required roles (https://github.com/eclipse/microprofile-open-api/issues/590[590])
+** Summary and description are now valid when `$ref` is set (https://github.com/eclipse/microprofile-open-api/issues/589[589])
+** Operation.requestBody permitted for HTTP methods which don't allow a request body (https://github.com/eclipse/microprofile-open-api/issues/591[591])
+** Only one of Paths, Components, or Webhooks is required (https://github.com/eclipse/microprofile-open-api/issues/592[592])
+** New encoding options for `multipart/form-data` (https://github.com/eclipse/microprofile-open-api/issues/587[587])
+** New parameter style values valid for object type (https://github.com/eclipse/microprofile-open-api/issues/586[586])
+** Operation no longer requires responses (https://github.com/eclipse/microprofile-open-api/issues/585[585])
+* Replace references to "JAX-RS" with "Jakarta RESTful Web Services" (https://github.com/eclipse/microprofile-open-api/issues/574[574])
+
 [[release_notes_31]]
 == Release Notes for MicroProfile OpenAPI 3.1
 
