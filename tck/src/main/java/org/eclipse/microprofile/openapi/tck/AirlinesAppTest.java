@@ -711,6 +711,20 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(t + "style", equalTo("form"));
         vr.body(t + "explode", equalTo(true));
         vr.body(t + "allowReserved", equalTo(true));
+
+        // Test style, explode and allowReserved when @Consumes is "multipart/form-data"
+        String allergiesEncoding =
+                "paths.'/zepplins'.post.requestBody.content.'multipart/form-data'.encoding.allergies";
+        String specialRequestsEncoding =
+                "paths.'/zepplins'.post.requestBody.content.'multipart/form-data'.encoding.specialRequests";
+
+        vr.body(allergiesEncoding + ".style", equalTo("pipeDelimited"));
+        vr.body(allergiesEncoding + ".explode", equalTo(true));
+        vr.body(allergiesEncoding + ".allowReserved", equalTo(true));
+
+        vr.body(specialRequestsEncoding + ".style", equalTo("spaceDelimited"));
+        vr.body(specialRequestsEncoding + ".explode", equalTo(true));
+        vr.body(specialRequestsEncoding + ".allowReserved", equalTo(true));
     }
 
     @Test(dataProvider = "formatProvider")

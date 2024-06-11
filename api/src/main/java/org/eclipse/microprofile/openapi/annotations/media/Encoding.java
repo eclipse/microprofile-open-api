@@ -58,7 +58,8 @@ public @interface Encoding {
 
     /**
      * Style describes how the encoding value will be serialized depending on the type of the parameter value. This
-     * property SHALL be ignored if the request body media type is not application/x-www-form-urlencoded.
+     * property SHALL be ignored if the request body media type is not application/x-www-form-urlencoded or
+     * multipart/form-data.
      * <p>
      * Default values include: form, spaceDelimited, pipeDelimited, and deepObject.
      * </p>

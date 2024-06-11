@@ -13,20 +13,28 @@
 
 package org.eclipse.microprofile.openapi.apps.airlines.resources;
 
+import java.util.List;
+
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
 import org.eclipse.microprofile.openapi.annotations.enums.ParameterStyle;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Encoding;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.media.SchemaProperty;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.HEAD;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Response;
@@ -69,6 +77,37 @@ public class ZepplinResource {
                required = true,
                schema = @Schema(type = SchemaType.OBJECT), style = ParameterStyle.PIPEDELIMITED)
     public Response getZepplin() {
+        return Response.ok().build();
+    }
+
+    @POST
+    @APIResponse(responseCode = "200", description = "Review posted")
+    @APIResponse(responseCode = "404", description = "Review not found")
+    @Operation(summary = "Post by Zepplin", operationId = "postZepplin")
+    @Produces("text/plain")
+    @SecurityRequirement(name = "mutualTLSScheme", scopes = "zepplinScope")
+    @Consumes("multipart/form-data")
+    public Response postZepplin(
+            @RequestBody(description = "Record of a new user to be created in the system.", required = true,
+                         content = @Content(mediaType = "multipart/form-data",
+                                            schema = @Schema(properties = {
+                                                    @SchemaProperty(name = "passenger", description = "the passanger",
+                                                                    type = SchemaType.STRING),
+                                                    @SchemaProperty(name = "allergies",
+                                                                    description = "Does the passenger have any allergies",
+                                                                    type = SchemaType.ARRAY),
+                                                    @SchemaProperty(name = "specialRequests",
+                                                                    description = "Does the passenger have any special requests",
+                                                                    type = SchemaType.OBJECT)
+                                            }),
+                                            encoding = {
+                                                    @Encoding(name = "allergies",
+                                                              allowReserved = true, explode = true,
+                                                              style = "pipeDelimited"),
+                                                    @Encoding(name = "specialRequests",
+                                                              allowReserved = true, explode = true,
+                                                              style = "spaceDelimited")
+                                            })) List<String> zeeplinUsers) {
         return Response.ok().build();
     }
 }
