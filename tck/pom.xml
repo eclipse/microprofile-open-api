@@ -94,13 +94,8 @@
 
          <dependency>
              <groupId>org.hamcrest</groupId>
-             <artifactId>hamcrest-all</artifactId>
-         </dependency>
-
-         <dependency>
-             <groupId>org.hamcrest</groupId>
-             <artifactId>java-hamcrest</artifactId>
-             <version>${java-hamcrest.version}</version>
+             <artifactId>hamcrest</artifactId>
+             <version>${hamcrest.version}</version>
          </dependency>
 
          <dependency>
