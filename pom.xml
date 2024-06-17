@@ -35,7 +35,7 @@
         <osgi-annotation.version>8.1.0</osgi-annotation.version>
         <!-- Versions of TCK dependencies -->
         <rest-assured.version>4.3.0</rest-assured.version>
-        <java-hamcrest.version>2.0.0.0</java-hamcrest.version>
+        <hamcrest.version>2.1</hamcrest.version>
         <httpclient.version>4.5.2</httpclient.version>
         <jackson.version>2.10.1</jackson.version>
         <mp.rest-client-api.version>3.0.1</mp.rest-client-api.version>
