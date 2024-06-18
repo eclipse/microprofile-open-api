@@ -43,6 +43,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -1018,7 +1019,16 @@ public class ModelConstructionTest extends Arquillian {
     @SuppressWarnings("deprecation") // Testing deprecated Schema methods
     @Test
     public void schemaTest() {
-        final Schema s = processConstructible(Schema.class);
+        final Schema s = processConstructible(Schema.class, Set.of("booleanSchema"));
+
+        s.setBooleanSchema(Boolean.TRUE);
+        assertSame(s.getBooleanSchema(), Boolean.TRUE, "Schema.getBooleanSchema should return the value that was set");
+        Schema s2 = s.booleanSchema(Boolean.FALSE);
+        assertSame(s2, s, "Schema.booleanSchema should return the same object");
+        assertSame(s.getBooleanSchema(), Boolean.FALSE,
+                "Schema.getBooleanSchema should return the value that was set with the builder method");
+        s.setBooleanSchema(null);
+        assertNull(s.getBooleanSchema(), "Should be able to set Schema.booleanSchema to null");
 
         final Schema ap = createConstructibleInstance(Schema.class);
         checkSameObject(s, s.additionalPropertiesSchema(ap));
@@ -1029,7 +1039,7 @@ public class ModelConstructionTest extends Arquillian {
         checkSameObject(s, s.additionalPropertiesBoolean(Boolean.TRUE));
         assertEquals(s.getAdditionalPropertiesBoolean(), Boolean.TRUE,
                 "AdditionalProperties (Boolean type) is expected to be true");
-        Schema s2 = s.getAdditionalPropertiesSchema();
+        s2 = s.getAdditionalPropertiesSchema();
         assertNotNull(s2, "AdditionalProperties (Schema type) is expected to be non-null");
         assertEquals(s2.getBooleanSchema(), Boolean.TRUE,
                 "AdditionalProperties (Schema type) is expected to return a boolean-true schema");
@@ -1721,6 +1731,10 @@ public class ModelConstructionTest extends Arquillian {
     }
 
     private <T extends Constructible> T processConstructible(Class<T> clazz) {
+        return processConstructible(clazz, Collections.emptySet());
+    }
+
+    private <T extends Constructible> T processConstructible(Class<T> clazz, Set<String> propertiesToIgnore) {
         final T o = createConstructibleInstance(clazz);
         if (o instanceof Extensible && Extensible.class.isAssignableFrom(clazz)) {
             processExtensible((Extensible<?>) o);
@@ -1729,9 +1743,12 @@ public class ModelConstructionTest extends Arquillian {
             processReference((Reference<?>) o);
         }
         final Map<String, Property> properties = collectProperties(clazz);
-        properties.values().stream().filter((p) -> p.isComplete()).forEach((p) -> {
-            processConstructibleProperty(o, p, clazz);
-        });
+        properties.values().stream()
+                .filter((p) -> p.isComplete())
+                .filter((p) -> !propertiesToIgnore.contains(p.getName()))
+                .forEach((p) -> {
+                    processConstructibleProperty(o, p, clazz);
+                });
         return o;
     }
 
