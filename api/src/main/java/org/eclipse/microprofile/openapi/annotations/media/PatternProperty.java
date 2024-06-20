@@ -26,6 +26,7 @@ import java.lang.annotation.Target;
  * which validate against {@link #schema()}.
  *
  * @see Schema#patternProperties()
+ * @since 4.0
  */
 @Target({})
 @Retention(RetentionPolicy.RUNTIME)

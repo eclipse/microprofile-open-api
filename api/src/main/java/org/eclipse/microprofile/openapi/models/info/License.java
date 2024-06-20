@@ -58,7 +58,8 @@ public interface License extends Constructible, Extensible<License> {
      * Returns the license identifier for this License instance that is used for the API.
      *
      * @return the license identifier used for the API
-     **/
+     * @since 4.0
+     */
     String getIdentifier();
 
     /**
@@ -66,6 +67,7 @@ public interface License extends Constructible, Extensible<License> {
      *
      * @param identifier
      *            the license identifier used for the API
+     * @since 4.0
      */
     void setIdentifier(String identifier);
 
@@ -75,6 +77,7 @@ public interface License extends Constructible, Extensible<License> {
      * @param identifier
      *            the license identifier used for the API
      * @return this License instance
+     * @since 4.0
      */
     default License identifier(String identifier) {
         setIdentifier(identifier);

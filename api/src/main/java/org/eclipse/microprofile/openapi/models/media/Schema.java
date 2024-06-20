@@ -44,7 +44,7 @@ import org.eclipse.microprofile.openapi.models.Reference;
 public interface Schema extends Extensible<Schema>, Constructible, Reference<Schema> {
 
     /**
-     * The values allowed for the in field.
+     * The values allowed for the {@code type} field.
      */
     enum SchemaType {
         INTEGER("integer"), NUMBER("number"), BOOLEAN("boolean"), STRING("string"), OBJECT("object"), ARRAY(
@@ -2063,6 +2063,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      * @param propertyName
      *            the property name
      * @return the value of the named property, or {@code null} if a property with the given name is not set
+     * @since 4.0
      */
     Object get(String propertyName);
 
@@ -2103,6 +2104,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      * @param value
      *            the value to set, or {@code null} to remove the property
      * @return the current Schema instance
+     * @since 4.0
      */
     Schema set(String propertyName, Object value);
 
@@ -2113,6 +2115,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      * into a {@code Map}.
      *
      * @return a {@code Map} of property names to their corresponding values
+     * @since 4.0
      */
     Map<String, ?> getAll();
 
@@ -2124,6 +2127,7 @@ public interface Schema extends Extensible<Schema>, Constructible, Reference<Sch
      * @param allProperties
      *            the properties to set. Each value in the map must be valid according to the rules in
      *            {@link #set(String, Object)}
+     * @since 4.0
      */
     void setAll(Map<String, ?> allProperties);
 }

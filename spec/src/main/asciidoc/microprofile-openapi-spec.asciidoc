@@ -17,7 +17,7 @@
 // limitations under the License.
 //
 
-:authors: Arthur De Magalhaes (Spec Lead), Eric Wittmann, Anna Safonov, Matt Gill, Ivan Junckes Filho, Jérémie Bresson, Jana Manoharan, Rui Qi Wang, Tommy Wojtczak, Martin Smithson, Michael Edgar
+:authors: Arthur De Magalhaes (Spec Lead), Eric Wittmann, Anna Safonov, Matt Gill, Ivan Junckes Filho, Jérémie Bresson, Jana Manoharan, Rui Qi Wang, Tommy Wojtczak, Martin Smithson, Michael Edgar, Andrew Rouse
 :version-label!:
 :sectanchors:
 :doctype: book
@@ -211,7 +211,7 @@ library and wish to take advantage to the official MP OpenAPI interfaces.
 
 ==== Quick overview of annotations
 
-The following annotations are found in the https://github.com/eclipse/microprofile-open-api/tree/master/api/src/main/java/org/eclipse/microprofile/openapi/annotations[org.eclipse.microprofile.openapi.annotations] package.
+The following annotations are found in the https://github.com/eclipse/microprofile-open-api/tree/main/api/src/main/java/org/eclipse/microprofile/openapi/annotations[org.eclipse.microprofile.openapi.annotations] package.
 
 [cols="1,4"]
 |===
@@ -387,7 +387,7 @@ post:
         '*/*':
           schema:
             $ref: '#/components/schemas/User'
-            required: true
+      required: true
     responses:
       default:
         description: no description
@@ -461,7 +461,7 @@ public class ServersResource {
 .Output for Sample 1
 [source, yaml]
 ----
-openapi: 3.0.2
+openapi: 3.1.0
 servers:
 - url: http://{var1}.definition1/{var2}
   description: definition server 1
@@ -614,18 +614,14 @@ maxItems = b`
 | `minProperties = a +
 maxProperties = b`
 | `@DecimalMax(value = a)` | `number` or `integer` | `maximum = a`
-| `@DecimalMax(value = a, exclusive = false)` | `number` or `integer` | `maximum = a +
-exclusiveMaximum = true`
+| `@DecimalMax(value = a, inclusive = false)` | `number` or `integer` | `exclusiveMaximum = a`
 | `@DecimalMin(value = a)` | `number` or `integer` | `minimum = a`
-| `@DecimalMin(value = a, exclusive = false)` | `number` or `integer` | `minimum = a +
-exclusiveMinimum = true`
+| `@DecimalMin(value = a, inclusive = false)` | `number` or `integer` | `exclusiveMinimum = a`
 | `@Max(a)` | `number` or `integer` | `maximum = a`
 | `@Min(a)` | `number` or `integer` | `minimum = a`
-| `@Negative` | `number` or `integer` | `maximum = 0 +
-exclusiveMaximum = true`
+| `@Negative` | `number` or `integer` | `exclusiveMaximum = 0`
 | `@NegativeOrZero` | `number` or `integer` | `maximum = 0`
-| `@Positive` | `number` or `integer` | `minimum = 0 +
-exclusiveMinimum = true`
+| `@Positive` | `number` or `integer` | `exclusiveMinimum = 0`
 | `@PositiveOrZero` | `number` or `integer` | `minimum = 0`
 |===
 
@@ -656,7 +652,7 @@ This is in addition to the default locations defined by https://github.com/eclip
 === Programming model
 
 Application developers are able to provide OpenAPI elements via Java POJOs. The
-complete set of models are found in the https://github.com/eclipse/microprofile-open-api/tree/master/api/src/main/java/org/eclipse/microprofile/openapi/models[org.eclipse.microprofile.openapi.models] package.
+complete set of models are found in the https://github.com/eclipse/microprofile-open-api/tree/main/api/src/main/java/org/eclipse/microprofile/openapi/models[org.eclipse.microprofile.openapi.models] package.
 
 ==== OASFactory
 

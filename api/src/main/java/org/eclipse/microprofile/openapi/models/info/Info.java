@@ -204,6 +204,7 @@ public interface Info extends Constructible, Extensible<Info> {
      * Returns the summary of the exposed API from this Info instance.
      *
      * @return the summary of the exposed API
+     * @since 4.0
      **/
     String getSummary();
 
@@ -212,6 +213,7 @@ public interface Info extends Constructible, Extensible<Info> {
      *
      * @param summary
      *            the summary of the exposed API
+     * @since 4.0
      */
     void setSummary(String summary);
 
@@ -221,6 +223,7 @@ public interface Info extends Constructible, Extensible<Info> {
      * @param summary
      *            the summary for the exposed API
      * @return this Info instance
+     * @since 4.0
      */
     default Info summary(String summary) {
         setSummary(summary);

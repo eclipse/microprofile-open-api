@@ -41,6 +41,7 @@ A full list of changes delivered in the 4.0 release can be found at link:https:/
 ** New `Info` property: `summary` (https://github.com/eclipse/microprofile-open-api/issues/435[435])
 ** New `License` property: `identifier` (https://github.com/eclipse/microprofile-open-api/issues/436[436])
 ** New `Schema` properties: `booleanSchema`, `comment`, `constValue`, `contains`, `contentEncoding`, `contentMediaType`, `contentSchema`, `dependentRequired`, `dependentSchemas`, `elseSchema`, `examples`, `ifSchema`, `maxContains`, `minContains`, `patternProperties`, `prefixItems`, `propertyNames`, `schemaDialect`, `thenSchema`, `unevaluatedItems`, `unevaluatedProperties` (https://github.com/eclipse/microprofile-open-api/issues/584[584]), (https://github.com/eclipse/microprofile-open-api/issues/567[567])
+* New `Schema` methods for working with custom properties: `set(String, Object)`, `get(String)`, `setAll(Map<String, ?>)`, `getAll()` (https://github.com/eclipse/microprofile-open-api/issues/584[584])
 ** New `Schema.SchemaType` enum value: `NULL` (https://github.com/eclipse/microprofile-open-api/issues/584[584])
 ** New `SecuritySchema.Type` enum value: `MUTUALTLS` (https://github.com/eclipse/microprofile-open-api/issues/582[582])
 * Annotation API changes, reflecting changes in the OpenAPI v3.1 document format
