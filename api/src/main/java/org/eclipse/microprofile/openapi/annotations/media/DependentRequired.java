@@ -22,6 +22,7 @@ package org.eclipse.microprofile.openapi.annotations.media;
  * properties with the names in {@link #requires()}.
  *
  * @see Schema#dependentRequired()
+ * @since 4.0
  */
 public @interface DependentRequired {
 

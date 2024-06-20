@@ -79,7 +79,8 @@ public @interface Info {
      * The summary of the API.
      *
      * @return the summary for the API
-     **/
+     * @since 4.0
+     */
     String summary() default "";
 
     /**

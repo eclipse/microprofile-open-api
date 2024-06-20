@@ -22,6 +22,7 @@ package org.eclipse.microprofile.openapi.annotations.media;
  * validate against {@link #schema()}.
  *
  * @see Schema#dependentSchemas()
+ * @since 4.0
  */
 public @interface DependentSchema {
 

@@ -44,6 +44,7 @@ public @interface License {
      * The license identifier used for the API.
      *
      * @return the identifier of the license
+     * @since 4.0
      **/
     String identifier() default "";
 

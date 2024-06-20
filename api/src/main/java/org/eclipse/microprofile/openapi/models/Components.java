@@ -488,6 +488,7 @@ public interface Components extends Constructible, Extensible<Components> {
      * elsewhere in the OpenAPI document.
      *
      * @return a copy Map (potentially immutable) of path items
+     * @since 4.0
      */
     Map<String, PathItem> getPathItems();
 
@@ -497,6 +498,7 @@ public interface Components extends Constructible, Extensible<Components> {
      *
      * @param pathItems
      *            a map of path items
+     * @since 4.0
      */
     void setPathItems(Map<String, PathItem> pathItems);
 
@@ -507,6 +509,7 @@ public interface Components extends Constructible, Extensible<Components> {
      * @param pathItems
      *            a map of path items
      * @return the current Schema instance
+     * @since 4.0
      */
     default Components pathItems(Map<String, PathItem> pathItems) {
         setPathItems(pathItems);
