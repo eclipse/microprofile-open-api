@@ -157,6 +157,7 @@ object of the resulting OpenAPI document using ``name``'s value as the key.
 +
 For example, in the case where an application wishes to represent Java ``Date``s in epoch milliseconds, the following configuration could be used (line 
 escapes and indentation added for readability):
++
 [source, json]
 ----
 mp.openapi.schema.java.util.Date = { \
