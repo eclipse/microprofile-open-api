@@ -35,6 +35,7 @@ endif::[]
 
 :sectnums!:
 include::license-efsl.adoc[]
+
 :sectnums:
 
 == Introduction
