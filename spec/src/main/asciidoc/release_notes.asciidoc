@@ -32,7 +32,7 @@ A full list of changes delivered in the 4.0 release can be found at link:https:/
 ** `type` property type changed from `SchemaType` to `List<SchemaType>`
 ** `exclusiveMinimum` and `exclusiveMaximum` property types changed from `Boolean` to `BigDecimal`
 ** `nullable` property removed (replaced by the addition of `NULL` to `SchemaType`)
-* `@RequestBody.required` changed to `true` to reflect that this is the much more common case where a RESTful resource method accepts a request body (https://github.com/eclipse/microprofile-open-api/issues/349[349])
+* Default value of `@RequestBody.required` changed to `true` to reflect that this is the much more common case where a RESTful resource method accepts a request body (https://github.com/eclipse/microprofile-open-api/issues/349[349])
 * Minimum Java version increased to 11
 
 [[api_changes_40]]
