@@ -38,7 +38,7 @@
         <hamcrest.version>2.1</hamcrest.version>
         <httpclient.version>4.5.2</httpclient.version>
         <jackson.version>2.10.1</jackson.version>
-        <mp.rest-client-api.version>4.0-RC2</mp.rest-client-api.version>
+        <mp.rest-client-api.version>4.0</mp.rest-client-api.version>
         <jakarta.xml.bind-api.version>3.0.1</jakarta.xml.bind-api.version>
         <jakarta.validation-api.version>3.0.2</jakarta.validation-api.version>
         <!-- We can use the 3.x TCK BOM even though we use the 2.x parent because we're targetting Java 11 -->
