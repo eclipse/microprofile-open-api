@@ -129,7 +129,9 @@ public class ModelConstructionTest extends Arquillian {
 
     @Deployment
     public static WebArchive createDeployment() {
-        return ShrinkWrap.create(WebArchive.class);
+        return ShrinkWrap.create(WebArchive.class)
+                .addPackages(true, "org.eclipse.microprofile.openapi.reader")
+                .addAsManifestResource("microprofile-reader.properties", "microprofile-config.properties");
     }
 
     // Container for matched getter, setter and builder methods
