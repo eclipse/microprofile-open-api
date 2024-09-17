@@ -76,7 +76,9 @@ public class OASFactoryErrorTest extends Arquillian {
 
     @Deployment
     public static WebArchive createDeployment() {
-        return ShrinkWrap.create(WebArchive.class);
+        return ShrinkWrap.create(WebArchive.class)
+                .addPackages(true, "org.eclipse.microprofile.openapi.reader")
+                .addAsManifestResource("microprofile-reader.properties", "microprofile-config.properties");
     }
 
     @Test(expectedExceptions = {NullPointerException.class})
