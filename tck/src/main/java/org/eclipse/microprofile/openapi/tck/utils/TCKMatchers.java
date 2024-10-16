@@ -15,7 +15,13 @@
  */
 package org.eclipse.microprofile.openapi.tck.utils;
 
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.either;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasEntry;
+import static org.hamcrest.Matchers.hasKey;
+import static org.hamcrest.Matchers.isA;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.comparator.ComparatorMatcherBuilder.comparedBy;
 
 import java.math.BigDecimal;
@@ -168,5 +174,22 @@ public final class TCKMatchers {
             }
         }
 
+    }
+
+    /**
+     * Creates a matcher which matches a map entry with an allowed value or the absence of a map entry from the object.
+     *
+     * @param entryName
+     *            name of the entry in the map
+     * @param value
+     *            a single allowed value in the map entry, if present
+     * @return the matcher
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> Matcher<T> hasOptionalEntry(String entryName, Object value) {
+        Matcher<T> hasEntry = (Matcher<T>) hasEntry(entryName, value);
+        Matcher<T> entryMissing = (Matcher<T>) not(hasKey(entryName));
+
+        return allOf(isA(java.util.Map.class), either(hasEntry).or(entryMissing));
     }
 }

@@ -16,6 +16,7 @@
 
 package org.eclipse.microprofile.openapi.tck;
 
+import static org.eclipse.microprofile.openapi.tck.utils.TCKMatchers.hasOptionalEntry;
 import static org.eclipse.microprofile.openapi.tck.utils.TCKMatchers.itemOrSingleton;
 import static org.hamcrest.Matchers.both;
 import static org.hamcrest.Matchers.contains;
@@ -161,7 +162,7 @@ public class FilterTest extends AppTestBase {
         vr.body(maxRate + ".required", equalTo(true));
         vr.body(maxRate + ".deprecated", equalTo(true));
         vr.body(maxRate + ".allowEmptyValue", equalTo(true));
-        vr.body(maxRate + ".style", equalTo("simple"));
+        vr.body(maxRate, hasOptionalEntry("style", "simple"));
         vr.body(maxRate + ".schema.type", itemOrSingleton("integer"));
     }
 

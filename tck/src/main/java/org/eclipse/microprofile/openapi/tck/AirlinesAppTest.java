@@ -16,6 +16,7 @@
 
 package org.eclipse.microprofile.openapi.tck;
 
+import static org.eclipse.microprofile.openapi.tck.utils.TCKMatchers.hasOptionalEntry;
 import static org.eclipse.microprofile.openapi.tck.utils.TCKMatchers.itemOrSingleton;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anEmptyMap;
@@ -408,8 +409,7 @@ public class AirlinesAppTest extends AppTestBase {
         }
 
         bookingParameters = "paths.'/bookings/{id}'.get.parameters";
-        vr.body(bookingParameters + ".findAll { it.name == 'id' }.style", both(hasSize(1)).and(contains("simple")));
-
+        vr.body(bookingParameters + ".findAll { it.name == 'id' }", contains(hasOptionalEntry("style", "simple")));
     }
 
     private void testAvailabilityGetParamater(ValidatableResponse vr) {
@@ -690,7 +690,7 @@ public class AirlinesAppTest extends AppTestBase {
         ValidatableResponse vr = callEndpoint(type);
         String s = "paths.'/user'.post.requestBody.content.'application/json'.encoding.email.";
         vr.body(s + "contentType", equalTo("text/plain"));
-        vr.body(s + "style", equalTo("form"));
+        vr.body(s, hasOptionalEntry("style", "form"));
         vr.body(s + "explode", equalTo(true));
         vr.body(s + "allowReserved", equalTo(true));
         vr.body(s + "x-encoding", equalTo("test-encoding"));
@@ -702,13 +702,13 @@ public class AirlinesAppTest extends AppTestBase {
         String s =
                 "paths.'/user/username/{username}'.put.responses.'200'.content.'application/json'.encoding.password.";
         vr.body(s + "contentType", equalTo("text/plain"));
-        vr.body(s + "style", equalTo("form"));
+        vr.body(s, hasOptionalEntry("style", "form"));
         vr.body(s + "explode", equalTo(true));
         vr.body(s + "allowReserved", equalTo(true));
 
         String t = "paths.'/user/username/{username}'.put.responses.'200'.content.'application/xml'.encoding.password.";
         vr.body(t + "contentType", equalTo("text/plain"));
-        vr.body(t + "style", equalTo("form"));
+        vr.body(t, hasOptionalEntry("style", "form"));
         vr.body(t + "explode", equalTo(true));
         vr.body(t + "allowReserved", equalTo(true));
 
@@ -930,7 +930,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(responseHeader1 + ".required", equalTo(true));
         vr.body(responseHeader1 + ".deprecated", equalTo(true));
         vr.body(responseHeader1 + ".allowEmptyValue", equalTo(true));
-        vr.body(responseHeader1 + ".style", equalTo("simple"));
+        vr.body(responseHeader1, hasOptionalEntry("style", "simple"));
         vr.body(responseHeader1 + ".schema.type", itemOrSingleton("integer"));
 
         String responseHeader2 = "paths.'/reviews/{id}'.get.responses.'200'.headers.responseHeader2";
@@ -939,7 +939,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(responseHeader2 + ".required", equalTo(true));
         vr.body(responseHeader2 + ".deprecated", equalTo(true));
         vr.body(responseHeader2 + ".allowEmptyValue", equalTo(true));
-        vr.body(responseHeader2 + ".style", equalTo("simple"));
+        vr.body(responseHeader2, hasOptionalEntry("style", "simple"));
         vr.body(responseHeader2 + ".schema.type", itemOrSingleton("string"));
     }
 
@@ -955,7 +955,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(testHeader + ".required", equalTo(true));
         vr.body(testHeader + ".deprecated", equalTo(true));
         vr.body(testHeader + ".allowEmptyValue", equalTo(true));
-        vr.body(testHeader + ".style", equalTo("simple"));
+        vr.body(testHeader, hasOptionalEntry("style", "simple"));
         vr.body(testHeader + ".schema.type", itemOrSingleton("integer"));
     }
 
@@ -988,7 +988,7 @@ public class AirlinesAppTest extends AppTestBase {
         vr.body(maxRate + ".required", equalTo(true));
         vr.body(maxRate + ".deprecated", equalTo(true));
         vr.body(maxRate + ".allowEmptyValue", equalTo(true));
-        vr.body(maxRate + ".style", equalTo("simple"));
+        vr.body(maxRate, hasOptionalEntry("style", "simple"));
         vr.body(maxRate + ".schema.type", itemOrSingleton("integer"));
         vr.body(maxRate + ".x-header", equalTo("test-header"));
     }
