@@ -41,16 +41,12 @@ public abstract class AppTestBase extends Arquillian {
     private static final String DEFAULT_HOST = "localhost";
     private static final int DEFAULT_PORT = 9080;
 
-    private static String serverUrl;
-    private static String username;
-    private static String password;
-
     protected static final Filter YAML_FILTER = new YamlToJsonFilter();
 
     @BeforeClass
-    public static void configureRestAssured() throws MalformedURLException {
+    public void configureRestAssured() throws MalformedURLException {
         // set base URI and port number to use for all requests
-        serverUrl = System.getProperty("test.url");
+        String serverUrl = System.getProperty("test.url");
         String protocol = DEFAULT_PROTOCOL;
         String host = DEFAULT_HOST;
         int port = DEFAULT_PORT;
@@ -65,8 +61,8 @@ public abstract class AppTestBase extends Arquillian {
         RestAssured.baseURI = protocol + "://" + host;
         RestAssured.port = port;
 
-        username = System.getProperty("test.user");
-        password = System.getProperty("test.pwd");
+        String username = System.getProperty("test.user");
+        String password = System.getProperty("test.pwd");
 
         if (username != null && password != null) {
             RestAssured.authentication = RestAssured.basic(username, password);
