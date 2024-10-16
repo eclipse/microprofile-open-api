@@ -200,7 +200,6 @@ components:
       delete:
         responses:
           '202':
-            content: []
             description: Delete item
       parameters:
         - name: id
