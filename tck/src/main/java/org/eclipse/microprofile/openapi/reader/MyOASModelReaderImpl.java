@@ -308,6 +308,7 @@ public class MyOASModelReaderImpl implements OASModelReader {
                 .externalDocs(OASFactory.createObject(ExternalDocumentation.class)
                         .description("instructions for how to deploy this app")
                         .url("https://github.com/microservices-api/oas3-airlines/blob/master/README.md"))
+                .jsonSchemaDialect("https://json-schema.org/draft/2020-12/schema")
                 .addWebhook("bookingEvent", OASFactory.createPathItem()
                         .PUT(OASFactory.createOperation()
                                 .summary("Notifies that a booking has been created")

@@ -328,6 +328,36 @@ public interface OpenAPI extends Constructible, Extensible<OpenAPI> {
     void removeWebhook(String name);
 
     /**
+     * Returns the default JSON Schema dialect for schemas in this document.
+     *
+     * @return the identifier of the default schema dialect for schemas in this document
+     * @since 4.1
+     */
+    String getJsonSchemaDialect();
+
+    /**
+     * Sets the default JSON Schema dialect for schemas in this document.
+     *
+     * @param jsonSchemaDialect
+     *            the identifier of the default schema dialect for schemas in this document
+     * @since 4.1
+     */
+    void setJsonSchemaDialect(String jsonSchemaDialect);
+
+    /**
+     * Sets the default JSON Schema dialect for schemas in this document.
+     *
+     * @param jsonSchemaDialect
+     *            the identifier of the default schema dialect for schemas in this document
+     * @return the current OpenAPI object
+     * @since 4.1
+     */
+    default OpenAPI jsonSchemaDialect(String jsonSchemaDialect) {
+        setJsonSchemaDialect(jsonSchemaDialect);
+        return this;
+    }
+
+    /**
      * Returns the components property from an OpenAPI instance.
      *
      * @return schemas used in the specification
