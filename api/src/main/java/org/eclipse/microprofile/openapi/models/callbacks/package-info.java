@@ -17,6 +17,6 @@
  * The behaviour of methods inherited from java.lang.Object are undefined by the MicroProfile OpenAPI specification.
  */
 
-@org.osgi.annotation.versioning.Version("2.0")
+@org.osgi.annotation.versioning.Version("2.1")
 @org.osgi.annotation.versioning.ProviderType
 package org.eclipse.microprofile.openapi.models.callbacks;
