@@ -19,6 +19,7 @@ package org.eclipse.microprofile.openapi.annotations.media;
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 import org.eclipse.microprofile.openapi.annotations.ExternalDocumentation;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
@@ -37,6 +38,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema.True;
  *
  * @since 2.0
  **/
+@Target({})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface SchemaProperty {
