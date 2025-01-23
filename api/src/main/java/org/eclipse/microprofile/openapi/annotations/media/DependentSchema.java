@@ -15,6 +15,8 @@
  */
 package org.eclipse.microprofile.openapi.annotations.media;
 
+import java.lang.annotation.Target;
+
 /**
  * A property name and an associated schema.
  * <p>
@@ -24,6 +26,7 @@ package org.eclipse.microprofile.openapi.annotations.media;
  * @see Schema#dependentSchemas()
  * @since 4.0
  */
+@Target({})
 public @interface DependentSchema {
 
     /**
