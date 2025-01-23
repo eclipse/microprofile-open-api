@@ -76,4 +76,34 @@ public interface Extensible<T extends Extensible<T>> {
      */
     void setExtensions(Map<String, Object> extensions);
 
+    /**
+     * Checks whether an extension with the given name is present in this Extensible's map of extensions.
+     *
+     * @param name
+     *            the key used to access the extension object. Always prefixed by "x-".
+     * @return {@code true} if an extension with the given name is present, otherwise {@code false}
+     */
+    default boolean hasExtension(String name) {
+        Map<String, Object> map = getExtensions();
+        if (map == null) {
+            return false;
+        }
+        return map.containsKey(name);
+    }
+
+    /**
+     * Returns the extension object with the given name from this Extensible's map of extensions.
+     *
+     * @param name
+     *            the key used to access the extension object. Always prefixed by "x-".
+     * @return the corresponding extension object, or {@code null} if no extension with the given name is present
+     */
+    default Object getExtension(String name) {
+        Map<String, Object> map = getExtensions();
+        if (map == null) {
+            return null;
+        }
+        return map.get(name);
+    }
+
 }

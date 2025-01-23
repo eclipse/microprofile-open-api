@@ -1781,16 +1781,28 @@ public class ModelConstructionTest extends Arquillian {
         assertEquals(map.size(), 2, "The extensions map is expected to contain two entries.");
         assertTrue(map.containsKey(extensionName1),
                 "The extensions map is expected to contain the key: " + extensionName1);
+        assertTrue(e.hasExtension(extensionName1),
+                "hasExtension is expected to return true for the key: " + extensionName1);
         assertTrue(map.containsKey(extensionName2),
                 "The extensions map is expected to contain the key: " + extensionName2);
+        assertTrue(e.hasExtension(extensionName2),
+                "hasExtension is expected to return true for the key: " + extensionName2);
         assertSame(map.get(extensionName1), obj1,
                 "The value associated with the key: " + extensionName1
                         + " is expected to be the same one that was added.");
+        assertSame(e.getExtension(extensionName1), obj1,
+                "getExtension should return the same instance added for the key: " + extensionName1);
         assertSame(map.get(extensionName2), obj2,
                 "The value associated with the key: " + extensionName2
                         + " is expected to be the same one that was added.");
+        assertSame(e.getExtension(extensionName2), obj2,
+                "getExtension should return the same instance added for the key: " + extensionName2);
         e.removeExtension(extensionName1);
         assertEquals(e.getExtensions().size(), 1, "The extensions map is expected to contain one entry.");
+        assertFalse(e.hasExtension(extensionName1),
+                "hasExtension is expected to return false for removed key: " + extensionName1);
+        assertNull(e.getExtension(extensionName1),
+                "getExtension is expected to return null for removed key: " + extensionName1);
         // Check that the extension map can be replaced with the setter and that it is returned by the getter.
         final Map<String, Object> newMap = new HashMap<>();
         e.setExtensions(newMap);
