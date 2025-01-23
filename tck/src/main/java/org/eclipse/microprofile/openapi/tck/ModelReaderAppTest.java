@@ -427,4 +427,10 @@ public class ModelReaderAppTest extends AppTestBase {
 
         vr.body("paths.'/zepplins'.delete.requestBody.content", notNullValue());
     }
+
+    @Test(dataProvider = "formatProvider")
+    public void testSchemaDialect(String type) {
+        ValidatableResponse vr = callEndpoint(type);
+        vr.body("jsonSchemaDialect", equalTo("https://json-schema.org/draft/2020-12/schema"));
+    }
 }
